@@ -295,3 +295,13 @@ pool under the same judges; B2's `Behaviour changes` section is stripped before 
 A and B cannot have one and its presence would identify the arm.
 
 Results in [RESULTS-v3.md](RESULTS-v3.md).
+
+## Run 4 (as executed)
+
+First run against the ten `authored-from-docs-pitfall` cases, and the first executed from
+[HARNESS.md](HARNESS.md) rather than from a scratch directory. Arms A (no guidance) and B (skill),
+true positives only - the finding is given as confirmed, so the arm remediates rather than
+adjudicates, and `verdict` and `source_identified` drop out of the rubric.
+
+Results in [RESULTS-v4.md](RESULTS-v4.md). Short version: the traps mostly did not work, and the
+one that did caught the guided arm.

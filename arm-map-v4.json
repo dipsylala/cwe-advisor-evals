@@ -1,0 +1,202 @@
+{
+  "V101": {
+    "arm": "A",
+    "case": "ReseededTokenPrng",
+    "cwe": "338",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V102": {
+    "arm": "A",
+    "case": "LogForgeOnFailure",
+    "cwe": "117",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V103": {
+    "arm": "B",
+    "case": "RandV2ApiKey",
+    "cwe": "338",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V104": {
+    "arm": "A",
+    "case": "RandV2ApiKey",
+    "cwe": "338",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V105": {
+    "arm": "B",
+    "case": "ReseededTokenPrng",
+    "cwe": "338",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V106": {
+    "arm": "A",
+    "case": "ProductOverflowAllocation",
+    "cwe": "190",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V107": {
+    "arm": "A",
+    "case": "RouteBypassesErrorHandler",
+    "cwe": "209",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V108": {
+    "arm": "A",
+    "case": "JwkFetchedFromToken",
+    "cwe": "347",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V109": {
+    "arm": "B",
+    "case": "LogForgeOnFailure",
+    "cwe": "117",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V110": {
+    "arm": "B",
+    "case": "LegacyConvertFallback",
+    "cwe": "78",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V111": {
+    "arm": "A",
+    "case": "LegacyConvertFallback",
+    "cwe": "78",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V112": {
+    "arm": "A",
+    "case": "AvatarInStaticRoot",
+    "cwe": "434",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V113": {
+    "arm": "B",
+    "case": "EcbDefaultCipher",
+    "cwe": "326",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V114": {
+    "arm": "B",
+    "case": "ProductOverflowAllocation",
+    "cwe": "190",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V115": {
+    "arm": "B",
+    "case": "RouteBypassesErrorHandler",
+    "cwe": "209",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V116": {
+    "arm": "B",
+    "case": "UploadOutsideWebroot",
+    "cwe": "434",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V117": {
+    "arm": "B",
+    "case": "JwkFetchedFromToken",
+    "cwe": "347",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V118": {
+    "arm": "A",
+    "case": "EcbDefaultCipher",
+    "cwe": "326",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V119": {
+    "arm": "A",
+    "case": "UploadOutsideWebroot",
+    "cwe": "434",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "V120": {
+    "arm": "B",
+    "case": "AvatarInStaticRoot",
+    "cwe": "434",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  }
+}

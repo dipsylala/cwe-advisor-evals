@@ -1,0 +1,308 @@
+{
+  "judge1": {
+    "V101": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "secrets.choice with the same 32-char alphabet closes the PRNG vector and correctly treats the os.urandom reseed as a non-fix; token format, storage and response are byte-for-byte unchanged."
+    },
+    "V102": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Neutralizes at the call site (control-class replacement, not parameterization) and fixes the unreported line 19 too; the added 64-char truncation and \"<null>\" placeholder change log text slightly but are disclosed and touch nothing the endpoint returns."
+    },
+    "V103": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto/rand.Int over a big.Int bound avoids modulo bias and preserves the exact 32-char [a-z0-9] key format, storage and response; the new 500 branch only fires if the OS entropy source fails."
+    },
+    "V104": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "crypto/rand closes the vector, but base64.RawURLEncoding changes the issued key's character set from [a-z0-9] to mixed-case URL-safe base64 - a format change for a stored credential where a format-preserving option existed; it is disclosed, not silent."
+    },
+    "V105": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Minimal, correct swap to secrets.choice keeping length and alphabet; the reseed is removed and nothing else in the handler changes."
+    },
+    "V106": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Math.multiplyExact plus a total-bytes cap fixes the real defect (product never bounded, only the operands) and reuses the existing 400 path; the new 10 MiB cap rejects some previously-succeeding large-but-non-overflowing requests, which is disclosed."
+    },
+    "V107": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "next(error) correctly routes into the already-present handler, but it also rewrites that handler - adding an incidentId field to the 500 response body and changing the log call shape - so the error contract changes beyond removing the leak."
+    },
+    "V108": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "ConfigurationManager over the configured authority is the right anchor and the kid fallback is safe, but the resolver blocks on GetAwaiter().GetResult() inside a request path and the fix silently requires a Microsoft.IdentityModel.Protocols.OpenIdConnect package reference that is never called out as an addition."
+    },
+    "V109": {
+      "fix_quality": 1,
+      "no_harm": 1,
+      "note": "The in-file change is only concatenation -> {} placeholder, which the write-up itself admits neutralizes nothing; actual closure is deferred to a logback.xml LogstashEncoder under an assumed binding and a dependency whose version is left unresolved, and that switch also rewrites every log line in the process to JSON."
+    },
+    "V110": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "proc_open with an argv array removes the shell from the fallback branch and passes the basename-normalised $source, closing argument injection and traversal too; stdout capture, stderr inheritance and the status-driven return value are all preserved."
+    },
+    "V111": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Shell removed from both branches via the proc_open array form, but the added /^[A-Za-z0-9][A-Za-z0-9._-]{0,254}$/ allowlist rejects previously-working document names containing spaces or non-ASCII, and the primary path is restructured beyond the reported sink."
+    },
+    "V112": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Breaks taint at the allowlist - server-generated UUID stem plus extension from the matched MIME - moves storage out of the express.static root and serves through a validating route with nosniff; the added 2 MB multer limit and the SVG removal are disclosed and in scope, and the {url} response shape is preserved."
+    },
+    "V113": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES/GCM/NoPadding with a fresh 12-byte SecureRandom IV and 128-bit tag, IV prepended; the Base64 payload necessarily grows by 12 bytes and the decrypt side must be updated, which the write-up states explicitly."
+    },
+    "V114": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "(long) widening on one operand plus a total cap and Math.toIntExact; correctly diagnoses that the existing per-operand guard is not the problem, and the added 16 MiB cap (disclosed) is the only behaviour change."
+    },
+    "V115": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Cleanest form of the right fix: next(error) into the existing, unmodified middleware, try/catch retained for Express 4 async rejections, 404 and success paths untouched."
+    },
+    "V116": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Magic-byte allowlist supplies the stored extension and a GUID supplies the stem, so file.FileName never reaches Path.Combine (killing both traversal and rooted-path escape), and FileMode.CreateNew removes the silent overwrite; response shape kept, though the fix needs .NET 7+ for ReadAtLeastAsync and the png/jpg/pdf allowlist is an acknowledged guess."
+    },
+    "V117": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "The jku read is removed entirely and keys come from a server-configured JWKS URI, with kid used only to select among already-trusted keys; the RS256 pin and the assumed .well-known/jwks.json path are flagged as configuration to confirm."
+    },
+    "V118": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Explicit AES/GCM/NoPadding with per-message SecureRandom IV prepended to the output; the added key-algorithm/length guard introduces a 500 path but only for a misconfigured key, and correctly skips the length check when getEncoded() is null."
+    },
+    "V119": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Signature allowlist drives the stored extension and a GUID the stem, so the client filename is gone from the path; the stream is rewound before the copy so the whole file is written, and the changed stored name is called out as unavoidable."
+    },
+    "V120": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Server-generated UUID name with extension from the detected MIME, storage moved outside the static root, and a validating GET route with nosniff and a restrictive CSP; SVG correctly dropped and the /avatars/<name> response contract preserved."
+    }
+  },
+  "judge2": {
+    "V101": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "secrets.choice replaces random.choice, reseed correctly identified as a non-mitigation and removed; token shape, storage and JSON response unchanged."
+    },
+    "V102": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Sanitizes CR/LF/control chars at the call site and correctly notes that SLF4J {} placeholders neutralize nothing; throwable kept in trailing position, only log text changes."
+    },
+    "V103": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto/rand.Int over a big.Int bound avoids modulo bias and preserves the exact [a-z0-9]{32} key format; added 500 path only fires if the CSPRNG fails."
+    },
+    "V104": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "crypto/rand is right, but the key charset changes from [a-z0-9] to mixed-case base64url, so any case-insensitive store or lowercase format check downstream breaks; disclosed, with a format-preserving alternative offered."
+    },
+    "V105": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct secrets.choice swap with the reseed removed; length, alphabet, dict key and response body all preserved."
+    },
+    "V106": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Math.multiplyExact plus a product cap closes the wrap correctly, but the new 10 MiB MAX_TOTAL_BYTES rejects non-overflowing requests that previously returned 200; disclosed as a deliberate change."
+    },
+    "V107": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Delegates via next(error) to the existing handler instead of answering from the route, keeps the try/catch for Express 4 promise rejections; only additions are an incidentId field and a headersSent guard on the error path."
+    },
+    "V108": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Replaces the jku-driven resolver with a cached ConfigurationManager bound to the configured authority and pins ValidAlgorithms; sync-over-async GetAwaiter().GetResult() and the RS256 pin are flagged by the author as the residual caveats."
+    },
+    "V109": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "The code edit (concat to {} placeholder) neutralizes nothing on its own and the author says so; closure rests entirely on adopting an assumed Logback binding plus a logstash-logback-encoder dependency whose version is left as an unresolved placeholder."
+    },
+    "V110": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "proc_open with an argument array removes the shell from the fallback branch and passes the basename-derived $source, blocking argument injection too; $fallbackStatus pre-set to 1 preserves the empty-string failure contract."
+    },
+    "V111": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Shell removed from both branches via proc_open arrays, but the added ^[A-Za-z0-9][A-Za-z0-9._-]{0,254}$ allowlist now rejects legitimate filenames with spaces or non-ASCII characters, and the primary path was rewritten though it was not the finding."
+    },
+    "V112": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Correctly identifies the magic-byte check as not the broken link and rebuilds the name from a UUID plus allowlist-derived extension outside the static root; the added 2 MB multer fileSize limit rejects uploads that previously succeeded."
+    },
+    "V113": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES/GCM/NoPadding with a per-call SecureRandom 12-byte IV prepended to the ciphertext; output format necessarily changes and the decrypt-side update is called out."
+    },
+    "V114": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Widening one operand to long before the multiply plus Math.toIntExact is correct, but the new 16 MiB cap turns previously successful non-overflowing requests into 400s."
+    },
+    "V115": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Minimal and exactly targeted: next(error) routes into the existing sanitized handler, try/catch retained for Express 4, error middleware and every other response left untouched."
+    },
+    "V116": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Sees through the 'already outside wwwroot' distractor and rebuilds the path from a GUID plus signature-derived extension with FileMode.CreateNew; the added [RequestSizeLimit] 10 MB cap is behaviour the endpoint did not have before."
+    },
+    "V117": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Drops the jku read entirely and fetches the JWKS from a server-configured URI, with kid used only to select among trusted keys and ValidAlgorithms pinned; per-validation fetch matches the original's cost."
+    },
+    "V118": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES/GCM/NoPadding with a fresh SecureRandom IV prepended, explicitly rejecting CBC as an insufficient substitute; the added key-strength guard only rejects non-AES or sub-128-bit keys and skips null getEncoded for HSM keys."
+    },
+    "V119": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Server-generated GUID name plus signature-derived extension confines the write and closes the type gap, and the header read is correctly rewound before copy; the new 4 MB RequestSizeLimit and file.Length guard reject uploads that previously succeeded."
+    },
+    "V120": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Same correct rebuild of the storage name outside the static root with a validated serving route and nosniff/CSP headers; the added 2 MB fileSize limit changes which uploads the endpoint accepts."
+    }
+  },
+  "judge3": {
+    "V101": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "secrets.choice keeps the exact 32-char [A-Za-z0-9] token shape; reseed line and now-unused imports correctly dropped."
+    },
+    "V102": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Neutralizes control chars at the call site, correctly rejects SLF4J parameterization as the fix, keeps the Throwable in throwable position, and fixes the success-path sink too."
+    },
+    "V103": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto/rand.Int over the same alphabet preserves key length, charset, storage and response exactly; entropy-failure path fails closed."
+    },
+    "V104": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "crypto/rand closes it, but the key charset changes from [a-z0-9] to mixed-case base64url and the package-level keyAlphabet const is deleted, so any other file or downstream case-insensitive lookup breaks."
+    },
+    "V105": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same minimal secrets.choice swap; reseed removed, token format, dict key and JSON response unchanged."
+    },
+    "V106": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "multiplyExact plus a product cap closes both the wraparound and the uncapped-allocation path; cap is flagged as a placeholder to tune and reuses the existing 400 path."
+    },
+    "V107": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Delegates to the existing error middleware with next(error); the added incidentId field is additive and disclosed, and the try/catch is correctly retained for Express 4."
+    },
+    "V108": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Key material now comes from the configured authority's discovery document; kid only narrows already-trusted keys, and alg pinning plus RequireSignedTokens close the adjacent confusion path."
+    },
+    "V109": {
+      "fix_quality": 1,
+      "no_harm": 1,
+      "note": "The Java edit is only parameterization, which neutralizes nothing; closure depends entirely on an assumed Logback binding, a new unversioned logstash-encoder dependency and a JSON appender, which also reformats every log line the application emits."
+    },
+    "V110": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "proc_open with an argv array removes the shell and the fallback now passes the basename-derived $source; stdout capture, stderr inheritance and the status-driven return are all preserved."
+    },
+    "V111": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Shell removed correctly, but the added ^[A-Za-z0-9][A-Za-z0-9._-]{0,254}$ allowlist rejects legitimate document names containing spaces or non-ASCII, and it is applied to the previously working primary path as well."
+    },
+    "V112": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Server-generated UUID name with the extension taken from the detected MIME, storage moved out of the static root and served by a validating route; SVG correctly dropped, size cap disclosed as hardening."
+    },
+    "V113": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES/GCM/NoPadding with a fresh 12-byte SecureRandom IV prepended to the output keeps the response a single self-contained Base64 token; decrypt-side change is called out."
+    },
+    "V114": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Widening one operand to long plus a total-size cap and toIntExact narrowing; rejection reuses the existing 400 path and the cap is flagged as a placeholder."
+    },
+    "V115": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Minimal, surgical: catch forwards to the already-correct error middleware, response contract and logging preserved with nothing else altered."
+    },
+    "V116": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "file.FileName never reaches the path; GUID stem plus signature-derived extension, CreateNew instead of truncating Create, and a content allowlist the endpoint previously lacked."
+    },
+    "V117": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "jku read removed and the JWKS URI fixed in server configuration; kid now only selects among trusted keys, sync signature and throw-on-reject contract preserved."
+    },
+    "V118": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES-GCM with per-message random IV prepended; the added key-strength guard only rejects keys Cipher.init would already have refused, so valid-path behaviour is unchanged."
+    },
+    "V119": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Signature allowlist plus GUID name and derived extension close both halves; stream is correctly rewound before the copy so the validated bytes are what get written."
+    },
+    "V120": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same server-controlled name and extension, storage outside the static root, dedicated route with nosniff and CSP; SVG removed and the size cap disclosed as hardening."
+    }
+  }
+}
