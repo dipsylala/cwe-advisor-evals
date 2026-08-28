@@ -11,8 +11,9 @@ reasoning alone. This harness exists to put numbers against three open questions
    detail a model genuinely lacks.
 2. Does review effort show up in output quality? Cases are split between CWEs the top-15 review
    covered and CWEs it never touched.
-3. Did removing the code blocks help or hurt? That A/B was proposed when the sweep was made and
-   never run. The pre-sweep entries are still recoverable from git.
+3. Does the top-15 review show up in fix quality? Arm C is each entry as it stood *before* this
+   session's review, so B vs C is a before/after on the same entry rather than a comparison across
+   different CWEs of differing difficulty.
 
 ## Corpus
 
@@ -27,22 +28,43 @@ which would manufacture whatever result was wanted.
 | Group | CWEs | Cases |
 |---|---|---|
 | Reviewed by the top-15 pass | 22, 78, 79, 89 | 8 |
-| Never reviewed | 327, 330, 501, 643 | 8 |
+| Never reviewed | 90, 330, 614 | 8 |
+
+Every CWE here has both a root entry and a `java/` entry, so each arm receives the same *shape* of
+guidance and coverage depth is not confounded with review status. Three Benchmark categories were
+excluded for that reason: CWE-327 and CWE-501 have root guidance but no language file, and CWE-643
+(XPath Injection) has no entry at all - a coverage gap this exercise surfaced, now recorded in
+TODO.md.
 
 All are Java servlets, which holds language constant across arms and removes it as a confound.
+
+**Cases are presented as findings, not as raw code.** This advisor remediates; it does not detect.
+A SAST tool or another skill supplies the finding, and SKILL.md is built for that - Step 1 takes
+the CWE as given, and Step 4 prefers a tool-supplied taint path. Each case file therefore carries a
+`// SAST FINDING:` comment above the sink naming the CWE and the flow, and `cases.json` records the
+same as structured metadata. Every arm receives it, so the comparison is purely about remediation
+quality. Scoring the skill on whether it *finds* the bug would measure something it does not claim
+to do, and would advantage the no-skill arm for the same reason.
 
 ## Arms
 
 Each case is run three times, in a **fresh context** each time.
 
-| Arm | Condition |
+| Arm | Guidance supplied |
 |---|---|
-| **A** | Model alone. No skill, no knowledge base access |
-| **B** | Skill as it currently stands |
-| **C** | Skill with the entry restored to its pre-sweep state (`git show 9a5a105^:{CWE}/INDEX.md` and the language file) |
+| **A** | None. The finding and the file, nothing else |
+| **B** | The current `{CWE}/INDEX.md` and `{CWE}/java/INDEX.md` |
+| **C** | The same two files as of commit `9a5a105` - after the `Safe Pattern` sweep, before this session's review |
 
 Arm A is the control and the reason the exercise is worth running. Without it the numbers describe
 the model, not the knowledge base.
+
+**The arms differ only in the guidance text.** Every arm receives the same task framing, the same
+annotated case file, and the same instruction to produce a fix. SKILL.md's workflow is held
+constant rather than invoked, because all three questions above are about the *content* of the
+knowledge base: mixing in the workflow would leave B vs C confounded between "fewer code blocks"
+and "different routing". Testing the workflow itself - routing, mode selection, the false-positive
+exit - is a separate exercise against different inputs.
 
 Runs are written to `runs/{arm}/{test}.md` containing the proposed fix and nothing identifying the
 arm, so scoring can be done blind.
@@ -58,24 +80,32 @@ arm, so scoring can be done blind.
 | **No new weakness** | Introduces a different weakness | Questionable construct, not clearly exploitable | Clean |
 | **Fit to the code** | Generic advice, or the wrong shape for this sink | Workable but not idiomatic | Right API, matches surrounding style |
 
-Binary: **CWE correctly identified** - did the run route to the weakness the ground truth names.
+Binary: **Flagged sink addressed** - did the change land on the data flow the finding names,
+rather than on adjacent code.
 
 **Primary metric:** proportion of cases scoring 2 on *Vulnerability removed*. Secondary: mean total
 across the four criteria.
 
-**Comparisons:** B vs A overall; B vs A split by reviewed/unreviewed; C vs B.
+**Comparisons:** B vs A overall; B vs A split by reviewed/unreviewed; B vs C on the four reviewed
+CWEs.
+
+**Built-in noise floor.** The review never touched CWE-327, 330, 501 or 643, so for those 8 cases
+arm C's guidance is byte-identical to arm B's. Any B-vs-C difference there is run-to-run variance
+in the model and the judge, and it sets the bar a difference on the reviewed CWEs has to clear
+before it means anything.
 
 ## Predictions
 
 Recorded in advance so the result cannot be rationalised after the fact.
 
-- B beats A on *Fit to the code* and on CWE identification, but the gap on *Vulnerability removed*
-  is small - a capable model already fixes textbook SQL injection and XSS.
+- B beats A on *Fit to the code*, but the gap on *Vulnerability removed* is small - a capable model
+  already fixes textbook SQL injection and XSS.
 - The reviewed/unreviewed split shows a smaller difference than the review effort implies, because
   both arms share the same model and Benchmark's cases are close to textbook.
-- C vs B is close to a wash, with the code blocks helping most where the fix has an awkward shape
-  (CWE-89's `CallableStatement`, CWE-501's trust boundary) and hurting where a block would be
-  copied verbatim into a context it does not fit.
+- B vs C on the reviewed CWEs is positive but small, and may not clear the noise floor the
+  identical-guidance pairs establish. The review corrected accuracy more than it changed the shape
+  of the advice, and Benchmark's cases are close enough to textbook that accuracy corrections
+  (the `th:attr` claim, the `Parameters.Add` value assignment) may never be exercised.
 
 If B does not beat A anywhere, that is the finding, and it argues for rewriting entries around
 what a model cannot infer - version floors, advisory status, framework-specific traps - and

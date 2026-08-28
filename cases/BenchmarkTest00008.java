@@ -55,6 +55,7 @@ public class BenchmarkTest00008 extends HttpServlet {
             java.sql.Connection connection =
                     org.owasp.benchmark.helpers.DatabaseHelper.getSqlConnection();
             java.sql.CallableStatement statement = connection.prepareCall(sql);
+            // SAST FINDING: CWE-89 (SQL Injection) - a SQL statement is built from request data and executed. Sink is the next statement.
             java.sql.ResultSet rs = statement.executeQuery();
             org.owasp.benchmark.helpers.DatabaseHelper.printResults(rs, sql, response);
 

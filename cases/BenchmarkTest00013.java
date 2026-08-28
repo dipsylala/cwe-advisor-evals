@@ -53,6 +53,7 @@ public class BenchmarkTest00013 extends HttpServlet {
 
         response.setHeader("X-XSS-Protection", "0");
         Object[] obj = {"a", "b"};
+        // SAST FINDING: CWE-79 (Cross-site Scripting) - request data is written into the HTTP response body. Sink is the next statement.
         response.getWriter().format(java.util.Locale.US, param, obj);
     }
 }

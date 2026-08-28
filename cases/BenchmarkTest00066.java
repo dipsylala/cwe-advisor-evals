@@ -70,6 +70,7 @@ public class BenchmarkTest00066 extends HttpServlet {
         if ((7 * 42) - num > 200) bar = "This_should_always_happen";
         else bar = param;
 
+        // SAST FINDING: CWE-330 (Use of Insufficiently Random Values) - a security-relevant value is drawn from a non-cryptographic PRNG. Sink is the next statement.
         double value = java.lang.Math.random();
         String rememberMeKey = Double.toString(value).substring(2); // Trim off the 0. at the front.
 

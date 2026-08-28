@@ -70,6 +70,7 @@ public class BenchmarkTest00002 extends HttpServlet {
         try {
             fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + param;
 
+            // SAST FINDING: CWE-22 (Path Traversal) - a file path is built from request data and opened. Sink is the next statement.
             fos = new java.io.FileOutputStream(fileName, false);
             response.getWriter()
                     .println(

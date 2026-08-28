@@ -58,6 +58,7 @@ public class BenchmarkTest00007 extends HttpServlet {
         Runtime r = Runtime.getRuntime();
 
         try {
+            // SAST FINDING: CWE-78 (OS Command Injection) - an OS command is built from request data and executed. Sink is the next statement.
             Process p = r.exec(args, argsEnv);
             org.owasp.benchmark.helpers.Utils.printOSCommandResults(p, response);
         } catch (IOException e) {
