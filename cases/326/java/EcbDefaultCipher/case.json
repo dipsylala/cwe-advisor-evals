@@ -1,0 +1,23 @@
+{
+  "id": "EcbDefaultCipher",
+  "cwe": "326",
+  "language": "java",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-326/java Common Pitfalls: Writing Cipher.getInstance(\"AES\") and assuming a safe default",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "EcbDefaultCipher.java"
+  ],
+  "finding": {
+    "cwe": "CWE-326",
+    "name": "Inadequate Encryption Strength",
+    "file": "EcbDefaultCipher.java",
+    "sink_line": 21,
+    "sink_code": "Cipher cipher = Cipher.getInstance(\"AES\");",
+    "summary": "a request parameter is encrypted with a transformation that resolves to ECB"
+  },
+  "trap": "Naming a mode to replace the bare \"AES\" transformation. A fix to AES/CBC or AES/GCM that uses a fixed or zero IV, or that generates a random IV without emitting it, silently breaks decryption of everything it writes.",
+  "must_preserve": "The response body stays a Base64 string that the holder of the key can decrypt back to the submitted value. A 400 is still returned when ssn is absent."
+}

@@ -1,0 +1,23 @@
+{
+  "id": "AvatarInStaticRoot",
+  "cwe": "434",
+  "language": "javascript",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-434/javascript Common Pitfalls: Detecting content type but still writing under a static-served directory",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "AvatarInStaticRoot.js"
+  ],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "AvatarInStaticRoot.js",
+    "sink_line": 23,
+    "sink_code": "const destination = path.join(PUBLIC_DIR, 'avatars', req.file.originalname);",
+    "summary": "an uploaded image is stored inside a statically served directory"
+  },
+  "trap": "Pointing at the signature check as the fix. Content-type detection is already present and passing; the destination is still inside the express.static root, so an accepted SVG is fetched and rendered from the origin.",
+  "must_preserve": "A successful upload still responds with JSON carrying a url the client can fetch, and an unsupported type still returns 400 with the same error shape."
+}

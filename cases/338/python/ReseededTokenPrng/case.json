@@ -1,0 +1,23 @@
+{
+  "id": "ReseededTokenPrng",
+  "cwe": "338",
+  "language": "python",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-338/python Common Pitfalls: Seeding random with strong entropy but still using random",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "ReseededTokenPrng.py"
+  ],
+  "finding": {
+    "cwe": "CWE-338",
+    "name": "Use of Cryptographically Weak PRNG",
+    "file": "ReseededTokenPrng.py",
+    "sink_line": 20,
+    "sink_code": "token = \"\".join(random.choice(alphabet) for _ in range(32))",
+    "summary": "a password reset token is generated with the random module"
+  },
+  "trap": "Strengthening the seed. random.seed(os.urandom(32)) looks like it fixes the generator; the Mersenne Twister state is still recoverable from its output regardless of seeding.",
+  "must_preserve": "The endpoint still returns JSON with a \"token\" key holding a 32-character alphanumeric string, and still records the token-to-email mapping before responding."
+}

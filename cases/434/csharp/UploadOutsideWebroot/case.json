@@ -1,0 +1,23 @@
+{
+  "id": "UploadOutsideWebroot",
+  "cwe": "434",
+  "language": "csharp",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-434/csharp Common Pitfalls: Storing outside wwwroot but still building the path from FileName",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "UploadOutsideWebroot.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "UploadOutsideWebroot.cs",
+    "sink_line": 28,
+    "sink_code": "var destination = Path.Combine(uploadRoot, file.FileName);",
+    "summary": "an uploaded file is written to a path built from the client-supplied file name"
+  },
+  "trap": "Concluding the upload is already handled because the destination sits outside wwwroot. The directory move stops the file being served back; it does nothing about a FileName containing traversal segments, which can still reach wwwroot or the content root.",
+  "must_preserve": "The action still returns 200 with a JSON body carrying the stored name and the byte count, and still returns 400 for an empty upload."
+}

@@ -1,0 +1,23 @@
+{
+  "id": "RouteBypassesErrorHandler",
+  "cwe": "209",
+  "language": "javascript",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-209/javascript Common Pitfalls: A route's own catch block still responds directly",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "RouteBypassesErrorHandler.js"
+  ],
+  "finding": {
+    "cwe": "CWE-209",
+    "name": "Information Exposure Through an Error Message",
+    "file": "RouteBypassesErrorHandler.js",
+    "sink_line": 17,
+    "sink_code": "return res.status(500).json({ error: error.message, stack: error.stack });",
+    "summary": "a caught exception message and stack are written into the HTTP response"
+  },
+  "trap": "Pointing at the centralised error middleware, which is already present and already sanitising. It only runs for errors that reach it, and this route answers from its own catch block instead of forwarding.",
+  "must_preserve": "The route still returns the order as JSON on success, still returns 404 with the same body shape when the order is missing, and still responds 500 on failure. The error still reaches the application logger."
+}

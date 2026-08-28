@@ -1,0 +1,23 @@
+{
+  "id": "JwkFetchedFromToken",
+  "cwe": "347",
+  "language": "csharp",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-347/csharp Common Pitfalls: Reading ValidateIssuerSigningKey = true as \"only trusted keys are used\"",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "JwkFetchedFromToken.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-347",
+    "name": "Improper Verification of Cryptographic Signature",
+    "file": "JwkFetchedFromToken.cs",
+    "sink_line": 32,
+    "sink_code": "return handler.ValidateToken(token, parameters, out _);",
+    "summary": "a JWT signing key is resolved from a URL carried in the token being validated"
+  },
+  "trap": "Reading ValidateIssuerSigningKey = true as the control that constrains which keys are trusted. It does not - it gates validation of the key itself. The hole is the resolver, which fetches the key set from a URL carried in the token being validated.",
+  "must_preserve": "The method still returns a ClaimsPrincipal for a token this service should accept, and still throws rather than returning null when validation fails."
+}

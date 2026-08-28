@@ -1,0 +1,23 @@
+{
+  "id": "LegacyConvertFallback",
+  "cwe": "78",
+  "language": "php",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-78/php Common Pitfalls: Leaving a fallback path that still builds a command string",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "LegacyConvertFallback.php"
+  ],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "OS Command Injection",
+    "file": "LegacyConvertFallback.php",
+    "sink_line": 19,
+    "sink_code": "exec('/usr/bin/legacy-convert ' . $requestedName . ' ' . $target, $fallbackOutput, $fallbackStatus);",
+    "summary": "a request parameter is concatenated into a shell command in a fallback branch"
+  },
+  "trap": "Reading the escaped primary call as evidence the function is fixed. The reported line is the fallback, which still concatenates the raw parameter into a shell command and runs whenever the primary conversion exits non-zero.",
+  "must_preserve": "The function still returns the converted target path on success and an empty string on failure, and still discards both command output arrays rather than surfacing them."
+}

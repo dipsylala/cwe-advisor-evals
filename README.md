@@ -32,10 +32,33 @@ cases/
 Cases accumulate here rather than being versioned into a new directory per run - git holds the
 history. Run records under `runs*/` name cases by id, so ids are stable once published.
 
-Current contents: 33 Java cases across CWE-22, 78, 79, 89, 90, 330, 601 and 614. Two sources, both
-externally authored: **OWASP Benchmark** single-file servlets (`source: owasp-benchmark`), and
-**Juliet** multi-file flow variants de-labelled mechanically (`source: juliet`), where the taint
-crosses 2, 4 or 5 files.
+Current contents: 43 cases across 15 CWEs and six languages. Three sources:
+
+| `source` | n | What it is |
+|---|---|---|
+| `owasp-benchmark` | 16 | Single-file Java servlets, labels from `expectedresults-1.2.csv` |
+| `juliet` | 17 | Java multi-file flow variants, de-labelled mechanically; taint crosses 2, 4 or 5 files |
+| `authored-from-docs-pitfall` | 10 | Single-function cases across Java, Python, Go, C#, JavaScript and PHP, each built around a fix that looks right and is not |
+
+The third group exists because runs 1-3 measured the first two to saturation. Chain depth never
+discriminated - every arm traced five-file chains perfectly, unguided included - while every
+recorded harm was sink-local: output the original discarded, an argument the original left `null`,
+a dropped URI fragment. These cases therefore drop the chain and vary what actually separated the
+arms: how much contract the sink has, and how wrong the plausible fix is.
+
+Each one is built from a `Common Pitfalls` bullet in the `docs/` corpus, which has been through
+actor/critic review across two model families. Being authored here rather than externally sourced,
+they carry two extra fields so the intended difficulty is explicit and checkable rather than
+implied by the code:
+
+- **`trap`** - the plausible fix that does not close the finding, or closes it while breaking
+  something.
+- **`must_preserve`** - the sink's contract a correct fix has to keep. This is what `no_harm` is
+  scored against, rather than left to a judge's reading of the original.
+- **`origin`** - the `docs/` pitfall the case is built from.
+
+Their labels are an authoring claim, not an external ground truth, which is weaker than the other
+two sources. Treat a judge disagreeing with `kind` on one of these as a finding about the case.
 
 ### Adding a case
 
@@ -51,6 +74,11 @@ Create `cases/{CWE}/{language}/{case-id}/` with the source files and a `case.jso
 | `group` | `reviewed` or `unreviewed`, for the review-effort split |
 | `files` | Source files, in call order |
 | `finding` | What the scanner reports: `cwe`, `name`, `file`, `sink_line`, `sink_code`, `summary` |
+| `trap`, `must_preserve`, `origin` | Authored cases only - see above |
+
+`case.json` holds the answer, so **runners and judges must be told not to read it**, the same way
+they are told not to read `RESULTS*.md` or the `runs*/` directories. Everything an arm is entitled
+to see is handed to it in the prompt: the case directory, the CWE, and the sink file and line.
 
 Two properties matter more than volume. **Cases must be externally authored or independently
 derived** - a case written against the guidance takes the shape the guidance already describes and

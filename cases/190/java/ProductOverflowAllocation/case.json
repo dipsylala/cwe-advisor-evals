@@ -1,0 +1,23 @@
+{
+  "id": "ProductOverflowAllocation",
+  "cwe": "190",
+  "language": "java",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-190/java Common Pitfalls: Validating a single field's range but not the combination",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "ProductOverflowAllocation.java"
+  ],
+  "finding": {
+    "cwe": "CWE-190",
+    "name": "Integer Overflow or Wraparound",
+    "file": "ProductOverflowAllocation.java",
+    "sink_line": 24,
+    "sink_code": "byte[] buffer = new byte[count * size];",
+    "summary": "two bounded request parameters are multiplied to size an allocation"
+  },
+  "trap": "Tightening the per-field bounds. Both operands already pass a range check; the bound that matters is on the product, not on the operands.",
+  "must_preserve": "The response is still the allocated length as text, and a request outside the documented per-field ranges still returns 400 rather than raising."
+}

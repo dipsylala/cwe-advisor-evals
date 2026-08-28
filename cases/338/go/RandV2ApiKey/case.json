@@ -1,0 +1,23 @@
+{
+  "id": "RandV2ApiKey",
+  "cwe": "338",
+  "language": "go",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-338/go Common Pitfalls: Assuming the package-level functions are the predictable ones",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "RandV2ApiKey.go"
+  ],
+  "finding": {
+    "cwe": "CWE-338",
+    "name": "Use of Cryptographically Weak PRNG",
+    "file": "RandV2ApiKey.go",
+    "sink_line": 24,
+    "sink_code": "key[i] = keyAlphabet[rand.IntN(len(keyAlphabet))]",
+    "summary": "an API key is generated with math/rand"
+  },
+  "trap": "Treating math/rand/v2 as the fix because it is the newer package, or concluding the finding is stale because Go 1.22+ seeds the package-level functions from ChaCha8. The package documents no unpredictability guarantee and GODEBUG=randautoseed=0 reverts it.",
+  "must_preserve": "IssueAPIKey still writes a 32-character key drawn from the same alphabet to the response body, and still records it in apiKeys before writing. The 400 path is unchanged."
+}

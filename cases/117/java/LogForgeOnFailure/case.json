@@ -1,0 +1,23 @@
+{
+  "id": "LogForgeOnFailure",
+  "cwe": "117",
+  "language": "java",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-117/java Common Pitfalls: Assuming SLF4J placeholders alone block CR/LF",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "LogForgeOnFailure.java"
+  ],
+  "finding": {
+    "cwe": "CWE-117",
+    "name": "Improper Output Neutralization for Logs",
+    "file": "LogForgeOnFailure.java",
+    "sink_line": 25,
+    "sink_code": "logger.error(\"Login failed for \" + username, e);",
+    "summary": "a request parameter is concatenated into a log message"
+  },
+  "trap": "Converting the concatenation to an SLF4J placeholder. That keeps the value separate at the API level but does not stop a raw CR/LF reaching the output line unless the appender uses an encoding-aware layout rather than a text PatternLayout.",
+  "must_preserve": "The failure branch still logs at ERROR with the caught exception attached, and still returns 401. The success branch still logs the username at INFO and returns 200."
+}
