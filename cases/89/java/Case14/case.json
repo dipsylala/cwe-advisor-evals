@@ -1,0 +1,22 @@
+{
+  "id": "Case14",
+  "cwe": "89",
+  "language": "java",
+  "source": "juliet",
+  "kind": "false_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "flow": "goodB2G",
+  "files": [
+    "Case14A.java",
+    "Case14B.java"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "SQL Injection",
+    "file": "Case14B.java",
+    "sink_line": 29,
+    "sink_code": "resultSet = sqlStatement.executeQuery();",
+    "summary": "a SQL statement is built from request data and executed"
+  }
+}

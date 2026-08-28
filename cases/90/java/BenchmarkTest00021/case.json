@@ -1,0 +1,20 @@
+{
+  "id": "BenchmarkTest00021",
+  "cwe": "90",
+  "language": "java",
+  "source": "owasp-benchmark",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "BenchmarkTest00021.java"
+  ],
+  "finding": {
+    "cwe": "CWE-90",
+    "name": "LDAP Injection",
+    "sink_line": 59,
+    "sink_code": "ctx.search(base, filter, filters, sc);",
+    "summary": "an LDAP filter is built from request data and searched",
+    "file": "BenchmarkTest00021.java"
+  }
+}

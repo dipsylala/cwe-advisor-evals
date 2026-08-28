@@ -1,0 +1,22 @@
+{
+  "id": "Case13",
+  "cwe": "89",
+  "language": "java",
+  "source": "juliet",
+  "kind": "false_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "flow": "goodG2B",
+  "files": [
+    "Case13A.java",
+    "Case13B.java"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "SQL Injection",
+    "file": "Case13B.java",
+    "sink_line": 28,
+    "sink_code": "resultSet = sqlStatement.executeQuery(\"select * from users where name='\"+data+\"'\");",
+    "summary": "a SQL statement is built from request data and executed"
+  }
+}

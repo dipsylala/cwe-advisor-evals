@@ -1,0 +1,20 @@
+{
+  "id": "BenchmarkTest00013",
+  "cwe": "79",
+  "language": "java",
+  "source": "owasp-benchmark",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "BenchmarkTest00013.java"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Cross-site Scripting",
+    "sink_line": 57,
+    "sink_code": "response.getWriter().format(java.util.Locale.US, param, obj);",
+    "summary": "request data is written into the HTTP response body",
+    "file": "BenchmarkTest00013.java"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "Case04",
+  "cwe": "78",
+  "language": "java",
+  "source": "juliet",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "flow": "bad",
+  "files": [
+    "Case04A.java",
+    "Case04B.java"
+  ],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "OS Command Injection",
+    "file": "Case04B.java",
+    "sink_line": 28,
+    "sink_code": "Process process = Runtime.getRuntime().exec(osCommand + data);",
+    "summary": "an OS command is built from request data and executed"
+  }
+}

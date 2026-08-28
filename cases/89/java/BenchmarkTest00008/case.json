@@ -1,0 +1,20 @@
+{
+  "id": "BenchmarkTest00008",
+  "cwe": "89",
+  "language": "java",
+  "source": "owasp-benchmark",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "BenchmarkTest00008.java"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "SQL Injection",
+    "sink_line": 59,
+    "sink_code": "java.sql.ResultSet rs = statement.executeQuery();",
+    "summary": "a SQL statement is built from request data and executed",
+    "file": "BenchmarkTest00008.java"
+  }
+}

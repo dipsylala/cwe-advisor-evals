@@ -1,0 +1,20 @@
+{
+  "id": "BenchmarkTest00087",
+  "cwe": "614",
+  "language": "java",
+  "source": "owasp-benchmark",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "BenchmarkTest00087.java"
+  ],
+  "finding": {
+    "cwe": "CWE-614",
+    "name": "Sensitive Cookie Without Secure Flag",
+    "sink_line": 97,
+    "sink_code": "response.addCookie(cookie);",
+    "summary": "a cookie is added to the response without the Secure attribute",
+    "file": "BenchmarkTest00087.java"
+  }
+}

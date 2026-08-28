@@ -1,0 +1,22 @@
+{
+  "id": "Case10",
+  "cwe": "601",
+  "language": "java",
+  "source": "juliet",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "unreviewed",
+  "flow": "bad",
+  "files": [
+    "Case10A.java",
+    "Case10B.java"
+  ],
+  "finding": {
+    "cwe": "CWE-601",
+    "name": "URL Redirection to Untrusted Site",
+    "file": "Case10B.java",
+    "sink_line": 32,
+    "sink_code": "response.sendRedirect(data);",
+    "summary": "a redirect target is taken from request data"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "BenchmarkTest00023",
+  "cwe": "330",
+  "language": "java",
+  "source": "owasp-benchmark",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "BenchmarkTest00023.java"
+  ],
+  "finding": {
+    "cwe": "CWE-330",
+    "name": "Use of Insufficiently Random Values",
+    "sink_line": 48,
+    "sink_code": "float rand = new java.util.Random().nextFloat();",
+    "summary": "a security-relevant value is drawn from a non-cryptographic PRNG",
+    "file": "BenchmarkTest00023.java"
+  }
+}

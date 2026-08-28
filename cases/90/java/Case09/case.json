@@ -1,0 +1,25 @@
+{
+  "id": "Case09",
+  "cwe": "90",
+  "language": "java",
+  "source": "juliet",
+  "kind": "true_positive",
+  "depth": 5,
+  "group": "unreviewed",
+  "flow": "bad",
+  "files": [
+    "Case09A.java",
+    "Case09B.java",
+    "Case09C.java",
+    "Case09D.java",
+    "Case09E.java"
+  ],
+  "finding": {
+    "cwe": "CWE-90",
+    "name": "LDAP Injection",
+    "file": "Case09E.java",
+    "sink_line": 32,
+    "sink_code": "NamingEnumeration<SearchResult> answer = directoryContext.search(\"\", search, null);",
+    "summary": "an LDAP filter is built from request data and searched"
+  }
+}

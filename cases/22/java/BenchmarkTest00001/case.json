@@ -1,0 +1,20 @@
+{
+  "id": "BenchmarkTest00001",
+  "cwe": "22",
+  "language": "java",
+  "source": "owasp-benchmark",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "BenchmarkTest00001.java"
+  ],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Path Traversal",
+    "sink_line": 73,
+    "sink_code": "fis = new java.io.FileInputStream(new java.io.File(fileName));",
+    "summary": "a file path is built from request data and opened",
+    "file": "BenchmarkTest00001.java"
+  }
+}

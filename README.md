@@ -15,11 +15,54 @@ reasoning alone. This harness exists to put numbers against three open questions
    session's review, so B vs C is a before/after on the same entry rather than a comparison across
    different CWEs of differing difficulty.
 
-## Corpus
+## Test cases
+
+One tree, keyed by CWE and language the same way the knowledge base is, so a case sits next to the
+guidance it exercises:
+
+```text
+cases/
+  {CWE}/
+    {language}/
+      {case-id}/
+        *.java        the case files
+        case.json     metadata and the finding handed to each arm
+```
+
+Cases accumulate here rather than being versioned into a new directory per run - git holds the
+history. Run records under `runs*/` name cases by id, so ids are stable once published.
+
+Current contents: 33 Java cases across CWE-22, 78, 79, 89, 90, 330, 601 and 614. Two sources, both
+externally authored: **OWASP Benchmark** single-file servlets (`source: owasp-benchmark`), and
+**Juliet** multi-file flow variants de-labelled mechanically (`source: juliet`), where the taint
+crosses 2, 4 or 5 files.
+
+### Adding a case
+
+Create `cases/{CWE}/{language}/{case-id}/` with the source files and a `case.json`:
+
+| Field | Meaning |
+|---|---|
+| `id` | Directory name. Stable once a run has referenced it |
+| `cwe`, `language` | Match the directory position |
+| `source` | Where the case came from, for judging independence from the guidance |
+| `kind` | `true_positive` or `false_positive` |
+| `depth` | Files in the call chain from source to sink |
+| `group` | `reviewed` or `unreviewed`, for the review-effort split |
+| `files` | Source files, in call order |
+| `finding` | What the scanner reports: `cwe`, `name`, `file`, `sink_line`, `sink_code`, `summary` |
+
+Two properties matter more than volume. **Cases must be externally authored or independently
+derived** - a case written against the guidance takes the shape the guidance already describes and
+manufactures whatever result was wanted. And **ground truth must come from outside the case**:
+Benchmark ships `expectedresults-1.2.csv`, Juliet encodes it in the variant name. A case whose
+label is only an assertion in its own metadata cannot settle a disagreement with a judge.
+
+## Corpus (run 1)
 
 16 cases from [OWASP BenchmarkJava](https://github.com/OWASP-Benchmark/BenchmarkJava), taken from
 its `expectedresults-1.2.csv` ground truth and filtered to entries labelled a real vulnerability.
-Test sources and labels are in `cases/` and `cases.json`.
+These now live in the shared case tree described under **Test cases** below, alongside the Juliet cases added for run 2.
 
 Chosen because they are **authored externally**. Cases written here would be written toward the
 guidance - unconsciously shaped so the vulnerability takes the form the entry already describes -
@@ -41,8 +84,8 @@ All are Java servlets, which holds language constant across arms and removes it 
 **Cases are presented as findings, not as raw code.** This advisor remediates; it does not detect.
 A SAST tool or another skill supplies the finding, and SKILL.md is built for that - Step 1 takes
 the CWE as given, and Step 4 prefers a tool-supplied taint path. Each case file therefore carries a
-`// SAST FINDING:` comment above the sink naming the CWE and the flow, and `cases.json` records the
-same as structured metadata. Every arm receives it, so the comparison is purely about remediation
+`// SAST FINDING:` comment above the sink naming the CWE and the flow, and its `case.json` records
+the same as structured metadata. Every arm receives it, so the comparison is purely about remediation
 quality. Scoring the skill on whether it *finds* the bug would measure something it does not claim
 to do, and would advantage the no-skill arm for the same reason.
 
@@ -183,7 +226,7 @@ Both arms are asked for the same output shape (verdict, source, fix, explanation
 comparable, and both are told a "not exploitable" verdict is a legitimate answer. Without that,
 the five false-positive cases would be unfair to arm A rather than informative.
 
-### Corpus
+### Corpus (run 2 additions)
 
 17 cases from Juliet, de-labelled mechanically (see the build script's docstring):
 
