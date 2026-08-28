@@ -2,6 +2,9 @@
 
 Measures whether the knowledge base actually improves remediation, rather than assuming it does.
 
+This file covers what is measured and what past runs found. To execute a run, see
+[HARNESS.md](HARNESS.md) - the runbook, with the arm and judge prompts verbatim.
+
 Nothing in this repository has been measured. The top-15 review, the `Safe Pattern` sweep that
 removed 307 code blocks, the CWE-306 language entries and the version pass were all applied on
 reasoning alone. This harness exists to put numbers against three open questions:
