@@ -1,0 +1,290 @@
+{
+  "R001": {
+    "arm": "B",
+    "test": "BenchmarkTest00014",
+    "cwe": "79",
+    "group": "reviewed"
+  },
+  "R002": {
+    "arm": "A",
+    "test": "BenchmarkTest00002",
+    "cwe": "22",
+    "group": "reviewed"
+  },
+  "R003": {
+    "arm": "A",
+    "test": "BenchmarkTest00018",
+    "cwe": "89",
+    "group": "reviewed"
+  },
+  "R004": {
+    "arm": "C",
+    "test": "BenchmarkTest00002",
+    "cwe": "22",
+    "group": "reviewed"
+  },
+  "R005": {
+    "arm": "A",
+    "test": "BenchmarkTest00006",
+    "cwe": "78",
+    "group": "reviewed"
+  },
+  "R006": {
+    "arm": "C",
+    "test": "BenchmarkTest00001",
+    "cwe": "22",
+    "group": "reviewed"
+  },
+  "R007": {
+    "arm": "B",
+    "test": "BenchmarkTest00001",
+    "cwe": "22",
+    "group": "reviewed"
+  },
+  "R008": {
+    "arm": "B",
+    "test": "BenchmarkTest00006",
+    "cwe": "78",
+    "group": "reviewed"
+  },
+  "R009": {
+    "arm": "B",
+    "test": "BenchmarkTest00013",
+    "cwe": "79",
+    "group": "reviewed"
+  },
+  "R010": {
+    "arm": "C",
+    "test": "BenchmarkTest00018",
+    "cwe": "89",
+    "group": "reviewed"
+  },
+  "R011": {
+    "arm": "C",
+    "test": "BenchmarkTest00067",
+    "cwe": "330",
+    "group": "unreviewed"
+  },
+  "R012": {
+    "arm": "A",
+    "test": "BenchmarkTest00021",
+    "cwe": "90",
+    "group": "unreviewed"
+  },
+  "R013": {
+    "arm": "B",
+    "test": "BenchmarkTest00067",
+    "cwe": "330",
+    "group": "unreviewed"
+  },
+  "R014": {
+    "arm": "C",
+    "test": "BenchmarkTest00023",
+    "cwe": "330",
+    "group": "unreviewed"
+  },
+  "R015": {
+    "arm": "C",
+    "test": "BenchmarkTest00013",
+    "cwe": "79",
+    "group": "reviewed"
+  },
+  "R016": {
+    "arm": "A",
+    "test": "BenchmarkTest00067",
+    "cwe": "330",
+    "group": "unreviewed"
+  },
+  "R017": {
+    "arm": "B",
+    "test": "BenchmarkTest00012",
+    "cwe": "90",
+    "group": "unreviewed"
+  },
+  "R018": {
+    "arm": "B",
+    "test": "BenchmarkTest00021",
+    "cwe": "90",
+    "group": "unreviewed"
+  },
+  "R019": {
+    "arm": "A",
+    "test": "BenchmarkTest00008",
+    "cwe": "89",
+    "group": "reviewed"
+  },
+  "R020": {
+    "arm": "B",
+    "test": "BenchmarkTest00018",
+    "cwe": "89",
+    "group": "reviewed"
+  },
+  "R021": {
+    "arm": "A",
+    "test": "BenchmarkTest00087",
+    "cwe": "614",
+    "group": "unreviewed"
+  },
+  "R022": {
+    "arm": "C",
+    "test": "BenchmarkTest00087",
+    "cwe": "614",
+    "group": "unreviewed"
+  },
+  "R023": {
+    "arm": "C",
+    "test": "BenchmarkTest00044",
+    "cwe": "90",
+    "group": "unreviewed"
+  },
+  "R024": {
+    "arm": "B",
+    "test": "BenchmarkTest00023",
+    "cwe": "330",
+    "group": "unreviewed"
+  },
+  "R025": {
+    "arm": "A",
+    "test": "BenchmarkTest00013",
+    "cwe": "79",
+    "group": "reviewed"
+  },
+  "R026": {
+    "arm": "C",
+    "test": "BenchmarkTest00008",
+    "cwe": "89",
+    "group": "reviewed"
+  },
+  "R027": {
+    "arm": "C",
+    "test": "BenchmarkTest00006",
+    "cwe": "78",
+    "group": "reviewed"
+  },
+  "R028": {
+    "arm": "B",
+    "test": "BenchmarkTest00002",
+    "cwe": "22",
+    "group": "reviewed"
+  },
+  "R029": {
+    "arm": "B",
+    "test": "BenchmarkTest00066",
+    "cwe": "330",
+    "group": "unreviewed"
+  },
+  "R030": {
+    "arm": "A",
+    "test": "BenchmarkTest00012",
+    "cwe": "90",
+    "group": "unreviewed"
+  },
+  "R031": {
+    "arm": "A",
+    "test": "BenchmarkTest00023",
+    "cwe": "330",
+    "group": "unreviewed"
+  },
+  "R032": {
+    "arm": "B",
+    "test": "BenchmarkTest00087",
+    "cwe": "614",
+    "group": "unreviewed"
+  },
+  "R033": {
+    "arm": "A",
+    "test": "BenchmarkTest00007",
+    "cwe": "78",
+    "group": "reviewed"
+  },
+  "R034": {
+    "arm": "B",
+    "test": "BenchmarkTest00008",
+    "cwe": "89",
+    "group": "reviewed"
+  },
+  "R035": {
+    "arm": "C",
+    "test": "BenchmarkTest00169",
+    "cwe": "614",
+    "group": "unreviewed"
+  },
+  "R036": {
+    "arm": "B",
+    "test": "BenchmarkTest00044",
+    "cwe": "90",
+    "group": "unreviewed"
+  },
+  "R037": {
+    "arm": "B",
+    "test": "BenchmarkTest00169",
+    "cwe": "614",
+    "group": "unreviewed"
+  },
+  "R038": {
+    "arm": "C",
+    "test": "BenchmarkTest00012",
+    "cwe": "90",
+    "group": "unreviewed"
+  },
+  "R039": {
+    "arm": "C",
+    "test": "BenchmarkTest00014",
+    "cwe": "79",
+    "group": "reviewed"
+  },
+  "R040": {
+    "arm": "A",
+    "test": "BenchmarkTest00014",
+    "cwe": "79",
+    "group": "reviewed"
+  },
+  "R041": {
+    "arm": "A",
+    "test": "BenchmarkTest00169",
+    "cwe": "614",
+    "group": "unreviewed"
+  },
+  "R042": {
+    "arm": "C",
+    "test": "BenchmarkTest00021",
+    "cwe": "90",
+    "group": "unreviewed"
+  },
+  "R043": {
+    "arm": "C",
+    "test": "BenchmarkTest00007",
+    "cwe": "78",
+    "group": "reviewed"
+  },
+  "R044": {
+    "arm": "C",
+    "test": "BenchmarkTest00066",
+    "cwe": "330",
+    "group": "unreviewed"
+  },
+  "R045": {
+    "arm": "A",
+    "test": "BenchmarkTest00001",
+    "cwe": "22",
+    "group": "reviewed"
+  },
+  "R046": {
+    "arm": "A",
+    "test": "BenchmarkTest00044",
+    "cwe": "90",
+    "group": "unreviewed"
+  },
+  "R047": {
+    "arm": "B",
+    "test": "BenchmarkTest00007",
+    "cwe": "78",
+    "group": "reviewed"
+  },
+  "R048": {
+    "arm": "A",
+    "test": "BenchmarkTest00066",
+    "cwe": "330",
+    "group": "unreviewed"
+  }
+}

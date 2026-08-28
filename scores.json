@@ -1,0 +1,386 @@
+{
+  "R001": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Constant \"%s\" format plus Encode.forHtml closes both the XSS and the format-string hazard at the sink; only nit is the extra CSP/X-XSS-Protection churn beyond the finding."
+  },
+  "R002": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Single-name-component check plus base containment on the real parent closes traversal; small residual TOCTOU between the symlink test and the FileOutputStream open, and it now creates the base dir and echoes only the file name."
+  },
+  "R003": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Correct parameterisation with PreparedStatement and try-with-resources; minor risk that closing the DatabaseHelper connection differs from the shared getSqlStatement() lifecycle, and count is left unused."
+  },
+  "R004": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Resolve-and-contain on Path objects with NOFOLLOW_LINKS on the open is the right shape; the justification comment for dropping URLDecoder is factually wrong (containers do not percent-decode cookie values), though the removal is harmless here."
+  },
+  "R005": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "The [A-Za-z0-9._-]{1,64} allowlist 400s inputs the endpoint previously echoed fine (any space or punctuation), and on Windows cmd.exe /c is still in the path so that allowlist, not argv separation, is doing the work there."
+  },
+  "R006": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "toRealPath canonicalisation plus Path.startsWith containment and opening the validated Path is correct; blanket rejection of '..' anywhere also refuses legitimate names containing a double dot."
+  },
+  "R007": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Single-component check plus toRealPath containment closes traversal and symlink escape; '.' passes validation and resolves to the base directory itself, which merely fails on read rather than exposing anything."
+  },
+  "R008": {
+    "vuln_removed": 2,
+    "functionality": 0,
+    "no_new_weakness": 2,
+    "fit": 0,
+    "sink_addressed": true,
+    "note": "Deletes the ProcessBuilder execution and printOSCommandResults entirely, so the command-execution endpoint no longer does its job; the correct fix is argv separation, not removing the feature."
+  },
+  "R009": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Literal \"%s\" with Locale.US preserved and Encode.forHtml at the sink is the right fix; the CSP/X-XSS-Protection swap is scope beyond the named flow."
+  },
+  "R010": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 1,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Parameterisation is correct, but the Connection and PreparedStatement are never closed on any path, leaking a connection per request."
+  },
+  "R011": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Shared SecureRandom with 16 bytes and url-safe Base64 replaces Math.random at the exact sink; only observable drift is the trailing status message text."
+  },
+  "R012": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Moves the parameter into a {1} placeholder on the existing search(base, filter, filters, sc) call so JNDI escapes it, preserving the original filter structure and args ordering."
+  },
+  "R013": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Shared SecureRandom with 16 raw bytes and URL-safe Base64 replaces Math.random at the exact sink; only the trailing status string wording changes."
+  },
+  "R014": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Minimal, idiomatic swap of java.util.Random for a static SecureRandom at the token source; surrounding cookie logic untouched."
+  },
+  "R015": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Format string is pinned to \"%s\" and the Referer value is HTML-encoded at the writer sink; the added CSP header and removal of X-XSS-Protection are mild scope creep, not defects."
+  },
+  "R016": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Correct SecureRandom fix, but it also stops printing the cookie name/value the endpoint was written to display and rewrites the cookie comparison, changing observable output beyond the finding."
+  },
+  "R017": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "The header value moves into a {1} placeholder on the existing four-arg DirContext.search overload, so JNDI escapes it; filter semantics unchanged."
+  },
+  "R018": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Parameter is bound as filterArgs {1} on the same search overload already in use; structure of the filter is now literal."
+  },
+  "R019": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 1,
+    "sink_addressed": true,
+    "note": "Allowlisting is the right shape for a procedure-name position, but the two allowed procedures and the new \"arg\" request parameter are invented, so real callers of this endpoint now get a 400."
+  },
+  "R020": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Constant INSERT with a ? bound via setString and no-arg executeUpdate; only the echoed SQL text differs (placeholder rather than interpolated)."
+  },
+  "R021": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "setSecure(true) before the addCookie sink, with the printed status line corrected to match the flag actually set."
+  },
+  "R022": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Same minimal setSecure(true) at the sink; the SameSite/container guidance stays in the explanation rather than bloating the code."
+  },
+  "R023": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Moves from the three-arg search to the parameterized four-arg overload with a {0} placeholder, which is the idiomatic JNDI fix for this sink."
+  },
+  "R024": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "SecureRandom.nextBytes plus URL-safe Base64 replaces nextFloat string-slicing at the sink; only the trailing status line wording changes."
+  },
+  "R025": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Constant format string plus Encode.forHtml closes both the format-string and XSS vectors at the writer; only cosmetic loss is the deliberately dropped X-XSS-Protection:0 header."
+  },
+  "R026": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Allowlist map is the right shape for a procedure-name sink, but the two invented keys (listUsers/getUserCount) are not the procedures this endpoint actually served, so every real request is now rejected."
+  },
+  "R027": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 1,
+    "sink_addressed": true,
+    "note": "Deletes the ProcessBuilder path entirely rather than fixing the sink: injection is gone, but the OS-execution behaviour and Utils.printOSCommandResults output the endpoint existed to produce are removed."
+  },
+  "R028": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Single-component check plus canonicalized-parent Path comparison and symlink rejection closes traversal at the write; residual TOCTOU on the symlink check is minor and the removed second URL-decode is justified."
+  },
+  "R029": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Shared static SecureRandom with 128-bit nextBytes and URL-safe Base64 replaces Math.random at the token source; token format and the trailing status line change, but the remember-me flow is intact."
+  },
+  "R030": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Moves the tainted value into the existing Object[] filterArgs as {1} with correct index ordering, which is exactly the right JNDI mechanism for this four-arg search sink."
+  },
+  "R031": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "SecureRandom with 256-bit Base64 token replaces Random.nextFloat at the sink; the added MessageDigest.isEqual comparison and suppressed token echo are scope creep but harmless."
+  },
+  "R032": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Minimal, exactly-targeted setSecure(true) on the cookie reaching addCookie, with the contradictory status message corrected and nothing else touched."
+  },
+  "R033": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Fixed env key plus ProcessBuilder closes the envp name-injection, but the child now inherits the container environment instead of the single-entry envp, and the [A-Za-z0-9._-] allowlist 400s inputs the endpoint previously accepted."
+  },
+  "R034": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Allowlist gate is correct and only constants can reach prepareCall, but the two permitted names are invented so legitimate calls to this endpoint now return 400."
+  },
+  "R035": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Exactly the setSecure(false) to setSecure(true) change on the cookie handed to addCookie, with the status text corrected and no unrelated edits."
+  },
+  "R036": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Switches to the four-argument DirContext.search with a {0} placeholder so JNDI escapes the uid value; correct API for this sink and behaviour otherwise preserved."
+  },
+  "R037": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "setSecure(true) at the exact attribute-configuration point feeding addCookie; confirmation text corrected to match."
+  },
+  "R038": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Moves uid to a {0} placeholder on the already-used four-arg search overload; only visible change is the not-found echo now showing the literal template."
+  },
+  "R039": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Constant format string plus Encode.forHtml at the sink; relies on org.owasp.encoder being on the classpath where the file otherwise uses ESAPI."
+  },
+  "R040": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Same correct fix as the format-string sink requires; only nit is introducing the OWASP Java Encoder where surrounding code uses ESAPI."
+  },
+  "R041": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Minimal, exact fix: setSecure(true) before addCookie, unrelated logic untouched."
+  },
+  "R042": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Constant filter with {0}/{1} bound through the existing filterArgs array; structure of the search preserved."
+  },
+  "R043": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 1,
+    "sink_addressed": true,
+    "note": "Deletes Runtime.exec and printOSCommandResults entirely, so the endpoint no longer spawns or reports on a process - safety by removing the feature rather than by binding the tainted value to a controlled environment entry."
+  },
+  "R044": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Shared SecureRandom with 128-bit nextBytes and URL-safe Base64 replaces Math.random at the sink; cookie/session flow and output unchanged."
+  },
+  "R045": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Single-name-component check plus normalized base containment and toRealPath before open; error branch now returns 400 with a generic message, a small but deliberate response change."
+  },
+  "R046": {
+    "vuln_removed": 2,
+    "functionality": 2,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Switches the three-arg search to the parameterised four-arg overload with a constant filter; identical query semantics."
+  },
+  "R047": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "Correct shape (ProcessBuilder, fixed env name, allowlist), but the child no longer receives the caller-named variable the script reads, and non-allowlisted inputs now 400, so observable output changes."
+  },
+  "R048": {
+    "vuln_removed": 2,
+    "functionality": 1,
+    "no_new_weakness": 2,
+    "fit": 2,
+    "sink_addressed": true,
+    "note": "SecureRandom fix is right, but the response no longer echoes the cookie name/value and the trailing message changed, altering the endpoint's observable output beyond the finding."
+  }
+}
