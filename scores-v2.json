@@ -1,0 +1,274 @@
+{
+  "R101": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Correctly traced the hardcoded \"foo\" at Case13A:15 to the sink and proposed no change."
+  },
+  "R102": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Accurate hop-by-hop trace of the constant into Runtime.exec, no change proposed."
+  },
+  "R103": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "Fix is the right parameterised search overload, but it wrongly claims SearchControls cannot be null and swaps the default one-level scope for SUBTREE_SCOPE, broadening the search."
+  },
+  "R104": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Constant filter (cn=foo) correctly established; no change proposed."
+  },
+  "R105": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "Sink-side validation is sound, but it rebuilds the target from the decoded uri.getPath() and silently drops the query string."
+  },
+  "R106": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Correct constant-source trace with a suppress-not-fix disposition."
+  },
+  "R107": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "Replacing exec with Files.newDirectoryStream closes the injection, but it now writes the listing to response.getWriter() when the original discarded process output, adding a new disclosure path."
+  },
+  "R108": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "Parameterised filter is correct, but the added SearchControls with SUBTREE_SCOPE widens the search beyond the original null/default one-level behaviour."
+  },
+  "R109": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "ProcessBuilder argument list is the right fix, but the invented hardcoded BASE_DIR /var/app/listable breaks the listing on both branches, especially Windows."
+  },
+  "R110": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Accurate five-file trace and a clean relative-only redirect using rawPath/rawQuery with a safe fallback."
+  },
+  "R111": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Minor line-number slip on the B->C hop, otherwise correct trace and a minimal parameterised search that preserves the null SearchControls."
+  },
+  "R112": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Correctly identified the compile-time constant reaching exec and left the code unchanged."
+  },
+  "R113": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Correctly traced the request parameter and recognised setString binding on a literal prepared statement; no change proposed."
+  },
+  "R114": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Source (remote HTTP body line) and single hop traced; site-relative allowlist at the sink closes the redirect without breaking the flow."
+  },
+  "R115": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "All four forwarding hops named with line numbers; parameterised statement applied at the sink."
+  },
+  "R116": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Correct false-positive call on the bound PreparedStatement with no code change."
+  },
+  "R117": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Accurate two-hop trace and a correct PreparedStatement fix at the concatenation site."
+  },
+  "R118": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "ProcessBuilder fix is right, but the invented hardcoded BASE_DIR /var/app/listable is applied to the Windows branch too and the tight allowlist rejects previously valid paths, changing behaviour."
+  },
+  "R119": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Correct trace and the proper JNDI filterArgs overload with {0}, preserving query semantics."
+  },
+  "R120": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Correctly identified the hardcoded \"foo\" literal as the only value reaching sendRedirect and proposed no change."
+  },
+  "R121": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Full five-file trace and a complete, compilable PreparedStatement rewrite at the sink."
+  },
+  "R122": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Three hops traced from the remote-read source; parsed-URI check with a server-chosen fallback rejects absolute and protocol-relative targets."
+  },
+  "R123": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Correct source-to-sink trace and a clean parameterised rewrite including the retyped finally block."
+  },
+  "R124": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Full chain traced (hop line numbers off by one); parameterised DirContext.search with {0} and null SearchControls matches original semantics."
+  },
+  "R125": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Correct remote-read source and sink fix; rebuilding from uri.getPath() plus contextPath silently drops any query string, a minor behaviour change."
+  },
+  "R126": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "Replacing exec with Files.newDirectoryStream removes the injection, but it now writes the directory listing into the HTTP response, which the original discarded - new information exposure, and the comment claiming parity is false."
+  },
+  "R127": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Accurate trace and a minimal PreparedStatement/setString fix at the sink; existing finally block still compiles."
+  },
+  "R128": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Correctly identifies the hardcoded \"foo\" literal and the private unreachable handle, and proposes no change."
+  },
+  "R129": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "Same as the four-hop sibling: fix is sound but the rewrite emits the directory listing to the response body, exposing data the original never returned."
+  },
+  "R130": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "Parameterised filter is right, but it swaps the original null SearchControls for SUBTREE_SCOPE, widening the search beyond the default one-level scope while claiming to preserve behaviour."
+  },
+  "R131": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "not_exploitable",
+    "note": "Correctly traces the constant \"foo\" into the filter, proposes no change, and notes the conditions that would make it real."
+  },
+  "R132": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 1,
+    "your_verdict": "exploitable",
+    "note": "ProcessBuilder plus allowlist is a correct sink fix, but it invents a hardcoded /var/app/listable base directory unrelated to the original cwd-relative listing, so legitimate requests would fail."
+  },
+  "R133": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Correct remote-body source, and the sink-side relative-only check with a safe fallback preserves path and query cleanly."
+  },
+  "R134": {
+    "verdict_correct": true,
+    "source_identified": 2,
+    "fix_quality": 2,
+    "no_harm": 2,
+    "your_verdict": "exploitable",
+    "note": "Accurate trace and a complete PreparedStatement rewrite including matching finally-block cleanup."
+  }
+}

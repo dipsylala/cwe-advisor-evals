@@ -1,0 +1,274 @@
+{
+  "R101": {
+    "arm": "A",
+    "case": "Case13",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R102": {
+    "arm": "B",
+    "case": "Case15",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R103": {
+    "arm": "A",
+    "case": "Case09",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "R104": {
+    "arm": "A",
+    "case": "Case17",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R105": {
+    "arm": "A",
+    "case": "Case11",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "R106": {
+    "arm": "B",
+    "case": "Case13",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R107": {
+    "arm": "B",
+    "case": "Case04",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "R108": {
+    "arm": "A",
+    "case": "Case08",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "R109": {
+    "arm": "A",
+    "case": "Case04",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "R110": {
+    "arm": "B",
+    "case": "Case12",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "R111": {
+    "arm": "B",
+    "case": "Case08",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "R112": {
+    "arm": "A",
+    "case": "Case15",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R113": {
+    "arm": "A",
+    "case": "Case14",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R114": {
+    "arm": "A",
+    "case": "Case10",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "R115": {
+    "arm": "B",
+    "case": "Case03",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "R116": {
+    "arm": "B",
+    "case": "Case14",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R117": {
+    "arm": "B",
+    "case": "Case01",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "R118": {
+    "arm": "A",
+    "case": "Case06",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "R119": {
+    "arm": "B",
+    "case": "Case07",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "R120": {
+    "arm": "B",
+    "case": "Case19",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R121": {
+    "arm": "A",
+    "case": "Case03",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "R122": {
+    "arm": "B",
+    "case": "Case11",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "R123": {
+    "arm": "A",
+    "case": "Case01",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "R124": {
+    "arm": "B",
+    "case": "Case09",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "R125": {
+    "arm": "A",
+    "case": "Case12",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "R126": {
+    "arm": "B",
+    "case": "Case05",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "R127": {
+    "arm": "B",
+    "case": "Case02",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "R128": {
+    "arm": "A",
+    "case": "Case19",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R129": {
+    "arm": "B",
+    "case": "Case06",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "R130": {
+    "arm": "A",
+    "case": "Case07",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "R131": {
+    "arm": "B",
+    "case": "Case17",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "R132": {
+    "arm": "A",
+    "case": "Case05",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "R133": {
+    "arm": "B",
+    "case": "Case10",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "R134": {
+    "arm": "A",
+    "case": "Case02",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  }
+}
