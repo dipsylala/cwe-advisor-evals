@@ -53,7 +53,7 @@ Each case is run three times, in a **fresh context** each time.
 | Arm | Guidance supplied |
 |---|---|
 | **A** | None. The finding and the file, nothing else |
-| **B** | The current `{CWE}/INDEX.md` and `{CWE}/java/INDEX.md` |
+| **B** | The current `cwe/{CWE}/INDEX.md` and `cwe/{CWE}/java/INDEX.md` |
 | **C** | The same two files as of commit `9a5a105` - after the `Safe Pattern` sweep, before this session's review |
 
 Arm A is the control and the reason the exercise is worth running. Without it the numbers describe
