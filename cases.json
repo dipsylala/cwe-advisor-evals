@@ -1,0 +1,130 @@
+[
+  {
+    "test": "BenchmarkTest00001",
+    "cwe": "22",
+    "category": "pathtraver",
+    "group": "reviewed",
+    "file": "cases/BenchmarkTest00001.java",
+    "lines": 107
+  },
+  {
+    "test": "BenchmarkTest00002",
+    "cwe": "22",
+    "category": "pathtraver",
+    "group": "reviewed",
+    "file": "cases/BenchmarkTest00002.java",
+    "lines": 94
+  },
+  {
+    "test": "BenchmarkTest00006",
+    "cwe": "78",
+    "category": "cmdi",
+    "group": "reviewed",
+    "file": "cases/BenchmarkTest00006.java",
+    "lines": 78
+  },
+  {
+    "test": "BenchmarkTest00007",
+    "cwe": "78",
+    "category": "cmdi",
+    "group": "reviewed",
+    "file": "cases/BenchmarkTest00007.java",
+    "lines": 71
+  },
+  {
+    "test": "BenchmarkTest00013",
+    "cwe": "79",
+    "category": "xss",
+    "group": "reviewed",
+    "file": "cases/BenchmarkTest00013.java",
+    "lines": 59
+  },
+  {
+    "test": "BenchmarkTest00014",
+    "cwe": "79",
+    "category": "xss",
+    "group": "reviewed",
+    "file": "cases/BenchmarkTest00014.java",
+    "lines": 59
+  },
+  {
+    "test": "BenchmarkTest00008",
+    "cwe": "89",
+    "category": "sqli",
+    "group": "reviewed",
+    "file": "cases/BenchmarkTest00008.java",
+    "lines": 68
+  },
+  {
+    "test": "BenchmarkTest00018",
+    "cwe": "89",
+    "category": "sqli",
+    "group": "reviewed",
+    "file": "cases/BenchmarkTest00018.java",
+    "lines": 68
+  },
+  {
+    "test": "BenchmarkTest00005",
+    "cwe": "327",
+    "category": "crypto",
+    "group": "unreviewed",
+    "file": "cases/BenchmarkTest00005.java",
+    "lines": 123
+  },
+  {
+    "test": "BenchmarkTest00019",
+    "cwe": "327",
+    "category": "crypto",
+    "group": "unreviewed",
+    "file": "cases/BenchmarkTest00019.java",
+    "lines": 108
+  },
+  {
+    "test": "BenchmarkTest00023",
+    "cwe": "330",
+    "category": "weakrand",
+    "group": "unreviewed",
+    "file": "cases/BenchmarkTest00023.java",
+    "lines": 97
+  },
+  {
+    "test": "BenchmarkTest00066",
+    "cwe": "330",
+    "category": "weakrand",
+    "group": "unreviewed",
+    "file": "cases/BenchmarkTest00066.java",
+    "lines": 123
+  },
+  {
+    "test": "BenchmarkTest00004",
+    "cwe": "501",
+    "category": "trustbound",
+    "group": "unreviewed",
+    "file": "cases/BenchmarkTest00004.java",
+    "lines": 77
+  },
+  {
+    "test": "BenchmarkTest00031",
+    "cwe": "501",
+    "category": "trustbound",
+    "group": "unreviewed",
+    "file": "cases/BenchmarkTest00031.java",
+    "lines": 61
+  },
+  {
+    "test": "BenchmarkTest00207",
+    "cwe": "643",
+    "category": "xpathi",
+    "group": "unreviewed",
+    "file": "cases/BenchmarkTest00207.java",
+    "lines": 91
+  },
+  {
+    "test": "BenchmarkTest00442",
+    "cwe": "643",
+    "category": "xpathi",
+    "group": "unreviewed",
+    "file": "cases/BenchmarkTest00442.java",
+    "lines": 84
+  }
+]
