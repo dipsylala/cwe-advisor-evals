@@ -1,0 +1,410 @@
+{
+  "X201": {
+    "arm": "B2",
+    "case": "Case19",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X202": {
+    "arm": "B2",
+    "case": "Case12",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X203": {
+    "arm": "B",
+    "case": "Case01",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X204": {
+    "arm": "A",
+    "case": "Case11",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X205": {
+    "arm": "B2",
+    "case": "Case03",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X206": {
+    "arm": "B2",
+    "case": "Case07",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X207": {
+    "arm": "B",
+    "case": "Case06",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X208": {
+    "arm": "B",
+    "case": "Case08",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X209": {
+    "arm": "B",
+    "case": "Case14",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X210": {
+    "arm": "B2",
+    "case": "Case01",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X211": {
+    "arm": "A",
+    "case": "Case10",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X212": {
+    "arm": "A",
+    "case": "Case13",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X213": {
+    "arm": "B2",
+    "case": "Case09",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X214": {
+    "arm": "B",
+    "case": "Case19",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X215": {
+    "arm": "B",
+    "case": "Case07",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X216": {
+    "arm": "A",
+    "case": "Case01",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X217": {
+    "arm": "A",
+    "case": "Case02",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X218": {
+    "arm": "A",
+    "case": "Case09",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X219": {
+    "arm": "B",
+    "case": "Case03",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X220": {
+    "arm": "A",
+    "case": "Case12",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X221": {
+    "arm": "A",
+    "case": "Case17",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X222": {
+    "arm": "B2",
+    "case": "Case06",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X223": {
+    "arm": "B",
+    "case": "Case13",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X224": {
+    "arm": "B2",
+    "case": "Case10",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X225": {
+    "arm": "A",
+    "case": "Case14",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X226": {
+    "arm": "B2",
+    "case": "Case14",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X227": {
+    "arm": "B",
+    "case": "Case09",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X228": {
+    "arm": "B",
+    "case": "Case10",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X229": {
+    "arm": "A",
+    "case": "Case19",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X230": {
+    "arm": "A",
+    "case": "Case03",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X231": {
+    "arm": "B",
+    "case": "Case02",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X232": {
+    "arm": "B2",
+    "case": "Case04",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X233": {
+    "arm": "B2",
+    "case": "Case13",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X234": {
+    "arm": "B2",
+    "case": "Case08",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X235": {
+    "arm": "B2",
+    "case": "Case05",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X236": {
+    "arm": "A",
+    "case": "Case05",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X237": {
+    "arm": "B",
+    "case": "Case05",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X238": {
+    "arm": "B2",
+    "case": "Case02",
+    "cwe": "89",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X239": {
+    "arm": "A",
+    "case": "Case08",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X240": {
+    "arm": "B",
+    "case": "Case12",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X241": {
+    "arm": "A",
+    "case": "Case07",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X242": {
+    "arm": "B",
+    "case": "Case15",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X243": {
+    "arm": "A",
+    "case": "Case15",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X244": {
+    "arm": "B",
+    "case": "Case11",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X245": {
+    "arm": "A",
+    "case": "Case06",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 5
+  },
+  "X246": {
+    "arm": "B",
+    "case": "Case17",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X247": {
+    "arm": "A",
+    "case": "Case04",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  },
+  "X248": {
+    "arm": "B2",
+    "case": "Case15",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X249": {
+    "arm": "B2",
+    "case": "Case17",
+    "cwe": "90",
+    "group": "unreviewed",
+    "kind": "false_positive",
+    "depth": 2
+  },
+  "X250": {
+    "arm": "B2",
+    "case": "Case11",
+    "cwe": "601",
+    "group": "unreviewed",
+    "kind": "true_positive",
+    "depth": 4
+  },
+  "X251": {
+    "arm": "B",
+    "case": "Case04",
+    "cwe": "78",
+    "group": "reviewed",
+    "kind": "true_positive",
+    "depth": 2
+  }
+}

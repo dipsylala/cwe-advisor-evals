@@ -196,3 +196,28 @@ the five false-positive cases would be unfair to arm A rather than informative.
 
 12 true positives, 5 false positives. Depth is the variable run 1 lacked: in a 5-file case the
 finding names the sink in the fifth file and the source is four hops away.
+
+## Run 3 (as executed)
+
+Run 2 left one criterion with variance - `no_harm` - and split it both ways: guidance prevented
+harm on CWE-90 and CWE-601, and caused it on CWE-78. Run 3 tests the response to that.
+
+Changes under test, all in the shared path rather than in any entry:
+
+- SKILL.md Step 4 gained a sink-contract step: before writing a fix, record what the sink returns,
+  what it **discards**, which arguments are left implicit or `null`, and its failure behaviour.
+- SKILL.md Step 5 gained a check that accounts for every change that is not the sink itself.
+- `references/autonomous-output.md` gained a `behaviour_changes` field, so the check lands in the
+  record a CI consumer reads rather than only in interactive presentation.
+
+| Arm | Condition |
+|---|---|
+| **A** | No skill, no guidance - run-2 output, re-judged |
+| **B** | Skill before the change - run-2 output, re-judged |
+| **B2** | Skill after the change - fresh |
+
+Same 17 Juliet cases. A and B are re-judged rather than re-run so all three sets sit in one blind
+pool under the same judges; B2's `Behaviour changes` section is stripped before blinding, because
+A and B cannot have one and its presence would identify the arm.
+
+Results in [RESULTS-v3.md](RESULTS-v3.md).

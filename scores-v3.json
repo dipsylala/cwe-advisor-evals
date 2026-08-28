@@ -1,0 +1,1232 @@
+{
+  "judge1": {
+    "X201": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly traces data to the literal \"foo\" in Case19A and proposes no change."
+    },
+    "X202": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Rebuilds the Location from the parsed URI's raw path, query and fragment; relative targets survive intact."
+    },
+    "X203": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "PreparedStatement with ? placeholder and setString; surrounding cleanup untouched."
+    },
+    "X204": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Closes the redirect, but the emitted target becomes encodeRedirectURL(contextPath + uri.getPath()), which prepends the context path, drops any query string and fragment, and may append a jsessionid the original never sent."
+    },
+    "X205": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Full-file parameterised rewrite that preserves logging, cleanup and the IO.writeLine call verbatim."
+    },
+    "X206": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Uses the JNDI filterArgs overload and keeps the null SearchControls, so scope and returned attributes are unchanged."
+    },
+    "X207": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Replaces exec with Files.newDirectoryStream but now writes every entry name to response.getWriter(); the original never read or emitted the command output, so the fix adds a directory listing to the HTTP response plus new 400/500 error responses."
+    },
+    "X208": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Minimal two-line change to the parameterised search overload with SearchControls still null."
+    },
+    "X209": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly identifies the tainted parameter but recognises the constant SQL plus setString binding and proposes no change."
+    },
+    "X210": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised rewrite of the whole file with the original error handling and cleanup preserved exactly."
+    },
+    "X211": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Vector closed, but the target becomes encodeRedirectURL(contextPath + uri.getPath()): context path prepended, query and fragment discarded, possible jsessionid appended."
+    },
+    "X212": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Traces back to the \"foo\" literal, notes the private handle method, and correctly declines to change code."
+    },
+    "X213": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised filter with null SearchControls retained; scope and output loop unchanged."
+    },
+    "X214": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Constant \"foo\" source identified correctly; no change proposed."
+    },
+    "X215": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correct filterArgs overload, null SearchControls preserved."
+    },
+    "X216": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Standard parameterisation; only the close-failure log wording is retyped alongside the variable."
+    },
+    "X217": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Three forwarding hops traced correctly; sink parameterised without other behaviour change."
+    },
+    "X218": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Injection closed, but the fix replaces the original null SearchControls with an explicit SUBTREE_SCOPE instance, widening the search from the default one-level scope; the claim that the overload requires controls is wrong since null is accepted."
+    },
+    "X219": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Clean parameterised snippet with cleanup and logging left alone."
+    },
+    "X220": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Closes the redirect, but the emitted value is encodeRedirectURL(contextPath + uri.getPath()), adding the context path and dropping query and fragment from legitimate relative targets."
+    },
+    "X221": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Identifies the \"foo\" literal and the unread request object; correctly proposes no change."
+    },
+    "X222": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Removes exec in favour of Files.newDirectoryStream and deliberately discards entries, matching the original silent, output-free behaviour including the null case."
+    },
+    "X223": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Constant source correctly named as the breaking link; hardening deferred rather than applied."
+    },
+    "X224": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Host allowlist plus canonical-origin rebuild; relative path, query and fragment preserved and the file's existing rejection path reused."
+    },
+    "X225": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly identifies the setString binding as the break and leaves the parameterised query alone."
+    },
+    "X226": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Full trace to the constant SQL literal and bind call; no change, with a sound re-triage condition."
+    },
+    "X227": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised filter, null SearchControls retained, no other change."
+    },
+    "X228": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Correct relative-only guard, but the rebuilt target keeps only path and query - the URI fragment is silently dropped from otherwise-valid relative redirects."
+    },
+    "X229": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Constant \"foo\" correctly identified; no change, with a clear re-open condition."
+    },
+    "X230": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised sink; only the close-failure log wording is retyped with the variable."
+    },
+    "X231": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Accurate hop-by-hop trace and a clean placeholder-plus-setString fix."
+    },
+    "X232": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Drops process execution for Files.newDirectoryStream and explicitly preserves the original discarded output and silent failure."
+    },
+    "X233": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Backwards trace to the literal is exact; hardening explicitly not applied."
+    },
+    "X234": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised filter with base name and null SearchControls deliberately preserved to avoid widening scope."
+    },
+    "X235": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Injection closed, but Paths.get(data) is unguarded against null while the catch covers only InvalidPathException and IOException, so a request missing the name parameter now throws NullPointerException where the original harmlessly ran ls null."
+    },
+    "X236": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "ProcessBuilder plus allowlist does close the vector, but it invents a hardcoded BASE_DIR of /var/app/listable, so listings that previously resolved against the JVM working directory now fail, and the endpoint emits 400 error responses it never produced before."
+    },
+    "X237": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Now prints every directory entry to response.getWriter() and adds 400/500 error responses; the original discarded the command output entirely."
+    },
+    "X238": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Complete parameterised file with logging, cleanup and the getRow() call unchanged."
+    },
+    "X239": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Swaps the original null SearchControls for an explicit SUBTREE_SCOPE, broadening the search beyond the default one-level scope while claiming to preserve original behaviour."
+    },
+    "X240": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Sound relative-only guard, but the rebuilt target preserves only path and query - the fragment is dropped from valid relative redirects."
+    },
+    "X241": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Introduces an explicit SUBTREE_SCOPE SearchControls in place of the original null, widening the search scope, and wrongly states the overload requires controls."
+    },
+    "X242": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly identifies the constant \"foo\" command argument and proposes no change."
+    },
+    "X243": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Constant source traced; hardening mentioned but explicitly not applied."
+    },
+    "X244": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Correct guard on the parsed URI, but the rebuilt target keeps only path and query, silently discarding any fragment on legitimate relative redirects."
+    },
+    "X245": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Vector closed via ProcessBuilder and an allowlist, but a hardcoded /var/app/listable base directory replaces the JVM working directory and the endpoint now returns 400 responses it previously never sent."
+    },
+    "X246": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Accurate trace to the \"foo\" literal with no code change proposed."
+    },
+    "X247": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "ProcessBuilder fix is sound, but the invented hardcoded base directory /var/app/listable relocates the listing root and adds new 400 error responses to an endpoint that previously produced no output."
+    },
+    "X248": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Thorough backwards trace covering both osCommand and data; correctly proposes no change."
+    },
+    "X249": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correct constant-source trace and no change; the aside calling the three-argument default OBJECT_SCOPE is wrong (it is one-level) but affects no code."
+    },
+    "X250": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Decides on the parsed URI and rebuilds path, query and fragment, reusing the file's existing rejection message and return."
+    },
+    "X251": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Closes the injection but now writes each directory entry to response.getWriter() and adds 400/500 error responses; the original discarded the command output and reported nothing."
+    }
+  },
+  "judge2": {
+    "X201": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case19 data is the literal \"foo\"; correctly traced and correctly proposes no code change."
+    },
+    "X202": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case12 remote-read line reaches sendRedirect; fix decides on the parsed URI and rebuilds from getRawPath/query/fragment, blocking //host."
+    },
+    "X203": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case01 getParameter to concatenated executeQuery; correct PreparedStatement + setString with surrounding cleanup untouched."
+    },
+    "X204": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 1,
+      "no_harm": 1,
+      "note": "Case11 fix rebuilds from decoded uri.getPath(), so /%2f%2fevil.example still yields a protocol-relative Location; it also prepends getContextPath(), drops query and fragment, and adds encodeRedirectURL (jsessionid)."
+    },
+    "X205": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case03 five-hop trace accurate; full-file parameterised rewrite preserves logging, finally block and result handling."
+    },
+    "X206": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case07 LDAP filter concatenation; correct JNDI {0}/filterArgs overload with SearchControls left null as before."
+    },
+    "X207": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case06 exec replaced by Files.newDirectoryStream, but the fixed code now prints every directory entry to response.getWriter() and emits 400/500 errors where the original produced no output at all."
+    },
+    "X208": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case08 traced through both forwarders; parameterised search overload with null controls preserves scope."
+    },
+    "X209": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case14 is already prepareStatement + setString; correctly names the bind as the breaking link and changes nothing."
+    },
+    "X210": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case01 trace and full-file PreparedStatement rewrite are both accurate and behaviour-preserving."
+    },
+    "X211": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 1,
+      "no_harm": 1,
+      "note": "Case10; same decoded-getPath() residual as X204 (percent-encoded slashes re-emerge as //host), and the emitted target now gains getContextPath() and encodeRedirectURL while losing query and fragment."
+    },
+    "X212": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case13 constant \"foo\" correctly identified as the breaking link; no change proposed, hardening only noted."
+    },
+    "X213": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case09 five-hop trace correct; parameterised filter with null controls, rest of the method untouched."
+    },
+    "X214": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case19 constant source identified with the private handle noted only as secondary; no change."
+    },
+    "X215": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case07; minimal two-line parameterised filter change with the controls argument still null."
+    },
+    "X216": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case01 correct trace and parameterised rewrite; only the close-log wording differs."
+    },
+    "X217": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case02 four-file chain traced; PreparedStatement fix at the sink with cleanup intact."
+    },
+    "X218": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case09 fix wrongly claims the overload requires SearchControls and supplies SUBTREE_SCOPE, widening the search beyond the original null (one-level) default."
+    },
+    "X219": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case03; concise correct trace and parameterised snippet, cleanup untouched."
+    },
+    "X220": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 1,
+      "no_harm": 1,
+      "note": "Case12; decoded uri.getPath() lets /%2f%2fevil.example become a protocol-relative Location, and the emitted target now includes getContextPath()/encodeRedirectURL and omits query and fragment."
+    },
+    "X221": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case17 filter is always (cn=foo); no change proposed and the correct remediation named for the hypothetical."
+    },
+    "X222": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case06 exec removed for Files.newDirectoryStream with entries deliberately discarded, so no new output or error surface is introduced."
+    },
+    "X223": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case13 constant source correctly traced; suppression recommended, no edit made."
+    },
+    "X224": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case10; host allowlist plus canonical-origin rebuild on the parsed URI, reusing the file's existing rejection path."
+    },
+    "X225": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case14 already parameterised; correctly declines to change working bind code."
+    },
+    "X226": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case14; identifies the literal SQL plus setString as the breaking link and proposes suppression only."
+    },
+    "X227": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case09; parameterised filter snippet keeping the null SearchControls."
+    },
+    "X228": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case10; relative-only check on the parsed URI using getRawPath with a fixed \"/\" fallback (fragment dropped, otherwise unchanged)."
+    },
+    "X229": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case19 constant redirect target correctly established; no change."
+    },
+    "X230": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case03; accurate forwarder trace and correct PreparedStatement fix at the sink."
+    },
+    "X231": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case02; correct trace and minimal parameterised replacement."
+    },
+    "X232": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case04 exec removed for Files.newDirectoryStream with the listing discarded and failures kept silent, matching the original's observable behaviour."
+    },
+    "X233": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case13; thorough backward trace to the literal, no edit, hardening explicitly not applied."
+    },
+    "X234": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case08; parameterised filter and explicitly keeps base name \"\" and null controls so scope is unchanged."
+    },
+    "X235": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case05 exec replaced by Files.newDirectoryStream, but Paths.get(data) with a missing name parameter now throws an uncaught NullPointerException (only InvalidPathException/IOException are caught) where the original returned normally."
+    },
+    "X236": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case05 ProcessBuilder plus allowlist closes it, but it invents a hardcoded BASE_DIR /var/app/listable so the listing no longer targets the requested path, and it adds sendError(400) responses the original never sent."
+    },
+    "X237": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case05; the replacement writes every directory entry to the response and emits 400/500 statuses, output the original discarded entirely."
+    },
+    "X238": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case02; full-file parameterised rewrite preserving logging, cleanup and result handling."
+    },
+    "X239": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case08; the added SearchControls with SUBTREE_SCOPE widens the search beyond the original null (one-level) default, contrary to the write-up's claim of preserved behaviour."
+    },
+    "X240": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case12; parsed-URI relative-only check on getRawPath with a server-chosen fallback, error path unchanged."
+    },
+    "X241": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case07; SearchControls with SUBTREE_SCOPE is introduced on the false premise that the overload requires it, broadening scope from the original null default."
+    },
+    "X242": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case15 command is always dir/ls foo; correctly traced and no change proposed."
+    },
+    "X243": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case15; literal source identified, hardening mentioned but explicitly not applied."
+    },
+    "X244": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case11; relative-only validation on the parsed URI using getRawPath with a fixed fallback."
+    },
+    "X245": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case06 ProcessBuilder plus allowlist closes it, but it hardcodes a nonexistent BASE_DIR /var/app/listable so the endpoint no longer lists the requested directory, and it adds 400 responses."
+    },
+    "X246": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case17; constant filter component correctly identified, no change."
+    },
+    "X247": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case04; the invented /var/app/listable base directory plus new sendError(400) responses change what the endpoint does beyond closing the injection."
+    },
+    "X248": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case15; careful backward trace to the literal and to the constant osCommand branches, no edit."
+    },
+    "X249": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case17; correct no-change verdict (its aside that three-arg search defaults to OBJECT_SCOPE is wrong, but nothing is changed)."
+    },
+    "X250": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Case11; rejects scheme/authority and a leading //, rebuilds from raw path, query and fragment, and reuses the existing rejection response."
+    },
+    "X251": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Case04; the replacement prints the directory listing to the response and adds 400/500 statuses, emitting output the original never produced."
+    }
+  },
+  "judge3": {
+    "X201": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly traces data to the literal \"foo\" in Case19A and proposes no code change."
+    },
+    "X202": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Rebuilds a site-relative target from the parsed URI (path+query+fragment) with a \"/\" fallback; nothing else disturbed."
+    },
+    "X203": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "PreparedStatement with ? and setString; declaration change called out, cleanup untouched."
+    },
+    "X204": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Vector closed, but the emitted Location now has request.getContextPath() prepended, is wrapped in encodeRedirectURL (may append a jsessionid), and drops the query and fragment the original forwarded."
+    },
+    "X205": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Full-file PreparedStatement rewrite preserving logging, cleanup and the getRow() output exactly."
+    },
+    "X206": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised DirContext.search with {0} and null SearchControls retained, so scope and result loop are unchanged."
+    },
+    "X207": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Command removed via Files.newDirectoryStream, but the fix writes every entry name to response.getWriter() and adds 400/500 sendError paths; the original discarded process output and wrote nothing."
+    },
+    "X208": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Minimal two-line switch to the filterArgs overload with null controls retained."
+    },
+    "X209": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly identifies the tainted value as bound via setString on a literal placeholder query and proposes no change."
+    },
+    "X210": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Full-file parameterised rewrite; only the statement type and binding change."
+    },
+    "X211": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Closes the redirect, but adds request.getContextPath() to the target, wraps it in encodeRedirectURL, and discards any query string the original passed through."
+    },
+    "X212": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Traces the constant \"foo\" and correctly declines to change the sink."
+    },
+    "X213": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised filter with null SearchControls kept, so scope and output are identical."
+    },
+    "X214": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Constant source correctly identified; no change proposed."
+    },
+    "X215": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Two-line parameterised search overload, controls left null as before."
+    },
+    "X216": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "PreparedStatement rewrite; only a log-message string in the finally block differs."
+    },
+    "X217": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correct three-hop trace and a clean parameterised sink."
+    },
+    "X218": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Filter parameterised correctly, but the null SearchControls is replaced with SUBTREE_SCOPE, widening the search past the JNDI one-level default and returning more entries; the claim that the overload requires controls is wrong."
+    },
+    "X219": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised sink, cleanup and error handling untouched."
+    },
+    "X220": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Vector closed, but the Location value gains request.getContextPath(), goes through encodeRedirectURL, and loses the query string."
+    },
+    "X221": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly resolves the filter to the constant (cn=foo) and leaves the code alone."
+    },
+    "X222": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Replaces exec with a directory stream whose entries are deliberately discarded, and handles null and InvalidPathException so the silent-failure, no-output contract is preserved."
+    },
+    "X223": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Constant source named precisely; no change proposed."
+    },
+    "X224": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Host allowlist plus canonical-origin rebuild, reusing the existing \"Invalid redirect URL\" rejection path."
+    },
+    "X225": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly identifies the bind as the breaking link and proposes no change."
+    },
+    "X226": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Full trace to the setString bind; code reproduced unchanged."
+    },
+    "X227": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised filter with null controls preserved."
+    },
+    "X228": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Accepts only rooted relative paths rebuilt from the parsed URI, otherwise redirects to a fixed \"/\"."
+    },
+    "X229": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Constant redirect target correctly identified; no change."
+    },
+    "X230": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Clean parameterised rewrite of the sink method."
+    },
+    "X231": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correct trace and minimal PreparedStatement fix."
+    },
+    "X232": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "exec replaced by a discarded directory enumeration with explicit null and InvalidPathException handling, keeping the original silent, output-free behaviour."
+    },
+    "X233": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Backwards trace to the literal is exact; no change proposed."
+    },
+    "X234": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterised filter with base name and null SearchControls explicitly preserved."
+    },
+    "X235": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "exec correctly removed, but Paths.get(data) is unguarded for null and the catch covers only InvalidPathException/IOException, so an absent name parameter now throws NPE out of the method where the original returned quietly."
+    },
+    "X236": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "ProcessBuilder argv closes the injection, but it invents a hardcoded BASE_DIR of /var/app/listable plus a name allowlist, so listings that previously resolved against the JVM working directory now fail, and 400 sendError responses appear where the original wrote nothing."
+    },
+    "X237": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Vector closed, but the replacement prints every directory entry into the HTTP response and adds 400/500 sendError paths; the original never read or emitted the command output."
+    },
+    "X238": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Full-file parameterised rewrite with logging and cleanup unchanged."
+    },
+    "X239": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Filter parameterised correctly, but null SearchControls is swapped for SUBTREE_SCOPE, broadening the search beyond the previous one-level default while claiming to preserve behaviour."
+    },
+    "X240": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Relative-only target rebuilt from the parsed URI with a fixed server-chosen fallback."
+    },
+    "X241": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Correct parameterised overload, but it adds SearchControls with SUBTREE_SCOPE in place of the original null, widening the search scope from the one-level default."
+    },
+    "X242": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Hardcoded \"foo\" correctly identified as the breaking link; no change."
+    },
+    "X243": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correct constant-source trace with no code modification."
+    },
+    "X244": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parsed-URI check with rooted-path rebuild and a fixed fallback; error path unchanged."
+    },
+    "X245": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Injection closed by ProcessBuilder argv, but an invented /var/app/listable base directory and strict allowlist change which paths can be listed at all, and new 400 sendError responses appear where the original produced no output."
+    },
+    "X246": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Constant filter value correctly traced; no change proposed."
+    },
+    "X247": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "ProcessBuilder fix is sound, but the hardcoded /var/app/listable base plus allowlist changes the endpoint behaviour and it now returns 400 errors the original never sent."
+    },
+    "X248": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Both the command prefix and the appended constant are traced; no change proposed."
+    },
+    "X249": {
+      "your_verdict": "not_exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correct constant-source trace and no code change; a passing remark misstates the three-argument search default as OBJECT_SCOPE."
+    },
+    "X250": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Rejects scheme/authority on the parsed URI and rebuilds path, query and fragment, reusing the existing rejection response."
+    },
+    "X251": {
+      "your_verdict": "exploitable",
+      "verdict_correct": true,
+      "source_identified": 2,
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Command injection removed, but the fix prints the directory listing into the HTTP response and adds 400/500 error responses; the original consumed neither the output nor the exit status."
+    }
+  }
+}
