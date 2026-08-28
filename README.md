@@ -122,3 +122,43 @@ Stated because they bound what any result here can support.
   scoring, which is why it is done blind and against criteria fixed in advance.
 - **Runs must originate in fresh contexts.** A judge or runner that has already read the knowledge
   base cannot credibly produce arm A.
+
+## Run 2 design (not yet executed)
+
+Run 1 measured the fix advice and called it "the knowledge base". It did not test the other half
+of the skill. Benchmark cases put source and sink in the same `doPost`, three lines apart, so:
+
+- SKILL.md Step 4 is a no-op - there is no flow to trace, and `references/data-flow-trace.md` was
+  never loaded by any arm.
+- The "break taint after allowlist validation" rule was never exercised, because there is nowhere
+  downstream for a tainted value to survive to.
+- The false-positive exit added to Step 4 has **no coverage at all** - every case was a true
+  positive, so no arm ever had the opportunity to correctly decline to fix.
+
+Run 2 should use the Juliet Java suite (`find-sec-bugs/juliet-test-suite`), whose variant numbering
+is built around exactly this axis:
+
+| Variant | Structure | What it tests |
+|---|---|---|
+| `_51a`/`_51b` | taint crosses two files | inter-file tracing |
+| `_52a-c`, `_53a-d` | three and four files | multi-hop tracing |
+| `_54a-e` | five-file chain | whether tracing survives depth |
+| `_61a`/`_61b` | taint returned from another class | return-value flow |
+| `_31`, `_41`, `_45` | class member, method argument, field | intra-class flow |
+
+The finding given to each arm should name **only the sink file and line**, as a scanner would,
+leaving the source to be traced back through the chain.
+
+Juliet's `good` variants (`goodB2G` sanitises the sink, `goodG2B` uses a safe source) supply the
+missing negative cases: present one with a plausible finding and score whether the arm correctly
+reports no exploitable path instead of "fixing" working code. OWASP Benchmark's ~1400
+`real vulnerability = false` rows are a second source for the same purpose.
+
+The rubric needs three additions for run 2, none of which run 1 could have used:
+
+- **source_identified** - did the run name the actual source, or assume one?
+- **fix_point** - is the change at the right place in the chain (sink, boundary, or source), or
+  did it patch a middle hop and leave other callers exposed?
+- **correctly_declined** - for a negative case, did it report no exploitable path rather than
+  modify safe code? This is the direction run 1 had no way to measure, and the direction where a
+  knowledge base can do the most damage.
