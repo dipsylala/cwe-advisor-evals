@@ -162,3 +162,37 @@ The rubric needs three additions for run 2, none of which run 1 could have used:
 - **correctly_declined** - for a negative case, did it report no exploitable path rather than
   modify safe code? This is the direction run 1 had no way to measure, and the direction where a
   knowledge base can do the most damage.
+
+## Run 2 arms (as executed)
+
+Run 1 supplied CWE entry text and held SKILL.md constant, to isolate content. That was wrong for
+run 2's question: the data-flow guidance *is* SKILL.md Step 4 and `references/data-flow-trace.md`,
+so a content-only arm would miss it a second time.
+
+| Arm | Condition |
+|---|---|
+| **A** | No skill, no guidance. The case files and the finding, nothing else |
+| **B** | Invokes the `cwe_advisor` skill in autonomous mode |
+
+Arm B therefore exercises the whole product - CWE resolution, entry loading, the Step 4 trace, the
+allowlist fix-point rule, the false-positive exit, and the autonomous output record - rather than
+the entry text alone. Arm C is dropped: run 1 measured no review effect against a 0.00 noise floor,
+so the third arm was not buying anything.
+
+Both arms are asked for the same output shape (verdict, source, fix, explanation) so the two are
+comparable, and both are told a "not exploitable" verdict is a legitimate answer. Without that,
+the five false-positive cases would be unfair to arm A rather than informative.
+
+### Corpus
+
+17 cases from Juliet, de-labelled mechanically (see the build script's docstring):
+
+| CWE | Reviewed | TP by depth | FP |
+|---|---|---|---|
+| 89 SQL Injection | yes | 2, 4, 5 files | hardcoded source; parameterised sink |
+| 78 OS Command Injection | yes | 2, 4, 5 files | hardcoded source |
+| 90 LDAP Injection | no | 2, 4, 5 files | hardcoded source |
+| 601 URL Redirection | no | 2, 4, 5 files | hardcoded source |
+
+12 true positives, 5 false positives. Depth is the variable run 1 lacked: in a 5-file case the
+finding names the sink in the fifth file and the source is four hops away.

@@ -1,0 +1,362 @@
+[
+  {
+    "case": "Case01",
+    "cwe": "89",
+    "group": "reviewed",
+    "depth": 2,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case01A.java",
+      "Case01B.java"
+    ],
+    "finding": {
+      "cwe": "CWE-89",
+      "name": "SQL Injection",
+      "file": "Case01B.java",
+      "sink_line": 28,
+      "sink_code": "resultSet = sqlStatement.executeQuery(\"select * from users where name='\"+data+\"'\");",
+      "summary": "a SQL statement is built from request data and executed"
+    }
+  },
+  {
+    "case": "Case02",
+    "cwe": "89",
+    "group": "reviewed",
+    "depth": 4,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case02A.java",
+      "Case02B.java",
+      "Case02C.java",
+      "Case02D.java"
+    ],
+    "finding": {
+      "cwe": "CWE-89",
+      "name": "SQL Injection",
+      "file": "Case02D.java",
+      "sink_line": 28,
+      "sink_code": "resultSet = sqlStatement.executeQuery(\"select * from users where name='\"+data+\"'\");",
+      "summary": "a SQL statement is built from request data and executed"
+    }
+  },
+  {
+    "case": "Case03",
+    "cwe": "89",
+    "group": "reviewed",
+    "depth": 5,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case03A.java",
+      "Case03B.java",
+      "Case03C.java",
+      "Case03D.java",
+      "Case03E.java"
+    ],
+    "finding": {
+      "cwe": "CWE-89",
+      "name": "SQL Injection",
+      "file": "Case03E.java",
+      "sink_line": 28,
+      "sink_code": "resultSet = sqlStatement.executeQuery(\"select * from users where name='\"+data+\"'\");",
+      "summary": "a SQL statement is built from request data and executed"
+    }
+  },
+  {
+    "case": "Case04",
+    "cwe": "78",
+    "group": "reviewed",
+    "depth": 2,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case04A.java",
+      "Case04B.java"
+    ],
+    "finding": {
+      "cwe": "CWE-78",
+      "name": "OS Command Injection",
+      "file": "Case04B.java",
+      "sink_line": 28,
+      "sink_code": "Process process = Runtime.getRuntime().exec(osCommand + data);",
+      "summary": "an OS command is built from request data and executed"
+    }
+  },
+  {
+    "case": "Case05",
+    "cwe": "78",
+    "group": "reviewed",
+    "depth": 4,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case05A.java",
+      "Case05B.java",
+      "Case05C.java",
+      "Case05D.java"
+    ],
+    "finding": {
+      "cwe": "CWE-78",
+      "name": "OS Command Injection",
+      "file": "Case05D.java",
+      "sink_line": 28,
+      "sink_code": "Process process = Runtime.getRuntime().exec(osCommand + data);",
+      "summary": "an OS command is built from request data and executed"
+    }
+  },
+  {
+    "case": "Case06",
+    "cwe": "78",
+    "group": "reviewed",
+    "depth": 5,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case06A.java",
+      "Case06B.java",
+      "Case06C.java",
+      "Case06D.java",
+      "Case06E.java"
+    ],
+    "finding": {
+      "cwe": "CWE-78",
+      "name": "OS Command Injection",
+      "file": "Case06E.java",
+      "sink_line": 28,
+      "sink_code": "Process process = Runtime.getRuntime().exec(osCommand + data);",
+      "summary": "an OS command is built from request data and executed"
+    }
+  },
+  {
+    "case": "Case07",
+    "cwe": "90",
+    "group": "unreviewed",
+    "depth": 2,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case07A.java",
+      "Case07B.java"
+    ],
+    "finding": {
+      "cwe": "CWE-90",
+      "name": "LDAP Injection",
+      "file": "Case07B.java",
+      "sink_line": 32,
+      "sink_code": "NamingEnumeration<SearchResult> answer = directoryContext.search(\"\", search, null);",
+      "summary": "an LDAP filter is built from request data and searched"
+    }
+  },
+  {
+    "case": "Case08",
+    "cwe": "90",
+    "group": "unreviewed",
+    "depth": 4,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case08A.java",
+      "Case08B.java",
+      "Case08C.java",
+      "Case08D.java"
+    ],
+    "finding": {
+      "cwe": "CWE-90",
+      "name": "LDAP Injection",
+      "file": "Case08D.java",
+      "sink_line": 32,
+      "sink_code": "NamingEnumeration<SearchResult> answer = directoryContext.search(\"\", search, null);",
+      "summary": "an LDAP filter is built from request data and searched"
+    }
+  },
+  {
+    "case": "Case09",
+    "cwe": "90",
+    "group": "unreviewed",
+    "depth": 5,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case09A.java",
+      "Case09B.java",
+      "Case09C.java",
+      "Case09D.java",
+      "Case09E.java"
+    ],
+    "finding": {
+      "cwe": "CWE-90",
+      "name": "LDAP Injection",
+      "file": "Case09E.java",
+      "sink_line": 32,
+      "sink_code": "NamingEnumeration<SearchResult> answer = directoryContext.search(\"\", search, null);",
+      "summary": "an LDAP filter is built from request data and searched"
+    }
+  },
+  {
+    "case": "Case10",
+    "cwe": "601",
+    "group": "unreviewed",
+    "depth": 2,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case10A.java",
+      "Case10B.java"
+    ],
+    "finding": {
+      "cwe": "CWE-601",
+      "name": "URL Redirection to Untrusted Site",
+      "file": "Case10B.java",
+      "sink_line": 32,
+      "sink_code": "response.sendRedirect(data);",
+      "summary": "a redirect target is taken from request data"
+    }
+  },
+  {
+    "case": "Case11",
+    "cwe": "601",
+    "group": "unreviewed",
+    "depth": 4,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case11A.java",
+      "Case11B.java",
+      "Case11C.java",
+      "Case11D.java"
+    ],
+    "finding": {
+      "cwe": "CWE-601",
+      "name": "URL Redirection to Untrusted Site",
+      "file": "Case11D.java",
+      "sink_line": 32,
+      "sink_code": "response.sendRedirect(data);",
+      "summary": "a redirect target is taken from request data"
+    }
+  },
+  {
+    "case": "Case12",
+    "cwe": "601",
+    "group": "unreviewed",
+    "depth": 5,
+    "kind": "true_positive",
+    "flow": "bad",
+    "files": [
+      "Case12A.java",
+      "Case12B.java",
+      "Case12C.java",
+      "Case12D.java",
+      "Case12E.java"
+    ],
+    "finding": {
+      "cwe": "CWE-601",
+      "name": "URL Redirection to Untrusted Site",
+      "file": "Case12E.java",
+      "sink_line": 32,
+      "sink_code": "response.sendRedirect(data);",
+      "summary": "a redirect target is taken from request data"
+    }
+  },
+  {
+    "case": "Case13",
+    "cwe": "89",
+    "group": "reviewed",
+    "depth": 2,
+    "kind": "false_positive",
+    "flow": "goodG2B",
+    "files": [
+      "Case13A.java",
+      "Case13B.java"
+    ],
+    "finding": {
+      "cwe": "CWE-89",
+      "name": "SQL Injection",
+      "file": "Case13B.java",
+      "sink_line": 28,
+      "sink_code": "resultSet = sqlStatement.executeQuery(\"select * from users where name='\"+data+\"'\");",
+      "summary": "a SQL statement is built from request data and executed"
+    }
+  },
+  {
+    "case": "Case14",
+    "cwe": "89",
+    "group": "reviewed",
+    "depth": 2,
+    "kind": "false_positive",
+    "flow": "goodB2G",
+    "files": [
+      "Case14A.java",
+      "Case14B.java"
+    ],
+    "finding": {
+      "cwe": "CWE-89",
+      "name": "SQL Injection",
+      "file": "Case14B.java",
+      "sink_line": 29,
+      "sink_code": "resultSet = sqlStatement.executeQuery();",
+      "summary": "a SQL statement is built from request data and executed"
+    }
+  },
+  {
+    "case": "Case15",
+    "cwe": "78",
+    "group": "reviewed",
+    "depth": 2,
+    "kind": "false_positive",
+    "flow": "goodG2B",
+    "files": [
+      "Case15A.java",
+      "Case15B.java"
+    ],
+    "finding": {
+      "cwe": "CWE-78",
+      "name": "OS Command Injection",
+      "file": "Case15B.java",
+      "sink_line": 28,
+      "sink_code": "Process process = Runtime.getRuntime().exec(osCommand + data);",
+      "summary": "an OS command is built from request data and executed"
+    }
+  },
+  {
+    "case": "Case17",
+    "cwe": "90",
+    "group": "unreviewed",
+    "depth": 2,
+    "kind": "false_positive",
+    "flow": "goodG2B",
+    "files": [
+      "Case17A.java",
+      "Case17B.java"
+    ],
+    "finding": {
+      "cwe": "CWE-90",
+      "name": "LDAP Injection",
+      "file": "Case17B.java",
+      "sink_line": 32,
+      "sink_code": "NamingEnumeration<SearchResult> answer = directoryContext.search(\"\", search, null);",
+      "summary": "an LDAP filter is built from request data and searched"
+    }
+  },
+  {
+    "case": "Case19",
+    "cwe": "601",
+    "group": "unreviewed",
+    "depth": 2,
+    "kind": "false_positive",
+    "flow": "goodG2B",
+    "files": [
+      "Case19A.java",
+      "Case19B.java"
+    ],
+    "finding": {
+      "cwe": "CWE-601",
+      "name": "URL Redirection to Untrusted Site",
+      "file": "Case19B.java",
+      "sink_line": 32,
+      "sink_code": "response.sendRedirect(data);",
+      "summary": "a redirect target is taken from request data"
+    }
+  }
+]
