@@ -6,25 +6,28 @@ this repo is linked into it as a git submodule at `evals/`. Every path below (`c
 a `cwe-advisor` clone with this submodule initialized (`git submodule update --init`), not from a
 standalone clone of this repo.
 
-Measures whether the knowledge base actually improves remediation, rather than assuming it does.
+## What this measures
 
-This file covers what is measured and what past runs found. To execute a run, see
-[HARNESS.md](HARNESS.md) - the runbook, with the arm and judge prompts verbatim.
+CWE guidance in the parent repo is written and reviewed on reasoning alone - nothing is measured by
+default. This harness exists to put numbers against three durable questions:
 
-Nothing in this repository has been measured. The top-15 review, the `Safe Pattern` sweep that
-removed 307 code blocks, the CWE-306 language entries and the version pass were all applied on
-reasoning alone. This harness exists to put numbers against three open questions:
-
-1. Does the knowledge base beat the bare model? If a capable model fixes SQL injection just as well
-   without the entry, the entry is not earning its place, and the content should shift toward the
+1. **Does the knowledge base beat the bare model?** If a capable model fixes SQL injection just as
+   well without the entry, the entry is not earning its place, and content should shift toward
    detail a model genuinely lacks.
-2. Does review effort show up in output quality? Cases are split between CWEs the top-15 review
-   covered and CWEs it never touched.
-3. Does the top-15 review show up in fix quality? Arm C is each entry as it stood *before* this
-   session's review, so B vs C is a before/after on the same entry rather than a comparison across
-   different CWEs of differing difficulty.
+2. **Does review effort show up in output quality?** Tested by splitting cases between CWEs a
+   review pass covered and CWEs it never touched.
+3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
+   comparisons on the same entries or the same SKILL.md logic.
 
-## Test cases
+Four runs so far - see **Past runs** below for what each one found. The headline that holds across
+all of them: verdict accuracy and multi-file source tracing are saturated in every arm, at every
+chain depth tested up to five files - a capable model does not need this harness's help to trace
+taint or recognise a textbook vulnerability. The knowledge base's one consistently measurable effect
+is on `no_harm` - whether a fix silently breaks or changes something the sink's caller depended on -
+and that effect has gone in both directions depending on how an entry's `Remediation Steps` are
+ordered (see run 4).
+
+## Corpus
 
 One tree, keyed by CWE and language the same way the knowledge base is, so a case sits next to the
 guidance it exercises:
@@ -41,54 +44,62 @@ cases/
 Cases accumulate here rather than being versioned into a new directory per run - git holds the
 history. Run records under `runs*/` name cases by id, so ids are stable once published.
 
-Current contents: 106 cases across 17 CWEs and six languages. Four sources:
+Current contents: 125 cases across 17 CWEs and seven languages (perl added by the CWE-79 depth
+batch below). Four sources:
 
 | `source` | n | What it is |
 |---|---|---|
 | `owasp-benchmark` | 16 | Single-file Java servlets, labels from `expectedresults-1.2.csv` |
 | `juliet` | 17 | Java multi-file flow variants, de-labelled mechanically; taint crosses 2, 4 or 5 files |
 | `authored-from-docs-pitfall` | 13 | Single-function cases across Java, Python, Go, C#, JavaScript and PHP, each built around a fix that looks right and is not |
-| `authored` | 60 | Single-function, single-language, plain true-positive cases with no `trap`/`must_preserve`/`origin` - pure language-coverage for CWEs the corpus already had in one language, not a discrimination instrument |
+| `authored` | 79 | Single-function, single-language, plain true-positive cases with no `trap`/`must_preserve`/`origin` - either pure language-coverage or top-15 depth (see below), not a discrimination instrument |
 
-The `authored` cases are a per-language coverage campaign, not a one-off: the goal is at least one case
-per `(CWE, language)` slot that has a language-specific entry (318 slots were missing when the
-campaign started; root-only CWEs with no language subfolder are out of scope - see TODO.md). Each
-was written by a workflow agent that read the target `cwe/{CWE}/{language}/INDEX.md`'s own `Taint
-Sinks` list and picked a real API from it, then had its `sink_line`/`sink_code` checked against the
-file it actually wrote before being accepted. CWE-22, 78, 89, 90, 117, 209, 326, 330, 338, 347,
-434, 502, 611 and 614 are fully covered across every language their entry has as of this writing;
-TODO.md tracks what remains.
+**`owasp-benchmark` and `juliet`** are externally authored, so their ground truth doesn't come from
+this repo: Benchmark ships `expectedresults-1.2.csv`, Juliet encodes it in the variant name (then
+mechanically stripped before use). A case written here would be shaped toward the guidance -
+unconsciously matching the vulnerability to the form the entry already describes - which manufactures
+whatever result was wanted. That is why these two are weighted as the stronger ground truth.
 
-The third group exists because runs 1-3 measured the first two to saturation. Chain depth never
-discriminated - every arm traced five-file chains perfectly, unguided included - while every
-recorded harm was sink-local: output the original discarded, an argument the original left `null`,
-a dropped URI fragment. These cases therefore drop the chain and vary what actually separated the
-arms: how much contract the sink has, and how wrong the plausible fix is.
-
-Run 4 scored the first 10 of these and found the traps mostly did not work (19/20 at ceiling on
-`fix_quality`) - see [RESULTS-v4.md](RESULTS-v4.md). The one exception, `LogForgeOnFailure`
-(CWE-117), confirmed a specific shape: when an entry's `Remediation Steps` open with an
-infrastructure or configuration change rather than the fix at the reported sink, the guided arm
-tends to perform that change and leave the flagged line untouched. `OrderEventQueueDeserialize`
-(CWE-502/java), `ModelCachePickleLoad` (CWE-502/python), and `DeprecatedEntityLoaderGuard`
-(CWE-611/php) target that same shape - each entry's leading remediation step is a migration or a
-config call that does not touch the flagged sink, and in two cases performing it as written breaks
-a real cross-service or cross-version contract the case's `must_preserve` field states. Extending
-the batch in any other style is not expected to add resolution, per run 4's conclusion.
-
-Each one is built from a `Common Pitfalls` bullet in the `docs/` corpus, which has been through
-actor/critic review across two model families. Being authored here rather than externally sourced,
-they carry two extra fields so the intended difficulty is explicit and checkable rather than
-implied by the code:
+**`authored-from-docs-pitfall`** cases exist because runs 1-3 measured the first two sources to
+saturation - chain depth never discriminated, every recorded harm was sink-local. These drop the
+chain and instead vary how much contract the sink has and how wrong a plausible fix is. Each is built
+from a `Common Pitfalls` bullet in the `docs/` corpus (actor/critic reviewed across two model
+families) and carries three extra fields, since the intended difficulty needs to be explicit and
+checkable rather than implied by the code:
 
 - **`trap`** - the plausible fix that does not close the finding, or closes it while breaking
   something.
-- **`must_preserve`** - the sink's contract a correct fix has to keep. This is what `no_harm` is
-  scored against, rather than left to a judge's reading of the original.
+- **`must_preserve`** - the sink's contract a correct fix has to keep. This is what `no_harm` should
+  be scored against, though the judge prompt in HARNESS.md does not yet pass it through - see
+  **Known gaps** below.
 - **`origin`** - the `docs/` pitfall the case is built from.
 
 Their labels are an authoring claim, not an external ground truth, which is weaker than the other
-two sources. Treat a judge disagreeing with `kind` on one of these as a finding about the case.
+two sources. Treat a judge disagreeing with `kind` on one of these as a finding about the case. Run
+4 scored the first ten and found the traps mostly did not work (19/20 at ceiling on `fix_quality`) -
+see [RESULTS-v4.md](RESULTS-v4.md). The one exception confirmed a specific, since-repeated shape:
+when an entry's `Remediation Steps` open with an infrastructure or configuration change rather than
+the fix at the reported sink, the guided arm tends to perform that change and leave the flagged line
+untouched. Three more cases (`OrderEventQueueDeserialize`, `ModelCachePickleLoad`,
+`DeprecatedEntityLoaderGuard`) target that same shape directly; none has been run yet.
+
+**`authored`** cases come from two related but distinct campaigns, both tracked in TODO.md, neither
+built around a deliberate wrong-fix:
+
+- **Per-language coverage (breadth).** At least one case per `(CWE, language)` slot that has a
+  language-specific entry. CWE-22, 78, 89, 90, 117, 209, 326, 330, 338, 347, 434, 502, 611 and 614
+  are fully covered across every language their entry has.
+- **Top-15 depth.** For the CWEs this project's own MITRE Top-25 ranks-1-15 review covered
+  (CWE-20, 22, 77, 78, 79, 89, 94, 125, 269, 287, 352, 416, 434, 787, 862 - 20 and 269 are
+  root-only and out of scope), a target of 3 cases per `(CWE, language)` slot rather than 1, each
+  built from a distinct named pattern in that language's `docs/CWE-{ID}/{language}/index.md`
+  "Common Vulnerable Patterns" section (adapted into an original scenario, not copied verbatim).
+  CWE-79 is the first one done: all 7 of its languages (including the newly-added perl) now have
+  3 cases each.
+
+Every case, regardless of source, is written by a workflow agent that reads the target entry's own
+`Taint Sinks` list (and, for the depth campaign, the named `docs/` pattern) and has its
+`sink_line`/`sink_code` checked against the file it actually wrote before being accepted.
 
 ### Adding a case
 
@@ -101,10 +112,10 @@ Create `cases/{CWE}/{language}/{case-id}/` with the source files and a `case.jso
 | `source` | Where the case came from, for judging independence from the guidance |
 | `kind` | `true_positive` or `false_positive` |
 | `depth` | Files in the call chain from source to sink |
-| `group` | `reviewed` or `unreviewed`, for the review-effort split |
+| `group` | `reviewed` or `unreviewed`, for the review-effort split (the CWEs the top-15 review covered - see run 1's design in [RESULTS.md](RESULTS.md) - are `reviewed`; everything else is `unreviewed`) |
 | `files` | Source files, in call order |
 | `finding` | What the scanner reports: `cwe`, `name`, `file`, `sink_line`, `sink_code`, `summary` |
-| `trap`, `must_preserve`, `origin` | `authored-from-docs-pitfall` only - see above. A plain `authored` case (language-coverage, no deliberate wrong-fix) omits all three |
+| `trap`, `must_preserve`, `origin` | `authored-from-docs-pitfall` only. A plain `authored` case omits all three |
 
 `case.json` holds the answer, so **runners and judges must be told not to read it**, the same way
 they are told not to read `RESULTS*.md` or the `runs*/` directories. Everything an arm is entitled
@@ -112,223 +123,42 @@ to see is handed to it in the prompt: the case directory, the CWE, and the sink 
 
 Two properties matter more than volume. **Cases must be externally authored or independently
 derived** - a case written against the guidance takes the shape the guidance already describes and
-manufactures whatever result was wanted. And **ground truth must come from outside the case**:
-Benchmark ships `expectedresults-1.2.csv`, Juliet encodes it in the variant name. A case whose
-label is only an assertion in its own metadata cannot settle a disagreement with a judge.
+manufactures whatever result was wanted. And **ground truth must come from outside the case**: a
+label that is only an assertion in its own metadata cannot settle a disagreement with a judge.
 
-## Corpus (run 1)
+## Running a test
 
-16 cases from [OWASP BenchmarkJava](https://github.com/OWASP-Benchmark/BenchmarkJava), taken from
-its `expectedresults-1.2.csv` ground truth and filtered to entries labelled a real vulnerability.
-These now live in the shared case tree described under **Test cases** below, alongside the Juliet cases added for run 2.
+Full runbook, with the arm and judge prompts verbatim: [HARNESS.md](HARNESS.md). In short: each case
+is remediated once per arm (arm A = no guidance, arm B = the skill invoked in autonomous mode),
+each arm run as a **fresh context** that has not read the knowledge base, then all outputs are
+blinded (`scripts/blind.py`) and scored by at least three independent judges who have not seen which
+arm produced what, and finally aggregated (`scripts/analyse.py`) into comparison tables.
 
-Chosen because they are **authored externally**. Cases written here would be written toward the
-guidance - unconsciously shaped so the vulnerability takes the form the entry already describes -
-which would manufacture whatever result was wanted.
+Both scripts are generic - they take arm directories as arguments and use the directory name as the
+label, so nothing needs editing to add an arm or start a new run. **Pick the next unused version
+suffix for a new run** (the existing ones are `runs`/`runs-v2`/`runs-v3`/`runs-v4` and their matching
+`arm-map*.json`/`scores*.json`/`RESULTS*.md`); HARNESS.md's own examples are written against
+`runs-v4` specifically because that is what run 4 used, not because that name is special.
 
-| Group | CWEs | Cases |
-|---|---|---|
-| Reviewed by the top-15 pass | 22, 78, 79, 89 | 8 |
-| Never reviewed | 90, 330, 614 | 8 |
+### Known gaps
 
-Every CWE here has both a root entry and a `java/` entry, so each arm receives the same *shape* of
-guidance and coverage depth is not confounded with review status. Three Benchmark categories were
-excluded for that reason: CWE-327 and CWE-501 have root guidance but no language file, and CWE-643
-(XPath Injection) has no entry at all - a coverage gap this exercise surfaced, now recorded in
-TODO.md.
+- **Most of the corpus has never been run.** Run 4 scored 10 cases. The corpus is now 125: the 79
+  `authored` cases from the breadth and depth campaigns have been checked for realism (sink lines
+  verified against the file, sink APIs matched to the entry's own `Taint Sinks` list) but never put
+  through an actual arm-vs-arm, judge-scored run. That is the natural scope for a run 5.
+- **`no_harm` doesn't see `must_preserve` yet.** The judge prompt in HARNESS.md withholds all of
+  `case.json`, including the contract `must_preserve` states, so judges apply their own reading of
+  what the original preserved and can disagree with each other over it (9 of 20 runs disagreed in
+  run 4). Passing the stated contract into the judge prompt without revealing which fix is the trap
+  is the obvious next fix.
+- **Nothing in the corpus is compiled or executed.** A fix is scored on whether it reads as correct,
+  not on whether it actually builds or passes a test.
 
-All are Java servlets, which holds language constant across arms and removes it as a confound.
+## Past runs
 
-**Cases are presented as findings, not as raw code.** This advisor remediates; it does not detect.
-A SAST tool or another skill supplies the finding, and SKILL.md is built for that - Step 1 takes
-the CWE as given, and Step 4 prefers a tool-supplied taint path. Each case file therefore carries a
-`// SAST FINDING:` comment above the sink naming the CWE and the flow, and its `case.json` records
-the same as structured metadata. Every arm receives it, so the comparison is purely about remediation
-quality. Scoring the skill on whether it *finds* the bug would measure something it does not claim
-to do, and would advantage the no-skill arm for the same reason.
-
-## Arms
-
-Each case is run three times, in a **fresh context** each time.
-
-| Arm | Guidance supplied |
-|---|---|
-| **A** | None. The finding and the file, nothing else |
-| **B** | The current `cwe/{CWE}/INDEX.md` and `cwe/{CWE}/java/INDEX.md` |
-| **C** | The same two files as of commit `9a5a105` - after the `Safe Pattern` sweep, before this session's review |
-
-Arm A is the control and the reason the exercise is worth running. Without it the numbers describe
-the model, not the knowledge base.
-
-**The arms differ only in the guidance text.** Every arm receives the same task framing, the same
-annotated case file, and the same instruction to produce a fix. SKILL.md's workflow is held
-constant rather than invoked, because all three questions above are about the *content* of the
-knowledge base: mixing in the workflow would leave B vs C confounded between "fewer code blocks"
-and "different routing". Testing the workflow itself - routing, mode selection, the false-positive
-exit - is a separate exercise against different inputs.
-
-Runs are written to `runs/{arm}/{test}.md` containing the proposed fix and nothing identifying the
-arm, so scoring can be done blind.
-
-## Rubric
-
-**Fixed before any run was executed.** Four criteria, scored 0-2, plus one binary.
-
-| Criterion | 0 | 1 | 2 |
-|---|---|---|---|
-| **Vulnerability removed** | Original vector still works | Some paths closed, others open | Vector closed |
-| **Functionality preserved** | Will not compile, or breaks the endpoint | Compiles but changes observable behaviour | Behaviour preserved |
-| **No new weakness** | Introduces a different weakness | Questionable construct, not clearly exploitable | Clean |
-| **Fit to the code** | Generic advice, or the wrong shape for this sink | Workable but not idiomatic | Right API, matches surrounding style |
-
-Binary: **Flagged sink addressed** - did the change land on the data flow the finding names,
-rather than on adjacent code.
-
-**Primary metric:** proportion of cases scoring 2 on *Vulnerability removed*. Secondary: mean total
-across the four criteria.
-
-**Comparisons:** B vs A overall; B vs A split by reviewed/unreviewed; B vs C on the four reviewed
-CWEs.
-
-**Built-in noise floor.** The review never touched CWE-327, 330, 501 or 643, so for those 8 cases
-arm C's guidance is byte-identical to arm B's. Any B-vs-C difference there is run-to-run variance
-in the model and the judge, and it sets the bar a difference on the reviewed CWEs has to clear
-before it means anything.
-
-## Predictions
-
-Recorded in advance so the result cannot be rationalised after the fact.
-
-- B beats A on *Fit to the code*, but the gap on *Vulnerability removed* is small - a capable model
-  already fixes textbook SQL injection and XSS.
-- The reviewed/unreviewed split shows a smaller difference than the review effort implies, because
-  both arms share the same model and Benchmark's cases are close to textbook.
-- B vs C on the reviewed CWEs is positive but small, and may not clear the noise floor the
-  identical-guidance pairs establish. The review corrected accuracy more than it changed the shape
-  of the advice, and Benchmark's cases are close enough to textbook that accuracy corrections
-  (the `th:attr` claim, the `Parameters.Add` value assignment) may never be exercised.
-
-If B does not beat A anywhere, that is the finding, and it argues for rewriting entries around
-what a model cannot infer - version floors, advisory status, framework-specific traps - and
-dropping what it restates.
-
-## Limitations
-
-Stated because they bound what any result here can support.
-
-- **Benchmark cases are synthetic.** Auto-generated servlets with a consistent shape. They test
-  whether a fix is correct, not whether it survives a real codebase's structure.
-- **Sample is small.** 16 cases across 8 CWEs supports direction, not significance.
-- **Scoring is judgement.** Deterministic checks are used where a case allows; the rest is rubric
-  scoring, which is why it is done blind and against criteria fixed in advance.
-- **Runs must originate in fresh contexts.** A judge or runner that has already read the knowledge
-  base cannot credibly produce arm A.
-
-## Run 2 design (not yet executed)
-
-Run 1 measured the fix advice and called it "the knowledge base". It did not test the other half
-of the skill. Benchmark cases put source and sink in the same `doPost`, three lines apart, so:
-
-- SKILL.md Step 4 is a no-op - there is no flow to trace, and `references/data-flow-trace.md` was
-  never loaded by any arm.
-- The "break taint after allowlist validation" rule was never exercised, because there is nowhere
-  downstream for a tainted value to survive to.
-- The false-positive exit added to Step 4 has **no coverage at all** - every case was a true
-  positive, so no arm ever had the opportunity to correctly decline to fix.
-
-Run 2 should use the Juliet Java suite (`find-sec-bugs/juliet-test-suite`), whose variant numbering
-is built around exactly this axis:
-
-| Variant | Structure | What it tests |
-|---|---|---|
-| `_51a`/`_51b` | taint crosses two files | inter-file tracing |
-| `_52a-c`, `_53a-d` | three and four files | multi-hop tracing |
-| `_54a-e` | five-file chain | whether tracing survives depth |
-| `_61a`/`_61b` | taint returned from another class | return-value flow |
-| `_31`, `_41`, `_45` | class member, method argument, field | intra-class flow |
-
-The finding given to each arm should name **only the sink file and line**, as a scanner would,
-leaving the source to be traced back through the chain.
-
-Juliet's `good` variants (`goodB2G` sanitises the sink, `goodG2B` uses a safe source) supply the
-missing negative cases: present one with a plausible finding and score whether the arm correctly
-reports no exploitable path instead of "fixing" working code. OWASP Benchmark's ~1400
-`real vulnerability = false` rows are a second source for the same purpose.
-
-The rubric needs three additions for run 2, none of which run 1 could have used:
-
-- **source_identified** - did the run name the actual source, or assume one?
-- **fix_point** - is the change at the right place in the chain (sink, boundary, or source), or
-  did it patch a middle hop and leave other callers exposed?
-- **correctly_declined** - for a negative case, did it report no exploitable path rather than
-  modify safe code? This is the direction run 1 had no way to measure, and the direction where a
-  knowledge base can do the most damage.
-
-## Run 2 arms (as executed)
-
-Run 1 supplied CWE entry text and held SKILL.md constant, to isolate content. That was wrong for
-run 2's question: the data-flow guidance *is* SKILL.md Step 4 and `references/data-flow-trace.md`,
-so a content-only arm would miss it a second time.
-
-| Arm | Condition |
-|---|---|
-| **A** | No skill, no guidance. The case files and the finding, nothing else |
-| **B** | Invokes the `cwe_advisor` skill in autonomous mode |
-
-Arm B therefore exercises the whole product - CWE resolution, entry loading, the Step 4 trace, the
-allowlist fix-point rule, the false-positive exit, and the autonomous output record - rather than
-the entry text alone. Arm C is dropped: run 1 measured no review effect against a 0.00 noise floor,
-so the third arm was not buying anything.
-
-Both arms are asked for the same output shape (verdict, source, fix, explanation) so the two are
-comparable, and both are told a "not exploitable" verdict is a legitimate answer. Without that,
-the five false-positive cases would be unfair to arm A rather than informative.
-
-### Corpus (run 2 additions)
-
-17 cases from Juliet, de-labelled mechanically (see the build script's docstring):
-
-| CWE | Reviewed | TP by depth | FP |
-|---|---|---|---|
-| 89 SQL Injection | yes | 2, 4, 5 files | hardcoded source; parameterised sink |
-| 78 OS Command Injection | yes | 2, 4, 5 files | hardcoded source |
-| 90 LDAP Injection | no | 2, 4, 5 files | hardcoded source |
-| 601 URL Redirection | no | 2, 4, 5 files | hardcoded source |
-
-12 true positives, 5 false positives. Depth is the variable run 1 lacked: in a 5-file case the
-finding names the sink in the fifth file and the source is four hops away.
-
-## Run 3 (as executed)
-
-Run 2 left one criterion with variance - `no_harm` - and split it both ways: guidance prevented
-harm on CWE-90 and CWE-601, and caused it on CWE-78. Run 3 tests the response to that.
-
-Changes under test, all in the shared path rather than in any entry:
-
-- SKILL.md Step 4 gained a sink-contract step: before writing a fix, record what the sink returns,
-  what it **discards**, which arguments are left implicit or `null`, and its failure behaviour.
-- SKILL.md Step 5 gained a check that accounts for every change that is not the sink itself.
-- `references/autonomous-output.md` gained a `behaviour_changes` field, so the check lands in the
-  record a CI consumer reads rather than only in interactive presentation.
-
-| Arm | Condition |
-|---|---|
-| **A** | No skill, no guidance - run-2 output, re-judged |
-| **B** | Skill before the change - run-2 output, re-judged |
-| **B2** | Skill after the change - fresh |
-
-Same 17 Juliet cases. A and B are re-judged rather than re-run so all three sets sit in one blind
-pool under the same judges; B2's `Behaviour changes` section is stripped before blinding, because
-A and B cannot have one and its presence would identify the arm.
-
-Results in [RESULTS-v3.md](RESULTS-v3.md).
-
-## Run 4 (as executed)
-
-First run against the ten `authored-from-docs-pitfall` cases, and the first executed from
-[HARNESS.md](HARNESS.md) rather than from a scratch directory. Arms A (no guidance) and B (skill),
-true positives only - the finding is given as confirmed, so the arm remediates rather than
-adjudicates, and `verdict` and `source_identified` drop out of the rubric.
-
-Results in [RESULTS-v4.md](RESULTS-v4.md). Short version: the traps mostly did not work, and the
-one that did caught the guided arm.
+| Run | Corpus | Runs | Question | Headline | Results |
+|---|---|---|---|---|---|
+| 1 | 16 OWASP Benchmark cases (Java) | 48 (16 x 3 arms) | Does the knowledge base beat the bare model? | Every run scored max on vulnerability-removed - the corpus was too easy to discriminate any arm. The only signal: guidance made one CWE-78 fix worse by over-deleting a feature | [RESULTS.md](RESULTS.md) |
+| 2 | +17 Juliet cases (Java, chain depth 2-5, plus false positives) | 34 (17 x 2 arms) | Does multi-file taint tracing need the skill? | No - both arms traced five-file chains and declined every false positive perfectly. `no_harm` was the only criterion with variance, and it cut both ways: helped on CWE-90/601, hurt on CWE-78 | [RESULTS-v2.md](RESULTS-v2.md) |
+| 3 | Same 17 Juliet cases, re-judged, plus a fresh B2 | 51 (17 x 3 sets) | Did the sink-contract fix (SKILL.md Step 4/5) address run 2's harm? | Yes - `no_harm` on true positives rose from 1.25 (A) / 1.67 (B, before) to 1.92 (B2, after); CWE-601's URI-fragment preservation is a clean, unconfounded before/after | [RESULTS-v3.md](RESULTS-v3.md) |
+| 4 | +10 `authored-from-docs-pitfall` cases | 20 (10 x 2 arms) | Do the deliberately-planted "plausible but wrong" fixes actually catch anything? | Mostly no (19/20 at ceiling on `fix_quality`) - but the one that did (CWE-117) confirmed a repeatable defect shape: guidance that leads with an infrastructure/config change over the sink-level fix | [RESULTS-v4.md](RESULTS-v4.md) |

@@ -1,7 +1,114 @@
 # Validation harness - run 1 results
 
-48 runs (16 cases x 3 arms), scored blind by four judges against the rubric in README.md, which
-was committed before any run executed. Arm mapping was held outside the repository during scoring.
+48 runs (16 cases x 3 arms), scored blind by four judges against the rubric below, which was
+committed before any run executed. Arm mapping was held outside the repository during scoring.
+
+## Design (pre-registered before this run)
+
+### Corpus
+
+16 cases from [OWASP BenchmarkJava](https://github.com/OWASP-Benchmark/BenchmarkJava), taken from
+its `expectedresults-1.2.csv` ground truth and filtered to entries labelled a real vulnerability.
+
+Chosen because they are **authored externally**. Cases written for this harness would be shaped
+toward the guidance - unconsciously matching the vulnerability to the form the entry already
+describes - which would manufacture whatever result was wanted.
+
+| Group | CWEs | Cases |
+|---|---|---|
+| Reviewed by the top-15 pass | 22, 78, 79, 89 | 8 |
+| Never reviewed | 90, 330, 614 | 8 |
+
+Every CWE here has both a root entry and a `java/` entry, so each arm receives the same *shape* of
+guidance and coverage depth is not confounded with review status. Three Benchmark categories were
+excluded for that reason: CWE-327, CWE-501 and CWE-643 (XPath Injection) had no language file, or no
+entry at all, at the time - a coverage gap this exercise surfaced. Since closed by the language-file
+sweep recorded in TODO.md: CWE-501 and CWE-643 gained language entries in batch 28; CWE-327 remains
+root-only.
+
+All are Java servlets, which holds language constant across arms and removes it as a confound.
+
+**Cases are presented as findings, not as raw code.** This advisor remediates; it does not detect.
+A SAST tool or another skill supplies the finding, and SKILL.md is built for that - Step 1 takes
+the CWE as given, and Step 4 prefers a tool-supplied taint path. Each case file therefore carries a
+`// SAST FINDING:` comment above the sink naming the CWE and the flow, and its `case.json` records
+the same as structured metadata. Every arm receives it, so the comparison is purely about
+remediation quality. Scoring the skill on whether it *finds* the bug would measure something it
+does not claim to do, and would advantage the no-skill arm for the same reason.
+
+### Arms
+
+Each case is run three times, in a **fresh context** each time.
+
+| Arm | Guidance supplied |
+|---|---|
+| **A** | None. The finding and the file, nothing else |
+| **B** | The current `cwe/{CWE}/INDEX.md` and `cwe/{CWE}/java/INDEX.md` |
+| **C** | The same two files as of commit `9a5a105` - after the `Safe Pattern` sweep, before the top-15 review |
+
+Arm A is the control and the reason the exercise is worth running. Without it the numbers describe
+the model, not the knowledge base.
+
+**The arms differ only in the guidance text.** Every arm receives the same task framing, the same
+annotated case file, and the same instruction to produce a fix. SKILL.md's workflow is held
+constant rather than invoked, because this run is about the *content* of the knowledge base:
+mixing in the workflow would leave B vs C confounded between "fewer code blocks" and "different
+routing". Testing the workflow itself - routing, mode selection, the false-positive exit - is a
+separate exercise against different inputs (see run 2).
+
+### Rubric
+
+**Fixed before any run was executed.** Four criteria, scored 0-2, plus one binary.
+
+| Criterion | 0 | 1 | 2 |
+|---|---|---|---|
+| **Vulnerability removed** | Original vector still works | Some paths closed, others open | Vector closed |
+| **Functionality preserved** | Will not compile, or breaks the endpoint | Compiles but changes observable behaviour | Behaviour preserved |
+| **No new weakness** | Introduces a different weakness | Questionable construct, not clearly exploitable | Clean |
+| **Fit to the code** | Generic advice, or the wrong shape for this sink | Workable but not idiomatic | Right API, matches surrounding style |
+
+Binary: **Flagged sink addressed** - did the change land on the data flow the finding names,
+rather than on adjacent code.
+
+**Primary metric:** proportion of cases scoring 2 on *Vulnerability removed*. Secondary: mean total
+across the four criteria.
+
+**Comparisons:** B vs A overall; B vs A split by reviewed/unreviewed; B vs C on the four reviewed
+CWEs.
+
+**Built-in noise floor.** The review never touched CWE-327, 330, 501 or 643, so for those 8 cases
+arm C's guidance is byte-identical to arm B's. Any B-vs-C difference there is run-to-run variance
+in the model and the judge, and it sets the bar a difference on the reviewed CWEs has to clear
+before it means anything.
+
+### Predictions
+
+Recorded in advance so the result cannot be rationalised after the fact.
+
+- B beats A on *Fit to the code*, but the gap on *Vulnerability removed* is small - a capable model
+  already fixes textbook SQL injection and XSS.
+- The reviewed/unreviewed split shows a smaller difference than the review effort implies, because
+  both arms share the same model and Benchmark's cases are close to textbook.
+- B vs C on the reviewed CWEs is positive but small, and may not clear the noise floor the
+  identical-guidance pairs establish. The review corrected accuracy more than it changed the shape
+  of the advice, and Benchmark's cases are close enough to textbook that accuracy corrections
+  (the `th:attr` claim, the `Parameters.Add` value assignment) may never be exercised.
+
+If B does not beat A anywhere, that is the finding, and it argues for rewriting entries around
+what a model cannot infer - version floors, advisory status, framework-specific traps - and
+dropping what it restates.
+
+### Limitations
+
+Stated because they bound what this run can support.
+
+- **Benchmark cases are synthetic.** Auto-generated servlets with a consistent shape. They test
+  whether a fix is correct, not whether it survives a real codebase's structure.
+- **Sample is small.** 16 cases across 8 CWEs supports direction, not significance.
+- **Scoring is judgement.** Deterministic checks are used where a case allows; the rest is rubric
+  scoring, which is why it is done blind and against criteria fixed in advance.
+- **Runs must originate in fresh contexts.** A judge or runner that has already read the knowledge
+  base cannot credibly produce arm A.
 
 ## Headline: the harness could not discriminate
 
@@ -13,9 +120,9 @@ answer**. What it does establish is why, and that is worth having before spendin
 
 The cause is the corpus. OWASP Benchmark's true positives are single-sink, textbook instances -
 one tainted parameter, one obvious sink, in a 60-line servlet with no surrounding structure. A
-capable model fixes all of them with or without guidance. The limitation recorded in README.md as
-"synthetic" turned out to understate it: they are not merely artificial, they are too easy to
-separate any arm from any other.
+capable model fixes all of them with or without guidance. The Limitations section above records them
+as "synthetic," which turned out to understate it: they are not merely artificial, they are too easy
+to separate any arm from any other.
 
 ## What did vary
 
@@ -142,12 +249,12 @@ The review effect (+0.00) **does NOT clear** the noise floor (0.00) measured on 
 
 ## Honest accounting against the predictions
 
-The predictions in README.md said B would beat A on *fit* with a small gap on *vulnerability
+The predictions above said B would beat A on *fit* with a small gap on *vulnerability
 removed*. B did not beat A anywhere: it tied overall and was marginally worse on the reviewed CWEs
 (7.25 vs 7.50). The prediction that the review effect might not clear the noise floor was correct,
 though not for the reason given - there was no effect and no noise to clear.
 
-The README also said "if B does not beat A anywhere, that is the finding, and it argues for
+The Predictions section above also said "if B does not beat A anywhere, that is the finding, and it argues for
 rewriting entries around what a model cannot infer". Run 1 cannot support that conclusion, because
 it cannot distinguish "the knowledge base adds nothing" from "these cases are too easy to tell".
 Both remain live.

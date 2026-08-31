@@ -3,6 +3,78 @@
 34 runs (17 cases x 2 arms) on Juliet multi-file flows, scored blind by three judges. Arm A had no
 guidance; arm B invoked the `cwe_advisor` skill in autonomous mode.
 
+## Design
+
+Run 1 measured the fix advice and called it "the knowledge base." It did not test the other half
+of the skill. Benchmark cases put source and sink in the same `doPost`, three lines apart, so:
+
+- SKILL.md Step 4 was a no-op - there was no flow to trace, and `references/data-flow-trace.md` was
+  never loaded by any arm.
+- The "break taint after allowlist validation" rule was never exercised, because there was nowhere
+  downstream for a tainted value to survive to.
+- The false-positive exit added to Step 4 had **no coverage at all** - every case was a true
+  positive, so no arm ever had the opportunity to correctly decline to fix.
+
+This run uses the Juliet Java suite (`find-sec-bugs/juliet-test-suite`), whose variant numbering is
+built around exactly this axis:
+
+| Variant | Structure | What it tests |
+|---|---|---|
+| `_51a`/`_51b` | taint crosses two files | inter-file tracing |
+| `_52a-c`, `_53a-d` | three and four files | multi-hop tracing |
+| `_54a-e` | five-file chain | whether tracing survives depth |
+| `_61a`/`_61b` | taint returned from another class | return-value flow |
+| `_31`, `_41`, `_45` | class member, method argument, field | intra-class flow |
+
+The finding given to each arm names **only the sink file and line**, as a scanner would, leaving
+the source to be traced back through the chain.
+
+Juliet's `good` variants (`goodB2G` sanitises the sink, `goodG2B` uses a safe source) supply
+negative cases: present one with a plausible finding and score whether the arm correctly reports no
+exploitable path instead of "fixing" working code. OWASP Benchmark's ~1400 `real vulnerability =
+false` rows are a second source for the same purpose.
+
+Run 1 supplied CWE entry text and held SKILL.md constant, to isolate content. That was wrong for
+this run's question: the data-flow guidance *is* SKILL.md Step 4 and `references/data-flow-trace.md`,
+so a content-only arm would miss it a second time.
+
+| Arm | Condition |
+|---|---|
+| **A** | No skill, no guidance. The case files and the finding, nothing else |
+| **B** | Invokes the `cwe_advisor` skill in autonomous mode |
+
+Arm B therefore exercises the whole product - CWE resolution, entry loading, the Step 4 trace, the
+allowlist fix-point rule, the false-positive exit, and the autonomous output record - rather than
+the entry text alone. Arm C is dropped: run 1 measured no review effect against a 0.00 noise floor,
+so the third arm was not buying anything.
+
+Both arms are asked for the same output shape (verdict, source, fix, explanation) so the two are
+comparable, and both are told a "not exploitable" verdict is a legitimate answer. Without that, the
+five false-positive cases would be unfair to arm A rather than informative.
+
+The rubric adds three criteria run 1 could not use:
+
+- **source_identified** - did the run name the actual source, or assume one?
+- **fix_point** - is the change at the right place in the chain (sink, boundary, or source), or did
+  it patch a middle hop and leave other callers exposed?
+- **correctly_declined** - for a negative case, did it report no exploitable path rather than
+  modify safe code? This is the direction run 1 had no way to measure, and the direction where a
+  knowledge base can do the most damage.
+
+### Corpus
+
+17 cases from Juliet, de-labelled mechanically (see the build script's docstring):
+
+| CWE | Reviewed | TP by depth | FP |
+|---|---|---|---|
+| 89 SQL Injection | yes | 2, 4, 5 files | hardcoded source; parameterised sink |
+| 78 OS Command Injection | yes | 2, 4, 5 files | hardcoded source |
+| 90 LDAP Injection | no | 2, 4, 5 files | hardcoded source |
+| 601 URL Redirection | no | 2, 4, 5 files | hardcoded source |
+
+12 true positives, 5 false positives. Depth is the variable run 1 lacked: in a 5-file case the
+finding names the sink in the fifth file and the source is four hops away.
+
 ## Judging is trustworthy
 
 Judges determined exploitability themselves rather than being told. Their determination matched the

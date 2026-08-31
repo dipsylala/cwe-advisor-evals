@@ -5,6 +5,14 @@ how to execute a run from a cold start, in any session and with any capable mode
 
 Nothing here depends on a previous run's context. If a step needs a decision, it is called out.
 
+**The `v4`/`runs-v4` naming throughout this file is a worked example, not a fixed requirement** -
+it is what run 4 (the last run executed) actually used. A new run picks the next unused suffix
+(`runs-v5`, `arm-map-v5.json`, `scores-v5.json`, `RESULTS-v5.md`) and substitutes it everywhere
+below; `scripts/blind.py` and `scripts/analyse.py` take directory paths as arguments and don't care
+what they're named. See README.md's **Known gaps** for what a run 5 would actually be scoped to -
+most of the corpus (79 of 125 cases, from the breadth and per-language-depth campaigns) has never
+been run at all.
+
 ## What a run is
 
 Each case is remediated once per arm, each time in a **fresh context**, and the outputs are scored
@@ -28,7 +36,8 @@ each arm and each judge as a separate agent with its own context.
 Cases live in `cases/{CWE}/{language}/{case-id}/`, each with a `case.json`. Select by whatever the
 run is about - all of them, one language, one `source`, one CWE.
 
-`case.json` holds the answer, including `kind`, `trap` and `must_preserve`. **Runners and judges
+`case.json` holds the answer, including `kind` and, for `authored-from-docs-pitfall` cases, `trap`
+and `must_preserve`. **Runners and judges
 must be told not to read it.** Everything an arm is entitled to see goes in its prompt.
 
 ## Step 2 - run the arms
