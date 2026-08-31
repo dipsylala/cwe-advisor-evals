@@ -1,0 +1,18 @@
+{
+  "id": "WhoisLookupChildProcess",
+  "cwe": "78",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["WhoisLookupChildProcess.js"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "WhoisLookupChildProcess.js",
+    "sink_line": 15,
+    "sink_code": "exec(`whois ${domain}`, (error, stdout, stderr) => {",
+    "summary": "unvalidated domain query parameter is interpolated directly into a shell command string passed to exec"
+  }
+}

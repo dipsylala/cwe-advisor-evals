@@ -1,0 +1,18 @@
+{
+  "id": "JwtParseUnverified",
+  "cwe": "347",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["JwtParseUnverified.go"],
+  "finding": {
+    "cwe": "CWE-347",
+    "name": "Improper Verification of Cryptographic Signature",
+    "file": "JwtParseUnverified.go",
+    "sink_line": 20,
+    "sink_code": "token, err := jwt.Parse(tokenString, keyfunc)",
+    "summary": "authorization header token is parsed with a keyfunc that returns the RSA key regardless of token.Method, allowing algorithm confusion"
+  }
+}

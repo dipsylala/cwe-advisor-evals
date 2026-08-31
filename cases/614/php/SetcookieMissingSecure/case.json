@@ -1,0 +1,18 @@
+{
+  "id": "SetcookieMissingSecure",
+  "cwe": "614",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["SetcookieMissingSecure.php"],
+  "finding": {
+    "cwe": "CWE-614",
+    "name": "Sensitive Cookie in HTTPS Session Without 'Secure' Attribute",
+    "file": "SetcookieMissingSecure.php",
+    "sink_line": 25,
+    "sink_code": "setcookie('auth_user', $username, time() + 3600, '/', '', false, true);",
+    "summary": "authenticated username is set into an auth cookie with the secure flag explicitly false"
+  }
+}

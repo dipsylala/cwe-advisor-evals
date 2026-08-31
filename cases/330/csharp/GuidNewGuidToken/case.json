@@ -1,0 +1,18 @@
+{
+  "id": "GuidNewGuidToken",
+  "cwe": "330",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["GuidNewGuidToken.cs"],
+  "finding": {
+    "cwe": "CWE-330",
+    "name": "Use of Insufficiently Random Values",
+    "file": "GuidNewGuidToken.cs",
+    "sink_line": 22,
+    "sink_code": "string resetToken = Guid.NewGuid().ToString();",
+    "summary": "password reset token generated with Guid.NewGuid instead of a CSPRNG"
+  }
+}

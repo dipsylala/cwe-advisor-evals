@@ -1,0 +1,18 @@
+{
+  "id": "TracerouteShellExec",
+  "cwe": "78",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["TracerouteShellExec.go"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "TracerouteShellExec.go",
+    "sink_line": 18,
+    "sink_code": "cmd := exec.Command(\"sh\", \"-c\", cmdLine)",
+    "summary": "query parameter host is concatenated into a shell command string and executed via sh -c"
+  }
+}

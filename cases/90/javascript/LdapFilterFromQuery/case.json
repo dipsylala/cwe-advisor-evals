@@ -1,0 +1,18 @@
+{
+  "id": "LdapFilterFromQuery",
+  "cwe": "90",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["LdapFilterFromQuery.js"],
+  "finding": {
+    "cwe": "CWE-90",
+    "name": "Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')",
+    "file": "LdapFilterFromQuery.js",
+    "sink_line": 22,
+    "sink_code": "client.search('ou=people,dc=example,dc=com', opts, (err, search) => {",
+    "summary": "unescaped username query parameter concatenated into an ldapjs search filter string"
+  }
+}

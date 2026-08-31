@@ -1,0 +1,18 @@
+{
+  "id": "UniqidTokenGenerator",
+  "cwe": "330",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["UniqidTokenGenerator.php"],
+  "finding": {
+    "cwe": "CWE-330",
+    "name": "Use of Insufficiently Random Values",
+    "file": "UniqidTokenGenerator.php",
+    "sink_line": 20,
+    "sink_code": "$resetToken = uniqid($prefix, true);",
+    "summary": "password reset token generated with uniqid() using a client-supplied prefix, producing a predictable, guessable reset token"
+  }
+}

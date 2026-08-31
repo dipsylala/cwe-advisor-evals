@@ -1,0 +1,23 @@
+{
+  "id": "DeprecatedEntityLoaderGuard",
+  "cwe": "611",
+  "language": "php",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-611/php Common Pitfalls: Calling libxml_disable_entity_loader(true) on older PHP but still passing unsafe parse flags",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "DeprecatedEntityLoaderGuard.php"
+  ],
+  "finding": {
+    "cwe": "CWE-611",
+    "name": "XML External Entity Reference",
+    "file": "DeprecatedEntityLoaderGuard.php",
+    "sink_line": 10,
+    "sink_code": "$dom->loadXML($xml, LIBXML_NOENT);",
+    "summary": "a request body is parsed as XML with LIBXML_NOENT, enabling entity substitution"
+  },
+  "trap": "Adding libxml_disable_entity_loader(true) before the parse call, which the entry's Remediation Steps lead with. This project targets PHP 8.2 (see the composer.json comment): the function has been deprecated since 8.0 specifically because libxml already disables external entity loading by default on that version, so the call changes nothing. The LIBXML_NOENT flag on the loadXML() call is what re-enables entity substitution, and it is still there.",
+  "must_preserve": "parse_submission still returns an associative array with title and body keys populated from the parsed document, for the same well-formed submission the caller already sends."
+}

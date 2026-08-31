@@ -1,0 +1,18 @@
+{
+  "id": "MathRandomInviteCode",
+  "cwe": "338",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["MathRandomInviteCode.js"],
+  "finding": {
+    "cwe": "CWE-338",
+    "name": "Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)",
+    "file": "MathRandomInviteCode.js",
+    "sink_line": 18,
+    "sink_code": "const inviteCode = Math.random().toString(36).slice(2, 10);",
+    "summary": "request-triggered invite code is generated with Math.random(), a predictable non-cryptographic PRNG, and returned to the caller"
+  }
+}

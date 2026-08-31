@@ -1,0 +1,18 @@
+{
+  "id": "RandomTokenGenerator",
+  "cwe": "338",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["RandomTokenGenerator.cs"],
+  "finding": {
+    "cwe": "CWE-338",
+    "name": "Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)",
+    "file": "RandomTokenGenerator.cs",
+    "sink_line": 13,
+    "sink_code": "var rng = new Random(seed);",
+    "summary": "query string seed value flows unmodified into new Random() used to build a password reset token"
+  }
+}

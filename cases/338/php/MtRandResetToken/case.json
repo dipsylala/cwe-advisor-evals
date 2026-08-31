@@ -1,0 +1,18 @@
+{
+  "id": "MtRandResetToken",
+  "cwe": "338",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["MtRandResetToken.php"],
+  "finding": {
+    "cwe": "CWE-338",
+    "name": "Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)",
+    "file": "MtRandResetToken.php",
+    "sink_line": 18,
+    "sink_code": "$token = mt_rand($seed, $seed + 999999);",
+    "summary": "password reset token generated with mt_rand seeded from a request-controlled value"
+  }
+}

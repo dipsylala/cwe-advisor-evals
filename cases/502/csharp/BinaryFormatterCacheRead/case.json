@@ -1,0 +1,18 @@
+{
+  "id": "BinaryFormatterCacheRead",
+  "cwe": "502",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["BinaryFormatterCacheRead.cs"],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "BinaryFormatterCacheRead.cs",
+    "sink_line": 29,
+    "sink_code": "var session = formatter.Deserialize(stream);",
+    "summary": "uploaded form file bytes are deserialized directly with BinaryFormatter"
+  }
+}

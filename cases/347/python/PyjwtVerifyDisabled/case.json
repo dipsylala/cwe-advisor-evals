@@ -1,0 +1,18 @@
+{
+  "id": "PyjwtVerifyDisabled",
+  "cwe": "347",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["PyjwtVerifyDisabled.py"],
+  "finding": {
+    "cwe": "CWE-347",
+    "name": "Improper Verification of Cryptographic Signature",
+    "file": "PyjwtVerifyDisabled.py",
+    "sink_line": 15,
+    "sink_code": "claims = jwt.decode(token, options={\"verify_signature\": False})",
+    "summary": "bearer token from the Authorization header is decoded with signature verification disabled before its claims are trusted"
+  }
+}

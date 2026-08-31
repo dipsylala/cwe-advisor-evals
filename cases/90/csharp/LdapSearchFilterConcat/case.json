@@ -1,0 +1,18 @@
+{
+  "id": "LdapSearchFilterConcat",
+  "cwe": "90",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["LdapSearchFilterConcat.cs"],
+  "finding": {
+    "cwe": "CWE-90",
+    "name": "Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')",
+    "file": "LdapSearchFilterConcat.cs",
+    "sink_line": 17,
+    "sink_code": "searcher.Filter = \"(sAMAccountName=\" + username + \")\";",
+    "summary": "query-string username is concatenated directly into the DirectorySearcher.Filter LDAP query"
+  }
+}

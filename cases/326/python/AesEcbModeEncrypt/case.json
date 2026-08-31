@@ -1,0 +1,18 @@
+{
+  "id": "AesEcbModeEncrypt",
+  "cwe": "326",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["AesEcbModeEncrypt.py"],
+  "finding": {
+    "cwe": "CWE-326",
+    "name": "Inadequate Encryption Strength",
+    "file": "AesEcbModeEncrypt.py",
+    "sink_line": 18,
+    "sink_code": "encryptor = Cipher(algorithms.AES(ENCRYPTION_KEY), modes.ECB()).encryptor()",
+    "summary": "user-supplied form message is encrypted with AES in unauthenticated ECB mode"
+  }
+}

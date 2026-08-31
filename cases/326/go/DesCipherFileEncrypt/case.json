@@ -1,0 +1,18 @@
+{
+  "id": "DesCipherFileEncrypt",
+  "cwe": "326",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["DesCipherFileEncrypt.go"],
+  "finding": {
+    "cwe": "CWE-326",
+    "name": "Inadequate Encryption Strength",
+    "file": "DesCipherFileEncrypt.go",
+    "sink_line": 26,
+    "sink_code": "block, err := des.NewCipher(key)",
+    "summary": "user-supplied form field key is used directly to construct a DES cipher for uploaded file encryption"
+  }
+}

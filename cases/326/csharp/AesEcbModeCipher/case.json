@@ -1,0 +1,18 @@
+{
+  "id": "AesEcbModeCipher",
+  "cwe": "326",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["AesEcbModeCipher.cs"],
+  "finding": {
+    "cwe": "CWE-326",
+    "name": "Inadequate Encryption Strength",
+    "file": "AesEcbModeCipher.cs",
+    "sink_line": 21,
+    "sink_code": "aes.Mode = CipherMode.ECB;",
+    "summary": "query string secretNote is encrypted with AES in unauthenticated ECB mode"
+  }
+}

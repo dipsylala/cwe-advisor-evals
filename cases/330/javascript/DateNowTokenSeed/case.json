@@ -1,0 +1,18 @@
+{
+  "id": "DateNowTokenSeed",
+  "cwe": "330",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["DateNowTokenSeed.js"],
+  "finding": {
+    "cwe": "CWE-330",
+    "name": "Use of Insufficiently Random Values",
+    "file": "DateNowTokenSeed.js",
+    "sink_line": 15,
+    "sink_code": "const token = Math.random().toString(36).substring(2);",
+    "summary": "password reset token for an attacker-submitted email is minted with Math.random() and emailed as a guessable reset link"
+  }
+}

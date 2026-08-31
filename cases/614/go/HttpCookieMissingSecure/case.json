@@ -1,0 +1,18 @@
+{
+  "id": "HttpCookieMissingSecure",
+  "cwe": "614",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["HttpCookieMissingSecure.go"],
+  "finding": {
+    "cwe": "CWE-614",
+    "name": "Sensitive Cookie in HTTPS Session Without 'Secure' Attribute",
+    "file": "HttpCookieMissingSecure.go",
+    "sink_line": 20,
+    "sink_code": "http.SetCookie(w, &http.Cookie{",
+    "summary": "session token issued via http.SetCookie without Secure, HttpOnly, or SameSite set"
+  }
+}

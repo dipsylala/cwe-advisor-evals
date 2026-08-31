@@ -1,0 +1,18 @@
+{
+  "id": "ConvertFileSubprocessShell",
+  "cwe": "78",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ConvertFileSubprocessShell.py"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "ConvertFileSubprocessShell.py",
+    "sink_line": 23,
+    "sink_code": "subprocess.run(command, shell=True, check=True)",
+    "summary": "form field filename is concatenated unmodified into a shell command string run via subprocess.run with shell=True"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "TemplateLiteralQueryConcat",
+  "cwe": "89",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["TemplateLiteralQueryConcat.js"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "TemplateLiteralQueryConcat.js",
+    "sink_line": 19,
+    "sink_code": "pool.query(sql, (err, rows) => {",
+    "summary": "unvalidated query string request parameter is concatenated into a SQL query template literal and passed directly to pool.query"
+  }
+}

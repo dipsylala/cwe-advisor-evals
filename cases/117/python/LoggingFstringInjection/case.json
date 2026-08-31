@@ -1,0 +1,18 @@
+{
+  "id": "LoggingFstringInjection",
+  "cwe": "117",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["LoggingFstringInjection.py"],
+  "finding": {
+    "cwe": "CWE-117",
+    "name": "Improper Output Neutralization for Logs",
+    "file": "LoggingFstringInjection.py",
+    "sink_line": 16,
+    "sink_code": "logger.warning(f\"Failed login attempt for user: {username}\")",
+    "summary": "unvalidated form username is f-string concatenated directly into a log warning"
+  }
+}

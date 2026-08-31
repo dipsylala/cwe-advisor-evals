@@ -1,0 +1,18 @@
+{
+  "id": "XmlDocumentDtdEnabled",
+  "cwe": "611",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["XmlDocumentDtdEnabled.cs"],
+  "finding": {
+    "cwe": "CWE-611",
+    "name": "Improper Restriction of XML External Entity Reference",
+    "file": "XmlDocumentDtdEnabled.cs",
+    "sink_line": 14,
+    "sink_code": "doc.LoadXml(xmlPayload);",
+    "summary": "request body xml payload passed directly into XmlDocument.LoadXml with no XmlResolver hardening"
+  }
+}

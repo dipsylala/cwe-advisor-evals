@@ -1,0 +1,18 @@
+{
+  "id": "MultipartUploadNoValidation",
+  "cwe": "434",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["MultipartUploadNoValidation.java"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "MultipartUploadNoValidation.java",
+    "sink_line": 21,
+    "sink_code": "file.transferTo(destination);",
+    "summary": "client-supplied original filename is used unmodified as the upload storage path with no type or content validation"
+  }
+}

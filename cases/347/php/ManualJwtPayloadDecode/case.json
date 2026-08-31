@@ -1,0 +1,18 @@
+{
+  "id": "ManualJwtPayloadDecode",
+  "cwe": "347",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["ManualJwtPayloadDecode.php"],
+  "finding": {
+    "cwe": "CWE-347",
+    "name": "Improper Verification of Cryptographic Signature",
+    "file": "ManualJwtPayloadDecode.php",
+    "sink_line": 19,
+    "sink_code": "$claims = json_decode(base64_decode($payload), true);",
+    "summary": "bearer token from the authorization header is split and its payload segment decoded and trusted for role-based access without any signature verification"
+  }
+}

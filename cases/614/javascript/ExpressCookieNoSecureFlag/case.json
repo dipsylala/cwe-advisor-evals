@@ -1,0 +1,18 @@
+{
+  "id": "ExpressCookieNoSecureFlag",
+  "cwe": "614",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["ExpressCookieNoSecureFlag.js"],
+  "finding": {
+    "cwe": "CWE-614",
+    "name": "Sensitive Cookie in HTTPS Session Without 'Secure' Attribute",
+    "file": "ExpressCookieNoSecureFlag.js",
+    "sink_line": 15,
+    "sink_code": "res.cookie('auth_token', authToken, {",
+    "summary": "SSO callback token from the query string is set as an auth cookie without the secure flag"
+  }
+}

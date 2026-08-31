@@ -1,0 +1,18 @@
+{
+  "id": "MoveUploadedFileNoExtCheck",
+  "cwe": "434",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["MoveUploadedFileNoExtCheck.php"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "MoveUploadedFileNoExtCheck.php",
+    "sink_line": 17,
+    "sink_code": "move_uploaded_file($_FILES['avatar']['tmp_name'], $destination);",
+    "summary": "client-supplied original filename is used unmodified to build the storage destination for move_uploaded_file"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "NodeSerializeUnsafeDecode",
+  "cwe": "502",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["NodeSerializeUnsafeDecode.js"],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "NodeSerializeUnsafeDecode.js",
+    "sink_line": 18,
+    "sink_code": "req.profile = serialize.unserialize(decoded);",
+    "summary": "cookie value decoded from the request header is passed directly to node-serialize's unserialize, allowing arbitrary code execution via an embedded IIFE"
+  }
+}

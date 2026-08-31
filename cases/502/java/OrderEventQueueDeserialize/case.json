@@ -1,0 +1,23 @@
+{
+  "id": "OrderEventQueueDeserialize",
+  "cwe": "502",
+  "language": "java",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-502/java Common Pitfalls: Replacing Java serialization in controllers while leaving message queues, caches, or RMI endpoints unchanged",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "OrderEventQueueDeserialize.java"
+  ],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "OrderEventQueueDeserialize.java",
+    "sink_line": 33,
+    "sink_code": "OrderEvent event = (OrderEvent) ois.readObject();",
+    "summary": "a message body from an externally-reachable queue is deserialized with native Java serialization"
+  },
+  "trap": "Migrating this listener to JSON (Jackson/Gson), which the entry's Remediation Steps lead with. The queue's other partner integrations still publish native Java-serialized OrderEvent bodies, produced by systems this change does not touch, so switching only the consumer's format rejects every legitimate message rather than closing the finding for malicious ones.",
+  "must_preserve": "onMessage still calls processor.handle() with an OrderEvent built from the message body for a legitimate partner message, and a malformed or rejected payload still surfaces as a RuntimeException rather than being silently swallowed."
+}

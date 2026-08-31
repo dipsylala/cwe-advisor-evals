@@ -1,0 +1,18 @@
+{
+  "id": "MysqliQueryConcat",
+  "cwe": "89",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["MysqliQueryConcat.php"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "MysqliQueryConcat.php",
+    "sink_line": 8,
+    "sink_code": "$result = mysqli_query($db, $query);",
+    "summary": "unvalidated GET username parameter concatenated into SQL string and executed via mysqli_query"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "RandomModuleApiKey",
+  "cwe": "330",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["RandomModuleApiKey.py"],
+  "finding": {
+    "cwe": "CWE-330",
+    "name": "Use of Insufficiently Random Values",
+    "file": "RandomModuleApiKey.py",
+    "sink_line": 17,
+    "sink_code": "key_suffix = random.randint(min_val, max_val)",
+    "summary": "attacker-controlled query string range bounds flow into random.randint to produce an API key segment"
+  }
+}

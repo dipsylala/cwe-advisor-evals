@@ -1,0 +1,18 @@
+{
+  "id": "XmlDecoderEntityExpansion",
+  "cwe": "611",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["XmlDecoderEntityExpansion.go"],
+  "finding": {
+    "cwe": "CWE-611",
+    "name": "Improper Restriction of XML External Entity Reference",
+    "file": "XmlDecoderEntityExpansion.go",
+    "sink_line": 20,
+    "sink_code": "decoder.Entity = map[string]string{\"noteLabel\": label}",
+    "summary": "query parameter noteLabel flows unmodified into xml.Decoder.Entity before decoding untrusted request body"
+  }
+}

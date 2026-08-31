@@ -1,0 +1,18 @@
+{
+  "id": "MathRandSessionId",
+  "cwe": "330",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["MathRandSessionId.go"],
+  "finding": {
+    "cwe": "CWE-330",
+    "name": "Use of Insufficiently Random Values",
+    "file": "MathRandSessionId.go",
+    "sink_line": 18,
+    "sink_code": "token := rand.Intn(1000000000)",
+    "summary": "session id for an authenticated login request is generated from math/rand instead of a CSPRNG"
+  }
+}

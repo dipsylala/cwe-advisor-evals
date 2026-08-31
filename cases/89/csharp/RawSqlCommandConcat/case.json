@@ -1,0 +1,18 @@
+{
+  "id": "RawSqlCommandConcat",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["RawSqlCommandConcat.cs"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "RawSqlCommandConcat.cs",
+    "sink_line": 28,
+    "sink_code": "using var reader = command.ExecuteReader();",
+    "summary": "query-string owner parameter concatenated into SQL text executed via ExecuteReader"
+  }
+}

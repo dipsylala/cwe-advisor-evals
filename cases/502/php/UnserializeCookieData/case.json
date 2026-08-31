@@ -1,0 +1,18 @@
+{
+  "id": "UnserializeCookieData",
+  "cwe": "502",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["UnserializeCookieData.php"],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "UnserializeCookieData.php",
+    "sink_line": 21,
+    "sink_code": "$cart = unserialize($rawCookie);",
+    "summary": "raw cart_state cookie value passed unmodified to unserialize"
+  }
+}

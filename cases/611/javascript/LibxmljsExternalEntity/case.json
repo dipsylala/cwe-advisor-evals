@@ -1,0 +1,18 @@
+{
+  "id": "LibxmljsExternalEntity",
+  "cwe": "611",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["LibxmljsExternalEntity.js"],
+  "finding": {
+    "cwe": "CWE-611",
+    "name": "Improper Restriction of XML External Entity Reference",
+    "file": "LibxmljsExternalEntity.js",
+    "sink_line": 13,
+    "sink_code": "const doc = libxmljs.parseXml(rawOrderXml);",
+    "summary": "raw request body XML parsed by libxmljs with no external entity restrictions"
+  }
+}

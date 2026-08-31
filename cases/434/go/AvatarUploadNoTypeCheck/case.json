@@ -1,0 +1,18 @@
+{
+  "id": "AvatarUploadNoTypeCheck",
+  "cwe": "434",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["AvatarUploadNoTypeCheck.go"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "AvatarUploadNoTypeCheck.go",
+    "sink_line": 32,
+    "sink_code": "dest, err := os.Create(destPath)",
+    "summary": "client-supplied multipart filename is joined into the avatar path and written to disk under the served webroot with no content-type or extension validation"
+  }
+}

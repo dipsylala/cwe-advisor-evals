@@ -1,0 +1,18 @@
+{
+  "id": "CreateCipherLegacyApi",
+  "cwe": "326",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["CreateCipherLegacyApi.js"],
+  "finding": {
+    "cwe": "CWE-326",
+    "name": "Inadequate Encryption Strength",
+    "file": "CreateCipherLegacyApi.js",
+    "sink_line": 16,
+    "sink_code": "const cipher = crypto.createCipher('aes-256-cbc', passphrase);",
+    "summary": "client-supplied passphrase from the request body flows unmodified into crypto.createCipher, which derives a weak key/IV via MD5-based key stretching"
+  }
+}

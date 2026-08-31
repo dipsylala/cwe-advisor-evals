@@ -1,0 +1,18 @@
+{
+  "id": "CookieOptionsSecureFalse",
+  "cwe": "614",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["CookieOptionsSecureFalse.cs"],
+  "finding": {
+    "cwe": "CWE-614",
+    "name": "Sensitive Cookie in HTTPS Session Without 'Secure' Attribute",
+    "file": "CookieOptionsSecureFalse.cs",
+    "sink_line": 19,
+    "sink_code": "Response.Cookies.Append(\"AuthToken\", authToken, options);",
+    "summary": "query string auth token set as a cookie value via CookieOptions lacking Secure"
+  }
+}

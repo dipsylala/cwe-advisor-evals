@@ -1,0 +1,18 @@
+{
+  "id": "LoginFailureLogConcat",
+  "cwe": "117",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["LoginFailureLogConcat.cs"],
+  "finding": {
+    "cwe": "CWE-117",
+    "name": "Improper Output Neutralization for Logs",
+    "file": "LoginFailureLogConcat.cs",
+    "sink_line": 23,
+    "sink_code": "_logger.LogWarning($\"Failed login attempt for user: {username}\");",
+    "summary": "unvalidated form username is interpolated directly into a logged warning message"
+  }
+}

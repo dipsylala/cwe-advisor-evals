@@ -1,0 +1,18 @@
+{
+  "id": "WeakRandomSessionToken",
+  "cwe": "338",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["WeakRandomSessionToken.java"],
+  "finding": {
+    "cwe": "CWE-338",
+    "name": "Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)",
+    "file": "WeakRandomSessionToken.java",
+    "sink_line": 17,
+    "sink_code": "Random random = new Random(seed);",
+    "summary": "attacker-controlled seed request parameter flows unmodified into a new Random() used to build a session token"
+  }
+}

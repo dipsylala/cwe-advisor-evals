@@ -1,0 +1,18 @@
+{
+  "id": "FileGetContentsUserPath",
+  "cwe": "22",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["FileGetContentsUserPath.php"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "FileGetContentsUserPath.php",
+    "sink_line": 17,
+    "sink_code": "$contents = file_get_contents($path);",
+    "summary": "unvalidated $_GET['file'] concatenated into a filesystem path and read with file_get_contents"
+  }
+}

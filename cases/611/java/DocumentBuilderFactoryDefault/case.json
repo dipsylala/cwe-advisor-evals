@@ -1,0 +1,18 @@
+{
+  "id": "DocumentBuilderFactoryDefault",
+  "cwe": "611",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["DocumentBuilderFactoryDefault.java"],
+  "finding": {
+    "cwe": "CWE-611",
+    "name": "Improper Restriction of XML External Entity Reference",
+    "file": "DocumentBuilderFactoryDefault.java",
+    "sink_line": 24,
+    "sink_code": "Document doc = builder.parse(new InputSource(new StringReader(orderXml)));",
+    "summary": "request parameter orderXml is parsed directly by a DocumentBuilder built from a default, unhardened DocumentBuilderFactory"
+  }
+}

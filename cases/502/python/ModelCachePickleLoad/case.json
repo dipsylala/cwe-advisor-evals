@@ -1,0 +1,23 @@
+{
+  "id": "ModelCachePickleLoad",
+  "cwe": "502",
+  "language": "python",
+  "source": "authored-from-docs-pitfall",
+  "origin": "docs/CWE-502/python Common Pitfalls: Replacing pickle in HTTP handlers but leaving shelve, pandas pickle files, task queues, or cache loaders unchanged",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "ModelCachePickleLoad.py"
+  ],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "ModelCachePickleLoad.py",
+    "sink_line": 19,
+    "sink_code": "model = pickle.loads(cached)",
+    "summary": "a cache entry selected by a request-supplied model name is deserialized with pickle"
+  },
+  "trap": "Replacing pickle.loads() with json.loads(), which the entry's Remediation Steps lead with. The nightly batch job that populates this cache still pickles a full model object exposing .predict(); JSON has no representation for it, so switching only the reader leaves every legitimately cached entry unreadable without addressing which entries an attacker can reach or substitute.",
+  "must_preserve": "get_prediction still returns a JSON body with a prediction key computed by calling .predict() on the cached model object for an existing model name, and still responds 404 when the cache entry is absent."
+}

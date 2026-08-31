@@ -1,0 +1,18 @@
+{
+  "id": "WinstonUserInputLog",
+  "cwe": "117",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["WinstonUserInputLog.js"],
+  "finding": {
+    "cwe": "CWE-117",
+    "name": "Improper Output Neutralization for Logs",
+    "file": "WinstonUserInputLog.js",
+    "sink_line": 19,
+    "sink_code": "logger.info(`Failed login attempt for user: ${username}`);",
+    "summary": "unvalidated request body username is interpolated directly into a winston log message"
+  }
+}

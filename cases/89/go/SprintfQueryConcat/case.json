@@ -1,0 +1,18 @@
+{
+  "id": "SprintfQueryConcat",
+  "cwe": "89",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SprintfQueryConcat.go"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "SprintfQueryConcat.go",
+    "sink_line": 18,
+    "sink_code": "row := h.DB.QueryRow(query)",
+    "summary": "username query parameter is concatenated via fmt.Sprintf into raw SQL passed to QueryRow"
+  }
+}

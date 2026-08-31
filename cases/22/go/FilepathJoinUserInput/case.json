@@ -1,0 +1,18 @@
+{
+  "id": "FilepathJoinUserInput",
+  "cwe": "22",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["FilepathJoinUserInput.go"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "FilepathJoinUserInput.go",
+    "sink_line": 21,
+    "sink_code": "data, err := os.ReadFile(path)",
+    "summary": "query parameter file joined with filepath.Join and read via os.ReadFile with no containment check"
+  }
+}

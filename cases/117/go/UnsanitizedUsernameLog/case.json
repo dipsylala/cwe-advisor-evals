@@ -1,0 +1,18 @@
+{
+  "id": "UnsanitizedUsernameLog",
+  "cwe": "117",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["UnsanitizedUsernameLog.go"],
+  "finding": {
+    "cwe": "CWE-117",
+    "name": "Improper Output Neutralization for Logs",
+    "file": "UnsanitizedUsernameLog.go",
+    "sink_line": 14,
+    "sink_code": "log.Printf(\"Failed login attempt for user: %s\", username)",
+    "summary": "unvalidated query-string username is concatenated into a log.Printf message"
+  }
+}

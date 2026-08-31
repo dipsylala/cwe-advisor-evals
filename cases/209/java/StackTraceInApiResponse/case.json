@@ -1,0 +1,18 @@
+{
+  "id": "StackTraceInApiResponse",
+  "cwe": "209",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["StackTraceInApiResponse.java"],
+  "finding": {
+    "cwe": "CWE-209",
+    "name": "Generation of Error Message Containing Sensitive Information",
+    "file": "StackTraceInApiResponse.java",
+    "sink_line": 18,
+    "sink_code": "return ResponseEntity.badRequest().body(e.getMessage());",
+    "summary": "unparsed request parameter value is echoed back to the client via the caught exception's message"
+  }
+}

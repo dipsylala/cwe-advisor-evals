@@ -1,0 +1,18 @@
+{
+  "id": "PingHostCommandInjection",
+  "cwe": "78",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["PingHostCommandInjection.cs"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "PingHostCommandInjection.cs",
+    "sink_line": 22,
+    "sink_code": "using var process = Process.Start(psi);",
+    "summary": "query string host parameter is concatenated unmodified into the cmd.exe ping arguments passed to Process.Start"
+  }
+}

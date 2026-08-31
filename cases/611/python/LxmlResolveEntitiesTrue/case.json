@@ -1,0 +1,18 @@
+{
+  "id": "LxmlResolveEntitiesTrue",
+  "cwe": "611",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["LxmlResolveEntitiesTrue.py"],
+  "finding": {
+    "cwe": "CWE-611",
+    "name": "Improper Restriction of XML External Entity Reference",
+    "file": "LxmlResolveEntitiesTrue.py",
+    "sink_line": 13,
+    "sink_code": "root = etree.fromstring(xml_body, parser=parser)",
+    "summary": "raw request body parsed as XML with an lxml parser configured with resolve_entities=True"
+  }
+}

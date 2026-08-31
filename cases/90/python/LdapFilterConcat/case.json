@@ -1,0 +1,18 @@
+{
+  "id": "LdapFilterConcat",
+  "cwe": "90",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["LdapFilterConcat.py"],
+  "finding": {
+    "cwe": "CWE-90",
+    "name": "Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')",
+    "file": "LdapFilterConcat.py",
+    "sink_line": 20,
+    "sink_code": "conn.search(BASE_DN, search_filter, attributes=[\"cn\", \"mail\", \"uid\"])",
+    "summary": "unescaped username query parameter concatenated into an ldap3 search filter string"
+  }
+}

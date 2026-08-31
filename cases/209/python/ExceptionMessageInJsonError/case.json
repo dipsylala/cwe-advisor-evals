@@ -1,0 +1,18 @@
+{
+  "id": "ExceptionMessageInJsonError",
+  "cwe": "209",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["ExceptionMessageInJsonError.py"],
+  "finding": {
+    "cwe": "CWE-209",
+    "name": "Generation of Error Message Containing Sensitive Information",
+    "file": "ExceptionMessageInJsonError.py",
+    "sink_line": 22,
+    "sink_code": "return jsonify({\"error\": str(e)}), 500",
+    "summary": "raw exception message including the server file path built from the query-string receipt id is returned to the client as JSON"
+  }
+}

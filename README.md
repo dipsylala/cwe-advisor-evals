@@ -35,19 +35,40 @@ cases/
 Cases accumulate here rather than being versioned into a new directory per run - git holds the
 history. Run records under `runs*/` name cases by id, so ids are stable once published.
 
-Current contents: 43 cases across 15 CWEs and six languages. Three sources:
+Current contents: 106 cases across 17 CWEs and six languages. Four sources:
 
 | `source` | n | What it is |
 |---|---|---|
 | `owasp-benchmark` | 16 | Single-file Java servlets, labels from `expectedresults-1.2.csv` |
 | `juliet` | 17 | Java multi-file flow variants, de-labelled mechanically; taint crosses 2, 4 or 5 files |
-| `authored-from-docs-pitfall` | 10 | Single-function cases across Java, Python, Go, C#, JavaScript and PHP, each built around a fix that looks right and is not |
+| `authored-from-docs-pitfall` | 13 | Single-function cases across Java, Python, Go, C#, JavaScript and PHP, each built around a fix that looks right and is not |
+| `authored` | 60 | Single-function, single-language, plain true-positive cases with no `trap`/`must_preserve`/`origin` - pure language-coverage for CWEs the corpus already had in one language, not a discrimination instrument |
+
+The `authored` cases are a per-language coverage campaign, not a one-off: the goal is at least one case
+per `(CWE, language)` slot that has a language-specific entry (318 slots were missing when the
+campaign started; root-only CWEs with no language subfolder are out of scope - see TODO.md). Each
+was written by a workflow agent that read the target `cwe/{CWE}/{language}/INDEX.md`'s own `Taint
+Sinks` list and picked a real API from it, then had its `sink_line`/`sink_code` checked against the
+file it actually wrote before being accepted. CWE-22, 78, 89, 90, 117, 209, 326, 330, 338, 347,
+434, 502, 611 and 614 are fully covered across every language their entry has as of this writing;
+TODO.md tracks what remains.
 
 The third group exists because runs 1-3 measured the first two to saturation. Chain depth never
 discriminated - every arm traced five-file chains perfectly, unguided included - while every
 recorded harm was sink-local: output the original discarded, an argument the original left `null`,
 a dropped URI fragment. These cases therefore drop the chain and vary what actually separated the
 arms: how much contract the sink has, and how wrong the plausible fix is.
+
+Run 4 scored the first 10 of these and found the traps mostly did not work (19/20 at ceiling on
+`fix_quality`) - see [RESULTS-v4.md](RESULTS-v4.md). The one exception, `LogForgeOnFailure`
+(CWE-117), confirmed a specific shape: when an entry's `Remediation Steps` open with an
+infrastructure or configuration change rather than the fix at the reported sink, the guided arm
+tends to perform that change and leave the flagged line untouched. `OrderEventQueueDeserialize`
+(CWE-502/java), `ModelCachePickleLoad` (CWE-502/python), and `DeprecatedEntityLoaderGuard`
+(CWE-611/php) target that same shape - each entry's leading remediation step is a migration or a
+config call that does not touch the flagged sink, and in two cases performing it as written breaks
+a real cross-service or cross-version contract the case's `must_preserve` field states. Extending
+the batch in any other style is not expected to add resolution, per run 4's conclusion.
 
 Each one is built from a `Common Pitfalls` bullet in the `docs/` corpus, which has been through
 actor/critic review across two model families. Being authored here rather than externally sourced,
@@ -77,7 +98,7 @@ Create `cases/{CWE}/{language}/{case-id}/` with the source files and a `case.jso
 | `group` | `reviewed` or `unreviewed`, for the review-effort split |
 | `files` | Source files, in call order |
 | `finding` | What the scanner reports: `cwe`, `name`, `file`, `sink_line`, `sink_code`, `summary` |
-| `trap`, `must_preserve`, `origin` | Authored cases only - see above |
+| `trap`, `must_preserve`, `origin` | `authored-from-docs-pitfall` only - see above. A plain `authored` case (language-coverage, no deliberate wrong-fix) omits all three |
 
 `case.json` holds the answer, so **runners and judges must be told not to read it**, the same way
 they are told not to read `RESULTS*.md` or the `runs*/` directories. Everything an arm is entitled

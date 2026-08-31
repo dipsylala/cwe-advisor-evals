@@ -1,0 +1,18 @@
+{
+  "id": "FlaskUploadNoValidation",
+  "cwe": "434",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["FlaskUploadNoValidation.py"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "FlaskUploadNoValidation.py",
+    "sink_line": 18,
+    "sink_code": "file.save(destination)",
+    "summary": "an uploaded file is saved under its client-supplied original filename after only a spoofable content_type header check"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "FlaskSetCookieNoSecure",
+  "cwe": "614",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": ["FlaskSetCookieNoSecure.py"],
+  "finding": {
+    "cwe": "CWE-614",
+    "name": "Sensitive Cookie in HTTPS Session Without 'Secure' Attribute",
+    "file": "FlaskSetCookieNoSecure.py",
+    "sink_line": 22,
+    "sink_code": "response.set_cookie(\"session_token\", token, httponly=True)",
+    "summary": "session token derived from login form credentials is set as a cookie without the secure flag"
+  }
+}
