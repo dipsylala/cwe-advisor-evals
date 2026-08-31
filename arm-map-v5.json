@@ -1,0 +1,1582 @@
+{
+  "R101": {
+    "arm": "A",
+    "case": "LxmlResolveEntitiesTrue",
+    "cwe": "611",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R102": {
+    "arm": "A",
+    "case": "ManualJwtPayloadDecode",
+    "cwe": "347",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R103": {
+    "arm": "A",
+    "case": "ExpressCookieNoSecureFlag",
+    "cwe": "614",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R104": {
+    "arm": "B",
+    "case": "HtmlConcatNoEscaping",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R105": {
+    "arm": "A",
+    "case": "SetcookieMissingSecure",
+    "cwe": "614",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R106": {
+    "arm": "B",
+    "case": "XmlDecoderEntityExpansion",
+    "cwe": "611",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R107": {
+    "arm": "A",
+    "case": "RandomModuleApiKey",
+    "cwe": "330",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R108": {
+    "arm": "B",
+    "case": "LdapFilterConcat",
+    "cwe": "90",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R109": {
+    "arm": "B",
+    "case": "ConvertFileSubprocessShell",
+    "cwe": "78",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R110": {
+    "arm": "B",
+    "case": "WinstonUserInputLog",
+    "cwe": "117",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R111": {
+    "arm": "B",
+    "case": "AesEcbModeEncrypt",
+    "cwe": "326",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R112": {
+    "arm": "A",
+    "case": "UniqidTokenGenerator",
+    "cwe": "330",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R113": {
+    "arm": "B",
+    "case": "ManualHtmlConstructionPython",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R114": {
+    "arm": "A",
+    "case": "MathRandomInviteCode",
+    "cwe": "338",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R115": {
+    "arm": "B",
+    "case": "WeakRandomSessionToken",
+    "cwe": "338",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R116": {
+    "arm": "B",
+    "case": "CursorExecuteStringFormat",
+    "cwe": "89",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R117": {
+    "arm": "A",
+    "case": "AvatarUploadNoTypeCheck",
+    "cwe": "434",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R118": {
+    "arm": "A",
+    "case": "FlaskSetCookieNoSecure",
+    "cwe": "614",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R119": {
+    "arm": "A",
+    "case": "HtmlConcatNoEscaping",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R120": {
+    "arm": "B",
+    "case": "UniqidTokenGenerator",
+    "cwe": "330",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R121": {
+    "arm": "A",
+    "case": "UnserializeCookieData",
+    "cwe": "502",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R122": {
+    "arm": "B",
+    "case": "MathRandSessionId",
+    "cwe": "330",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R123": {
+    "arm": "A",
+    "case": "ErrorDetailInResponse",
+    "cwe": "209",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R124": {
+    "arm": "B",
+    "case": "RazorRawConcatOutput",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R125": {
+    "arm": "A",
+    "case": "FileGetContentsUserPath",
+    "cwe": "22",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R126": {
+    "arm": "B",
+    "case": "PathCombineUnsanitizedFilename",
+    "cwe": "22",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R127": {
+    "arm": "A",
+    "case": "TemplateLiteralQueryConcat",
+    "cwe": "89",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R128": {
+    "arm": "A",
+    "case": "OsPathJoinOpenFile",
+    "cwe": "22",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R129": {
+    "arm": "A",
+    "case": "WhoisLookupChildProcess",
+    "cwe": "78",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R130": {
+    "arm": "B",
+    "case": "MoveUploadedFileNoExtCheck",
+    "cwe": "434",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R131": {
+    "arm": "A",
+    "case": "DirectEchoUserInput",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R132": {
+    "arm": "A",
+    "case": "AesEcbModeCipher",
+    "cwe": "326",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R133": {
+    "arm": "B",
+    "case": "XmlDocumentDtdEnabled",
+    "cwe": "611",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R134": {
+    "arm": "B",
+    "case": "PingHostCommandInjection",
+    "cwe": "78",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R135": {
+    "arm": "A",
+    "case": "JsContextUnencodedOutput",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R136": {
+    "arm": "B",
+    "case": "ThymeleafUtextUnescaped",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R137": {
+    "arm": "A",
+    "case": "FlaskAutoescapeDisabled",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R138": {
+    "arm": "B",
+    "case": "LdapFilterFromQuery",
+    "cwe": "90",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R139": {
+    "arm": "A",
+    "case": "DjangoMarkSafeMisuse",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R140": {
+    "arm": "B",
+    "case": "TracerouteShellExec",
+    "cwe": "78",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R141": {
+    "arm": "A",
+    "case": "ManualHtmlConstructionPython",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R142": {
+    "arm": "A",
+    "case": "AesEcbModeEncrypt",
+    "cwe": "326",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R143": {
+    "arm": "A",
+    "case": "LdapFilterConcat",
+    "cwe": "90",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R144": {
+    "arm": "A",
+    "case": "JwtParserNoSignatureCheck",
+    "cwe": "347",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R145": {
+    "arm": "B",
+    "case": "JwtParseUnverified",
+    "cwe": "347",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R146": {
+    "arm": "B",
+    "case": "RandomModuleApiKey",
+    "cwe": "330",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R147": {
+    "arm": "B",
+    "case": "WhoisLookupChildProcess",
+    "cwe": "78",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R148": {
+    "arm": "B",
+    "case": "LdapSearchFilterConcat",
+    "cwe": "90",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R149": {
+    "arm": "A",
+    "case": "DateNowTokenSeed",
+    "cwe": "330",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R150": {
+    "arm": "A",
+    "case": "MtRandResetToken",
+    "cwe": "338",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R151": {
+    "arm": "B",
+    "case": "DirectEchoUserInput",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R152": {
+    "arm": "A",
+    "case": "RawSqlCommandConcat",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R153": {
+    "arm": "B",
+    "case": "ExpressDirectHtmlRender",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R154": {
+    "arm": "B",
+    "case": "DjangoMarkSafeMisuse",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R155": {
+    "arm": "B",
+    "case": "ExceptionMessageInJsonError",
+    "cwe": "209",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R156": {
+    "arm": "B",
+    "case": "MysqliQueryConcat",
+    "cwe": "89",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R157": {
+    "arm": "B",
+    "case": "TextTemplateForHtmlOutput",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R158": {
+    "arm": "A",
+    "case": "MultipartUploadNoValidation",
+    "cwe": "434",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R159": {
+    "arm": "B",
+    "case": "RandomTokenGenerator",
+    "cwe": "338",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R160": {
+    "arm": "B",
+    "case": "GobDecodeUntrustedPayload",
+    "cwe": "502",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R161": {
+    "arm": "A",
+    "case": "TracerouteShellExec",
+    "cwe": "78",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R162": {
+    "arm": "A",
+    "case": "HttpResponseWriteUnencoded",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R163": {
+    "arm": "A",
+    "case": "LdapSearchFilterConcat",
+    "cwe": "90",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R164": {
+    "arm": "B",
+    "case": "ManualJwtPayloadDecode",
+    "cwe": "347",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R165": {
+    "arm": "B",
+    "case": "CookieOptionsSecureFalse",
+    "cwe": "614",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R166": {
+    "arm": "A",
+    "case": "UnsanitizedUsernameLog",
+    "cwe": "117",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R167": {
+    "arm": "B",
+    "case": "SprintfQueryConcat",
+    "cwe": "89",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R168": {
+    "arm": "B",
+    "case": "OsPathJoinOpenFile",
+    "cwe": "22",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R169": {
+    "arm": "B",
+    "case": "JsContextUnencodedOutput",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R170": {
+    "arm": "B",
+    "case": "SetcookieMissingSecure",
+    "cwe": "614",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R171": {
+    "arm": "B",
+    "case": "BinaryFormatterCacheRead",
+    "cwe": "502",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R172": {
+    "arm": "B",
+    "case": "AvatarUploadNoTypeCheck",
+    "cwe": "434",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R173": {
+    "arm": "B",
+    "case": "MtRandResetToken",
+    "cwe": "338",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R174": {
+    "arm": "A",
+    "case": "SprintfQueryConcat",
+    "cwe": "89",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R175": {
+    "arm": "A",
+    "case": "StackTraceInApiResponse",
+    "cwe": "209",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R176": {
+    "arm": "B",
+    "case": "LxmlResolveEntitiesTrue",
+    "cwe": "611",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R177": {
+    "arm": "B",
+    "case": "ManualHtmlConstructionPerl",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R178": {
+    "arm": "A",
+    "case": "CreateCipherLegacyApi",
+    "cwe": "326",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R179": {
+    "arm": "A",
+    "case": "ManualHtmlConstructionPerl",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R180": {
+    "arm": "B",
+    "case": "ExpressCookieNoSecureFlag",
+    "cwe": "614",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R181": {
+    "arm": "B",
+    "case": "CreateCipherLegacyApi",
+    "cwe": "326",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R182": {
+    "arm": "A",
+    "case": "LdapFilterFromQuery",
+    "cwe": "90",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R183": {
+    "arm": "A",
+    "case": "GuidNewGuidToken",
+    "cwe": "330",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R184": {
+    "arm": "A",
+    "case": "WinstonUserInputLog",
+    "cwe": "117",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R185": {
+    "arm": "B",
+    "case": "JwtParserNoSignatureCheck",
+    "cwe": "347",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R186": {
+    "arm": "A",
+    "case": "TemplateHtmlTypeConversion",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R187": {
+    "arm": "A",
+    "case": "NodeSerializeUnsafeDecode",
+    "cwe": "502",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R188": {
+    "arm": "B",
+    "case": "FilepathJoinUserInput",
+    "cwe": "22",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R189": {
+    "arm": "A",
+    "case": "InnerHtmlUserContent",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R190": {
+    "arm": "A",
+    "case": "DocumentBuilderFactoryDefault",
+    "cwe": "611",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R191": {
+    "arm": "B",
+    "case": "DateNowTokenSeed",
+    "cwe": "330",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R192": {
+    "arm": "B",
+    "case": "FlaskUploadNoValidation",
+    "cwe": "434",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R193": {
+    "arm": "A",
+    "case": "JwtParseUnverified",
+    "cwe": "347",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R194": {
+    "arm": "B",
+    "case": "DocumentBuilderFactoryDefault",
+    "cwe": "611",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R195": {
+    "arm": "A",
+    "case": "MathRandSessionId",
+    "cwe": "330",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R196": {
+    "arm": "A",
+    "case": "JsContextUnescapedPhp",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R197": {
+    "arm": "A",
+    "case": "RandomTokenGenerator",
+    "cwe": "338",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R198": {
+    "arm": "B",
+    "case": "LoginFailureLogConcat",
+    "cwe": "117",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R199": {
+    "arm": "A",
+    "case": "LoginFailureLogConcat",
+    "cwe": "117",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R200": {
+    "arm": "A",
+    "case": "FilepathJoinUserInput",
+    "cwe": "22",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R201": {
+    "arm": "A",
+    "case": "FprintfHtmlOutput",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R202": {
+    "arm": "A",
+    "case": "PathJoinReadFile",
+    "cwe": "22",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R203": {
+    "arm": "B",
+    "case": "FileGetContentsUserPath",
+    "cwe": "22",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R204": {
+    "arm": "B",
+    "case": "MultipartUploadNoValidation",
+    "cwe": "434",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R205": {
+    "arm": "B",
+    "case": "FlaskAutoescapeDisabled",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R206": {
+    "arm": "B",
+    "case": "GuidNewGuidToken",
+    "cwe": "330",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R207": {
+    "arm": "A",
+    "case": "PathCombineUnsanitizedFilename",
+    "cwe": "22",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R208": {
+    "arm": "B",
+    "case": "ErrorDetailInResponse",
+    "cwe": "209",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R209": {
+    "arm": "B",
+    "case": "TemplateLiteralQueryConcat",
+    "cwe": "89",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R210": {
+    "arm": "B",
+    "case": "UnserializeCookieData",
+    "cwe": "502",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R211": {
+    "arm": "A",
+    "case": "WeakRandomSessionToken",
+    "cwe": "338",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R212": {
+    "arm": "B",
+    "case": "ReactDangerouslySetInnerHtml",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R213": {
+    "arm": "B",
+    "case": "HttpCookieMissingSecure",
+    "cwe": "614",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R214": {
+    "arm": "A",
+    "case": "MoveUploadedFileNoExtCheck",
+    "cwe": "434",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R215": {
+    "arm": "A",
+    "case": "DirectVariableInterpolation",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R216": {
+    "arm": "B",
+    "case": "MathRandomInviteCode",
+    "cwe": "338",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R217": {
+    "arm": "A",
+    "case": "MysqliQueryConcat",
+    "cwe": "89",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R218": {
+    "arm": "B",
+    "case": "UnsanitizedUsernameLog",
+    "cwe": "117",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R219": {
+    "arm": "A",
+    "case": "CgiParamUnescapedOutput",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R220": {
+    "arm": "B",
+    "case": "NodeSerializeUnsafeDecode",
+    "cwe": "502",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R221": {
+    "arm": "A",
+    "case": "TextTemplateForHtmlOutput",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R222": {
+    "arm": "A",
+    "case": "DesCipherFileEncrypt",
+    "cwe": "326",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R223": {
+    "arm": "A",
+    "case": "HttpCookieMissingSecure",
+    "cwe": "614",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R224": {
+    "arm": "B",
+    "case": "DirectVariableInterpolation",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R225": {
+    "arm": "A",
+    "case": "RazorRawConcatOutput",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R226": {
+    "arm": "B",
+    "case": "JwtDecodeWithoutVerify",
+    "cwe": "347",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R227": {
+    "arm": "A",
+    "case": "ExceptionMessageInJsonError",
+    "cwe": "209",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R228": {
+    "arm": "A",
+    "case": "GobDecodeUntrustedPayload",
+    "cwe": "502",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R229": {
+    "arm": "A",
+    "case": "XmlDocumentDtdEnabled",
+    "cwe": "611",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R230": {
+    "arm": "B",
+    "case": "InnerHtmlUserContent",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R231": {
+    "arm": "A",
+    "case": "CursorExecuteStringFormat",
+    "cwe": "89",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R232": {
+    "arm": "B",
+    "case": "RawSqlCommandConcat",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R233": {
+    "arm": "B",
+    "case": "PathJoinReadFile",
+    "cwe": "22",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R234": {
+    "arm": "A",
+    "case": "JwtDecodeWithoutVerify",
+    "cwe": "347",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R235": {
+    "arm": "A",
+    "case": "ReactDangerouslySetInnerHtml",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R236": {
+    "arm": "B",
+    "case": "FlaskSetCookieNoSecure",
+    "cwe": "614",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R237": {
+    "arm": "B",
+    "case": "FprintfHtmlOutput",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R238": {
+    "arm": "A",
+    "case": "ConvertFileSubprocessShell",
+    "cwe": "78",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R239": {
+    "arm": "B",
+    "case": "StackTraceInApiResponse",
+    "cwe": "209",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R240": {
+    "arm": "B",
+    "case": "JsContextUnescapedPhp",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R241": {
+    "arm": "B",
+    "case": "PyjwtVerifyDisabled",
+    "cwe": "347",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R242": {
+    "arm": "A",
+    "case": "ThymeleafUtextUnescaped",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R243": {
+    "arm": "A",
+    "case": "ExpressDirectHtmlRender",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R244": {
+    "arm": "A",
+    "case": "LibxmljsExternalEntity",
+    "cwe": "611",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R245": {
+    "arm": "B",
+    "case": "DesCipherFileEncrypt",
+    "cwe": "326",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R246": {
+    "arm": "B",
+    "case": "TemplateHtmlTypeConversion",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R247": {
+    "arm": "B",
+    "case": "LibxmljsExternalEntity",
+    "cwe": "611",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R248": {
+    "arm": "B",
+    "case": "LoggingFstringInjection",
+    "cwe": "117",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R249": {
+    "arm": "B",
+    "case": "CgiParamUnescapedOutput",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R250": {
+    "arm": "A",
+    "case": "XmlDecoderEntityExpansion",
+    "cwe": "611",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R251": {
+    "arm": "B",
+    "case": "HttpResponseWriteUnencoded",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R252": {
+    "arm": "A",
+    "case": "PyjwtVerifyDisabled",
+    "cwe": "347",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R253": {
+    "arm": "A",
+    "case": "FlaskUploadNoValidation",
+    "cwe": "434",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R254": {
+    "arm": "A",
+    "case": "LoggingFstringInjection",
+    "cwe": "117",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R255": {
+    "arm": "A",
+    "case": "CookieOptionsSecureFalse",
+    "cwe": "614",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R256": {
+    "arm": "A",
+    "case": "PingHostCommandInjection",
+    "cwe": "78",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R257": {
+    "arm": "B",
+    "case": "AesEcbModeCipher",
+    "cwe": "326",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R258": {
+    "arm": "A",
+    "case": "BinaryFormatterCacheRead",
+    "cwe": "502",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  }
+}

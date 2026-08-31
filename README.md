@@ -19,13 +19,15 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Four runs so far - see **Past runs** below for what each one found. The headline that holds across
+Five runs so far - see **Past runs** below for what each one found. The headline that holds across
 all of them: verdict accuracy and multi-file source tracing are saturated in every arm, at every
-chain depth tested up to five files - a capable model does not need this harness's help to trace
-taint or recognise a textbook vulnerability. The knowledge base's one consistently measurable effect
-is on `no_harm` - whether a fix silently breaks or changes something the sink's caller depended on -
-and that effect has gone in both directions depending on how an entry's `Remediation Steps` are
-ordered (see run 4).
+chain depth tested up to five files, and `fix_quality` is saturated across the 79-case breadth/depth
+corpus too - a capable model does not need this harness's help to trace taint or recognise a
+textbook vulnerability. The knowledge base's one consistently measurable effect is on `no_harm` -
+whether a fix silently breaks or changes something the sink's caller depended on - and that effect
+has gone in both directions depending on how an entry's `Remediation Steps` are ordered (see run 4),
+though run 5 also found a defect neither arm avoided: a CWE-434 fix that renames an uploaded file
+without the entry warning that the read path needs the new name too.
 
 ## Corpus
 
@@ -142,10 +144,9 @@ suffix for a new run** (the existing ones are `runs`/`runs-v2`/`runs-v3`/`runs-v
 
 ### Known gaps
 
-- **Most of the corpus has never been run.** Run 4 scored 10 cases. The corpus is now 125: the 79
-  `authored` cases from the breadth and depth campaigns have been checked for realism (sink lines
-  verified against the file, sink APIs matched to the entry's own `Taint Sinks` list) but never put
-  through an actual arm-vs-arm, judge-scored run. That is the natural scope for a run 5.
+- **Three `authored-from-docs-pitfall` cases have never been run.** Run 4 scored 10 of the 13;
+  `OrderEventQueueDeserialize`, `ModelCachePickleLoad` and `DeprecatedEntityLoaderGuard` target the
+  same leads-with-infrastructure-not-the-sink shape run 4 confirmed once, and remain unscored.
 - **`no_harm` doesn't see `must_preserve` yet.** The judge prompt in HARNESS.md withholds all of
   `case.json`, including the contract `must_preserve` states, so judges apply their own reading of
   what the original preserved and can disagree with each other over it (9 of 20 runs disagreed in
@@ -162,3 +163,4 @@ suffix for a new run** (the existing ones are `runs`/`runs-v2`/`runs-v3`/`runs-v
 | 2 | +17 Juliet cases (Java, chain depth 2-5, plus false positives) | 34 (17 x 2 arms) | Does multi-file taint tracing need the skill? | No - both arms traced five-file chains and declined every false positive perfectly. `no_harm` was the only criterion with variance, and it cut both ways: helped on CWE-90/601, hurt on CWE-78 | [RESULTS-v2.md](RESULTS-v2.md) |
 | 3 | Same 17 Juliet cases, re-judged, plus a fresh B2 | 51 (17 x 3 sets) | Did the sink-contract fix (SKILL.md Step 4/5) address run 2's harm? | Yes - `no_harm` on true positives rose from 1.25 (A) / 1.67 (B, before) to 1.92 (B2, after); CWE-601's URI-fragment preservation is a clean, unconfounded before/after | [RESULTS-v3.md](RESULTS-v3.md) |
 | 4 | +10 `authored-from-docs-pitfall` cases | 20 (10 x 2 arms) | Do the deliberately-planted "plausible but wrong" fixes actually catch anything? | Mostly no (19/20 at ceiling on `fix_quality`) - but the one that did (CWE-117) confirmed a repeatable defect shape: guidance that leads with an infrastructure/config change over the sink-level fix | [RESULTS-v4.md](RESULTS-v4.md) |
+| 5 | 79 `authored` cases (breadth + depth campaigns, 14 CWEs x 7 languages) | 158 (79 x 2 arms) | Does the knowledge base still help on the ordinary, undramatic, single-file case at this scale? | `fix_quality` saturated again (156/158 at ceiling); `no_harm` favoured the guided arm on a low-disagreement measurement (1.97 A vs 2.00 B); found one new, reproducible entry gap - `cwe/434/go` doesn't warn that a renamed upload needs the read path updated too, and both arms independently shipped that break | [RESULTS-v5.md](RESULTS-v5.md) |
