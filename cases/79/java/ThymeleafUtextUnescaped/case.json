@@ -1,0 +1,18 @@
+{
+  "id": "ThymeleafUtextUnescaped",
+  "cwe": "79",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ThymeleafUtextUnescaped.java"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "ThymeleafUtextUnescaped.java",
+    "sink_line": 32,
+    "sink_code": "        return templateEngine.process(fragment, context);",
+    "summary": "request parameter submitterNote flows into a th:utext-bound Thymeleaf context variable and is rendered unescaped via templateEngine.process"
+  }
+}

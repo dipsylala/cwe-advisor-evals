@@ -1,0 +1,18 @@
+{
+  "id": "FprintfHtmlOutput",
+  "cwe": "79",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["FprintfHtmlOutput.go"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "FprintfHtmlOutput.go",
+    "sink_line": 16,
+    "sink_code": "fmt.Fprintf(w, \"<p>Customer note: %s</p>\", customerNote)",
+    "summary": "query parameter customerNote is written into an HTML response via fmt.Fprintf with no escaping"
+  }
+}

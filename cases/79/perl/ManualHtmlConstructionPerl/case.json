@@ -1,0 +1,18 @@
+{
+  "id": "ManualHtmlConstructionPerl",
+  "cwe": "79",
+  "language": "perl",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ManualHtmlConstructionPerl.pl"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "ManualHtmlConstructionPerl.pl",
+    "sink_line": 27,
+    "sink_code": "print $ticket_html;",
+    "summary": "CGI param values for ticket subject and customer reply are concatenated into an HTML string and printed without any HTML encoding"
+  }
+}

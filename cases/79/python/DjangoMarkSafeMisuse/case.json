@@ -1,0 +1,18 @@
+{
+  "id": "DjangoMarkSafeMisuse",
+  "cwe": "79",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["DjangoMarkSafeMisuse.py"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "DjangoMarkSafeMisuse.py",
+    "sink_line": 23,
+    "sink_code": "    return mark_safe(banner_markup)",
+    "summary": "organizer-submitted POST announcement text is string-formatted into HTML and wrapped in mark_safe, disabling Django's auto-escaping before it reaches the template"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "JsContextUnescapedPhp",
+  "cwe": "79",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["JsContextUnescapedPhp.php"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "JsContextUnescapedPhp.php",
+    "sink_line": 29,
+    "sink_code": "        var agentNote = '<?php echo $agentNote; ?>';",
+    "summary": "agent_note query parameter is echoed unescaped into a single-quoted JavaScript string literal, letting quote characters break out of the string"
+  }
+}

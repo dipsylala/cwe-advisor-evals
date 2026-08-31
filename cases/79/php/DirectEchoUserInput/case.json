@@ -1,0 +1,18 @@
+{
+  "id": "DirectEchoUserInput",
+  "cwe": "79",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["DirectEchoUserInput.php"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "DirectEchoUserInput.php",
+    "sink_line": 27,
+    "sink_code": "echo \"<div class='requester-note'>Note from requester: \" . $_POST['note'] . \"</div>\";",
+    "summary": "raw $_POST['note'] is concatenated straight into an echo statement with no encoding"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "JsContextUnencodedOutput",
+  "cwe": "79",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["JsContextUnencodedOutput.cs"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "JsContextUnencodedOutput.cs",
+    "sink_line": 23,
+    "sink_code": "            Response.Write(script);",
+    "summary": "query string search term is concatenated unencoded into a JS string literal inside an inline script block and emitted via Response.Write"
+  }
+}

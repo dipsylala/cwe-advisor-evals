@@ -1,0 +1,18 @@
+{
+  "id": "ExpressDirectHtmlRender",
+  "cwe": "79",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ExpressDirectHtmlRender.js"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "ExpressDirectHtmlRender.js",
+    "sink_line": 30,
+    "sink_code": "    res.send(page);",
+    "summary": "unescaped query parameter note is interpolated into an HTML template literal and sent directly via res.send with no template engine or encoding"
+  }
+}

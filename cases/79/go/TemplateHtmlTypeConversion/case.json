@@ -1,0 +1,18 @@
+{
+  "id": "TemplateHtmlTypeConversion",
+  "cwe": "79",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["TemplateHtmlTypeConversion.go"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "TemplateHtmlTypeConversion.go",
+    "sink_line": 22,
+    "sink_code": "\t\tBody: template.HTML(reviewText),",
+    "summary": "submitted review text from a form field is wrapped in template.HTML, disabling html/template auto-escaping before rendering"
+  }
+}

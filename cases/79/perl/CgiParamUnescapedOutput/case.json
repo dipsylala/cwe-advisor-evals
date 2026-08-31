@@ -1,0 +1,18 @@
+{
+  "id": "CgiParamUnescapedOutput",
+  "cwe": "79",
+  "language": "perl",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["CgiParamUnescapedOutput.pl"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "CgiParamUnescapedOutput.pl",
+    "sink_line": 18,
+    "sink_code": "print \"<p>Customer note: \" . $cgi->param('note') . \"</p>\\n\";",
+    "summary": "CGI.pm param() value is concatenated directly into an HTML print statement with no HTML encoding"
+  }
+}

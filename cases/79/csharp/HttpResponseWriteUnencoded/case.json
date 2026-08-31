@@ -1,0 +1,18 @@
+{
+  "id": "HttpResponseWriteUnencoded",
+  "cwe": "79",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["HttpResponseWriteUnencoded.cs"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "HttpResponseWriteUnencoded.cs",
+    "sink_line": 18,
+    "sink_code": "Response.Write(\"<p>Showing status for ticket: \" + ticketRef + \"</p>\");",
+    "summary": "query string ticketRef parameter is concatenated unencoded into HTML written directly via Response.Write"
+  }
+}

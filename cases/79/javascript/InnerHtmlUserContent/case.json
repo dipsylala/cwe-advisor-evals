@@ -1,0 +1,18 @@
+{
+  "id": "InnerHtmlUserContent",
+  "cwe": "79",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["InnerHtmlUserContent.js"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "InnerHtmlUserContent.js",
+    "sink_line": 10,
+    "sink_code": "  entry.innerHTML = `<span class=\"chat-author\">${message.author}</span>: ${message.body}`;",
+    "summary": "chat message author and body from another participant's input are interpolated unescaped into an innerHTML template literal"
+  }
+}

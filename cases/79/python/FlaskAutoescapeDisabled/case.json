@@ -1,0 +1,18 @@
+{
+  "id": "FlaskAutoescapeDisabled",
+  "cwe": "79",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["FlaskAutoescapeDisabled.py"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "FlaskAutoescapeDisabled.py",
+    "sink_line": 24,
+    "sink_code": "    return f\"<html><body>{banner}</body></html>\"",
+    "summary": "request query param label is wrapped in Markup() to bypass Jinja2 auto-escaping and returned directly as raw HTML"
+  }
+}

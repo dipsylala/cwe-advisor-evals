@@ -1,0 +1,18 @@
+{
+  "id": "RazorRawConcatOutput",
+  "cwe": "79",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["RazorRawConcatOutput.cs"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "RazorRawConcatOutput.cs",
+    "sink_line": 20,
+    "sink_code": "return Content(html, \"text/html\");",
+    "summary": "query string order id and customer note are concatenated unencoded into an HTML string and returned via Content, bypassing Razor auto-encoding"
+  }
+}

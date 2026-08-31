@@ -1,0 +1,18 @@
+{
+  "id": "ManualHtmlConstructionPython",
+  "cwe": "79",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ManualHtmlConstructionPython.py"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "ManualHtmlConstructionPython.py",
+    "sink_line": 28,
+    "sink_code": "    return page",
+    "summary": "request.args ticket and priority values are concatenated into a raw HTML string and returned directly, bypassing Jinja2 auto-escaping"
+  }
+}

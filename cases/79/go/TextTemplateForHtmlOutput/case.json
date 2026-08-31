@@ -1,0 +1,18 @@
+{
+  "id": "TextTemplateForHtmlOutput",
+  "cwe": "79",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["TextTemplateForHtmlOutput.go"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "TextTemplateForHtmlOutput.go",
+    "sink_line": 28,
+    "sink_code": "\tticketPage.Execute(w, data)",
+    "summary": "unescaped query-string subject rendered into HTML via text/template.Execute, which performs no HTML encoding"
+  }
+}

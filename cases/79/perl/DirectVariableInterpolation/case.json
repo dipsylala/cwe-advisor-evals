@@ -1,0 +1,18 @@
+{
+  "id": "DirectVariableInterpolation",
+  "cwe": "79",
+  "language": "perl",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["DirectVariableInterpolation.pl"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "DirectVariableInterpolation.pl",
+    "sink_line": 18,
+    "sink_code": "    print \"<h2>Thanks, $guest_name! You're confirmed for $event_title.</h2>\\n\";",
+    "summary": "CGI param guest_name and event_title interpolated unescaped directly into a printed HTML string"
+  }
+}
