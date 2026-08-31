@@ -30,6 +30,14 @@ the label.
 **A runner or judge that has already read the knowledge base cannot credibly produce arm A.** Run
 each arm and each judge as a separate agent with its own context.
 
+**Pin an explicit model for every arm and judge agent, and record it in the run's `RESULTS*.md`.**
+An `agent()` or Agent-tool call that omits a model override inherits whatever model is running the
+orchestrating session - which changes across sessions and is easy to lose track of. Runs 1-6 did
+this; all of them ran under whatever model powered the session at the time (Sonnet 5 for runs 5 and
+6), undocumented and unpinned. Every comparison in this harness so far is "one model with guidance
+vs. the same model without" - none of it has been repeated on a second model, so a benefit or defect
+found here has not been shown to generalise across models.
+
 ## Step 1 - choose the cases
 
 Cases live in `cases/{CWE}/{language}/{case-id}/`, each with a `case.json`. Select by whatever the
@@ -42,7 +50,8 @@ must be told not to read it.** Everything an arm is entitled to see goes in its 
 ## Step 2 - run the arms
 
 One agent per case per arm, each with a fresh context. Create the output directories first, e.g.
-`runs-v4/A/` and `runs-v4/B/`.
+`runs-v4/A/` and `runs-v4/B/`. If orchestrating with the Workflow tool, pass an explicit `model` in
+each `agent()` call's options rather than omitting it - see the model note above.
 
 Substitute the bracketed values from `case.json`. The current scope is confirmed true positives -
 a static analysis tool has found a real issue and we are helping resolve it - so the arm is told
@@ -117,7 +126,9 @@ headings before going further - a heading only one arm produces identifies that 
 ## Step 5 - score blind
 
 At least three judges, each an independent agent, each scoring the whole pool. Judges read the case
-files to check claims; they must not read `case.json`, the knowledge base, or any results file.
+files to check claims; they must not read `case.json`, the knowledge base, or any results file. Pin
+an explicit model here too - see the model note under **What a run is**. Judges do not need to run
+the same model as the arms, but whichever model they run should be recorded.
 
 ```text
 You are scoring {n} remediation write-ups blind, against a rubric fixed before any of them were

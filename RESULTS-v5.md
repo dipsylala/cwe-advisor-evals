@@ -7,6 +7,11 @@ three judges who each scored all 158. Scores are the mean across the three. Exec
 HARNESS.md's arm A/B prompts and judge rubric verbatim, orchestrated as a workflow: 158 remediation
 agents, a fixture-integrity check, blinding, three independent judges, and `analyse.py`.
 
+**Model: Sonnet 5**, both arms and all three judges. No `model` override was set on any agent call,
+so every agent inherited the orchestrating session's model rather than being pinned explicitly -
+see HARNESS.md's model note, added after this run. This comparison is "Sonnet 5 with guidance vs.
+Sonnet 5 without"; it has not been repeated on any other model.
+
 The question: this is the corpus README.md flagged as never run - does the skill help on the
 ordinary, undramatic case (no planted trap, no multi-file chain), across this many CWEs and
 languages at once?

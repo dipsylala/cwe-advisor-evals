@@ -6,6 +6,10 @@
 judges scoring all six blind. Executed the same way as run 5: HARNESS.md's prompts verbatim,
 orchestrated as a workflow.
 
+**Model: Sonnet 5**, both arms and all judges, including the addendum's re-judge - inherited from
+the orchestrating session rather than pinned; see HARNESS.md's model note. Not repeated on any
+other model.
+
 | Set | n | fix /2 | no-harm /2 |
 |---|---|---|---|
 | A - no guidance | 3 | 2.00 | 1.78 |

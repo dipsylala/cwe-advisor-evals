@@ -176,6 +176,11 @@ special.
   whether it reads as correct, not on whether it actually builds or passes a test; the judge-side
   gap above is this same problem one level up, where even the *scoring* wasn't independently
   verified until this session checked one case by hand.
+- **No run has pinned or varied model.** Runs 1-6 all had every arm and judge inherit whatever
+  model was running the orchestrating session, rather than an explicit `model` override - Sonnet 5
+  for runs 5 and 6, undocumented for 1-4. Every result in this harness is therefore "one model with
+  guidance vs. the same model without"; none of it has been shown to hold on a second model.
+  HARNESS.md now instructs future runs to pin and record the model explicitly.
 
 ## Past runs
 
