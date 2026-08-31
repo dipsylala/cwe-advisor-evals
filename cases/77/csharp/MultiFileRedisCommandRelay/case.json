@@ -1,0 +1,23 @@
+{
+  "id": "MultiFileRedisCommandRelay",
+  "cwe": "77",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 4,
+  "group": "reviewed",
+  "files": [
+    "AnnotationsController.cs",
+    "AnnotationService.cs",
+    "AnnotationCacheClient.cs",
+    "RedisWireWriter.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "RedisWireWriter.cs",
+    "sink_line": 24,
+    "sink_code": "            stream.Write(payload, 0, payload.Length);",
+    "summary": "An unsanitized note-text field submitted to AnnotationsController flows through AnnotationService and AnnotationCacheClient into RedisWireWriter, which hand-builds a Redis inline-protocol SET command and writes it to the raw socket, letting embedded CRLF sequences inject additional Redis commands across this 4-file call chain."
+  }
+}

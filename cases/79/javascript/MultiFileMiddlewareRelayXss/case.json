@@ -1,0 +1,24 @@
+{
+  "id": "MultiFileMiddlewareRelayXss",
+  "cwe": "79",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 5,
+  "group": "reviewed",
+  "files": [
+    "feedbackController.js",
+    "feedbackService.js",
+    "notificationDispatcher.js",
+    "digestEntryFormatter.js",
+    "digestPageRenderer.js"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "digestPageRenderer.js",
+    "sink_line": 13,
+    "sink_code": "    res.send(`<!DOCTYPE html><html><body>${pageBody}</body></html>`);",
+    "summary": "The req.body.comment field from feedbackController.js flows unsanitized through FeedbackService, NotificationDispatcher, and DigestEntryFormatter (which escapes only the author name, not the comment) across a 5-file chain before DigestPageRenderer.js embeds it in a template literal passed to res.send()."
+  }
+}

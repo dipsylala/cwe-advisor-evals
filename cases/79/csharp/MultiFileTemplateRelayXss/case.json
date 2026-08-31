@@ -1,0 +1,18 @@
+{
+  "id": "MultiFileTemplateRelayXss",
+  "cwe": "79",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": ["ProfileController.cs", "GreetingService.cs", "WelcomeBannerRenderer.cs"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "WelcomeBannerRenderer.cs",
+    "sink_line": 14,
+    "sink_code": "            await response.WriteAsync(html);",
+    "summary": "The nickname query parameter read in ProfileController flows unsanitized through GreetingService's BannerContent DTO into WelcomeBannerRenderer, where it is interpolated into an HTML string and written to the response via WriteAsync across a 3-file call chain."
+  }
+}

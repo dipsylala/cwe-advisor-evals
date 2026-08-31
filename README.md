@@ -63,7 +63,7 @@ cases/
 Cases accumulate here rather than being versioned into a new directory per run - git holds the
 history. Run records under `runs*/` name cases by id, so ids are stable once published.
 
-Current contents: 137 cases across 18 CWEs and seven languages (perl added by the CWE-79 depth
+Current contents: 148 cases across 18 CWEs and seven languages (perl added by the CWE-79 depth
 batch below). Four sources:
 
 | `source` | n | What it is |
@@ -71,7 +71,7 @@ batch below). Four sources:
 | `owasp-benchmark` | 16 | Single-file Java servlets, labels from `expectedresults-1.2.csv` |
 | `juliet` | 17 | Java multi-file flow variants, de-labelled mechanically; taint crosses 2, 4 or 5 files |
 | `authored-from-docs-pitfall` | 13 | Single-function cases across Java, Python, Go, C#, JavaScript and PHP, each built around a fix that looks right and is not |
-| `authored` | 91 | Single-function, single-language, plain true-positive cases with no `trap`/`must_preserve`/`origin` - either pure language-coverage or top-15 depth (see below), not a discrimination instrument |
+| `authored` | 102 | Plain true-positive cases with no `trap`/`must_preserve`/`origin` - language-coverage, top-15 depth, or (11 cases, see below) multi-file chains crossing 2-5 files, not a discrimination instrument |
 
 **`owasp-benchmark` and `juliet`** are externally authored, so their ground truth doesn't come from
 this repo: Benchmark ships `expectedresults-1.2.csv`, Juliet encodes it in the variant name (then
@@ -121,6 +121,13 @@ built around a deliberate wrong-fix:
   protocol, raw-socket SMTP/IMAP/FTP, PHP dynamic dispatch) - never a CWE-78 shell pattern, which
   would misfile the case. Remaining, in MITRE rank order: 78, 89 (both already breadth-complete at
   1/language, need 2 more per slot), 94, 125, 287, 352, 416, 434 (same), 787, 862.
+- **Multi-file depth.** Every `authored` case above is single-file (`depth: 1`) - the only multi-file
+  cases in the corpus were `juliet`'s, and only in Java. 11 new cases (one per language slot across
+  CWE-79 and CWE-77, `depth` 2-5) test whether tracing across files - which runs 1-3 found saturated
+  on Sonnet 5 up to 5 files, only ever on Juliet's Java cases - holds on other languages and other
+  models. Each threads untrusted input through genuine intermediate logic (a value object, a
+  service layer, a partial allowlist that checks one half of a value but not the other) rather than
+  a bare pass-through, so the chain has to be traced, not just walked past boilerplate.
 
 Every case, regardless of source, is written by a workflow agent that reads the target entry's own
 `Taint Sinks` list (and, for the depth campaign, the named `docs/` pattern) and has its

@@ -1,0 +1,18 @@
+{
+  "id": "MultiFileViewRelayXss",
+  "cwe": "79",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": ["search_controller.py", "search_view.py"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "search_view.py",
+    "sink_line": 19,
+    "sink_code": "    return render_template_string(page_html)",
+    "summary": "An unsanitized search term read from the query string in search_controller.py is wrapped in a SearchQuery object and passed to search_view.py, where it is concatenated into an HTML string and rendered via render_template_string(), crossing 2 files with no encoding applied along the way."
+  }
+}

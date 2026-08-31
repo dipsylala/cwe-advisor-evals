@@ -1,0 +1,23 @@
+{
+  "id": "MultiFileHandlerRelayXss",
+  "cwe": "79",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 4,
+  "group": "reviewed",
+  "files": [
+    "feedback_handler.go",
+    "feedback_service.go",
+    "comment_formatter.go",
+    "comment_view.go"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "comment_view.go",
+    "sink_line": 24,
+    "sink_code": "_, err := v.w.Write([]byte(html))",
+    "summary": "an author name and message submitted to the feedback form flow unsanitized through a handler, a service, and a formatter across 4 files before being concatenated into an HTML fragment and written directly to the response"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "MultiFileDispatchRelay",
+  "cwe": "77",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 5,
+  "group": "reviewed",
+  "files": [
+    "WorkflowStepController.php",
+    "WorkflowStep.php",
+    "WorkflowExecutionService.php",
+    "ActionResolver.php",
+    "ActionDispatcher.php"
+  ],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "ActionDispatcher.php",
+    "sink_line": 12,
+    "sink_code": "        $handler->$method($params);",
+    "summary": "An attacker-controlled workflow action string (e.g. \"email.arbitraryMethod\") flows unsanitized across 5 files - WorkflowStepController, WorkflowStep, WorkflowExecutionService, ActionResolver, and ActionDispatcher - where only the category prefix is checked against a registry while the method-name suffix reaches a dynamic `$handler->$method()` call unvalidated."
+  }
+}

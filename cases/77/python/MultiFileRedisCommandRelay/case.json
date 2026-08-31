@@ -1,0 +1,18 @@
+{
+  "id": "MultiFileRedisCommandRelay",
+  "cwe": "77",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": ["profile_controller.py", "profile_service.py", "redis_command_relay.py"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "redis_command_relay.py",
+    "sink_line": 20,
+    "sink_code": "        self._sock.sendall(command.encode(\"utf-8\"))",
+    "summary": "An unsanitized display_name from the Flask request handler in profile_controller.py flows through a ProfileUpdate DTO in profile_service.py and into redis_command_relay.py, where it is concatenated into a hand-built Redis inline HSET command and sent over a raw socket, letting an embedded CRLF sequence inject additional Redis commands."
+  }
+}

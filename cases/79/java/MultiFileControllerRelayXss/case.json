@@ -1,0 +1,18 @@
+{
+  "id": "MultiFileControllerRelayXss",
+  "cwe": "79",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": ["FeedbackController.java", "FeedbackRenderer.java"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "FeedbackRenderer.java",
+    "sink_line": 36,
+    "sink_code": "        out.println(html);",
+    "summary": "The comment and author request parameters read in FeedbackController.handleSubmit flow unsanitized through FeedbackRenderer.FeedbackSubmission and into an unencoded HTML string that FeedbackRenderer.renderConfirmation writes to the response, an XSS sink reached across 2 files."
+  }
+}

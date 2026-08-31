@@ -1,0 +1,23 @@
+{
+  "id": "MultiFileControllerRelayXss",
+  "cwe": "79",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 4,
+  "group": "reviewed",
+  "files": [
+    "TicketController.php",
+    "TicketService.php",
+    "NotificationDispatcher.php",
+    "ConfirmationPageRenderer.php"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "ConfirmationPageRenderer.php",
+    "sink_line": 11,
+    "sink_code": "        echo '<p>' . $message . '</p>';",
+    "summary": "The unsanitized $_POST['comment'] value flows unescaped from TicketController through TicketService and NotificationDispatcher into ConfirmationPageRenderer, where it is echoed directly into the HTML confirmation page across a 4-file call chain."
+  }
+}

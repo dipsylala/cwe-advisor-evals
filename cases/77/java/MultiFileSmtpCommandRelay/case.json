@@ -1,0 +1,18 @@
+{
+  "id": "MultiFileSmtpCommandRelay",
+  "cwe": "77",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": ["TicketController.java", "TicketNotificationService.java", "SmtpRelayClient.java"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "SmtpRelayClient.java",
+    "sink_line": 28,
+    "sink_code": "            out.write((\"MAIL FROM:<\" + envelope.getReplyTo() + \">\\r\\n\").getBytes(StandardCharsets.US_ASCII));",
+    "summary": "The requesterEmail request parameter flows unsanitized from TicketController through TicketSubmission and TicketNotificationService's MailEnvelope into SmtpRelayClient, where it is concatenated into a hand-built SMTP MAIL FROM command line written to a raw Socket, letting an address containing CRLF inject an additional SMTP command into the session."
+  }
+}

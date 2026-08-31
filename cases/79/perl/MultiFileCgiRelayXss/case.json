@@ -1,0 +1,18 @@
+{
+  "id": "MultiFileCgiRelayXss",
+  "cwe": "79",
+  "language": "perl",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": ["ticket_controller.pl", "TicketSummary.pm", "TicketPageRenderer.pm"],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "TicketPageRenderer.pm",
+    "sink_line": 19,
+    "sink_code": "    say \"<p>Subject: $subject</p>\";",
+    "summary": "The CGI 'subject' parameter is read unsanitized in ticket_controller.pl, wrapped into a TicketSummary object in TicketSummary.pm, and rendered with raw string interpolation via say() in TicketPageRenderer.pm, giving a reflected XSS that crosses all 3 files."
+  }
+}
