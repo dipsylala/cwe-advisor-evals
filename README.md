@@ -1,5 +1,11 @@
 # Validation harness
 
+Validates the knowledge base in [dipsylala/cwe-advisor](https://github.com/dipsylala/cwe-advisor) -
+this repo is linked into it as a git submodule at `evals/`. Every path below (`cwe/{CWE}/...`, the
+`{repo}` placeholders in HARNESS.md) refers to that parent checkout, so run the harness from inside
+a `cwe-advisor` clone with this submodule initialized (`git submodule update --init`), not from a
+standalone clone of this repo.
+
 Measures whether the knowledge base actually improves remediation, rather than assuming it does.
 
 This file covers what is measured and what past runs found. To execute a run, see
