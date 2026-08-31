@@ -1,0 +1,18 @@
+{
+  "id": "MemcachedKeyInjectionRawSocket",
+  "cwe": "77",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["MemcachedKeyInjectionRawSocket.cs"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "MemcachedKeyInjectionRawSocket.cs",
+    "sink_line": 26,
+    "sink_code": "_memcachedSocket.Send(payload);",
+    "summary": "An untrusted cache key is concatenated directly into a hand-built Memcached inline-protocol \"set\" command line and sent over a raw Socket, so a key containing a space or CRLF injects extra command tokens or an additional Memcached command."
+  }
+}

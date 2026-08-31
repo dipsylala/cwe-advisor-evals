@@ -1,0 +1,18 @@
+{
+  "id": "ChatbotCallUserFuncDispatch",
+  "cwe": "77",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ChatbotCallUserFuncDispatch.php"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "ChatbotCallUserFuncDispatch.php",
+    "sink_line": 19,
+    "sink_code": "    $result = call_user_func_array($action, $args);",
+    "summary": "The chat command's action name and comma-split arguments come straight from the user's message and are passed to call_user_func_array() with no allowlist, letting a visitor invoke any callable function in the application by name."
+  }
+}

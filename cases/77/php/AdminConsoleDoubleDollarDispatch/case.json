@@ -1,0 +1,18 @@
+{
+  "id": "AdminConsoleDoubleDollarDispatch",
+  "cwe": "77",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["AdminConsoleDoubleDollarDispatch.php"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "AdminConsoleDoubleDollarDispatch.php",
+    "sink_line": 20,
+    "sink_code": "    $result = $$cmd();",
+    "summary": "The admin console handler reads the unvalidated 'action' POST field directly into $cmd and invokes it with variable-variable dispatch ($$cmd()), letting a caller execute any function reachable by name with no allowlist."
+  }
+}

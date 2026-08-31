@@ -1,0 +1,18 @@
+{
+  "id": "FtpRawSocketFilenameInjection",
+  "cwe": "77",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["FtpRawSocketFilenameInjection.java"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "FtpRawSocketFilenameInjection.java",
+    "sink_line": 21,
+    "sink_code": "            out.write(command.getBytes(StandardCharsets.US_ASCII));",
+    "summary": "An FTP RETR command line is hand-built by concatenating an untrusted requested file name onto a raw socket write, so a file name containing CRLF injects an additional FTP command into the control channel."
+  }
+}

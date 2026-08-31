@@ -1,0 +1,18 @@
+{
+  "id": "SmtpRawSocketRcptInjection",
+  "cwe": "77",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SmtpRawSocketRcptInjection.java"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "SmtpRawSocketRcptInjection.java",
+    "sink_line": 18,
+    "sink_code": "        out.write((\"RCPT TO:<\" + recipientAddress + \">\\r\\n\").getBytes(StandardCharsets.US_ASCII));",
+    "summary": "The customerEmail request parameter is concatenated unsanitized into a hand-built SMTP RCPT TO command line written to a raw Socket, letting an address containing CRLF inject an additional SMTP command into the session."
+  }
+}

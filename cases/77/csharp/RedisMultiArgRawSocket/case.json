@@ -1,0 +1,18 @@
+{
+  "id": "RedisMultiArgRawSocket",
+  "cwe": "77",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["RedisMultiArgRawSocket.cs"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "RedisMultiArgRawSocket.cs",
+    "sink_line": 29,
+    "sink_code": "_redisSocket.Send(payload);",
+    "summary": "The untrusted agentNote field is concatenated unescaped into a hand-built inline-protocol HSET command and written to a raw Socket, so an embedded CRLF in the note lets an attacker terminate the HSET call and inject an additional Redis command."
+  }
+}

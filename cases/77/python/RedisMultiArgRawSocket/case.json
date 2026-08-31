@@ -1,0 +1,18 @@
+{
+  "id": "RedisMultiArgRawSocket",
+  "cwe": "77",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["RedisMultiArgRawSocket.py"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "RedisMultiArgRawSocket.py",
+    "sink_line": 13,
+    "sink_code": "    conn.sendall(f\"HSET {key} theme dark locale {locale}\\r\\n\".encode())",
+    "summary": "The untrusted locale value is interpolated into the last field/value pair of a hand-built multi-field HSET inline command and sent over a raw socket, so an embedded CRLF lets an attacker terminate the HSET and inject an additional Redis command."
+  }
+}

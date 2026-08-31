@@ -1,0 +1,18 @@
+{
+  "id": "RedisInlineCommandRawSocket",
+  "cwe": "77",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["RedisInlineCommandRawSocket.py"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "RedisInlineCommandRawSocket.py",
+    "sink_line": 13,
+    "sink_code": "    conn.sendall(f\"SET {key} {bio}\\r\\n\".encode())",
+    "summary": "The untrusted bio field from the profile update request is interpolated directly into a hand-built Redis inline-protocol SET command and sent over a raw socket, so a value containing CRLF can inject an additional Redis command."
+  }
+}

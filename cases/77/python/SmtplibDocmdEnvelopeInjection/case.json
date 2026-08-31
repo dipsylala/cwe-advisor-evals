@@ -1,0 +1,18 @@
+{
+  "id": "SmtplibDocmdEnvelopeInjection",
+  "cwe": "77",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SmtplibDocmdEnvelopeInjection.py"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "SmtplibDocmdEnvelopeInjection.py",
+    "sink_line": 19,
+    "sink_code": "    smtp.docmd(\"MAIL\", \"FROM:<\" + failed_sender + \">\")",
+    "summary": "An attacker-controlled failed_sender value from a webhook form field is concatenated directly into a raw SMTP MAIL FROM command issued via smtplib's low-level docmd()/putcmd() layer, bypassing sendmail()'s own address validation and allowing CRLF in the address to inject an additional SMTP command into the envelope."
+  }
+}

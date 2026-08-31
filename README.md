@@ -63,7 +63,7 @@ cases/
 Cases accumulate here rather than being versioned into a new directory per run - git holds the
 history. Run records under `runs*/` name cases by id, so ids are stable once published.
 
-Current contents: 125 cases across 17 CWEs and seven languages (perl added by the CWE-79 depth
+Current contents: 137 cases across 18 CWEs and seven languages (perl added by the CWE-79 depth
 batch below). Four sources:
 
 | `source` | n | What it is |
@@ -71,7 +71,7 @@ batch below). Four sources:
 | `owasp-benchmark` | 16 | Single-file Java servlets, labels from `expectedresults-1.2.csv` |
 | `juliet` | 17 | Java multi-file flow variants, de-labelled mechanically; taint crosses 2, 4 or 5 files |
 | `authored-from-docs-pitfall` | 13 | Single-function cases across Java, Python, Go, C#, JavaScript and PHP, each built around a fix that looks right and is not |
-| `authored` | 79 | Single-function, single-language, plain true-positive cases with no `trap`/`must_preserve`/`origin` - either pure language-coverage or top-15 depth (see below), not a discrimination instrument |
+| `authored` | 91 | Single-function, single-language, plain true-positive cases with no `trap`/`must_preserve`/`origin` - either pure language-coverage or top-15 depth (see below), not a discrimination instrument |
 
 **`owasp-benchmark` and `juliet`** are externally authored, so their ground truth doesn't come from
 this repo: Benchmark ships `expectedresults-1.2.csv`, Juliet encodes it in the variant name (then
@@ -115,8 +115,12 @@ built around a deliberate wrong-fix:
   root-only and out of scope), a target of 3 cases per `(CWE, language)` slot rather than 1, each
   built from a distinct named pattern in that language's `docs/CWE-{ID}/{language}/index.md`
   "Common Vulnerable Patterns" section (adapted into an original scenario, not copied verbatim).
-  CWE-79 is the first one done: all 7 of its languages (including the newly-added perl) now have
-  3 cases each.
+  CWE-79 was the first one done: all 7 of its languages (including the newly-added perl) have 3
+  cases each. CWE-77 is the second: csharp/java/php/python (its only 4 languages) now have 3 cases
+  each too, scoped strictly to the non-shell interpreters this entry covers (Redis/Memcached inline
+  protocol, raw-socket SMTP/IMAP/FTP, PHP dynamic dispatch) - never a CWE-78 shell pattern, which
+  would misfile the case. Remaining, in MITRE rank order: 78, 89 (both already breadth-complete at
+  1/language, need 2 more per slot), 94, 125, 287, 352, 416, 434 (same), 787, 862.
 
 Every case, regardless of source, is written by a workflow agent that reads the target entry's own
 `Taint Sinks` list (and, for the depth campaign, the named `docs/` pattern) and has its

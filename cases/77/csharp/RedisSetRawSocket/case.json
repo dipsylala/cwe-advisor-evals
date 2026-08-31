@@ -1,0 +1,18 @@
+{
+  "id": "RedisSetRawSocket",
+  "cwe": "77",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["RedisSetRawSocket.cs"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "RedisSetRawSocket.cs",
+    "sink_line": 31,
+    "sink_code": "        _redisSocket.Send(payload);",
+    "summary": "An unsanitized form field is concatenated into a hand-built Redis SET wire-protocol command and written to a raw Socket, letting an embedded CRLF inject an additional Redis command."
+  }
+}

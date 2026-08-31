@@ -1,0 +1,18 @@
+{
+  "id": "MacroDynamicMethodDispatch",
+  "cwe": "77",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["MacroDynamicMethodDispatch.php"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "MacroDynamicMethodDispatch.php",
+    "sink_line": 23,
+    "sink_code": "    $renderer->$macro();",
+    "summary": "A report macro token taken directly from $_POST['macro'] with no allowlist is used to dynamically invoke an arbitrary method on the ReportRenderer object via $renderer->$macro(), letting an attacker call any public method on that object."
+  }
+}

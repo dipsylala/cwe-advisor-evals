@@ -1,0 +1,18 @@
+{
+  "id": "ImapRawSocketFolderInjection",
+  "cwe": "77",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ImapRawSocketFolderInjection.java"],
+  "finding": {
+    "cwe": "CWE-77",
+    "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+    "file": "ImapRawSocketFolderInjection.java",
+    "sink_line": 18,
+    "sink_code": "out.write(command.getBytes(\"US-ASCII\"));",
+    "summary": "An IMAP SELECT command is hand-built by concatenating an unvalidated request parameter into the command line and writing it directly to a raw socket, so a folder name containing CRLF can inject an additional IMAP command into the session."
+  }
+}
