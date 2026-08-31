@@ -28,9 +28,13 @@ whether a fix silently breaks or changes something the sink's caller depended on
 has gone in both directions depending on how an entry's `Remediation Steps` are ordered (see run 4).
 Run 5 found a defect neither arm avoided (a CWE-434 fix that renames an uploaded file without the
 entry warning the read path needs the new name too, since fixed - see run 5's row below). Run 6
-found the planted traps still mostly don't catch anything (12 of 13 across runs 4 and 6), but
-sharpened the one open `no_harm` gap: a model that honestly declines to guess a value it cannot
-verify can score worse than one that guesses and gets lucky.
+found the planted traps still mostly don't catch anything (12 of 13 across runs 4 and 6), sharpened
+the one open `no_harm` gap (a model that honestly declines to guess a value it cannot verify scored
+worse than one that guesses and gets lucky - the rubric now scores disclosure correctly, see
+HARNESS.md Step 5), and independently confirmed by direct reproduction that `cwe/611/php`'s
+`LIBXML_NOENT`/`LIBXML_NO_XXE` guidance is technically correct - a re-judge with a fresh panel had
+disagreed, unanimously and wrongly, which is its own finding: see HARNESS.md's **Things that have
+gone wrong before** and [RESULTS-v6.md](RESULTS-v6.md)'s addendum.
 
 ## Corpus
 
@@ -150,17 +154,28 @@ special.
 
 ### Known gaps
 
-- **`no_harm` doesn't see `must_preserve` yet, and doesn't distinguish disclosed limitations from
-  silent breakage.** The judge prompt in HARNESS.md withholds all of `case.json`, including the
-  contract `must_preserve` states, so judges apply their own reading of what the original preserved
-  and can disagree with each other over it (9 of 20 runs disagreed in run 4). Passing the stated
-  contract into the judge prompt without revealing which fix is the trap is the obvious next fix.
-  Separately, runs 4 and 6 both found the rubric scores a disclosed limitation the same as a silent
-  one: run 4 saw declared scope creep cost a point, run 6 saw a model that honestly declined to
-  guess an unverifiable value score far worse than one that guessed and got lucky.
-- **Nothing in the corpus is compiled or executed.** A fix is scored on whether it reads as correct,
-  not on whether it actually builds or passes a test - run 6 caught a judge reproducing a claim
-  against a different runtime version than the case specified, which this gap does not help with.
+- **`no_harm` doesn't see `must_preserve` yet.** The judge prompt in HARNESS.md withholds all of
+  `case.json`, including the contract `must_preserve` states, so judges apply their own reading of
+  what the original preserved and can disagree with each other over it (9 of 20 runs disagreed in
+  run 4). Passing the stated contract into the judge prompt without revealing which fix is the trap
+  is the obvious next fix. This is separate from the disclosure gap below, which is fixed.
+- **`no_harm`'s disclosed-vs-silent gap is fixed going forward, not retroactively.** Runs 4 and 6
+  both found the old rubric scored a disclosed limitation the same as a silent one - run 4 saw
+  declared scope creep cost a point, run 6 saw a model that honestly declined to guess an
+  unverifiable value score far worse than one that guessed and got lucky. HARNESS.md's `no_harm`
+  wording now scores a disclosed, endpoint-breaking limitation as a 1 rather than a 0. Runs 1-6's
+  `no_harm` numbers were scored under the old wording and are not directly comparable to a future
+  run's without accounting for that.
+- **A judge's self-reported "reproduced" is not independently verified.** Validating the disclosure
+  fix on run 6's pool, a fresh judge panel unanimously reversed the original panel's (correct) read
+  of `DeprecatedEntityLoaderGuard`'s core technical claim while citing its own reproduction. Direct
+  reproduction confirmed the original panel and the entry were right - see HARNESS.md's **Things
+  that have gone wrong before** and [RESULTS-v6.md](RESULTS-v6.md)'s addendum. Treat a judge's
+  reproduction claim as provisional, especially before it would change an entry.
+- **Nothing in the corpus is compiled or executed by the harness itself.** A fix is scored on
+  whether it reads as correct, not on whether it actually builds or passes a test; the judge-side
+  gap above is this same problem one level up, where even the *scoring* wasn't independently
+  verified until this session checked one case by hand.
 
 ## Past runs
 

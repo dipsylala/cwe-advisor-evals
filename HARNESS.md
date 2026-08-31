@@ -6,12 +6,11 @@ how to execute a run from a cold start, in any session and with any capable mode
 Nothing here depends on a previous run's context. If a step needs a decision, it is called out.
 
 **The `v4`/`runs-v4` naming throughout this file is a worked example, not a fixed requirement** -
-it is what run 4 (the last run executed) actually used. A new run picks the next unused suffix
-(`runs-v5`, `arm-map-v5.json`, `scores-v5.json`, `RESULTS-v5.md`) and substitutes it everywhere
-below; `scripts/blind.py` and `scripts/analyse.py` take directory paths as arguments and don't care
-what they're named. See README.md's **Known gaps** for what a run 5 would actually be scoped to -
-most of the corpus (79 of 125 cases, from the breadth and per-language-depth campaigns) has never
-been run at all.
+it is what run 4 used when this file was first written. A new run picks the next unused suffix
+(`runs-v7`, `arm-map-v7.json`, `scores-v7.json`, `RESULTS-v7.md`, as of the most recent run) and
+substitutes it everywhere below; `scripts/blind.py` and `scripts/analyse.py` take directory paths as
+arguments and don't care what they're named. See README.md's **Known gaps** for what remains
+unscored.
 
 ## What a run is
 
@@ -138,15 +137,22 @@ Score each:
 - fix_quality (0-2): 2 = the vector is closed using an appropriate API for this sink; 1 = partially
   closed, or workable but the wrong shape for this sink; 0 = does not close the vector, or would
   not compile.
-- no_harm (0-2): 2 = clean - closes the weakness and alters nothing else observable; 1 = changes
-  observable behaviour beyond the fix, or a questionable construct not clearly exploitable;
-  0 = introduces a different weakness, or breaks the endpoint.
+- no_harm (0-2): 2 = clean - closes the weakness and alters nothing else observable, or the only
+  other change is stated plainly in the write-up and does not stop a legitimate caller from
+  succeeding; 1 = changes observable behaviour beyond the fix, or a questionable construct not
+  clearly exploitable, or the fix stops legitimate use but the write-up states that openly as a
+  known, required follow-up; 0 = introduces a different weakness, or silently stops the endpoint
+  working for legitimate use without saying so.
 - note: one short sentence; for any score below 2 say specifically what is wrong.
 
 For no_harm, look hard at: output the fixed code produces that the original did not (or vice
 versa); arguments supplied where the original passed null or omitted them; changed return values or
 types; dropped error handling. A fix that closes the weakness while quietly changing what the code
-does is exactly what this criterion is for.
+does is exactly what this criterion is for - "quietly" is load-bearing: the same change stated
+plainly in the write-up is a lesser defect than the identical change left for the reader to find,
+because a reviewer or an automated gate reading the write-up can catch a stated change before the
+fix ships and cannot catch a silent one. Disclosure does not launder a change that stops legitimate
+use into a 2 - it moves a 0 to a 1, not a 0 to a 2.
 
 Write one JSON object keyed by run id to {scores-dir}/judge{N}.json:
 {"R101": {"fix_quality": 2, "no_harm": 2, "note": "..."}, ...}
@@ -191,3 +197,15 @@ sample size, a confounded cell, a prompt that was not preserved, a criterion at 
   improvement in either direction. Check the spread before concluding a change did nothing.
 - **Answers in the fixture.** Juliet labels the answer in method names, class names and comments;
   cases from it are de-labelled mechanically before use.
+- **A judge's "reproduced" was wrong.** Testing the no_harm rubric wording added after run 6, a
+  fresh panel re-judging the same six run-6 write-ups reversed the original panel's read of
+  `DeprecatedEntityLoaderGuard` (CWE-611/php) - unanimously, and citing "matches repro" - concluding
+  external entity resolution is dead on PHP 8.2+ regardless of `LIBXML_NOENT`. A direct reproduction
+  (PHP 8.5.8/libxml 2.11.9) showed the opposite: `LIBXML_NOENT` does re-enable external `SYSTEM`
+  entity resolution and leaks file contents; without it, the same entity resolves to empty. The
+  likely cause is mundane and worth naming - a naive `file://$path` URI on Windows mixes backslashes
+  into the path and produces `Invalid URI`, which reads as "the entity didn't resolve" instead of
+  "the test URI was malformed," and this session hit the identical bug on its first attempt. A
+  judge's self-reported reproduction is not independently verified; treat a claim as unconfirmed
+  until it is reproduced outside the judge's own transcript, especially before editing an entry
+  because of it.

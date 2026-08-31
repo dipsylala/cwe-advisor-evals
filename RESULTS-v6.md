@@ -38,17 +38,16 @@ Both arms shipped the same code fix (drop `LIBXML_NOENT`, add `LIBXML_NONET`), s
 Two of three judges independently reproduced arm B's read and confirmed it. `cwe/611/php/INDEX.md`
 already documents this exact mechanism - it states `LIBXML_NO_XXE` is needed specifically because
 `LIBXML_NOENT` "otherwise reopens XXE" even with the modern default - so the guided arm's Verdict
-section matches the entry precisely, and the entry's account holds up under judge reproduction.
-`no_harm` splits accordingly (A: 1.67, B: 2.00): both arms shipped the same fix, but only one
-described it accurately, even though the case's own prompt states the finding is confirmed real.
-This is the run's one clean instance of guidance improving output the trap did not have to catch a
-fix defect to demonstrate.
+section matches the entry precisely. `no_harm` splits accordingly (A: 1.67, B: 2.00): both arms
+shipped the same fix, but only one described it accurately, even though the case's own prompt
+states the finding is confirmed real. This is the run's one clean instance of guidance improving
+output the trap did not have to catch a fix defect to demonstrate.
 
-One caveat on the reproduction itself: one judge's note reproduces the leak "on PHP 8.5/libxml
-2.11," not the PHP 8.2 the case's `composer.json` comment specifies. The conclusion still matches
-the entry's documented mechanism, but a version-pinned claim reproduced against a different runtime
-than the case targets is exactly the kind of drift this repo's own version-claims discipline exists
-to catch - it just showed up in a judge this time, not an authored entry.
+**This was directly reproduced, not left as a judge self-report** (see the no_harm rubric section
+below for why that distinction turned out to matter): a minimal script against PHP 8.5.8/libxml
+2.11.9 confirmed `DOMDocument::loadXML($xml, LIBXML_NOENT)` resolves an external `SYSTEM` entity and
+leaks the target file's contents, and that dropping `LIBXML_NOENT` returns the same entity to an
+empty string. Arm B and the entry are correct; arm A's "not exploitable" verdict is wrong.
 
 ## ModelCachePickleLoad (CWE-502, Python): the intended trap failed for both arms - a different, worse one appeared, and it hit the guided arm harder
 
@@ -80,6 +79,40 @@ guard clause, a widened cap); this run finds it cuts just as hard against declar
 model that says "I don't know the real class name, here's where to add it" scores as though it
 broke the endpoint by accident, identically to if it had.
 
+## Addendum: fixing the no_harm disclosure gap, and what testing it found
+
+The `no_harm` disclosure gap above was closed in HARNESS.md: the rubric now scores a fix that stops
+legitimate use but says so plainly as a 1, not a 0 - disclosure moves a 0 to a 1, not a 0 to a 2, so
+a genuinely broken fix still cannot score clean. Validated cheaply by re-judging the same six
+run-6 write-ups, blind, with three fresh judges under the new wording (no new remediation needed -
+same blind pool, same case files):
+
+| run | case, arm | old no_harm | new no_harm |
+|---|---|---|---|
+| R103 | ModelCachePickleLoad, B (disclosed empty allowlist) | 0.33 | 1.00 |
+| R104 | ModelCachePickleLoad, A (undisclosed guessed classes) | 1.67 | 0.33 |
+
+Both moved the direction the fix intends: the disclosed, broken-until-configured fix rose, and the
+undisclosed, silently-maybe-wrong guess fell sharply - the new panel called out that four fabricated
+class names presented as fact, unverified anywhere in the case, will likely break real model loads
+with no warning. That is a second, independent confirmation of run 6's headline finding about
+`ModelCachePickleLoad`, from a different angle.
+
+But the same re-judge also reversed the *other* case's technical read with no rubric change involved
+- the new panel unanimously agreed with arm A's wrong "not exploitable" verdict, citing a
+reproduction that (per the direct reproduction above) cannot have been done correctly. `R101` and
+`R106` (`OrderEventQueueDeserialize`) also drifted down slightly on an unrelated, more defensible
+disagreement about how much of `OrderEvent`'s allowlist the write-up should have hedged. Judge-panel
+variance on a borderline call is not a rubric problem and not new to this run, but a full unanimous
+reversal on a load-bearing technical claim is - see HARNESS.md's new "Things that have gone wrong
+before" entry. The practical implication: a judge's stated reproduction is not itself verified, and
+should not be trusted over a conflicting result without redoing it independently, which is what
+settled this one.
+
+The rubric wording change applies to runs from here forward; runs 1-6's `no_harm` numbers were
+scored under the old wording and are not directly comparable without accounting for that, the same
+way run 3 kept its pre/post SKILL.md-fix numbers in separate columns rather than merging them.
+
 ## What run 6 establishes
 
 1. **12 of 13 `authored-from-docs-pitfall` cases across runs 4 and 6 do not catch the trap as
@@ -87,31 +120,37 @@ broke the endpoint by accident, identically to if it had.
    (run 4) has caught the guided arm the way the batch intended; this run adds zero more instances
    of that design working, and the remaining two CWE-502 cases in this run instead surfaced
    unplanned findings.
-2. **One clean case of guidance measurably improving accuracy on a contested technical claim.**
-   `DeprecatedEntityLoaderGuard`'s guided arm gave the answer that matched the entry's documented
-   mechanism and that two of three judges reproduced; the ungoverned arm argued the opposite,
-   despite the prompt stating the finding was confirmed real.
-3. **The `no_harm` disclosure gap generalises beyond scope creep.** Run 4 found declared scope
-   creep costs a point under this rubric. Run 6 finds declared, honest incompleteness costs more -
-   a model that refuses to guess a class name it cannot verify scores worse than one that guesses
-   and gets lucky. This is the same open gap, not a new one, but it is now demonstrated in the
-   direction that matters most: it can penalise the more conservative, more honest behaviour.
-4. **A judge-side version-drift instance, worth a HARNESS.md note.** When a case names a target
-   runtime version, a judge's reproduction should be checked against that version, not whichever one
-   happens to be locally available - the conclusion here still held, but the mismatch was luck, not
-   design.
+2. **One clean, independently-verified case of guidance measurably improving accuracy on a
+   contested technical claim.** `DeprecatedEntityLoaderGuard`'s guided arm gave the answer that
+   matched the entry's documented mechanism, confirmed by direct reproduction (see the addendum);
+   the ungoverned arm argued the opposite and was wrong, despite the prompt stating the finding was
+   confirmed real.
+3. **The `no_harm` disclosure gap generalised beyond scope creep, and is now fixed.** Run 4 found
+   declared scope creep cost a point under the old rubric. Run 6 found declared, honest
+   incompleteness cost more - a model that refuses to guess a class name it cannot verify scored
+   worse than one that guesses and gets lucky. HARNESS.md's rubric now scores a disclosed,
+   endpoint-breaking limitation as a 1 rather than a 0; the addendum above validates the fix moved
+   the two affected runs in the intended direction without inflating a genuinely broken fix to a 2.
+4. **A judge's self-reported reproduction is not reliable evidence on its own.** Re-judging the same
+   evidence with a fresh panel produced a confident, unanimous, wrong reversal of
+   `DeprecatedEntityLoaderGuard`'s technical read - not a close call, a full flip - most likely from
+   a Windows `file://` URI construction bug that silently reads as "the entity didn't resolve."
+   HARNESS.md's "Things that have gone wrong before" now names this; treat any single judge panel's
+   "reproduced" claim as provisional until checked independently, especially before it changes an
+   entry.
 
 ## Limitations
 
 - **n = 3 cases, one per CWE/language cell except CWE-502 (2).** Every finding above is a single
   run, credible only because of unanimous or 2-of-3 judge agreement, not sample size.
 - **These cases are `authored-from-docs-pitfall`** - their `trap`/`must_preserve` fields are an
-  authoring claim, not external ground truth. This run does not independently settle whether
-  `cwe/611/php`'s documented `LIBXML_NOENT` mechanism is correct against a live, pinned PHP
-  8.2/libxml target; it relies on judges' own stated reproduction, one of which used a different
-  runtime version than the case specifies (see above).
+  authoring claim, not external ground truth. `DeprecatedEntityLoaderGuard`'s core technical
+  question was independently settled by direct reproduction (see above and the addendum); the other
+  two cases' claims still rest on judge reasoning that was not independently re-verified.
 - **`must_preserve` was not passed to the judges**, per the same unresolved gap runs 4 and 5 both
   flagged.
-- **Nothing was compiled or executed by this session directly.** Every reproduction claim above is
-  a judge's self-report, which is exactly where the PHP-version drift was caught - a reminder that
-  a judge's "reproduced" is not independently verified either.
+- **Most reproduction claims in this run are still judge self-reports, not independently verified.**
+  The one exception is `DeprecatedEntityLoaderGuard`, checked directly against PHP 8.5.8/libxml
+  2.11.9 after two independent judge panels disagreed with each other about it - see the addendum.
+  That disagreement is the reason to treat any other "reproduced" claim in this file with the same
+  suspicion until it is checked the same way.
