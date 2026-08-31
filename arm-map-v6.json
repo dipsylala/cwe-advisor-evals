@@ -1,0 +1,62 @@
+{
+  "R101": {
+    "arm": "A",
+    "case": "OrderEventQueueDeserialize",
+    "cwe": "502",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R102": {
+    "arm": "B",
+    "case": "DeprecatedEntityLoaderGuard",
+    "cwe": "611",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R103": {
+    "arm": "B",
+    "case": "ModelCachePickleLoad",
+    "cwe": "502",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R104": {
+    "arm": "A",
+    "case": "ModelCachePickleLoad",
+    "cwe": "502",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R105": {
+    "arm": "A",
+    "case": "DeprecatedEntityLoaderGuard",
+    "cwe": "611",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R106": {
+    "arm": "B",
+    "case": "OrderEventQueueDeserialize",
+    "cwe": "502",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  }
+}

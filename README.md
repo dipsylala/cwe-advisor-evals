@@ -19,15 +19,18 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Five runs so far - see **Past runs** below for what each one found. The headline that holds across
+Six runs so far - see **Past runs** below for what each one found. The headline that holds across
 all of them: verdict accuracy and multi-file source tracing are saturated in every arm, at every
 chain depth tested up to five files, and `fix_quality` is saturated across the 79-case breadth/depth
 corpus too - a capable model does not need this harness's help to trace taint or recognise a
 textbook vulnerability. The knowledge base's one consistently measurable effect is on `no_harm` -
 whether a fix silently breaks or changes something the sink's caller depended on - and that effect
-has gone in both directions depending on how an entry's `Remediation Steps` are ordered (see run 4),
-though run 5 also found a defect neither arm avoided: a CWE-434 fix that renames an uploaded file
-without the entry warning that the read path needs the new name too.
+has gone in both directions depending on how an entry's `Remediation Steps` are ordered (see run 4).
+Run 5 found a defect neither arm avoided (a CWE-434 fix that renames an uploaded file without the
+entry warning the read path needs the new name too, since fixed - see run 5's row below). Run 6
+found the planted traps still mostly don't catch anything (12 of 13 across runs 4 and 6), but
+sharpened the one open `no_harm` gap: a model that honestly declines to guess a value it cannot
+verify can score worse than one that guesses and gets lucky.
 
 ## Corpus
 
@@ -82,8 +85,10 @@ two sources. Treat a judge disagreeing with `kind` on one of these as a finding 
 see [RESULTS-v4.md](RESULTS-v4.md). The one exception confirmed a specific, since-repeated shape:
 when an entry's `Remediation Steps` open with an infrastructure or configuration change rather than
 the fix at the reported sink, the guided arm tends to perform that change and leave the flagged line
-untouched. Three more cases (`OrderEventQueueDeserialize`, `ModelCachePickleLoad`,
-`DeprecatedEntityLoaderGuard`) target that same shape directly; none has been run yet.
+untouched. Run 6 scored the remaining three (`OrderEventQueueDeserialize`, `ModelCachePickleLoad`,
+`DeprecatedEntityLoaderGuard`) and found none of them caught that shape either - 12 of 13 across
+both runs now, so `authored-from-docs-pitfall` traps still mostly do not catch anything, though run
+6 did surface two findings the traps were not built to test - see [RESULTS-v6.md](RESULTS-v6.md).
 
 **`authored`** cases come from two related but distinct campaigns, both tracked in TODO.md, neither
 built around a deliberate wrong-fix:
@@ -138,22 +143,24 @@ arm produced what, and finally aggregated (`scripts/analyse.py`) into comparison
 
 Both scripts are generic - they take arm directories as arguments and use the directory name as the
 label, so nothing needs editing to add an arm or start a new run. **Pick the next unused version
-suffix for a new run** (the existing ones are `runs`/`runs-v2`/`runs-v3`/`runs-v4` and their matching
-`arm-map*.json`/`scores*.json`/`RESULTS*.md`); HARNESS.md's own examples are written against
-`runs-v4` specifically because that is what run 4 used, not because that name is special.
+suffix for a new run** (the existing ones are `runs`/`runs-v2`/`runs-v3`/`runs-v4`/`runs-v5`/`runs-v6`
+and their matching `arm-map*.json`/`scores*.json`/`RESULTS*.md`); HARNESS.md's own examples are
+written against `runs-v4` specifically because that is what run 4 used, not because that name is
+special.
 
 ### Known gaps
 
-- **Three `authored-from-docs-pitfall` cases have never been run.** Run 4 scored 10 of the 13;
-  `OrderEventQueueDeserialize`, `ModelCachePickleLoad` and `DeprecatedEntityLoaderGuard` target the
-  same leads-with-infrastructure-not-the-sink shape run 4 confirmed once, and remain unscored.
-- **`no_harm` doesn't see `must_preserve` yet.** The judge prompt in HARNESS.md withholds all of
-  `case.json`, including the contract `must_preserve` states, so judges apply their own reading of
-  what the original preserved and can disagree with each other over it (9 of 20 runs disagreed in
-  run 4). Passing the stated contract into the judge prompt without revealing which fix is the trap
-  is the obvious next fix.
+- **`no_harm` doesn't see `must_preserve` yet, and doesn't distinguish disclosed limitations from
+  silent breakage.** The judge prompt in HARNESS.md withholds all of `case.json`, including the
+  contract `must_preserve` states, so judges apply their own reading of what the original preserved
+  and can disagree with each other over it (9 of 20 runs disagreed in run 4). Passing the stated
+  contract into the judge prompt without revealing which fix is the trap is the obvious next fix.
+  Separately, runs 4 and 6 both found the rubric scores a disclosed limitation the same as a silent
+  one: run 4 saw declared scope creep cost a point, run 6 saw a model that honestly declined to
+  guess an unverifiable value score far worse than one that guessed and got lucky.
 - **Nothing in the corpus is compiled or executed.** A fix is scored on whether it reads as correct,
-  not on whether it actually builds or passes a test.
+  not on whether it actually builds or passes a test - run 6 caught a judge reproducing a claim
+  against a different runtime version than the case specified, which this gap does not help with.
 
 ## Past runs
 
@@ -164,3 +171,4 @@ suffix for a new run** (the existing ones are `runs`/`runs-v2`/`runs-v3`/`runs-v
 | 3 | Same 17 Juliet cases, re-judged, plus a fresh B2 | 51 (17 x 3 sets) | Did the sink-contract fix (SKILL.md Step 4/5) address run 2's harm? | Yes - `no_harm` on true positives rose from 1.25 (A) / 1.67 (B, before) to 1.92 (B2, after); CWE-601's URI-fragment preservation is a clean, unconfounded before/after | [RESULTS-v3.md](RESULTS-v3.md) |
 | 4 | +10 `authored-from-docs-pitfall` cases | 20 (10 x 2 arms) | Do the deliberately-planted "plausible but wrong" fixes actually catch anything? | Mostly no (19/20 at ceiling on `fix_quality`) - but the one that did (CWE-117) confirmed a repeatable defect shape: guidance that leads with an infrastructure/config change over the sink-level fix | [RESULTS-v4.md](RESULTS-v4.md) |
 | 5 | 79 `authored` cases (breadth + depth campaigns, 14 CWEs x 7 languages) | 158 (79 x 2 arms) | Does the knowledge base still help on the ordinary, undramatic, single-file case at this scale? | `fix_quality` saturated again (156/158 at ceiling); `no_harm` favoured the guided arm on a low-disagreement measurement (1.97 A vs 2.00 B); found one new, reproducible entry gap - `cwe/434/go` doesn't warn that a renamed upload needs the read path updated too, and both arms independently shipped that break | [RESULTS-v5.md](RESULTS-v5.md) |
+| 6 | Last 3 `authored-from-docs-pitfall` cases | 6 (3 x 2 arms) | Do the last three planted traps catch anything run 4 didn't already find? | No (12/13 across runs 4 and 6 at ceiling on `fix_quality`), but two unplanned findings: guidance gave the technically correct exploitability read on a contested PHP/libxml question two judges reproduced, and the `no_harm` disclosure gap cuts against honest incompleteness even harder than it cuts against declared scope creep | [RESULTS-v6.md](RESULTS-v6.md) |

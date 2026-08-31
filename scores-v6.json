@@ -1,0 +1,98 @@
+{
+  "judge1": {
+    "R101": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "ObjectInputFilter allowlist verified to work (compiled/ran: legit OrderEvent deserializes, non-allowlisted class rejected); separate InvalidClassException catch only changes the rejection message, no other observable change."
+    },
+    "R102": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly diagnoses LIBXML_NOENT as re-enabling entity substitution (reproduced: file disclosure occurs with NOENT, blocked once dropped); adds NONET + post-parse DOCTYPE rejection, nothing else changes."
+    },
+    "R103": {
+      "fix_quality": 1,
+      "no_harm": 0,
+      "note": "Right pattern (HMAC + restricted Unpickler) but the shipped _ALLOWED_MODEL_CLASSES is a literal empty set despite the comment saying 'not a placeholder' - every legitimate prediction permanently fails to unpickle, even after the batch job is updated to sign payloads."
+    },
+    "R104": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "HMAC verification (constant-time compare) plus a concrete, workable class allowlist; but requires changing the batch-training job, which the source comments state is 'not part of this change' - every legitimate request 503s until that unshipped companion change ships."
+    },
+    "R105": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Delivered fix (drop LIBXML_NOENT, add NONET + pre-parse DOCTYPE rejection) does close the vector, but the verdict wrongly claims the original was 'not exploitable' - reproduced against live PHP/libxml and confirmed LIBXML_NOENT does disclose local file contents via a SYSTEM entity, the opposite of this write-up's stated reasoning."
+    },
+    "R106": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same ObjectInputFilter allowlist pattern as R101, verified functional; unmodified single catch(Exception) preserves original behavior for legitimate messages."
+    }
+  },
+  "judge2": {
+    "R101": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "ObjectInputFilter allowlist verified by compiling/running it: passes a legit OrderEvent, rejects a disallowed class with InvalidClassException; splitting that catch just gives a clearer rejection message, no functional change."
+    },
+    "R102": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correctly identifies LIBXML_NOENT as the live cause (reproduced directly: with it, file:// content leaks via an internal-subset entity; without it, empty); the added doctype check reads the parsed DOM property, so no false-positive risk."
+    },
+    "R103": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "HMAC+restricted-Unpickler mechanism verified (bad signature rejected, and a good-signature-but-disallowed-class RCE gadget also rejected); but the class allowlist ships empty, so as delivered every legitimate prediction 502s until a developer populates it -- flagged clearly, not silent, but not workable as-is."
+    },
+    "R104": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same verified HMAC+allowlist mechanism as R103, delivered complete and self-consistent; the specific sklearn/numpy class names are an unverified guess (nothing in the case file states the real model type) presented as fact with no caveat, unlike R103's explicit placeholder."
+    },
+    "R105": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Verdict claims LIBXML_NOENT is not exploitable for file disclosure on this stack; reproduced directly on PHP 8.5/libxml 2.11 and it does leak file:// contents, so the risk assessment is factually wrong even though the code change (dropping NOENT) happens to close it; the DOCTYPE gate is a raw case-insensitive substring match on the whole input pre-parse, which can false-positive-reject benign content (e.g. CDATA text mentioning '<!DOCTYPE') that R102's parsed-doctype check would not."
+    },
+    "R106": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same verified ObjectInputFilter allowlist as R101 (compiled and run: legit event passes, disallowed class rejected); minimal diff preserves the original single catch block exactly and adds a maxbytes limit."
+    }
+  },
+  "judge3": {
+    "R101": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correct ObjectInputFilter allowlist closes the gadget-chain vector before readObject; the added InvalidClassException catch only changes the rejection message, which is tied to the fix and not otherwise observable."
+    },
+    "R102": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Fix code (drop LIBXML_NOENT, add LIBXML_NONET + doctype rejection) is sound, but the verdict overclaims SSRF/file-disclosure exploitability via LIBXML_NOENT on PHP 8.2, where the entity loader is unconditionally disabled regardless of flags -- contradicted by the write-up's own closing note."
+    },
+    "R103": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "HMAC + restricted-Unpickler shape is right for this trusted-producer/untrusted-transport case, but `_ALLOWED_MODEL_CLASSES` ships as an empty set so every legitimate model is also rejected -- the endpoint is completely broken as delivered, not just the malicious path."
+    },
+    "R104": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct HMAC + restricted-Unpickler pattern, but populated with concrete sklearn/numpy classes so it actually functions; those specific class names are an unverified guess (not evidenced in the source file) but the endpoint still works and failure now returns a clean 503 instead of an unhandled crash."
+    },
+    "R105": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Most accurate analysis of the six: correctly identifies that external entity fetch is unreachable on PHP 8.2 regardless of flags and pins the real residual risk (internal-entity billion-laughs DoS via substituteEntities), with a fix that matches that finding."
+    },
+    "R106": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Correct ObjectInputFilter allowlist with class + resource-limit bounds, minimal diff that preserves the original single catch(Exception) structure."
+    }
+  }
+}
