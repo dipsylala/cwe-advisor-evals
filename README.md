@@ -19,22 +19,32 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Six runs so far - see **Past runs** below for what each one found. The headline that holds across
-all of them: verdict accuracy and multi-file source tracing are saturated in every arm, at every
-chain depth tested up to five files, and `fix_quality` is saturated across the 79-case breadth/depth
-corpus too - a capable model does not need this harness's help to trace taint or recognise a
-textbook vulnerability. The knowledge base's one consistently measurable effect is on `no_harm` -
-whether a fix silently breaks or changes something the sink's caller depended on - and that effect
-has gone in both directions depending on how an entry's `Remediation Steps` are ordered (see run 4).
-Run 5 found a defect neither arm avoided (a CWE-434 fix that renames an uploaded file without the
-entry warning the read path needs the new name too, since fixed - see run 5's row below). Run 6
-found the planted traps still mostly don't catch anything (12 of 13 across runs 4 and 6), sharpened
-the one open `no_harm` gap (a model that honestly declines to guess a value it cannot verify scored
-worse than one that guesses and gets lucky - the rubric now scores disclosure correctly, see
-HARNESS.md Step 5), and independently confirmed by direct reproduction that `cwe/611/php`'s
-`LIBXML_NOENT`/`LIBXML_NO_XXE` guidance is technically correct - a re-judge with a fresh panel had
-disagreed, unanimously and wrongly, which is its own finding: see HARNESS.md's **Things that have
-gone wrong before** and [RESULTS-v6.md](RESULTS-v6.md)'s addendum.
+Seven runs so far - see **Past runs** below for what each one found. Runs 1-6 all ran on Sonnet 5
+(undocumented as such until run 5/6, see the model gap below) and found verdict accuracy and
+multi-file source tracing saturated in every arm at every chain depth tested up to five files, and
+`fix_quality` saturated across the 79-case breadth/depth corpus too - at that model's capability
+level, guidance had nothing to add to whether the vulnerability got found and closed. The knowledge
+base's one consistently measurable effect on Sonnet 5 was on `no_harm` - whether a fix silently
+breaks or changes something the sink's caller depended on - and that effect went in both directions
+depending on how an entry's `Remediation Steps` are ordered (see run 4). Run 5 found a defect
+neither arm avoided (a CWE-434 fix that renames an uploaded file without the entry warning the read
+path needs the new name too, since fixed - see run 5's row below). Run 6 found the planted traps
+still mostly don't catch anything (12 of 13 across runs 4 and 6), sharpened the one open `no_harm`
+gap (a model that honestly declines to guess a value it cannot verify scored worse than one that
+guesses and gets lucky - the rubric now scores disclosure correctly, see HARNESS.md Step 5), and
+independently confirmed by direct reproduction that `cwe/611/php`'s `LIBXML_NOENT`/`LIBXML_NO_XXE`
+guidance is technically correct - a re-judge with a fresh panel had disagreed, unanimously and
+wrongly, which is its own finding: see HARNESS.md's **Things that have gone wrong before** and
+[RESULTS-v6.md](RESULTS-v6.md)'s addendum.
+
+**Run 7 overturns the "saturated" half of that headline.** The identical 79-case corpus, re-run
+with Haiku 4.5 on both arms instead of Sonnet 5, produced a real `fix_quality` gap (1.84 no-guidance
+vs. 1.97 guided; +0.89 on CWE-90 alone) that Sonnet 5 never showed on these same cases. The
+mechanism was checked directly, not taken from a judge's word: the ungoverned arm called library
+functions that do not exist - confirmed by installing the real `ldap3` and `ldapjs` packages and
+checking - while the guided arm, reading the entry's named APIs, did not. Saturation was a property
+of the model being capable enough not to need the guidance, not a property of the corpus being too
+easy; see [RESULTS-v7.md](RESULTS-v7.md).
 
 ## Corpus
 
@@ -176,11 +186,12 @@ special.
   whether it reads as correct, not on whether it actually builds or passes a test; the judge-side
   gap above is this same problem one level up, where even the *scoring* wasn't independently
   verified until this session checked one case by hand.
-- **No run has pinned or varied model.** Runs 1-6 all had every arm and judge inherit whatever
-  model was running the orchestrating session, rather than an explicit `model` override - Sonnet 5
-  for runs 5 and 6, undocumented for 1-4. Every result in this harness is therefore "one model with
-  guidance vs. the same model without"; none of it has been shown to hold on a second model.
-  HARNESS.md now instructs future runs to pin and record the model explicitly.
+- **Model has been varied exactly once.** Runs 1-6 all had every arm and judge inherit whatever
+  model was running the orchestrating session (Sonnet 5 for runs 5 and 6, undocumented for 1-4).
+  Run 7 re-ran run 5's exact corpus with arms on Haiku 4.5 and judges pinned to Sonnet 5, and found
+  a real `fix_quality` gap Sonnet 5 never showed on the same cases - see run 7's row below. That is
+  one data point on one smaller model, not a trend; a third model (mid-tier, or a different vendor)
+  is the obvious next test before treating either result as representative.
 
 ## Past runs
 
@@ -192,3 +203,4 @@ special.
 | 4 | +10 `authored-from-docs-pitfall` cases | 20 (10 x 2 arms) | Do the deliberately-planted "plausible but wrong" fixes actually catch anything? | Mostly no (19/20 at ceiling on `fix_quality`) - but the one that did (CWE-117) confirmed a repeatable defect shape: guidance that leads with an infrastructure/config change over the sink-level fix | [RESULTS-v4.md](RESULTS-v4.md) |
 | 5 | 79 `authored` cases (breadth + depth campaigns, 14 CWEs x 7 languages) | 158 (79 x 2 arms) | Does the knowledge base still help on the ordinary, undramatic, single-file case at this scale? | `fix_quality` saturated again (156/158 at ceiling); `no_harm` favoured the guided arm on a low-disagreement measurement (1.97 A vs 2.00 B); found one new, reproducible entry gap - `cwe/434/go` doesn't warn that a renamed upload needs the read path updated too, and both arms independently shipped that break | [RESULTS-v5.md](RESULTS-v5.md) |
 | 6 | Last 3 `authored-from-docs-pitfall` cases | 6 (3 x 2 arms) | Do the last three planted traps catch anything run 4 didn't already find? | No (12/13 across runs 4 and 6 at ceiling on `fix_quality`), but two unplanned findings: guidance gave the technically correct exploitability read on a contested PHP/libxml question two judges reproduced, and the `no_harm` disclosure gap cuts against honest incompleteness even harder than it cuts against declared scope creep | [RESULTS-v6.md](RESULTS-v6.md) |
+| 7 | Run 5's identical 79 cases, arms on Haiku 4.5 instead of Sonnet 5 (judges stayed on Sonnet 5) | 158 (79 x 2 arms) | Does run 5's `fix_quality` saturation hold on a smaller model? | No - real gap (1.84 A / 1.97 B), concentrated in CWE-90 (+0.89) and CWE-117 (+0.75). Mechanism verified directly, not from judge notes: the ungoverned arm called `ldap3`/`ldapjs` functions that do not exist (confirmed against the real packages); the guided arm, reading the entry's named APIs, did not | [RESULTS-v7.md](RESULTS-v7.md) |

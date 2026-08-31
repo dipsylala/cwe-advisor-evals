@@ -6,11 +6,11 @@ how to execute a run from a cold start, in any session and with any capable mode
 Nothing here depends on a previous run's context. If a step needs a decision, it is called out.
 
 **The `v4`/`runs-v4` naming throughout this file is a worked example, not a fixed requirement** -
-it is what run 4 used when this file was first written. A new run picks the next unused suffix
-(`runs-v7`, `arm-map-v7.json`, `scores-v7.json`, `RESULTS-v7.md`, as of the most recent run) and
-substitutes it everywhere below; `scripts/blind.py` and `scripts/analyse.py` take directory paths as
-arguments and don't care what they're named. See README.md's **Known gaps** for what remains
-unscored.
+it is what run 4 used when this file was first written. A new run picks the next unused suffix -
+check `evals/` for the highest existing `runs-v*`/`RESULTS-v*.md` and increment it - and substitutes
+it everywhere below; `scripts/blind.py` and `scripts/analyse.py` take directory paths as arguments
+and don't care what they're named. See README.md's **Known gaps** for what remains unscored, and
+**Past runs** for what the highest-numbered run so far actually used.
 
 ## What a run is
 

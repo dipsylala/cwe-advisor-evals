@@ -1,0 +1,2378 @@
+{
+  "judge1": {
+    "R101": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "lxml resolve_entities=False + no_network=True correctly closes XXE."
+    },
+    "R102": {
+      "fix_quality": 1,
+      "no_harm": 0,
+      "note": "JWT::decode is correct, but ships '$_ENV[JWT_SECRET] ?? \"your-secret-key\"' - a hardcoded guessable fallback secret that silently defeats verification if the env var is unset."
+    },
+    "R103": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds secure:true to cookie options, closes CWE-614 cleanly."
+    },
+    "R104": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars with ENT_QUOTES applied at the actual concatenation points."
+    },
+    "R105": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "flips setcookie's secure param to true, correct fix."
+    },
+    "R106": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "removes the tainted Entity map assignment and its now-unused source read; compiles and closes the vector."
+    },
+    "R107": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "secrets.randbelow preserves the numeric range correctly."
+    },
+    "R108": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "ldap3.utils.conv.escape_filter_chars is the correct import and closes the filter-injection vector."
+    },
+    "R109": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "argv list with shell=False closes it; the fixed argument is always UPLOAD_DIR-prefixed so no flag-injection residue."
+    },
+    "R110": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "winston simple() format JSON-stringifies splat metadata, so moving username into the metadata object does escape embedded control chars."
+    },
+    "R111": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "correct AES-256-GCM, but ENCRYPTION_KEY = AESGCM.generate_key() regenerates a random key every process start, silently breaking decryption across restarts/instances - not disclosed."
+    },
+    "R112": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "bin2hex(random_bytes(32)) replaces uniqid; drops the client-controlled prefix and says so."
+    },
+    "R113": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "html.escape() applied directly at each concatenation point, no reliance on any framework autoescape."
+    },
+    "R114": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes(8).toString('hex') is a correct, appropriately-sized replacement."
+    },
+    "R115": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "SecureRandom replaces seeded java.util.Random cleanly."
+    },
+    "R116": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "sqlite3 parameterized query, standard fix."
+    },
+    "R117": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "extension allowlist closes the reported dangerous-file-type vector for this sink."
+    },
+    "R118": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds secure=True to set_cookie."
+    },
+    "R119": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars applied at the concatenation points."
+    },
+    "R120": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "bin2hex(random_bytes(16)) replaces uniqid, drops the attacker-controlled prefix."
+    },
+    "R121": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "unserialize -> json_decode with explicit field reconstruction, sound approach."
+    },
+    "R122": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto/rand.Read hex-encoded token, format preserved."
+    },
+    "R123": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "generic client response + server-side log.Printf using %q (which quotes/escapes), so no log-injection is introduced by the added log line."
+    },
+    "R124": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "HtmlEncoder.Default.Encode() throws ArgumentNullException on a null value; orderId/note are null when the query params are simply omitted (a normal, previously-working request), so this silently 500s a case that worked before, undisclosed."
+    },
+    "R125": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "basename()+realpath() containment check closes traversal; also fixes the adjacent header-injection with addcslashes, disclosed."
+    },
+    "R126": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "GetFullPath + GetRelativePath containment check correctly catches both relative traversal and absolute-path Path.Combine quirks."
+    },
+    "R127": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "mysql2 '?' placeholder with params array, standard correct fix."
+    },
+    "R128": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "explicit '..'/leading-'/' rejection plus resolve+startswith containment; the missing separator-suffix in the startswith check is not exploitable given the '..' pre-check."
+    },
+    "R129": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "execFile closes shell-metacharacter injection but leaves domain values starting with '-' able to be read as whois flags; no leading-dash guard or '--' separator."
+    },
+    "R130": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "finfo MIME allowlist + random filename, solid fix."
+    },
+    "R131": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars with ENT_QUOTES/UTF-8, standard correct fix."
+    },
+    "R132": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "ECB -> CBC with a random IV prepended, correct standard remediation."
+    },
+    "R133": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "XmlResolver = null is the documented, effective XXE mitigation for XmlDocument.LoadXml."
+    },
+    "R134": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces process spawning entirely with System.Net.NetworkInformation.Ping, eliminating the shell/injection surface."
+    },
+    "R135": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "JavaScriptStringEncode does not escape '<' or '/', so a payload containing a literal '</script>' still breaks out of the script block regardless of the quote-escaping fix."
+    },
+    "R136": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "th:utext -> th:text restores Thymeleaf's default HTML escaping."
+    },
+    "R137": {
+      "fix_quality": 0,
+      "no_harm": 2,
+      "note": "wrong mental model: this route returns a plain f-string, never passed through Jinja2, so Flask's autoescaping never applied and removing Markup() changes nothing - the XSS is unaffected."
+    },
+    "R138": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "correct hand-rolled RFC4515 escaping (backslash escaped first), closes LDAP filter injection."
+    },
+    "R139": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escapes announcement_text before building banner_markup, keeps mark_safe on the now-safe result - correct handling of the mark_safe/escape interplay."
+    },
+    "R140": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "argv exec.Command plus explicit leading-dash rejection closes both shell and flag injection."
+    },
+    "R141": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "'from flask import ... escape' - flask.escape was removed from the top-level flask package (moved to markupsafe); this import fails on any current Flask, so the app will not even start, undisclosed."
+    },
+    "R142": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES-256-GCM with a persistent hardcoded key (same pattern/location as the original, not a new regression) and correct nonce/tag handling."
+    },
+    "R143": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "'from ldap3 import ... escape_filter_chars' - this function is not exported from the ldap3 top-level package (only from ldap3.utils.conv), so the import fails at startup."
+    },
+    "R144": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "checks the boolean return of signedJWT.verify() and rejects on failure, correct fix for the discarded-result bug."
+    },
+    "R145": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "algorithm-confusion fix is correct, but switches to ParseWithClaims(tokenString, &jwt.MapClaims{}, ...) while keeping the old token.Claims.(jwt.MapClaims) assertion; passing a pointer makes token.Claims a *jwt.MapClaims, so this type assertion panics on every successful login, silently breaking all legitimate auth."
+    },
+    "R146": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "secrets.randbelow, full corrected file, import updated."
+    },
+    "R147": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "execFile closes shell injection but the added regex only blocks shell metacharacters (now moot) and never rejects a leading '-', leaving whois flag injection open."
+    },
+    "R148": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "strict allowlist regex on username closes the LDAP filter injection; restriction is explicit and disclosed."
+    },
+    "R149": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes(32).toString('hex') replaces Math.random(), correct."
+    },
+    "R150": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "random_bytes()+bin2hex replaces mt_rand and drops the attacker-controlled seed."
+    },
+    "R151": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars with a strong flag set, correct."
+    },
+    "R152": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "SqlCommand parameterization with AddWithValue, standard correct fix."
+    },
+    "R153": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escape-html applied to all three interpolated values, correct."
+    },
+    "R154": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "removes mark_safe() entirely and escapes the text, but the template presumably renders {{ announcement }} un-escaped-wrapper; without mark_safe, Django's default autoescape will now also encode the intended <div> wrapper markup itself, breaking the banner's visual rendering for every legitimate announcement - not disclosed."
+    },
+    "R155": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "generic client message plus server-side logger.error(exc_info=True), correct pattern."
+    },
+    "R156": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "mysqli prepare/bind_param/get_result, correct parameterized query."
+    },
+    "R157": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "text/template -> html/template swap is the idiomatic, correct Go fix."
+    },
+    "R158": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "extension whitelist + path-traversal rejection + UUID filename, solid layered fix."
+    },
+    "R159": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RandomNumberGenerator.GetBytes replaces seeded Random and drops the seed parameter."
+    },
+    "R160": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "switches to a narrow JSON DTO with DisallowUnknownFields and server-controls IsAdmin/Balance explicitly, closing both the weak-format and mass-assignment aspects."
+    },
+    "R161": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "argv exec.Command closes shell injection but adds no leading-dash/flag-injection guard, unlike the sibling write-up for this same case."
+    },
+    "R162": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HttpUtility.HtmlEncode applied at the concatenation point, correct."
+    },
+    "R163": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "manual escape helper for LDAP metacharacters; not strict RFC4515 hex-encoding but the backslash+literal-char style is a commonly used and accepted pattern for .NET/ADSI DirectorySearcher filters."
+    },
+    "R164": {
+      "fix_quality": 1,
+      "no_harm": 0,
+      "note": "JWT::decode/Key usage is correct, but the verification key is a bare hardcoded literal string 'your-secret-key-or-public-key' with no secret-management guidance, shipped as though it were final code."
+    },
+    "R165": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds Secure = true to CookieOptions, correct."
+    },
+    "R166": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "strips \\n/\\r before logging, directly closes CWE-117."
+    },
+    "R167": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "'?' placeholder parameterized query, correct."
+    },
+    "R168": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Path.is_relative_to() is a clean, correct containment check, but switching from a raw byte return to send_file(..., as_attachment=True) adds a Content-Disposition:attachment header that was not present before, changing browser download behavior for legitimate requests without saying so."
+    },
+    "R169": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "same gap as its sibling write-up: JavaScriptStringEncode doesn't escape '<'/'/', so a '</script>' payload still breaks out of the script block."
+    },
+    "R170": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "flips setcookie's secure parameter to true."
+    },
+    "R171": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces BinaryFormatter with System.Text.Json against an explicit typed model, the correct remediation since BinaryFormatter cannot be secured."
+    },
+    "R172": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "magic-byte MIME sniffing, allowlist, random filename, moved outside webroot, safe serving handler - thorough and correct; format/contract change is explicitly disclosed."
+    },
+    "R173": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "random_bytes()+bin2hex replaces mt_rand."
+    },
+    "R174": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "'?' placeholder parameterized query, correct (aside about all Go drivers using '?' is inaccurate but doesn't affect the shipped code)."
+    },
+    "R175": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "fix calls logger.debug(...) but no Logger field/import is declared anywhere in the class or explained as needing one, so the code as given will not compile."
+    },
+    "R176": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "resolve_entities=False, no_network=True, load_dtd=False - thorough, correct XXE fix."
+    },
+    "R177": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HTML::Entities::encode_entities applied at both interpolation points."
+    },
+    "R178": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "correctly modernizes to createCipheriv+PBKDF2+random IV, but uses a hardcoded static salt ('salt') across all users - disclosed as a known simplification, which is a real weakness even though flagged."
+    },
+    "R179": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "CGI's escapeHTML correctly imported via ':standard' (which includes :html2, where escapeHTML lives)."
+    },
+    "R180": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds secure:true, also suggests sameSite appropriately."
+    },
+    "R181": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES-256-GCM with PBKDF2 and a fresh random salt per encryption plus explicit authTag handling - thorough, correct."
+    },
+    "R182": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "ldap.escapeFilterValue() is not a real ldapjs export (no such function documented anywhere in ldapjs); this throws at runtime on every request, undisclosed."
+    },
+    "R183": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RandomNumberGenerator.Create()+GetBytes(32) replaces Guid.NewGuid(), correct."
+    },
+    "R184": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "moves username into winston metadata, correctly escaped via JSON.stringify in the simple() formatter."
+    },
+    "R185": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "checks verify()'s boolean return, correct fix for the discarded-result bug."
+    },
+    "R186": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "changes the struct field from template.HTML to string so html/template auto-escapes it, correct."
+    },
+    "R187": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "node-serialize -> JSON.parse with type validation, removes the RCE-capable deserializer."
+    },
+    "R188": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "absolute-path/leading-'..' rejection plus Clean+prefix containment check, correct and thorough."
+    },
+    "R189": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "innerHTML -> createElement/textContent, correct DOM-based fix preserving structure."
+    },
+    "R190": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "standard OWASP feature set (disallow-doctype-decl, external entities off, etc.) on DocumentBuilderFactory."
+    },
+    "R191": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes(16).toString('base64url'), correct."
+    },
+    "R192": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "magic-byte MIME detection + UUID filename derived from the detected type, closes both file-type and path-traversal aspects."
+    },
+    "R193": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "same defect as its sibling write-up: switches to ParseWithClaims(tokenString, &jwt.MapClaims{}, ...) but keeps token.Claims.(jwt.MapClaims), which panics on every successful login since the stored type is now *jwt.MapClaims."
+    },
+    "R194": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "same standard XXE hardening feature set, wrapped in try/catch; harmless duplicate lines."
+    },
+    "R195": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto/rand.Int(rand.Reader, max) replaces math/rand with the same numeric range, cryptographically secure."
+    },
+    "R196": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "json_encode() for the JS string context, correctly removes the manual quote wrapper too."
+    },
+    "R197": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RandomNumberGenerator.Fill replaces seeded Random and drops the seed parameter."
+    },
+    "R198": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "encodes control characters via JavaScriptEncoder before logging, closes CRLF log forging regardless of sink."
+    },
+    "R199": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "message-template logging is good practice but the claim that 'the logging provider automatically handles escaping' of embedded newlines is incorrect for typical text-based ILogger sinks - the template mechanism alone does not neutralize control characters in the value."
+    },
+    "R200": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "filepath.Rel + '..' prefix check correctly catches traversal; Go's filepath.Join doesn't discard the base on an absolute 2nd arg so no separate absolute-path check is needed."
+    },
+    "R201": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "html.EscapeString applied to both interpolated values."
+    },
+    "R202": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "path.resolve + startsWith(base+sep) containment check, correct."
+    },
+    "R203": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "realpath containment with separator-suffix check plus basename-derived Content-Disposition header, thorough."
+    },
+    "R204": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Apache Tika content-type detection, allowlist, UUID filename, moved outside webroot, size limit - thorough and correct."
+    },
+    "R205": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "correctly uses html.escape() directly (unlike the sibling write-up, this doesn't rely on any nonexistent autoescaping)."
+    },
+    "R206": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "System.Buffers.Text.Base64Url.ConvertToString is not a real method (the actual API is EncodeToString); this code will not compile."
+    },
+    "R207": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "GetFullPath + StartsWith(base+separator) containment check, correctly avoids the sibling-directory prefix bypass."
+    },
+    "R208": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "generic client response + server log.Printf with %q, correct and notes the needed import."
+    },
+    "R209": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "'?' placeholder with pool.execute(), a correct (if slightly overstated in explanation) parameterized fix."
+    },
+    "R210": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "unserialize -> json_decode with explicit reconstruction, correct."
+    },
+    "R211": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "SecureRandom replaces seeded java.util.Random."
+    },
+    "R212": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "removes dangerouslySetInnerHTML in favor of plain JSX text rendering, correct for free-text content."
+    },
+    "R213": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds Secure, HttpOnly, and SameSite to the cookie, comprehensive correct fix."
+    },
+    "R214": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "extension+MIME allowlist and random filename, correct."
+    },
+    "R215": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "primary fix uses 'use CGI::Util qw(escape_html)' - CGI::Util exports no public subroutines, so this import fails; a correct working alternative ($cgi->escapeHTML) is given immediately after, so the vector can be closed but the primary snippet as written cannot."
+    },
+    "R216": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes(16).toString('hex'), correct sizing and API."
+    },
+    "R217": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "mysqli prepared statement with bind_param, correct."
+    },
+    "R218": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "moves username into an slog.String attribute; log/slog's TextHandler quotes values containing control characters via strconv.Quote, so this genuinely closes the vector."
+    },
+    "R219": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "$cgi->escapeHTML(), correct and real API."
+    },
+    "R220": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "JSON.parse + Ajv closes the RCE vector, but the schema has properties:{} with additionalProperties:false, so essentially any non-empty profile object fails validation and req.profile silently collapses to {} for virtually all legitimate cookies - not disclosed."
+    },
+    "R221": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "text/template -> html/template swap, correct."
+    },
+    "R222": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "DES -> AES-256-CBC with a random IV, correct standard remediation."
+    },
+    "R223": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds Secure: true to the cookie, correctly closes the reported finding."
+    },
+    "R224": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "$cgi->escapeHTML() applied to both interpolated values."
+    },
+    "R225": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "same defect as its sibling: HtmlEncoder.Default.Encode(null) throws when orderId/note query params are simply omitted, silently 500ing a request that worked before."
+    },
+    "R226": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "jwt.verify with explicit algorithms allowlist and secret from env, correct."
+    },
+    "R227": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "generic client message plus server-side logging, correct pattern."
+    },
+    "R228": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "switches to JSON plus an HMAC signature requirement to establish trust before deserializing, a valid CWE-502 mitigation strategy; disclosed as central to the fix."
+    },
+    "R229": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "XmlReader with DtdProcessing.Prohibit + XmlResolver=null, the OWASP-recommended strict fix."
+    },
+    "R230": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "innerHTML -> createElement/textContent DOM construction, correct."
+    },
+    "R231": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "sqlite3 parameterized query, correct."
+    },
+    "R232": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "SqlCommand parameterization with explicit SqlDbType, correct."
+    },
+    "R233": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "resolves via fs.realpathSync.native and checks path.relative containment, closing both traversal and symlink-based escapes."
+    },
+    "R234": {
+      "fix_quality": 1,
+      "no_harm": 0,
+      "note": "jwt.verify is correct, but 'process.env.JWT_SECRET || \"your-secret-key\"' ships a hardcoded guessable fallback secret that silently defeats verification whenever the env var is unset."
+    },
+    "R235": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "removes dangerouslySetInnerHTML for plain text rendering, with a correctly-caveated DOMPurify alternative for when HTML must be preserved."
+    },
+    "R236": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds secure=True (and samesite), correct."
+    },
+    "R237": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces Fprintf concatenation with html/template, idiomatic and correct."
+    },
+    "R238": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "argv subprocess.run(shell=False); input_path is always UPLOAD_DIR-prefixed so no flag-injection residue despite no filename validation."
+    },
+    "R239": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "uses a fully-qualified inline LoggerFactory.getLogger() call, so this compiles without needing a separately-declared field."
+    },
+    "R240": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "json_encode with JSON_HEX_TAG/AMP/APOS/QUOT, the most thorough of the JS-context fixes seen, also guards the '</script>' breakout."
+    },
+    "R241": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "jwt.decode with secret+algorithms correctly restores verification, but nothing catches PyJWT's InvalidTokenError family, so any invalid/expired token now 500s instead of a handled 401 - a real, unstated behavior change."
+    },
+    "R242": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "th:utext -> th:text, correct."
+    },
+    "R243": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escape-html applied, correct."
+    },
+    "R244": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "noent:false plus nonet:true matches documented libxmljs XXE guidance."
+    },
+    "R245": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES-256-GCM with a SHA-256-derived key (also fixes the pre-existing exact-key-length requirement bug) and random nonce, thorough and correct."
+    },
+    "R246": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "template.HTML -> string field type, correct."
+    },
+    "R247": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "sets dtdvalid/dtdload/noent but omits nonet:true, which per libxmljs's documented secure configuration is needed to fully close SSRF/network-based exfiltration during parsing."
+    },
+    "R248": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "repr() genuinely escapes control characters into printable text, closing the log-forging vector."
+    },
+    "R249": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HTML::Entities::encode_entities, correct."
+    },
+    "R250": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "instructs removing only the Entity-map line while leaving 'label := r.URL.Query().Get(...)' in place; the now-unused local variable is a hard compile error in Go."
+    },
+    "R251": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "WebUtility.HtmlEncode applied at the concatenation point, correct."
+    },
+    "R252": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "jwt.decode with secret+algorithms, and correctly catches DecodeError/ExpiredSignatureError (InvalidSignatureError is a DecodeError subclass) so invalid tokens get a clean 401."
+    },
+    "R253": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "extension allowlist + magic-byte signature check + secure_filename, correct layered fix."
+    },
+    "R254": {
+      "fix_quality": 0,
+      "no_harm": 2,
+      "note": "claims '%s' parameterized logging causes 'the logger [to] handle proper escaping' of special characters - this is false; Python logging's %-style substitution is purely a lazy-formatting optimization with no escaping, so an embedded newline in username still forges a fake log line exactly as before."
+    },
+    "R255": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds Secure = true, correct."
+    },
+    "R256": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "validates host against IP/hostname regex (rejecting a leading '-') and drops cmd.exe in favor of invoking ping.exe directly, closing both shell and flag injection."
+    },
+    "R257": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "correct AES-256-GCM, but the 32-byte Key is regenerated via RandomNumberGenerator.Fill in a static constructor - a fresh random key every process start/instance, silently breaking cross-restart/cross-instance decryption, not disclosed."
+    },
+    "R258": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces BinaryFormatter with System.Text.Json against a typed model, correct remediation."
+    }
+  },
+  "judge2": {
+    "R101": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "resolve_entities=False plus no_network=True correctly closes XXE."
+    },
+    "R176": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "resolve_entities=False plus no_network=True plus load_dtd=False, thorough correct XXE closure."
+    },
+    "R102": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "firebase/php-jwt signature verification is correct; but fallback secret 'your-secret-key' if JWT_SECRET unset is an undisclosed weak-default footgun."
+    },
+    "R164": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "JWT::decode with a Key object correctly implements signature verification, but the shown key value is the unconditional hardcoded literal 'your-secret-key-or-public-key' (no env/config lookup at all) -- every deployment following this fix as written signs and verifies with a publicly-known string, silently defeating the verification it claims to add."
+    },
+    "R103": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds secure:true, minimal correct change."
+    },
+    "R180": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds secure:true, minimal correct change, notes sameSite tradeoff."
+    },
+    "R104": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5 correctly closes XSS."
+    },
+    "R119": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars with ENT_QUOTES, correct."
+    },
+    "R105": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "flips secure param to true, minimal correct change."
+    },
+    "R170": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "flips secure param to true, minimal correct change."
+    },
+    "R106": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "removes untrusted Entity map assignment entirely; no legitimate use of that field existed."
+    },
+    "R250": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "removes untrusted Entity map assignment entirely; no legitimate use of that field existed."
+    },
+    "R107": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "secrets.randbelow preserves range, correct CSPRNG replacement."
+    },
+    "R146": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "secrets.randbelow preserves the original numeric range, correct CSPRNG replacement."
+    },
+    "R143": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "imports `escape_filter_chars` from top-level `ldap3` package, which does not export it (only `ldap3.utils.conv` does, confirmed against the published wheel) -- raises ImportError, app never starts."
+    },
+    "R109": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "argument-array subprocess.run plus filename allowlist regex; input always prefixed by dir so no option injection."
+    },
+    "R238": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "argument-array subprocess.run closes shell injection; no filename validation added but path is always dir-prefixed so no option injection either."
+    },
+    "R125": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "basename()+realpath containment check, multi-layered, correct."
+    },
+    "R203": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "realpath canonicalization plus separator rejection, correct containment."
+    },
+    "R128": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "denylist '..'/leading '/' plus resolve+startswith defense in depth."
+    },
+    "R168": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "resolve+is_relative_to correctly closes traversal, but silently switches to send_file(as_attachment=True) adding a Content-Disposition header the original response never sent."
+    },
+    "R188": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "prefilter plus canonicalize+HasPrefix containment check after Join/Clean is authoritative and correct."
+    },
+    "R200": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "filepath.Rel + HasPrefix('..') containment check, standard correct Go pattern."
+    },
+    "R202": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "path.resolve()+startsWith containment check, correct."
+    },
+    "R233": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "realpathSync-based containment check, thorough and correct."
+    },
+    "R132": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "ECB to CBC with random IV, IV-prepend format change openly documented and necessary."
+    },
+    "R257": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "AesGcm authenticated encryption correctly closes ECB weakness, but silently switches to a random key generated fresh each process start (static ctor) instead of a persistent key, undisclosed as a tradeoff."
+    },
+    "R222": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES-256-CBC+random IV; requires hex-encoded 32-byte key, disclosed as part of fix."
+    },
+    "R245": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES-256-GCM with SHA-256-derived key from form value preserves flexible key input; disclosed decrypt-side changes."
+    },
+    "R178": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "createCipheriv+PBKDF2+explicit IV in CBC; static salt caveat disclosed; output format change disclosed and necessary."
+    },
+    "R181": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "moves to AES-256-GCM with PBKDF2 salt+iv+authTag, fully disclosed format change."
+    },
+    "R111": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "AESGCM correctly closes ECB weakness, but key becomes a fresh random value generated at import time each process start rather than a persistent key; not disclosed as a tradeoff."
+    },
+    "R142": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES-256-GCM with fixed (unchanged persistence) key, nonce added correctly."
+    },
+    "R183": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RandomNumberGenerator 32 random bytes, correct CSPRNG replacement."
+    },
+    "R206": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RandomNumberGenerator.Fill + Base64Url, correct; version caveat disclosed."
+    },
+    "R122": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto/rand.Read hex-encoded, preserves sessionID format, disclosed."
+    },
+    "R195": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto/rand.Int via math/big, correct CSPRNG replacement."
+    },
+    "R149": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes(32) hex, correct drop-in replacement."
+    },
+    "R191": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes(16) base64url, correct drop-in replacement."
+    },
+    "R112": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "random_bytes(32) hex, removes attacker-influenced prefix, disclosed."
+    },
+    "R120": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "random_bytes(16) hex, removes attacker-influenced prefix, disclosed."
+    },
+    "R159": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RandomNumberGenerator.GetBytes, removes seed param, disclosed as required since tokens must be non-deterministic."
+    },
+    "R197": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RandomNumberGenerator.Fill, removes seed param, disclosed."
+    },
+    "R115": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "SecureRandom correctly replaces seeded Random; leftover unused seed-parsing lines are harmless (same requirement existed before)."
+    },
+    "R211": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "SecureRandom correctly replaces seeded Random, same as above."
+    },
+    "R114": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes(8) hex; 64-bit is on the low side but still a valid CSPRNG drop-in replacement."
+    },
+    "R216": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes(16) hex, correct 128-bit CSPRNG replacement."
+    },
+    "R150": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "random_bytes(32) hex, removes seed dependency, disclosed."
+    },
+    "R173": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "random_bytes(16) hex, removes seed dependency, disclosed."
+    },
+    "R145": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds signing-method allowlist check in keyfunc plus WithValidMethods/WithExpirationRequired, standard mitigation, no side effects."
+    },
+    "R193": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds signing-method allowlist check in keyfunc, standard mitigation, no side effects."
+    },
+    "R144": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "checks verify() boolean return value and rejects on false, correctly closes the bypass."
+    },
+    "R185": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "checks verify() boolean return value and rejects on false, correctly closes the bypass."
+    },
+    "R226": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "jwt.verify with explicit algorithms allowlist, checks secret is configured before use (no insecure fallback), clean."
+    },
+    "R234": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "jwt.verify correctly replaces jwt.decode, but defaults to a hardcoded fallback secret 'your-secret-key' when JWT_SECRET is unset, silently defeating verification if undeployed; not flagged as a risk."
+    },
+    "R241": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "restores jwt.decode with secret+algorithms, checks secret presence, clean."
+    },
+    "R252": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "restores jwt.decode with secret+algorithms, catches decode errors, clean."
+    },
+    "R117": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "extension allowlist before save; disclosed narrowing of accepted types, standard approach for this sink."
+    },
+    "R172": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "content-sniffing, random filename, private storage with custom handler; response body change to return generated filename is disclosed and necessary since filename is now randomized."
+    },
+    "R158": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "extension allowlist, traversal check, UUID filename; response naturally reflects new path, standard fix."
+    },
+    "R204": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Tika content-type detection, allowlist, size cap, UUID filename outside webroot; thorough and correct."
+    },
+    "R130": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "finfo MIME detection, allowlist, random filename; correct standard fix."
+    },
+    "R214": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "extension allowlist plus finfo MIME check plus random filename; correct layered fix."
+    },
+    "R192": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "magic-byte MIME detection via python-magic, UUID filename derived from detected type; correct, response shape preserved."
+    },
+    "R253": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "extension allowlist, magic-byte signature check, secure_filename; correct layered fix, response shape preserved."
+    },
+    "R171": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces BinaryFormatter with System.Text.Json against a narrow DTO; wire-format change is the unavoidable, standard consequence of this fix."
+    },
+    "R258": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces BinaryFormatter with System.Text.Json against a narrow DTO; same as above."
+    },
+    "R160": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "narrow request DTO plus server-controlled IsAdmin/Balance defaults closes mass-assignment; JSON format change is disclosed and necessary."
+    },
+    "R228": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "HMAC-signed JSON payload is a recognized CWE-502 mitigation, but silently requires all callers to share a pre-shared secret that did not previously exist -- breaks every existing legitimate caller and the write-up never flags this as a required migration step."
+    },
+    "R187": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "JSON.parse plus object-type validation, correctly closes RCE vector."
+    },
+    "R220": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "closes the RCE vector, but the Ajv schema (properties:{}, additionalProperties:false) validates only an empty object -- any populated profile is silently discarded to {} on every request, and this is never flagged."
+    },
+    "R121": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "json_decode plus type-checked field reconstruction into ShoppingCart; write path updated to json_encode, disclosed."
+    },
+    "R210": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "json_decode plus type-checked field reconstruction into ShoppingCart; correct."
+    },
+    "R133": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "XmlResolver=null before LoadXml is Microsoft's documented XXE mitigation for XmlDocument, no side effects for well-formed input."
+    },
+    "R229": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "XmlReaderSettings with DtdProcessing.Prohibit plus XmlResolver=null, stronger defense-in-depth variant, no side effects for the case's expected input."
+    },
+    "R190": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "standard six-feature DocumentBuilderFactory hardening, correct and no side effects."
+    },
+    "R194": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "same hardening plus fail-secure try/catch around setFeature; correct."
+    },
+    "R244": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "noent:false disables entity substitution (the core XXE control) plus nonet:true for network defense-in-depth; correctly closes the primary vector."
+    },
+    "R247": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "disables entity substitution plus DTD loading/validation; correctly closes the primary vector, includes a useful note on libxmljs's own unfixed advisories."
+    },
+    "R165": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds Secure=true, minimal correct change."
+    },
+    "R255": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds Secure=true, minimal correct change."
+    },
+    "R213": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds Secure/HttpOnly/SameSite, disclosed improvement, no regression."
+    },
+    "R223": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds Secure:true, minimal correct change."
+    },
+    "R118": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds secure=True, minimal correct change."
+    },
+    "R236": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "adds secure=True plus samesite='Lax', disclosed improvement."
+    },
+    "R134": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces Process.Start(cmd.exe) with native System.Net.NetworkInformation.Ping, eliminating the shell entirely; output reformatting is disclosed and necessary."
+    },
+    "R256": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "invokes ping.exe directly (no cmd.exe) plus host allowlist regex requiring alnum-leading hostnames/IPs, closing both shell and leading-dash option injection."
+    },
+    "R140": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "argument-array exec.Command with no shell closes the reported vector; also explicitly rejects leading '-' (CWE-88 hardening)."
+    },
+    "R161": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "argument-array exec.Command with no shell correctly closes the reported command-injection vector; does not add a leading-dash/option-injection guard like its sibling fix does, a minor completeness gap."
+    },
+    "R129": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "execFile with argument array closes the reported shell-injection vector; no leading-dash guard against option injection into the whois binary."
+    },
+    "R147": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "execFile with argument array closes the reported vector; added metacharacter denylist doesn't cover leading '-' option injection, a minor completeness gap."
+    },
+    "R162": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HttpUtility.HtmlEncode, correct context encoding."
+    },
+    "R251": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "WebUtility.HtmlEncode, correct context encoding."
+    },
+    "R135": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "JavaScriptStringEncode correctly matches the JS-string-literal output context."
+    },
+    "R169": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "JavaScriptStringEncode correctly matches the JS-string-literal output context."
+    },
+    "R124": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HtmlEncoder.Default.Encode, correct context encoding."
+    },
+    "R225": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HtmlEncoder.Default.Encode, correct context encoding."
+    },
+    "R201": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "html.EscapeString, correct idiomatic Go fix."
+    },
+    "R237": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "switches to html/template with auto-escaping, robust fix."
+    },
+    "R186": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "removes template.HTML cast in favor of string, restoring auto-escaping, correct."
+    },
+    "R246": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "removes template.HTML cast in favor of string, restoring auto-escaping, correct."
+    },
+    "R157": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "text/template to html/template drop-in swap, correct."
+    },
+    "R221": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "text/template to html/template drop-in swap, correct."
+    },
+    "R136": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "th:utext to th:text, correct Thymeleaf auto-escaping fix."
+    },
+    "R242": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "th:utext to th:text, correct Thymeleaf auto-escaping fix."
+    },
+    "R153": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escape-html applied to all interpolated values, correct."
+    },
+    "R243": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escape-html applied to closingNote, correct."
+    },
+    "R189": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces innerHTML with textContent/createTextNode DOM construction, correct and safe."
+    },
+    "R230": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces innerHTML with element/textNode DOM construction for both fields, correct and safe."
+    },
+    "R212": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "removes dangerouslySetInnerHTML in favor of auto-escaped JSX text; tag changes div to p, a cosmetic difference only."
+    },
+    "R235": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "removes dangerouslySetInnerHTML in favor of auto-escaped JSX text, offers DOMPurify alternative if HTML support is required; correct."
+    },
+    "R219": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escapeHTML on the reported note param, correct; separately notes but does not fix an unreported second sink at line 14."
+    },
+    "R249": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "encode_entities on the reported note param, correct."
+    },
+    "R215": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escapes both interpolated variables in the reported print statement, correct."
+    },
+    "R224": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escapes both interpolated variables in the reported print statement, correct."
+    },
+    "R177": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "encode_entities on both user-controlled fields, correctly leaves server-generated status badge unescaped."
+    },
+    "R179": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escapeHTML on both user-controlled fields, correctly leaves server-generated status badge unescaped."
+    },
+    "R131": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars with ENT_QUOTES, correct."
+    },
+    "R151": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5, correct."
+    },
+    "R196": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "json_encode() for JS-string context, correct context-aware encoding."
+    },
+    "R240": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "json_encode() with JSON_HEX_* flags for JS-string/script context, correct."
+    },
+    "R139": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escape() applied before format+mark_safe, correct."
+    },
+    "R154": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "html.escape() applied, mark_safe() removed since content is now plain-safe, correct."
+    },
+    "R137": {
+      "fix_quality": 0,
+      "no_harm": 2,
+      "note": "removing Markup() is a no-op here: the view returns a raw f-string, never passed through Jinja2/render_template, so Flask's autoescaping never applies either way -- output is byte-for-byte identical before and after, XSS still fully exploitable."
+    },
+    "R205": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "replaces Markup() with html.escape() applied directly to the string, correctly closes the vector regardless of templating path."
+    },
+    "R113": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "html.escape() applied to all three concatenated values including derived status, correct."
+    },
+    "R141": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "imports `escape` from top-level `flask`, which Flask removed in 3.0 (confirmed against the published 3.1.3 wheel's __init__.py -- no escape/Markup re-export) -- raises ImportError, app never starts."
+    },
+    "R152": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "parameterized query via AddWithValue, correct."
+    },
+    "R232": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "parameterized query via Parameters.Add with explicit SqlDbType, correct."
+    },
+    "R167": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "parameterized query with '?' placeholder, correct."
+    },
+    "R174": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "parameterized query with '?' placeholder, correct."
+    },
+    "R127": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "parameterized query with '?' placeholder and array, correct mysql2 usage."
+    },
+    "R209": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "switches to pool.execute with '?' placeholder, correct server-side prepared statement."
+    },
+    "R156": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "mysqli prepare/bind_param, correct."
+    },
+    "R217": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "mysqli prepare/bind_param, correct."
+    },
+    "R116": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "parameterized query with '?' and tuple, correct sqlite3 usage."
+    },
+    "R231": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "parameterized query with '?' and tuple, correct sqlite3 usage."
+    },
+    "R148": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "allowlist regex rejects all LDAP metacharacters before the filter is built, valid alternate mitigation, disclosed."
+    },
+    "R163": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escapes the five LDAP special characters with backslash-prefix rather than RFC 4515's canonical two-hex-digit form; functions in practice for .NET DirectorySearcher but is a less portable escaping style than the hex-encoded form used elsewhere in this batch."
+    },
+    "R138": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "correct RFC 4515 hex-encoded escaping plus allowlist validation, thorough."
+    },
+    "R182": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "calls `ldap.escapeFilterValue()`, which does not exist anywhere in ldapjs's exports (confirmed against the published 3.0.7 tarball) -- throws TypeError on every request, breaking the endpoint entirely rather than closing the vector."
+    },
+    "R108": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escape_filter_chars imported correctly from ldap3.utils.conv, correct."
+    },
+    "R175": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "returns generic message, logs full exception; snippet references an undeclared `logger` field, a presentational omission but the security-relevant part (removing e.getMessage() from the response) is complete and correct."
+    },
+    "R239": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "returns generic message, logs full exception via a self-contained LoggerFactory call, correct."
+    },
+    "R155": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "generic error message to client, full exception logged server-side with exc_info, correct and self-contained."
+    },
+    "R227": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "generic error message to client, full exception logged server-side with exc_info, correct and self-contained."
+    },
+    "R123": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "generic message to client, internal log.Printf with full detail, correct."
+    },
+    "R208": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "generic message to client, internal log.Printf with full detail, correct."
+    },
+    "R126": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "GetFullPath+GetRelativePath containment check, rejects rather than strips, correct."
+    },
+    "R207": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "GetFullPath+StartsWith(separator-terminated) containment check, correct."
+    },
+    "R110": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "moves username into winston metadata object, which winston's simple format JSON-serializes (escaping control chars); correct."
+    },
+    "R184": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "same structured-metadata approach, correct."
+    },
+    "R166": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "explicitly strips \\n/\\r before logging, a direct character-level fix robust regardless of formatter."
+    },
+    "R218": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "moves username into an slog.String attribute; log/slog's handlers quote-and-escape control characters in attribute values, correct."
+    },
+    "R198": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "encodes the value with JavaScriptEncoder before logging, so control characters are neutralized in the string itself regardless of which formatter renders it; robust."
+    },
+    "R199": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "relies solely on the named-placeholder mechanism to prevent injection, but Microsoft.Extensions.Logging's default (Simple) console/text formatter substitutes the raw value into the message text with no control-character escaping -- an embedded newline still forges a log line unless a JSON/structured sink is configured, which isn't established here."
+    },
+    "R248": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "wraps the value in repr() before the %s substitution, which does escape control characters into visible backslash sequences; correctly closes the vector."
+    },
+    "R254": {
+      "fix_quality": 0,
+      "no_harm": 2,
+      "note": "Python logging's %-style lazy formatting performs plain string substitution with no escaping of the substituted value -- an embedded newline in username appears exactly as literal as it would with the original f-string, so the output is unchanged and the vector remains open despite the write-up's claim that the logger 'handles proper escaping'."
+    }
+  },
+  "judge3": {
+    "R198": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Message template + JavaScriptEncoder.Encode actually neutralizes control chars; no side effects."
+    },
+    "R199": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "Structured-logging placeholder alone doesn't strip/escape newlines under the default text console formatter, so raw newline injection can still forge log lines; only helps with structured (JSON) sinks."
+    },
+    "R166": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Strips \\n and \\r before logging; closes the injection vector cleanly."
+    },
+    "R218": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "log/slog's TextHandler/JSONHandler quote/escape control characters in attribute values, genuinely closing the vector."
+    },
+    "R110": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Winston metadata field is JSON-stringified, escaping control chars; clean."
+    },
+    "R184": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct structured-logging fix as its pair."
+    },
+    "R248": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "repr() escapes control characters as literal backslash sequences, actually closing the vector."
+    },
+    "R254": {
+      "fix_quality": 0,
+      "no_harm": 2,
+      "note": "%s parameterization alone does not escape control chars in Python logging; the formatted output is identical to the original f-string for injected newlines, so the vector stays open."
+    },
+    "R123": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Logs detail server-side, returns generic message; clean."
+    },
+    "R208": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same pattern, correctly closes the info leak."
+    },
+    "R175": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Logs exception, returns generic message; clean."
+    },
+    "R239": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern, with a reusable global handler alternative."
+    },
+    "R155": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Logs with exc_info, returns generic JSON error; clean."
+    },
+    "R227": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern."
+    },
+    "R126": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Canonicalizes and checks containment via GetRelativePath before use; rejects escapes, preserves legitimate access."
+    },
+    "R207": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "GetFullPath + prefix containment check; correct and unobtrusive."
+    },
+    "R188": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Canonicalizes and verifies containment before the real read; correct."
+    },
+    "R200": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "filepath.Rel containment check catches escapes; correct."
+    },
+    "R202": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "path.resolve + prefix containment check; standard correct fix."
+    },
+    "R233": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "realpath-based containment check (handles symlinks too); correct."
+    },
+    "R125": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "basename() + realpath containment check; correct, preserves normal downloads."
+    },
+    "R203": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Rejects separators, realpath containment check; correct."
+    },
+    "R128": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "resolve() + containment check; response shape unchanged for legitimate files."
+    },
+    "R168": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Correctly closes traversal, but silently switches to send_file(as_attachment=True), adding a Content-Disposition/download behavior not present before and not mentioned in the write-up."
+    },
+    "R132": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "ECB->CBC with random IV, prepended and disclosed; key unchanged so no hidden persistence issue."
+    },
+    "R257": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "ECB->AES-GCM correctly closes the mode weakness, but the key is now regenerated in a static constructor on every process start (vs. the previous persisted key), silently making any previously-encrypted data undecryptable after a restart -- not mentioned in the write-up."
+    },
+    "R222": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "DES->AES-256 correctly closes the weak-cipher finding, but requires a new 64-char-hex key format, so any caller using the old 8-byte DES key now gets rejected -- disclosed as required, so capped rather than zeroed."
+    },
+    "R245": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "DES->AES-256-GCM; SHA-256 of the supplied key value accepts any prior key input without rejecting requests."
+    },
+    "R178": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "createCipher->createCipheriv+PBKDF2 correctly closes the legacy-API weakness, but uses a static PBKDF2 salt, a real weakness the write-up itself flags as a shortcut ('for simplicity in a test scenario') rather than fixing."
+    },
+    "R181": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "AES-256-GCM with random salt/IV/tag, richer but necessary response shape; clean."
+    },
+    "R111": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "ECB->AESGCM correctly closes the mode weakness, but the key is generated fresh at import time (module load) instead of being persisted, silently breaking decryption across restarts -- not disclosed."
+    },
+    "R142": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "ECB->GCM with random nonce; key stays a persisted constant, only response format changes (disclosed)."
+    },
+    "R183": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Guid.NewGuid()->RandomNumberGenerator bytes; correct, no side effects."
+    },
+    "R206": {
+      "fix_quality": 1,
+      "no_harm": 2,
+      "note": "Approach is correct, but cites `System.Buffers.Text.Base64Url.ConvertToString`, which is not the actual .NET 9 API (the real method is `EncodeToString`); likely would not compile as written."
+    },
+    "R122": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto/rand + hex encoding; preserves session ID structure, disclosed."
+    },
+    "R195": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto/rand.Int bounded correctly; clean."
+    },
+    "R149": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes(32).toString('hex'); downstream code accepts any string, no breakage."
+    },
+    "R191": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes base64url; explicitly notes no caller changes needed."
+    },
+    "R112": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "random_bytes(32)+bin2hex; drops the unused client_nonce prefix, disclosed, doesn't break the reset flow."
+    },
+    "R120": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern."
+    },
+    "R107": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "secrets.randbelow with correct range translation; preserves caller-supplied min/max contract."
+    },
+    "R146": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern."
+    },
+    "R159": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RandomNumberGenerator.GetBytes, seed param dropped (ignored by ASP.NET, not rejected); clean."
+    },
+    "R197": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern."
+    },
+    "R115": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "SecureRandom() self-seeded; correct removal of attacker-controlled seed."
+    },
+    "R211": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern."
+    },
+    "R114": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "crypto.randomBytes hex; map-key contract preserved."
+    },
+    "R216": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern."
+    },
+    "R150": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "random_bytes+bin2hex; drops attacker-controlled seed cleanly, other flow untouched."
+    },
+    "R173": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern."
+    },
+    "R145": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Type-asserts RSA method in keyfunc plus WithValidMethods/WithExpirationRequired; closes the alg-confusion vector thoroughly, valid RS256 tokens unaffected."
+    },
+    "R193": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same core fix (method type assertion); valid tokens unaffected."
+    },
+    "R144": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Checks verify() boolean return and rejects on false; correct fail-secure fix."
+    },
+    "R185": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern."
+    },
+    "R226": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "jwt.decode->jwt.verify with explicit algorithms and a fail-closed check when JWT_SECRET is unset; clean."
+    },
+    "R234": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "Adds real signature verification, but falls back to a hardcoded, well-known placeholder secret ('your-secret-key') when JWT_SECRET is unset, silently reintroducing forgeable signatures rather than failing closed."
+    },
+    "R102": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "Adds real signature verification via firebase/php-jwt, but falls back to a hardcoded literal secret ('your-secret-key') when the env var is missing, silently reintroducing forgeable tokens."
+    },
+    "R164": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "Adds real signature verification, but the verification key is a hardcoded literal string ('your-secret-key-or-public-key') rather than loaded from configuration -- a hardcoded credential, not a placeholder guarded by any check."
+    },
+    "R241": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Re-enables verification with explicit algorithm, fails closed (500) if secret is missing; clean."
+    },
+    "R252": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct pattern, no insecure fallback."
+    },
+    "R117": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Extension allowlist before save; rejects non-image types, legitimate uploads unaffected."
+    },
+    "R172": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Content-sniffed allowlist, random filename, private storage dir with a safe custom handler; returns the generated filename so the caller can still retrieve it (disclosed contract change)."
+    },
+    "R158": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Extension whitelist + path-component check + UUID filename; correct."
+    },
+    "R204": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Content-sniffed (Tika) allowlist + UUID filename + size cap; thorough and correct."
+    },
+    "R130": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "finfo MIME allowlist + random filename; correct."
+    },
+    "R214": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Extension + MIME allowlist + random filename; correct, defense-in-depth."
+    },
+    "R192": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Magic-byte MIME detection + UUID filename; response shape preserved."
+    },
+    "R253": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Extension allowlist + magic-byte check + secure_filename(); correct."
+    },
+    "R171": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "BinaryFormatter->System.Text.Json with a typed DTO correctly closes the RCE vector, but requires callers to switch from a binary blob to JSON, breaking every existing BinaryFormatter-based caller (necessary given BinaryFormatter cannot be secured, and shown plainly in the rewritten code)."
+    },
+    "R258": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Same fix and same necessary-but-breaking format change to JSON."
+    },
+    "R160": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "gob->JSON with a narrow DTO that excludes IsAdmin/Balance is an excellent mass-assignment fix, but it is also a full wire-format change that breaks any existing gob-based caller (shown plainly, necessary since gob itself is the unsafe mechanism)."
+    },
+    "R228": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "gob->JSON+HMAC closes the vector but requires clients to compute a shared-secret signature, a bigger breaking contract change than R160's, still disclosed via the full rewrite."
+    },
+    "R187": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "unserialize-equivalent (node-serialize)->JSON.parse with a type check correctly closes the RCE vector, but changes the cookie's wire format, breaking any cookie written in the old node-serialize format (not addressed, though plausible no legitimate writer used that unusual format)."
+    },
+    "R220": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "JSON.parse closes the RCE vector, but the accompanying Ajv schema (properties: {}, additionalProperties: false) rejects any object with any field at all, so every legitimate non-empty profile is silently discarded to {} on every request -- a severe, undisclosed functional regression."
+    },
+    "R121": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "unserialize->json_decode with manual reconstruction, and explicitly updates the cookie-write path to json_encode too, keeping both sides consistent and disclosed."
+    },
+    "R210": {
+      "fix_quality": 2,
+      "no_harm": 1,
+      "note": "Same read-side fix, but never mentions or updates the cookie-write path, so if it still uses PHP serialize() elsewhere every existing cart cookie silently fails to decode and resets to an empty cart -- not addressed."
+    },
+    "R133": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "XmlResolver = null blocks external entity resolution before LoadXml; standard Microsoft-recommended mitigation, no side effects."
+    },
+    "R229": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "XmlReaderSettings with DtdProcessing.Prohibit + null resolver; more thorough (also blocks DTD/billion-laughs), correct."
+    },
+    "R106": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Removes user-controlled data from the Entity map entirely; closes the vector, no legitimate feature depended on it."
+    },
+    "R250": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct removal."
+    },
+    "R190": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Standard OWASP-style DocumentBuilderFactory hardening (disallow-doctype-decl etc.); correct and complete."
+    },
+    "R194": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same hardening set (with a harmless duplicated line); correct."
+    },
+    "R244": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "noent:false + nonet:true is the standard documented libxmljs XXE mitigation; parsing of legitimate order XML unaffected."
+    },
+    "R247": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "noent:false plus dtdload/dtdvalid restrictions closes the vector; also flags libxmljs's unfixed CVE and suggests migration."
+    },
+    "R101": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "resolve_entities=False + no_network=True; standard correct lxml hardening."
+    },
+    "R176": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same fix plus load_dtd=False; correct, more thorough."
+    },
+    "R165": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Adds Secure=true to CookieOptions; minimal, correct."
+    },
+    "R255": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R213": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Adds Secure, HttpOnly, SameSite; correct, appropriate for a session cookie."
+    },
+    "R223": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Adds Secure: true; minimal correct fix for the reported finding."
+    },
+    "R103": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Adds secure: true; correct, minimal."
+    },
+    "R180": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same fix, with SameSite reasoning appropriate to the SSO callback flow."
+    },
+    "R105": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Flips setcookie's secure parameter to true; correct minimal fix."
+    },
+    "R170": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R118": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Adds secure=True to set_cookie; correct."
+    },
+    "R236": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Adds secure=True and samesite='Lax'; correct, disclosed reasoning."
+    },
+    "R134": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Replaces shell-based ping with System.Net.NetworkInformation.Ping, eliminating the shell entirely; output reconstructed to match, disclosed."
+    },
+    "R256": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Validates host and invokes ping.exe directly without cmd.exe/shell; correct, preserves response format."
+    },
+    "R140": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "exec.Command with argument array (no shell) plus host validation; correct, preserves output/error handling."
+    },
+    "R161": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Minimal correct fix: argument-array exec.Command with no shell."
+    },
+    "R129": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "execFile with argument array instead of exec+string; correct, same response shape."
+    },
+    "R147": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix, with optional extra validation suggested."
+    },
+    "R109": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "shell=False with argument list plus filename allowlist; correct."
+    },
+    "R238": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "shell=False with argument list; correct minimal fix."
+    },
+    "R162": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HttpUtility.HtmlEncode on the untrusted value; correct HTML-context encoding."
+    },
+    "R251": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "WebUtility.HtmlEncode; same correct fix."
+    },
+    "R135": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "JavaScriptStringEncode is the correct context-aware encoder for a JS string literal sink."
+    },
+    "R169": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct context-aware fix."
+    },
+    "R124": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HtmlEncoder.Default.Encode on both fields; correct."
+    },
+    "R225": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R201": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "html.EscapeString on both fields; correct."
+    },
+    "R237": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Switches to html/template with auto-escaping; correct, equivalent output."
+    },
+    "R186": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Removes the template.HTML cast so auto-escaping applies; correct, standard Go XSS gotcha fix."
+    },
+    "R246": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R157": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "text/template->html/template; drop-in correct fix."
+    },
+    "R221": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R136": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "th:utext->th:text enables Thymeleaf's default escaping; correct."
+    },
+    "R242": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R153": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escape-html applied to all interpolated fields; correct."
+    },
+    "R243": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R189": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "innerHTML->textContent/createTextNode DOM construction; correct, preserves visual structure."
+    },
+    "R230": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R212": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Removes dangerouslySetInnerHTML for plain JSX text; React auto-escapes, correct."
+    },
+    "R235": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix (with a DOMPurify alternative noted for when HTML must be preserved)."
+    },
+    "R219": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "$cgi->escapeHTML on the note; correct real CGI.pm method."
+    },
+    "R249": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HTML::Entities::encode_entities; correct."
+    },
+    "R215": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "escape_html/escapeHTML applied to both interpolated fields; correct."
+    },
+    "R224": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "$cgi->escapeHTML on both fields; correct."
+    },
+    "R177": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "HTML::Entities::encode_entities on both fields; correct."
+    },
+    "R179": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "CGI::escapeHTML on both fields; correct."
+    },
+    "R131": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars(ENT_QUOTES, UTF-8); correct."
+    },
+    "R151": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix with additional flags."
+    },
+    "R104": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "htmlspecialchars on both fields; correct."
+    },
+    "R119": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R196": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "json_encode for the JS-string sink; PHP escapes '/' by default so '</script>' breakout is also blocked."
+    },
+    "R240": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "json_encode with explicit JSON_HEX_* flags; correct, more explicit."
+    },
+    "R139": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Escapes the input before formatting, keeps mark_safe() around the now-safe string -- exactly the correct Django pattern, no double-escaping."
+    },
+    "R154": {
+      "fix_quality": 2,
+      "no_harm": 0,
+      "note": "html.escape() correctly neutralizes the payload, but removing mark_safe() means Django's template auto-escaping (via render()) will now also escape the intentional '<div>' wrapper when the template renders {{ announcement }}, so the banner silently displays as literal HTML source instead of a styled element for every request -- not disclosed."
+    },
+    "R137": {
+      "fix_quality": 0,
+      "no_harm": 2,
+      "note": "Removing Markup() does nothing: this view returns a raw f-string directly (no render_template/Jinja2 call), so there was never any auto-escaping to 're-enable' -- the XSS vector is completely unaffected by this change."
+    },
+    "R205": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Applies html.escape() directly to the label; correctly closes the vector regardless of any template-engine involvement."
+    },
+    "R113": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "html.escape() applied to all three interpolated values; correct."
+    },
+    "R141": {
+      "fix_quality": 0,
+      "no_harm": 0,
+      "note": "Imports `escape` from the top-level `flask` package, which was deprecated in Flask 2.2 and removed in Flask 2.3+; on any current Flask version this raises ImportError and the app fails to start at all."
+    },
+    "R152": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Parameterized SqlCommand with @owner; correct, standard fix."
+    },
+    "R232": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix with explicit SqlDbType."
+    },
+    "R167": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "? placeholder with QueryRow(query, username); correct."
+    },
+    "R174": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R127": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "? placeholder with parameter array; correct."
+    },
+    "R209": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "? placeholder via pool.execute with parameter array; correct, valid mysql2 API."
+    },
+    "R156": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "mysqli prepare/bind_param; correct standard fix."
+    },
+    "R217": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R116": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "? placeholder with tuple parameter; correct."
+    },
+    "R231": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same correct fix."
+    },
+    "R148": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Allowlist regex validation before the LDAP filter is built; correct, legitimate usernames unaffected."
+    },
+    "R163": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RFC 4515 character-class escaping of the five LDAP metacharacters; correct, preserves ability to search names with those chars."
+    },
+    "R138": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "RFC 4515 escaping plus allowlist validation; correct, thorough."
+    },
+    "R182": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Uses ldapjs's escapeFilterValue helper; correct standard-library approach."
+    },
+    "R108": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "ldap3's documented escape_filter_chars via the canonical ldap3.utils.conv import path; correct."
+    },
+    "R143": {
+      "fix_quality": 2,
+      "no_harm": 2,
+      "note": "Same escape_filter_chars fix; correct."
+    }
+  }
+}
