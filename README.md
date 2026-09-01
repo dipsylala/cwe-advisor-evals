@@ -20,7 +20,7 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Seven runs so far - see **Past runs** below for what each one found. Runs 1-6 all ran on Sonnet 5
+Eight runs so far - see **Past runs** below for what each one found. Runs 1-6 all ran on Sonnet 5
 (undocumented as such until run 5/6, see the model gap below) and found verdict accuracy and
 multi-file source tracing saturated in every arm at every chain depth tested up to five files, and
 `fix_quality` saturated across the 79-case breadth/depth corpus too - at that model's capability
@@ -38,14 +38,33 @@ guidance is technically correct - a re-judge with a fresh panel had disagreed, u
 wrongly, which is its own finding: see HARNESS.md's **Things that have gone wrong before** and
 [RESULTS-v6.md](RESULTS-v6.md)'s addendum.
 
-**Run 7 overturns the "saturated" half of that headline.** The identical 79-case corpus, re-run
-with Haiku 4.5 on both arms instead of Sonnet 5, produced a real `fix_quality` gap (1.84 no-guidance
-vs. 1.97 guided; +0.89 on CWE-90 alone) that Sonnet 5 never showed on these same cases. The
-mechanism was checked directly, not taken from a judge's word: the ungoverned arm called library
-functions that do not exist - confirmed by installing the real `ldap3` and `ldapjs` packages and
-checking - while the guided arm, reading the entry's named APIs, did not. Saturation was a property
-of the model being capable enough not to need the guidance, not a property of the corpus being too
-easy; see [RESULTS-v7.md](RESULTS-v7.md).
+**Run 7 overturned the "saturated" half of that headline, on a smaller corpus.** The identical
+79-case corpus, re-run with Haiku 4.5 on both arms instead of Sonnet 5, produced a real
+`fix_quality` gap (1.84 no-guidance vs. 1.97 guided; +0.89 on CWE-90 alone) that Sonnet 5 never
+showed on these same cases. The mechanism was checked directly, not taken from a judge's word: the
+ungoverned arm called library functions that do not exist - confirmed by installing the real
+`ldap3` and `ldapjs` packages and checking - while the guided arm, reading the entry's named APIs,
+did not.
+
+**Run 8 is the current word on Haiku and complicates that story.** The identical Haiku-4.5-vs-Sonnet-5
+pairing, re-run after the corpus grew from 79 to 203 cases (new top-15 fix-complexity and multi-file
+depth batches), produced a near-tie: `fix_quality` 1.86 vs. 1.86, `no_harm` 1.86 vs. 1.80 - slightly
+favouring *no* guidance. Run 7's gap does not hold once the corpus is bigger and includes cases built
+around a plausible-but-wrong fix. Saturation is not simply "a property of the model being capable
+enough not to need the guidance" as run 7 concluded - it is corpus-dependent, and on three entries
+the guidance was itself the source of a defect it exists to prevent, confirmed directly against the
+real API/language/framework semantics rather than taken from a judge's word: `cwe/90/java` told the
+model to use `DirContext.search()`'s `filterArgs` parameter without stating that every such overload
+also requires a `SearchControls` argument, so the guided arm wrote a three-argument call that does
+not compile in 3 of 4 CWE-90 multi-file cases (the ungoverned arm sidestepped the API and hand-wrote
+an escaper instead); `cwe/117/javascript` named Unicode code points as `U+0085`/`U+2028`/`U+2029`
+without showing the JS escape syntax to write them, and the guided arm pasted the literal raw
+characters into a regex literal, a `SyntaxError`; `cwe/352/csharp` said minimal API endpoints are
+"covered... by `app.UseAntiforgery()`" without noting that this only auto-validates form-bound
+endpoints - confirmed against Microsoft's own current docs, a JSON-bound endpoint is not rejected
+even with the middleware registered, and both arms independently missed the extra
+`IAntiforgery.ValidateRequestAsync()` call it needs. All three gaps are now fixed in the guidance
+itself; see [RESULTS-v8.md](RESULTS-v8.md).
 
 ## Corpus
 
@@ -256,12 +275,15 @@ special.
   whether it reads as correct, not on whether it actually builds or passes a test; the judge-side
   gap above is this same problem one level up, where even the *scoring* wasn't independently
   verified until this session checked one case by hand.
-- **Model has been varied exactly once.** Runs 1-6 all had every arm and judge inherit whatever
-  model was running the orchestrating session (Sonnet 5 for runs 5 and 6, undocumented for 1-4).
-  Run 7 re-ran run 5's exact corpus with arms on Haiku 4.5 and judges pinned to Sonnet 5, and found
-  a real `fix_quality` gap Sonnet 5 never showed on the same cases - see run 7's row below. That is
-  one data point on one smaller model, not a trend; a third model (mid-tier, or a different vendor)
-  is the obvious next test before treating either result as representative.
+- **Only one alternate model has been tried, and its two data points disagree with each other.**
+  Runs 1-6 all had every arm and judge inherit whatever model was running the orchestrating session
+  (Sonnet 5 for runs 5 and 6, undocumented for 1-4). Run 7 re-ran run 5's exact 79-case corpus with
+  arms on Haiku 4.5 and judges pinned to Sonnet 5, and found a real `fix_quality` gap Sonnet 5 never
+  showed on the same cases. Run 8 repeated the identical Haiku-vs-Sonnet pairing after the corpus
+  grew to 203 cases and found the gap did not hold - see run 7's and run 8's rows below. Model choice
+  and corpus size/composition are now both demonstrated confounds, not just model choice; a third
+  model (mid-tier, or a different vendor) is still the obvious next test, and it should be run
+  against a fixed, unchanging corpus if the goal is to isolate the model variable cleanly.
 
 ## Past runs
 
@@ -274,3 +296,4 @@ special.
 | 5 | 79 `authored` cases (breadth + depth campaigns, 14 CWEs x 7 languages) | 158 (79 x 2 arms) | Does the knowledge base still help on the ordinary, undramatic, single-file case at this scale? | `fix_quality` saturated again (156/158 at ceiling); `no_harm` favoured the guided arm on a low-disagreement measurement (1.97 A vs 2.00 B); found one new, reproducible entry gap - `cwe/434/go` doesn't warn that a renamed upload needs the read path updated too, and both arms independently shipped that break | [RESULTS-v5.md](RESULTS-v5.md) |
 | 6 | Last 3 `authored-from-docs-pitfall` cases | 6 (3 x 2 arms) | Do the last three planted traps catch anything run 4 didn't already find? | No (12/13 across runs 4 and 6 at ceiling on `fix_quality`), but two unplanned findings: guidance gave the technically correct exploitability read on a contested PHP/libxml question two judges reproduced, and the `no_harm` disclosure gap cuts against honest incompleteness even harder than it cuts against declared scope creep | [RESULTS-v6.md](RESULTS-v6.md) |
 | 7 | Run 5's identical 79 cases, arms on Haiku 4.5 instead of Sonnet 5 (judges stayed on Sonnet 5) | 158 (79 x 2 arms) | Does run 5's `fix_quality` saturation hold on a smaller model? | No - real gap (1.84 A / 1.97 B), concentrated in CWE-90 (+0.89) and CWE-117 (+0.75). Mechanism verified directly, not from judge notes: the ungoverned arm called `ldap3`/`ldapjs` functions that do not exist (confirmed against the real packages); the guided arm, reading the entry's named APIs, did not | [RESULTS-v7.md](RESULTS-v7.md) |
+| 8 | Full 203-case corpus (grown from run 7's 79), same Haiku-4.5-vs-Sonnet-5 pairing | 406 (203 x 2 arms) | Does run 7's Haiku `fix_quality` gap hold once the corpus nearly triples and adds deliberate wrong-fix traps? | No - collapses to a near-tie (1.86 A / 1.86 B); `no_harm` now slightly favours *no* guidance (1.86 A / 1.80 B). Traced three guidance defects the harder corpus exposed and both arms' actual generated code (or Microsoft's own docs) confirmed directly: `cwe/90/java` omitted that `DirContext.search()`'s `filterArgs` overload requires a `SearchControls` argument (guided arm's fix didn't compile in 3/4 CWE-90 multi-file cases); `cwe/117/javascript` named Unicode code points without their JS escape syntax (guided arm pasted raw control characters into a regex literal, a `SyntaxError`); `cwe/352/csharp` didn't note that `app.UseAntiforgery()` never validates a JSON-bound minimal API endpoint, which both arms independently missed on the same case. All three fixed | [RESULTS-v8.md](RESULTS-v8.md) |
