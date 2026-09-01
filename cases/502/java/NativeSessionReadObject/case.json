@@ -1,0 +1,24 @@
+{
+  "id": "NativeSessionReadObject",
+  "cwe": "502",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/502/java Taint Sinks: ObjectInputStream.readObject() on external data",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "SessionRestoreController.java",
+    "SessionDecoder.java"
+  ],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "SessionDecoder.java",
+    "sink_line": 10,
+    "sink_code": "            return (RestoredSession) input.readObject();",
+    "summary": "A base64 session token is decoded and passed to ObjectInputStream.readObject(), allowing attacker-controlled serialized Java objects."
+  },
+  "trap": "Catching more exceptions, validating the base64 wrapper, or adding an ObjectInputFilter that omits required container types and silently breaks legitimate sessions. Prefer a data-only format; if Java serialization must remain temporarily, use a strict ObjectInputFilter and integrity protection before readObject().",
+  "must_preserve": "Invalid sessions still fail with IllegalArgumentException, legitimate session data still restores userId/cartId fields, and untrusted bytes cannot instantiate arbitrary classes during restoration."
+}

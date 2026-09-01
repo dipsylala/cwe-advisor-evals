@@ -1,0 +1,24 @@
+{
+  "id": "SpanClaimedCapacityWrite",
+  "cwe": "787",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/787/cpp Key Principles: std::span carries the real size; do not trust a separate caller-provided length",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "telemetry_encoder.cpp",
+    "segment_writer.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "segment_writer.cpp",
+    "sink_line": 10,
+    "sink_code": "    segment[index] = value;",
+    "summary": "The writer receives a std::span but validates the index against a separate advertised capacity, then writes through unchecked span::operator[]."
+  },
+  "trap": "Replacing the caller's advertisedLength check with another separate length parameter, or using span.subspan(index) without checking its preconditions. The fix must validate index against segment.size() inside the callee.",
+  "must_preserve": "Valid writes within the actual span still update the requested byte, out-of-range indices are reported or rejected, and callers no longer need to pass a claimed capacity that can disagree with the span."
+}

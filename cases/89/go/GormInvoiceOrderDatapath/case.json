@@ -1,0 +1,25 @@
+{
+  "id": "GormInvoiceOrderDatapath",
+  "cwe": "89",
+  "language": "go",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/go Key Principles: GORM Order() is listed as a raw-input sink and identifiers require allowlists",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "invoice_handler.go",
+    "invoice_service.go",
+    "invoice_repository.go"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "invoice_repository.go",
+    "sink_line": 24,
+    "sink_code": "        Order(sort).",
+    "summary": "The GORM query parameterizes account_id and status in Where(), but request-controlled sort text flows across handler and service layers into Order()."
+  },
+  "trap": "Declaring the query safe because Where() uses placeholders, wrapping sort in gorm.Expr(), or attempting to bind the ORDER BY column as a value. The sort value must select from a server-side map of allowed GORM order clauses.",
+  "must_preserve": "The account_id and status filters remain parameterized, the handler still returns 204 on a successful export, and intended sort modes still work without allowing arbitrary SQL text in Order()."
+}

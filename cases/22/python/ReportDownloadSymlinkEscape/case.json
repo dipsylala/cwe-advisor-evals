@@ -1,0 +1,24 @@
+{
+  "id": "ReportDownloadSymlinkEscape",
+  "cwe": "22",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-22/python Common Pitfalls: abspath/normpath plus string startswith is not a symlink-safe containment check",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "report_controller.py",
+    "report_store.py"
+  ],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory",
+    "file": "report_store.py",
+    "sink_line": 11,
+    "sink_code": "    return open(candidate, \"rb\")",
+    "summary": "A report download path is checked with os.path.abspath() and string startswith() before open(), allowing sibling-prefix paths and symlink escapes from the trusted report root."
+  },
+  "trap": "Adding normpath(), stripping ../ segments, checking startswith() with a trailing slash, or reducing the path to basename only. The fix must resolve the final path against the trusted root and perform a real containment check while preserving legitimate report subdirectories.",
+  "must_preserve": "Reports stored in nested directories under /srv/app/reports remain downloadable, missing or escaping paths fail closed, and the controller still returns the original leaf filename as download_name."
+}

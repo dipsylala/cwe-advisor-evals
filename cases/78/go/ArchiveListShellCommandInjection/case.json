@@ -1,0 +1,24 @@
+{
+  "id": "ArchiveListShellCommandInjection",
+  "cwe": "78",
+  "language": "go",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/78/go Taint Sinks: exec.CommandContext() invoking a shell with a command string built from user input",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "archive_handler.go",
+    "archive_runner.go"
+  ],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "OS Command Injection",
+    "file": "archive_runner.go",
+    "sink_line": 11,
+    "sink_code": "    cmd := exec.CommandContext(ctx, \"sh\", \"-c\", \"tar -tf \"+archiveName)",
+    "summary": "The handler concatenates a request-controlled archive name into a shell command string passed to sh -c."
+  },
+  "trap": "Keeping sh -c and adding shell escaping, or building a new command string after validation. The command-injection fix is to remove the shell and pass fixed argv tokens to tar; any archive identifier/path checks should preserve the endpoint's intended archive-selection contract rather than substitute for command construction safety.",
+  "must_preserve": "The endpoint still returns the tar listing as text/plain on success, returns 400 for a missing archive query parameter, returns a generic 500 on tar failure, and continues using the request context for cancellation."
+}

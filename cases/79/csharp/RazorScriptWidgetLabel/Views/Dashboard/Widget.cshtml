@@ -1,0 +1,11 @@
+@model WidgetViewModel
+
+<section id="widget-preview">
+    <h2>@Model.Title</h2>
+    <script>
+        window.widgetConfig = {
+            label: "@Html.Raw(Model.Label)",
+            refreshSeconds: @Model.RefreshSeconds
+        };
+    </script>
+</section>

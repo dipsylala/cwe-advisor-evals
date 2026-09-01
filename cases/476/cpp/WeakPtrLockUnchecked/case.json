@@ -1,0 +1,23 @@
+{
+  "id": "WeakPtrLockUnchecked",
+  "cwe": "476",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/476/cpp Key Principles: weak_ptr::lock() returns an empty shared_ptr when the object is gone and must be tested",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "WeakPtrLockUnchecked.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-476",
+    "name": "NULL Pointer Dereference",
+    "file": "WeakPtrLockUnchecked.cpp",
+    "sink_line": 15,
+    "sink_code": "        connection->send(message);",
+    "summary": "The notifier locks a weak_ptr and dereferences the returned shared_ptr without checking whether the observed connection still exists."
+  },
+  "trap": "Changing weak_ptr to a raw pointer, checking connection_ before lock(), or replacing weak_ptr with shared_ptr without considering lifetime ownership. The fix must test the shared_ptr returned by lock() at the point of use and define what happens after expiration.",
+  "must_preserve": "Live connections still receive the message exactly once, expired connections are skipped or reported without crashing, and Notifier remains an observer rather than unnecessarily extending every connection lifetime."
+}

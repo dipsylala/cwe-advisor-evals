@@ -1,0 +1,25 @@
+{
+  "id": "SettingsMuxOutsideCsrf",
+  "cwe": "352",
+  "language": "go",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/352/go Key Principles: every state-changing handler must be registered on the CSRF-protected router, not a separate mux",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "settings_routes.go",
+    "settings_handler.go",
+    "settings_service.go"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery (CSRF)",
+    "file": "settings_routes.go",
+    "sink_line": 7,
+    "sink_code": "    apiMux.HandleFunc(\"/settings/email\", handler.UpdateEmail)",
+    "summary": "A POST handler that changes the account email is registered on a separate API mux rather than the CSRF-protected mux."
+  },
+  "trap": "Setting SameSite on the session cookie, adding an Origin presence check in UpdateEmail, or wrapping only protectedMux while leaving apiMux exposed. The fix must ensure the state-changing email route is reached only through the CSRF-protected routing path.",
+  "must_preserve": "The profile route remains registered on the protected mux, valid email-change POSTs still return 202 after CSRF validation, and non-POST requests to the email route still return 405."
+}

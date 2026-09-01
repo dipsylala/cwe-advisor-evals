@@ -1,0 +1,23 @@
+{
+  "id": "ZipEntryNormalizeExtract",
+  "cwe": "22",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/22/java Key Principles: ZipEntry.getName() is untrusted and normalize() is weaker than canonical/real-path containment checks",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "ZipExtractor.java"
+  ],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory",
+    "file": "ZipExtractor.java",
+    "sink_line": 18,
+    "sink_code": "            Files.copy(zip, target);",
+    "summary": "Archive entry names are resolved with normalize() and a path-prefix check before extraction; this does not safely handle symlinked paths or a non-canonical destination."
+  },
+  "trap": "Adding string startsWith(), rejecting only ../ text, or checking after extraction. The fix must canonicalize the destination and extraction target appropriately before writing, reject escaping entries, and handle existing symlinks safely.",
+  "must_preserve": "Valid nested archive entries still extract under the destination directory, escaping entries are rejected before bytes are written, and the method still processes multiple entries in sequence."
+}

@@ -1,0 +1,23 @@
+{
+  "id": "ProductBatchAllocationOverflow",
+  "cwe": "787",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-787/c Common Vulnerable Patterns: Integer Overflow Before Allocation",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "ProductBatchAllocationOverflow.c"
+  ],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "ProductBatchAllocationOverflow.c",
+    "sink_line": 31,
+    "sink_code": "        batch->rows[i] = input[i];",
+    "summary": "The allocation size is computed with unchecked count * sizeof(ProductRow); when it wraps, the loop writes count rows into a smaller allocation."
+  },
+  "trap": "Changing the loop to stop at bytes / sizeof(ProductRow) avoids the overwrite only by silently dropping valid rows after an overflowed size calculation. The fix must reject counts that would overflow before allocation, or use an allocator such as calloc/reallocarray that checks the multiplication.",
+  "must_preserve": "For valid counts, load_product_batch still returns a ProductBatch containing exactly count copied rows and sets batch->count to the requested count. Allocation failures and invalid oversized counts return NULL without leaking batch."
+}

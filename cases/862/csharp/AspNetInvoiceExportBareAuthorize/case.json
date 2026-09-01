@@ -1,0 +1,24 @@
+{
+  "id": "AspNetInvoiceExportBareAuthorize",
+  "cwe": "862",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/862/csharp Key Principles: [Authorize] alone authenticates but does not perform resource authorization",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "InvoiceExportController.cs",
+    "InvoiceRepository.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "InvoiceExportController.cs",
+    "sink_line": 17,
+    "sink_code": "    [Authorize]",
+    "summary": "The invoice export endpoint requires an authenticated user but loads any invoice by ID without a role, policy, or resource ownership check."
+  },
+  "trap": "Treating [Authorize] as sufficient, adding only a broad role check, or loading the invoice and then leaking whether it exists before checking ownership. The fix should enforce a policy or resource-based authorization decision tied to the authenticated principal and invoice.",
+  "must_preserve": "Authenticated authorized users can still download their own invoice PDF with the same content type and filename behavior. Unauthenticated callers are still challenged, and unauthorized invoice IDs do not reveal more than the original not-found path."
+}

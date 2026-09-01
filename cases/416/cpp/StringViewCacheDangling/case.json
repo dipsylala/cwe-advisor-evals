@@ -1,0 +1,23 @@
+{
+  "id": "StringViewCacheDangling",
+  "cwe": "416",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/416/cpp Key Principles: storing string_view of a temporary returned string creates a dangling view",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "StringViewCacheDangling.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "StringViewCacheDangling.cpp",
+    "sink_line": 23,
+    "sink_code": "        return names_[index][0];",
+    "summary": "ProfileCache stores a string_view to the temporary std::string returned by displayName(); later reads dereference a dangling view."
+  },
+  "trap": "Changing displayName() to return const char*, reserving the vector, or checking only the vector index. The cache must own copied strings or keep the source object alive; a non-owning string_view cannot outlive the temporary.",
+  "must_preserve": "Remembered profile display names remain available after remember() returns, firstLetter() still returns the first character for valid cached names, and invalid indexes are handled separately from the lifetime fix."
+}

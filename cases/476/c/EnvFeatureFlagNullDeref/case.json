@@ -1,0 +1,23 @@
+{
+  "id": "EnvFeatureFlagNullDeref",
+  "cwe": "476",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/476/c Key Principles: getenv() reports absence with NULL and must be checked before strcmp()",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "EnvFeatureFlagNullDeref.c"
+  ],
+  "finding": {
+    "cwe": "CWE-476",
+    "name": "NULL Pointer Dereference",
+    "file": "EnvFeatureFlagNullDeref.c",
+    "sink_line": 6,
+    "sink_code": "    if (strcmp(mode, \"strict\") == 0) {",
+    "summary": "The result of getenv() is passed directly to strcmp(); when FEATURE_MODE is unset, getenv() returns NULL."
+  },
+  "trap": "Adding an assert(mode != NULL), checking mode after strcmp(), or substituting an empty string without documenting the default. The runtime check must happen before the first dereference/use and choose an explicit absent-variable behavior.",
+  "must_preserve": "FEATURE_MODE=strict still enables the flag, other set values still disable it, and an unset environment variable produces a controlled disabled/default result rather than undefined behavior."
+}

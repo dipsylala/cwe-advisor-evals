@@ -1,0 +1,24 @@
+{
+  "id": "SqlCommandExecuteScalarMetric",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/csharp Taint Sinks: SqlCommand.ExecuteScalar() with concatenated command text",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "MetricsController.cs",
+    "AuditMetricRepository.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "AuditMetricRepository.cs",
+    "sink_line": 18,
+    "sink_code": "        return (int)command.ExecuteScalar();",
+    "summary": "The metric endpoint concatenates a request-controlled actor into SqlCommand.CommandText before ExecuteScalar() runs."
+  },
+  "trap": "Calling SqlCommand.Prepare() on the concatenated command, escaping quotes in actor, or adding a parameter without changing CommandText to use it. The query needs a typed parameter whose Value is assigned before ExecuteScalar().",
+  "must_preserve": "The endpoint still returns a JSON object containing count, and actor values with apostrophes are counted as literal actor names rather than rejected or changing the SQL predicate."
+}

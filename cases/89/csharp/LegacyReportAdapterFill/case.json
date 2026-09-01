@@ -1,0 +1,24 @@
+{
+  "id": "LegacyReportAdapterFill",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/csharp Taint Sinks: SqlDataAdapter.Fill() executes the SelectCommand built from the provided SQL",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "LegacyReportController.cs",
+    "LegacyReportRepository.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "LegacyReportRepository.cs",
+    "sink_line": 20,
+    "sink_code": "        adapter.Fill(table);",
+    "summary": "A legacy reporting path builds a SqlDataAdapter from SQL containing a request-controlled region string and executes it through Fill()."
+  },
+  "trap": "Escaping single quotes, validating region against a loose regex, or only replacing SqlCommand call sites while overlooking SqlDataAdapter.SelectCommand. The adapter must use a SqlCommand with parameters before Fill() executes.",
+  "must_preserve": "The method still returns a DataTable named Customers with CustomerId, Name, and Region columns, and valid region values still filter the report rather than returning all customers."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "LaravelOrderRefundAuthOnly",
+  "cwe": "862",
+  "language": "php",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/862/php Key Principles: auth middleware confirms login only; add can middleware, Gate::authorize(), or a Policy check",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "routes_api.php",
+    "OrderRefundController.php"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "routes_api.php",
+    "sink_line": 6,
+    "sink_code": "Route::post('/orders/{order}/refund', [OrderRefundController::class, 'store'])",
+    "summary": "A Laravel refund route uses auth middleware but has no can middleware, Gate::authorize(), or Policy check before refunding the route-bound order."
+  },
+  "trap": "Using Gate::allows() without acting on the result, adding only auth:sanctum, or checking a client-supplied user_id. The fix should authorize the authenticated user against the route-bound Order through a Policy/Gate or can middleware before refund().",
+  "must_preserve": "Authorized users can still refund permitted orders and receive the same status shape. Unauthorized users receive the framework authorization failure, and the controller does not call refund() before the authorization decision."
+}

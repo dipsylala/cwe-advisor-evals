@@ -1,0 +1,24 @@
+{
+  "id": "SpelStandardEvaluationContext",
+  "cwe": "94",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/94/java Key Principles: Spring Expression Language against StandardEvaluationContext exposes type references and method invocation",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "RulePreviewController.java",
+    "RulePreviewService.java"
+  ],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code",
+    "file": "RulePreviewService.java",
+    "sink_line": 14,
+    "sink_code": "        return expression.getValue(context);",
+    "summary": "A request-supplied rule expression is parsed as SpEL and evaluated against a StandardEvaluationContext, which permits powerful runtime access."
+  },
+  "trap": "Switching from ScriptEngine to SpEL, filtering only the string T(java.lang.Runtime), or using SimpleEvaluationContext as a claimed sandbox for arbitrary untrusted expressions. A correct fix removes untrusted expression evaluation or replaces it with a deny-by-default, narrowly allowed expression grammar.",
+  "must_preserve": "Legitimate previews can still compute supported arithmetic over the supplied OrderContext, but expressions that invoke methods, reference types, construct objects, or reach beans/runtime APIs are rejected rather than evaluated."
+}

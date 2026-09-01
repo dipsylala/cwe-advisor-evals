@@ -1,0 +1,23 @@
+{
+  "id": "VectorReserveThenIndexWrite",
+  "cwe": "787",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/787/cpp Key Principles: reserve() changes capacity, not size, and operator[] performs no bounds check",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "VectorReserveThenIndexWrite.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "VectorReserveThenIndexWrite.cpp",
+    "sink_line": 15,
+    "sink_code": "        packet[i] = fields[i];",
+    "summary": "The vector reserves capacity but has size zero, then writes through unchecked operator[] for attacker-influenced count values."
+  },
+  "trap": "Checking packet.capacity(), replacing reserve(count) with a larger reserve(), or changing only fields[i] to fields.at(i). The destination vector still has no elements; a correct fix must size or grow the destination and validate count against fields.size().",
+  "must_preserve": "The function still returns a vector containing the first count packet fields in order for valid counts, and rejects or reports counts larger than the source field vector instead of silently truncating without telling the caller."
+}

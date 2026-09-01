@@ -1,0 +1,25 @@
+{
+  "id": "EfCoreArchiveExecuteSqlRaw",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/csharp Taint Sinks: ExecuteSqlRaw() with string interpolation in SQL construction",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "ArchiveController.cs",
+    "ArchiveService.cs",
+    "OrderMaintenanceRepository.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "OrderMaintenanceRepository.cs",
+    "sink_line": 20,
+    "sink_code": "        return _db.Database.ExecuteSqlRawAsync(sql, beforeUtc);",
+    "summary": "The non-query EF Core update uses ExecuteSqlRawAsync() with accountId and status already interpolated into the SQL string; only beforeUtc is passed separately."
+  },
+  "trap": "Passing beforeUtc separately and assuming the call is parameterized, or replacing ExecuteSqlRawAsync with ExecuteSqlInterpolatedAsync after keeping the prebuilt interpolated string. Every user-controlled value must be represented as a parameter at the point SQL is formed.",
+  "must_preserve": "The method still archives matching orders and returns the affected-row count. AccountId, Status, and BeforeUtc remain separate query values rather than changing the archival criteria."
+}

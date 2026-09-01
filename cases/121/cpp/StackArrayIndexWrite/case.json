@@ -1,0 +1,23 @@
+{
+  "id": "StackArrayIndexWrite",
+  "cwe": "121",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/121/cpp Key Principles: std::array stores inline and operator[] is unchecked",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "StackArrayIndexWrite.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-121",
+    "name": "Stack-based Buffer Overflow",
+    "file": "StackArrayIndexWrite.cpp",
+    "sink_line": 11,
+    "sink_code": "    badge.levels[slot] = level;",
+    "summary": "A caller-controlled slot indexes a local std::array with unchecked operator[], so out-of-range writes corrupt stack storage."
+  },
+  "trap": "Wrapping operator[] in try/catch, changing std::array to another fixed stack buffer, or silently clamping slot to the last element. The fix must validate against levels.size() or use a checked accessor and report refused writes.",
+  "must_preserve": "Valid slots still set the requested badge level, invalid slots are rejected or reported rather than silently writing another slot, and the returned Badge shape remains unchanged."
+}

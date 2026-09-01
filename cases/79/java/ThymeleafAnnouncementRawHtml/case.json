@@ -1,0 +1,25 @@
+{
+  "id": "ThymeleafAnnouncementRawHtml",
+  "cwe": "79",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/79/java Key Principles: Thymeleaf th:utext is an escaping opt-out and should be treated as a sink",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "AnnouncementController.java",
+    "AnnouncementService.java",
+    "templates/announcement-preview.html"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)",
+    "file": "templates/announcement-preview.html",
+    "sink_line": 5,
+    "sink_code": "  <section class=\"announcement-body\" th:utext=\"${announcement.bodyHtml}\"></section>",
+    "summary": "A draft announcement body flows from controller and service code into Thymeleaf th:utext, bypassing Thymeleaf's normal HTML escaping."
+  },
+  "trap": "Adding input validation in the controller, relying on CSP, or switching only the title to th:text. The raw body sink remains unsafe unless it is rendered with escaping or sanitized with a real HTML allowlist before th:utext.",
+  "must_preserve": "The preview still renders the announcement title and body. Plain text bodies remain visible, and any intentionally supported rich-text tags are preserved only after allowlist sanitization rather than by rendering arbitrary draft HTML."
+}

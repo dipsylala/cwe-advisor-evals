@@ -1,0 +1,23 @@
+{
+  "id": "TelemetryClaimedLengthRead",
+  "cwe": "125",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/125/cpp Key Principles: validate requested length against the container's current size, not just the starting offset",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "TelemetryClaimedLengthRead.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "TelemetryClaimedLengthRead.cpp",
+    "sink_line": 12,
+    "sink_code": "        checksum = (checksum << 5) ^ frame[offset + i];",
+    "summary": "The function checks only that the starting offset is inside the frame, then reads length bytes with unchecked vector indexing."
+  },
+  "trap": "Replacing frame[offset] with frame.at(offset) at the first access, using subspan() without checking its preconditions, or validating length against a separate claimed frame length. The fix must check offset and length together against frame.size(), including overflow in offset + length.",
+  "must_preserve": "Valid telemetry windows still produce the same checksum for the requested bytes, empty or out-of-range windows are rejected consistently, and the function does not silently checksum a truncated range unless that behavior is reported to callers."
+}

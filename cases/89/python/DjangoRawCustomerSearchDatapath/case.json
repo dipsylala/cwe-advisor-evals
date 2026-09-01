@@ -1,0 +1,25 @@
+{
+  "id": "DjangoRawCustomerSearchDatapath",
+  "cwe": "89",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/python Taint Sinks: Django raw SQL with interpolated identifiers",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "customer_controller.py",
+    "customer_service.py",
+    "customer_repository.py"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "customer_repository.py",
+    "sink_line": 10,
+    "sink_code": "    return Customer.objects.raw(sql, [tenant_id, f\"%{term}%\"])",
+    "summary": "The Django raw query binds tenant_id and the LIKE value, but request-controlled field text is interpolated into the SQL predicate as an identifier."
+  },
+  "trap": "Escaping quotes in field, binding field as another %s parameter, or focusing only on the LIKE term. The searchable field must be chosen from a server-owned map of allowed column names or replaced with ORM filters built from mapped field keys.",
+  "must_preserve": "tenant_id remains bound, the search term remains a bound LIKE value, the default name field still works, and approved alternate fields search the same customers without accepting raw SQL identifiers."
+}

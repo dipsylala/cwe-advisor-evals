@@ -1,0 +1,24 @@
+{
+  "id": "RazorScriptWidgetLabel",
+  "cwe": "79",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/79/csharp Taint Sinks: @Html.Raw() opt-out inside JavaScript string context",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "WidgetViewModel.cs",
+    "Views/Dashboard/Widget.cshtml"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)",
+    "file": "Views/Dashboard/Widget.cshtml",
+    "sink_line": 7,
+    "sink_code": "            label: \"@Html.Raw(Model.Label)\",",
+    "summary": "A model value is emitted through Html.Raw() inside a JavaScript string literal, so quote-breakout payloads are not encoded before reaching script source."
+  },
+  "trap": "Assuming the surrounding quotes make Html.Raw() safe, applying HtmlEncoder inside the script block, or relying on CSP alone. The value must be moved out of script source or emitted with JSON/JavaScript string encoding for this context.",
+  "must_preserve": "The widget preview still renders the HTML title with normal Razor encoding, still exposes label and refreshSeconds to client-side code, and does not change refreshSeconds from a number into a string."
+}

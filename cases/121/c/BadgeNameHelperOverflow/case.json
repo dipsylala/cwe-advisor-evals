@@ -1,0 +1,23 @@
+{
+  "id": "BadgeNameHelperOverflow",
+  "cwe": "121",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/121/c Key Principles: sizeof(buffer) is only the array size in the declaring scope; helper functions need an explicit capacity",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "BadgeNameHelperOverflow.c"
+  ],
+  "finding": {
+    "cwe": "CWE-121",
+    "name": "Stack-based Buffer Overflow",
+    "file": "BadgeNameHelperOverflow.c",
+    "sink_line": 6,
+    "sink_code": "    strcat(destination, last);",
+    "summary": "A helper concatenates attacker-controlled first and last names into a caller's fixed 32-byte stack buffer without receiving or enforcing its capacity."
+  },
+  "trap": "Adding sizeof(destination) checks inside append_display_name(), replacing only the final strcat(), or truncating names silently. In the helper, destination is a pointer; the caller must pass the real capacity and the helper must reject or report oversized combined names.",
+  "must_preserve": "Valid first and last names still produce the same 'first last' display string in out. Oversized combined names are rejected or reported instead of being silently truncated into a different badge value."
+}

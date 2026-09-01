@@ -1,0 +1,24 @@
+{
+  "id": "FormulaPreviewFunctionConstructor",
+  "cwe": "94",
+  "language": "javascript",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/94/javascript Taint Sinks: new Function() with user input",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "formulaController.js",
+    "formulaEngine.js"
+  ],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code",
+    "file": "formulaEngine.js",
+    "sink_line": 4,
+    "sink_code": "  const fn = new Function('order', `return (${expression});`);",
+    "summary": "A request-supplied formula expression is compiled with the Function constructor and executed in the Node.js process."
+  },
+  "trap": "Blocking the literal token eval, wrapping the expression in node:vm, or using a regex that only allows expected variable names. A correct fix must remove dynamic code generation or parse the whole expression into an allowlisted AST.",
+  "must_preserve": "Legitimate arithmetic previews such as order.total + order.tax still return JSON with a numeric value, while expressions with calls, member escapes, imports, or process access are rejected rather than executed."
+}

@@ -15,7 +15,9 @@ and don't care what they're named. See README.md's **Known gaps** for what remai
 ## What a run is
 
 Each case is remediated once per arm, each time in a **fresh context**, and the outputs are scored
-blind by several judges who have not seen which arm produced what.
+blind by several judges who have not seen which arm produced what. The normal top-15 scope assumes
+the scanner is upstream of this harness: the finding has already been confirmed as a true positive,
+and the run measures the quality of the fix, not whether the model can rediscover the bug.
 
 | Arm | Condition |
 |---|---|
@@ -43,9 +45,9 @@ found here has not been shown to generalise across models.
 Cases live in `cases/{CWE}/{language}/{case-id}/`, each with a `case.json`. Select by whatever the
 run is about - all of them, one language, one `source`, one CWE.
 
-`case.json` holds the answer, including `kind` and, for `authored-from-docs-pitfall` cases, `trap`
-and `must_preserve`. **Runners and judges
-must be told not to read it.** Everything an arm is entitled to see goes in its prompt.
+`case.json` holds the answer, including `kind` and, for `authored-from-docs-pitfall` and
+`authored-top15-fix-complexity` cases, `trap` and `must_preserve`. **Runners and judges must be told
+not to read it.** Everything an arm is entitled to see goes in its prompt.
 
 ## Step 2 - run the arms
 
@@ -55,7 +57,8 @@ each `agent()` call's options rather than omitting it - see the model note above
 
 Substitute the bracketed values from `case.json`. The current scope is confirmed true positives -
 a static analysis tool has found a real issue and we are helping resolve it - so the arm is told
-the finding is confirmed rather than asked to adjudicate it.
+the finding is confirmed rather than asked to adjudicate it. Do not add prompt language asking the
+arm to verify whether the scanner is right unless the run is explicitly about false positives.
 
 ### Arm A prompt (control)
 
@@ -135,7 +138,8 @@ You are scoring {n} remediation write-ups blind, against a rubric fixed before a
 produced. Each responds to one static analysis finding on one small case.
 
 Write-ups: {blind-dir}/{first}.md through {last}.md
-Each names its case directory. Read the case files to check the claims - that is the point.
+Each names its case directory. Read the case files to check whether the proposed fix actually closes
+the reported sink and preserves behavior - that is the point.
 
 Do NOT read: case.json in any case directory, anything else under {repo}/evals/, or anything under
 {repo}/cwe/. Judge on security merit and on the code in front of you.

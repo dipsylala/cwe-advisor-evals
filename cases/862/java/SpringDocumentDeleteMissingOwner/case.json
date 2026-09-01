@@ -1,0 +1,25 @@
+{
+  "id": "SpringDocumentDeleteMissingOwner",
+  "cwe": "862",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/862/java Key Principles: generic authentication is not enough for resource-specific delete endpoints",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "DocumentController.java",
+    "DocumentService.java",
+    "DocumentRepository.java"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "DocumentController.java",
+    "sink_line": 16,
+    "sink_code": "    @DeleteMapping(\"/api/documents/{documentId}\")",
+    "summary": "A document delete endpoint accepts any authenticated caller and deletes by documentId without a role, policy, or ownership check."
+  },
+  "trap": "Adding hasRole('USER'), checking ownership after deleteById(), or annotating a private/self-invoked method with @PreAuthorize while method security is inactive. The fix must authorize the caller against the specific document before deletion.",
+  "must_preserve": "Authorized owners can still delete their documents and receive 204. Unauthorized or non-owned document IDs are denied before deletion and should not reveal more than the application's existing not-found path."
+}

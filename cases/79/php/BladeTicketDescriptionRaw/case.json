@@ -1,0 +1,25 @@
+{
+  "id": "BladeTicketDescriptionRaw",
+  "cwe": "79",
+  "language": "php",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/79/php Taint Sinks: Blade {!! !!} raw rendering is safe only for already-sanitized rich HTML",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "TicketController.php",
+    "TicketPresenter.php",
+    "resources/views/tickets/show.blade.php"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)",
+    "file": "resources/views/tickets/show.blade.php",
+    "sink_line": 3,
+    "sink_code": "  <div class=\"ticket-description\">{!! $ticket['descriptionHtml'] !!}</div>",
+    "summary": "A support-ticket description flows through a presenter into a Laravel Blade raw-output block."
+  },
+  "trap": "Calling htmlentities() in the controller, adding CSP only, or using strip_tags() without an HTML sanitizer policy. The fix must either use Blade escaping for plain text or sanitize rich HTML with an allowlist before the raw render.",
+  "must_preserve": "Ticket titles remain escaped with Blade {{ }}. Descriptions remain visible to users; if rich text is supported, allowed formatting survives sanitization while scripts, event handlers, and dangerous URLs are removed."
+}

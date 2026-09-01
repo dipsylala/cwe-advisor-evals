@@ -1,0 +1,25 @@
+{
+  "id": "DrfCustomRetrieveBypass",
+  "cwe": "862",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-862/python Common Pitfalls: Loading the object outside get_object()",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "views.py",
+    "permissions.py",
+    "models.py"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "views.py",
+    "sink_line": 21,
+    "sink_code": "        invoice = get_object_or_404(Invoice, pk=pk)",
+    "summary": "The custom retrieve() action bypasses DRF get_object(), so the scoped queryset and IsInvoiceOwner.has_object_permission() never run for invoice detail reads."
+  },
+  "trap": "Adding a standalone check_object_permissions(request, invoice) after the unscoped lookup closes the direct read but changes not-owned invoices from the scoped 404 behavior to 403, creating an existence oracle. The route should load through self.get_object() or an equivalently scoped lookup.",
+  "must_preserve": "Owners can retrieve their own invoice JSON with id, owner_id, and total_cents. Staff users can retrieve any invoice. A missing invoice and another user's invoice remain indistinguishable to ordinary users."
+}

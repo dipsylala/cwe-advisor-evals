@@ -1,0 +1,25 @@
+{
+  "id": "MultiFileTemplatePreviewInjection",
+  "cwe": "94",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-94/python Common Vulnerable Patterns: Template Injection (Jinja2 Unsafe)",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "template_controller.py",
+    "template_store.py",
+    "template_renderer.py"
+  ],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "template_renderer.py",
+    "sink_line": 10,
+    "sink_code": "        template = self.env.from_string(draft.source)",
+    "summary": "A request-supplied template string is stored as a draft and compiled with Jinja2 Environment.from_string(), giving the requester control over executable template source."
+  },
+  "trap": "Enabling autoescape is already present and does not constrain template source execution. Escaping only protects values inserted into HTML; it does not stop a user-authored Jinja template from accessing objects exposed in the render context.",
+  "must_preserve": "A valid preview request still returns ({\"preview\": rendered_html}, 200), and a missing template still returns ({\"error\": \"template is required\"}, 400). The rendered preview still has access only to the intended user and campaign data."
+}

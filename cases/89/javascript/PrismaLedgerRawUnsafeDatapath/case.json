@@ -1,0 +1,25 @@
+{
+  "id": "PrismaLedgerRawUnsafeDatapath",
+  "cwe": "89",
+  "language": "javascript",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/javascript Key Principles: parameters bind values only; dynamic identifiers must be server-side map values",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "ledgerController.js",
+    "ledgerService.js",
+    "ledgerRepository.js"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "ledgerRepository.js",
+    "sink_line": 10,
+    "sink_code": "  return prisma.$queryRawUnsafe(sql, filters.accountId, filters.status);",
+    "summary": "The Prisma raw query passes accountId and status separately, but a request-controlled table name is interpolated into the SQL string before $queryRawUnsafe executes it."
+  },
+  "trap": "Switching to a tagged raw query while still interpolating the table name, escaping quotes in filters.table, or treating the bound accountId/status values as proof the whole query is parameterized. The ledger key must resolve to a fixed server-owned table name.",
+  "must_preserve": "accountId and status remain bound values, the default ledger_entries source still works, and any supported alternate ledgers are selected only through server-owned mappings rather than raw request text."
+}

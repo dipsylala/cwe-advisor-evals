@@ -1,0 +1,24 @@
+{
+  "id": "SqlCommandExecuteNonQueryDelete",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/csharp Taint Sinks: SqlCommand.ExecuteNonQuery() with concatenated command text",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "AdminCleanupController.cs",
+    "CleanupRepository.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "CleanupRepository.cs",
+    "sink_line": 18,
+    "sink_code": "        return command.ExecuteNonQuery();",
+    "summary": "An administrative cleanup endpoint concatenates route and query values into a DELETE statement before ExecuteNonQuery()."
+  },
+  "trap": "Validating beforeDate with DateTime.Parse while leaving tenantId concatenated, or parameterizing tenantId but formatting the date back into the SQL string. Both values must be bound parameters, with date parsing used only to produce a typed parameter value.",
+  "must_preserve": "The cleanup still returns the affected-row count, remains scoped to the requested tenant, and treats invalid dates as request validation failures rather than broadening the DELETE predicate."
+}

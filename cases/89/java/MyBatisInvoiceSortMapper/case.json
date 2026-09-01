@@ -1,0 +1,25 @@
+{
+  "id": "MyBatisInvoiceSortMapper",
+  "cwe": "89",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/java Key Principles: MyBatis #{} binds values, while ${} performs raw text substitution and must be safe by construction for identifiers",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "InvoiceController.java",
+    "InvoiceService.java",
+    "InvoiceMapper.java"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "InvoiceMapper.java",
+    "sink_line": 8,
+    "sink_code": "    @Select(\"SELECT id, status, total_cents FROM invoices WHERE tenant_id = #{tenantId} ORDER BY ${sort}\")",
+    "summary": "A request-controlled sort value flows through service code into MyBatis ${} text substitution in an ORDER BY clause."
+  },
+  "trap": "Replacing ${sort} with #{sort}, escaping the sort string, or focusing only on tenantId because it already uses #{}. MyBatis cannot bind an identifier as a value; sort must resolve to a fixed allowlisted SQL fragment before reaching ${}.",
+  "must_preserve": "tenantId remains bound with #{tenantId}, the default created_at sort remains available, and legitimate sort choices still return InvoiceRow records without accepting arbitrary SQL fragments."
+}

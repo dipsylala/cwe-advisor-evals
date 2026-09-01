@@ -1,0 +1,23 @@
+{
+  "id": "LinkedListFreeThenAdvance",
+  "cwe": "416",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/416/c Taint Sinks: linked-list traversal that frees while iterating",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "LinkedListFreeThenAdvance.c"
+  ],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "LinkedListFreeThenAdvance.c",
+    "sink_line": 16,
+    "sink_code": "            node = node->next;",
+    "summary": "The traversal frees an expired list node and then dereferences the freed node to advance to node->next."
+  },
+  "trap": "Setting node to NULL after free(), adding a null check after free(), or moving the refresh call. The traversal must save next before free(node) and then advance using the saved pointer.",
+  "must_preserve": "All non-expired sessions are still passed to refresh_session() in list order, expired nodes are freed exactly once, and traversal continues after an expired node instead of stopping early."
+}

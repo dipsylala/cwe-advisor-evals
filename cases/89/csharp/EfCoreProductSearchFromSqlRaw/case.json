@@ -1,0 +1,24 @@
+{
+  "id": "EfCoreProductSearchFromSqlRaw",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/csharp Remediation Steps: EF Core FromSqlRaw is unsafe when values are interpolated into the SQL string before execution",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "ProductSearchController.cs",
+    "ProductSearchRepository.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "ProductSearchRepository.cs",
+    "sink_line": 17,
+    "sink_code": "        return _db.Products.FromSqlRaw(sql).ToListAsync();",
+    "summary": "A controller query parameter flows into an interpolated EF Core SQL string that is executed with FromSqlRaw()."
+  },
+  "trap": "Changing only the call name while still building sql with interpolation, or passing term as an extra FromSqlRaw argument without adding placeholders. A correct fix should use LINQ, FromSqlInterpolated, or FromSqlRaw with placeholders and separate arguments for every user-controlled value.",
+  "must_preserve": "The search still filters by tenant and by a contains-style product name term, returns Product rows asynchronously, and does not turn an empty term into a different tenant-wide authorization behavior."
+}

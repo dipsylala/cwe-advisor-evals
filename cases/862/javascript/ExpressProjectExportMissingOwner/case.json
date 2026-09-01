@@ -1,0 +1,25 @@
+{
+  "id": "ExpressProjectExportMissingOwner",
+  "cwe": "862",
+  "language": "javascript",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/862/javascript Key Principles: authentication middleware is not authorization; resource lookups must be scoped by owner",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "projectRoutes.js",
+    "sessionAuth.js",
+    "projectStore.js"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "projectRoutes.js",
+    "sink_line": 9,
+    "sink_code": "router.get('/projects/:projectId/export', requireAuth, async (req, res) => {",
+    "summary": "The export route verifies that a user is authenticated, but loads the requested project by ID without checking role or project ownership."
+  },
+  "trap": "Treating requireAuth as sufficient, trusting a role or ownerId supplied in the request, or loading by project ID and returning 403 only after the data has been fetched. The data lookup should be scoped to the authenticated user's authorized projects and preserve not-found behavior for unauthorized IDs.",
+  "must_preserve": "Unauthenticated requests still return 401 with the existing JSON shape. Authorized users can still export their own projects, and unknown or unauthorized project IDs do not reveal whether the project exists."
+}

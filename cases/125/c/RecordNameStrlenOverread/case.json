@@ -1,0 +1,23 @@
+{
+  "id": "RecordNameStrlenOverread",
+  "cwe": "125",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/125/c Key Principles: use strnlen() rather than strlen() on buffers not guaranteed to contain NUL within their allocation",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "RecordNameStrlenOverread.c"
+  ],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "RecordNameStrlenOverread.c",
+    "sink_line": 11,
+    "sink_code": "    return strlen((const char *)record->name);",
+    "summary": "A fixed-size record name buffer is treated as a NUL-terminated string; if no NUL exists in the 16-byte field, strlen() reads into following memory."
+  },
+  "trap": "Adding a terminator after the strlen() call, switching to strnlen() but accepting a result equal to the field capacity as a valid complete name, or checking sizeof(record->name) after it has decayed to a pointer in a helper. The fix must bound the scan to the actual field size and reject missing terminators if the format requires one.",
+  "must_preserve": "Names with a NUL inside the 16-byte field still report their existing length, unterminated names fail closed or report invalid data, and the flags field is never read as part of the name."
+}

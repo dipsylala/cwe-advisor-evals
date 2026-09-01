@@ -1,0 +1,24 @@
+{
+  "id": "DjangoExemptBillingEmail",
+  "cwe": "352",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/352/python Taint Sinks: @csrf_exempt on state-changing Django views",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "views.py",
+    "billing_mailer.py"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery (CSRF)",
+    "file": "views.py",
+    "sink_line": 7,
+    "sink_code": "@csrf_exempt",
+    "summary": "A cookie-authenticated POST view that changes a user's billing email is explicitly exempted from Django CSRF validation."
+  },
+  "trap": "Adding SameSite cookie settings, checking request.method, or requiring only request.user.is_authenticated while leaving @csrf_exempt in place. The state-changing POST still accepts a forged browser request without a CSRF token.",
+  "must_preserve": "POST requests from authenticated users with a valid CSRF token still return JSON status \"queued\" and call BillingMailer.queue_change(). Missing sessions still return the existing 401 JSON shape, and non-POST methods still return 405 JSON."
+}

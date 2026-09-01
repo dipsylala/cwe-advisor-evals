@@ -1,0 +1,25 @@
+{
+  "id": "SqlAlchemyReportSortDatapath",
+  "cwe": "89",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/python Key Principles: dynamic identifiers are allowlisted, not escaped or parameterized",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "report_controller.py",
+    "report_service.py",
+    "report_repository.py"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "report_repository.py",
+    "sink_line": 11,
+    "sink_code": "    return session.execute(statement, {\"account_id\": account_id, \"status\": status})",
+    "summary": "The SQLAlchemy text query binds account_id and status, but the report sort key flows across three files into an interpolated ORDER BY clause."
+  },
+  "trap": "Adding a bound parameter for the ORDER BY identifier, escaping quotes in sort, or validating status while leaving sort raw. The sort value must select from a server-side map of allowed SQLAlchemy column expressions or fixed text fragments.",
+  "must_preserve": "The account_id and status filters remain bound parameters, the default created_at sort remains available, and supported sort keys still work without accepting raw SQL fragments."
+}

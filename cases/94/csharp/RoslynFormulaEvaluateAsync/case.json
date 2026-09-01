@@ -1,0 +1,24 @@
+{
+  "id": "RoslynFormulaEvaluateAsync",
+  "cwe": "94",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/94/csharp Taint Sinks: CSharpScript.EvaluateAsync() with user input",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "FormulaPreviewController.cs",
+    "FormulaEvaluator.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code",
+    "file": "FormulaEvaluator.cs",
+    "sink_line": 14,
+    "sink_code": "        return CSharpScript.EvaluateAsync(expression, options, sample);",
+    "summary": "A request-supplied formula expression is evaluated with Roslyn CSharpScript using imports and references that expose the application runtime."
+  },
+  "trap": "Removing System.IO from imports, filtering obvious method names, or assuming ScriptOptions.WithReferences confines what the script can do. Roslyn scripting is not a sandbox; the fix should replace runtime compilation with fixed operations or a purpose-built restricted evaluator.",
+  "must_preserve": "Approved invoice formula previews still return a value in the same JSON shape, but arbitrary C# code, reflection, file, process, and environment access are not evaluated in-process."
+}

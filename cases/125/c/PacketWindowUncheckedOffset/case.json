@@ -1,0 +1,23 @@
+{
+  "id": "PacketWindowUncheckedOffset",
+  "cwe": "125",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-125/c Common Pitfalls: Casting to size_t before validating the sign / Trusting offset + length",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "PacketWindowUncheckedOffset.c"
+  ],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "PacketWindowUncheckedOffset.c",
+    "sink_line": 13,
+    "sink_code": "        memcpy(out, packet + offset, length);",
+    "summary": "The range check casts a signed offset before validating it and uses offset + length, allowing negative offsets or unsigned wraparound to pass before memcpy reads outside packet."
+  },
+  "trap": "Keeping the offset + length comparison but moving casts around still leaves wraparound risk, and checking only the upper bound leaves negative offsets ambiguous. The fix must reject offset < 0 first, then check length <= packet_len - offset and length <= out_capacity.",
+  "must_preserve": "Valid windows copy exactly length bytes and return that length. Invalid windows return -1 without writing beyond out_capacity or reading outside packet."
+}

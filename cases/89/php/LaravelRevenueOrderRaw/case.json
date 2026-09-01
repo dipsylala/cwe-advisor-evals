@@ -1,0 +1,24 @@
+{
+  "id": "LaravelRevenueOrderRaw",
+  "cwe": "89",
+  "language": "php",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/php Key Principles: Laravel orderByRaw() is a raw sink; identifiers and directions cannot be bound",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "RevenueController.php",
+    "RevenueRepository.php"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "RevenueRepository.php",
+    "sink_line": 12,
+    "sink_code": "            ->orderByRaw($sort)",
+    "summary": "The Laravel query builder binds values in where clauses, but a request-controlled sort string flows into orderByRaw()."
+  },
+  "trap": "Adding bindings to whereRaw(), calling DB::raw($sort), or checking that range is one of month/year while leaving sort raw. The column and direction must come from a server-side allowlist, preferably using orderBy() with mapped column and direction values.",
+  "must_preserve": "account_id remains constrained, range still maps to the existing 31-day or 365-day window, and approved sort modes continue to work without accepting arbitrary SQL text."
+}

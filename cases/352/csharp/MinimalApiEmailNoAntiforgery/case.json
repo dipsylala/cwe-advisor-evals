@@ -1,0 +1,24 @@
+{
+  "id": "MinimalApiEmailNoAntiforgery",
+  "cwe": "352",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/352/csharp Key Principles: MVC anti-forgery filters do not run for Minimal API endpoints; use app.UseAntiforgery()",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "Program.cs",
+    "EmailEndpoints.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery (CSRF)",
+    "file": "EmailEndpoints.cs",
+    "sink_line": 7,
+    "sink_code": "        app.MapPost(\"/account/email\", async (EmailChangeRequest request, EmailChangeService service) =>",
+    "summary": "A cookie-authenticated Minimal API POST endpoint changes account email and requires authorization, but the pipeline never calls UseAntiforgery()."
+  },
+  "trap": "Adding [ValidateAntiForgeryToken] or AutoValidateAntiforgeryTokenAttribute as if this were MVC, or relying on RequireAuthorization()/SameSite alone. Minimal API endpoints need antiforgery middleware in the pipeline and a validated request token.",
+  "must_preserve": "Authorized clients with valid antiforgery tokens can still POST /account/email and receive 202 Accepted. Authentication and authorization middleware remain in place, and the endpoint still calls EmailChangeService.QueueAsync()."
+}

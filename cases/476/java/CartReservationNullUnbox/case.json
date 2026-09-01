@@ -1,0 +1,23 @@
+{
+  "id": "CartReservationNullUnbox",
+  "cwe": "476",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/476/java Key Principles: Map.get miss flowing into a numeric expression",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "unreviewed",
+  "files": [
+    "CartReservationNullUnbox.java"
+  ],
+  "finding": {
+    "cwe": "CWE-476",
+    "name": "NULL Pointer Dereference",
+    "file": "CartReservationNullUnbox.java",
+    "sink_line": 14,
+    "sink_code": "        int reserved = reservedBySku.get(sku);",
+    "summary": "A missing SKU returns null from Map.get(), and assigning it to int unboxes the null Integer and throws NullPointerException."
+  },
+  "trap": "Catching NullPointerException around the arithmetic hides the missing-value contract and can leave other callers of the same map exposed. The fix should make the absent reservation count explicit with getOrDefault, containsKey handling, or a producer contract that never stores null counts.",
+  "must_preserve": "For SKUs present in reservedBySku, availableToPromise returns onHand minus the stored reservation count. For SKUs with no reservation entry, absence is handled as a controlled no-reservation case rather than an unhandled exception."
+}

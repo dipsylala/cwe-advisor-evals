@@ -11,9 +11,10 @@ standalone clone of this repo.
 CWE guidance in the parent repo is written and reviewed on reasoning alone - nothing is measured by
 default. This harness exists to put numbers against three durable questions:
 
-1. **Does the knowledge base beat the bare model?** If a capable model fixes SQL injection just as
-   well without the entry, the entry is not earning its place, and content should shift toward
-   detail a model genuinely lacks.
+1. **Does the knowledge base improve remediation after a scanner has already found a real issue?**
+   The current top-15 corpus assumes a SAST, LLM, or hybrid scanner has reported a confirmed true
+   positive. The arm is not being asked to rediscover or adjudicate the bug; it is being asked to
+   fix the reported sink correctly.
 2. **Does review effort show up in output quality?** Tested by splitting cases between CWEs a
    review pass covered and CWEs it never touched.
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
@@ -63,14 +64,15 @@ cases/
 Cases accumulate here rather than being versioned into a new directory per run - git holds the
 history. Run records under `runs*/` name cases by id, so ids are stable once published.
 
-Current contents: 148 cases across 18 CWEs and seven languages (perl added by the CWE-79 depth
-batch below). Four sources:
+Current contents: 203 cases across 26 CWEs and nine languages (perl added by the CWE-79 depth
+batch below; c and cpp added by the top-15 fix-complexity batch). Five sources:
 
 | `source` | n | What it is |
 |---|---|---|
 | `owasp-benchmark` | 16 | Single-file Java servlets, labels from `expectedresults-1.2.csv` |
 | `juliet` | 17 | Java multi-file flow variants, de-labelled mechanically; taint crosses 2, 4 or 5 files |
 | `authored-from-docs-pitfall` | 13 | Single-function cases across Java, Python, Go, C#, JavaScript and PHP, each built around a fix that looks right and is not |
+| `authored-top15-fix-complexity` | 55 | True-positive remediation cases for 2025 CWE Top 15 entries with explicit `trap`, `must_preserve`, and `origin` metadata; several cross files, and all test fix shape rather than finding adjudication |
 | `authored` | 102 | Plain true-positive cases with no `trap`/`must_preserve`/`origin` - language-coverage, top-15 depth, or (11 cases, see below) multi-file chains crossing 2-5 files, not a discrimination instrument |
 
 **`owasp-benchmark` and `juliet`** are externally authored, so their ground truth doesn't come from
@@ -103,6 +105,63 @@ untouched. Run 6 scored the remaining three (`OrderEventQueueDeserialize`, `Mode
 `DeprecatedEntityLoaderGuard`) and found none of them caught that shape either - 12 of 13 across
 both runs now, so `authored-from-docs-pitfall` traps still mostly do not catch anything, though run
 6 did surface two findings the traps were not built to test - see [RESULTS-v6.md](RESULTS-v6.md).
+
+**`authored-top15-fix-complexity`** cases cover the 2025 CWE Top 15 entries with remediation-quality
+pressure rather than detection labels. The scanner finding is part of the prompt and is treated as
+confirmed. The case succeeds only if the produced fix closes that true positive while preserving the
+observable contract. The first batch filled entries that had local guidance but no eval coverage:
+CWE-121, 125, 352, 416, 476, 787, 862, and 94. The second batch added more detailed wrong-fix cases
+for high-volume entries that already had ordinary coverage: CWE-22, 78, 79, and 89. The third batch
+widened language coverage for underrepresented top-15 entries: CWE-352/Python, CWE-862/JavaScript,
+CWE-94/JavaScript and PHP, CWE-787/C++, and CWE-416/C. The fourth batch added framework and datapath
+variety across eight more language/CWE pairs: CWE-352/Java, CWE-862/C#, CWE-434/Go, CWE-502/PHP,
+CWE-89/Python, CWE-79/C#, CWE-125/C++, and CWE-121/C. The fifth batch concentrated on CWE-89 across
+all six supported languages, adding Dapper/C#, GORM/Go, MyBatis/Java, Prisma-style raw SQL/
+JavaScript, Laravel/PHP, and Django/Python datapaths. The sixth batch added five more C# CWE-89
+sinks: EF Core `FromSqlRaw`, EF Core `ExecuteSqlRawAsync`, `SqlDataAdapter.Fill()`,
+`SqlCommand.ExecuteScalar()`, and `SqlCommand.ExecuteNonQuery()`. The seventh batch returned to the
+MITRE top five, excluding already-expanded CWE-89, with Java/PHP XSS rendering sinks, Go/C# CSRF
+route coverage gaps, Java/PHP authorization gaps, and C/C++ out-of-bounds write datapaths. Each is a
+confirmed true positive and carries the same `trap`/`must_preserve`/`origin` fields as the pitfall
+cases. The eighth batch filled weaker top-15 areas with Java/C# code execution, Java upload and
+deserialization, C/C++ null/read/stack/use-after-free cases, and Java Zip Slip extraction. The focus
+is remediation quality: choosing the right API or control, preserving the endpoint/function
+contract, and avoiding plausible local edits that leave the reported sink exposed or break valid
+callers. CWE-120 is the only 2025 top-15 entry still uncovered because this repo has no `cwe/120`
+guidance directory; add guidance or explicitly route it to CWE-121/125/787 before adding a case.
+
+### 2025 Top 15 Fix-Quality Target
+
+The 2025 CWE Top 15 is the priority set for remediation-quality pressure, using MITRE's 2025 Top 25
+list published December 15, 2025. The target is not equal volume everywhere: a common, already-easy
+sink does not need another direct case. A top-15 CWE is considered "hammered" only when it has
+ordinary true positives, at least one multi-file or cross-layer flow where that shape is natural,
+and at least one explicit wrong-fix/contract-preservation case. These are not scanner-benchmark
+cases: the finding is already known, so added detail should make the fix decision harder, not make
+the bug harder to notice.
+
+| Rank | CWE | Current coverage | Next pressure to add |
+|---|---|---|---|
+| 1 | 79 | 32 cases across seven languages, depths 1-5, with JavaScript URL, C# Razor script, Java Thymeleaf raw HTML, and PHP Blade raw-render traps | Add more `trap`/`must_preserve` cases for sanitizer misuse and framework escape bypasses |
+| 2 | 89 | 25 cases across C#, Go, Java, JavaScript, PHP, and Python; C# now covers ADO.NET, Dapper, EF Core raw SQL, `SqlDataAdapter`, scalar, and non-query sinks | Add non-C# value cases that still break fixes: LIKE wildcard binding, hand-built `IN` lists, stored procedures with concatenated dynamic SQL, and one client-side escaping trap |
+| 3 | 352 | 5 cases: JavaScript Origin/Referer, Python `@csrf_exempt`, Java Spring CSRF exclusion, Go secondary mux, and C# Minimal API antiforgery gaps | Add another Go/C# case only if it covers a distinct token-header or migration trap; otherwise move pressure to weaker top-15 CWEs |
+| 4 | 862 | 5 depth-2/3 cases: Python DRF object bypass, JavaScript Express missing ownership, C# bare `[Authorize]`, Java Spring delete, and PHP Laravel auth-only route | Add list-vs-detail authorization and admin branch drift cases, especially in Java and PHP |
+| 5 | 787 | 4 cases: C allocation overflow, C offset/length write, C++ `reserve()`-then-index write, and C++ span claimed-capacity write | Add off-by-one loops and multi-function size propagation where the callee lacks real capacity |
+| 6 | 22 | 9 cases across six languages, including Python symlink/prefix containment and Java Zip Slip normalize/extract traps | Add traps for path normalization performed before joining the trusted root and more symlink-safe upload/download cases |
+| 7 | 416 | 3 cases: C++ callback trap, C linked-list free-then-advance, and C++ dangling `string_view` cache | Add one multi-file owner/observer split and iterator invalidation after erase/reallocation |
+| 8 | 125 | 3 cases: C offset/length, C++ claimed-window vector read, and C non-NUL `strlen()` over-read traps | Add paired source/destination checks that distinguish CWE-125 from CWE-787 and send/write length cases |
+| 9 | 78 | 12 cases, depths 1-5, with PHP fallback and Go shell-command construction traps | Add traps for shell removal that breaks required behaviour, environment/PATH preservation, and valid CWE-88 option-injection shapes where the tainted argument is actually parsed as an option |
+| 10 | 94 | 5 cases: Python Jinja, JavaScript `Function`, PHP dynamic `require`, Java SpEL, and C# Roslyn scripting traps | Add Python import/AST-parser wrong fixes and DynamicExpresso/NCalc custom-function cases |
+| 11 | 120 | 0 cases, no local `cwe/120` guidance | Decide whether to add a narrow `cwe/120` entry or route direct buffer-copy findings to CWE-121/125/787 before adding evals |
+| 12 | 434 | 8 cases, including Go and Java multipart header/content-type datapath traps | Add upload retrieval flows, rename-read-path preservation, object storage metadata checks, and webroot/static serving traps |
+| 13 | 476 | 3 cases: Java unboxing, C `getenv()`/`strcmp()`, and C++ unchecked `weak_ptr::lock()` traps | Add producer-contract cases where fixing only the crash site leaves sibling callers exposed |
+| 14 | 121 | 3 cases: C stack concat, C helper-boundary capacity, and C++ stack `std::array` unchecked index traps | Add `fgets` truncation handling, `scanf` width cases, and C++ stack-copy variants |
+| 15 | 502 | 8 cases, including PHP cart-cookie decode/unserialize and Java native `ObjectInputStream.readObject()` datapaths | Add multi-file queue/cache/session flows, allowlist filters that preserve legitimate types, and migrations that keep persisted data readable |
+
+For future top-15 batches, prefer cases that combine two axes from this list: multi-file flow,
+existing partial mitigation, plausible wrong fix, and observable contract preservation. Single-file
+cases are still useful for native memory and API-specific pitfalls, but a new one should name the
+fix mistake it is designed to catch.
 
 **`authored`** cases come from two related but distinct campaigns, both tracked in TODO.md, neither
 built around a deliberate wrong-fix:
@@ -146,8 +205,8 @@ Create `cases/{CWE}/{language}/{case-id}/` with the source files and a `case.jso
 | `depth` | Files in the call chain from source to sink |
 | `group` | `reviewed` or `unreviewed`, for the review-effort split (the CWEs the top-15 review covered - see run 1's design in [RESULTS.md](RESULTS.md) - are `reviewed`; everything else is `unreviewed`) |
 | `files` | Source files, in call order |
-| `finding` | What the scanner reports: `cwe`, `name`, `file`, `sink_line`, `sink_code`, `summary` |
-| `trap`, `must_preserve`, `origin` | `authored-from-docs-pitfall` only. A plain `authored` case omits all three |
+| `finding` | What the scanner reports and the arm is told to fix: `cwe`, `name`, `file`, `sink_line`, `sink_code`, `summary` |
+| `trap`, `must_preserve`, `origin` | `authored-from-docs-pitfall` and `authored-top15-fix-complexity` only. A plain `authored` case omits all three |
 
 `case.json` holds the answer, so **runners and judges must be told not to read it**, the same way
 they are told not to read `RESULTS*.md` or the `runs*/` directories. Everything an arm is entitled

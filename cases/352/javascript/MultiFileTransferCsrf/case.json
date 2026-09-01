@@ -1,0 +1,25 @@
+{
+  "id": "MultiFileTransferCsrf",
+  "cwe": "352",
+  "language": "javascript",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-352/javascript Common Pitfalls: Origin/Referer check that allows the request when the header is absent",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "transferRoutes.js",
+    "csrfOriginPolicy.js",
+    "transferLedger.js"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery (CSRF)",
+    "file": "transferRoutes.js",
+    "sink_line": 15,
+    "sink_code": "  app.post('/api/transfer', requireSession, (req, res) => {",
+    "summary": "A cookie-authenticated state-changing transfer route relies on an Origin/Referer helper that allows requests with no header and has no CSRF token validation."
+  },
+  "trap": "Tightening the Origin/Referer helper while still allowing missing headers, or adding SameSite alone. The reported route remains a cookie-authenticated POST with no token that an attacker can submit cross-site when the browser sends cookies.",
+  "must_preserve": "Authenticated successful transfers still call TransferLedger.scheduleTransfer() and respond with JSON containing status \"scheduled\" and transferId. Missing sessions still return 401 with the existing error shape, and cross-site failures still return 403 JSON rather than redirecting."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "CartCookieDecodeUnserialize",
+  "cwe": "502",
+  "language": "php",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/502/php Taint Sinks: unserialize() on external data",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "CartController.php",
+    "CartCookie.php"
+  ],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "CartCookie.php",
+    "sink_line": 12,
+    "sink_code": "        return unserialize($payload);",
+    "summary": "A cart cookie is base64-decoded and passed directly to unserialize(), allowing attacker-controlled serialized objects to instantiate PHP classes and magic methods."
+  },
+  "trap": "Adding allowed_classes only after calling unserialize(), trusting base64 as validation, or signing the value after deserialization. Prefer a JSON cart format; if legacy serialized data must be supported temporarily, verify an HMAC before deserialization and restrict allowed classes.",
+  "must_preserve": "Unsigned attacker-controlled cookies no longer reach unserialize(). Empty or invalid cookies still restore an empty cart, and legitimate cart data still returns items and coupon fields in the same array shape."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "OrdersDynamicSortIdentifier",
+  "cwe": "89",
+  "language": "javascript",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-89/javascript Common Pitfalls: Parameterization does not bind SQL identifiers or ORDER BY fragments",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "orderController.js",
+    "orderRepository.js"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "orderRepository.js",
+    "sink_line": 11,
+    "sink_code": "  const [rows] = await db.execute(sql, [accountId]);",
+    "summary": "The query still parameterizes accountId, but client-controlled sort column and direction are interpolated into the ORDER BY clause before db.execute() runs."
+  },
+  "trap": "Changing ORDER BY to use placeholders, escaping the sort string, or allowlisting only the direction. SQL parameters bind values, not identifiers; the column must come from a server-owned map of allowed sort keys and the direction must be independently allowlisted.",
+  "must_preserve": "The accountId filter remains parameterized, the default created_at DESC sort remains available, and the endpoint still supports the intended sort keys without allowing raw SQL fragments from the client."
+}

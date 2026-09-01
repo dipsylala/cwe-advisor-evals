@@ -1,0 +1,23 @@
+{
+  "id": "PluginPreviewDynamicRequire",
+  "cwe": "94",
+  "language": "php",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/94/php Taint Sinks: include/require with user-controlled path",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "PluginPreviewDynamicRequire.php"
+  ],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code",
+    "file": "PluginPreviewDynamicRequire.php",
+    "sink_line": 10,
+    "sink_code": "        require __DIR__ . '/plugins/' . $plugin . '.php';",
+    "summary": "A request-controlled plugin name is concatenated into a require path, allowing attacker-selected PHP code to be loaded and executed."
+  },
+  "trap": "Setting allow_url_include=0, checking for http:// URLs, or sanitizing path separators while still allowing arbitrary local plugin names. Local require() execution remains; the fix must use a server-owned allowlist of plugin identifiers to fixed files.",
+  "must_preserve": "The existing summary plugin remains the default, approved plugins can still render previews through render_preview(), and rejected plugin names fail before require() executes."
+}

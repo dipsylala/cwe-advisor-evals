@@ -1,0 +1,24 @@
+{
+  "id": "SpringAvatarContentTypeTrust",
+  "cwe": "434",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/434/java Key Principles: MultipartFile.getContentType() and getOriginalFilename() are client-supplied metadata",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "AvatarController.java",
+    "AvatarStorage.java"
+  ],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "AvatarController.java",
+    "sink_line": 20,
+    "sink_code": "        String contentType = avatar.getContentType();",
+    "summary": "The Spring upload handler trusts the client-supplied multipart Content-Type header and later stores the upload under the client-supplied original filename."
+  },
+  "trap": "Adding an extension check, using Files.probeContentType() on the stored name, or generating a random name while preserving the client-chosen extension. The fix must inspect the file bytes, allowlist the real type, derive storage extension from that type, and update the returned/retrieval name.",
+  "must_preserve": "Valid PNG and JPEG avatars still upload and return the stored filename, unsupported content fails before storage, and callers can retrieve the avatar by the server-generated name returned from store()."
+}

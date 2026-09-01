@@ -1,0 +1,23 @@
+{
+  "id": "ProfileWebsiteUrlScheme",
+  "cwe": "79",
+  "language": "javascript",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-79/javascript Common Pitfalls: URL-context XSS where HTML escaping does not validate dangerous schemes",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "profileLinkRenderer.js"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)",
+    "file": "profileLinkRenderer.js",
+    "sink_line": 16,
+    "sink_code": "  return `<a class=\"profile-link\" href=\"${websiteUrl}\" rel=\"nofollow\">${displayName}</a>`;",
+    "summary": "A profile website URL is only HTML-attribute escaped before being placed in an href, so javascript: or data: URLs still execute when a user clicks the rendered link."
+  },
+  "trap": "Escaping the href for HTML, percent-encoding the whole value, or adding CSP alone. The dangerous scheme remains the bug; a correct fix must validate the URL protocol for this URL context before rendering the link.",
+  "must_preserve": "Valid http, https, and mailto profile links still render as links with the existing class and rel attribute. The display name remains HTML-escaped, and missing or rejected URLs do not turn into a broken clickable javascript/data link."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "FrameOffsetLengthWriter",
+  "cwe": "787",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/787/c Key Principles: validate offset <= buf_len first, then length <= buf_len - offset",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "frame_encoder.c",
+    "buffer_writer.c"
+  ],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "buffer_writer.c",
+    "sink_line": 10,
+    "sink_code": "    memcpy(destination + offset, payload, length);",
+    "summary": "The helper checks only length against capacity, then writes at destination + offset without proving offset + length fits in the destination."
+  },
+  "trap": "Changing the check to offset + length > capacity without considering unsigned overflow, or checking length against the input payload size only. The fix must validate offset first and then length <= capacity - offset before memcpy().",
+  "must_preserve": "Valid payload writes at a nonzero offset still work, oversized writes are rejected without modifying memory beyond the frame, and the helper keeps receiving capacity explicitly from its caller."
+}

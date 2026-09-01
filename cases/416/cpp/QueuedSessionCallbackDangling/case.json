@@ -1,0 +1,23 @@
+{
+  "id": "QueuedSessionCallbackDangling",
+  "cwe": "416",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-416/cpp Common Vulnerable Patterns: Callback Capturing by Reference / Callback With Freed Context",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "QueuedSessionCallbackDangling.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "QueuedSessionCallbackDangling.cpp",
+    "sink_line": 33,
+    "sink_code": "        raw->touch();",
+    "summary": "A queued callback captures a raw pointer to a Session owned by a unique_ptr that is reset before the callback can run."
+  },
+  "trap": "Setting raw = nullptr after queue.enqueue() or after session.reset() does not update the copy already captured in the lambda. Capturing a reference to the unique_ptr is also wrong because the closure outlives the local variable.",
+  "must_preserve": "scheduleSessionTouch still enqueues exactly one callback. If touching the session after scheduling is required, the callback must own/share the Session; if the session may expire, the callback must check a weak reference and skip safely."
+}

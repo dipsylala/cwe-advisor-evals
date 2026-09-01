@@ -1,0 +1,25 @@
+{
+  "id": "DapperCustomerSortDatapath",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/csharp Key Principles: dynamic identifiers cannot be parameterized and must resolve through a server-side map",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "CustomerSearchController.cs",
+    "CustomerSearchService.cs",
+    "CustomerRepository.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command",
+    "file": "CustomerRepository.cs",
+    "sink_line": 26,
+    "sink_code": "        return _connection.QueryAsync<CustomerRow>(sql, new { AccountId = accountId, Query = options.Query });",
+    "summary": "The Dapper query binds account and search values, but a request-controlled sort field flows through controller and service layers into an interpolated ORDER BY clause."
+  },
+  "trap": "Adding a Dapper parameter for ORDER BY, escaping quotes in options.Sort, or focusing only on the already-bound search term. SQL parameters bind values, not identifiers; the sort key must resolve to a fixed server-owned column expression and direction.",
+  "must_preserve": "AccountId and Query remain bound parameters, the default created_at sort still works, and supported sort options keep returning CustomerRow values without accepting raw SQL fragments."
+}

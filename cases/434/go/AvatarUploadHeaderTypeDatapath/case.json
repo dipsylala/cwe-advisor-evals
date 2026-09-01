@@ -1,0 +1,24 @@
+{
+  "id": "AvatarUploadHeaderTypeDatapath",
+  "cwe": "434",
+  "language": "go",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/434/go Key Principles: FileHeader Content-Type and Filename are client-supplied metadata",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "avatar_handler.go",
+    "avatar_store.go"
+  ],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "avatar_handler.go",
+    "sink_line": 21,
+    "sink_code": "        contentType := header.Header.Get(\"Content-Type\")",
+    "summary": "The upload handler trusts the multipart part's client-supplied Content-Type header before saving the file under the client-supplied filename."
+  },
+  "trap": "Adding an extension check, sanitizing only header.Filename, or generating a new filename without updating the response/retrieval contract. The fix must sniff the opened file's leading bytes, allowlist real content types, rewind before saving, and store under a server-generated name that callers can retrieve.",
+  "must_preserve": "Valid PNG and JPEG uploads still return 201 with the stored avatar name, oversized or malformed uploads still fail with the existing error shapes, and successful uploads remain retrievable by the name returned to the caller."
+}

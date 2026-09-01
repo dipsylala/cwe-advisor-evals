@@ -1,0 +1,25 @@
+{
+  "id": "SpringBillingCsrfIgnored",
+  "cwe": "352",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/352/java Taint Sinks: over-broad ignoringRequestMatchers(...) exclusion on state-changing endpoints",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "SecurityConfig.java",
+    "BillingController.java",
+    "BillingService.java"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery (CSRF)",
+    "file": "SecurityConfig.java",
+    "sink_line": 12,
+    "sink_code": "            .csrf(csrf -> csrf.ignoringRequestMatchers(\"/api/billing/**\"))",
+    "summary": "Spring Security authentication is required, but CSRF protection is disabled for every billing API route, including a state-changing card update endpoint."
+  },
+  "trap": "Adding SameSite cookies, changing PATCH to POST, or narrowing only the controller code while leaving /api/billing/** ignored in the CSRF filter. The filter chain must require a valid CSRF token for the state-changing billing route.",
+  "must_preserve": "Authenticated clients with valid CSRF tokens can still PATCH /api/billing/card and receive a BillingResult with status \"queued\". The endpoint remains authenticated, and unrelated non-browser API exclusions are not broadened."
+}

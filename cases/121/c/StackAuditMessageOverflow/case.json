@@ -1,0 +1,23 @@
+{
+  "id": "StackAuditMessageOverflow",
+  "cwe": "121",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "docs/CWE-121/c Common Pitfalls: Passing the destination's size to strncat()",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "StackAuditMessageOverflow.c"
+  ],
+  "finding": {
+    "cwe": "CWE-121",
+    "name": "Stack-based Buffer Overflow",
+    "file": "StackAuditMessageOverflow.c",
+    "sink_line": 14,
+    "sink_code": "    strcat(message, action);",
+    "summary": "username and action are concatenated into a 64-byte stack buffer with strcpy/strcat and no length check."
+  },
+  "trap": "Replacing strcat(message, action) with strncat(message, action, sizeof(message)) still treats the third argument as the destination capacity instead of remaining space, and can overflow after username and ':' are already in the buffer.",
+  "must_preserve": "For inputs that fit, build_audit_message still writes \"AUDIT <username>:<action>\" to out and returns 0. Oversized input is rejected rather than silently truncated into a different audit message."
+}
