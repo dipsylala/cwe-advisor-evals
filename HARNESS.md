@@ -20,7 +20,7 @@ the scanner is upstream of this harness: the finding has already been confirmed 
 and the run measures the quality of the fix, not whether the model can rediscover the bug.
 
 | Arm | Condition |
-|---|---|
+| --- | --- |
 | **A** | Control. The finding and the case files, nothing else. No skill, no guidance |
 | **B** | Invokes the `cwe_advisor` skill in autonomous mode |
 
