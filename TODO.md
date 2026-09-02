@@ -7,9 +7,12 @@ of those. Completed work's reasoning lives in `git log` commit messages, not her
 
 ## Corpus campaigns
 
-- Per-language coverage (breadth): 258 `(cwe, language)` slots remain out of the original 318
-  missing (root-only CWEs with no language subfolder are out of scope). Continue in ~15-case
-  batches, one workflow run each, checking each batch's output before the next.
+- Per-language coverage (breadth): 222 `(cwe, language)` slots remain uncovered, out of 339 total
+  in the knowledge base (root-only CWEs with no language subfolder are out of scope) - recounted
+  2026-09-02 via a directory diff (`cwe/{id}/{lang}/` vs `evals/cases/{cwe}/{lang}/`), since the
+  tracked "258 of 318" figure had drifted stale as new CWE entries were added independent of this
+  campaign. Continue in ~15-case batches, one workflow run each, checking each batch's output
+  before the next.
 - Top-15 depth: remaining CWEs in rank order: 78, 89 (both need 2 more per slot to reach 3), 94,
   125, 287, 352, 416, 434, 787, 862. The corpus this campaign originally mined pattern shapes from
   is no longer part of the parent repo's source - pull patterns from OWASP cheat sheets, framework
