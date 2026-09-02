@@ -1,0 +1,23 @@
+{
+  "id": "DynamicExpressoCustomFunctionFileRead",
+  "cwe": "94",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/94/csharp Key Principles: SetFunction adds identifiers rather than confining them - review any registered delegate that reflects on a string argument or reaches files as a sink in its own right",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "DiscountRuleEvaluator.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "DiscountRuleEvaluator.cs",
+    "sink_line": 14,
+    "sink_code": "        return interpreter.Eval(rule);",
+    "summary": "The Interpreter has reflection disabled by default and references no namespaces, but it registers a custom lookupRate function whose body passes its string argument straight to File.ReadAllText; a rule expression fully controls that argument, so lookupRate(\"C:\\\\secrets\\\\api.key\") reads an arbitrary file even though the interpreter itself looks locked down."
+  },
+  "trap": "Locking the interpreter down further - confirming EnableReflection() is never called, or refusing to Reference() any namespace - does not touch this finding, because the injection is not in what the expression can resolve through the interpreter; it is inside the body of the custom function the application itself registered. The fix has to change LookupRate: validate configKey against an allowlist of known rate-config keys, or map it through a fixed Dictionary<string, decimal>, rather than treating an expression-supplied string as a file path.",
+  "must_preserve": "Evaluate still resolves an approved rate-config key to its configured decimal rate and returns the rule's arithmetic result using orderTotal. A rule that passes a key outside the known set to lookupRate is rejected rather than reading an arbitrary file."
+}

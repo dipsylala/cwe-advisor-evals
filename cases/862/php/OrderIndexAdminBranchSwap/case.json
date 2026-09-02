@@ -1,0 +1,23 @@
+{
+  "id": "OrderIndexAdminBranchSwap",
+  "cwe": "862",
+  "language": "php",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/862/php Key Principles: for resource-specific actions compare the authenticated user to the model instance, not just check a role",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "OrderController.php"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "OrderController.php",
+    "sink_line": 16,
+    "sink_code": "            return Order::all();",
+    "summary": "index() intends admins to see every order and other users to see only their own, but the two return statements are on the wrong side of the isAdmin() check: any non-admin, authenticated user hits the Order::all() branch and receives every user's orders, while admins get the owner-scoped query."
+  },
+  "trap": "Adding abort_unless($user->isAdmin(), 403) before Order::all() (or blocking non-admins from index() entirely with middleware) makes the branch admin-only but removes the endpoint's self-service list for every non-admin caller, which was never the intent. The branches themselves are simply swapped: Order::all() belongs behind if ($user->isAdmin()), and Order::where('user_id', $user->id)->get() belongs in the else - the fix is correcting which return sits in which branch, not adding a new gate.",
+  "must_preserve": "Admin users still receive every Order from this endpoint. Non-admin users receive only orders where user_id matches their own id, and never another user's orders."
+}
