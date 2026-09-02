@@ -20,7 +20,7 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Eight runs so far - see **Past runs** below for what each one found. Runs 1-6 all ran on Sonnet 5
+Ten runs so far - see **Past runs** below for what each one found. Runs 1-6 all ran on Sonnet 5
 (undocumented as such until run 5/6, see the model gap below) and found verdict accuracy and
 multi-file source tracing saturated in every arm at every chain depth tested up to five files, and
 `fix_quality` saturated across the 79-case breadth/depth corpus too - at that model's capability
@@ -65,6 +65,20 @@ endpoints - confirmed against Microsoft's own current docs, a JSON-bound endpoin
 even with the middleware registered, and both arms independently missed the extra
 `IAntiforgery.ValidateRequestAsync()` call it needs. All three gaps are now fixed in the guidance
 itself; see [RESULTS-v8.md](RESULTS-v8.md).
+
+**Runs 9 and 10 are the current word on each model, both on the same post-fix corpus.** Run 9
+(Sonnet 5, both arms) replicates run 5's saturation on the full 203-case corpus: `fix_quality`
+1.98 vs. 1.98, with guidance's usual small `no_harm` edge (1.88 vs. 1.91). Run 10 (Haiku 4.5, both
+arms - the direct before/after test of run 8's three fixes) shows a small `fix_quality` gap
+reopening (1.85 vs. 1.90), traced case-by-case rather than assumed from the aggregate: all three
+previously-broken Juliet CWE-90 cases now score a clean 2.00/2.00 for the guided arm (up from 0.67
+in run 8), and `MinimalApiEmailNoAntiforgery` (CWE-352/csharp) rose from a mixed read to 2.00/1.67
+while the unguided arm - which never reads the fix - stayed poor on the same case, exactly the
+isolation a guidance-only change should produce. The third fix (`cwe/117/javascript`) only partially
+held: the entry now gives the literal JS escape text verbatim, but Haiku independently pasted a raw
+Unicode character into a regex character class again in this run - the same mistake recurring as a
+fresh model-generation error rather than anything the guidance text could still address. See
+[RESULTS-v9.md](RESULTS-v9.md) and [RESULTS-v10.md](RESULTS-v10.md).
 
 ## Corpus
 
@@ -275,15 +289,19 @@ special.
   whether it reads as correct, not on whether it actually builds or passes a test; the judge-side
   gap above is this same problem one level up, where even the *scoring* wasn't independently
   verified until this session checked one case by hand.
-- **Only one alternate model has been tried, and its two data points disagree with each other.**
-  Runs 1-6 all had every arm and judge inherit whatever model was running the orchestrating session
-  (Sonnet 5 for runs 5 and 6, undocumented for 1-4). Run 7 re-ran run 5's exact 79-case corpus with
-  arms on Haiku 4.5 and judges pinned to Sonnet 5, and found a real `fix_quality` gap Sonnet 5 never
-  showed on the same cases. Run 8 repeated the identical Haiku-vs-Sonnet pairing after the corpus
-  grew to 203 cases and found the gap did not hold - see run 7's and run 8's rows below. Model choice
-  and corpus size/composition are now both demonstrated confounds, not just model choice; a third
-  model (mid-tier, or a different vendor) is still the obvious next test, and it should be run
-  against a fixed, unchanging corpus if the goal is to isolate the model variable cleanly.
+- **Only one alternate model has been tried, and its data points on the full corpus still disagree
+  with each other before and after the guidance fixes.** Runs 1-6 all had every arm and judge
+  inherit whatever model was running the orchestrating session (Sonnet 5 for runs 5 and 6,
+  undocumented for 1-4). Run 7 re-ran run 5's exact 79-case corpus with arms on Haiku 4.5 and judges
+  pinned to Sonnet 5, and found a real `fix_quality` gap Sonnet 5 never showed on the same cases.
+  Run 8 repeated the identical Haiku-vs-Sonnet pairing after the corpus grew to 203 cases and found
+  the gap collapsed to a near-tie; run 10 repeated it again after fixing three guidance defects run
+  8 found, and the gap partially reopened (+0.05, well short of run 7's +0.13) - see runs 7, 8, and
+  10's rows below. Model choice, corpus size/composition, and specific entry defects are all now
+  demonstrated confounds; a third model (mid-tier, or a different vendor) is still the obvious next
+  test, and it should be run against a fixed, unchanging corpus and guidance snapshot if the goal is
+  to isolate the model variable cleanly. Run 9 (Sonnet 5 on the full corpus) at least confirms
+  Sonnet's own saturation is stable across both corpus size and the guidance fixes.
 
 ## Past runs
 
@@ -297,3 +315,5 @@ special.
 | 6 | Last 3 `authored-from-docs-pitfall` cases | 6 (3 x 2 arms) | Do the last three planted traps catch anything run 4 didn't already find? | No (12/13 across runs 4 and 6 at ceiling on `fix_quality`), but two unplanned findings: guidance gave the technically correct exploitability read on a contested PHP/libxml question two judges reproduced, and the `no_harm` disclosure gap cuts against honest incompleteness even harder than it cuts against declared scope creep | [RESULTS-v6.md](RESULTS-v6.md) |
 | 7 | Run 5's identical 79 cases, arms on Haiku 4.5 instead of Sonnet 5 (judges stayed on Sonnet 5) | 158 (79 x 2 arms) | Does run 5's `fix_quality` saturation hold on a smaller model? | No - real gap (1.84 A / 1.97 B), concentrated in CWE-90 (+0.89) and CWE-117 (+0.75). Mechanism verified directly, not from judge notes: the ungoverned arm called `ldap3`/`ldapjs` functions that do not exist (confirmed against the real packages); the guided arm, reading the entry's named APIs, did not | [RESULTS-v7.md](RESULTS-v7.md) |
 | 8 | Full 203-case corpus (grown from run 7's 79), same Haiku-4.5-vs-Sonnet-5 pairing | 406 (203 x 2 arms) | Does run 7's Haiku `fix_quality` gap hold once the corpus nearly triples and adds deliberate wrong-fix traps? | No - collapses to a near-tie (1.86 A / 1.86 B); `no_harm` now slightly favours *no* guidance (1.86 A / 1.80 B). Traced three guidance defects the harder corpus exposed and both arms' actual generated code (or Microsoft's own docs) confirmed directly: `cwe/90/java` omitted that `DirContext.search()`'s `filterArgs` overload requires a `SearchControls` argument (guided arm's fix didn't compile in 3/4 CWE-90 multi-file cases); `cwe/117/javascript` named Unicode code points without their JS escape syntax (guided arm pasted raw control characters into a regex literal, a `SyntaxError`); `cwe/352/csharp` didn't note that `app.UseAntiforgery()` never validates a JSON-bound minimal API endpoint, which both arms independently missed on the same case. All three fixed | [RESULTS-v8.md](RESULTS-v8.md) |
+| 9 | Full 203-case corpus, Sonnet 5 for both arms (first Sonnet pass at this scale) | 406 (203 x 2 arms) | Does run 5's Sonnet-5 saturation hold on the full, harder corpus, after run 8's fixes? | Yes - `fix_quality` saturates again (1.98 A / 1.98 B), `no_harm` keeps its small guided edge (1.88 A / 1.91 B), replicating run 5's pattern at more than twice the scale | [RESULTS-v9.md](RESULTS-v9.md) |
+| 10 | Run 8's identical 203-case corpus, Haiku 4.5 for both arms (direct before/after on run 8's three fixes) | 406 (203 x 2 arms) | Did run 8's three guidance fixes actually work? | Mostly - a small `fix_quality` gap reopens (1.85 A / 1.90 B). Verified case-by-case, not just in aggregate: all three previously-broken CWE-90 Java cases now score a clean 2.00/2.00 for the guided arm (up from 0.67), and the CWE-352/csharp case rose to 2.00/1.67 while the unguided arm - unaffected by the fix - stayed poor on the same case. The CWE-117/javascript fix only partially held: Haiku pasted a raw Unicode character into fresh code again, independent of the (now-correct) guidance text - a model execution slip, not a remaining documentation gap | [RESULTS-v10.md](RESULTS-v10.md) |

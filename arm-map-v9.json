@@ -1,0 +1,4062 @@
+{
+  "R101": {
+    "arm": "B",
+    "case": "BenchmarkTest00021",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R102": {
+    "arm": "A",
+    "case": "StackAuditMessageOverflow",
+    "cwe": "121",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R103": {
+    "arm": "B",
+    "case": "MysqliQueryConcat",
+    "cwe": "89",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R104": {
+    "arm": "A",
+    "case": "MyBatisInvoiceSortMapper",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R105": {
+    "arm": "A",
+    "case": "HtmlConcatNoEscaping",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R106": {
+    "arm": "B",
+    "case": "SmtplibDocmdEnvelopeInjection",
+    "cwe": "77",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R107": {
+    "arm": "A",
+    "case": "VectorReserveThenIndexWrite",
+    "cwe": "787",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R108": {
+    "arm": "A",
+    "case": "ManualJwtPayloadDecode",
+    "cwe": "347",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R109": {
+    "arm": "B",
+    "case": "CookieOptionsSecureFalse",
+    "cwe": "614",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R110": {
+    "arm": "A",
+    "case": "WhoisLookupChildProcess",
+    "cwe": "78",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R111": {
+    "arm": "A",
+    "case": "DesCipherFileEncrypt",
+    "cwe": "326",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R112": {
+    "arm": "B",
+    "case": "BladeTicketDescriptionRaw",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R113": {
+    "arm": "A",
+    "case": "Case11",
+    "cwe": "601",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R114": {
+    "arm": "B",
+    "case": "LegacyConvertFallback",
+    "cwe": "78",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R115": {
+    "arm": "B",
+    "case": "UniqidTokenGenerator",
+    "cwe": "330",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R116": {
+    "arm": "A",
+    "case": "MultiFileHandlerRelayXss",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R117": {
+    "arm": "B",
+    "case": "StackTraceInApiResponse",
+    "cwe": "209",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R118": {
+    "arm": "A",
+    "case": "ExpressDirectHtmlRender",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R119": {
+    "arm": "B",
+    "case": "RandomTokenGenerator",
+    "cwe": "338",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R120": {
+    "arm": "A",
+    "case": "LaravelOrderRefundAuthOnly",
+    "cwe": "862",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R121": {
+    "arm": "A",
+    "case": "Case01",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R122": {
+    "arm": "B",
+    "case": "Case13",
+    "cwe": "89",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R123": {
+    "arm": "A",
+    "case": "JwtParseUnverified",
+    "cwe": "347",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R124": {
+    "arm": "A",
+    "case": "RecordNameStrlenOverread",
+    "cwe": "125",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R125": {
+    "arm": "B",
+    "case": "StackAuditMessageOverflow",
+    "cwe": "121",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R126": {
+    "arm": "B",
+    "case": "CartCookieDecodeUnserialize",
+    "cwe": "502",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R127": {
+    "arm": "A",
+    "case": "SpanClaimedCapacityWrite",
+    "cwe": "787",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R128": {
+    "arm": "B",
+    "case": "InnerHtmlUserContent",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R129": {
+    "arm": "B",
+    "case": "RandomModuleApiKey",
+    "cwe": "330",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R130": {
+    "arm": "B",
+    "case": "FilepathJoinUserInput",
+    "cwe": "22",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R131": {
+    "arm": "A",
+    "case": "ConvertFileSubprocessShell",
+    "cwe": "78",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R132": {
+    "arm": "A",
+    "case": "BenchmarkTest00023",
+    "cwe": "330",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R133": {
+    "arm": "B",
+    "case": "Case02",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R134": {
+    "arm": "A",
+    "case": "ProductOverflowAllocation",
+    "cwe": "190",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R135": {
+    "arm": "A",
+    "case": "MultiFileControllerRelayXss",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R136": {
+    "arm": "A",
+    "case": "LoginFailureLogConcat",
+    "cwe": "117",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R137": {
+    "arm": "B",
+    "case": "Case06",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R138": {
+    "arm": "A",
+    "case": "FrameOffsetLengthWriter",
+    "cwe": "787",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R139": {
+    "arm": "B",
+    "case": "DateNowTokenSeed",
+    "cwe": "330",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R140": {
+    "arm": "A",
+    "case": "DjangoMarkSafeMisuse",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R141": {
+    "arm": "B",
+    "case": "WeakPtrLockUnchecked",
+    "cwe": "476",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R142": {
+    "arm": "B",
+    "case": "SpanClaimedCapacityWrite",
+    "cwe": "787",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R143": {
+    "arm": "B",
+    "case": "QueuedSessionCallbackDangling",
+    "cwe": "416",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R144": {
+    "arm": "B",
+    "case": "JwtParseUnverified",
+    "cwe": "347",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R145": {
+    "arm": "B",
+    "case": "WeakRandomSessionToken",
+    "cwe": "338",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R146": {
+    "arm": "B",
+    "case": "SetcookieMissingSecure",
+    "cwe": "614",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R147": {
+    "arm": "B",
+    "case": "AvatarInStaticRoot",
+    "cwe": "434",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R148": {
+    "arm": "B",
+    "case": "EfCoreProductSearchFromSqlRaw",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R149": {
+    "arm": "B",
+    "case": "BenchmarkTest00066",
+    "cwe": "330",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R150": {
+    "arm": "B",
+    "case": "RouteBypassesErrorHandler",
+    "cwe": "209",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R151": {
+    "arm": "A",
+    "case": "DocumentBuilderFactoryDefault",
+    "cwe": "611",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R152": {
+    "arm": "A",
+    "case": "BenchmarkTest00001",
+    "cwe": "22",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R153": {
+    "arm": "B",
+    "case": "OsPathJoinOpenFile",
+    "cwe": "22",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R154": {
+    "arm": "A",
+    "case": "PyjwtVerifyDisabled",
+    "cwe": "347",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R155": {
+    "arm": "A",
+    "case": "ThymeleafUtextUnescaped",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R156": {
+    "arm": "A",
+    "case": "XmlDocumentDtdEnabled",
+    "cwe": "611",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R157": {
+    "arm": "B",
+    "case": "RedisMultiArgRawSocket",
+    "cwe": "77",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R158": {
+    "arm": "B",
+    "case": "Case08",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R159": {
+    "arm": "A",
+    "case": "MacroDynamicMethodDispatch",
+    "cwe": "77",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R160": {
+    "arm": "A",
+    "case": "GobDecodeUntrustedPayload",
+    "cwe": "502",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R161": {
+    "arm": "B",
+    "case": "AvatarUploadNoTypeCheck",
+    "cwe": "434",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R162": {
+    "arm": "B",
+    "case": "RawSqlCommandConcat",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R163": {
+    "arm": "A",
+    "case": "DeprecatedEntityLoaderGuard",
+    "cwe": "611",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R164": {
+    "arm": "A",
+    "case": "RedisInlineCommandRawSocket",
+    "cwe": "77",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R165": {
+    "arm": "B",
+    "case": "RazorScriptWidgetLabel",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R166": {
+    "arm": "B",
+    "case": "MultiFileTemplateRelayXss",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R167": {
+    "arm": "A",
+    "case": "RazorRawConcatOutput",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R168": {
+    "arm": "B",
+    "case": "BenchmarkTest00087",
+    "cwe": "614",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R169": {
+    "arm": "B",
+    "case": "MultiFileHandlerRelayXss",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R170": {
+    "arm": "B",
+    "case": "MultiFileTemplatePreviewInjection",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R171": {
+    "arm": "B",
+    "case": "GormInvoiceOrderDatapath",
+    "cwe": "89",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R172": {
+    "arm": "A",
+    "case": "ManualHtmlConstructionPerl",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R173": {
+    "arm": "B",
+    "case": "UnsanitizedUsernameLog",
+    "cwe": "117",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R174": {
+    "arm": "B",
+    "case": "NativeSessionReadObject",
+    "cwe": "502",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R175": {
+    "arm": "B",
+    "case": "LegacyReportAdapterFill",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R176": {
+    "arm": "A",
+    "case": "SpringDocumentDeleteMissingOwner",
+    "cwe": "862",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R177": {
+    "arm": "A",
+    "case": "RedisMultiArgRawSocket",
+    "cwe": "77",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R178": {
+    "arm": "A",
+    "case": "TemplateHtmlTypeConversion",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R179": {
+    "arm": "A",
+    "case": "PathCombineUnsanitizedFilename",
+    "cwe": "22",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R180": {
+    "arm": "A",
+    "case": "BenchmarkTest00169",
+    "cwe": "614",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R181": {
+    "arm": "A",
+    "case": "RedisSetRawSocket",
+    "cwe": "77",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R182": {
+    "arm": "B",
+    "case": "EcbDefaultCipher",
+    "cwe": "326",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R183": {
+    "arm": "A",
+    "case": "NativeSessionReadObject",
+    "cwe": "502",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R184": {
+    "arm": "A",
+    "case": "BladeTicketDescriptionRaw",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R185": {
+    "arm": "B",
+    "case": "AvatarUploadHeaderTypeDatapath",
+    "cwe": "434",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R186": {
+    "arm": "A",
+    "case": "Case08",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R187": {
+    "arm": "A",
+    "case": "LegacyConvertFallback",
+    "cwe": "78",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R188": {
+    "arm": "A",
+    "case": "BenchmarkTest00018",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R189": {
+    "arm": "A",
+    "case": "Case13",
+    "cwe": "89",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R190": {
+    "arm": "B",
+    "case": "BinaryFormatterCacheRead",
+    "cwe": "502",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R191": {
+    "arm": "A",
+    "case": "MultiFileTemplateRelayXss",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R192": {
+    "arm": "A",
+    "case": "ImapRawSocketFolderInjection",
+    "cwe": "77",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R193": {
+    "arm": "B",
+    "case": "LdapFilterFromQuery",
+    "cwe": "90",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R194": {
+    "arm": "A",
+    "case": "LinkedListFreeThenAdvance",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R195": {
+    "arm": "A",
+    "case": "Case17",
+    "cwe": "90",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R196": {
+    "arm": "B",
+    "case": "TemplateHtmlTypeConversion",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R197": {
+    "arm": "A",
+    "case": "MultiFileCgiRelayXss",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R198": {
+    "arm": "A",
+    "case": "RawSqlCommandConcat",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R199": {
+    "arm": "B",
+    "case": "ChatbotCallUserFuncDispatch",
+    "cwe": "77",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R200": {
+    "arm": "A",
+    "case": "JwtDecodeWithoutVerify",
+    "cwe": "347",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R201": {
+    "arm": "B",
+    "case": "PathJoinReadFile",
+    "cwe": "22",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R202": {
+    "arm": "A",
+    "case": "PathJoinReadFile",
+    "cwe": "22",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R203": {
+    "arm": "A",
+    "case": "CursorExecuteStringFormat",
+    "cwe": "89",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R204": {
+    "arm": "B",
+    "case": "LoggingFstringInjection",
+    "cwe": "117",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R205": {
+    "arm": "B",
+    "case": "ExpressCookieNoSecureFlag",
+    "cwe": "614",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R206": {
+    "arm": "B",
+    "case": "DirectVariableInterpolation",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R207": {
+    "arm": "B",
+    "case": "JsContextUnencodedOutput",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R208": {
+    "arm": "B",
+    "case": "ReactDangerouslySetInnerHtml",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R209": {
+    "arm": "B",
+    "case": "FlaskUploadNoValidation",
+    "cwe": "434",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R210": {
+    "arm": "B",
+    "case": "DeprecatedEntityLoaderGuard",
+    "cwe": "611",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R211": {
+    "arm": "B",
+    "case": "SqlCommandExecuteScalarMetric",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R212": {
+    "arm": "B",
+    "case": "CartReservationNullUnbox",
+    "cwe": "476",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R213": {
+    "arm": "A",
+    "case": "BenchmarkTest00002",
+    "cwe": "22",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R214": {
+    "arm": "B",
+    "case": "TracerouteShellExec",
+    "cwe": "78",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R215": {
+    "arm": "B",
+    "case": "BenchmarkTest00007",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R216": {
+    "arm": "B",
+    "case": "JsContextUnescapedPhp",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R217": {
+    "arm": "B",
+    "case": "MultiFileDispatchRelay",
+    "cwe": "77",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R218": {
+    "arm": "A",
+    "case": "BenchmarkTest00087",
+    "cwe": "614",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R219": {
+    "arm": "B",
+    "case": "SqlAlchemyReportSortDatapath",
+    "cwe": "89",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R220": {
+    "arm": "A",
+    "case": "BenchmarkTest00067",
+    "cwe": "330",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R221": {
+    "arm": "A",
+    "case": "FprintfHtmlOutput",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R222": {
+    "arm": "B",
+    "case": "MyBatisInvoiceSortMapper",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R223": {
+    "arm": "A",
+    "case": "Case14",
+    "cwe": "89",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R224": {
+    "arm": "A",
+    "case": "SqlCommandExecuteNonQueryDelete",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R225": {
+    "arm": "B",
+    "case": "RedisInlineCommandRawSocket",
+    "cwe": "77",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R226": {
+    "arm": "B",
+    "case": "MtRandResetToken",
+    "cwe": "338",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R227": {
+    "arm": "B",
+    "case": "SpringAvatarContentTypeTrust",
+    "cwe": "434",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R228": {
+    "arm": "B",
+    "case": "PrismaLedgerRawUnsafeDatapath",
+    "cwe": "89",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R229": {
+    "arm": "B",
+    "case": "MemcachedKeyInjectionRawSocket",
+    "cwe": "77",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R230": {
+    "arm": "B",
+    "case": "BenchmarkTest00006",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R231": {
+    "arm": "B",
+    "case": "FprintfHtmlOutput",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R232": {
+    "arm": "B",
+    "case": "EnvFeatureFlagNullDeref",
+    "cwe": "476",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R233": {
+    "arm": "A",
+    "case": "FileGetContentsUserPath",
+    "cwe": "22",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R234": {
+    "arm": "B",
+    "case": "Case07",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R235": {
+    "arm": "B",
+    "case": "ThymeleafAnnouncementRawHtml",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R236": {
+    "arm": "B",
+    "case": "FormulaPreviewFunctionConstructor",
+    "cwe": "94",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R237": {
+    "arm": "B",
+    "case": "MacroDynamicMethodDispatch",
+    "cwe": "77",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R238": {
+    "arm": "A",
+    "case": "ModelCachePickleLoad",
+    "cwe": "502",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R239": {
+    "arm": "A",
+    "case": "ProductBatchAllocationOverflow",
+    "cwe": "787",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R240": {
+    "arm": "B",
+    "case": "FileGetContentsUserPath",
+    "cwe": "22",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R241": {
+    "arm": "B",
+    "case": "PyjwtVerifyDisabled",
+    "cwe": "347",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R242": {
+    "arm": "A",
+    "case": "FilepathJoinUserInput",
+    "cwe": "22",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R243": {
+    "arm": "B",
+    "case": "Case14",
+    "cwe": "89",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R244": {
+    "arm": "B",
+    "case": "FlaskAutoescapeDisabled",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R245": {
+    "arm": "B",
+    "case": "DjangoRawCustomerSearchDatapath",
+    "cwe": "89",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R246": {
+    "arm": "A",
+    "case": "LxmlResolveEntitiesTrue",
+    "cwe": "611",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R247": {
+    "arm": "B",
+    "case": "JwtParserNoSignatureCheck",
+    "cwe": "347",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R248": {
+    "arm": "A",
+    "case": "MultiFileSmtpCommandRelay",
+    "cwe": "77",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R249": {
+    "arm": "A",
+    "case": "SqlCommandExecuteScalarMetric",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R250": {
+    "arm": "A",
+    "case": "AvatarInStaticRoot",
+    "cwe": "434",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R251": {
+    "arm": "A",
+    "case": "MinimalApiEmailNoAntiforgery",
+    "cwe": "352",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R252": {
+    "arm": "A",
+    "case": "HttpCookieMissingSecure",
+    "cwe": "614",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R253": {
+    "arm": "A",
+    "case": "SpelStandardEvaluationContext",
+    "cwe": "94",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R254": {
+    "arm": "A",
+    "case": "UnserializeCookieData",
+    "cwe": "502",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R255": {
+    "arm": "A",
+    "case": "RandomTokenGenerator",
+    "cwe": "338",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R256": {
+    "arm": "A",
+    "case": "LibxmljsExternalEntity",
+    "cwe": "611",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R257": {
+    "arm": "A",
+    "case": "FlaskUploadNoValidation",
+    "cwe": "434",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R258": {
+    "arm": "B",
+    "case": "Case19",
+    "cwe": "601",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R259": {
+    "arm": "B",
+    "case": "WinstonUserInputLog",
+    "cwe": "117",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R260": {
+    "arm": "B",
+    "case": "LaravelRevenueOrderRaw",
+    "cwe": "89",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R261": {
+    "arm": "B",
+    "case": "SettingsMuxOutsideCsrf",
+    "cwe": "352",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R262": {
+    "arm": "B",
+    "case": "CreateCipherLegacyApi",
+    "cwe": "326",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R263": {
+    "arm": "B",
+    "case": "MathRandSessionId",
+    "cwe": "330",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R264": {
+    "arm": "B",
+    "case": "TextTemplateForHtmlOutput",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R265": {
+    "arm": "B",
+    "case": "Case11",
+    "cwe": "601",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R266": {
+    "arm": "A",
+    "case": "TelemetryClaimedLengthRead",
+    "cwe": "125",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R267": {
+    "arm": "A",
+    "case": "CookieOptionsSecureFalse",
+    "cwe": "614",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R268": {
+    "arm": "A",
+    "case": "HttpResponseWriteUnencoded",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R269": {
+    "arm": "B",
+    "case": "JwkFetchedFromToken",
+    "cwe": "347",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R270": {
+    "arm": "B",
+    "case": "SpelStandardEvaluationContext",
+    "cwe": "94",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R271": {
+    "arm": "A",
+    "case": "StackTraceInApiResponse",
+    "cwe": "209",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R272": {
+    "arm": "B",
+    "case": "MultiFileMiddlewareRelayXss",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R273": {
+    "arm": "B",
+    "case": "UnserializeCookieData",
+    "cwe": "502",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R274": {
+    "arm": "B",
+    "case": "ExpressDirectHtmlRender",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R275": {
+    "arm": "B",
+    "case": "CgiParamUnescapedOutput",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R276": {
+    "arm": "A",
+    "case": "AvatarUploadHeaderTypeDatapath",
+    "cwe": "434",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R277": {
+    "arm": "B",
+    "case": "BadgeNameHelperOverflow",
+    "cwe": "121",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R278": {
+    "arm": "B",
+    "case": "AesEcbModeEncrypt",
+    "cwe": "326",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R279": {
+    "arm": "B",
+    "case": "SpringDocumentDeleteMissingOwner",
+    "cwe": "862",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R280": {
+    "arm": "B",
+    "case": "LdapFilterConcat",
+    "cwe": "90",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R281": {
+    "arm": "A",
+    "case": "GuidNewGuidToken",
+    "cwe": "330",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R282": {
+    "arm": "A",
+    "case": "Case09",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R283": {
+    "arm": "B",
+    "case": "FrameOffsetLengthWriter",
+    "cwe": "787",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R284": {
+    "arm": "A",
+    "case": "ExceptionMessageInJsonError",
+    "cwe": "209",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R285": {
+    "arm": "A",
+    "case": "MultiFileDispatchRelay",
+    "cwe": "77",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R286": {
+    "arm": "B",
+    "case": "LaravelOrderRefundAuthOnly",
+    "cwe": "862",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R287": {
+    "arm": "A",
+    "case": "ExpressCookieNoSecureFlag",
+    "cwe": "614",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R288": {
+    "arm": "A",
+    "case": "FlaskAutoescapeDisabled",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R289": {
+    "arm": "A",
+    "case": "Case12",
+    "cwe": "601",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R290": {
+    "arm": "B",
+    "case": "ArchiveListShellCommandInjection",
+    "cwe": "78",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R291": {
+    "arm": "A",
+    "case": "MultiFileRedisCommandRelay",
+    "cwe": "77",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R292": {
+    "arm": "A",
+    "case": "WeakRandomSessionToken",
+    "cwe": "338",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R293": {
+    "arm": "A",
+    "case": "BenchmarkTest00066",
+    "cwe": "330",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R294": {
+    "arm": "B",
+    "case": "DrfCustomRetrieveBypass",
+    "cwe": "862",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R295": {
+    "arm": "A",
+    "case": "LegacyReportAdapterFill",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R296": {
+    "arm": "B",
+    "case": "DocumentBuilderFactoryDefault",
+    "cwe": "611",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R297": {
+    "arm": "A",
+    "case": "BadgeNameHelperOverflow",
+    "cwe": "121",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R298": {
+    "arm": "A",
+    "case": "RedisMultiArgRawSocket",
+    "cwe": "77",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R299": {
+    "arm": "A",
+    "case": "ProfileWebsiteUrlScheme",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R300": {
+    "arm": "A",
+    "case": "AspNetInvoiceExportBareAuthorize",
+    "cwe": "862",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R301": {
+    "arm": "A",
+    "case": "PrismaLedgerRawUnsafeDatapath",
+    "cwe": "89",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R302": {
+    "arm": "A",
+    "case": "TracerouteShellExec",
+    "cwe": "78",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R303": {
+    "arm": "B",
+    "case": "BenchmarkTest00169",
+    "cwe": "614",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R304": {
+    "arm": "B",
+    "case": "MultiFileRedisCommandRelay",
+    "cwe": "77",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R305": {
+    "arm": "A",
+    "case": "FormulaPreviewFunctionConstructor",
+    "cwe": "94",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R306": {
+    "arm": "B",
+    "case": "LxmlResolveEntitiesTrue",
+    "cwe": "611",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R307": {
+    "arm": "A",
+    "case": "SqlAlchemyReportSortDatapath",
+    "cwe": "89",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R308": {
+    "arm": "A",
+    "case": "ExpressProjectExportMissingOwner",
+    "cwe": "862",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R309": {
+    "arm": "A",
+    "case": "SetcookieMissingSecure",
+    "cwe": "614",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R310": {
+    "arm": "A",
+    "case": "DjangoRawCustomerSearchDatapath",
+    "cwe": "89",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R311": {
+    "arm": "A",
+    "case": "LdapSearchFilterConcat",
+    "cwe": "90",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R312": {
+    "arm": "A",
+    "case": "MathRandSessionId",
+    "cwe": "330",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R313": {
+    "arm": "A",
+    "case": "StringViewCacheDangling",
+    "cwe": "416",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R314": {
+    "arm": "A",
+    "case": "RandomModuleApiKey",
+    "cwe": "330",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R315": {
+    "arm": "B",
+    "case": "StackArrayIndexWrite",
+    "cwe": "121",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R316": {
+    "arm": "A",
+    "case": "LoggingFstringInjection",
+    "cwe": "117",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R317": {
+    "arm": "A",
+    "case": "NodeSerializeUnsafeDecode",
+    "cwe": "502",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R318": {
+    "arm": "B",
+    "case": "RazorRawConcatOutput",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R319": {
+    "arm": "B",
+    "case": "Case15",
+    "cwe": "78",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R320": {
+    "arm": "A",
+    "case": "JsContextUnencodedOutput",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R321": {
+    "arm": "B",
+    "case": "PingHostCommandInjection",
+    "cwe": "78",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R322": {
+    "arm": "A",
+    "case": "MultiFileTemplatePreviewInjection",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R323": {
+    "arm": "A",
+    "case": "BenchmarkTest00014",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R324": {
+    "arm": "A",
+    "case": "ReactDangerouslySetInnerHtml",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R325": {
+    "arm": "B",
+    "case": "VectorReserveThenIndexWrite",
+    "cwe": "787",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R326": {
+    "arm": "B",
+    "case": "ThymeleafUtextUnescaped",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R327": {
+    "arm": "A",
+    "case": "ChatbotCallUserFuncDispatch",
+    "cwe": "77",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R328": {
+    "arm": "A",
+    "case": "MoveUploadedFileNoExtCheck",
+    "cwe": "434",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R329": {
+    "arm": "B",
+    "case": "CursorExecuteStringFormat",
+    "cwe": "89",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R330": {
+    "arm": "A",
+    "case": "CartReservationNullUnbox",
+    "cwe": "476",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R331": {
+    "arm": "A",
+    "case": "InnerHtmlUserContent",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R332": {
+    "arm": "B",
+    "case": "LinkedListFreeThenAdvance",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R333": {
+    "arm": "A",
+    "case": "Case06",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R334": {
+    "arm": "B",
+    "case": "ExceptionMessageInJsonError",
+    "cwe": "209",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R335": {
+    "arm": "A",
+    "case": "PacketWindowUncheckedOffset",
+    "cwe": "125",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R336": {
+    "arm": "A",
+    "case": "StackArrayIndexWrite",
+    "cwe": "121",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R337": {
+    "arm": "B",
+    "case": "ProfileWebsiteUrlScheme",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R338": {
+    "arm": "A",
+    "case": "OrdersDynamicSortIdentifier",
+    "cwe": "89",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R339": {
+    "arm": "A",
+    "case": "EnvFeatureFlagNullDeref",
+    "cwe": "476",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R340": {
+    "arm": "B",
+    "case": "BenchmarkTest00018",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R341": {
+    "arm": "B",
+    "case": "WhoisLookupChildProcess",
+    "cwe": "78",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R342": {
+    "arm": "A",
+    "case": "SpringAvatarContentTypeTrust",
+    "cwe": "434",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R343": {
+    "arm": "A",
+    "case": "BenchmarkTest00013",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R344": {
+    "arm": "B",
+    "case": "HtmlConcatNoEscaping",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R345": {
+    "arm": "B",
+    "case": "RoslynFormulaEvaluateAsync",
+    "cwe": "94",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R346": {
+    "arm": "A",
+    "case": "DirectEchoUserInput",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R347": {
+    "arm": "A",
+    "case": "SmtpRawSocketRcptInjection",
+    "cwe": "77",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R348": {
+    "arm": "A",
+    "case": "LdapFilterFromQuery",
+    "cwe": "90",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R349": {
+    "arm": "B",
+    "case": "ErrorDetailInResponse",
+    "cwe": "209",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R350": {
+    "arm": "A",
+    "case": "BenchmarkTest00044",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R351": {
+    "arm": "B",
+    "case": "BenchmarkTest00044",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R352": {
+    "arm": "A",
+    "case": "FtpRawSocketFilenameInjection",
+    "cwe": "77",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R353": {
+    "arm": "B",
+    "case": "MultiFileControllerRelayXss",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R354": {
+    "arm": "A",
+    "case": "ReseededTokenPrng",
+    "cwe": "338",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R355": {
+    "arm": "B",
+    "case": "OrdersDynamicSortIdentifier",
+    "cwe": "89",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R356": {
+    "arm": "A",
+    "case": "MultiFileMiddlewareRelayXss",
+    "cwe": "79",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R357": {
+    "arm": "B",
+    "case": "MultiFileViewRelayXss",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R358": {
+    "arm": "A",
+    "case": "AdminConsoleDoubleDollarDispatch",
+    "cwe": "77",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R359": {
+    "arm": "A",
+    "case": "MemcachedKeyInjectionRawSocket",
+    "cwe": "77",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R360": {
+    "arm": "A",
+    "case": "CreateCipherLegacyApi",
+    "cwe": "326",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R361": {
+    "arm": "A",
+    "case": "XmlDecoderEntityExpansion",
+    "cwe": "611",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R362": {
+    "arm": "B",
+    "case": "MathRandomInviteCode",
+    "cwe": "338",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R363": {
+    "arm": "B",
+    "case": "MinimalApiEmailNoAntiforgery",
+    "cwe": "352",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R364": {
+    "arm": "A",
+    "case": "LogForgeOnFailure",
+    "cwe": "117",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R365": {
+    "arm": "A",
+    "case": "UploadOutsideWebroot",
+    "cwe": "434",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R366": {
+    "arm": "B",
+    "case": "MultiFileTransferCsrf",
+    "cwe": "352",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R367": {
+    "arm": "B",
+    "case": "UploadOutsideWebroot",
+    "cwe": "434",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R368": {
+    "arm": "B",
+    "case": "DjangoExemptBillingEmail",
+    "cwe": "352",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R369": {
+    "arm": "A",
+    "case": "MtRandResetToken",
+    "cwe": "338",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R370": {
+    "arm": "B",
+    "case": "ZipEntryNormalizeExtract",
+    "cwe": "22",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R371": {
+    "arm": "A",
+    "case": "Case04",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R372": {
+    "arm": "B",
+    "case": "SprintfQueryConcat",
+    "cwe": "89",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R373": {
+    "arm": "A",
+    "case": "ErrorDetailInResponse",
+    "cwe": "209",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R374": {
+    "arm": "B",
+    "case": "ImapRawSocketFolderInjection",
+    "cwe": "77",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R375": {
+    "arm": "B",
+    "case": "BenchmarkTest00002",
+    "cwe": "22",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R376": {
+    "arm": "B",
+    "case": "HttpCookieMissingSecure",
+    "cwe": "614",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R377": {
+    "arm": "A",
+    "case": "EfCoreProductSearchFromSqlRaw",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R378": {
+    "arm": "B",
+    "case": "LoginFailureLogConcat",
+    "cwe": "117",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R379": {
+    "arm": "A",
+    "case": "DrfCustomRetrieveBypass",
+    "cwe": "862",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R380": {
+    "arm": "A",
+    "case": "DirectVariableInterpolation",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R381": {
+    "arm": "B",
+    "case": "MultiFileRedisCommandRelay",
+    "cwe": "77",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R382": {
+    "arm": "A",
+    "case": "ArchiveListShellCommandInjection",
+    "cwe": "78",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R383": {
+    "arm": "B",
+    "case": "AspNetInvoiceExportBareAuthorize",
+    "cwe": "862",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R384": {
+    "arm": "A",
+    "case": "MultiFileControllerRelayXss",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R385": {
+    "arm": "A",
+    "case": "UniqidTokenGenerator",
+    "cwe": "330",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R386": {
+    "arm": "A",
+    "case": "MultiFileTransferCsrf",
+    "cwe": "352",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R387": {
+    "arm": "B",
+    "case": "ConvertFileSubprocessShell",
+    "cwe": "78",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R388": {
+    "arm": "A",
+    "case": "ManualHtmlConstructionPython",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R389": {
+    "arm": "A",
+    "case": "ZipEntryNormalizeExtract",
+    "cwe": "22",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R390": {
+    "arm": "B",
+    "case": "Case12",
+    "cwe": "601",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R391": {
+    "arm": "B",
+    "case": "Case10",
+    "cwe": "601",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R392": {
+    "arm": "B",
+    "case": "StringViewCacheDangling",
+    "cwe": "416",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R393": {
+    "arm": "B",
+    "case": "Case17",
+    "cwe": "90",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R394": {
+    "arm": "B",
+    "case": "BenchmarkTest00067",
+    "cwe": "330",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R395": {
+    "arm": "A",
+    "case": "RandV2ApiKey",
+    "cwe": "338",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R396": {
+    "arm": "A",
+    "case": "Case02",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R397": {
+    "arm": "A",
+    "case": "UnsanitizedUsernameLog",
+    "cwe": "117",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R398": {
+    "arm": "A",
+    "case": "Case05",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R399": {
+    "arm": "A",
+    "case": "ReportDownloadSymlinkEscape",
+    "cwe": "22",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R400": {
+    "arm": "B",
+    "case": "TemplateLiteralQueryConcat",
+    "cwe": "89",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R401": {
+    "arm": "B",
+    "case": "RedisMultiArgRawSocket",
+    "cwe": "77",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R402": {
+    "arm": "B",
+    "case": "SmtpRawSocketRcptInjection",
+    "cwe": "77",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R403": {
+    "arm": "A",
+    "case": "WeakPtrLockUnchecked",
+    "cwe": "476",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R404": {
+    "arm": "A",
+    "case": "GormInvoiceOrderDatapath",
+    "cwe": "89",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R405": {
+    "arm": "A",
+    "case": "RoslynFormulaEvaluateAsync",
+    "cwe": "94",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R406": {
+    "arm": "B",
+    "case": "DirectEchoUserInput",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R407": {
+    "arm": "A",
+    "case": "BenchmarkTest00012",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R408": {
+    "arm": "A",
+    "case": "EfCoreArchiveExecuteSqlRaw",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R409": {
+    "arm": "A",
+    "case": "MultipartUploadNoValidation",
+    "cwe": "434",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R410": {
+    "arm": "A",
+    "case": "AvatarUploadNoTypeCheck",
+    "cwe": "434",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R411": {
+    "arm": "A",
+    "case": "BinaryFormatterCacheRead",
+    "cwe": "502",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R412": {
+    "arm": "A",
+    "case": "DjangoExemptBillingEmail",
+    "cwe": "352",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R413": {
+    "arm": "B",
+    "case": "GobDecodeUntrustedPayload",
+    "cwe": "502",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R414": {
+    "arm": "A",
+    "case": "FlaskSetCookieNoSecure",
+    "cwe": "614",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R415": {
+    "arm": "A",
+    "case": "ThymeleafAnnouncementRawHtml",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R416": {
+    "arm": "B",
+    "case": "XmlDocumentDtdEnabled",
+    "cwe": "611",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R417": {
+    "arm": "B",
+    "case": "BenchmarkTest00012",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R418": {
+    "arm": "A",
+    "case": "SprintfQueryConcat",
+    "cwe": "89",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R419": {
+    "arm": "B",
+    "case": "BenchmarkTest00001",
+    "cwe": "22",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R420": {
+    "arm": "A",
+    "case": "CartCookieDecodeUnserialize",
+    "cwe": "502",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R421": {
+    "arm": "B",
+    "case": "ManualHtmlConstructionPerl",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R422": {
+    "arm": "B",
+    "case": "Case09",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R423": {
+    "arm": "B",
+    "case": "JwtDecodeWithoutVerify",
+    "cwe": "347",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R424": {
+    "arm": "A",
+    "case": "BenchmarkTest00007",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R425": {
+    "arm": "B",
+    "case": "LibxmljsExternalEntity",
+    "cwe": "611",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R426": {
+    "arm": "B",
+    "case": "PluginPreviewDynamicRequire",
+    "cwe": "94",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R427": {
+    "arm": "B",
+    "case": "ReportDownloadSymlinkEscape",
+    "cwe": "22",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R428": {
+    "arm": "A",
+    "case": "BenchmarkTest00006",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R429": {
+    "arm": "B",
+    "case": "OrderEventQueueDeserialize",
+    "cwe": "502",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R430": {
+    "arm": "A",
+    "case": "EcbDefaultCipher",
+    "cwe": "326",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R431": {
+    "arm": "A",
+    "case": "BenchmarkTest00021",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R432": {
+    "arm": "B",
+    "case": "ExpressProjectExportMissingOwner",
+    "cwe": "862",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R433": {
+    "arm": "A",
+    "case": "LaravelRevenueOrderRaw",
+    "cwe": "89",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R434": {
+    "arm": "B",
+    "case": "LdapSearchFilterConcat",
+    "cwe": "90",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R435": {
+    "arm": "A",
+    "case": "Case03",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R436": {
+    "arm": "A",
+    "case": "Case07",
+    "cwe": "90",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R437": {
+    "arm": "B",
+    "case": "ProductOverflowAllocation",
+    "cwe": "190",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R438": {
+    "arm": "B",
+    "case": "EfCoreArchiveExecuteSqlRaw",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R439": {
+    "arm": "B",
+    "case": "FlaskSetCookieNoSecure",
+    "cwe": "614",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R440": {
+    "arm": "A",
+    "case": "DapperCustomerSortDatapath",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R441": {
+    "arm": "B",
+    "case": "Case05",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R442": {
+    "arm": "B",
+    "case": "RedisSetRawSocket",
+    "cwe": "77",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R443": {
+    "arm": "A",
+    "case": "OsPathJoinOpenFile",
+    "cwe": "22",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R444": {
+    "arm": "B",
+    "case": "AesEcbModeCipher",
+    "cwe": "326",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R445": {
+    "arm": "B",
+    "case": "PathCombineUnsanitizedFilename",
+    "cwe": "22",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R446": {
+    "arm": "B",
+    "case": "SpringBillingCsrfIgnored",
+    "cwe": "352",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R447": {
+    "arm": "A",
+    "case": "SettingsMuxOutsideCsrf",
+    "cwe": "352",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R448": {
+    "arm": "A",
+    "case": "WinstonUserInputLog",
+    "cwe": "117",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R449": {
+    "arm": "B",
+    "case": "AdminConsoleDoubleDollarDispatch",
+    "cwe": "77",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R450": {
+    "arm": "B",
+    "case": "ManualJwtPayloadDecode",
+    "cwe": "347",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R451": {
+    "arm": "A",
+    "case": "DateNowTokenSeed",
+    "cwe": "330",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R452": {
+    "arm": "B",
+    "case": "BenchmarkTest00023",
+    "cwe": "330",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "owasp-benchmark"
+  },
+  "R453": {
+    "arm": "B",
+    "case": "MultiFileControllerRelayXss",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R454": {
+    "arm": "A",
+    "case": "MultiFileRedisCommandRelay",
+    "cwe": "77",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 4,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R455": {
+    "arm": "B",
+    "case": "MoveUploadedFileNoExtCheck",
+    "cwe": "434",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R456": {
+    "arm": "A",
+    "case": "QueuedSessionCallbackDangling",
+    "cwe": "416",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R457": {
+    "arm": "B",
+    "case": "HttpResponseWriteUnencoded",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R458": {
+    "arm": "A",
+    "case": "RazorScriptWidgetLabel",
+    "cwe": "79",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R459": {
+    "arm": "B",
+    "case": "GuidNewGuidToken",
+    "cwe": "330",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R460": {
+    "arm": "B",
+    "case": "ModelCachePickleLoad",
+    "cwe": "502",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R461": {
+    "arm": "A",
+    "case": "AesEcbModeCipher",
+    "cwe": "326",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R462": {
+    "arm": "B",
+    "case": "FtpRawSocketFilenameInjection",
+    "cwe": "77",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R463": {
+    "arm": "A",
+    "case": "OrderEventQueueDeserialize",
+    "cwe": "502",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R464": {
+    "arm": "B",
+    "case": "NodeSerializeUnsafeDecode",
+    "cwe": "502",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R465": {
+    "arm": "A",
+    "case": "SmtplibDocmdEnvelopeInjection",
+    "cwe": "77",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R466": {
+    "arm": "B",
+    "case": "SqlCommandExecuteNonQueryDelete",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R467": {
+    "arm": "B",
+    "case": "RecordNameStrlenOverread",
+    "cwe": "125",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R468": {
+    "arm": "B",
+    "case": "BenchmarkTest00014",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R469": {
+    "arm": "A",
+    "case": "JsContextUnescapedPhp",
+    "cwe": "79",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R470": {
+    "arm": "B",
+    "case": "ReseededTokenPrng",
+    "cwe": "338",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R471": {
+    "arm": "B",
+    "case": "MultipartUploadNoValidation",
+    "cwe": "434",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R472": {
+    "arm": "B",
+    "case": "RandV2ApiKey",
+    "cwe": "338",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R473": {
+    "arm": "A",
+    "case": "Case19",
+    "cwe": "601",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R474": {
+    "arm": "A",
+    "case": "AesEcbModeEncrypt",
+    "cwe": "326",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R475": {
+    "arm": "A",
+    "case": "MysqliQueryConcat",
+    "cwe": "89",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R476": {
+    "arm": "A",
+    "case": "BenchmarkTest00008",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R477": {
+    "arm": "A",
+    "case": "JwtParserNoSignatureCheck",
+    "cwe": "347",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R478": {
+    "arm": "B",
+    "case": "TelemetryClaimedLengthRead",
+    "cwe": "125",
+    "language": "cpp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R479": {
+    "arm": "B",
+    "case": "BenchmarkTest00013",
+    "cwe": "79",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R480": {
+    "arm": "B",
+    "case": "BenchmarkTest00008",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "owasp-benchmark"
+  },
+  "R481": {
+    "arm": "B",
+    "case": "MultiFileSmtpCommandRelay",
+    "cwe": "77",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R482": {
+    "arm": "B",
+    "case": "MultiFileCgiRelayXss",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R483": {
+    "arm": "B",
+    "case": "XmlDecoderEntityExpansion",
+    "cwe": "611",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R484": {
+    "arm": "B",
+    "case": "LogForgeOnFailure",
+    "cwe": "117",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R485": {
+    "arm": "B",
+    "case": "Case04",
+    "cwe": "78",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R486": {
+    "arm": "B",
+    "case": "DjangoMarkSafeMisuse",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R487": {
+    "arm": "B",
+    "case": "Case01",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R488": {
+    "arm": "A",
+    "case": "LdapFilterConcat",
+    "cwe": "90",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R489": {
+    "arm": "A",
+    "case": "TextTemplateForHtmlOutput",
+    "cwe": "79",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R490": {
+    "arm": "B",
+    "case": "ManualHtmlConstructionPython",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R491": {
+    "arm": "B",
+    "case": "Case03",
+    "cwe": "89",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 5,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R492": {
+    "arm": "A",
+    "case": "SpringBillingCsrfIgnored",
+    "cwe": "352",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R493": {
+    "arm": "A",
+    "case": "PingHostCommandInjection",
+    "cwe": "78",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R494": {
+    "arm": "A",
+    "case": "CgiParamUnescapedOutput",
+    "cwe": "79",
+    "language": "perl",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R495": {
+    "arm": "A",
+    "case": "Case10",
+    "cwe": "601",
+    "language": "java",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "unreviewed",
+    "source": "juliet"
+  },
+  "R496": {
+    "arm": "A",
+    "case": "JwkFetchedFromToken",
+    "cwe": "347",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R497": {
+    "arm": "B",
+    "case": "PacketWindowUncheckedOffset",
+    "cwe": "125",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R498": {
+    "arm": "B",
+    "case": "DapperCustomerSortDatapath",
+    "cwe": "89",
+    "language": "csharp",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R499": {
+    "arm": "B",
+    "case": "DesCipherFileEncrypt",
+    "cwe": "326",
+    "language": "go",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R500": {
+    "arm": "B",
+    "case": "ProductBatchAllocationOverflow",
+    "cwe": "787",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R501": {
+    "arm": "A",
+    "case": "Case15",
+    "cwe": "78",
+    "language": "java",
+    "kind": "false_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "juliet"
+  },
+  "R502": {
+    "arm": "A",
+    "case": "TemplateLiteralQueryConcat",
+    "cwe": "89",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R503": {
+    "arm": "A",
+    "case": "RouteBypassesErrorHandler",
+    "cwe": "209",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored-from-docs-pitfall"
+  },
+  "R504": {
+    "arm": "A",
+    "case": "PluginPreviewDynamicRequire",
+    "cwe": "94",
+    "language": "php",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R505": {
+    "arm": "A",
+    "case": "MathRandomInviteCode",
+    "cwe": "338",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R506": {
+    "arm": "A",
+    "case": "MultiFileViewRelayXss",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored"
+  }
+}
