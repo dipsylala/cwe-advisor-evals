@@ -97,7 +97,7 @@ cases/
 Cases accumulate here rather than being versioned into a new directory per run - git holds the
 history. Run records under `runs*/` name cases by id, so ids are stable once published.
 
-Current contents: 216 cases across 26 CWEs and nine languages (perl added by the CWE-79 depth
+Current contents: 218 cases across 26 CWEs and nine languages (perl added by the CWE-79 depth
 batch below; c and cpp added by the top-15 fix-complexity batch). Five sources:
 
 | `source` | n | What it is |
@@ -105,7 +105,7 @@ batch below; c and cpp added by the top-15 fix-complexity batch). Five sources:
 | `owasp-benchmark` | 16 | Single-file Java servlets, labels from `expectedresults-1.2.csv` |
 | `juliet` | 17 | Java multi-file flow variants, de-labelled mechanically; taint crosses 2, 4 or 5 files |
 | `authored-from-docs-pitfall` | 13 | Single-function cases across Java, Python, Go, C#, JavaScript and PHP, each built around a fix that looks right and is not |
-| `authored-top15-fix-complexity` | 68 | True-positive remediation cases for 2025 CWE Top 15 entries with explicit `trap`, `must_preserve`, and `origin` metadata; several cross files, and all test fix shape rather than finding adjudication |
+| `authored-top15-fix-complexity` | 70 | True-positive remediation cases for 2025 CWE Top 15 entries with explicit `trap`, `must_preserve`, and `origin` metadata; several cross files, and all test fix shape rather than finding adjudication |
 | `authored` | 102 | Plain true-positive cases with no `trap`/`must_preserve`/`origin` - language-coverage, top-15 depth, or (11 cases, see below) multi-file chains crossing 2-5 files, not a discrimination instrument |
 
 **`owasp-benchmark` and `juliet`** are externally authored, so their ground truth doesn't come from
@@ -181,7 +181,15 @@ whose trap clamps the write but leaves a stale length field pointing past what w
 where the admin and owner-scoped return statements are on the wrong side of an `isAdmin()` check
 (CWE-862), and a C# DynamicExpresso case where the interpreter itself is correctly locked down but
 a registered custom function passes its expression-controlled string argument straight to
-`File.ReadAllText()` (CWE-94).
+`File.ReadAllText()` (CWE-94). The twelfth batch added an upload-retrieval-flow case (CWE-434): a
+Java avatar upload allowlists `image/svg+xml` by detected content type and stores it unmodified,
+then a separate download endpoint serves it back inline with no safe headers, so an uploaded SVG's
+embedded script executes in the application's origin - the trap covers why `Content-Disposition:
+attachment` alone does not fix a caller that embeds the response instead of navigating to it. It
+also added a multi-file queue-flow case (CWE-502): a Go job-queue consumer decodes an untrusted
+message directly into a struct carrying a privileged `IsAdmin` field via `gob.Decode()`, with a
+trap covering why swapping the decoder to `encoding/json` without splitting out a client-settable
+DTO leaves the same privilege-escalation gap open.
 
 ### 2025 Top 15 Fix-Quality Target
 
@@ -206,10 +214,10 @@ the bug harder to notice.
 | 9 | 78 | 12 cases, depths 1-5, with PHP fallback and Go shell-command construction traps | Add traps for shell removal that breaks required behaviour, environment/PATH preservation, and valid CWE-88 option-injection shapes where the tainted argument is actually parsed as an option |
 | 10 | 94 | 7 cases: Python Jinja, JavaScript `Function`, PHP dynamic `require`, Java SpEL, C# Roslyn scripting, a Python `eval()`-with-restricted-`__builtins__` trap, and a C# DynamicExpresso custom-function file-read trap | No open next-pressure item for this row; add only for a genuinely distinct datapath (e.g. NCalc) |
 | 11 | 120 | 0 cases, no local `cwe/120` guidance | Decide whether to add a narrow `cwe/120` entry or route direct buffer-copy findings to CWE-121/125/787 before adding evals |
-| 12 | 434 | 8 cases, including Go and Java multipart header/content-type datapath traps | Add upload retrieval flows, rename-read-path preservation, object storage metadata checks, and webroot/static serving traps |
+| 12 | 434 | 9 cases, including Go and Java multipart header/content-type datapath traps, a C#/JavaScript webroot/static-serving pair, and a Java allowlisted-but-unsanitized SVG inline-serve retrieval-flow trap | Add rename-read-path preservation and object storage metadata checks |
 | 13 | 476 | 4 cases: Java unboxing, C `getenv()`/`strcmp()`, C++ unchecked `weak_ptr::lock()`, and a Java multi-file producer-contract sibling-caller trap | Producer-contract pressure now spans C, C++, and Java; add a fourth-language case only for a genuinely distinct datapath |
 | 14 | 121 | 6 cases: C stack concat, C helper-boundary capacity, C++ stack `std::array` unchecked index, a C `scanf` field-width off-by-one, a C `gets()`-to-`fgets()` truncation-handling trap, and a C++ stack `std::array` copy-loop overflow | No open next-pressure item for this row; add only for a genuinely distinct datapath |
-| 15 | 502 | 8 cases, including PHP cart-cookie decode/unserialize and Java native `ObjectInputStream.readObject()` datapaths | Add multi-file queue/cache/session flows, allowlist filters that preserve legitimate types, and migrations that keep persisted data readable |
+| 15 | 502 | 9 cases, including PHP cart-cookie decode/unserialize, Java native `ObjectInputStream.readObject()` datapaths, and a Go multi-file job-queue `gob` privileged-field trap | Add allowlist filters that preserve legitimate types, and migrations that keep persisted data readable |
 
 For future top-15 batches, prefer cases that combine two axes from this list: multi-file flow,
 existing partial mitigation, plausible wrong fix, and observable contract preservation. Single-file

@@ -1,0 +1,24 @@
+{
+  "id": "JobQueueGobPrivilegeField",
+  "cwe": "502",
+  "language": "go",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/502/go Key Principles: gob will happily instantiate and populate any registered struct field - including privileged ones like IsAdmin or Balance - from untrusted input",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "unreviewed",
+  "files": [
+    "queue_consumer.go",
+    "job_decoder.go"
+  ],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "job_decoder.go",
+    "sink_line": 18,
+    "sink_code": "\tif err := gob.NewDecoder(r).Decode(&job); err != nil {",
+    "summary": "ProcessNextJob passes an untrusted message-queue payload straight to gob.NewDecoder().Decode() into a Job struct that carries the privileged IsAdmin field, so a crafted queue message can set IsAdmin true and have runJob execute the job with elevated privileges."
+  },
+  "trap": "Replacing gob.NewDecoder(r).Decode(&job) with json.NewDecoder(r).Decode(&job) into the same Job struct removes gob's arbitrary-type-instantiation risk but does not close this finding: encoding/json will still populate IsAdmin straight from the attacker-supplied message, because the struct being decoded into still carries a privileged field alongside the client-settable ones. The fix needs a purpose-built DTO containing only Command and Priority - the fields a queue message is allowed to set - with IsAdmin (and any other privileged field) resolved separately from a server-side source, never from the decoded payload, regardless of which format decodes it.",
+  "must_preserve": "ProcessNextJob still decodes a queue message's Command and Priority and runs the job with those values. Whether a job runs with elevated privileges is decided by the server, independent of any field present in the queue message, so a message claiming an admin job is not allowed to run with elevated privileges."
+}

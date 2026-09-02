@@ -1,0 +1,24 @@
+{
+  "id": "AvatarSvgInlineServeXss",
+  "cwe": "434",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/434/java Key Principles: for image uploads, re-encode before persisting - detection identifies the prefix, not the whole file",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "AvatarStorage.java",
+    "AvatarDownloadController.java"
+  ],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "AvatarDownloadController.java",
+    "sink_line": 22,
+    "sink_code": "        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, contentType).body(bytes);",
+    "summary": "AvatarStorage allowlists image/svg+xml by detected content type and stores the bytes unchanged (no re-encoding). AvatarDownloadController then serves a stored .svg back with Content-Type image/svg+xml and no Content-Disposition/nosniff header, so a browser navigating to the URL renders any <script> the uploaded SVG carries in the application's origin."
+  },
+  "trap": "Adding a Content-Disposition: attachment header forces a download prompt for a browser navigating directly to the URL, but does not fix a caller that fetches the bytes through an <img src>, an API client, or any other path that renders the response body inline - an SVG containing a <script> element still executes wherever it is embedded, not just at this endpoint. The durable fix is upstream of serving: either drop image/svg+xml from AvatarStorage's allowlisted upload types, or sanitize/re-encode the SVG - stripping <script>, event-handler attributes, and external references - before it is ever written to storage, so nothing served back can carry active content regardless of how it is later embedded.",
+  "must_preserve": "Uploaded PNG and JPEG avatars are still stored and served back unchanged. An avatar stored under a name returned by AvatarStorage.store() is still retrievable at GET /api/avatars/{storedName}."
+}
