@@ -109,8 +109,8 @@ cases are still useful for native memory and API-specific pitfalls, but a new on
 fix mistake it is designed to catch, and should target a genuinely distinct datapath rather than
 padding an already-hammered CWE.
 
-**`authored`** cases come from two related but distinct campaigns, both tracked in TODO.md, neither
-built around a deliberate wrong-fix:
+**`authored`** cases come from two related but distinct campaigns, both tracked in
+[TODO.md](TODO.md), neither built around a deliberate wrong-fix:
 
 - **Per-language coverage (breadth).** At least one case per `(CWE, language)` slot that has a
   language-specific entry. CWE-22, 78, 89, 90, 117, 209, 326, 330, 338, 347, 434, 502, 611 and 614
