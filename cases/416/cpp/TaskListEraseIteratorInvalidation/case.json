@@ -1,0 +1,23 @@
+{
+  "id": "TaskListEraseIteratorInvalidation",
+  "cwe": "416",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/416/cpp Key Principles: vector/deque/string invalidate every outstanding iterator and reference from the erased element onward",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "TaskListEraseIteratorInvalidation.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "TaskListEraseIteratorInvalidation.cpp",
+    "sink_line": 12,
+    "sink_code": "            tasks.erase(it);",
+    "summary": "The loop calls tasks.erase(it) without capturing its return value; the for loop's own ++it then advances the now-invalidated iterator on the next pass, an out-of-bounds use of a dangling internal pointer."
+  },
+  "trap": "Rewriting the erase call as tasks.erase(it++) is the correct idiom for std::list or the associative containers, where erase invalidates only the iterator to the erased element - but it does not fix this function, because tasks is a std::vector, whose erase() invalidates every iterator from the erased position onward, including the one it++ just advanced to. The loop needs to capture erase()'s return value - it = tasks.erase(it) - and skip the loop's own ++it in that branch (for example with a while loop that only advances when nothing was erased), since erase() already returns a valid iterator to the element that followed the one removed.",
+  "must_preserve": "removeCompletedTasks still removes every Task whose completed field is true from tasks, preserves the relative order of the tasks that remain, and does not skip evaluating any element."
+}

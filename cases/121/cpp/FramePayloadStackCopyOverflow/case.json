@@ -1,0 +1,23 @@
+{
+  "id": "FramePayloadStackCopyOverflow",
+  "cwe": "121",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/121/cpp Key Principles: where a genuine upper bound exists, reject the oversized value rather than calling resize()",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "FramePayloadStackCopyOverflow.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-121",
+    "name": "Stack-based Buffer Overflow",
+    "file": "FramePayloadStackCopyOverflow.cpp",
+    "sink_line": 16,
+    "sink_code": "        frame.payload[i] = data[i];",
+    "summary": "The copy loop writes dataLen bytes into the 32-element, stack-resident payload std::array with no check that dataLen fits, overflowing payload through unchecked operator[] for any dataLen greater than 32."
+  },
+  "trap": "Clamping the loop bound to std::min(dataLen, frame.payload.size()) stops the write from overflowing payload but is an incomplete fix if frame.length is left set to the original dataLen: any caller that later reads frame.length bytes from frame.payload (to send or log it, for example) reads uninitialized bytes past what was actually copied - a fix that closes the write here can reopen a read overflow immediately downstream. Clamp both consistently: reject an oversized dataLen outright (matching the general preference to reject rather than silently resize or truncate), or clamp the loop bound and set frame.length to that same clamped count.",
+  "must_preserve": "For dataLen <= payload.size(), buildFrame still copies all dataLen bytes into payload and sets frame.length to dataLen. A dataLen exceeding payload.size() is rejected or truncated consistently - frame.length always matches the number of bytes actually written to payload."
+}

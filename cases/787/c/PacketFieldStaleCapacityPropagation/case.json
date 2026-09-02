@@ -1,0 +1,24 @@
+{
+  "id": "PacketFieldStaleCapacityPropagation",
+  "cwe": "787",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/787/c Key Principles: validate offset <= buf_len first and then length <= buf_len - offset",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "packet_buffer.c",
+    "field_writer.c"
+  ],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "field_writer.c",
+    "sink_line": 11,
+    "sink_code": "    memcpy(dest + offset, value, valueLen);",
+    "summary": "write_field validates offset and valueLen against destCapacity correctly, but encode_packet calls it with the compile-time constant MAX_PACKET_CAPACITY (256) instead of requestedCapacity, the size it actually malloc'd; when requestedCapacity is smaller than 256, the check passes against a capacity larger than the real allocation and memcpy writes past the end of packet."
+  },
+  "trap": "Tightening write_field's own check (adding another comparison, or re-deriving a margin inside write_field) cannot fix this: the check inside write_field is already the correct paired offset/length form for whatever destCapacity it is given, and the finding is that the value handed in is wrong, not the formula that uses it. The fix has to change encode_packet to pass requestedCapacity - the size it actually allocated - instead of MAX_PACKET_CAPACITY.",
+  "must_preserve": "encode_packet still allocates a buffer of requestedCapacity bytes and writes value at offset when the write fits inside that specific allocation. A write that would exceed the actual allocated buffer is still rejected (write_field returns without writing) rather than performed."
+}

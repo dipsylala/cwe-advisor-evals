@@ -1,0 +1,23 @@
+{
+  "id": "CommandLineGetsFgetsTruncation",
+  "cwe": "121",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/121/c Key Principles: fgets closes the overflow and leaves truncation behind; peek the next character to detect it",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "CommandLineGetsFgetsTruncation.c"
+  ],
+  "finding": {
+    "cwe": "CWE-121",
+    "name": "Stack-based Buffer Overflow",
+    "file": "CommandLineGetsFgetsTruncation.c",
+    "sink_line": 9,
+    "sink_code": "    gets(line);",
+    "summary": "gets(line) has no size limit and can write past the end of the 64-byte line stack array for any input longer than 63 characters."
+  },
+  "trap": "Replacing gets(line) with fgets(line, sizeof(line), stdin) closes the overflow but is an incomplete fix on its own: fgets splits an over-long line silently, leaving the remainder queued on stdin to be read as the start of the next call to read_command_line. A missing trailing newline in line does not by itself prove truncation - it can also mean the input ended exactly at line's capacity with only the newline left unread. The fix must also detect truncation and drain the rest of the line: after fgets succeeds, peek the next character with getchar() - EOF or '\\n' means the line ended there; anything else means input is still queued, so drain to the next newline and reject the over-long line instead of silently processing only its first 63 characters.",
+  "must_preserve": "For an input line that fits within line's capacity, read_command_line still copies it into out (bounded by out_capacity) and returns 0. An input line too long for line is rejected (returns -1), and no leftover bytes from a rejected line are left queued to corrupt the next call's read."
+}
