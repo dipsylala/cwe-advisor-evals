@@ -20,65 +20,13 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Ten runs so far - see **Past runs** below for what each one found. Runs 1-6 all ran on Sonnet 5
-(undocumented as such until run 5/6, see the model gap below) and found verdict accuracy and
-multi-file source tracing saturated in every arm at every chain depth tested up to five files, and
-`fix_quality` saturated across the 79-case breadth/depth corpus too - at that model's capability
-level, guidance had nothing to add to whether the vulnerability got found and closed. The knowledge
-base's one consistently measurable effect on Sonnet 5 was on `no_harm` - whether a fix silently
-breaks or changes something the sink's caller depended on - and that effect went in both directions
-depending on how an entry's `Remediation Steps` are ordered (see run 4). Run 5 found a defect
-neither arm avoided (a CWE-434 fix that renames an uploaded file without the entry warning the read
-path needs the new name too, since fixed - see run 5's row below). Run 6 found the planted traps
-still mostly don't catch anything (12 of 13 across runs 4 and 6), sharpened the one open `no_harm`
-gap (a model that honestly declines to guess a value it cannot verify scored worse than one that
-guesses and gets lucky - the rubric now scores disclosure correctly, see HARNESS.md Step 5), and
-independently confirmed by direct reproduction that `cwe/611/php`'s `LIBXML_NOENT`/`LIBXML_NO_XXE`
-guidance is technically correct - a re-judge with a fresh panel had disagreed, unanimously and
-wrongly, which is its own finding: see HARNESS.md's **Things that have gone wrong before** and
-[RESULTS-v6.md](RESULTS-v6.md)'s addendum.
-
-**Run 7 overturned the "saturated" half of that headline, on a smaller corpus.** The identical
-79-case corpus, re-run with Haiku 4.5 on both arms instead of Sonnet 5, produced a real
-`fix_quality` gap (1.84 no-guidance vs. 1.97 guided; +0.89 on CWE-90 alone) that Sonnet 5 never
-showed on these same cases. The mechanism was checked directly, not taken from a judge's word: the
-ungoverned arm called library functions that do not exist - confirmed by installing the real
-`ldap3` and `ldapjs` packages and checking - while the guided arm, reading the entry's named APIs,
-did not.
-
-**Run 8 is the current word on Haiku and complicates that story.** The identical Haiku-4.5-vs-Sonnet-5
-pairing, re-run after the corpus grew from 79 to 203 cases (new top-15 fix-complexity and multi-file
-depth batches), produced a near-tie: `fix_quality` 1.86 vs. 1.86, `no_harm` 1.86 vs. 1.80 - slightly
-favouring *no* guidance. Run 7's gap does not hold once the corpus is bigger and includes cases built
-around a plausible-but-wrong fix. Saturation is not simply "a property of the model being capable
-enough not to need the guidance" as run 7 concluded - it is corpus-dependent, and on three entries
-the guidance was itself the source of a defect it exists to prevent, confirmed directly against the
-real API/language/framework semantics rather than taken from a judge's word: `cwe/90/java` told the
-model to use `DirContext.search()`'s `filterArgs` parameter without stating that every such overload
-also requires a `SearchControls` argument, so the guided arm wrote a three-argument call that does
-not compile in 3 of 4 CWE-90 multi-file cases (the ungoverned arm sidestepped the API and hand-wrote
-an escaper instead); `cwe/117/javascript` named Unicode code points as `U+0085`/`U+2028`/`U+2029`
-without showing the JS escape syntax to write them, and the guided arm pasted the literal raw
-characters into a regex literal, a `SyntaxError`; `cwe/352/csharp` said minimal API endpoints are
-"covered... by `app.UseAntiforgery()`" without noting that this only auto-validates form-bound
-endpoints - confirmed against Microsoft's own current docs, a JSON-bound endpoint is not rejected
-even with the middleware registered, and both arms independently missed the extra
-`IAntiforgery.ValidateRequestAsync()` call it needs. All three gaps are now fixed in the guidance
-itself; see [RESULTS-v8.md](RESULTS-v8.md).
-
-**Runs 9 and 10 are the current word on each model, both on the same post-fix corpus.** Run 9
-(Sonnet 5, both arms) replicates run 5's saturation on the full 203-case corpus: `fix_quality`
-1.98 vs. 1.98, with guidance's usual small `no_harm` edge (1.88 vs. 1.91). Run 10 (Haiku 4.5, both
-arms - the direct before/after test of run 8's three fixes) shows a small `fix_quality` gap
-reopening (1.85 vs. 1.90), traced case-by-case rather than assumed from the aggregate: all three
-previously-broken Juliet CWE-90 cases now score a clean 2.00/2.00 for the guided arm (up from 0.67
-in run 8), and `MinimalApiEmailNoAntiforgery` (CWE-352/csharp) rose from a mixed read to 2.00/1.67
-while the unguided arm - which never reads the fix - stayed poor on the same case, exactly the
-isolation a guidance-only change should produce. The third fix (`cwe/117/javascript`) only partially
-held: the entry now gives the literal JS escape text verbatim, but Haiku independently pasted a raw
-Unicode character into a regex character class again in this run - the same mistake recurring as a
-fresh model-generation error rather than anything the guidance text could still address. See
-[RESULTS-v9.md](RESULTS-v9.md) and [RESULTS-v10.md](RESULTS-v10.md).
+Ten runs so far - see **Past runs** below for the run-by-run detail, headline, and results file for
+each. In short: `fix_quality` saturates on Sonnet 5 across every corpus size and composition tested
+so far; on Haiku 4.5 it has shown a real gap, a near-tie, and a smaller reopened gap across three
+re-runs as the corpus grew and specific guidance defects got found and fixed - model and corpus are
+both live confounds, not settled variables. `no_harm` (whether a fix silently breaks or changes
+something the sink's caller depended on) has consistently shown guidance's small edge on Sonnet 5.
+See **Known gaps** below for what remains unverified rather than just measured.
 
 ## Corpus
 
@@ -129,116 +77,16 @@ checkable rather than implied by the code:
 - **`origin`** - the `docs/` pitfall the case is built from.
 
 Their labels are an authoring claim, not an external ground truth, which is weaker than the other
-two sources. Treat a judge disagreeing with `kind` on one of these as a finding about the case. Run
-4 scored the first ten and found the traps mostly did not work (19/20 at ceiling on `fix_quality`) -
-see [RESULTS-v4.md](RESULTS-v4.md). The one exception confirmed a specific, since-repeated shape:
-when an entry's `Remediation Steps` open with an infrastructure or configuration change rather than
-the fix at the reported sink, the guided arm tends to perform that change and leave the flagged line
-untouched. Run 6 scored the remaining three (`OrderEventQueueDeserialize`, `ModelCachePickleLoad`,
-`DeprecatedEntityLoaderGuard`) and found none of them caught that shape either - 12 of 13 across
-both runs now, so `authored-from-docs-pitfall` traps still mostly do not catch anything, though run
-6 did surface two findings the traps were not built to test - see [RESULTS-v6.md](RESULTS-v6.md).
+two sources. Treat a judge disagreeing with `kind` on one of these as a finding about the case. See
+**Past runs** (runs 4 and 6) for what these traps did and did not catch.
 
 **`authored-top15-fix-complexity`** cases cover the 2025 CWE Top 15 entries with remediation-quality
 pressure rather than detection labels. The scanner finding is part of the prompt and is treated as
 confirmed. The case succeeds only if the produced fix closes that true positive while preserving the
-observable contract. The first batch filled entries that had local guidance but no eval coverage:
-CWE-121, 125, 352, 416, 476, 787, 862, and 94. The second batch added more detailed wrong-fix cases
-for high-volume entries that already had ordinary coverage: CWE-22, 78, 79, and 89. The third batch
-widened language coverage for underrepresented top-15 entries: CWE-352/Python, CWE-862/JavaScript,
-CWE-94/JavaScript and PHP, CWE-787/C++, and CWE-416/C. The fourth batch added framework and datapath
-variety across eight more language/CWE pairs: CWE-352/Java, CWE-862/C#, CWE-434/Go, CWE-502/PHP,
-CWE-89/Python, CWE-79/C#, CWE-125/C++, and CWE-121/C. The fifth batch concentrated on CWE-89 across
-all six supported languages, adding Dapper/C#, GORM/Go, MyBatis/Java, Prisma-style raw SQL/
-JavaScript, Laravel/PHP, and Django/Python datapaths. The sixth batch added five more C# CWE-89
-sinks: EF Core `FromSqlRaw`, EF Core `ExecuteSqlRawAsync`, `SqlDataAdapter.Fill()`,
-`SqlCommand.ExecuteScalar()`, and `SqlCommand.ExecuteNonQuery()`. The seventh batch returned to the
-MITRE top five, excluding already-expanded CWE-89, with Java/PHP XSS rendering sinks, Go/C# CSRF
-route coverage gaps, Java/PHP authorization gaps, and C/C++ out-of-bounds write datapaths. Each is a
-confirmed true positive and carries the same `trap`/`must_preserve`/`origin` fields as the pitfall
-cases. The eighth batch filled weaker top-15 areas with Java/C# code execution, Java upload and
-deserialization, C/C++ null/read/stack/use-after-free cases, and Java Zip Slip extraction. The focus
-is remediation quality: choosing the right API or control, preserving the endpoint/function
-contract, and avoiding plausible local edits that leave the reported sink exposed or break valid
-callers. The ninth batch targeted the five most underrepresented top-15 entries: a C off-by-one
-loop-bound write (CWE-787), a C paired offset/length send() over-read distinguishing CWE-125 from
-CWE-787, a C++ multi-file owner/observer dangling-pointer case (CWE-416), a Java multi-file
-producer-contract case where fixing only the reported call site leaves a sibling caller exposed
-(CWE-476), and a C `scanf` field-width off-by-one (CWE-121); it then added a Java list-vs-detail
-authorization-scoping case (CWE-862) and a Python `eval()`-with-restricted-`__builtins__` case whose
-plausible wrong fix is switching to `ast.literal_eval()` and reintroducing the injection via string
-substitution (CWE-94). CWE-120 was the only 2025 top-15 entry uncovered at this point because this
-repo had no `cwe/120` guidance directory; resolved in the fifteenth batch below by routing it to
-CWE-121/125/787 rather than adding a case. The tenth batch closed out the remaining narrow asks on
-the three CWEs from the
-ninth: a C multi-function size-propagation case where a correct paired-bounds check inside the
-callee is defeated by the caller passing a stale compile-time capacity instead of the size it
-actually allocated (CWE-787), a C++ vector erase-in-loop that invalidates the iterator the for
-loop's own increment then advances, with a trap covering the `erase(it++)` idiom that works for
-`std::list` but not `std::vector` (CWE-416), a C `gets()`-to-`fgets()` swap whose trap is the
-missing truncation-detection/drain step (CWE-121), and a C++ stack-resident `std::array` copy loop
-whose trap clamps the write but leaves a stale length field pointing past what was actually copied
-(CWE-121). The eleventh batch closed the remaining two open rows: a PHP admin-branch-swap case
-where the admin and owner-scoped return statements are on the wrong side of an `isAdmin()` check
-(CWE-862), and a C# DynamicExpresso case where the interpreter itself is correctly locked down but
-a registered custom function passes its expression-controlled string argument straight to
-`File.ReadAllText()` (CWE-94). The twelfth batch added an upload-retrieval-flow case (CWE-434): a
-Java avatar upload allowlists `image/svg+xml` by detected content type and stores it unmodified,
-then a separate download endpoint serves it back inline with no safe headers, so an uploaded SVG's
-embedded script executes in the application's origin - the trap covers why `Content-Disposition:
-attachment` alone does not fix a caller that embeds the response instead of navigating to it. It
-also added a multi-file queue-flow case (CWE-502): a Go job-queue consumer decodes an untrusted
-message directly into a struct carrying a privileged `IsAdmin` field via `gob.Decode()`, with a
-trap covering why swapping the decoder to `encoding/json` without splitting out a client-settable
-DTO leaves the same privilege-escalation gap open. The thirteenth batch closed CWE-22 and CWE-78. On
-CWE-22: a Java case where `normalize()` is called on the raw request path before it is joined to the
-base directory, so a leading `../../` traversal - which has nothing preceding it to cancel against -
-survives normalization unchanged and only escapes containment at `resolve()`, with a trap covering
-why moving `normalize()` to after `resolve()` is progress but still needs an explicit `startsWith()`
-containment check; and a Go case where join/clean/prefix containment is implemented correctly but
-symlinks are never resolved, so a symlink planted inside the uploads directory is followed at read
-time, with a trap covering why `os.Stat()` (which follows the link) doesn't catch it the way
-`os.Lstat()` does. On CWE-78: a Python case matching the entry's own documented `tar`
-option-injection example - an argument-array call with no shell that still lets a filename starting
-with `-` be parsed as a `tar` flag - and a Go case where removing the shell is the correct fix, but
-a plausible accompanying `cmd.Env = []string{}` "hardening" step relies on a real `os/exec` gotcha
-(only `Env == nil` inherits the parent's environment; a non-nil empty slice replaces it entirely) to
-strip the `PATH` and config variables the replaced tool needs, breaking the feature. The fourteenth
-batch added a case each to CWE-79, 89, 434, and 502. CWE-79 (JavaScript): `DOMPurify.sanitize()`
-correctly guards the HTML-content use of a value, but the same sanitized string is also concatenated
-unescaped into a `title` attribute, since DOMPurify's own threat model covers HTML re-insertion, not
-attribute-value construction - the trap covers why hand-escaping just the quote character is the
-wrong layer to fix it at. CWE-89 (PHP): the entry's own documented `LIKE`-wildcard-binding example -
-`%...%` concatenated into the SQL text before `prepare()` - with a trap covering why wrapping the
-value in `PDO::quote()` and concatenating that into the clause instead produces a mangled, doubly-
-quoted pattern rather than a fix. CWE-434 (Python): an S3 upload sets the stored object's
-`ContentType` metadata straight from the client-supplied header with no relation to the actual
-bytes, so a presigned or public URL later serves attacker-chosen content type - the trap covers why
-validating the header against an allowlist doesn't help when the header itself was never checked
-against the real bytes. CWE-502 (Java): an `ObjectInputFilter` allowlists classes with
-`String.startsWith("com.example.report")`, the same unanchored-prefix mistake CWE-22 makes with file
-paths, applied to class names - the trap covers why lengthening the prefix string narrows one bypass
-without fixing the underlying shape. The fifteenth batch closed every remaining open row in the
-table below, including the CWE-120 decision: `cwe/120/INDEX.md` is now a routing-only entry (the
-same pattern `cwe/77` already uses for `cwe/78`) that sends a stack-destination finding to CWE-121
-and every other destination to CWE-787, rather than duplicating either entry's remediation, so no
-CWE-120-specific fixture is needed - the routed-to rows already carry the pressure. CWE-79
-(JavaScript): Angular's `DomSanitizer.bypassSecurityTrustHtml()` called directly on untrusted
-comment content, with a trap covering why pre-filtering with a denylist before the bypass call still
-misses vectors the framework's own sanitizer would have caught. CWE-89: a hand-built `IN` list in
-Node/`pg` whose trap is that binding the whole array as one parameter doesn't expand into per-value
-placeholders (JavaScript); a stored procedure invoked through a concatenated `EXEC` string instead of
-`CommandType.StoredProcedure` (C#); and a case where client-side quote-escaping is irrelevant to a
-server-side string-concatenated query, since any HTTP client can skip the browser entirely (Python,
-two files). CWE-352 (Go): a hand-rolled token comparison using `strings.Contains()` instead of exact
-equality, so a token that is merely a substring of the real one passes, with a trap covering why
-switching to `==` reopens a timing side channel that `subtle.ConstantTimeCompare()` avoids. CWE-434
-(Go, two files): the historical rename-read-path gap made concrete as a fixture - the write and read
-paths are coupled through the same filename, so a trap that renames the stored file without updating
-every reader breaks retrieval as a side effect of closing the upload finding. CWE-502 (PHP): a
-migration from `unserialize()` to `json_decode()` whose trap is that `json_decode()` returns `null`
-rather than throwing on a pre-migration row's PHP-serialized data, silently discarding it rather than
-migrating it.
+observable contract, and each carries the same `trap`/`must_preserve`/`origin` fields as the pitfall
+cases above. Built up over many authoring passes tracked in `git log` (this directory's own commit
+history names what each pass added and why); see **2025 Top 15 Fix-Quality Target** below for the
+current state and `cases/{cwe}/{language}/` on disk for the cases themselves.
 
 ### 2025 Top 15 Fix-Quality Target
 
@@ -256,8 +104,8 @@ multiple languages, at least one multi-file flow, and at least one `trap`/`must_
 one entry with no dedicated fixture is CWE-120: `cwe/120/INDEX.md` routes a finding to CWE-121
 (stack destination) or CWE-787 (every other destination) rather than duplicating either entry's
 remediation, the same pattern `cwe/77` already uses for `cwe/78`, so the eval pressure lives on
-those two rows instead. Per-CWE case counts and traps are `cases/{cwe}/{language}/` on disk; the
-prose above this section narrates what each batch added and why.
+those two rows instead. Per-CWE case counts and traps are `cases/{cwe}/{language}/` on disk; `git
+log` on this directory names what each authoring pass added and why.
 
 For future top-15 batches, prefer cases that combine two axes from this list: multi-file flow,
 existing partial mitigation, plausible wrong fix, and observable contract preservation. Single-file
