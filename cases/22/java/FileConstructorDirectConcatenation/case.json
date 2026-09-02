@@ -1,0 +1,18 @@
+{
+  "id": "FileConstructorDirectConcatenation",
+  "cwe": "22",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["DocumentDownloadServlet.java"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "DocumentDownloadServlet.java",
+    "sink_line": 39,
+    "sink_code": "        File requestedFile = new File(DOCUMENT_STORE_DIR + File.separator + fileName);",
+    "summary": "The file request parameter is concatenated directly onto DOCUMENT_STORE_DIR and passed to new File() with no canonicalization, containment check, or traversal-sequence filtering anywhere in doGet before the resulting File is opened with FileInputStream."
+  }
+}

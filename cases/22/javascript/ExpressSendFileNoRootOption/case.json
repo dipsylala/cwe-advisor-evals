@@ -1,0 +1,18 @@
+{
+  "id": "ExpressSendFileNoRootOption",
+  "cwe": "22",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ExpressSendFileNoRootOption.js"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "ExpressSendFileNoRootOption.js",
+    "sink_line": 22,
+    "sink_code": "  res.sendFile(reportPath);",
+    "summary": "req.query.file is joined onto the reports directory and passed to res.sendFile() without the root option, so Express only requires an absolute path and performs no containment check, letting traversal sequences reach files outside the reports directory"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "PathCombineAbsoluteOverride",
+  "cwe": "22",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["PathCombineAbsoluteOverride.cs"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "PathCombineAbsoluteOverride.cs",
+    "sink_line": 23,
+    "sink_code": "        var reportText = File.ReadAllText(reportPath);",
+    "summary": "query string 'file' value is combined with the reports root via Path.Combine with no check that it is relative, so a rooted value such as C:\\Windows\\win.ini discards the base directory entirely and File.ReadAllText reads the absolute attacker-supplied path"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "AbsolutePathDiscardsBaseJoin",
+  "cwe": "22",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["document_download.py"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "document_download.py",
+    "sink_line": 23,
+    "sink_code": "    document_path = os.path.join(BASE_DIR, filename)",
+    "summary": "the 'file' query parameter is joined to BASE_DIR with os.path.join() with no check that it is a relative path first, so an absolute value like /etc/passwd discards BASE_DIR entirely and the subsequent open() reads that absolute path"
+  }
+}

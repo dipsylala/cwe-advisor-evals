@@ -1,0 +1,18 @@
+{
+  "id": "RealpathFalseFallbackDowngrade",
+  "cwe": "22",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["RealpathFalseFallbackDowngrade.php"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "RealpathFalseFallbackDowngrade.php",
+    "sink_line": 52,
+    "sink_code": "    file_put_contents($safePath, $content);",
+    "summary": "saveNote() writes a new file, so realpath() on the not-yet-existing destination returns false on essentially every legitimate call, not just malicious ones; the ?: fallback then substitutes the original unresolved path (still containing any '../' segments) into a containment check that passes by construction - it always starts with $baseDir - so file_put_contents writes to whatever that unresolved path names, including outside $baseDir"
+  }
+}

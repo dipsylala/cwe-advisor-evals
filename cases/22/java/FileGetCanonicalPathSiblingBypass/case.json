@@ -1,0 +1,18 @@
+{
+  "id": "FileGetCanonicalPathSiblingBypass",
+  "cwe": "22",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["UploadNotesServlet.java"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "UploadNotesServlet.java",
+    "sink_line": 37,
+    "sink_code": "        if (!canonicalPath.startsWith(BASE_DIR)) {",
+    "summary": "the 'note' request parameter is joined onto the uploads base directory, canonicalized with File.getCanonicalPath(), and checked for containment with a bare String.startsWith(BASE_DIR) comparison, which a sibling directory such as /app/uploads-backup passes despite lying outside the intended base"
+  }
+}

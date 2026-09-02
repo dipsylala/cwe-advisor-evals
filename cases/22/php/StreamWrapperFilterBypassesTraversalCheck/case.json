@@ -1,0 +1,18 @@
+{
+  "id": "StreamWrapperFilterBypassesTraversalCheck",
+  "cwe": "22",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["StreamWrapperFilterBypassesTraversalCheck.php"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "StreamWrapperFilterBypassesTraversalCheck.php",
+    "sink_line": 33,
+    "sink_code": "    $handle = fopen($file, 'r');",
+    "summary": "$_GET['file'] is denylisted only for the substring '..' then passed unmodified to fopen, so a php://filter/convert.base64-encode/resource=... stream wrapper value bypasses the check and discloses source code with no traversal sequence at all"
+  }
+}

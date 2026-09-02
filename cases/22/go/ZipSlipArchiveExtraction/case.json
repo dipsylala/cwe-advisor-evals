@@ -1,0 +1,18 @@
+{
+  "id": "ZipSlipArchiveExtraction",
+  "cwe": "22",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ZipSlipArchiveExtraction.go"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "ZipSlipArchiveExtraction.go",
+    "sink_line": 83,
+    "sink_code": "\t\tdst, err := os.Create(destPath)",
+    "summary": "uploaded zip archive entry.Name is joined with filepath.Join(extractDir, entry.Name) and used as the path for os.Create with no containment check, so a crafted entry name containing '../' sequences (Zip Slip) writes outside extractDir"
+  }
+}

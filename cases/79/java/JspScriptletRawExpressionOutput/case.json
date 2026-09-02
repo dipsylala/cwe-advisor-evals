@@ -1,0 +1,20 @@
+{
+  "id": "JspScriptletRawExpressionOutput",
+  "cwe": "79",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "welcome.jsp"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    "file": "welcome.jsp",
+    "sink_line": 30,
+    "sink_code": "        <p>Welcome, <%= displayName %>!</p>",
+    "summary": "The displayName request parameter is read via request.getParameter and written straight into the page body through a JSP <%= %> expression scriptlet, which JSP performs with no engine-wide auto-escape to fall back on."
+  }
+}

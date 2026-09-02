@@ -1,0 +1,18 @@
+{
+  "id": "TarfileExtractallNoFilter",
+  "cwe": "22",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["TarfileExtractallNoFilter.py"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "TarfileExtractallNoFilter.py",
+    "sink_line": 39,
+    "sink_code": "    tarfile.open(staged_path).extractall(workspace_dir)",
+    "summary": "an uploaded tar archive is extracted with tarfile.extractall() and no filter argument on Python 3.11, so a crafted member name containing '../' sequences writes outside the tenant workspace directory"
+  }
+}

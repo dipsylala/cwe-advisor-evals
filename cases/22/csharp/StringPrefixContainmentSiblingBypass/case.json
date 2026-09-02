@@ -1,0 +1,18 @@
+{
+  "id": "StringPrefixContainmentSiblingBypass",
+  "cwe": "22",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["UploadsController.cs"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "UploadsController.cs",
+    "sink_line": 36,
+    "sink_code": "            var bytes = System.IO.File.ReadAllBytes(fullPath);",
+    "summary": "userFile query parameter is combined into a path and canonicalized with Path.GetFullPath, but containment is checked with a bare fullPath.StartsWith(BaseDirectory) that a sibling directory sharing the same string prefix (e.g. C:\\app\\uploads-secret) passes, letting File.ReadAllBytes read files outside the intended uploads directory"
+  }
+}

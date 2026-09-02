@@ -1,0 +1,18 @@
+{
+  "id": "SiblingDirectoryPrefixBypass",
+  "cwe": "22",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["uploads_download.go"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "uploads_download.go",
+    "sink_line": 37,
+    "sink_code": "\thttp.ServeFile(w, r, full)",
+    "summary": "query parameter file is joined against uploadsDir with filepath.Join, cleaned, and checked with strings.HasPrefix(full, uploadsDir) without appending the path separator to uploadsDir, so a value like ../uploads-backup/secrets.txt resolves to the sibling directory /srv/app/uploads-backup, which still matches the bare string prefix, and reaches http.ServeFile"
+  }
+}

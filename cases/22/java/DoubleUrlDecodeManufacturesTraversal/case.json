@@ -1,0 +1,18 @@
+{
+  "id": "DoubleUrlDecodeManufacturesTraversal",
+  "cwe": "22",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["AttachmentDownloadServlet.java"],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+    "file": "AttachmentDownloadServlet.java",
+    "sink_line": 46,
+    "sink_code": "        File target = new File(ATTACHMENTS_DIR, filename);",
+    "summary": "the file request parameter, already percent-decoded once by the servlet container, is passed through a second URLDecoder.decode() call that turns the inert literal %2e%2e%2f into ../, so the subsequent \"..\" containment check runs on the pre-decode value and passes before the traversal-bearing filename reaches new File(ATTACHMENTS_DIR, filename)"
+  }
+}
