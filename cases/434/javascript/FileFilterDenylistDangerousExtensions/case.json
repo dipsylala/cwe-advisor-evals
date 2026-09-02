@@ -1,0 +1,18 @@
+{
+  "id": "FileFilterDenylistDangerousExtensions",
+  "cwe": "434",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["FileFilterDenylistDangerousExtensions.js"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "FileFilterDenylistDangerousExtensions.js",
+    "sink_line": 22,
+    "sink_code": "  return cb(null, true);",
+    "summary": "multer's fileFilter only rejects a hardcoded denylist of extensions ('.exe', '.php', '.sh', '.bat') and accepts every other originalname unchecked, so an unlisted or double extension like '.html' or '.php.jpg' is stored with no allowlist and no content-sniffing"
+  }
+}

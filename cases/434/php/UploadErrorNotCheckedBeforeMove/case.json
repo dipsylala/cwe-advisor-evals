@@ -1,0 +1,18 @@
+{
+  "id": "UploadErrorNotCheckedBeforeMove",
+  "cwe": "434",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["UploadErrorNotCheckedBeforeMove.php"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "UploadErrorNotCheckedBeforeMove.php",
+    "sink_line": 29,
+    "sink_code": "    move_uploaded_file($_FILES['avatar']['tmp_name'], $destination);",
+    "summary": "code never checks $_FILES['avatar']['error'] against UPLOAD_ERR_OK before validating and moving the file, so a partial or interrupted upload whose truncated tmp_name still passes the finfo_file() magic-byte allowlist check reaches move_uploaded_file() as if it were a complete, valid file"
+  }
+}

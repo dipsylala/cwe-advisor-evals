@@ -1,0 +1,18 @@
+{
+  "id": "ContentTypeAllowlistNoMagicByteCheck",
+  "cwe": "434",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ImageUploadController.java"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "ImageUploadController.java",
+    "sink_line": 45,
+    "sink_code": "        Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);",
+    "summary": "The handler allowlists MultipartFile.getContentType() against image/png and image/jpeg but never sniffs the actual file bytes (no Apache Tika detect, no manual signature check), so a client can send arbitrary file bytes with a forged Content-Type header and pass the check; the stored filename itself is generated safely from UUID.randomUUID() with the extension taken from a fixed map keyed by the same unverified content type."
+  }
+}

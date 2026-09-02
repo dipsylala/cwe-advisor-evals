@@ -1,0 +1,18 @@
+{
+  "id": "ContentTypeOnlyValidation",
+  "cwe": "434",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ContentTypeOnlyValidation.cs"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "ContentTypeOnlyValidation.cs",
+    "sink_line": 53,
+    "sink_code": "            using (var destinationStream = System.IO.File.Create(destinationPath))",
+    "summary": "the action allowlists only the client-supplied IFormFile.ContentType against known image MIME types with no signature/magic-byte check of the actual stream bytes, so a mismatched file is written under an otherwise-correct GUID-generated name"
+  }
+}

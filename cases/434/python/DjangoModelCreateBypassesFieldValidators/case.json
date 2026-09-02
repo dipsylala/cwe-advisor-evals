@@ -1,0 +1,18 @@
+{
+  "id": "DjangoModelCreateBypassesFieldValidators",
+  "cwe": "434",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["models.py", "serializers.py"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "serializers.py",
+    "sink_line": 19,
+    "sink_code": "        return Document.objects.create(",
+    "summary": "Document.file declares validators=[validate_file_content], a magic-byte content check, but DocumentUploadSerializer.create() persists the upload via Model.objects.create() instead of a ModelForm's is_valid()/full_clean() path, and objects.create() never calls full_clean() - so the field validator is defined but never executes for this endpoint, letting any file content through."
+  }
+}

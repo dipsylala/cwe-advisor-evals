@@ -1,0 +1,18 @@
+{
+  "id": "ExtensionFromClientFilenameNotDetectedType",
+  "cwe": "434",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["document_upload.go"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "document_upload.go",
+    "sink_line": 66,
+    "sink_code": "\tstoredName += filepath.Ext(fileHeader.Filename)",
+    "summary": "The handler correctly calls http.DetectContentType on the file body and allowlists the result, and generates a random storage base name, but then appends the extension from the client-supplied fileHeader.Filename via filepath.Ext instead of a fixed map keyed by the detected content type, so the client still controls the extension that decides how the stored file is served."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "RazorViewsDirectoryTraversalWrite",
+  "cwe": "434",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["AdminEmailTemplateController.cs"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "AdminEmailTemplateController.cs",
+    "sink_line": 40,
+    "sink_code": "            var destinationPath = Path.Combine(viewsRootPath, file.FileName);",
+    "summary": "an admin-uploaded email template is written with Path.Combine(viewsRootPath, file.FileName) with no rejection of traversal sequences in the client-supplied FileName, so on an app using AddRazorRuntimeCompilation() a crafted FileName like \"../../Views/Shared/_Injected.cshtml\" places an executable .cshtml inside the Views tree outside the nominal EmailTemplates subfolder"
+  }
+}

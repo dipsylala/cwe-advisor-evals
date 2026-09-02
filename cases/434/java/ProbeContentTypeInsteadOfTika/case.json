@@ -1,0 +1,18 @@
+{
+  "id": "ProbeContentTypeInsteadOfTika",
+  "cwe": "434",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["DocumentUploadController.java"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "DocumentUploadController.java",
+    "sink_line": 42,
+    "sink_code": "        String detectedType = Files.probeContentType(tempFile);",
+    "summary": "The handler writes the upload to a temp file carrying the client's own extension and calls Files.probeContentType(tempFile) believing this inspects the file's actual bytes, but on JDK 9+ the built-in Linux/Windows detectors key off the file name's extension, not content, so a renamed executable with an allowlisted extension passes while the allowlist check on the result validates nothing about what was actually uploaded."
+  }
+}

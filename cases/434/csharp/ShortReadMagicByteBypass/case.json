@@ -1,0 +1,18 @@
+{
+  "id": "ShortReadMagicByteBypass",
+  "cwe": "434",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ShortReadMagicByteBypass.cs"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "ShortReadMagicByteBypass.cs",
+    "sink_line": 36,
+    "sink_code": "            int bytesRead = stream.Read(header, 0, header.Length);",
+    "summary": "the file-signature check fills an 8-byte header buffer with a single stream.Read call instead of ReadAtLeastAsync or a read loop, so a short read leaves the buffer partially zeroed and a small or slow-streamed upload can match a magic-number comparison without its real leading bytes ever being read"
+  }
+}

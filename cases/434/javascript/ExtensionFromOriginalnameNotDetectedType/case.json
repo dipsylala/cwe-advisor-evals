@@ -1,0 +1,18 @@
+{
+  "id": "ExtensionFromOriginalnameNotDetectedType",
+  "cwe": "434",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ExtensionFromOriginalnameNotDetectedType.js"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "ExtensionFromOriginalnameNotDetectedType.js",
+    "sink_line": 42,
+    "sink_code": "  await fs.writeFile(destination, req.file.buffer);",
+    "summary": "fileTypeFromBuffer correctly checks the upload's real bytes against a mime allowlist, but the stored filename's extension is taken from path.extname(req.file.originalname) instead of the detected.ext result, so the client still controls the extension the file is written and later served with"
+  }
+}

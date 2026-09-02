@@ -1,0 +1,18 @@
+{
+  "id": "SecureFilenameMistakenForContentValidation",
+  "cwe": "434",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["document_upload.py"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "document_upload.py",
+    "sink_line": 26,
+    "sink_code": "    uploaded.save(destination)",
+    "summary": "upload_document sanitizes the filename with werkzeug.utils.secure_filename() and treats that as sufficient validation, but secure_filename() only strips path separators and unsafe characters from the name string - it performs no content or magic-byte check, so the file is saved with no verification of what its bytes actually are"
+  }
+}

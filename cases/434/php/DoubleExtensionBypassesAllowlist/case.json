@@ -1,0 +1,18 @@
+{
+  "id": "DoubleExtensionBypassesAllowlist",
+  "cwe": "434",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["DoubleExtensionBypassesAllowlist.php"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "DoubleExtensionBypassesAllowlist.php",
+    "sink_line": 36,
+    "sink_code": "    move_uploaded_file($file['tmp_name'], $destination);",
+    "summary": "extension allowlist check uses strpos() to test whether an allowed extension appears anywhere in the filename instead of validating the final extension, so a double-extension name like shell.php.jpg passes and is stored under the client's original name for move_uploaded_file"
+  }
+}

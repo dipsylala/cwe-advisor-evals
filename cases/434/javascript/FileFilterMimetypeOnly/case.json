@@ -1,0 +1,18 @@
+{
+  "id": "FileFilterMimetypeOnly",
+  "cwe": "434",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["FileFilterMimetypeOnly.js"],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "FileFilterMimetypeOnly.js",
+    "sink_line": 24,
+    "sink_code": "  cb(null, ALLOWED_MIMETYPES.includes(file.mimetype));",
+    "summary": "the multer fileFilter accepts an upload solely by checking the client-supplied file.mimetype against an allowlist, and no magic-byte content check ever runs after the file is written"
+  }
+}
