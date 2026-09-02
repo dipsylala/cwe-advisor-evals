@@ -90,22 +90,18 @@ current state and `cases/{cwe}/{language}/` on disk for the cases themselves.
 
 ### 2025 Top 15 Fix-Quality Target
 
-The 2025 CWE Top 15 (MITRE's 2025 Top 25 list, published December 15, 2025: CWE-79, 89, 352, 862,
-787, 22, 416, 125, 78, 94, 120, 434, 476, 121, 502) is the priority set for remediation-quality
-pressure. The target is not equal volume everywhere: a common, already-easy sink does not need
-another direct case. A top-15 CWE is considered "hammered" only when it has ordinary true
-positives, at least one multi-file or cross-layer flow where that shape is natural, and at least
-one explicit wrong-fix/contract-preservation case. These are not scanner-benchmark cases: the
-finding is already known, so added detail should make the fix decision harder, not make the bug
-harder to notice.
+The 2025 CWE Top 15 (CWE-79, 89, 352, 862, 787, 22, 416, 125, 78, 94, 120, 434, 476, 121, 502, per
+MITRE's 2025 Top 25 list) is the priority set for remediation-quality pressure. The target is not
+equal volume everywhere: a common, already-easy sink does not need another direct case. A top-15
+CWE counts as "hammered" only when it has ordinary true positives, at least one multi-file or
+cross-layer flow where that shape is natural, and at least one explicit wrong-fix/contract-
+preservation case. These are not scanner-benchmark cases: the finding is already known, so added
+detail should make the fix decision harder, not make the bug harder to notice.
 
-Every entry in the list above is now hammered by that definition - each has case counts spanning
-multiple languages, at least one multi-file flow, and at least one `trap`/`must_preserve` case. The
-one entry with no dedicated fixture is CWE-120: `cwe/120/INDEX.md` routes a finding to CWE-121
-(stack destination) or CWE-787 (every other destination) rather than duplicating either entry's
-remediation, the same pattern `cwe/77` already uses for `cwe/78`, so the eval pressure lives on
-those two rows instead. Per-CWE case counts and traps are `cases/{cwe}/{language}/` on disk; `git
-log` on this directory names what each authoring pass added and why.
+CWE-120 has no dedicated fixture: `cwe/120/INDEX.md` routes a finding to CWE-121 (stack
+destination) or CWE-787 (every other destination) rather than duplicating either entry's
+remediation, the same pattern `cwe/77` already uses for `cwe/78`. Per-CWE case counts and traps are
+`cases/{cwe}/{language}/` on disk.
 
 For future top-15 batches, prefer cases that combine two axes from this list: multi-file flow,
 existing partial mitigation, plausible wrong fix, and observable contract preservation. Single-file
