@@ -1,0 +1,23 @@
+{
+  "id": "S3ObjectContentTypeMetadataTrust",
+  "cwe": "434",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/434 Key Principles: verify the file's actual content rather than the filename extension or client-supplied Content-Type header",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "avatar_upload.py"
+  ],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "avatar_upload.py",
+    "sink_line": 8,
+    "sink_code": "    s3.put_object(Bucket=bucket, Key=key, Body=file_bytes, ContentType=content_type)",
+    "summary": "upload_avatar stores the object with ContentType set directly from the client-supplied content_type parameter, with no check against the actual file bytes. A caller can pass ContentType=text/html (or any type unrelated to file_bytes), and the object is later served - via a presigned URL or public bucket policy - with that attacker-chosen Content-Type, so a browser renders it as HTML instead of downloading it as an opaque file, executing any embedded script."
+  },
+  "trap": "Validating content_type against an allowlist of image MIME types before the put_object call closes the finding only if the check is against the real content: content_type is still the client-supplied header, unrelated to what file_bytes actually contains, so a request can pass image/png in the header while file_bytes is HTML with a script payload - the object is still served back with the client's claimed, unverified Content-Type. The check has to detect the type from file_bytes itself (a content-sniffing library, not the parameter) and pass the detected type - never content_type - to ContentType, in addition to setting ContentDisposition to attachment and, where the object type allows it, re-encoding the bytes before upload.",
+  "must_preserve": "upload_avatar still stores valid image uploads and they remain retrievable with a correct image Content-Type. An upload whose actual bytes do not match an allowed image type is rejected before put_object runs, or is stored with a Content-Type that reflects its real detected type, never the caller-supplied value."
+}

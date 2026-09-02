@@ -1,0 +1,23 @@
+{
+  "id": "DomPurifyAttributeContextMisuse",
+  "cwe": "79",
+  "language": "javascript",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/79/javascript Key Principles: DOMPurify's stated scope is HTML re-insertion sinks - sanitised output is not a value you can then place in any context",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "profileCard.js"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Cross-site Scripting",
+    "file": "profileCard.js",
+    "sink_line": 7,
+    "sink_code": "  return `<div class=\"profile-card\" title=\"${safeBio}\">${safeBio}</div>`;",
+    "summary": "DOMPurify.sanitize() correctly removes script-capable markup for the HTML-content use of safeBio, but the same sanitized string is also concatenated, unescaped, into the title attribute's quoted value. DOMPurify's guarantee covers HTML re-insertion, not attribute-value construction: a bio containing a double quote passes sanitization untouched (it is inert as HTML text content) but still closes the title attribute early when interpolated into it, letting the rest of the string add a new attribute such as onerror."
+  },
+  "trap": "Hand-escaping only the double-quote character before interpolating safeBio into title closes this one payload but is the wrong layer to fix it at: any other attribute-breaking sequence the ad hoc replace misses reopens the same class of bug, and it still leaves the underlying mismatch - a value sanitized for one context being reused in a different one. The fix is to build safeBio for HTML-content use only, and construct the attribute value through a proper HTML-attribute encoder (or, better, an element/attribute API that encodes per context automatically) rather than string-interpolating a DOMPurify-sanitized value into a hand-built attribute string.",
+  "must_preserve": "renderProfileCard still shows the bio's allowed formatting in the card body, and the title attribute still reflects the same bio text for tooltip purposes. Neither location can be broken out of by any character sequence in bioHtml."
+}

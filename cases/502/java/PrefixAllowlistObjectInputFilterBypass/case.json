@@ -1,0 +1,23 @@
+{
+  "id": "PrefixAllowlistObjectInputFilterBypass",
+  "cwe": "502",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/502 Key Principles: enforce strict type whitelisting and class instantiation controls",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "ReportPayloadReader.java"
+  ],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "ReportPayloadReader.java",
+    "sink_line": 21,
+    "sink_code": "        return in.readObject();",
+    "summary": "The ObjectInputFilter allows any class whose name starts with the literal string \"com.example.report\", checked with String.startsWith(). That matches not only the intended com.example.report package but also any class in a sibling package that merely shares the text prefix, such as com.example.reportbuilder.RemoteLoader - the same unanchored-prefix mistake as comparing file paths with startsWith() instead of a real directory boundary, applied here to class names instead."
+  },
+  "trap": "Lengthening the allowed prefix string (for example \"com.example.report.\" with a trailing dot) narrows this one sibling-package bypass but keeps the same shape of bug: it is still a raw string match with no defined list of the individual classes actually expected, so any future class added to that package - intentionally or via a dependency - is silently allowed too. The durable fix is java.io.ObjectInputFilter.Config.createFilter() with an explicit allowlist of the exact classes and array types the endpoint needs, rather than a prefix test on the package name, paired with a maximum object-graph depth/array length to bound resource exhaustion.",
+  "must_preserve": "readReport still successfully deserializes the specific report classes the endpoint is meant to handle. Any class outside that explicit set is rejected by the filter before ObjectInputStream constructs an instance of it."
+}

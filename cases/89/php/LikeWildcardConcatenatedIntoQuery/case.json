@@ -1,0 +1,23 @@
+{
+  "id": "LikeWildcardConcatenatedIntoQuery",
+  "cwe": "89",
+  "language": "php",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89/php Key Principles: bind LIKE wildcard values as a parameter too - concatenating \"%$search%\" into an otherwise-prepared query still injects the wildcard portion",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "ProductSearch.php"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "SQL Injection",
+    "file": "ProductSearch.php",
+    "sink_line": 8,
+    "sink_code": "    $stmt->execute();",
+    "summary": "$term is concatenated directly into the LIKE pattern before prepare() is called, so the prepared statement has no placeholder at all - $term reaches the SQL text unparameterized despite prepare() being called."
+  },
+  "trap": "Replacing $term with $pdo->quote($term) inside the LIKE clause's SQL text - prepare(\"... LIKE '%\" . $pdo->quote($term) . \"%'\") - looks like manual sanitization closes the gap, but PDO::quote() already wraps its own output in surrounding quote characters, so concatenating it inside the LIKE clause's existing literal quotes produces a mangled, doubly-quoted pattern rather than a safely delimited one - and PDO's own documentation is explicit that quote() should not be relied on for security with every driver. The fix is to remove $term from the query text entirely: prepare(\"... LIKE ?\") and bind '%' . $term . '%' as the parameter value passed to execute(), never building the wildcard pattern inside the SQL string.",
+  "must_preserve": "searchProducts still returns products whose name contains $term as a substring match, the same LIKE '%...%' semantics as before. Special SQL characters in $term (quotes, wildcards) do not change the query's structure."
+}
