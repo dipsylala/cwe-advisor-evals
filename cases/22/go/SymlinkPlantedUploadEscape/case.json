@@ -1,0 +1,23 @@
+{
+  "id": "SymlinkPlantedUploadEscape",
+  "cwe": "22",
+  "language": "go",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/22/go Key Principles: resolve symlinks with filepath.EvalSymlinks before opening when the directory may contain attacker-influenced links, or reject non-regular files with os.Lstat/Mode().IsRegular()",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "uploads.go"
+  ],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory",
+    "file": "uploads.go",
+    "sink_line": 20,
+    "sink_code": "\treturn os.ReadFile(full)",
+    "summary": "ReadUploadedFile joins, cleans, and checks string-prefix containment correctly, but never resolves symlinks before opening. requestedName can name a symlink previously planted inside uploadsDir (for example by an earlier upload) whose target lies outside it, and os.ReadFile follows that link at open time, escaping the containment check entirely."
+  },
+  "trap": "Adding a check with os.Stat(full) and requiring info.Mode().IsRegular() looks like it blocks a symlink, but os.Stat follows symlinks and reports on the file the link points to - if the link's target is itself a regular file (which most files elsewhere on disk are), the check passes and the read proceeds through the link anyway. The check has to use os.Lstat(full), which reports on the link itself rather than its target, so a symlink entry is correctly rejected regardless of what it points to - or resolve the path fully with filepath.EvalSymlinks and re-check containment on the resolved result before opening.",
+  "must_preserve": "ReadUploadedFile still reads and returns the bytes of a regular file stored directly inside uploadsDir. A requestedName that names a symlink (or resolves, once followed, to a location outside uploadsDir) is rejected rather than read."
+}

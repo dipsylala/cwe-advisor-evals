@@ -1,0 +1,23 @@
+{
+  "id": "TarArchiveFilenameOptionInjection",
+  "cwe": "78",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/78/python Key Principles: ['tar', 'czf', archive, filename] with a filename of '--to-command=...' hands tar an option and no shell was involved",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "backup.py"
+  ],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "OS Command Injection",
+    "file": "backup.py",
+    "sink_line": 9,
+    "sink_code": "    subprocess.run(command, shell=False, check=True)",
+    "summary": "create_backup_archive already avoids a shell (shell=False, an argument list), so no shell metacharacter can inject a second command - but filenames is attacker-controlled and appended directly as tar arguments with no check for a leading '-'. A filenames entry such as --absolute-names is parsed by tar as an option rather than a file to archive, silently changing tar's behaviour for every filename that follows it in the same invocation."
+  },
+  "trap": "Confirming shell=False and an argument list are already in place (they are) or adding a check for shell metacharacters in each filename closes command injection but does nothing about this finding: tar parses its own argument list independently of the shell, and an argument beginning with - is read as an option regardless of how the process was spawned. The fix has to reject any filenames entry that starts with -, or insert a literal -- into the command list before the user-controlled filenames so tar stops parsing options at that point (['tar', 'czf', archive_path, '--'] + filenames).",
+  "must_preserve": "create_backup_archive still archives every filenames entry that does not start with -. Any entry beginning with - is either rejected outright or passed through as a literal filename via the -- separator, never interpreted as a tar option."
+}

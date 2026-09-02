@@ -1,0 +1,23 @@
+{
+  "id": "NormalizeBeforeJoinTraversal",
+  "cwe": "22",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/22/java Key Principles: Path.normalize() is textual and getAbsolutePath() resolves nothing; validate canonical paths remain within the intended base directory",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "ReportFileReader.java"
+  ],
+  "finding": {
+    "cwe": "CWE-22",
+    "name": "Improper Limitation of a Pathname to a Restricted Directory",
+    "file": "ReportFileReader.java",
+    "sink_line": 15,
+    "sink_code": "        return Files.readAllBytes(target);",
+    "summary": "readReport calls normalize() on userSuppliedPath in isolation, before joining it to BASE_DIR. A relative path made only of leading .. segments (e.g. ../../etc/passwd) has nothing preceding the .. to cancel against, so normalize() leaves it unchanged, and BASE_DIR.resolve() performs no containment check of its own - the traversal reaches Files.readAllBytes intact."
+  },
+  "trap": "Moving the normalize() call to after resolve() - BASE_DIR.resolve(userSuppliedPath).normalize() - collapses the traversal down to a syntactically clean absolute path, but a clean path is not necessarily a contained one: resolving ../../etc/passwd against /var/app-data/reports and normalizing produces /etc/passwd, an entirely normal-looking path that still lies outside BASE_DIR. Normalizing in either order only produces a comparable path; the fix still needs an explicit containment check - target.startsWith(BASE_DIR) - applied after normalization, rejecting anything that fails it, rather than trusting a normalized path to already be safe.",
+  "must_preserve": "readReport still returns the bytes of any report whose resolved, normalized path is inside BASE_DIR. A userSuppliedPath that resolves outside BASE_DIR is rejected before Files.readAllBytes runs, rather than read."
+}

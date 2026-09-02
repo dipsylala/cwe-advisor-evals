@@ -1,0 +1,23 @@
+{
+  "id": "ImageResizeShellEnvStripped",
+  "cwe": "78",
+  "language": "go",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/78/go Remediation Steps: pass absolute binary paths to avoid PATH ambiguity",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "resize.go"
+  ],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "OS Command Injection",
+    "file": "resize.go",
+    "sink_line": 12,
+    "sink_code": "\tcmd := exec.Command(\"sh\", \"-c\", shellCmd)",
+    "summary": "inputPath and outputPath are formatted directly into a shell command string passed to sh -c, so shell metacharacters in either path execute as command syntax."
+  },
+  "trap": "Removing the shell and passing convert, inputPath, -resize, 800x600, outputPath as separate exec.Command arguments closes the injection, but a common accompanying hardening step - setting cmd.Env = []string{} so the child does not inherit the process's environment - does not do what it looks like it does. Go's os/exec only inherits the parent's environment when Env is left nil; setting it to a non-nil slice, even an empty one, replaces the environment entirely, so convert loses PATH, locale variables, and any ImageMagick configuration variables (MAGICK_CONFIGURE_PATH, TMPDIR) it depends on, breaking the resize feature outright. If environment scoping is wanted, set cmd.Env to an explicit minimal list that still includes what convert needs (at minimum PATH), rather than an empty one - or leave Env nil and rely on invoking convert by absolute path instead.",
+  "must_preserve": "ResizeImage still successfully resizes a valid image at inputPath and writes the result to outputPath. Shell metacharacters in either path are treated as literal argument data, not command syntax."
+}
