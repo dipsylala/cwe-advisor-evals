@@ -1,0 +1,18 @@
+{
+  "id": "Mysql2QueryConcat",
+  "cwe": "89",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["Mysql2QueryConcat.js"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "Mysql2QueryConcat.js",
+    "sink_line": 23,
+    "sink_code": "  pool.query(sql, (err, rows) => {",
+    "summary": "the userId route parameter is concatenated via template literal into a SQL string and passed to mysql2's connection.query() instead of using its parameterized query() form"
+  }
+}

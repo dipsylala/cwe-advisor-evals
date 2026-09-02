@@ -1,0 +1,18 @@
+{
+  "id": "SqlxSelectConcat",
+  "cwe": "89",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SqlxSelectConcat.go"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "SqlxSelectConcat.go",
+    "sink_line": 33,
+    "sink_code": "\terr := h.DB.Select(&products, query)",
+    "summary": "category query parameter is concatenated via fmt.Sprintf into raw SQL passed to sqlx's db.Select, which scans results directly into a []Product slice"
+  }
+}

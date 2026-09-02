@@ -1,0 +1,18 @@
+{
+  "id": "StatementExecuteQueryConcat",
+  "cwe": "89",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["CustomerLookupServlet.java"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "CustomerLookupServlet.java",
+    "sink_line": 54,
+    "sink_code": "            ResultSet resultSet = statement.executeQuery(sql);",
+    "summary": "customerId request parameter is concatenated directly into a SQL string and executed via the classic java.sql.Statement.executeQuery()."
+  }
+}

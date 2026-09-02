@@ -1,0 +1,18 @@
+{
+  "id": "HibernateCreateQueryConcat",
+  "cwe": "89",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ProductSearchService.java"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "ProductSearchService.java",
+    "sink_line": 29,
+    "sink_code": "            Query<Product> query = session.createQuery(hql, Product.class);",
+    "summary": "caller-supplied searchTerm is concatenated directly into an HQL string and executed via Hibernate Session.createQuery()"
+  }
+}

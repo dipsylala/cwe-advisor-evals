@@ -1,0 +1,18 @@
+{
+  "id": "SqlAlchemyTextConcat",
+  "cwe": "89",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["report_service.py"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "report_service.py",
+    "sink_line": 24,
+    "sink_code": "        result = connection.execute(text(sql))",
+    "summary": "caller-supplied since date filter is f-string concatenated into raw SQL text and passed to SQLAlchemy Core's connection.execute(text(sql)) instead of using text()'s :param bound-parameter syntax with a params dict"
+  }
+}

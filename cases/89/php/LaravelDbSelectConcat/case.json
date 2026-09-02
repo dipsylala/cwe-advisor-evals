@@ -1,0 +1,18 @@
+{
+  "id": "LaravelDbSelectConcat",
+  "cwe": "89",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ReportController.php"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "ReportController.php",
+    "sink_line": 24,
+    "sink_code": "        $rows = DB::select($sql);",
+    "summary": "The region query parameter is concatenated directly into a raw SQL string and passed to Illuminate\\Support\\Facades\\DB::select() instead of using its '?' binding parameter."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "PdoQueryConcat",
+  "cwe": "89",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["PdoQueryConcat.php"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "PdoQueryConcat.php",
+    "sink_line": 8,
+    "sink_code": "    $stmt = $db->query($sql);",
+    "summary": "unvalidated GET sku parameter concatenated into SQL string and executed via PDO::query() with no placeholders"
+  }
+}

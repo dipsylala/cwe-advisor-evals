@@ -1,0 +1,18 @@
+{
+  "id": "StringFormatCommandText",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["WidgetAdminController.cs"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "WidgetAdminController.cs",
+    "sink_line": 33,
+    "sink_code": "                rowsDeleted = command.ExecuteNonQuery();",
+    "summary": "The ownerName route parameter is interpolated via string.Format into a DELETE statement assigned to SqlCommand.CommandText, then executed with SqlCommand.ExecuteNonQuery()."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "DjangoRawManagerConcat",
+  "cwe": "89",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["views.py"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "views.py",
+    "sink_line": 18,
+    "sink_code": "    orders = Order.objects.raw(sql)",
+    "summary": "customer-supplied email query parameter is concatenated via f-string into raw SQL text and passed to Django's Model.objects.raw() manager method instead of using its %s parameter-substitution form"
+  }
+}

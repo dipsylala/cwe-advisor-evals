@@ -1,0 +1,18 @@
+{
+  "id": "DbExecConcat",
+  "cwe": "89",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["DbExecConcat.go"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "DbExecConcat.go",
+    "sink_line": 19,
+    "sink_code": "\tresult, err := h.DB.Exec(stmt)",
+    "summary": "display_name form value and user_id query parameter are concatenated via fmt.Sprintf into a raw UPDATE statement passed to db.Exec"
+  }
+}

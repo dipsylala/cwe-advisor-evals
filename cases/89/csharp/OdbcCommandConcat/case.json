@@ -1,0 +1,18 @@
+{
+  "id": "OdbcCommandConcat",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["OdbcCommandConcat.cs"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "OdbcCommandConcat.cs",
+    "sink_line": 29,
+    "sink_code": "                using (OdbcDataReader reader = command.ExecuteReader())",
+    "summary": "searchTerm parameter is concatenated with '+' into a raw SQL string passed to OdbcCommand, then executed via OdbcDataReader = command.ExecuteReader() against a legacy ODBC-connected database."
+  }
+}

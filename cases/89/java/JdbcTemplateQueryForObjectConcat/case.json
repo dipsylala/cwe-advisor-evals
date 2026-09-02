@@ -1,0 +1,18 @@
+{
+  "id": "JdbcTemplateQueryForObjectConcat",
+  "cwe": "89",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["OrderLookupService.java"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "OrderLookupService.java",
+    "sink_line": 43,
+    "sink_code": "        return jdbcTemplate.queryForObject(sql, ORDER_ROW_MAPPER);",
+    "summary": "A request-supplied orderNumber is concatenated directly into a SQL string that is executed via Spring's JdbcTemplate.queryForObject(sql, rowMapper), bypassing JdbcTemplate's own '?' placeholder parameterization."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "SequelizeRawQueryConcat",
+  "cwe": "89",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SequelizeRawQueryConcat.js"],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+    "file": "SequelizeRawQueryConcat.js",
+    "sink_line": 20,
+    "sink_code": "  const rows = await sequelize.query(sql, { type: QueryTypes.SELECT });",
+    "summary": "startDate and endDate query parameters are concatenated into a raw SQL BETWEEN clause and passed to Sequelize's sequelize.query() instead of using replacements/bind parameter binding"
+  }
+}
