@@ -1,0 +1,18 @@
+{
+  "id": "VectorReallocationInvalidatesReference",
+  "cwe": "416",
+  "language": "cpp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["VectorReallocationInvalidatesReference.cpp"],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "VectorReallocationInvalidatesReference.cpp",
+    "sink_line": 36,
+    "sink_code": "        current.priority = completionPriority;",
+    "summary": "current is a reference into tasks taken before tasks.push_back(follow), which may reallocate the vector's storage and invalidate current, so the later write through current is a use after free"
+  }
+}

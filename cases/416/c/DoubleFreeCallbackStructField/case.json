@@ -1,0 +1,18 @@
+{
+  "id": "DoubleFreeCallbackStructField",
+  "cwe": "416",
+  "language": "c",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["DoubleFreeCallbackStructField.c"],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "DoubleFreeCallbackStructField.c",
+    "sink_line": 84,
+    "sink_code": "        printf(\"completing request %d for fd %d\\n\", ctx->request_id, ctx->conn->fd);",
+    "summary": "ctx->conn, a copy of the Connection pointer captured earlier inside a queued CallbackContext, is dereferenced in process_work_queue after connection_release freed and nulled only the caller's own conn variable, leaving the queued copy dangling."
+  }
+}

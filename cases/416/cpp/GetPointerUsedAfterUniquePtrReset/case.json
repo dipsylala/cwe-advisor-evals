@@ -1,0 +1,18 @@
+{
+  "id": "GetPointerUsedAfterUniquePtrReset",
+  "cwe": "416",
+  "language": "cpp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["GetPointerUsedAfterUniquePtrReset.cpp"],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "GetPointerUsedAfterUniquePtrReset.cpp",
+    "sink_line": 41,
+    "sink_code": "    return rawHandle->bytesSent();",
+    "summary": "rawHandle, obtained via resourcePtr.get() before the fallback branch, is dereferenced after resourcePtr.reset(new Resource(...)) destroys the Resource it pointed at"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "ReallocMoveStaleAliasUse",
+  "cwe": "416",
+  "language": "c",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["log_buffer.c"],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "log_buffer.c",
+    "sink_line": 48,
+    "sink_code": "    list->last_write_ptr[RECORD_SIZE - 1] = status;",
+    "summary": "list->last_write_ptr was cached from the old list->data allocation before realloc() ran, so writing through it after a realloc() that moves the block dereferences the freed old buffer instead of the new one."
+  }
+}

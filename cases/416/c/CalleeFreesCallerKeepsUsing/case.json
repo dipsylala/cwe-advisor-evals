@@ -1,0 +1,18 @@
+{
+  "id": "CalleeFreesCallerKeepsUsing",
+  "cwe": "416",
+  "language": "c",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["CalleeFreesCallerKeepsUsing.c"],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "CalleeFreesCallerKeepsUsing.c",
+    "sink_line": 69,
+    "sink_code": "        fprintf(stderr, \"request rejected for client %d (rc=%d)\\n\", req->clientId, rc);",
+    "summary": "process_request logs req->clientId through the req pointer after validate_and_normalize already freed it internally on the error path, unbeknownst to the caller"
+  }
+}

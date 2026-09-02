@@ -1,0 +1,18 @@
+{
+  "id": "LambdaCapturedThisQueuedAsync",
+  "cwe": "416",
+  "language": "cpp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["LambdaCapturedThisQueuedAsync.cpp"],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "LambdaCapturedThisQueuedAsync.cpp",
+    "sink_line": 32,
+    "sink_code": "        queue.post([this]() { this->onTimerFired(); });",
+    "summary": "Widget::startTimer posts a lambda capturing the raw this pointer to a task queue for deferred execution, and the Widget is destroyed before the queue later runs the lambda and dereferences the dangling this"
+  }
+}
