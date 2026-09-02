@@ -1,0 +1,18 @@
+{
+  "id": "GetRequestStateChange",
+  "cwe": "352",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["accountRoutes.js"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "accountRoutes.js",
+    "sink_line": 53,
+    "sink_code": "app.get('/account/delete', requireSession, deleteAccountHandler);",
+    "summary": "Account deletion is registered on a GET route, so it never passes through the doubleCsrfProtection (csrf-csrf) middleware that is correctly applied to the app's POST/PUT/DELETE routes, since that middleware only validates non-safe HTTP methods."
+  }
+}

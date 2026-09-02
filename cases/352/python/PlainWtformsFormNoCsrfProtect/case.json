@@ -1,0 +1,18 @@
+{
+  "id": "PlainWtformsFormNoCsrfProtect",
+  "cwe": "352",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["account_settings.py", "app.py"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "account_settings.py",
+    "sink_line": 40,
+    "sink_code": "        current_app.db.users.update_one({\"id\": user[\"id\"]}, {\"$set\": {",
+    "summary": "The state-changing settings form subclasses plain wtforms.Form, which carries no CSRF token field or check, and the Flask app never initializes CSRFProtect(app) to cover the route instead, so the POST accepts a forged cross-site request with no token validation at all."
+  }
+}

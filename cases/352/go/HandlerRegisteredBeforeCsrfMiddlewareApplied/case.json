@@ -1,0 +1,21 @@
+{
+  "id": "HandlerRegisteredBeforeCsrfMiddlewareApplied",
+  "cwe": "352",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "main.go",
+    "settings_service.go"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "main.go",
+    "sink_line": 37,
+    "sink_code": "\t\tlog.Fatal(http.ListenAndServe(\":8080\", mux))",
+    "summary": "The app builds protectedHandler by wrapping mux with http.CrossOriginProtection, but a second listener meant only to redirect plaintext traffic is started with the raw, unwrapped mux instead, so the POST /settings handler is reachable on :8080 with no CSRF protection at all."
+  }
+}

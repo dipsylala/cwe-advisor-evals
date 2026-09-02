@@ -1,0 +1,22 @@
+{
+  "id": "MissingSessionIdentifierBinding",
+  "cwe": "352",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "csrfProtection.js",
+    "accountRoutes.js",
+    "accountStore.js"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "accountRoutes.js",
+    "sink_line": 27,
+    "sink_code": "  app.post('/api/account/password', requireSession, doubleCsrfProtection, (req, res) => {",
+    "summary": "doubleCsrf() is configured without the required getSessionIdentifier option, so the generated CSRF token is never bound to the session that requested it and a token issued to one authenticated user validates when replayed under a different user's session on this password-change route."
+  }
+}

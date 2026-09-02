@@ -1,0 +1,18 @@
+{
+  "id": "FastApiMissingCsrfProtectDecorator",
+  "cwe": "352",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["main.py", "account.py"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "account.py",
+    "sink_line": 40,
+    "sink_code": "async def update_account_settings(",
+    "summary": "The app registers starlette-wtf's CSRFProtectMiddleware, which issues a token but validates nothing on its own, and this POST route that updates account settings is missing the @csrf_protect decorator that actually enforces token validation, unlike the sibling route above it."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "GetRequestStateChange",
+  "cwe": "352",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["AccountController.cs"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery (CSRF)",
+    "file": "AccountController.cs",
+    "sink_line": 32,
+    "sink_code": "        [HttpGet(\"delete\")]",
+    "summary": "DeleteAccount deletes the authenticated user's account from an [HttpGet] action, so no anti-forgery filter or middleware ever runs against it - ValidateAntiForgeryToken and AutoValidateAntiforgeryTokenAttribute only apply to non-safe HTTP methods, leaving the state change reachable via a plain cross-site GET."
+  }
+}

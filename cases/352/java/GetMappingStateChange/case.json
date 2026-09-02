@@ -1,0 +1,18 @@
+{
+  "id": "GetMappingStateChange",
+  "cwe": "352",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["AccountController.java", "AccountService.java"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery (CSRF)",
+    "file": "AccountController.java",
+    "sink_line": 38,
+    "sink_code": "    @GetMapping(\"/account/delete\")",
+    "summary": "Account deletion is state-changing but mapped to GET, so Spring Security's CsrfFilter, which only validates non-safe HTTP methods (POST/PUT/DELETE/PATCH), never checks for a CSRF token on this endpoint even though CSRF protection is otherwise correctly enabled application-wide."
+  }
+}

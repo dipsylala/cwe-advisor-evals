@@ -1,0 +1,21 @@
+{
+  "id": "IgnoringRequestMatchersOverBroad",
+  "cwe": "352",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "SecurityConfig.java",
+    "AccountController.java"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "SecurityConfig.java",
+    "sink_line": 24,
+    "sink_code": "            .csrf(csrf -> csrf.ignoringRequestMatchers(\"/api/**\"))",
+    "summary": "The CSRF exclusion is patterned on \"/api/**\" instead of the narrower \"/api/webhooks/**\" that unauthenticated third-party callbacks actually need, so the CsrfFilter never validates a token for any other authenticated, state-changing route under /api/, including AccountController's session-cookie-authenticated email-change endpoint."
+  }
+}

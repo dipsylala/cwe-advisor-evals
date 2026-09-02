@@ -1,0 +1,21 @@
+{
+  "id": "MvcControllerIgnoreAntiforgeryToken",
+  "cwe": "352",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "Program.cs",
+    "AccountController.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery (CSRF)",
+    "file": "AccountController.cs",
+    "sink_line": 47,
+    "sink_code": "    [IgnoreAntiforgeryToken]",
+    "summary": "The app registers AutoValidateAntiforgeryTokenAttribute as a global MVC filter, but the AccountController.UpdateSettings POST action is explicitly decorated with [IgnoreAntiforgeryToken], opting the account-email-change endpoint out of that protection."
+  }
+}

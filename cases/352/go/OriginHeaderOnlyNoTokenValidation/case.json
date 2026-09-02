@@ -1,0 +1,18 @@
+{
+  "id": "OriginHeaderOnlyNoTokenValidation",
+  "cwe": "352",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["account_settings.go"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "account_settings.go",
+    "sink_line": 74,
+    "sink_code": "\tif err := s.store.UpdateSettings(accountID, req.Email, req.DisplayName); err != nil {",
+    "summary": "UpdateSettingsHandler authorizes the state-changing settings update using only an Origin-header host comparison (isTrustedOrigin), with no CSRF synchronizer token generated, stored, or validated anywhere in the flow."
+  }
+}

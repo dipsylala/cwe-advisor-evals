@@ -1,0 +1,18 @@
+{
+  "id": "GetRequestStateChange",
+  "cwe": "352",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["account_routes.go"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "account_routes.go",
+    "sink_line": 31,
+    "sink_code": "\tmux.HandleFunc(\"GET /account/delete\", deleteAccountHandler(store))",
+    "summary": "Account deletion is registered as a GET-method route, so it never passes through the http.CrossOriginProtection middleware wrapping the POST/PUT routes, since that middleware only validates non-safe methods and treats GET as safe by definition."
+  }
+}

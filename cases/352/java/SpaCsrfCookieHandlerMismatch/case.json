@@ -1,0 +1,22 @@
+{
+  "id": "SpaCsrfCookieHandlerMismatch",
+  "cwe": "352",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "SecurityConfig.java",
+    "AccountController.java",
+    "AccountService.java"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "SecurityConfig.java",
+    "sink_line": 26,
+    "sink_code": "            .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))",
+    "summary": "CookieCsrfTokenRepository.withHttpOnlyFalse() is configured for the SPA frontend without pairing it with SpaCsrfTokenRequestHandler, so the default XorCsrfTokenRequestAttributeHandler BREACH-encodes the token server-side and never matches the plain value the browser reads from the cookie and sends back."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "JsonBoundMinimalApiMissingValidateRequestAsync",
+  "cwe": "352",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["Program.cs"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "Program.cs",
+    "sink_line": 27,
+    "sink_code": "    await accounts.UpdateEmailAsync(userId, request.NewEmail);",
+    "summary": "app.UseAntiforgery() is registered in the pipeline, but the /account/email endpoint binds its body from JSON rather than a form, so the middleware never validates a token for this request and the handler never calls IAntiforgery.ValidateRequestAsync() itself."
+  }
+}

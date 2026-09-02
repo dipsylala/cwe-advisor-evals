@@ -1,0 +1,18 @@
+{
+  "id": "FastifyCsrfProtectionMissingRegistration",
+  "cwe": "352",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["accountSettingsRoutes.js", "accountStore.js"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "accountSettingsRoutes.js",
+    "sink_line": 39,
+    "sink_code": "  const updated = await accountStore.updateAccountSettings(userId, {",
+    "summary": "The Fastify app never registers @fastify/csrf-protection or any CSRF token generation/verification hook, so the cookie-session-authenticated POST /account/settings handler accepts and persists state-changing requests with no CSRF defense at all."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "GetRequestStateChange",
+  "cwe": "352",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["views.py", "urls.py", "settings.py"],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "views.py",
+    "sink_line": 23,
+    "sink_code": "    user.delete()",
+    "summary": "delete_account is registered in urls.py with no require_POST/require_http_methods restriction, so it deletes the authenticated user's account on a plain GET request; Django's CsrfViewMiddleware only validates unsafe methods (POST/PUT/PATCH/DELETE), so the GET-reachable state change is never checked for a CSRF token even though the middleware is correctly enabled."
+  }
+}
