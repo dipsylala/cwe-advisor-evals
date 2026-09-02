@@ -1,0 +1,23 @@
+{
+  "id": "HandBuiltInListNodePg",
+  "cwe": "89",
+  "language": "javascript",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89 Key Principles: never allow untrusted input to directly control filesystem/query construction; always parameterize",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "orders.js"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "SQL Injection",
+    "file": "orders.js",
+    "sink_line": 5,
+    "sink_code": "  const result = await pool.query(`SELECT * FROM orders WHERE id IN (${inClause})`);",
+    "summary": "ids is joined directly into the SQL text as a comma-separated IN list; any element of ids that is not a plain digit (a caller-controlled string containing SQL) is concatenated straight into the query."
+  },
+  "trap": "Passing ids as a single bound parameter - pool.query('SELECT * FROM orders WHERE id IN ($1)', [ids]) - looks parameterized but does not do what it looks like: node-postgres does not expand an array into multiple placeholder values for a single $1, so the query does not match the way an IN list is expected to. Each value needs its own placeholder, generated from the array's length - ids.map((_, i) => '$' + (i + 1)).join(', ') built into the query text, with ids passed as the parameter array - or use a library helper (pg-format's %L, or an ORM's whereIn) that expands an IN list into individual bound parameters correctly.",
+  "must_preserve": "getOrdersByIds still returns every order whose id is in the ids array, for any array of valid order ids. No value in ids can alter the query beyond selecting orders by id."
+}

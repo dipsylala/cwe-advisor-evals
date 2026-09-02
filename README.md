@@ -97,7 +97,7 @@ cases/
 Cases accumulate here rather than being versioned into a new directory per run - git holds the
 history. Run records under `runs*/` name cases by id, so ids are stable once published.
 
-Current contents: 226 cases across 26 CWEs and nine languages (perl added by the CWE-79 depth
+Current contents: 233 cases across 26 CWEs and nine languages (perl added by the CWE-79 depth
 batch below; c and cpp added by the top-15 fix-complexity batch). Five sources:
 
 | `source` | n | What it is |
@@ -105,7 +105,7 @@ batch below; c and cpp added by the top-15 fix-complexity batch). Five sources:
 | `owasp-benchmark` | 16 | Single-file Java servlets, labels from `expectedresults-1.2.csv` |
 | `juliet` | 17 | Java multi-file flow variants, de-labelled mechanically; taint crosses 2, 4 or 5 files |
 | `authored-from-docs-pitfall` | 13 | Single-function cases across Java, Python, Go, C#, JavaScript and PHP, each built around a fix that looks right and is not |
-| `authored-top15-fix-complexity` | 78 | True-positive remediation cases for 2025 CWE Top 15 entries with explicit `trap`, `must_preserve`, and `origin` metadata; several cross files, and all test fix shape rather than finding adjudication |
+| `authored-top15-fix-complexity` | 85 | True-positive remediation cases for 2025 CWE Top 15 entries with explicit `trap`, `must_preserve`, and `origin` metadata; several cross files, and all test fix shape rather than finding adjudication |
 | `authored` | 102 | Plain true-positive cases with no `trap`/`must_preserve`/`origin` - language-coverage, top-15 depth, or (11 cases, see below) multi-file chains crossing 2-5 files, not a discrimination instrument |
 
 **`owasp-benchmark` and `juliet`** are externally authored, so their ground truth doesn't come from
@@ -167,9 +167,10 @@ producer-contract case where fixing only the reported call site leaves a sibling
 (CWE-476), and a C `scanf` field-width off-by-one (CWE-121); it then added a Java list-vs-detail
 authorization-scoping case (CWE-862) and a Python `eval()`-with-restricted-`__builtins__` case whose
 plausible wrong fix is switching to `ast.literal_eval()` and reintroducing the injection via string
-substitution (CWE-94). CWE-120 is the only 2025 top-15 entry still uncovered because this repo has
-no `cwe/120` guidance directory; add guidance or explicitly route it to CWE-121/125/787 before
-adding a case. The tenth batch closed out the remaining narrow asks on the three CWEs from the
+substitution (CWE-94). CWE-120 was the only 2025 top-15 entry uncovered at this point because this
+repo had no `cwe/120` guidance directory; resolved in the fifteenth batch below by routing it to
+CWE-121/125/787 rather than adding a case. The tenth batch closed out the remaining narrow asks on
+the three CWEs from the
 ninth: a C multi-function size-propagation case where a correct paired-bounds check inside the
 callee is defeated by the caller passing a stale compile-time capacity instead of the size it
 actually allocated (CWE-787), a C++ vector erase-in-loop that invalidates the iterator the for
@@ -217,7 +218,27 @@ validating the header against an allowlist doesn't help when the header itself w
 against the real bytes. CWE-502 (Java): an `ObjectInputFilter` allowlists classes with
 `String.startsWith("com.example.report")`, the same unanchored-prefix mistake CWE-22 makes with file
 paths, applied to class names - the trap covers why lengthening the prefix string narrows one bypass
-without fixing the underlying shape.
+without fixing the underlying shape. The fifteenth batch closed every remaining open row in the
+table below, including the CWE-120 decision: `cwe/120/INDEX.md` is now a routing-only entry (the
+same pattern `cwe/77` already uses for `cwe/78`) that sends a stack-destination finding to CWE-121
+and every other destination to CWE-787, rather than duplicating either entry's remediation, so no
+CWE-120-specific fixture is needed - the routed-to rows already carry the pressure. CWE-79
+(JavaScript): Angular's `DomSanitizer.bypassSecurityTrustHtml()` called directly on untrusted
+comment content, with a trap covering why pre-filtering with a denylist before the bypass call still
+misses vectors the framework's own sanitizer would have caught. CWE-89: a hand-built `IN` list in
+Node/`pg` whose trap is that binding the whole array as one parameter doesn't expand into per-value
+placeholders (JavaScript); a stored procedure invoked through a concatenated `EXEC` string instead of
+`CommandType.StoredProcedure` (C#); and a case where client-side quote-escaping is irrelevant to a
+server-side string-concatenated query, since any HTTP client can skip the browser entirely (Python,
+two files). CWE-352 (Go): a hand-rolled token comparison using `strings.Contains()` instead of exact
+equality, so a token that is merely a substring of the real one passes, with a trap covering why
+switching to `==` reopens a timing side channel that `subtle.ConstantTimeCompare()` avoids. CWE-434
+(Go, two files): the historical rename-read-path gap made concrete as a fixture - the write and read
+paths are coupled through the same filename, so a trap that renames the stored file without updating
+every reader breaks retrieval as a side effect of closing the upload finding. CWE-502 (PHP): a
+migration from `unserialize()` to `json_decode()` whose trap is that `json_decode()` returns `null`
+rather than throwing on a pre-migration row's PHP-serialized data, silently discarding it rather than
+migrating it.
 
 ### 2025 Top 15 Fix-Quality Target
 
@@ -231,21 +252,21 @@ the bug harder to notice.
 
 | Rank | CWE | Current coverage | Next pressure to add |
 |---|---|---|---|
-| 1 | 79 | 33 cases across seven languages, depths 1-5, with JavaScript URL, C# Razor script, Java Thymeleaf raw HTML, PHP Blade raw-render, and DOMPurify attribute-context-misuse traps | Add more `trap`/`must_preserve` cases for sanitizer misuse and framework escape bypasses |
-| 2 | 89 | 26 cases across C#, Go, Java, JavaScript, PHP, and Python; C# now covers ADO.NET, Dapper, EF Core raw SQL, `SqlDataAdapter`, scalar, and non-query sinks; PHP now has a `LIKE`-wildcard-concatenation trap | Add hand-built `IN` lists, stored procedures with concatenated dynamic SQL, and one client-side escaping trap |
-| 3 | 352 | 5 cases: JavaScript Origin/Referer, Python `@csrf_exempt`, Java Spring CSRF exclusion, Go secondary mux, and C# Minimal API antiforgery gaps | Add another Go/C# case only if it covers a distinct token-header or migration trap; otherwise move pressure to weaker top-15 CWEs |
+| 1 | 79 | 34 cases across seven languages, depths 1-5, with JavaScript URL, C# Razor script, Java Thymeleaf raw HTML, PHP Blade raw-render, DOMPurify attribute-context-misuse, and Angular `bypassSecurityTrustHtml()` misuse traps | No open next-pressure item for this row; add only for a genuinely distinct sanitizer/framework-escape shape |
+| 2 | 89 | 29 cases across C#, Go, Java, JavaScript, PHP, and Python; C# now covers ADO.NET, Dapper, EF Core raw SQL, `SqlDataAdapter`, scalar, non-query, and EXEC-string stored-procedure sinks; PHP now has a `LIKE`-wildcard-concatenation trap; JavaScript now has a hand-built `IN`-list trap; Python now has a client-side-escaping trap | No open next-pressure item for this row; add only for a genuinely distinct datapath |
+| 3 | 352 | 6 cases: JavaScript Origin/Referer, Python `@csrf_exempt`, Java Spring CSRF exclusion, Go secondary mux, C# Minimal API antiforgery gaps, and a Go token-header substring-match trap | No open next-pressure item for this row; add only for a genuinely distinct token-header or migration trap |
 | 4 | 862 | 7 depth-1/2/3 cases: Python DRF object bypass, JavaScript Express missing ownership, C# bare `[Authorize]`, Java Spring delete, PHP Laravel auth-only route, a Java list-vs-detail authorization-scoping case, and a PHP admin-branch-swap case | No open next-pressure item for this row; add only for a genuinely distinct datapath |
 | 5 | 787 | 6 cases: C allocation overflow, C offset/length write, C++ `reserve()`-then-index write, C++ span claimed-capacity write, a C off-by-one loop-bound write, and a C multi-function stale-capacity-propagation trap | No open next-pressure item for this row; add only for a genuinely distinct datapath |
 | 6 | 22 | 11 cases across six languages, including Python symlink/prefix containment, Java Zip Slip normalize/extract, a Java normalize-before-join, and a Go symlink-planted-upload trap | No open next-pressure item for this row; add only for a genuinely distinct datapath |
 | 7 | 416 | 5 cases: C++ callback trap, C linked-list free-then-advance, C++ dangling `string_view` cache, a C++ multi-file owner/observer dangling-pointer case, and a C++ vector erase-in-loop iterator-invalidation trap | No open next-pressure item for this row; add only for a genuinely distinct datapath |
-| 8 | 125 | 4 cases: C offset/length, C++ claimed-window vector read, C non-NUL `strlen()` over-read, and a C paired offset/length `send()` over-read distinguishing CWE-125 from CWE-787 | Distinguishing 125-vs-787 pressure is now covered; lower priority than the remaining rows here |
+| 8 | 125 | 4 cases: C offset/length, C++ claimed-window vector read, C non-NUL `strlen()` over-read, and a C paired offset/length `send()` over-read distinguishing CWE-125 from CWE-787 | No open next-pressure item for this row; add only for a genuinely distinct datapath |
 | 9 | 78 | 14 cases, depths 1-5, with PHP fallback, Go shell-command construction, a Python `tar` option-injection, and a Go shell-removal-strips-environment trap | No open next-pressure item for this row; add only for a genuinely distinct datapath |
 | 10 | 94 | 7 cases: Python Jinja, JavaScript `Function`, PHP dynamic `require`, Java SpEL, C# Roslyn scripting, a Python `eval()`-with-restricted-`__builtins__` trap, and a C# DynamicExpresso custom-function file-read trap | No open next-pressure item for this row; add only for a genuinely distinct datapath (e.g. NCalc) |
-| 11 | 120 | 0 cases, no local `cwe/120` guidance | Decide whether to add a narrow `cwe/120` entry or route direct buffer-copy findings to CWE-121/125/787 before adding evals |
-| 12 | 434 | 10 cases, including Go and Java multipart header/content-type datapath traps, a C#/JavaScript webroot/static-serving pair, a Java allowlisted-but-unsanitized SVG inline-serve retrieval-flow trap, and a Python S3 object-metadata Content-Type-trust trap | Add rename-read-path preservation |
-| 13 | 476 | 4 cases: Java unboxing, C `getenv()`/`strcmp()`, C++ unchecked `weak_ptr::lock()`, and a Java multi-file producer-contract sibling-caller trap | Producer-contract pressure now spans C, C++, and Java; add a fourth-language case only for a genuinely distinct datapath |
+| 11 | 120 | 0 cases; `cwe/120/INDEX.md` now exists as a routing-only entry to CWE-121 (stack destination) or CWE-787 (every other destination), matching the `cwe/77`-to-`cwe/78` routing pattern already in this repo | No fixture needed - a CWE-120 finding is remediated identically to whichever of CWE-121/787 it routes to, and those rows already carry the eval pressure |
+| 12 | 434 | 11 cases, including Go and Java multipart header/content-type datapath traps, a C#/JavaScript webroot/static-serving pair, a Java allowlisted-but-unsanitized SVG inline-serve retrieval-flow trap, a Python S3 object-metadata Content-Type-trust trap, and a Go multi-file rename-read-path-coupling trap | No open next-pressure item for this row; add only for a genuinely distinct datapath |
+| 13 | 476 | 4 cases: Java unboxing, C `getenv()`/`strcmp()`, C++ unchecked `weak_ptr::lock()`, and a Java multi-file producer-contract sibling-caller trap | No open next-pressure item for this row; add only for a genuinely distinct datapath |
 | 14 | 121 | 6 cases: C stack concat, C helper-boundary capacity, C++ stack `std::array` unchecked index, a C `scanf` field-width off-by-one, a C `gets()`-to-`fgets()` truncation-handling trap, and a C++ stack `std::array` copy-loop overflow | No open next-pressure item for this row; add only for a genuinely distinct datapath |
-| 15 | 502 | 10 cases, including PHP cart-cookie decode/unserialize, Java native `ObjectInputStream.readObject()` datapaths, a Go multi-file job-queue `gob` privileged-field trap, and a Java prefix-allowlist `ObjectInputFilter` bypass trap | Add migrations that keep persisted data readable |
+| 15 | 502 | 11 cases, including PHP cart-cookie decode/unserialize, Java native `ObjectInputStream.readObject()` datapaths, a Go multi-file job-queue `gob` privileged-field trap, a Java prefix-allowlist `ObjectInputFilter` bypass trap, and a PHP legacy-serialized-data migration trap | No open next-pressure item for this row; add only for a genuinely distinct datapath |
 
 For future top-15 batches, prefer cases that combine two axes from this list: multi-file flow,
 existing partial mitigation, plausible wrong fix, and observable contract preservation. Single-file

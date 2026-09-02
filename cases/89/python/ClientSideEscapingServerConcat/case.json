@@ -1,0 +1,24 @@
+{
+  "id": "ClientSideEscapingServerConcat",
+  "cwe": "89",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89 Key Principles: never allow untrusted input to directly control query construction; always parameterize",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "search.js",
+    "search.py"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "SQL Injection",
+    "file": "search.py",
+    "sink_line": 9,
+    "sink_code": "    cursor.execute(\"SELECT id, name FROM customers WHERE name = '\" + term + \"'\")",
+    "summary": "search_customers concatenates term directly into the SQL text. The browser-side submitSearch() escapes single quotes before sending the request, but that only affects requests made through the app's own JavaScript - any HTTP client (curl, a proxy, a script) can POST an unescaped term directly to the endpoint, so the server-side concatenation is exploitable regardless of what the client does."
+  },
+  "trap": "Treating the client-side escaping in search.js as evidence the finding is already mitigated, or adding a matching server-side .replace(\"'\", \"\\\\'\") to match it, both miss the point: escaping is bypassable no matter where it runs client-side, since a request never has to go through search.js at all, and a hand-rolled escape (quote-doubling or backslash-escaping) is itself an incomplete defense against a database's actual quoting rules. The fix is parameterization at the server: cursor.execute(\"SELECT id, name FROM customers WHERE name = ?\", (term,)), which the SQLite driver treats as a placeholder no matter what term contains - the client-side code becomes irrelevant to whether the query is safe.",
+  "must_preserve": "search_customers still returns customers whose name exactly matches term for any legitimate search value. The client-side escaping in search.js is unrelated to this fix and does not need to change."
+}

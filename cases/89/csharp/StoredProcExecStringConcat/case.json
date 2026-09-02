@@ -1,0 +1,23 @@
+{
+  "id": "StoredProcExecStringConcat",
+  "cwe": "89",
+  "language": "csharp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/89 Key Principles: never allow untrusted input to directly control query construction; always parameterize",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "CustomerOrdersRepository.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-89",
+    "name": "SQL Injection",
+    "file": "CustomerOrdersRepository.cs",
+    "sink_line": 10,
+    "sink_code": "        return command.ExecuteReader();",
+    "summary": "The stored procedure is invoked through a hand-built EXEC string with customerId concatenated directly into the literal, rather than through SqlCommand's parameterized stored-procedure mode; a customerId containing a quote breaks out of the literal and appends arbitrary T-SQL to the EXEC statement."
+  },
+  "trap": "Escaping single quotes in customerId by doubling them (customerId.Replace(\"'\", \"''\")) before building the EXEC string closes the most obvious payload but is still string-built SQL - a value using a different injection vector for this exact context is not covered by a single-character escape, and every future call site that builds an EXEC string this way has to remember the same escaping. The fix is to stop building an EXEC string: set command.CommandType = CommandType.StoredProcedure, set CommandText to just the procedure name ('dbo.GetOrdersByCustomer'), and add customerId as a SqlParameter - the driver sends it as data, never as part of the SQL text, regardless of its contents.",
+  "must_preserve": "GetOrdersByCustomer still calls dbo.GetOrdersByCustomer with the given customerId and returns its result set. Any character customerId contains is treated as a literal parameter value, never as SQL syntax."
+}

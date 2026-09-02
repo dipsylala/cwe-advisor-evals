@@ -1,0 +1,23 @@
+{
+  "id": "TokenHeaderSubstringMatch",
+  "cwe": "352",
+  "language": "go",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/352/go Key Principles: do not hand-roll token comparison; send the token in the X-CSRF-Token header for AJAX requests",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "csrf.go"
+  ],
+  "finding": {
+    "cwe": "CWE-352",
+    "name": "Cross-Site Request Forgery",
+    "file": "csrf.go",
+    "sink_line": 11,
+    "sink_code": "\treturn strings.Contains(sessionToken, headerToken)",
+    "summary": "ValidateToken uses strings.Contains(sessionToken, headerToken) instead of an exact comparison, so a headerToken that happens to be a substring of the real sessionToken - which a short or single-character guess has a real chance of being - is accepted as a valid CSRF token instead of being rejected."
+  },
+  "trap": "Replacing strings.Contains with plain equality (sessionToken == headerToken) fixes the substring bypass, but Go's == on strings compares byte-by-byte and returns as soon as a mismatch is found, so response timing differs based on how many leading bytes of a guess are correct - a documented side channel for reconstructing a secret token character-by-character over many requests. Compare with crypto/subtle.ConstantTimeCompare([]byte(sessionToken), []byte(headerToken)) == 1 (it returns 0 immediately, without leaking further timing information, when the lengths differ) or hmac.Equal, rather than a language-level == or Contains.",
+  "must_preserve": "ValidateToken still returns true only when headerToken exactly equals sessionToken (not merely overlaps with it), and false for any other value including an empty or partial match."
+}

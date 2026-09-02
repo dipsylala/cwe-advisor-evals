@@ -1,0 +1,24 @@
+{
+  "id": "AvatarRenameReadPathCoupling",
+  "cwe": "434",
+  "language": "go",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/434 Key Principles: generate a new filename for storage; never use the original filename or client-supplied path as the storage path",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "avatar_upload.go",
+    "avatar_lookup.go"
+  ],
+  "finding": {
+    "cwe": "CWE-434",
+    "name": "Unrestricted Upload of File with Dangerous Type",
+    "file": "avatar_upload.go",
+    "sink_line": 27,
+    "sink_code": "\tos.WriteFile(filepath.Join(storageDir, header.Filename), bytes, 0o600)",
+    "summary": "UploadAvatar stores the upload under header.Filename, the client-supplied original filename, with no type validation and no generated name. ReadAvatarBytes (used elsewhere to serve avatars back) also looks the file up by that same original filename, so the two are coupled: whatever name UploadAvatar stores under is the name every later read has to reconstruct."
+  },
+  "trap": "Generating a random stored name in UploadAvatar (for example hex.EncodeToString(randomBytes) plus a detected extension) and writing to that name instead of header.Filename fixes the storage-side finding, but if ReadAvatarBytes is left unchanged, every subsequent avatar read breaks: it still builds its path from the original client filename, which was never written to disk under that name. The fix has to persist the generated stored name (in a database record keyed by the avatar's logical id, or returned to the caller at upload time) and update ReadAvatarBytes - and every other caller that currently passes header.Filename or an original filename - to look the file up by the generated stored name instead.",
+  "must_preserve": "A valid upload is still stored and, after the fix, is still retrievable through whatever caller previously read it back - the read path must be updated in step with the write path, not just closed against the injection. No valid, previously-working avatar retrieval flow starts silently failing as a side effect of the storage fix."
+}

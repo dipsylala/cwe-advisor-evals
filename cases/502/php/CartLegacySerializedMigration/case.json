@@ -1,0 +1,23 @@
+{
+  "id": "CartLegacySerializedMigration",
+  "cwe": "502",
+  "language": "php",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/502 Key Principles: replace native deserialization with safe data formats (JSON, XML with schema validation)",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "CartRepository.php"
+  ],
+  "finding": {
+    "cwe": "CWE-502",
+    "name": "Deserialization of Untrusted Data",
+    "file": "CartRepository.php",
+    "sink_line": 16,
+    "sink_code": "        return unserialize($row['cart_data']);",
+    "summary": "cart_data is deserialized with unserialize() with no allowed_classes restriction, so a row containing an attacker-influenced serialized payload can instantiate arbitrary PHP objects and trigger magic methods during deserialization."
+  },
+  "trap": "Switching to json_decode($row['cart_data'], true) fixes new writes going forward, but every row written before the migration still holds a PHP-serialized string (starting a:, O:, s:, and so on), not JSON - json_decode() on that string returns null rather than throwing, so loadCart silently returns an empty cart for every user whose data predates the change, a data-loss regression the fix has to account for rather than a security fix that stands alone. Handle both formats during a transition: detect the stored format (a JSON payload starts with { or [; a PHP-serialized one matches a leading type-and-length prefix), migrate legacy rows by parsing them once with unserialize(['allowed_classes' => false]) - which decodes into arrays/scalars only, never constructing objects - and rewrite them as JSON, so the unsafe call is only ever used with object construction disabled and only during the one-time migration, never on an ongoing basis.",
+  "must_preserve": "loadCart still returns a user's existing cart contents for a row written before the format change, and returns the same contents (now as JSON) for one written after. No user's cart is silently lost as a result of the migration."
+}

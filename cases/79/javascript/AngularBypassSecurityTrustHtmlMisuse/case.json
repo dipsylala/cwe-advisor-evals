@@ -1,0 +1,23 @@
+{
+  "id": "AngularBypassSecurityTrustHtmlMisuse",
+  "cwe": "79",
+  "language": "javascript",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/79/javascript Taint Sinks: Angular [innerHTML] and DomSanitizer.bypassSecurityTrustHtml()",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "commentRenderer.js"
+  ],
+  "finding": {
+    "cwe": "CWE-79",
+    "name": "Cross-site Scripting",
+    "file": "commentRenderer.js",
+    "sink_line": 3,
+    "sink_code": "  return sanitizer.bypassSecurityTrustHtml(rawBody);",
+    "summary": "bypassSecurityTrustHtml() tells Angular's DomSanitizer to treat rawBody as already-safe HTML and skip its own sanitization entirely. rawBody is untrusted comment content, so any script-carrying markup in it is rendered unescaped wherever the returned value is bound to [innerHTML]."
+  },
+  "trap": "Keeping bypassSecurityTrustHtml() but pre-filtering rawBody with a denylist (stripping <script> tags, or blocking a few known-dangerous attribute names) before the call does not close this: bypassSecurityTrustHtml() disables Angular's own sanitizer for whatever value it returns, so any vector the hand-rolled filter misses - an onerror handler, a javascript: URL in an href, an <svg onload=...> - reaches [innerHTML] unescaped, and a denylist reliably misses some of these. The fix is to stop calling bypassSecurityTrustHtml() on user-controlled content: either bind rawBody straight to [innerHTML] and let Angular's default DomSanitizer run (it strips dangerous markup automatically), or, if a broader set of formatting tags needs to be allowed than Angular's own sanitizer permits, sanitize with DOMPurify.sanitize() first and bind that result without any bypass call.",
+  "must_preserve": "Comment bodies still render their allowed formatting (for example <b>, <em>, <a>) in the page. No markup in rawBody can execute script in the viewer's browser, regardless of which tag or attribute it uses."
+}
