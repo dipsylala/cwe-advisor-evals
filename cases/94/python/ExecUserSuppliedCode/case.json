@@ -1,0 +1,18 @@
+{
+  "id": "ExecUserSuppliedCode",
+  "cwe": "94",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ExecUserSuppliedCode.py"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "ExecUserSuppliedCode.py",
+    "sink_line": 37,
+    "sink_code": "    exec(snippet, migration_globals)",
+    "summary": "an operator-supplied Python snippet from the request JSON 'code' field is run directly with exec(snippet, migration_globals), a fresh globals dict with no restricted __builtins__"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "CSharpCompilationRuntimeCompile",
+  "cwe": "94",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["RuleCompilerService.cs"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "RuleCompilerService.cs",
+    "sink_line": 36,
+    "sink_code": "            CSharpCompilation compilation = CSharpCompilation.Create(",
+    "summary": "the admin-submitted raw C# rule source text is parsed into a SyntaxTree and passed unmodified into CSharpCompilation.Create(), then Emit() to a MemoryStream and loaded with Assembly.Load(), so arbitrary attacker-controlled C# is compiled and its Evaluate() method invoked via reflection."
+  }
+}

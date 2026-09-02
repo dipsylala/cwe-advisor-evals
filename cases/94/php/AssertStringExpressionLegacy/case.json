@@ -1,0 +1,18 @@
+{
+  "id": "AssertStringExpressionLegacy",
+  "cwe": "94",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["AssertStringExpressionLegacy.php"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "AssertStringExpressionLegacy.php",
+    "sink_line": 23,
+    "sink_code": "        assert($rule);",
+    "summary": "the request body's account_type field is concatenated into a PHP expression string and passed to assert(), which on the PHP 7.4 target evaluates the string as executable PHP code"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "FlaskRenderTemplateStringSSTI",
+  "cwe": "94",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["greeting.py"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "greeting.py",
+    "sink_line": 18,
+    "sink_code": "    return render_template_string(f\"<h1>Hello {name}!</h1><p>Welcome back.</p>\")",
+    "summary": "the 'name' query parameter is f-string-concatenated directly into the Jinja2 template source before it reaches flask.render_template_string(), so an attacker-supplied value like {{ 7*7 }} is compiled and executed as template code rather than substituted as data"
+  }
+}

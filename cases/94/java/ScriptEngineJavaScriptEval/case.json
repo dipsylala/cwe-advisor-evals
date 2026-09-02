@@ -1,0 +1,18 @@
+{
+  "id": "ScriptEngineJavaScriptEval",
+  "cwe": "94",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["CustomValidationRuleService.java"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "CustomValidationRuleService.java",
+    "sink_line": 42,
+    "sink_code": "        Object result = engine.eval(ruleSource);",
+    "summary": "an admin-supplied 'custom validation rule' string is stored unmodified and passed directly to javax.script.ScriptEngine.eval() obtained via ScriptEngineManager().getEngineByName(\"JavaScript\")"
+  }
+}

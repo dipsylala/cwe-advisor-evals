@@ -1,0 +1,18 @@
+{
+  "id": "ImportlibDynamicModuleName",
+  "cwe": "94",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["plugin_loader.py"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "plugin_loader.py",
+    "sink_line": 25,
+    "sink_code": "    plugin_module = importlib.import_module(plugin_name)",
+    "summary": "the JSON field 'plugin' from the request body is passed unchecked (no allowlist) as the module name to importlib.import_module(), letting an attacker import and execute the top-level code of any importable module, then invoking that module's run() entry point"
+  }
+}

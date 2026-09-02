@@ -1,0 +1,18 @@
+{
+  "id": "JexlEngineUnsandboxedEval",
+  "cwe": "94",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ReportFilterService.java"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "ReportFilterService.java",
+    "sink_line": 38,
+    "sink_code": "        JexlExpression expression = jexlEngine.createExpression(filterExpression);",
+    "summary": "an analyst-authored filter expression persisted on the report definition is passed unmodified into Apache Commons JEXL's engine.createExpression(), evaluated by a JexlEngine built via new JexlBuilder().create() with no JexlSandbox configured, so the expression has unrestricted access to any class or method reachable from the JexlContext"
+  }
+}

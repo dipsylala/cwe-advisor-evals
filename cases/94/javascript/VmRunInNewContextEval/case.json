@@ -1,0 +1,18 @@
+{
+  "id": "VmRunInNewContextEval",
+  "cwe": "94",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["automationRunner.js"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "automationRunner.js",
+    "sink_line": 19,
+    "sink_code": "  vm.runInNewContext(script, sandbox, { timeout: 2000 });",
+    "summary": "A request-supplied automation script (req.body.script) is executed as JavaScript via node:vm's vm.runInNewContext(), which is not a security boundary and lets the script escape the sandbox to reach the host process."
+  }
+}

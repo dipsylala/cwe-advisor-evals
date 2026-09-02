@@ -1,0 +1,18 @@
+{
+  "id": "GroovyShellEvaluate",
+  "cwe": "94",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["PricingFormulaEvaluator.java"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "PricingFormulaEvaluator.java",
+    "sink_line": 43,
+    "sink_code": "        Object result = shell.evaluate(customFormula);",
+    "summary": "an admin-configured custom pricing formula stored as free text is loaded from the repository and passed to groovy.lang.GroovyShell.evaluate(), executing arbitrary Groovy source as code at quote time"
+  }
+}

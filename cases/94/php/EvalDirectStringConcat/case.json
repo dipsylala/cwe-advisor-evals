@@ -1,0 +1,18 @@
+{
+  "id": "EvalDirectStringConcat",
+  "cwe": "94",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["QuickCalculationHandler.php"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "QuickCalculationHandler.php",
+    "sink_line": 26,
+    "sink_code": "        eval('$result = ' . $expr . ';');",
+    "summary": "the POST field expr is concatenated unmodified into a PHP expression string and executed directly via eval()"
+  }
+}

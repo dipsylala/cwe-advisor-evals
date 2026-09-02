@@ -1,0 +1,18 @@
+{
+  "id": "SetTimeoutStringArg",
+  "cwe": "94",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SetTimeoutStringArg.js"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "SetTimeoutStringArg.js",
+    "sink_line": 28,
+    "sink_code": "  setTimeout(deferredStatement, delayMs);",
+    "summary": "request body fields reminderId and message are concatenated into a JavaScript statement string that is passed as the first argument to setTimeout(), which implicitly evaluates a string argument as code"
+  }
+}

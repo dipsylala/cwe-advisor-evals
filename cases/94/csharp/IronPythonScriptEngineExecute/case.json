@@ -1,0 +1,18 @@
+{
+  "id": "IronPythonScriptEngineExecute",
+  "cwe": "94",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["TransformScriptController.cs"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "TransformScriptController.cs",
+    "sink_line": 40,
+    "sink_code": "                result = PythonEngine.Execute(request.ScriptBody, scope);",
+    "summary": "The request body's ScriptBody field is passed unmodified as Python source to a shared IronPython.Hosting ScriptEngine's Execute() method, letting a caller run arbitrary Python code with the full permissions of the hosting process."
+  }
+}

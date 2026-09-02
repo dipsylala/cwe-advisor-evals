@@ -1,0 +1,18 @@
+{
+  "id": "AssemblyLoadUserBytes",
+  "cwe": "94",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["PluginController.cs"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "PluginController.cs",
+    "sink_line": 37,
+    "sink_code": "            Assembly pluginAssembly = Assembly.Load(uploadedBytes);",
+    "summary": "raw bytes of an uploaded .dll form file are passed unmodified to Assembly.Load(byte[]), then a well-known entry-point method on any exported type is located via GetMethod and invoked via MethodInfo.Invoke with no signature verification or code-signing check"
+  }
+}

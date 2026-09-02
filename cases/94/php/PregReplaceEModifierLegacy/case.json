@@ -1,0 +1,18 @@
+{
+  "id": "PregReplaceEModifierLegacy",
+  "cwe": "94",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["PregReplaceEModifierLegacy.php"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "PregReplaceEModifierLegacy.php",
+    "sink_line": 24,
+    "sink_code": "    return preg_replace('/\\{(\\w+)\\}/e', $formatter . '($vars[\"$1\"])', $template);",
+    "summary": "a POST 'formatter' value reaches preg_replace() with the /e modifier, where it is concatenated into the replacement string and evaluated as PHP code on every match on a PHP 5.x target."
+  }
+}

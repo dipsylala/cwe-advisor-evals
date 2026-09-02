@@ -1,0 +1,18 @@
+{
+  "id": "EvalDirectStringConcat",
+  "cwe": "94",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["calculatorController.js"],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "calculatorController.js",
+    "sink_line": 15,
+    "sink_code": "  const result = eval('(' + expression + ')');",
+    "summary": "req.body.expression is concatenated directly into a string and passed to the global eval() function, letting an attacker run arbitrary JavaScript in the request handler"
+  }
+}
