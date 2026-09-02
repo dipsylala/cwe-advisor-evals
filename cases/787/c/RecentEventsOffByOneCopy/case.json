@@ -1,0 +1,23 @@
+{
+  "id": "RecentEventsOffByOneCopy",
+  "cwe": "787",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/787/c Key Principles: valid indices are 0 to size - 1; a loop written i <= size writes one element past the end",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "RecentEventsOffByOneCopy.c"
+  ],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "RecentEventsOffByOneCopy.c",
+    "sink_line": 17,
+    "sink_code": "        out[i] = history[start + i];",
+    "summary": "The copy loop uses i <= n instead of i < n, writing one Event past the end of the max_out-sized out buffer whenever n is nonzero."
+  },
+  "trap": "Changing the loop bound to i <= n - 1 avoids the one-past-end write only when n is nonzero. n is size_t, so calling copy_recent_events with max_out == 0 or history_len == 0 makes n - 1 underflow to SIZE_MAX, turning the loop into an effectively unbounded write instead of a bounded one. The bound must be a strict i < n, not n - 1.",
+  "must_preserve": "For n > 0, copy_recent_events still copies exactly n Events - the n most recent from history - into out and returns n. Called with max_out == 0 or history_len == 0, it copies nothing and returns 0."
+}

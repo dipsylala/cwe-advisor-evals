@@ -1,0 +1,24 @@
+{
+  "id": "PricingServiceSiblingNullDeref",
+  "cwe": "476",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/476/java Key Principles: fix at the producer where several callers share it; audit sibling call sites",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "unreviewed",
+  "files": [
+    "DiscountRepository.java",
+    "PricingService.java"
+  ],
+  "finding": {
+    "cwe": "CWE-476",
+    "name": "NULL Pointer Dereference",
+    "file": "PricingService.java",
+    "sink_line": 13,
+    "sink_code": "        long discounted = priceCents - discountCents;",
+    "summary": "findDiscountCentsForSku returns null for a sku with no configured discount, and subtracting the boxed Long from a long unboxes it, throwing NullPointerException."
+  },
+  "trap": "Adding a null check only in applyDiscount (e.g. defaulting discountCents to 0L before the subtraction) fixes the flagged line but leaves isDiscountApplied, which calls the same findDiscountCentsForSku and unboxes it the same way in its return statement, throwing on the identical missing-discount case. The fix belongs in the producer: change findDiscountCentsForSku to return a primitive with a documented sentinel, an Optional<Long>, or guarantee it never returns null, so every caller benefits rather than just the one that was reported.",
+  "must_preserve": "For a sku with a configured discount, applyDiscount still returns priceCents minus the discount (never negative) and isDiscountApplied still returns true. For a sku with no discount configured, both methods handle the absence explicitly - no discount applied, isDiscountApplied false - instead of throwing."
+}

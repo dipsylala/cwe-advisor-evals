@@ -1,0 +1,23 @@
+{
+  "id": "TicketCodeScanfWidthOffByOne",
+  "cwe": "121",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/121/c Taint Sinks: scanf(\"%s\", ...)",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "TicketCodeScanfWidthOffByOne.c"
+  ],
+  "finding": {
+    "cwe": "CWE-121",
+    "name": "Stack-based Buffer Overflow",
+    "file": "TicketCodeScanfWidthOffByOne.c",
+    "sink_line": 9,
+    "sink_code": "    if (scanf(\"%s\", code) != 1) {",
+    "summary": "scanf(\"%s\", code) has no field width, so an input token longer than 15 characters overflows the 16-byte code stack array."
+  },
+  "trap": "Adding a field width of scanf(\"%16s\", code) looks like it matches the 16-byte array but still overflows by one: an %Ns conversion reads up to N characters and then appends a terminating NUL, so %16s can write 17 bytes into a 16-byte array. The field width must be one less than the destination's size - %15s for char code[16] - to leave room for the NUL.",
+  "must_preserve": "read_ticket_code still reads a whitespace-delimited token from stdin into code and, when it fits, copies it into out (bounded by out_capacity) and returns 0. An input token that does not fit in code is rejected (returns -1) rather than silently truncated."
+}

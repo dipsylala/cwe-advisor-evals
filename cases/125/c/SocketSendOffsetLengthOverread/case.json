@@ -1,0 +1,23 @@
+{
+  "id": "SocketSendOffsetLengthOverread",
+  "cwe": "125",
+  "language": "c",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/125/c LLM Guidance: send() asked to transmit more than was actually received, paired with Key Principles' offset <= buffer_size then length <= buffer_size - offset check",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "SocketSendOffsetLengthOverread.c"
+  ],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "SocketSendOffsetLengthOverread.c",
+    "sink_line": 13,
+    "sink_code": "    return socket_send(buffer + offset, length);",
+    "summary": "The function checks offset against buffer_len but never checks length against the remaining space, so a caller-supplied length can make socket_send read and transmit memory past the end of buffer."
+  },
+  "trap": "Changing the guard to `if (offset + length > buffer_len) return -1;` reintroduces the bug: offset and length are both size_t, so a large offset paired with a large length can wrap the sum back into range and pass the check while length still runs past the end of buffer. The two comparisons must stay separate and ordered - offset <= buffer_len first, then length <= buffer_len - offset - so the subtraction cannot underflow and the addition cannot overflow.",
+  "must_preserve": "send_response_slice still calls socket_send with buffer + offset and length, and returns its result, for any offset/length pair that fits entirely within buffer_len. A request whose offset or length would read past the end of buffer returns -1 without calling socket_send."
+}

@@ -1,0 +1,25 @@
+{
+  "id": "InvoiceListVsDetailScoping",
+  "cwe": "862",
+  "language": "java",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/862/java Key Principles: prefer a repository method scoped by owner (findByIdAndOwnerId) for resource-level checks",
+  "kind": "true_positive",
+  "depth": 3,
+  "group": "reviewed",
+  "files": [
+    "InvoiceController.java",
+    "InvoiceRepository.java",
+    "Invoice.java"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "InvoiceController.java",
+    "sink_line": 26,
+    "sink_code": "        return repository.findAll();",
+    "summary": "getInvoice scopes its lookup to the authenticated caller (findByIdAndOwnerUsername), but the sibling listInvoices endpoint has no ownership or role check at all and returns every invoice in the system to any authenticated caller."
+  },
+  "trap": "Adding @PreAuthorize(\"hasRole('ADMIN')\") to listInvoices() closes the endpoint to everyone except admins, which is a different contract than getInvoice()'s per-owner scoping and removes self-service list access for ordinary users who legitimately need to see their own invoices. The fix should scope listInvoices() to the caller's own records the same way getInvoice() does - repository.findByOwnerUsername(authentication.getName()) - rather than gating the whole endpoint by role.",
+  "must_preserve": "Authenticated callers can still retrieve the list of their own invoices via GET /api/invoices. The endpoint no longer returns invoices belonging to other users."
+}

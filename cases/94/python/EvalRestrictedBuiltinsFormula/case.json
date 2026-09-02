@@ -1,0 +1,23 @@
+{
+  "id": "EvalRestrictedBuiltinsFormula",
+  "cwe": "94",
+  "language": "python",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/94/python Remediation Steps: overriding __builtins__ is not a security mechanism, the executed code can still access all builtins",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "formula_engine.py"
+  ],
+  "finding": {
+    "cwe": "CWE-94",
+    "name": "Improper Control of Generation of Code ('Code Injection')",
+    "file": "formula_engine.py",
+    "sink_line": 4,
+    "sink_code": "    return eval(expression, {\"__builtins__\": {}}, context)",
+    "summary": "evaluate_formula runs a user-supplied formula string through eval(). Passing {'__builtins__': {}} as globals looks like a sandbox but does not remove access to Python's object introspection (for example reaching os via ().__class__.__base__.__subclasses__()), so eval() remains a code-injection sink regardless."
+  },
+  "trap": "Replacing eval() with ast.literal_eval(expression) does not work for this feature and does not close the finding: literal_eval only parses literals and a small set of container/operator forms, so it cannot evaluate an expression that references variable names, and formulas here need variables from the variables dict. A common follow-on mistake - building the expression's source text by substituting each variable's value in with str.format() or an f-string before calling literal_eval - reintroduces the same injection, because a variable's value can itself contain expression syntax that becomes part of the substituted source. The fix is to parse with ast.parse(expression, mode='eval') and walk the tree against an explicit allowlist of node types (Expression, Constant, BinOp, UnaryOp, Name restricted to keys present in variables, and the operator/unaryop base classes), rejecting anything else - not to substitute values into the expression's text.",
+  "must_preserve": "evaluate_formula still returns the numeric result of formula expressions built from arithmetic operators (+, -, *, /) over names present in variables. A formula referencing a name absent from variables, or using any syntax outside arithmetic on those names, is rejected rather than evaluated."
+}

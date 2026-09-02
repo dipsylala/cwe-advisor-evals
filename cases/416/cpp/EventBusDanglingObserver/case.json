@@ -1,0 +1,24 @@
+{
+  "id": "EventBusDanglingObserver",
+  "cwe": "416",
+  "language": "cpp",
+  "source": "authored-top15-fix-complexity",
+  "origin": "cwe/416/cpp Key Principles: use std::weak_ptr for an observer that may outlive the object, and lock() at the point of use",
+  "kind": "true_positive",
+  "depth": 2,
+  "group": "reviewed",
+  "files": [
+    "sensor_monitor.cpp",
+    "event_bus.cpp"
+  ],
+  "finding": {
+    "cwe": "CWE-416",
+    "name": "Use After Free",
+    "file": "event_bus.cpp",
+    "sink_line": 18,
+    "sink_code": "            observer->onEvent(code);",
+    "summary": "EventBus stores raw Observer pointers with no unsubscribe path. monitorOnce() subscribes a stack-local SensorObserver and returns, destroying it while EventBus still holds the pointer; the next publish() dereferences the dangling pointer."
+  },
+  "trap": "Adding a destructor to SensorObserver that calls an unsubscribe method on the bus only fixes observers that are destroyed through their own destructor and that remember which bus they registered with; it does not change what EventBus itself stores, so any other observer lifetime path (a moved-from observer, a container that erases without running destructors, a bus outliving process shutdown order) reproduces the same dangling pointer. The durable fix is for EventBus to store std::weak_ptr<Observer> and require observers to be held via shared_ptr, so publish() can skip an expired observer instead of dereferencing a stale raw pointer.",
+  "must_preserve": "publish() still calls onEvent() on every currently-subscribed, live observer, in subscription order. An observer that is properly unsubscribed before publish() runs must not be invoked."
+}
