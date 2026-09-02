@@ -1,0 +1,18 @@
+{
+  "id": "JwtDecodeVerifySignatureFalse",
+  "cwe": "287",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["account_api.py"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "account_api.py",
+    "sink_line": 28,
+    "sink_code": "        payload = jwt.decode(token, options={\"verify_signature\": False})",
+    "summary": "the bearer-token middleware calls jwt.decode() with options={'verify_signature': False}, accepting any unsigned or tampered token and trusting its user_id claim to identify the caller for the account-close action"
+  }
+}

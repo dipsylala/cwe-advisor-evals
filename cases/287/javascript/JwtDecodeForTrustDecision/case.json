@@ -1,0 +1,18 @@
+{
+  "id": "JwtDecodeForTrustDecision",
+  "cwe": "287",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["authMiddleware.js"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "authMiddleware.js",
+    "sink_line": 16,
+    "sink_code": "  const payload = jwt.decode(token);",
+    "summary": "the admin auth middleware decodes the bearer token with jwt.decode(), which performs no signature verification, and trusts payload.userId/payload.role to grant admin access"
+  }
+}

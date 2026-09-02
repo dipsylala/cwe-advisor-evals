@@ -1,0 +1,18 @@
+{
+  "id": "JwtDecodeLegacyArrayAlgorithmsForm",
+  "cwe": "287",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["AuthController.php"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "AuthController.php",
+    "sink_line": 44,
+    "sink_code": "            $decoded = JWT::decode($jwt, $publicKey, ['RS256', 'HS256']);",
+    "summary": "bearer token is verified with firebase/php-jwt 5.x's legacy JWT::decode($jwt, $key, $algs) array-of-algorithms form, accepting both RS256 and HS256 for the same key instead of binding one explicit algorithm, so the token's own alg header can select the verification algorithm."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "CustomSignatureValidatorBypass",
+  "cwe": "287",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["CustomSignatureValidatorBypass.cs"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "CustomSignatureValidatorBypass.cs",
+    "sink_line": 32,
+    "sink_code": "                    options.TokenValidationParameters.SignatureValidator = (token, validationParameters) => new JsonWebToken(token);",
+    "summary": "the JWT bearer handler's TokenValidationParameters.SignatureValidator is overridden with a delegate that parses the token into a JsonWebToken and returns it without verifying its signature, bypassing signature checking entirely."
+  }
+}

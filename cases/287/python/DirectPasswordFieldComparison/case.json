@@ -1,0 +1,18 @@
+{
+  "id": "DirectPasswordFieldComparison",
+  "cwe": "287",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["legacy_portal_backend.py"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "legacy_portal_backend.py",
+    "sink_line": 34,
+    "sink_code": "        if password == user.password:",
+    "summary": "custom Django AUTHENTICATION_BACKENDS class compares the submitted password directly against the stored user.password field instead of calling user.check_password(), bypassing Django's password hasher verification"
+  }
+}

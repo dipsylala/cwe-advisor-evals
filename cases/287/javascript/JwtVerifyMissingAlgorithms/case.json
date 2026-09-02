@@ -1,0 +1,18 @@
+{
+  "id": "JwtVerifyMissingAlgorithms",
+  "cwe": "287",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["authMiddleware.js"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "authMiddleware.js",
+    "sink_line": 21,
+    "sink_code": "    const claims = jwt.verify(token, publicKey);",
+    "summary": "the Express bearer-token middleware calls jwt.verify(token, publicKey) with no algorithms option, so the accepted signing algorithm is inferred from the key rather than pinned, leaving the verification open to algorithm-confusion between RS256 and HS256"
+  }
+}

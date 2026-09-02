@@ -1,0 +1,18 @@
+{
+  "id": "ProviderSupportsTooBroad",
+  "cwe": "287",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ApiKeyAuthenticationProvider.java"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "ApiKeyAuthenticationProvider.java",
+    "sink_line": 42,
+    "sink_code": "        return Authentication.class.isAssignableFrom(authentication);",
+    "summary": "supports(Class<?> authentication) is scoped to any Authentication.class subtype instead of ApiKeyAuthenticationToken.class, so ProviderManager can delegate unrelated authentication attempts (e.g. UsernamePasswordAuthenticationToken) into this provider's authenticate(), which unconditionally casts to ApiKeyAuthenticationToken"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "CustomAuthProviderNoCredentialCheck",
+  "cwe": "287",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["CustomAuthenticationProvider.java"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "CustomAuthenticationProvider.java",
+    "sink_line": 34,
+    "sink_code": "        return new UsernamePasswordAuthenticationToken(userDetails, credentials, userDetails.getAuthorities());",
+    "summary": "authenticate() loads the UserDetails by username and returns a successful UsernamePasswordAuthenticationToken without ever calling PasswordEncoder.matches() to verify the submitted credential against the stored one"
+  }
+}

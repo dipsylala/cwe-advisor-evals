@@ -1,0 +1,18 @@
+{
+  "id": "JwtKeyFuncNoMethodCheck",
+  "cwe": "287",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["JwtKeyFuncNoMethodCheck.go"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "JwtKeyFuncNoMethodCheck.go",
+    "sink_line": 49,
+    "sink_code": "\t\ttoken, err := jwt.ParseWithClaims(tokenString, claims, keyFunc)",
+    "summary": "the keyFunc passed to golang-jwt/jwt/v5's jwt.ParseWithClaims returns the configured HMAC secret for any token without asserting token.Method, letting an attacker forge a token with a different signing algorithm"
+  }
+}

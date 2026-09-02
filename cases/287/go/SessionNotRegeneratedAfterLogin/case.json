@@ -1,0 +1,18 @@
+{
+  "id": "SessionNotRegeneratedAfterLogin",
+  "cwe": "287",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["login_handler.go"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "login_handler.go",
+    "sink_line": 51,
+    "sink_code": "\tsession.Values[\"userID\"] = user.ID",
+    "summary": "LoginHandler calls gorilla/sessions store.Get(r, \"session-name\") after a successful password check and writes the authenticated user straight into session.Values without regenerating the session identifier, so a session (and cookie) an attacker planted on the victim before login is promoted to an authenticated session (session fixation)."
+  }
+}

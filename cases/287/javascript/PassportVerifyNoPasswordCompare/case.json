@@ -1,0 +1,18 @@
+{
+  "id": "PassportVerifyNoPasswordCompare",
+  "cwe": "287",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["auth.js"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "auth.js",
+    "sink_line": 19,
+    "sink_code": "        return done(null, user);",
+    "summary": "Passport LocalStrategy verify callback calls done(null, user) after a User.findOne({ username }) lookup succeeds, with no bcrypt.compare/argon2.verify password check anywhere in the callback."
+  }
+}

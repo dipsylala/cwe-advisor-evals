@@ -1,0 +1,18 @@
+{
+  "id": "SessionNotRegeneratedAfterLogin",
+  "cwe": "287",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["LoginHandler.php"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "LoginHandler.php",
+    "sink_line": 34,
+    "sink_code": "        $_SESSION['user_id'] = $user['id'];",
+    "summary": "after password_verify() succeeds, the handler writes the authenticated user id and flag directly into $_SESSION without ever calling session_regenerate_id(), so a session identifier planted on the victim before login carries over as the authenticated session"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "PlaintextEqualityPasswordCheck",
+  "cwe": "287",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["LoginHandler.php"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "LoginHandler.php",
+    "sink_line": 35,
+    "sink_code": "        if ($password == $user['password']) {",
+    "summary": "the login handler compares the submitted password to the stored users.password value with PHP's == operator instead of password_verify(), accepting any value that loosely equals the stored plaintext"
+  }
+}

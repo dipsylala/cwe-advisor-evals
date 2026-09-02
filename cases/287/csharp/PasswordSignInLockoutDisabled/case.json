@@ -1,0 +1,18 @@
+{
+  "id": "PasswordSignInLockoutDisabled",
+  "cwe": "287",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["AccountController.cs"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "AccountController.cs",
+    "sink_line": 27,
+    "sink_code": "            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);",
+    "summary": "login action calls SignInManager.PasswordSignInAsync with lockoutOnFailure explicitly set to false, disabling ASP.NET Core Identity's account lockout and permitting unlimited password guesses against an account"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "FlaskLoginSessionWrittenBeforeLoginUser",
+  "cwe": "287",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["FlaskLoginSessionWrittenBeforeLoginUser.py"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "FlaskLoginSessionWrittenBeforeLoginUser.py",
+    "sink_line": 32,
+    "sink_code": "    session[\"pending_cart_id\"] = request.form.get(\"cart_id\")",
+    "summary": "the login view writes request.form.get('cart_id') into session['pending_cart_id'] before calling Flask-Login's login_user(), carrying unauthenticated, potentially attacker-influenced session state into the newly authenticated session instead of starting clean"
+  }
+}

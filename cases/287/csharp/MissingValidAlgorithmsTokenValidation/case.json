@@ -1,0 +1,18 @@
+{
+  "id": "MissingValidAlgorithmsTokenValidation",
+  "cwe": "287",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["Program.cs"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "Program.cs",
+    "sink_line": 15,
+    "sink_code": "        options.TokenValidationParameters = new TokenValidationParameters",
+    "summary": "JwtBearer options configure ValidateIssuer, ValidateAudience, ValidateLifetime, and ValidateIssuerSigningKey but never set ValidAlgorithms on TokenValidationParameters, leaving the accepted JWT signing algorithm unconstrained by application configuration"
+  }
+}

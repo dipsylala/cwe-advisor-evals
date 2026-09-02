@@ -1,0 +1,18 @@
+{
+  "id": "JjwtUnsignedParseClaimsJwt",
+  "cwe": "287",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["JwtAuthenticationFilter.java"],
+  "finding": {
+    "cwe": "CWE-287",
+    "name": "Improper Authentication",
+    "file": "JwtAuthenticationFilter.java",
+    "sink_line": 58,
+    "sink_code": "            Jwt<?, Claims> jwt = Jwts.parser().parseClaimsJwt(token);",
+    "summary": "the bearer token from the Authorization header is parsed with jjwt 0.11.5's unsigned Jwts.parser().parseClaimsJwt(token) instead of parseClaimsJws() bound to a verification key, so an alg:none token with an arbitrary claims set is accepted and used to populate SecurityContextHolder without any signature check"
+  }
+}
