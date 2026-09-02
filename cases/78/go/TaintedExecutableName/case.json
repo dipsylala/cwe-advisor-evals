@@ -1,0 +1,18 @@
+{
+  "id": "TaintedExecutableName",
+  "cwe": "78",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["diagnostics.go"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "diagnostics.go",
+    "sink_line": 35,
+    "sink_code": "\tcmd := exec.Command(tool, \"-c\", \"4\", target)",
+    "summary": "user-supplied 'tool' query parameter is passed directly as the program name to exec.Command with no allowlist check, letting the attacker choose which executable runs rather than just an argument to a fixed program"
+  }
+}

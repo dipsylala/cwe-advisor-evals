@@ -1,0 +1,18 @@
+{
+  "id": "ProcessBuilderBatchReentry",
+  "cwe": "78",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ReportExportService.java"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "ReportExportService.java",
+    "sink_line": 30,
+    "sink_code": "        ProcessBuilder pb = new ProcessBuilder(script.toString(), reportName);",
+    "summary": "caller-supplied reportName is passed as a ProcessBuilder argument to a bundled run-report.bat file; on Windows the .bat target re-enters cmd.exe, which re-parses the whole command line, so the argument-list form does not prevent injection"
+  }
+}

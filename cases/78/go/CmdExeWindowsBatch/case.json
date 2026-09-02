@@ -1,0 +1,18 @@
+{
+  "id": "CmdExeWindowsBatch",
+  "cwe": "78",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["diagnostics.go"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "diagnostics.go",
+    "sink_line": 28,
+    "sink_code": "\tcmd := exec.Command(\"cmd\", \"/C\", batchLine)",
+    "summary": "the target query parameter is formatted with fmt.Sprintf into a batch command line and executed via exec.Command(\"cmd\", \"/C\", batchLine), invoking the Windows shell on unsanitized input"
+  }
+}

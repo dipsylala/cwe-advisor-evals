@@ -1,0 +1,18 @@
+{
+  "id": "ProcOpenShellString",
+  "cwe": "78",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ProcOpenShellString.php"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "ProcOpenShellString.php",
+    "sink_line": 18,
+    "sink_code": "    $process = proc_open('grep -F -- \"' . $term . '\" ' . $logPath, $descriptors, $pipes);",
+    "summary": "a query-string search term is concatenated unmodified into a shell command string passed as the first argument to proc_open(), which proc_open() runs through the shell"
+  }
+}

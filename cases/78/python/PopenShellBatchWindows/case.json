@@ -1,0 +1,18 @@
+{
+  "id": "PopenShellBatchWindows",
+  "cwe": "78",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["PopenShellBatchWindows.py"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "PopenShellBatchWindows.py",
+    "sink_line": 29,
+    "sink_code": "    proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)",
+    "summary": "caller-supplied report_id is concatenated unmodified into a command string that invokes a bundled .bat script via subprocess.Popen with shell=True, re-entering cmd.exe on Windows"
+  }
+}

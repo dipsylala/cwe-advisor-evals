@@ -1,0 +1,18 @@
+{
+  "id": "OsSystemStringFormat",
+  "cwe": "78",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["OsSystemStringFormat.py"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "OsSystemStringFormat.py",
+    "sink_line": 21,
+    "sink_code": "    os.system(\"ping -c 4 %s > %s 2>&1\" % (target_host, log_path))",
+    "summary": "JSON body field host is % formatted unmodified into a ping command string run via os.system"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "ShellExecConcat",
+  "cwe": "78",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ShellExecConcat.php"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "ShellExecConcat.php",
+    "sink_line": 27,
+    "sink_code": "    $output = shell_exec('ping -c ' . $pingCount . ' ' . $host . ' 2>&1');",
+    "summary": "the host GET parameter is concatenated unmodified into a ping command string executed via shell_exec()"
+  }
+}

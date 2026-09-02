@@ -1,0 +1,18 @@
+{
+  "id": "ExecWindowsBatchTarget",
+  "cwe": "78",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ExecWindowsBatchTarget.js"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "ExecWindowsBatchTarget.js",
+    "sink_line": 20,
+    "sink_code": "  exec(`\"${scriptPath}\" ${reportName}`, (error, stdout, stderr) => {",
+    "summary": "request body field reportName is concatenated unmodified into a command string that invokes a bundled .bat script via child_process.exec(), which lets cmd.exe re-parse the batch target's arguments as a second layer of shell metacharacters"
+  }
+}

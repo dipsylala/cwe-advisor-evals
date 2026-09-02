@@ -1,0 +1,18 @@
+{
+  "id": "ProcessBuilderCmdWindows",
+  "cwe": "78",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["DiagnosticController.java"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "DiagnosticController.java",
+    "sink_line": 28,
+    "sink_code": "        Process process = new ProcessBuilder(\"cmd.exe\", \"/c\", diagnosticCommand).start();",
+    "summary": "the host and count request parameters are concatenated into a single ping command string, passed as the third cmd.exe /c argument to ProcessBuilder, and executed via start()"
+  }
+}

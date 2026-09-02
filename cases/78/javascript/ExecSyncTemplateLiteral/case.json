@@ -1,0 +1,18 @@
+{
+  "id": "ExecSyncTemplateLiteral",
+  "cwe": "78",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ExecSyncTemplateLiteral.js"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "ExecSyncTemplateLiteral.js",
+    "sink_line": 20,
+    "sink_code": "  execSync(`convert ${sourcePath} -resize ${geometry} ${thumbPath}`);",
+    "summary": "the request body's geometry value and the path-joined filename are interpolated unmodified into a shell command string run via child_process.execSync"
+  }
+}

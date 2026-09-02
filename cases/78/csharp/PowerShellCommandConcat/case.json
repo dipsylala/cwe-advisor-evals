@@ -1,0 +1,18 @@
+{
+  "id": "PowerShellCommandConcat",
+  "cwe": "78",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["PowerShellCommandConcat.cs"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "PowerShellCommandConcat.cs",
+    "sink_line": 22,
+    "sink_code": "            using var process = Process.Start(psi);",
+    "summary": "query-string serverName is concatenated unmodified into a powershell.exe -Command argument string and launched via Process.Start"
+  }
+}

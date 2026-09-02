@@ -1,0 +1,18 @@
+{
+  "id": "BatchScriptReentry",
+  "cwe": "78",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["BatchScriptReentry.cs"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "BatchScriptReentry.cs",
+    "sink_line": 34,
+    "sink_code": "            using var process = Process.Start(psi);",
+    "summary": "user-supplied reportName is concatenated unmodified into the Arguments string for a Process.Start call that launches a bundled run-report.bat, which cmd.exe re-parses as a full command line even though the caller only intended to pass a filename argument"
+  }
+}

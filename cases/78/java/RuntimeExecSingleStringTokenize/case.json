@@ -1,0 +1,18 @@
+{
+  "id": "RuntimeExecSingleStringTokenize",
+  "cwe": "78",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["PingDiagnosticServlet.java"],
+  "finding": {
+    "cwe": "CWE-78",
+    "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+    "file": "PingDiagnosticServlet.java",
+    "sink_line": 50,
+    "sink_code": "        Process process = Runtime.getRuntime().exec(command);",
+    "summary": "the 'host' request parameter is concatenated unmodified into a single command string and passed to the single-String Runtime.getRuntime().exec(String) overload, which tokenizes it with StringTokenizer"
+  }
+}
