@@ -1,0 +1,18 @@
+{
+  "id": "ArrayIndexUnvalidatedNetworkOffset",
+  "cwe": "125",
+  "language": "c",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["ArrayIndexUnvalidatedNetworkOffset.c"],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "ArrayIndexUnvalidatedNetworkOffset.c",
+    "sink_line": 42,
+    "sink_code": "    *out = descriptors[field_index];",
+    "summary": "the 1-byte field index read from an inbound frame's first byte is used unchecked as an array subscript into the fixed 16-entry descriptors table, allowing an out-of-bounds read for any index value of 16 or greater"
+  }
+}

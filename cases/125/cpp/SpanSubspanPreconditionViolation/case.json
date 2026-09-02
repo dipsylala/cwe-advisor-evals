@@ -1,0 +1,18 @@
+{
+  "id": "SpanSubspanPreconditionViolation",
+  "cwe": "125",
+  "language": "cpp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SpanSubspanPreconditionViolation.cpp"],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "SpanSubspanPreconditionViolation.cpp",
+    "sink_line": 16,
+    "sink_code": "    std::span<const std::byte> field = buffer.subspan(header.fieldOffset, header.fieldLength);",
+    "summary": "attacker-controlled fieldOffset and fieldLength from a network message header are passed unchecked into std::span::subspan(), whose offset and count are documented preconditions with no runtime bounds check or throws clause"
+  }
+}

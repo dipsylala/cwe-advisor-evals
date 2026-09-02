@@ -1,0 +1,18 @@
+{
+  "id": "RawPointerFromDataUncheckedLength",
+  "cwe": "125",
+  "language": "cpp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["RawPointerFromDataUncheckedLength.cpp"],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "RawPointerFromDataUncheckedLength.cpp",
+    "sink_line": 17,
+    "sink_code": "        std::memcpy(destination, frameBuffer.data(), payloadLength);",
+    "summary": "a caller-supplied payloadLength parameter, disconnected from frameBuffer's own size, is passed directly to std::memcpy() as the read length from frameBuffer.data() with no check against frameBuffer.size()"
+  }
+}

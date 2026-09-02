@@ -1,0 +1,18 @@
+{
+  "id": "StdArrayOperatorBracketOverread",
+  "cwe": "125",
+  "language": "cpp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SensorCalibration.cpp"],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "SensorCalibration.cpp",
+    "sink_line": 27,
+    "sink_code": "    double offset = calibrationTable[request.sensorIndex];",
+    "summary": "sensorIndex is copied unvalidated from an inbound network message into a fixed-size std::array and used directly as the index to calibrationTable's operator[], with no bounds check against the array's 8-element size."
+  }
+}

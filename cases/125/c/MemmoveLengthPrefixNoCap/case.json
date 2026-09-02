@@ -1,0 +1,18 @@
+{
+  "id": "MemmoveLengthPrefixNoCap",
+  "cwe": "125",
+  "language": "c",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["MemmoveLengthPrefixNoCap.c"],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "MemmoveLengthPrefixNoCap.c",
+    "sink_line": 33,
+    "sink_code": "    memmove(destination, conn->sourceBuffer + 2, length);",
+    "summary": "a 2-byte length header parsed from sourceBuffer is passed directly as the memmove length without checking it against receivedByteCount, the separately-tracked count of bytes actually received into sourceBuffer"
+  }
+}

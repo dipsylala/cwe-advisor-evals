@@ -1,0 +1,18 @@
+{
+  "id": "SscanfMissingFieldWidth",
+  "cwe": "125",
+  "language": "c",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SscanfMissingFieldWidth.c"],
+  "finding": {
+    "cwe": "CWE-125",
+    "name": "Out-of-bounds Read",
+    "file": "SscanfMissingFieldWidth.c",
+    "sink_line": 32,
+    "sink_code": "    int fields = sscanf(line, \"%7s %s %63s %d\", tag, out->nameBuf, out->state, &out->uptimeSeconds);",
+    "summary": "line is filled by a raw socket read that does not append a NUL terminator, so a peer that fills the whole LINE_CAPACITY-byte buffer with no whitespace leaves nothing inside its allocation to stop the unwidthed %s conversion's scan; sscanf reads past line's own buffer looking for a delimiter, independent of the (deliberately oversized) destination fields"
+  }
+}
