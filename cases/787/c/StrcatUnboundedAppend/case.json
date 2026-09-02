@@ -1,0 +1,18 @@
+{
+  "id": "StrcatUnboundedAppend",
+  "cwe": "787",
+  "language": "c",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["StrcatUnboundedAppend.c"],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "StrcatUnboundedAppend.c",
+    "sink_line": 20,
+    "sink_code": "    strcat(path, filename);",
+    "summary": "The attacker-controlled upload filename is appended via strcat into a fixed 128-byte stack buffer already holding the base directory, with no check that the filename fits in the remaining space."
+  }
+}

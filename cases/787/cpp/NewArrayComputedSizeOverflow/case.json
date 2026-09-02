@@ -1,0 +1,18 @@
+{
+  "id": "NewArrayComputedSizeOverflow",
+  "cwe": "787",
+  "language": "cpp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["NewArrayComputedSizeOverflow.cpp"],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "NewArrayComputedSizeOverflow.cpp",
+    "sink_line": 18,
+    "sink_code": "    uint8_t* buffer = new uint8_t[totalSize];",
+    "summary": "Attacker-controlled headerLen and payloadLen fragment header fields are summed into a uint32_t totalSize with no overflow check, and the wrapped, undersized result sizes a raw new[] allocation that the following memcpy calls then overrun."
+  }
+}

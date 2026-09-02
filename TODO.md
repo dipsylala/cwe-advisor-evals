@@ -14,11 +14,11 @@ of those. Completed work's reasoning lives in `git log` commit messages, not her
   campaign. Continue in ~15-case batches, one workflow run each, checking each batch's output
   before the next.
 - Top-15 depth: CWE-78, CWE-89, and CWE-434 are done (3 `authored` cases per language across all 6
-  languages each); CWE-94, CWE-125, CWE-287, CWE-352, and CWE-416 are done (3 `authored` cases per
-  language across all their languages - all five had zero `authored` cases before this pass;
-  CWE-287 also had zero cases of any source). Remaining CWEs in rank order: 787, 862. The corpus
-  this campaign originally mined pattern shapes from is no longer part of the parent repo's source -
-  pull patterns from OWASP cheat sheets, framework docs, or the language entry's own
-  `Key Principles` instead.
+  languages each); CWE-94, CWE-125, CWE-287, CWE-352, CWE-416, and CWE-787 are done (3 `authored`
+  cases per language across all their languages - all six had zero `authored` cases before this
+  pass; CWE-287 also had zero cases of any source). Remaining: CWE-862 (last one in rank order).
+  The corpus this campaign originally mined pattern shapes from is no longer part of the parent
+  repo's source - pull patterns from OWASP cheat sheets, framework docs, or the language entry's
+  own `Key Principles` instead.
 - Multi-file depth cases exist only for CWE-79 (7 languages) and CWE-77 (4 languages) at the 3-case
   single-file target; not extended to other top-15 CWEs or applied as a default - decide if wanted.

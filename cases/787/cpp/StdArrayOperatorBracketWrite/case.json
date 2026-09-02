@@ -1,0 +1,18 @@
+{
+  "id": "StdArrayOperatorBracketWrite",
+  "cwe": "787",
+  "language": "cpp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["StdArrayOperatorBracketWrite.cpp"],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "StdArrayOperatorBracketWrite.cpp",
+    "sink_line": 29,
+    "sink_code": "    calibrationTable[update.channelIndex] = update.value;",
+    "summary": "channelIndex is read unchecked from a network calibration message and used to write through unchecked std::array<double, 8>::operator[] into a fixed-size table."
+  }
+}

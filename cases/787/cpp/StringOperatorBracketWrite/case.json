@@ -1,0 +1,18 @@
+{
+  "id": "StringOperatorBracketWrite",
+  "cwe": "787",
+  "language": "cpp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["StringOperatorBracketWrite.cpp"],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "StringOperatorBracketWrite.cpp",
+    "sink_line": 29,
+    "sink_code": "        record[position] = edit.replacementChar;",
+    "summary": "A peer-supplied edit offset from an EditMessage is written into a std::string record via unchecked operator[] with no comparison against record.size()."
+  }
+}

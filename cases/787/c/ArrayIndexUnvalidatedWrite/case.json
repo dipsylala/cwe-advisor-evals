@@ -1,0 +1,18 @@
+{
+  "id": "ArrayIndexUnvalidatedWrite",
+  "cwe": "787",
+  "language": "c",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["score_update.c"],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "score_update.c",
+    "sink_line": 34,
+    "sink_code": "    scoreTable[msg.playerIndex] = msg.newScore;",
+    "summary": "playerIndex is decoded directly from a client ScoreUpdate network packet with no bounds check against the 16-slot scoreTable before being used to index a single write."
+  }
+}

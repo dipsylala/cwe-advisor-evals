@@ -1,0 +1,18 @@
+{
+  "id": "SprintfFixedBufferOverflow",
+  "cwe": "787",
+  "language": "c",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["SprintfFixedBufferOverflow.c"],
+  "finding": {
+    "cwe": "CWE-787",
+    "name": "Out-of-bounds Write",
+    "file": "SprintfFixedBufferOverflow.c",
+    "sink_line": 16,
+    "sink_code": "    sprintf(line, \"[%s] %s: %s\", timestamp, username, message);",
+    "summary": "attacker-controlled username and message are formatted with sprintf into a fixed 64-byte stack buffer line with no bounds checking, so a sufficiently long username or message overflows the buffer"
+  }
+}
