@@ -1,0 +1,22 @@
+{
+  "id": "MongooseFilterNotScalarInjection",
+  "cwe": "862",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "orderRoutes.js",
+    "sessionAuth.js",
+    "orderModel.js"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "orderRoutes.js",
+    "sink_line": 24,
+    "sink_code": "    const order = await Order.findOne(filter);",
+    "summary": "The order lookup starts from the correctly owner-scoped filter { _id, ownerId: req.user.id }, but then spreads a caller-supplied req.body.extra object into it, letting a caller override the ownerId key with a MongoDB operator (e.g. { \"$ne\": null }) and retrieve any user's order by _id since mongoose.sanitizeFilter() is never enabled."
+  }
+}

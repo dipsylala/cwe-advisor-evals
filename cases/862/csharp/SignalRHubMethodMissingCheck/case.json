@@ -1,0 +1,22 @@
+{
+  "id": "SignalRHubMethodMissingCheck",
+  "cwe": "862",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "ChatHub.cs",
+    "ChatMessageStore.cs",
+    "Program.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "ChatHub.cs",
+    "sink_line": 31,
+    "sink_code": "            await _messageStore.DeleteMessageAsync(messageId);",
+    "summary": "ChatHub.DeleteMessage deletes a chat message by ID with no check that the connected caller authored the message or holds a moderator role, so any authenticated user can delete any other user's message once connected."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "PerformCreateMissingOwnershipEnforcement",
+  "cwe": "862",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["views.py", "serializers.py", "permissions.py", "models.py"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "views.py",
+    "sink_line": 23,
+    "sink_code": "        serializer.save()",
+    "summary": "ExpenseReportViewSet.perform_create() saves the serializer without binding owner to request.user, so a POST body can set owner to any user ID; has_object_permission() enforces ownership on retrieve/update/destroy but is never invoked on create."
+  }
+}

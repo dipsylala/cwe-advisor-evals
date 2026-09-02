@@ -1,0 +1,22 @@
+{
+  "id": "RouteMissingRoleMiddlewareNewEndpoint",
+  "cwe": "862",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "adminRoutes.js",
+    "authMiddleware.js",
+    "adminHandlers.js"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "adminRoutes.js",
+    "sink_line": 24,
+    "sink_code": "router.get('/admin/users/export', requireAuth, exportUsersHandler);",
+    "summary": "The user data export route applies requireAuth but omits the requireRole('admin') middleware that every sibling admin route (ban, unban, delete) uses, letting any authenticated user trigger a full export of user data."
+  }
+}

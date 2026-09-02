@@ -1,0 +1,18 @@
+{
+  "id": "RouteMissingCanMiddlewareNewEndpoint",
+  "cwe": "862",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["routes_orders.php"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "routes_orders.php",
+    "sink_line": 24,
+    "sink_code": "Route::delete('/orders/{order}/purge', [OrderController::class, 'purge'])",
+    "summary": "The purge route only applies auth:sanctum, confirming login, while the sibling update and cancel routes on the same order resource also chain can:update,order; the new delete route is missing the equivalent can middleware before permanently deleting the route-bound order."
+  }
+}

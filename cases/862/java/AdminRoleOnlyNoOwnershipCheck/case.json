@@ -1,0 +1,24 @@
+{
+  "id": "AdminRoleOnlyNoOwnershipCheck",
+  "cwe": "862",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "OrderController.java",
+    "OrderService.java",
+    "OrderRepository.java",
+    "Order.java",
+    "OrderUpdateRequest.java"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "OrderService.java",
+    "sink_line": 24,
+    "sink_code": "        return orderRepository.save(order);",
+    "summary": "updateOrder is reached only after @PreAuthorize(\"hasRole('USER')\") confirms the caller is authenticated, but it persists changes to the order loaded by the path-supplied orderId with no check that the authenticated user actually owns that order, so any logged-in user can edit any other user's order by changing the ID in the URL."
+  }
+}

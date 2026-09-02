@@ -1,0 +1,18 @@
+{
+  "id": "RouteRegisteredWithoutMiddlewareWrapper",
+  "cwe": "862",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["admin.go"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "admin.go",
+    "sink_line": 103,
+    "sink_code": "\tmux.HandleFunc(\"GET /admin/users/export\", exportUsersHandler)",
+    "summary": "the GET /admin/users/export route is registered directly with exportUsersHandler instead of being wrapped in the requireAdmin middleware that guards the sibling ban/unban routes, so any caller can export the full user table without an admin role check"
+  }
+}

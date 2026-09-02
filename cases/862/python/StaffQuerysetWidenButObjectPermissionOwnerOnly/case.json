@@ -1,0 +1,18 @@
+{
+  "id": "StaffQuerysetWidenButObjectPermissionOwnerOnly",
+  "cwe": "862",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["views.py", "permissions.py", "models.py"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "views.py",
+    "sink_line": 32,
+    "sink_code": "            return Ticket.objects.all()",
+    "summary": "get_queryset() was widened for is_staff by copying a pattern from an unrelated viewset where that was correct; for tickets, IsTicketOwner.has_object_permission() is the intended sole access rule, but DRF never invokes it for the list action (only from get_object()), so this widening silently exposes every customer's ticket body to any staff account with no ownership or assignment check at all."
+  }
+}

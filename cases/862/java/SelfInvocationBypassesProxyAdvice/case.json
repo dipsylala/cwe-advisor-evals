@@ -1,0 +1,18 @@
+{
+  "id": "SelfInvocationBypassesProxyAdvice",
+  "cwe": "862",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["InvoiceService.java", "MaintenanceController.java"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "InvoiceService.java",
+    "sink_line": 33,
+    "sink_code": "            deleteInvoice(invoice.getId());",
+    "summary": "processMonthEndCleanup deletes invoices via a same-class self-invocation of deleteInvoice(), which bypasses the Spring AOP proxy and silently skips its @PreAuthorize(\"hasRole('ADMIN')\") check, and the endpoint reaching processMonthEndCleanup requires only authentication, not an admin role."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "SocketIoEventHandlerMissingPerEventCheck",
+  "cwe": "862",
+  "language": "javascript",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["chatServer.js"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "chatServer.js",
+    "sink_line": 52,
+    "sink_code": "    socket.on('admin:broadcastMessage', (payload) => {",
+    "summary": "The admin:broadcastMessage handler relies on the connection-time io.use() authentication middleware, which runs once per connection rather than per event, so it broadcasts to every client with no role check confirming the caller is an admin."
+  }
+}

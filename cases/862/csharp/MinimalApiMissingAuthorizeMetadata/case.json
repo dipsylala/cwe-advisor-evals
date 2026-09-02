@@ -1,0 +1,23 @@
+{
+  "id": "MinimalApiMissingAuthorizeMetadata",
+  "cwe": "862",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "Program.cs",
+    "DocumentEndpoints.cs",
+    "DocumentsController.cs",
+    "DocumentService.cs"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "Program.cs",
+    "sink_line": 29,
+    "sink_code": "app.MapDelete(\"/api/documents/{id}\", DocumentEndpoints.DeleteDocument);",
+    "summary": "The Minimal API document delete route carries no [Authorize] attribute and no .RequireAuthorization() call, and with no global FallbackPolicy configured it is reachable by unauthenticated callers even though the sibling MVC DocumentsController is protected with [Authorize]."
+  }
+}

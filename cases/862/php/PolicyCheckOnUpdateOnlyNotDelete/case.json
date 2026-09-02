@@ -1,0 +1,22 @@
+{
+  "id": "PolicyCheckOnUpdateOnlyNotDelete",
+  "cwe": "862",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "OrderPolicy.php",
+    "OrderController.php",
+    "routes_web.php"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "OrderController.php",
+    "sink_line": 35,
+    "sink_code": "        $order->delete();",
+    "summary": "destroy() deletes the route-bound Order without calling Gate::authorize('delete', $order) or any other check, even though OrderPolicy::delete() already exists and enforces owner-only access, and the sibling update() action on the same controller does call Gate::authorize('update', $order)."
+  }
+}

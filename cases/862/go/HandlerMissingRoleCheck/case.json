@@ -1,0 +1,18 @@
+{
+  "id": "HandlerMissingRoleCheck",
+  "cwe": "862",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["handler.go"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "handler.go",
+    "sink_line": 65,
+    "sink_code": "\tif err := h.Accounts.SuspendUser(r.Context(), req.UserID); err != nil {",
+    "summary": "SuspendUserHandler reads the authenticated caller from the request context to confirm they are logged in, then suspends the target account with no check that the caller's role is admin"
+  }
+}

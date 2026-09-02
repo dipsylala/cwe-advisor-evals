@@ -1,0 +1,41 @@
+@page "/admin/accounts/{UserId}"
+@using Microsoft.AspNetCore.Components.Authorization
+@inject IAccountService AccountService
+@inject NavigationManager NavigationManager
+
+<h3>Account: @UserId</h3>
+
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <p>Signed in as @context.User.Identity?.Name.</p>
+        <button class="btn btn-danger" @onclick="DeleteAccount" disabled="@isDeleting">Delete Account</button>
+    </Authorized>
+    <NotAuthorized>
+        <p>You do not have permission to manage this account.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@if (isDeleting)
+{
+    <p>Deleting account...</p>
+}
+
+@code {
+    [Parameter]
+    public string UserId { get; set; } = string.Empty;
+
+    private bool isDeleting;
+
+    // Invoked by the "Delete Account" button, which <AuthorizeView Roles="Admin">
+    // only renders for admins. AuthorizeView controls rendering, not invocation:
+    // this method is a regular event handler and runs for whoever calls it.
+    private async Task DeleteAccount()
+    {
+        isDeleting = true;
+
+        // SAST FINDING: CWE-862 (Missing Authorization) reported here. Sink is the next statement.
+        await AccountService.DeleteAccountAsync(UserId);
+
+        NavigationManager.NavigateTo("/admin/accounts");
+    }
+}

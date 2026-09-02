@@ -1,0 +1,24 @@
+{
+  "id": "MethodSecurityNotEnabledGlobally",
+  "cwe": "862",
+  "language": "java",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "UserAccountService.java",
+    "UserAccountController.java",
+    "UserAccountRepository.java",
+    "UserAccount.java",
+    "SecurityConfig.java"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "UserAccountService.java",
+    "sink_line": 18,
+    "sink_code": "        userAccountRepository.deleteById(userId);",
+    "summary": "deleteUserAccount is annotated @PreAuthorize(\"hasRole('ADMIN')\"), but no configuration class anywhere in the application applies @EnableMethodSecurity, so Spring never registers the method security interceptor and the annotation is never evaluated - any authenticated caller can delete any user account."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "DefaultPermissionClassesUnsetAllowAny",
+  "cwe": "862",
+  "language": "python",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": [
+    "views.py",
+    "serializers.py",
+    "models.py",
+    "urls.py",
+    "settings.py"
+  ],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "views.py",
+    "sink_line": 8,
+    "sink_code": "class ApiKeyViewSet(viewsets.ModelViewSet):",
+    "summary": "ApiKeyViewSet sets no permission_classes and the project's REST_FRAMEWORK settings never define DEFAULT_PERMISSION_CLASSES, so DRF falls back to AllowAny and every action - list, retrieve, create, and destroy of internal API keys - is reachable by unauthenticated callers."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "BlazorAuthorizeViewHandlerUnchecked",
+  "cwe": "862",
+  "language": "csharp",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["AdminAccountPanel.razor"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "AdminAccountPanel.razor",
+    "sink_line": 37,
+    "sink_code": "        await AccountService.DeleteAccountAsync(UserId);",
+    "summary": "The DeleteAccount event handler deletes the account with no server-side role or policy check, relying only on the AuthorizeView Roles=\"Admin\" wrapper that hides the button in the UI without gating the handler itself."
+  }
+}

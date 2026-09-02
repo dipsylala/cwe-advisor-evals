@@ -1,0 +1,18 @@
+{
+  "id": "GateAllowsResultIgnored",
+  "cwe": "862",
+  "language": "php",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["OrderController.php"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "OrderController.php",
+    "sink_line": 24,
+    "sink_code": "        Gate::allows('update', $order);",
+    "summary": "update() calls Gate::allows('update', $order) but never checks or acts on the returned boolean, so the order's shipping address and status are saved regardless of whether the authenticated user is authorized to update it."
+  }
+}

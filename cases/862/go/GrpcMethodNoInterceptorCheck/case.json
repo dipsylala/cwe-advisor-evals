@@ -1,0 +1,18 @@
+{
+  "id": "GrpcMethodNoInterceptorCheck",
+  "cwe": "862",
+  "language": "go",
+  "source": "authored",
+  "kind": "true_positive",
+  "depth": 1,
+  "group": "reviewed",
+  "files": ["GrpcMethodNoInterceptorCheck.go"],
+  "finding": {
+    "cwe": "CWE-862",
+    "name": "Missing Authorization",
+    "file": "GrpcMethodNoInterceptorCheck.go",
+    "sink_line": 42,
+    "sink_code": "\t_, err := s.DB.ExecContext(ctx, \"DELETE FROM projects WHERE id = ?\", req.ProjectId)",
+    "summary": "DeleteProject deletes a project by ID with no authorization check on the caller, and the gRPC server is built with grpc.NewServer() and no interceptor chain (ChainUnaryInterceptor) registered anywhere, so no authentication or permission enforcement runs before any RPC"
+  }
+}
