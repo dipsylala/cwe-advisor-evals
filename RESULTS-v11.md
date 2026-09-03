@@ -45,18 +45,18 @@ vs 2.00/2.00 (B).
 
 Across three languages, arm B's CWE-502 fixes repeatedly replace the vulnerable deserializer with a
 different wire format (gob/PHP-serialize -> JSON) as part of closing the gadget-chain vector, and
-several write-ups do not flag this as a breaking compatibility change for existing producers/callers
-- the pattern the harness's own `no_harm` rubric is built to catch. All three judges independently
-made the identical, specific observation on each case, unprompted:
+several write-ups do not flag this as a breaking compatibility change for existing producers or
+callers - the pattern the harness's own `no_harm` rubric is built to catch. All three judges
+independently made the identical, specific observation on each case, unprompted:
 
 - **`OrderEventQueueDeserialize` (java)** - fix_quality 1.00, no_harm 0.00 (all 3 judges). All three
   independently state the fix calls `ObjectInputFilter.Config.setSerialFilter()` inside a per-message
   `onMessage()` handler; that setter is process-wide and documented as callable at most once per JVM
-  (`IllegalStateException` on a second call), so the fix breaks every message after the first. This
-  is consistent with the `ObjectInputFilter.Config` javadoc contract (set-once, not per-stream) and
-  with this repo's own prior note on the adjacent `jdk.serialFilter` system property - not
-  independently reproduced against a live JVM in this session, so treat as corroborated, not
-  confirmed, before editing `cwe/502/java`.
+  (`IllegalStateException` on a second call), so the fix breaks every message after the first.
+  **Reproduced** on JDK 26: a second `Config.setSerialFilter()` call throws
+  `IllegalStateException: Serial filter can only be set once`. `cwe/502/java` never mentions the
+  per-stream `ois.setObjectInputFilter()` / process-wide `Config.setSerialFilter()` distinction -
+  a guidance gap, not a model slip.
 - **`CartCookieDecodeUnserialize`, `CartLegacySerializedMigration` (php)** - no_harm 1.00 (both,
   unanimous across judges). The fix swaps `unserialize()` for `json_decode()`, which closes the
   gadget-chain vector but silently breaks decoding of any cookie written by an existing
@@ -105,9 +105,12 @@ Full tables in this run's raw `analyse.py` output (not committed separately - re
 - **`must_preserve` still not passed to judges** - same standing gap as every prior run.
 - **Judging was sharded** (19 shards of up to 40 runs x 3 judges), same deviation from HARNESS.md
   Step 5 as runs 8 and 10, needed at this pool size for judge context.
-- **The CWE-502 finding is corroborated, not independently verified.** The `ObjectInputFilter`
-  set-once claim matches the documented javadoc contract and this repo's own prior notes on the
-  adjacent system-property API, but was not reproduced against a live JVM in this session.
+- **Two judge claims were reproduced directly, the rest were not.** The `ObjectInputFilter`
+  set-once claim (JDK 26) and the `crypto/rand.Text()` single-return compile error
+  (`330/go/MathRandSessionId` arm B, 0.00 fix - Go 1.25) were both run and confirmed. Other
+  judge-stated mechanisms (multer `file.buffer` absent inside `fileFilter`, `@fastify/csrf-protection`
+  needing an explicit hook, `size_t` underflow in `125/cpp/TelemetryClaimedLengthRead`) are plausible
+  and unanimous across judges but were not reproduced here - check before editing an entry on them.
 - **Not a controlled before/after against any single prior run** - the corpus grew substantially
   since run 10 (new top-15 depth and fix-complexity cases dominate the increase), so run 11's
   aggregate numbers are informative on their own terms but not a clean isolate of any one variable
