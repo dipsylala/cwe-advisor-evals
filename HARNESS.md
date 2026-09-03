@@ -126,6 +126,11 @@ Writes the pool to `--out` and `arm-map.json` beside it. It strips any `Behaviou
 prints a leak check, and reports the per-arm counts. Confirm every file carries the same section
 headings before going further - a heading only one arm produces identifies that arm.
 
+Where a case states a `must_preserve` contract, the blinded file's header carries it as a
+`Contract to preserve:` line (from run 12 on), so judges score `no_harm` against the stated contract
+rather than each inventing their own. `trap` and `origin` are never copied through - they name the
+intended wrong fix and would tell a judge what to look for.
+
 ## Step 5 - score blind
 
 At least three judges, each an independent agent, each scoring the whole pool. Judges read the case
@@ -146,6 +151,10 @@ Do NOT read: case.json in any case directory, anything else under {repo}/evals/,
 
 Every finding here has been confirmed as a real issue, so the question is not whether to fix but
 how well it was fixed.
+
+Where a write-up's header carries a "Contract to preserve:" line, that is the sink's stated
+contract - score no_harm against it, not against your own reading of what the original preserved.
+Where there is no such line, derive the contract from the case files as usual.
 
 Score each:
 

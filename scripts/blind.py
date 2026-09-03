@@ -20,6 +20,10 @@ Two things this does that matter:
   produced, not its account of itself.
 - Each blinded file is prefixed with the finding the arm was given, so a judge can check the claim
   without opening case.json - which holds the answer.
+- Where the case states a must_preserve contract, it is copied into that header as
+  'Contract to preserve:' so every judge scores no_harm against the same stated contract instead
+  of inventing one (run 11: 63 of 91 arm-B no_harm misses were judge splits). trap and origin are
+  never copied - they name the intended wrong fix and would tell a judge what to look for.
 
 Writes <out>/<rid>.md and <out>/arm-map.json next to it. (Older invocations of this script wrote
 the map to <out>/../arm-map.json - fine for a throwaway --out like /tmp/blind-v4, but a repo-local
@@ -94,11 +98,14 @@ def main():
         body = io.open(os.path.join(d, cid + '.md'), encoding='utf-8').read()
         body = SELF_REPORT.split(body, maxsplit=1)[0].rstrip() + '\n'
         f = c['finding']
+        header = (f"# {rid}\n\n"
+                  f"Case directory: `{c['dir']}/` ({c['depth']} file(s) in the call chain)\n"
+                  f"Scanner reported: {f['cwe']} ({f['name']}) in `{f['file']}` line {f['sink_line']}\n"
+                  f"Reported sink: `{f['sink_code']}`\n")
+        if c.get('must_preserve'):
+            header += f"Contract to preserve: {c['must_preserve']}\n"
         io.open(os.path.join(args.out, rid + '.md'), 'w', encoding='utf-8', newline='').write(
-            f"# {rid}\n\n"
-            f"Case directory: `{c['dir']}/` ({c['depth']} file(s) in the call chain)\n"
-            f"Scanner reported: {f['cwe']} ({f['name']}) in `{f['file']}` line {f['sink_line']}\n"
-            f"Reported sink: `{f['sink_code']}`\n\n---\n\n{body}\n")
+            header + f"\n---\n\n{body}\n")
 
     out_map = os.path.join(args.out, 'arm-map.json')
     io.open(out_map, 'w', encoding='utf-8', newline='').write(json.dumps(mapping, indent=2) + '\n')

@@ -181,11 +181,15 @@ special.
 
 ### Known gaps
 
-- **`no_harm` doesn't see `must_preserve` yet.** The judge prompt in HARNESS.md withholds all of
-  `case.json`, including the contract `must_preserve` states, so judges apply their own reading of
-  what the original preserved and can disagree with each other over it (9 of 20 runs disagreed in
-  run 4). Passing the stated contract into the judge prompt without revealing which fix is the trap
-  is the obvious next fix. This is separate from the disclosure gap below, which is fixed.
+- **`no_harm` sees `must_preserve` from run 12 on, not retroactively.** Through run 11 the judge
+  prompt withheld all of `case.json`, including the contract `must_preserve` states, so judges
+  applied their own reading of what the original preserved and disagreed with each other over it
+  (9 of 20 runs in run 4; 63 of the 91 arm-B `no_harm` misses in run 11 were judge splits rather
+  than unanimous defects). `scripts/blind.py` now copies `must_preserve` into the blinded header as
+  `Contract to preserve:` - never `trap` or `origin`, which would reveal the intended wrong fix -
+  and the judge prompt in HARNESS.md scores against it. Runs 1-11's `no_harm` numbers were scored
+  without it and are not directly comparable to a later run's. This is separate from the disclosure
+  gap below, which was fixed earlier.
 - **`no_harm`'s disclosed-vs-silent gap is fixed going forward, not retroactively.** Runs 4 and 6
   both found the old rubric scored a disclosed limitation the same as a silent one - run 4 saw
   declared scope creep cost a point, run 6 saw a model that honestly declined to guess an
