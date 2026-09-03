@@ -20,12 +20,13 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Ten runs so far - see **Past runs** below for the run-by-run detail, headline, and results file for
-each. In short: `fix_quality` saturates on Sonnet 5 across every corpus size and composition tested
-so far; on Haiku 4.5 it has shown a real gap, a near-tie, and a smaller reopened gap across three
-re-runs as the corpus grew and specific guidance defects got found and fixed - model and corpus are
-both live confounds, not settled variables. `no_harm` (whether a fix silently breaks or changes
-something the sink's caller depended on) has consistently shown guidance's small edge on Sonnet 5.
+Eleven runs so far - see **Past runs** below for the run-by-run detail, headline, and results file
+for each. In short: `fix_quality` saturates on Sonnet 5 across every corpus size and composition
+tested so far; on Haiku 4.5 it has shown a real gap, a near-tie, a smaller reopened gap, and now a
+comparable gap holding at nearly double the corpus size, across four re-runs as the corpus grew and
+specific guidance defects got found and fixed - model and corpus are both live confounds, not
+settled variables. `no_harm` (whether a fix silently breaks or changes something the sink's caller
+depended on) has consistently shown guidance's small edge on Sonnet 5, and no such edge on Haiku 4.5.
 See **Known gaps** below for what remains unverified rather than just measured.
 
 ## Corpus
@@ -45,7 +46,7 @@ cases/
 Cases accumulate here rather than being versioned into a new directory per run - git holds the
 history. Run records under `runs*/` name cases by id, so ids are stable once published.
 
-Current contents: 233 cases across 26 CWEs and nine languages (perl added by the CWE-79 depth
+Current contents: 372 cases across 27 CWEs and nine languages (perl added by the CWE-79 depth
 batch below; c and cpp added by the top-15 fix-complexity batch). Five sources:
 
 | `source` | n | What it is |
@@ -209,12 +210,13 @@ special.
   pinned to Sonnet 5, and found a real `fix_quality` gap Sonnet 5 never showed on the same cases.
   Run 8 repeated the identical Haiku-vs-Sonnet pairing after the corpus grew to 203 cases and found
   the gap collapsed to a near-tie; run 10 repeated it again after fixing three guidance defects run
-  8 found, and the gap partially reopened (+0.05, well short of run 7's +0.13) - see runs 7, 8, and
-  10's rows below. Model choice, corpus size/composition, and specific entry defects are all now
-  demonstrated confounds; a third model (mid-tier, or a different vendor) is still the obvious next
-  test, and it should be run against a fixed, unchanging corpus and guidance snapshot if the goal is
-  to isolate the model variable cleanly. Run 9 (Sonnet 5 on the full corpus) at least confirms
-  Sonnet's own saturation is stable across both corpus size and the guidance fixes.
+  8 found, and the gap partially reopened (+0.05, well short of run 7's +0.13); run 11 repeated it
+  again after the corpus nearly doubled to 372 cases and found a comparable gap (+0.07) - see runs 7,
+  8, 10, and 11's rows below. Model choice, corpus size/composition, and specific entry defects are
+  all now demonstrated confounds; a third model (mid-tier, or a different vendor) is still the
+  obvious next test, and it should be run against a fixed, unchanging corpus and guidance snapshot if
+  the goal is to isolate the model variable cleanly. Run 9 (Sonnet 5 on the full corpus) at least
+  confirms Sonnet's own saturation is stable across both corpus size and the guidance fixes.
 
 ## Past runs
 
@@ -230,3 +232,4 @@ special.
 | 8 | Full 203-case corpus (grown from run 7's 79), same Haiku-4.5-vs-Sonnet-5 pairing | 406 (203 x 2 arms) | Does run 7's Haiku `fix_quality` gap hold once the corpus nearly triples and adds deliberate wrong-fix traps? | No - collapses to a near-tie (1.86 A / 1.86 B); `no_harm` now slightly favours *no* guidance (1.86 A / 1.80 B). Traced three guidance defects the harder corpus exposed and both arms' actual generated code (or Microsoft's own docs) confirmed directly: `cwe/90/java` omitted that `DirContext.search()`'s `filterArgs` overload requires a `SearchControls` argument (guided arm's fix didn't compile in 3/4 CWE-90 multi-file cases); `cwe/117/javascript` named Unicode code points without their JS escape syntax (guided arm pasted raw control characters into a regex literal, a `SyntaxError`); `cwe/352/csharp` didn't note that `app.UseAntiforgery()` never validates a JSON-bound minimal API endpoint, which both arms independently missed on the same case. All three fixed | [RESULTS-v8.md](RESULTS-v8.md) |
 | 9 | Full 203-case corpus, Sonnet 5 for both arms (first Sonnet pass at this scale) | 406 (203 x 2 arms) | Does run 5's Sonnet-5 saturation hold on the full, harder corpus, after run 8's fixes? | Yes - `fix_quality` saturates again (1.98 A / 1.98 B), `no_harm` keeps its small guided edge (1.88 A / 1.91 B), replicating run 5's pattern at more than twice the scale | [RESULTS-v9.md](RESULTS-v9.md) |
 | 10 | Run 8's identical 203-case corpus, Haiku 4.5 for both arms (direct before/after on run 8's three fixes) | 406 (203 x 2 arms) | Did run 8's three guidance fixes actually work? | Mostly - a small `fix_quality` gap reopens (1.85 A / 1.90 B). Verified case-by-case, not just in aggregate: all three previously-broken CWE-90 Java cases now score a clean 2.00/2.00 for the guided arm (up from 0.67), and the CWE-352/csharp case rose to 2.00/1.67 while the unguided arm - unaffected by the fix - stayed poor on the same case. The CWE-117/javascript fix only partially held: Haiku pasted a raw Unicode character into fresh code again, independent of the (now-correct) guidance text - a model execution slip, not a remaining documentation gap | [RESULTS-v10.md](RESULTS-v10.md) |
+| 11 | Full 372-case corpus (grown from run 10's 203 via ongoing breadth/depth campaigns), Haiku 4.5 for both arms | 744 (372 x 2 arms) | Does the Haiku `fix_quality` gap hold at nearly double the corpus size? | Yes, comparably - +0.07 (1.82 A / 1.89 B), between run 10's +0.05 and run 7's original +0.13; `no_harm` stays flat/slightly negative for the guided arm (1.81 A / 1.79 B), same as runs 8 and 10. CWE-94 and CWE-90 show guidance's clearest wins, concentrated in cases needing an architectural fix (sandbox/remove a dynamic-execution engine) rather than a local patch. New finding: a reproducible, cross-language (java/php/go) `no_harm` pattern where guided CWE-502 fixes swap wire format (gob/PHP-serialize -> JSON) without fully disclosing the breaking change - flagged for follow-up, not yet fixed | [RESULTS-v11.md](RESULTS-v11.md) |
