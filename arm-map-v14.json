@@ -1,0 +1,562 @@
+{
+  "R101": {
+    "arm": "A-post",
+    "case": "EvalRestrictedBuiltinsFormula",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R102": {
+    "arm": "A-pre",
+    "case": "FlaskAutoescapeDisabled",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R103": {
+    "arm": "B-post",
+    "case": "CalleeFreesCallerKeepsUsing",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R104": {
+    "arm": "A-pre",
+    "case": "CalleeFreesCallerKeepsUsing",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R105": {
+    "arm": "B-post",
+    "case": "DjangoMarkSafeMisuse",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R106": {
+    "arm": "A-post",
+    "case": "DoubleFreeCallbackStructField",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R107": {
+    "arm": "B-pre",
+    "case": "FlaskRenderTemplateStringSSTI",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R108": {
+    "arm": "B-post",
+    "case": "FlaskRenderTemplateStringSSTI",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R109": {
+    "arm": "A-post",
+    "case": "MultiFileViewRelayXss",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R110": {
+    "arm": "B-post",
+    "case": "LinkedListFreeThenAdvance",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R111": {
+    "arm": "B-pre",
+    "case": "LinkedListFreeThenAdvance",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R112": {
+    "arm": "A-post",
+    "case": "FlaskAutoescapeDisabled",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R113": {
+    "arm": "A-pre",
+    "case": "DoubleFreeCallbackStructField",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R114": {
+    "arm": "B-pre",
+    "case": "MultiFileTemplatePreviewInjection",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R115": {
+    "arm": "A-post",
+    "case": "ReallocMoveStaleAliasUse",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R116": {
+    "arm": "B-pre",
+    "case": "EvalRestrictedBuiltinsFormula",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R117": {
+    "arm": "A-pre",
+    "case": "LdapFilterFromQuery",
+    "cwe": "90",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R118": {
+    "arm": "A-pre",
+    "case": "LinkedListFreeThenAdvance",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R119": {
+    "arm": "A-post",
+    "case": "LinkedListFreeThenAdvance",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R120": {
+    "arm": "A-post",
+    "case": "DjangoMarkSafeMisuse",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R121": {
+    "arm": "B-pre",
+    "case": "MultiFileViewRelayXss",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R122": {
+    "arm": "A-pre",
+    "case": "MultiFileTemplatePreviewInjection",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R123": {
+    "arm": "B-post",
+    "case": "ImportlibDynamicModuleName",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R124": {
+    "arm": "A-pre",
+    "case": "ExecUserSuppliedCode",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R125": {
+    "arm": "B-pre",
+    "case": "CalleeFreesCallerKeepsUsing",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R126": {
+    "arm": "B-post",
+    "case": "MultiFileTemplatePreviewInjection",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R127": {
+    "arm": "B-pre",
+    "case": "FlaskAutoescapeDisabled",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R128": {
+    "arm": "A-post",
+    "case": "ExecUserSuppliedCode",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R129": {
+    "arm": "B-pre",
+    "case": "ExecUserSuppliedCode",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R130": {
+    "arm": "A-pre",
+    "case": "FlaskRenderTemplateStringSSTI",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R131": {
+    "arm": "B-post",
+    "case": "LdapFilterFromQuery",
+    "cwe": "90",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R132": {
+    "arm": "B-pre",
+    "case": "ImportlibDynamicModuleName",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R133": {
+    "arm": "A-pre",
+    "case": "ImportlibDynamicModuleName",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R134": {
+    "arm": "B-pre",
+    "case": "ReallocMoveStaleAliasUse",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R135": {
+    "arm": "A-post",
+    "case": "ManualHtmlConstructionPython",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R136": {
+    "arm": "A-post",
+    "case": "ImportlibDynamicModuleName",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R137": {
+    "arm": "A-pre",
+    "case": "DjangoMarkSafeMisuse",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R138": {
+    "arm": "B-post",
+    "case": "ExecUserSuppliedCode",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R139": {
+    "arm": "B-pre",
+    "case": "LdapFilterFromQuery",
+    "cwe": "90",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R140": {
+    "arm": "A-post",
+    "case": "LdapFilterFromQuery",
+    "cwe": "90",
+    "language": "javascript",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "unreviewed",
+    "source": "authored"
+  },
+  "R141": {
+    "arm": "B-post",
+    "case": "ManualHtmlConstructionPython",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R142": {
+    "arm": "B-pre",
+    "case": "DjangoMarkSafeMisuse",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R143": {
+    "arm": "A-post",
+    "case": "CalleeFreesCallerKeepsUsing",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R144": {
+    "arm": "A-post",
+    "case": "FlaskRenderTemplateStringSSTI",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R145": {
+    "arm": "A-pre",
+    "case": "ReallocMoveStaleAliasUse",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R146": {
+    "arm": "B-post",
+    "case": "MultiFileViewRelayXss",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R147": {
+    "arm": "B-post",
+    "case": "EvalRestrictedBuiltinsFormula",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R148": {
+    "arm": "A-pre",
+    "case": "ManualHtmlConstructionPython",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R149": {
+    "arm": "B-post",
+    "case": "DoubleFreeCallbackStructField",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R150": {
+    "arm": "B-pre",
+    "case": "DoubleFreeCallbackStructField",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R151": {
+    "arm": "B-pre",
+    "case": "ManualHtmlConstructionPython",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R152": {
+    "arm": "A-pre",
+    "case": "EvalRestrictedBuiltinsFormula",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R153": {
+    "arm": "B-post",
+    "case": "FlaskAutoescapeDisabled",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R154": {
+    "arm": "A-post",
+    "case": "MultiFileTemplatePreviewInjection",
+    "cwe": "94",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 3,
+    "group": "reviewed",
+    "source": "authored-top15-fix-complexity"
+  },
+  "R155": {
+    "arm": "A-pre",
+    "case": "MultiFileViewRelayXss",
+    "cwe": "79",
+    "language": "python",
+    "kind": "true_positive",
+    "depth": 2,
+    "group": "reviewed",
+    "source": "authored"
+  },
+  "R156": {
+    "arm": "B-post",
+    "case": "ReallocMoveStaleAliasUse",
+    "cwe": "416",
+    "language": "c",
+    "kind": "true_positive",
+    "depth": 1,
+    "group": "reviewed",
+    "source": "authored"
+  }
+}
