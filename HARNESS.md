@@ -244,3 +244,21 @@ sample size, a confounded cell, a prompt that was not preserved, a criterion at 
   judge's self-reported reproduction is not independently verified; treat a claim as unconfirmed
   until it is reproduced outside the judge's own transcript, especially before editing an entry
   because of it.
+- **The session limit kills a workflow mid-run, and its tally undercounts the disk.** Runs 13, 14
+  and 15 all lost arm or judge agents to the session limit (79 of 84 judges in one launch). The
+  outputs already written are fine; the workflow's own success count is not - it reported 5 where
+  10 valid judge files were on disk, and 13 where 14 arm outputs were. Recover by validating what
+  is on disk (every judge file parses and carries exactly its segment's run ids; every arm output is
+  a flat `<cwe>/<lang>/<id>.md`), passing the valid keys to the script as a done-set through `args`,
+  and relaunching - the script skips those and runs the rest under the identical prompt. Never
+  trust the tally; count the files.
+- **Agents inherit the launcher's working directory.** The Bash tool's `cd` persists across calls,
+  and Workflow agents start in whatever directory it was left in. Run 15's first arm launch went out
+  with `evals/` as the working directory, so every repo-root-relative path in the prompt pointed at
+  nothing and no output was written. `cd` to the repository root immediately before launching, and
+  tell manifest and judge agents the absolute root to `cd` to first.
+- **Arm agents nest or duplicate their output.** Some write `<id>/<id>.md` instead of `<id>.md`,
+  some leave an empty `<id>/` directory after a `mkdir -p` on the file path, and one wrote a
+  byte-identical copy to a mangled `E:Github...` path. `scripts/blind.py` reads one level only, so
+  flatten (move `<id>/<id>.md` up, delete empty directories) and recount before blinding; the
+  count must equal the case count exactly.
