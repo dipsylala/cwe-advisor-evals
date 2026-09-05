@@ -29,6 +29,17 @@ the knowledge base. Add further arms (an older skill revision, a variant entry) 
 own output directory - the scripts take arm directories as arguments and use the directory name as
 the label.
 
+**From run 15 the control is a frozen sample, not a fresh one.** Arm A never reads `cwe/`, so an
+entry or SKILL.md edit cannot move it; re-running it only re-samples the model (run 11 -> 13 moved
+it -0.03 / -0.05 on 372 cases with nothing changed, and -0.10 / -0.23 on a 14-case subset). Keep one
+arm-A sample per corpus version - `runs-v15/A` is run 13's outputs with the 14 cases in the slots
+re-edited after it taken from run 14 - and copy it into every later run's pool so the same judge
+panel scores it beside the fresh B set. Panels drift too, so carry A's text forward, never its
+scores: A's movement between runs is then the panel's, and B's movement beyond it is the change
+under test. Copying the previous B set's text in as well (`B-pre`) measures the edit directly under
+identical judging for the cost of judge agents only. Re-sample A when the corpus changes, or on a
+small fixed subset when a fresh estimate of the sample floor is needed.
+
 **A runner or judge that has already read the knowledge base cannot credibly produce arm A.** Run
 each arm and each judge as a separate agent with its own context.
 
