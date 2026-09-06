@@ -38,7 +38,10 @@ panel scores it beside the fresh B set. Panels drift too, so carry A's text forw
 scores: A's movement between runs is then the panel's, and B's movement beyond it is the change
 under test. Copying the previous B set's text in as well (`B-pre`) measures the edit directly under
 identical judging for the cost of judge agents only. Re-sample A when the corpus changes, or on a
-small fixed subset when a fresh estimate of the sample floor is needed.
+small fixed subset when a fresh estimate of the sample floor is needed. The reuse key for a frozen
+sample is everything that produced it: the corpus commit and fixture contents, the arm model, the
+arm prompt, and the execution settings - not the corpus version alone. Any of those changing means
+a fresh A.
 
 **A runner or judge that has already read the knowledge base cannot credibly produce arm A.** Run
 each arm and each judge as a separate agent with its own context.
@@ -70,6 +73,10 @@ Substitute the bracketed values from `case.json`. The current scope is confirmed
 a static analysis tool has found a real issue and we are helping resolve it - so the arm is told
 the finding is confirmed rather than asked to adjudicate it. Do not add prompt language asking the
 arm to verify whether the scanner is right unless the run is explicitly about false positives.
+
+Create the output tree first with `python evals/scripts/collect.py mkdirs evals/runs-v4/A` (and `B`),
+so no agent has to create a directory - from run 13 on, agents asked to create the parent of
+their output path produced dozens of `<id>/<id>.md` nestings and empty `<id>/` directories.
 
 ### Arm A prompt (control)
 
@@ -126,6 +133,17 @@ git status --porcelain evals/cases
 ```
 
 Must be empty. A runner that edited a fixture has contaminated every later arm.
+
+Then collect and validate each arm mechanically:
+
+```sh
+python evals/scripts/collect.py arm evals/runs-v4/A --out /tmp/done-A.json
+```
+
+It flattens any `<id>/<id>.md`, removes empty directories and stray scratch files, checks the
+required headings, compares the set of write-ups against the corpus, and writes the done-set the
+arm workflow takes as `args` to run only what is missing. Never trust a workflow's own success
+tally - count the files.
 
 ## Step 4 - blind the outputs
 
@@ -197,6 +215,53 @@ All {n} must be present. Reply with just the path and the count.
 
 Add `source_identified` and `verdict_correct` to the rubric only if the run includes cases whose
 exploitability the arm must determine. Under the current true-positive scope it is given.
+
+### Bundled judging (from run 16)
+
+Measured on run 16's judges under the prompt above, the median judge agent took 31 turns and
+re-sent about 120k tokens of context on each of them (3.7M input tokens per judge, most of it
+cache reads), spent a third of its tool calls discovering and reading case files, and called
+WebSearch three times. Validated on run 15's segment s3 against its own three-judge panel, judges
+given a prepared bundle instead agreed with the original scores on 35 of 40 `fix_quality` and 33
+of 40 `no_harm` means, were slightly stricter (-0.12 / -0.16), took 7-19 turns, and caught two
+compile errors the original panel had passed (an invented `com.googlecode.owasp...` package where
+the jar has `org.owasp.html`; two interpolated strings concatenated into a plain `string` where
+`ExecuteSqlInterpolatedAsync` needs a `FormattableString`) - both reproduced before being believed.
+The same bundles judged by the restricted `cwe-judge` agent type (below) agreed on 33 and 30 of 40,
+split among themselves on 1 and 2 write-ups against the original panel's 4 and 6, started each
+turn from 17.8k tokens of context instead of 45k, and spent more turns compiling (9-28, mostly
+Bash). Per write-up that is roughly 62k input tokens against the old protocol's 92k - a smaller
+saving than the turn count suggests, because the judges now verify by building - with a stricter
+and more consistent panel. From run 16 the protocol is:
+
+```sh
+python evals/scripts/bundle.py /tmp/blind-v4 --out /tmp/bundle-v4 --max-bytes 80000
+```
+
+Each `s<idx>.md` holds every blinded write-up in that segment followed by the complete contents of
+its case directory, minus `case.json` and anything that is not source; segments are packed by
+size so each fits one Read. `index.json` records which run ids are in which segment. The judge
+prompt is the one above with the "Write-ups:" and "Do NOT read:" lines replaced by
+
+```text
+Everything you need is in one bundle file: {bundle-dir}/s{idx}.md
+Read it in full (use offset and limit if a single Read does not return all of it). It contains
+each write-up followed by the complete contents of its case directory. Do not read anything else
+on disk and do not search the web; if a specific claim can only be settled by compiling or
+running something, you may do that with Bash in a scratch directory outside the repository and
+say so in the note.
+```
+
+Dispatch judges as the `cwe-judge` agent type (`.claude/agents/cwe-judge.md`: Read, Write and Bash
+only, so the judge carries no web search or MCP tool surface), and validate with
+
+```sh
+python evals/scripts/collect.py judges /tmp/scores-v4 --index /tmp/bundle-v4/index.json
+```
+
+which prints the done-set of valid `s<idx>-<j>` keys for a relaunch. The rubric, the three
+judges per write-up, and the one-pool blinding are unchanged; only what the judge is handed and
+what it can reach changed.
 
 ## Step 6 - analyse
 
