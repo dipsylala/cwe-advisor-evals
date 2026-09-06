@@ -168,9 +168,11 @@ def cmd_judges(args):
             if not isinstance(d, dict) or set(d) != want:
                 problems.append((key, f'{len(d) if isinstance(d, dict) else "?"} keys, expected {len(want)}'))
                 continue
-            bad = [r for r in want if not (isinstance(d[r], dict) and 'fix_quality' in d[r] and 'no_harm' in d[r])]
+            bad = [r for r in want if not (isinstance(d[r], dict)
+                                           and d[r].get('fix_quality') in (0, 1, 2)
+                                           and d[r].get('no_harm') in (0, 1, 2))]
             if bad:
-                problems.append((key, f'{len(bad)} entries lack fix_quality/no_harm'))
+                problems.append((key, f'{len(bad)} entries lack an integer 0-2 fix_quality/no_harm: {bad[:3]}'))
                 continue
             valid.append(key)
     total = len(segments) * args.judges
