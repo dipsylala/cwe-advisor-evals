@@ -1,0 +1,18 @@
+{
+  "R1165": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom-based 128-bit URL-safe token cleanly replaces Math.random(); used identically as cookie/session value, no other behavior change."},
+  "R1166": {"fix_quality": 2, "no_harm": 2, "note": "Full PreparedStatement rewrite with correctly scoped resource cleanup; compiles and preserves query semantics."},
+  "R1167": {"fix_quality": 1, "no_harm": 2, "note": "Removes cmd.exe shell but still concatenates host into a single Arguments string instead of using ArgumentList, leaving Windows argv-parsing based flag/argument injection into ping.exe unaddressed."},
+  "R1168": {"fix_quality": 1, "no_harm": 1, "note": "Core query replacement is correct, but the 'additionally' instructions re-declare preparedStatement inside the try block while telling the reader to close it in the finally block, an out-of-scope reference that would not compile as literally described, and this is not flagged."},
+  "R1169": {"fix_quality": 2, "no_harm": 2, "note": "Clean, correct move from ECB to AES-GCM with random nonce and tag persisted; no unrequested changes."},
+  "R1170": {"fix_quality": 2, "no_harm": 1, "note": "Correctly drops cmd.exe for a direct ping.exe argument array and also guards the leading-dash flag-injection gap; but arbitrarily caps previously-unrestricted pingCount to 1-4, a disclosed but real restriction of prior functionality."},
+  "R1171": {"fix_quality": 2, "no_harm": 1, "note": "Correct AES-GCM fix, but gratuitously widens the key to 32 bytes by duplicating the original 16 bytes, citing a 'guidance' not present in the case, an unrequested change to key material beyond the reported ECB-mode fix."},
+  "R1172": {"fix_quality": 2, "no_harm": 2, "note": "Replaces string-eval assert() with a direct boolean comparison; preserves the premium-check semantics for legitimate 'premium' values."},
+  "R1173": {"fix_quality": 2, "no_harm": 2, "note": "OWASP Encoder Encode.forHtml() applied at both interpolation points in the sink; correct context, no behavior change for benign input."},
+  "R1174": {"fix_quality": 2, "no_harm": 2, "note": "Adds offset >= 0 short-circuit check before the unsigned cast, exactly closing the sign-wraparound bypass while preserving the valid/invalid-window contract."},
+  "R1175": {"fix_quality": 2, "no_harm": 2, "note": "Standard CGI.pm escapeHTML() applied at the reported sink; preserves output for benign input, correctly neutralizes markup."},
+  "R1176": {"fix_quality": 2, "no_harm": 2, "note": "PDO prepare/execute with bound parameter; error-handling shape (false-return checks) preserved as before."},
+  "R1177": {"fix_quality": 1, "no_harm": 2, "note": "Chosen width (%255s) matches the destination buffer, not the 64-byte source (line) capacity; in the documented no-delimiter scenario sscanf can still read well past line's allocation before hitting the 255-char cap, so the described exploit is only bounded, not eliminated."},
+  "R1178": {"fix_quality": 2, "no_harm": 2, "note": "Rejects both absolute and protocol-relative ('//') redirects, correctly closing the open-redirect bypass with no impact on legitimate relative redirects."},
+  "R1179": {"fix_quality": 2, "no_harm": 2, "note": "Replaces attacker-controlled jku extraction with a hardcoded trusted JWKS URL; preserves ClaimsPrincipal return and throw-on-failure contract."},
+  "R1180": {"fix_quality": 2, "no_harm": 2, "note": "Adds Secure (closing the reported sink), plus HttpOnly/SameSite=Strict as disclosed defense-in-depth with an explicit caveat for cross-site flows."}
+}

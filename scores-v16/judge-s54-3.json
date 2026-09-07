@@ -1,0 +1,21 @@
+{
+  "R1060": {"fix_quality": 2, "no_harm": 2, "note": "Host+scheme rejection correctly blocks external and scheme-relative (//evil.com) and pseudo-protocol URLs; rejection response matches the existing catch-block pattern already in the file."},
+  "R1061": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist maps are exact-case only ('ASC'/'DESC'), so a previously-working lowercase dir value (e.g. 'asc') now throws instead of sorting; not disclosed."},
+  "R1062": {"fix_quality": 2, "no_harm": 2, "note": "Moves route to protectedMux exactly as required; handler's method check and 202/405 responses untouched."},
+  "R1063": {"fix_quality": 2, "no_harm": 1, "note": "Fully closes shell injection, but swaps ICMP ping for a TCP:80 connect test, changing the diagnostic's actual output (loses latency/packet-loss, differs for hosts with ICMP open/port80 closed or vice versa); the swap is stated but its functional impact is understated."},
+  "R1064": {"fix_quality": 2, "no_harm": 2, "note": "Removes the stale opt-out attribute; app-wide antiforgery filter now applies as intended, no other change."},
+  "R1065": {"fix_quality": 2, "no_harm": 2, "note": "Null check placed before dereference, short-circuits correctly, preserves 0/1 contract."},
+  "R1066": {"fix_quality": 2, "no_harm": 2, "note": "Moving username into Winston's meta object is JSON-stringified by format.simple(), which escapes newlines/control chars, closing the log-injection vector; log line format changes but no caller-facing behavior changes."},
+  "R1067": {"fix_quality": 2, "no_harm": 1, "note": "Type-constrained JSON deserialization is appropriate for BinaryFormatter (which has no safe fix); write-up openly states the wire-format swap is breaking and requires upstream producer changes, so existing binary payloads will fail without being silently unnoticed."},
+  "R1068": {"fix_quality": 2, "no_harm": 2, "note": "AST allowlist correctly restricts to arithmetic ops and known names, rejecting everything else; matches the stated contract."},
+  "R1069": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized EXEC call preserves the same stored-proc invocation and result set."},
+  "R1070": {"fix_quality": 2, "no_harm": 2, "note": "NUL-terminated copy fixes the OOB read; added %255s field width matches the 256-byte destination, no behavior change for valid input."},
+  "R1071": {"fix_quality": 2, "no_harm": 0, "note": "Closes the shell-injection vector, but querying only whois.iana.org (the root server) returns a TLD referral stub rather than actual registration data for virtually all domains (no referral-following), silently breaking the endpoint's stated purpose; write-up claims 'same format' output, which is false for common TLDs."},
+  "R1072": {"fix_quality": 2, "no_harm": 2, "note": "Array-form exec closes the reported shell-metacharacter injection; same ping arguments and output handling preserved."},
+  "R1073": {"fix_quality": 2, "no_harm": 0, "note": "Sandbox/newInstance(false) is an appropriate JEXL hardening API, but the added regex allowlist excludes quote characters, so it rejects the class's own documented example expression (region == 'EMEA') and any string-literal comparison, silently breaking the feature."},
+  "R1074": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check against calibrationTable.size() correctly rejects out-of-range channel writes, no change for valid indices."},
+  "R1075": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist matches the original SELECT columns including default created_at; rejects unknown sort keys as required."},
+  "R1076": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(32) hex token is a purely internal value with no external format contract; closes the predictability issue cleanly."},
+  "R1077": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check preserves the existing rawReading fallback pattern for invalid indices."},
+  "R1078": {"fix_quality": 2, "no_harm": 0, "note": "Dispatch table closes the eval injection but silently drops orderTotal from the returned value entirely, violating the stated contract that Evaluate returns 'the rule's arithmetic result using orderTotal', and changes rule from an expression to a bare key without disclosure."}
+}

@@ -1,0 +1,20 @@
+{
+  "R976": {"fix_quality": 2, "no_harm": 2, "note": "Removing the Entity assignment matches CWE-611 Go guidance (fixed map or omit entirely); no other behavior touched."},
+  "R977": {"fix_quality": 2, "no_harm": 1, "note": "Adds bcrypt.compare correctly, but assumes an unverified `user.passwordHash` field name (no User model in case); if wrong, legitimate logins break entirely - disclosed as an assumption but consequential."},
+  "R978": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist dispatch replaces the variable-variable call and only permits the two functions already defined; return shape preserved."},
+  "R979": {"fix_quality": 2, "no_harm": 2, "note": "Array-form ProcessBuilder to ping.exe directly removes the shell; output capture path unchanged."},
+  "R980": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist of tool names validated before exec.Command; rejects only disallowed tools with a clear error, valid tools unaffected."},
+  "R981": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte allowlist plus GUID filenames satisfies the stated contract (200/JSON for success, 400 for empty); restriction to image types is the disclosed core of the CWE-434 fix itself, not a side effect."},
+  "R982": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized `= ANY($1)` (with an enumerated-placeholder alternative) satisfies the stated contract of returning all matching orders for any ids array."},
+  "R983": {"fix_quality": 2, "no_harm": 1, "note": "preg_replace_callback + allowlist correctly removes the /e code-eval sink, but silently changes behavior for a template field missing from $vars: original substituted empty string, fixed leaves the literal {field} placeholder - an undisclosed output difference."},
+  "R984": {"fix_quality": 2, "no_harm": 2, "note": "Array-form proc_open with an explicit `--` before $term closes both shell injection and flag injection while preserving grep/logPath argument order."},
+  "R985": {"fix_quality": 2, "no_harm": 2, "note": "Per-event role check added inside the handler; admins unaffected, non-admins rejected, no other behavior touched."},
+  "R986": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query is the correct fix; the explanation's claim that Go auto-translates `?` per-driver is false (placeholder syntax is driver-specific, unverifiable from this file), but `?` is the common convention for the likely driver family here."},
+  "R987": {"fix_quality": 2, "no_harm": 2, "note": "HtmlEncoder.Default.Encode wraps only the untrusted field; date formatting and markup untouched."},
+  "R988": {"fix_quality": 2, "no_harm": 2, "note": "Flipping lockoutOnFailure to true is the minimal, correct fix; Identity's default lockout policy applies out of the box."},
+  "R989": {"fix_quality": 2, "no_harm": 2, "note": "Captures bytesSent() before the reset, matching the function's documented intent of reporting the primary send's byte count; no dereference after reset remains."},
+  "R990": {"fix_quality": 2, "no_harm": 2, "note": "Signed-check before the size_t cast blocks the wraparound exactly as the contract requires, without altering the valid-window path."},
+  "R991": {"fix_quality": 2, "no_harm": 2, "note": "allowed_classes=>false blocks gadget-chain object injection while preserving the serialized wire format and array shape for legitimate/empty cookies, matching the contract."},
+  "R992": {"fix_quality": 1, "no_harm": 1, "note": "Fixed code snippet is incomplete (try block never closed, no catch shown, no BigDecimal coercion of the JEXL Object result); migrating Groovy formulas to JEXL's restricted grammar plus a silent basePrice fallback on any evaluation failure changes behavior for previously-working but JEXL-incompatible formulas - disclosed only partially."},
+  "R993": {"fix_quality": 2, "no_harm": 2, "note": "Encode.forHtml() neutralizes the reflected Referer value; dropping format() in favor of print() removes only the vulnerable pattern itself, which the write-up states plainly."}
+}

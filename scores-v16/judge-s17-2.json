@@ -1,0 +1,21 @@
+{
+  "R409": {"fix_quality": 2, "no_harm": 2, "note": "FlaskForm's own CSRF field validates via existing SECRET_KEY without needing app-wide CSRFProtect; correctly flags the template needs {{ form.csrf_token }} added."},
+  "R410": {"fix_quality": 2, "no_harm": 2, "note": "Standard SqlParameter parameterization, preserves query result and shape."},
+  "R411": {"fix_quality": 0, "no_harm": 0, "note": "Fixed code declares `const COMMAND_HANDLERS` inside a function body, which is invalid PHP (verified with php 8.5: 'Parse error: syntax error, unexpected token \"const\"'); the file fails to parse, undisclosed."},
+  "R412": {"fix_quality": 1, "no_harm": 0, "note": "IAntiforgery.ValidateRequestAsync is the right API class for this sink, but AddAntiforgery() is never configured with a HeaderName and the default reads only a form field; against a JSON-bound body this throws for every caller including legitimate ones, undisclosed (write-up's claimed default header name is also wrong)."},
+  "R413": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte MIME allowlist check added before save; stream correctly reset with seek(0) so legitimate files still save."},
+  "R414": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized with explicit SqlDbType, preserves returned count and apostrophe-as-literal behavior per stated contract."},
+  "R415": {"fix_quality": 2, "no_harm": 2, "note": "Query builder binds region as a value; DB::raw retains the unparameterizable aggregate expression; result shape preserved."},
+  "R416": {"fix_quality": 2, "no_harm": 2, "note": "RequireAuthorization() closes the reported missing-metadata gap on the minimal API endpoint; residual per-document ownership check openly flagged as a separate follow-up."},
+  "R417": {"fix_quality": 2, "no_harm": 2, "note": "jwt.verify() with try/catch correctly replaces unverified decode; valid tokens still authorize identically."},
+  "R418": {"fix_quality": 2, "no_harm": 2, "note": "path.resolve + separator-aware startsWith containment check is the standard correct pattern; legitimate in-directory files still open."},
+  "R419": {"fix_quality": 0, "no_harm": 0, "note": "catch (IOException e) with no `import java.io.IOException;` fails to compile (verified with javac: 'cannot find symbol: class IOException'); also leaves the Files.list() stream unclosed."},
+  "R420": {"fix_quality": 2, "no_harm": 2, "note": "Standard sqlite3 parameterized query, same result set."},
+  "R421": {"fix_quality": 2, "no_harm": 2, "note": "Gate::authorize() is Laravel's own intended replacement for a discarded Gate::allows() result; legitimate authorized updates proceed unchanged."},
+  "R422": {"fix_quality": 2, "no_harm": 2, "note": "Generates one $n placeholder per id and passes ids array positionally, matching pg's binding model; preserves the IN-by-id contract."},
+  "R423": {"fix_quality": 2, "no_harm": 2, "note": "AST allowlist evaluator correctly rejects unknown names/non-arithmetic nodes and preserves arithmetic results; added length cap and Mod/Pow are openly stated extras that don't block legitimate arithmetic formulas."},
+  "R424": {"fix_quality": 2, "no_harm": 2, "note": "Parameterizes both tenantId and beforeDate; row count return and tenant scoping preserved, malformed dates still fail via the same implicit-conversion path as before rather than altering the predicate."},
+  "R425": {"fix_quality": 2, "no_harm": 1, "note": "full_clean() correctly triggers validate_file_content before save, blocking bad uploads; but full_clean() raises Django's core ValidationError, which DRF's default exception handler does not convert to a response, so an invalid upload now surfaces as an unhandled 500 instead of a clean rejection - not mentioned in the write-up (valid uploads unaffected)."},
+  "R426": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check moved to the real span size and the untrusted capacity parameter removed from both sides of the call; throwing instead of silently no-op matches the stated contract and is disclosed."},
+  "R427": {"fix_quality": 2, "no_harm": 2, "note": "Rejects stream-wrapper syntax, joins path explicitly, canonicalizes with realpath and checks separator-bound containment before opening; legitimate in-directory reports still open."}
+}

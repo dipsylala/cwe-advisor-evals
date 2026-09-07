@@ -1,0 +1,21 @@
+{
+  "R673": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist on sort column with explicit rejection (ValueError) matches the contract; default created_at stays valid."},
+  "R674": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist regex forbids leading '-' and all shell/cmd metacharacters, closing the .bat re-parse vector without altering the happy path."},
+  "R675": {"fix_quality": 2, "no_harm": 2, "note": "Correct JNDI parameterized-filter API (filterArgs); explicit new SearchControls() matches the null-default behavior of the original 3-arg call."},
+  "R676": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized SqlCommand via adapter.SelectCommand.Parameters.Add; compiles, returns same DataTable/columns."},
+  "R677": {"fix_quality": 2, "no_harm": 2, "note": "Adds a role check using an existing field (caller.Role); fails closed with 403, no other behavior change."},
+  "R678": {"fix_quality": 2, "no_harm": 2, "note": "Removes LIBXML_NOENT (the actual enabler of entity substitution) and adds LIBXML_NONET; well-formed submissions with no custom entities are unaffected."},
+  "R679": {"fix_quality": 1, "no_harm": 0, "note": "Calls userOwnsProject(), a function that does not exist anywhere in the codebase and is not imported/defined - as shipped this throws a ReferenceError on every request, silently breaking the endpoint for legitimate users too, not disclosed as needing an implementation."},
+  "R680": {"fix_quality": 2, "no_harm": 2, "note": "Argument-array subprocess.run (shell=False) plus filename allowlist; input_path is prefixed by UPLOAD_DIR so no leading-dash flag-injection risk remains."},
+  "R681": {"fix_quality": 2, "no_harm": 2, "note": "Flips the setcookie secure flag only; no other change."},
+  "R682": {"fix_quality": 2, "no_harm": 2, "note": "WebUtility.HtmlEncode on the injected segment only; correct API, no other behavior change."},
+  "R683": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist approach is correct, but on an invalid field it silently substitutes 'name' instead of rejecting - returns different data than requested without any error, a quiet observable-behavior change (unlike R673's explicit reject)."},
+  "R684": {"fix_quality": 2, "no_harm": 2, "note": "Manual RFC4515 filter escaping is the standard .NET mitigation (no built-in sanitizer exists); escaped chars round-trip to the same literal value server-side, preserving legitimate usernames."},
+  "R685": {"fix_quality": 2, "no_harm": 2, "note": "Standard JdbcTemplate '?' parameter binding; behavior otherwise identical."},
+  "R686": {"fix_quality": 2, "no_harm": 1, "note": "Correct approach (native Ping API instead of shelling out), but changes the output materially - one reply instead of the original 'ping -n 4' four-reply/statistics text - only loosely disclosed as 'similar to' rather than stated as a real format change."},
+  "R687": {"fix_quality": 2, "no_harm": 2, "note": "@PreAuthorize on the outer entry point closes the Spring self-invocation bypass, matching the same ADMIN policy already required on deleteInvoice()."},
+  "R688": {"fix_quality": 2, "no_harm": 0, "note": "exec() is correctly eliminated, but the shipped example handlers (backfill_column/delete_stale_records) build SQL via f-string interpolation of caller-supplied table/column names with no allowlist - introduces a new SQL injection (CWE-89) in the replacement code."},
+  "R689": {"fix_quality": 2, "no_harm": 2, "note": "crypto/rand with error handling; format change (hex string vs decimal) is disclosed and inherent to the fix."},
+  "R690": {"fix_quality": 0, "no_harm": 0, "note": "Verified with a live Sequelize+sqlite test: '?' placeholders require the `replacements` option, not `bind` (which needs $1/$2-style tokens) - using bind:[...] with '?' throws 'SQLITE_RANGE: column index out of range' on every call, so the endpoint is completely broken, not merely re-secured."},
+  "R691": {"fix_quality": 2, "no_harm": 2, "note": "Closure callback replaces string-eval'd setTimeout; same downstream call and args, also fixes the pre-existing quote-breakage bug as a side effect of removing string building."}
+}

@@ -1,0 +1,18 @@
+{
+  "R187": {"fix_quality": 2, "no_harm": 2, "note": "Separator-aware boundary check correctly excludes sibling dirs sharing a prefix; base dir and legitimate contents still served."},
+  "R188": {"fix_quality": 2, "no_harm": 2, "note": "text().bindparams()/dict-execute are real SQLAlchemy parameterization APIs; equivalent query semantics for legitimate date values."},
+  "R189": {"fix_quality": 2, "no_harm": 2, "note": "strnlen(name, sizeof(name)) matches the stated contract exactly: bounds the read, preserves length for NUL-containing names, never touches flags."},
+  "R190": {"fix_quality": 2, "no_harm": 2, "note": "Moves param into filterArgs as a second parameterized position; JNDI's DirContext.search overload escapes filterArgs per RFC 4515, correct real API."},
+  "R191": {"fix_quality": 2, "no_harm": 2, "note": "random_bytes(16)+bin2hex replaces the seeded mt_rand; dropping client_seed is the point of the fix and is effectively disclosed."},
+  "R192": {"fix_quality": 2, "no_harm": 2, "note": "Validates against segment.size() instead of the untrustworthy claimedCapacity, exactly matching the stated contract."},
+  "R193": {"fix_quality": 2, "no_harm": 2, "note": "Adds PasswordEncoder.matches() verification plus a real Spring Security exception/timing-safe pattern; constructor DI change is disclosed and necessary."},
+  "R194": {"fix_quality": 2, "no_harm": 2, "note": "Laravel query builder / '?' placeholder are real, equivalent parameterized alternatives to the concatenated raw SQL."},
+  "R195": {"fix_quality": 0, "no_harm": 0, "note": "Fixed code calls DatabaseHelper.getConnection(), which does not exist on the real OWASP Benchmark helper (verified against upstream source: only getSqlConnection()/getSqlStatement() are defined) - would not compile."},
+  "R196": {"fix_quality": 0, "no_harm": 0, "note": "Fix imports org.apache.commons.jexl3.JexlSandbox, but that class lives in org.apache.commons.jexl3.introspection in commons-jexl3 (verified by downloading 3.3 and compiling) - the file as written fails to compile."},
+  "R197": {"fix_quality": 0, "no_harm": 0, "note": "New repository method findByIdAndOwner(Long,String) is derived-query syntax against a property 'owner' that doesn't exist on Order (field is customerUsername); Spring Data JPA would throw PropertyReferenceException at context startup, breaking the whole service, not just closing the finding."},
+  "R198": {"fix_quality": 2, "no_harm": 2, "note": "escape-html applied to every interpolated value is a correct, standard XSS fix with no other behavior change."},
+  "R199": {"fix_quality": 2, "no_harm": 2, "note": "Whitelisting the 'status' field and requiring scalar strings blocks $-operator injection while keeping the ownerId check and legitimate status filtering intact."},
+  "R200": {"fix_quality": 2, "no_harm": 2, "note": "Tika.detect(bytes) plus a fixed MIME-to-extension map and image re-encode correctly replaces the filename-based probeContentType check; extra hardening (re-encode, random name) is disclosed."},
+  "R201": {"fix_quality": 2, "no_harm": 2, "note": "Adds a size check before memcpy and returns false on overflow, using the function's existing bool contract; no unrelated behavior change."},
+  "R202": {"fix_quality": 2, "no_harm": 2, "note": "Deletes the bypassing SignatureValidator, restoring the already-configured default validation pipeline; minimal, correctly scoped fix."}
+}

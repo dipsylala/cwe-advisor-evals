@@ -1,0 +1,19 @@
+{
+  "R550": {"fix_quality": 2, "no_harm": 2, "note": "Swaps client-supplied extension for file-type's detected.ext before storing; no other observable change."},
+  "R551": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized JNDI search preserves default ONELEVEL_SCOPE behavior (new SearchControls() matches original's null-cons default)."},
+  "R552": {"fix_quality": 2, "no_harm": 2, "note": "Content-sniffed allowlist plus random filename closes vector; returning the generated filename in a new JSON body is disclosed and needed since the filename is now random, not a legitimate-caller blocker."},
+  "R553": {"fix_quality": 2, "no_harm": 1, "note": "%15s correctly avoids the overflow, but for tokens longer than 15 chars it silently truncates and returns 0 instead of rejecting (-1) as the stated contract requires; not disclosed."},
+  "R554": {"fix_quality": 2, "no_harm": 2, "note": "Adds SpaCsrfTokenRequestHandler to match the BREACH-encoding mismatch, correct and minimal; the offered 'csrf.spa()' alternative is unverified/likely not a real API but is only a secondary mention, not the applied fix."},
+  "R555": {"fix_quality": 2, "no_harm": 0, "note": "Removes Runtime.exec entirely, but adds writing full directory listings to the HTTP response - the original never wrote anything to response, so this is a new information-disclosure channel misrepresented as 'preserving the output contract.'"},
+  "R556": {"fix_quality": 2, "no_harm": 2, "note": "IsAuthenticated plus owner-scoped permission/queryset closes the AllowAny gap; restricting results to the caller's own keys is the intended fix, not an incidental side effect."},
+  "R557": {"fix_quality": 2, "no_harm": 2, "note": "Primary fix rejects out-of-range windows exactly per the stated contract; a clamp alternative is mentioned in prose but is not the code actually shipped."},
+  "R558": {"fix_quality": 2, "no_harm": 2, "note": "Adds admin-role check after auth using the existing User.Role field; no other observable change."},
+  "R559": {"fix_quality": 2, "no_harm": 2, "note": "Per-stream ObjectInputFilter allowlist keeps the native-serialization format and consumer contract intact while blocking unlisted classes."},
+  "R560": {"fix_quality": 2, "no_harm": 2, "note": "Standard HTML::Entities encode_entities() on both interpolated values, output structure unchanged otherwise."},
+  "R561": {"fix_quality": 2, "no_harm": 2, "note": "enable_shared_from_this + shared_ptr correctly keeps Widget alive until the queued lambda runs; idiomatic fix for this pattern."},
+  "R562": {"fix_quality": 2, "no_harm": 2, "note": "Bounds checks exactly mirror std::span::subspan's real precondition (offset<=size, length<=size-offset), preserving valid-range output byte-for-byte."},
+  "R563": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist regex is a reasonable, disclosed defense given cmd.exe's re-parsing of batch-file arguments on Windows; restriction matches the stated report-identifier use case."},
+  "R564": {"fix_quality": 2, "no_harm": 2, "note": "Adds Gate::authorize('delete', $order) matching the existing show/update pattern and OrderPolicy::delete()."},
+  "R565": {"fix_quality": 2, "no_harm": 0, "note": "subscribe() now stores only a weak_ptr and no shared_ptr owner persists beyond monitorOnce(), so the observer is destroyed before any publish() call can ever fire it - silently breaks 'publish() calls onEvent() on every live subscriber' while the write-up's own comment incorrectly claims the object stays alive."},
+  "R566": {"fix_quality": 2, "no_harm": 1, "note": "Branch swap correctly restores admin-sees-all/non-admin-sees-own per the contract, but wraps both paths in Gate::authorize() calls to abilities ('viewAll'/'viewOwn') that don't exist anywhere in the given code, which as written would deny everyone until that policy work is done - disclosed as a required follow-up in the explanation."}
+}

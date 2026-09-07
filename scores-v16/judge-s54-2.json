@@ -1,0 +1,21 @@
+{
+  "R1060": {"fix_quality": 2, "no_harm": 2, "note": "URI host/scheme check correctly rejects external and scheme-relative redirects, allows relative-path only."},
+  "R1061": {"fix_quality": 2, "no_harm": 2, "note": "Column/direction allowlist matches all real columns and defaults; accountId stays parameterized."},
+  "R1062": {"fix_quality": 2, "no_harm": 2, "note": "Moves route to protectedMux exactly as required; profile route, method check, and status codes untouched."},
+  "R1063": {"fix_quality": 2, "no_harm": 1, "note": "Replaces shell_exec with fsockopen TCP:80 probe instead of ICMP ping - closes injection but silently changes the diagnostic's semantics/output from a ping report to a TCP-connect message, not flagged as a limitation."},
+  "R1064": {"fix_quality": 2, "no_harm": 2, "note": "Simple removal of the opt-out attribute restores app-wide antiforgery validation with no other change."},
+  "R1065": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing NULL short-circuit check before strcmp; preserves enabled/disabled semantics exactly."},
+  "R1066": {"fix_quality": 2, "no_harm": 2, "note": "Verified against real winston: meta-object logging JSON-escapes embedded newlines, preventing forged log lines; format change is the stated mechanism of the fix."},
+  "R1067": {"fix_quality": 2, "no_harm": 1, "note": "BinaryFormatter has no safe fix so the JSON swap is justified, but it is a breaking wire-format change for upstream producers; write-up discloses this openly as a required migration."},
+  "R1068": {"fix_quality": 2, "no_harm": 2, "note": "AST walker allowlists only arithmetic ops and known variables, matching the contract; no eval/exec path remains."},
+  "R1069": {"fix_quality": 2, "no_harm": 2, "note": "Named @customerId parameter binding for the EXEC call is the correct ADO.NET pattern; preserves the stored-proc call exactly."},
+  "R1070": {"fix_quality": 2, "no_harm": 2, "note": "NUL-terminated copy plus field widths matching each destination buffer's real capacity; closes the read overrun without truncating any value that would have fit before."},
+  "R1071": {"fix_quality": 2, "no_harm": 0, "note": "Closes the shell injection, but verified against the real whois.iana.org server: it returns only a TLD referral stub, not the actual domain record the exec(whois) call previously returned - silently guts the endpoint's real output for the vast majority of domains, not disclosed."},
+  "R1072": {"fix_quality": 2, "no_harm": 2, "note": "Array-form Runtime.exec bypasses the shell entirely; output capture and control flow unchanged."},
+  "R1073": {"fix_quality": 0, "no_harm": 0, "note": "Compiled against real commons-jexl3 3.4.0: the write-up's own 'Added imports' names JexlSandbox as org.apache.commons.jexl3.JexlSandbox, which does not exist there (it's in the .introspection subpackage) - fails to compile as written. Also verified the allowlist regex rejects the quote characters needed for the class's own documented example expression (region == 'EMEA'), silently breaking legitimate string-comparison filters while a quote-free code-exec probe (System.exit(1)) still passes the regex unblocked (sandbox alone stops it)."},
+  "R1074": {"fix_quality": 2, "no_harm": 2, "note": "Straightforward bounds check against calibrationTable.size() before the write; no other change."},
+  "R1075": {"fix_quality": 2, "no_harm": 2, "note": "Sort-column allowlist covers every selected column and the default; account_id/status stay bound parameters."},
+  "R1076": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(32).toString('hex') is a correct CSPRNG swap; token length/charset changes but nothing in the case depends on the old format."},
+  "R1077": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check against calibrationTable.size() before the read, preserving the existing rawReading fallback behavior."},
+  "R1078": {"fix_quality": 2, "no_harm": 0, "note": "Fully removes the Eval sink (safe), but silently violates the stated contract: the replacement dictionary dispatch never uses orderTotal and drops all arithmetic-rule capability the contract requires, without disclosing that this functionality is gone."}
+}

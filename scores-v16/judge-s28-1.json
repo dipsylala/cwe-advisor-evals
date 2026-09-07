@@ -1,0 +1,16 @@
+{
+  "R604": {"fix_quality": 2, "no_harm": 2, "note": "raw() concat replaced with filter(customer_email=email); same exact-match semantics, fields used downstream all present."},
+  "R605": {"fix_quality": 2, "no_harm": 0, "note": "LDAP escaping correctly neutralizes * ( ) \\, but wrongly maps space (0x20) to \\00 (NUL) instead of leaving it or encoding \\20, silently corrupting/breaking legitimate searches for names containing spaces."},
+  "R606": {"fix_quality": 2, "no_harm": 2, "note": "secrets.randbelow(max-min+1)+min correctly preserves inclusive range semantics of random.randint with CSPRNG source; unused random import removed."},
+  "R607": {"fix_quality": 2, "no_harm": 2, "note": "generic messages + server-side logging closes CWE-209; status-code split (404 vs 500) is a disclosed, reasonable behavior refinement, not a silent break."},
+  "R608": {"fix_quality": 2, "no_harm": 2, "note": "method whitelist in ActionResolver closes arbitrary-method-call vector before reaching dispatcher; legitimate email.send path still works."},
+  "R609": {"fix_quality": 2, "no_harm": 2, "note": "htmlspecialchars on $message correctly closes XSS in HTML body context; scope correctly limited to the reported sink."},
+  "R610": {"fix_quality": 2, "no_harm": 2, "note": "magic-byte validation of PNG/JPEG/GIF replaces trust in client Content-Type; response shape unchanged for legitimate uploads."},
+  "R611": {"fix_quality": 2, "no_harm": 2, "note": "parameterized query with sqlx.Select placeholder preserves identical filter semantics; closes concatenation-based injection."},
+  "R612": {"fix_quality": 2, "no_harm": 2, "note": "replaces hand-rolled inline-protocol socket writer with redis-py HSET, which frames each argument with an explicit length prefix, closing CRLF command injection; timeout and field mapping preserved."},
+  "R613": {"fix_quality": 2, "no_harm": 2, "note": "swaps unsigned parseClaimsJwt for parseClaimsJws + setSigningKey, correctly enforcing signature verification; new required constructor param and 401-on-failure behavior are openly disclosed and don't block legitimate signed callers."},
+  "R614": {"fix_quality": 2, "no_harm": 2, "note": "Statement/executeQuery concat replaced with PreparedStatement + setString; identical output for legitimate lookups."},
+  "R615": {"fix_quality": 2, "no_harm": 2, "note": "Statement concat replaced with PreparedStatement + setString placeholder; behavior otherwise unchanged."},
+  "R616": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetFileName plus separator/extension whitelist closes traversal for both Windows and Linux deployments; response echoes sanitized name as disclosed."},
+  "R617": {"fix_quality": 2, "no_harm": 2, "note": "parameterized sqlite3 query with ? placeholder preserves exact-match contract; search.js left untouched per stated contract."}
+}

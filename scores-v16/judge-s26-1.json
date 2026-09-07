@@ -1,0 +1,21 @@
+{
+  "R567": {"fix_quality": 2, "no_harm": 2, "note": "Adds Gate::authorize('delete', $order) mirroring the show/update pattern; no other change."},
+  "R568": {"fix_quality": 2, "no_harm": 2, "note": "Adds Secure = true, single-line fix, nothing else changed."},
+  "R569": {"fix_quality": 2, "no_harm": 2, "note": "HtmlEncode applied at the sink before Response.Write; correct encoding fix."},
+  "R570": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query via SqlCommand.Parameters preserves count/JSON contract and treats apostrophes as literal data."},
+  "R571": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing UPLOAD_ERR_OK check before move_uploaded_file, matching the gap the case targets; no other behavior change."},
+  "R572": {"fix_quality": 2, "no_harm": 1, "note": "send_from_directory closes traversal, but silently changes success-path response headers vs. the original (adds Content-Disposition: attachment and derives Content-Type from file extension instead of the hardcoded application/pdf) - not disclosed as a behavior change."},
+  "R573": {"fix_quality": 2, "no_harm": 2, "note": "filepath.EvalSymlinks resolves the target before the containment check, matching the stated contract exactly (rejects symlink escape, still reads a plain regular file)."},
+  "R574": {"fix_quality": 2, "no_harm": 1, "note": "Removing dynamic compilation is the appropriate primary defense (no reliable in-process sandbox exists), but it eliminates the endpoint's stated legitimate purpose (rapid rule prototyping without a code change) and changes the method signature entirely; this is stated openly as the intended tradeoff, not hidden."},
+  "R575": {"fix_quality": 2, "no_harm": 1, "note": "Magic-byte MIME allowlist correctly closes the content-type gap, but the returned \"filename\" field silently changes meaning - it is now the sanitized display name rather than the actual stored (UUID) filename, an undisclosed response contract change."},
+  "R576": {"fix_quality": 2, "no_harm": 2, "note": "Generic message returned, exception logged separately; no other change."},
+  "R577": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist dict maps exactly the plugin names the module's own docstring names as the installed set; unknown names now get a 400 instead of import."},
+  "R578": {"fix_quality": 0, "no_harm": 0, "note": "Nimbus JOSE+JWT's JWTProcessor interface exposes process(...), not processClaims(...); DefaultJWTProcessor has no processClaims method, so this fix would not compile."},
+  "R579": {"fix_quality": 2, "no_harm": 2, "note": "Same case/fix as R568: Secure = true added, nothing else changed."},
+  "R580": {"fix_quality": 2, "no_harm": 2, "note": "sqlite3 '?' placeholder parameterization preserves query logic and return values."},
+  "R581": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetRelativePath-based containment check correctly rejects the sibling-directory bypass while passing legitimate in-directory paths unchanged."},
+  "R582": {"fix_quality": 1, "no_harm": 2, "note": "Only tightens == to === (closes the numeric-string type-juggling bypass on this exact line) but leaves the deeper plaintext password storage/comparison that the case name centers on; password_hash/password_verify is mentioned only as an optional afterthought, not applied."},
+  "R583": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check ordered to avoid unsigned wraparound before calling subspan(); legitimate in-bounds calls unaffected."},
+  "R584": {"fix_quality": 2, "no_harm": 2, "note": "Tika.detect(bytes) performs real content sniffing in place of extension-based probeContentType; the stored-filename hardening is clearly labeled as an additional, disclosed change that doesn't break legitimate uploads."},
+  "R585": {"fix_quality": 2, "no_harm": 2, "note": "IAntiforgery.ValidateRequestAsync call matches the documented .NET 8 minimal-API antiforgery pattern (UseAntiforgery() auto-issues the token cookie on safe requests for the client to echo back)."}
+}

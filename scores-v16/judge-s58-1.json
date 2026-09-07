@@ -1,0 +1,21 @@
+{
+  "R1131": {"fix_quality": 2, "no_harm": 2, "note": "Filename allowlist rejects separators and exact '.'/'..' components, closing traversal while single-component saves still succeed."},
+  "R1132": {"fix_quality": 2, "no_harm": 2, "note": "Query builder parameterizes region and reproduces the same aggregation/order/group; behavior preserved."},
+  "R1133": {"fix_quality": 2, "no_harm": 2, "note": "Switches to CBC with random IV (GCM offered as alternative); IV-prepend format change is required by the fix and stated plainly, doesn't fail the caller."},
+  "R1134": {"fix_quality": 2, "no_harm": 2, "note": "Prepared statement with bind_param closes injection; return shape (assoc array or null) preserved."},
+  "R1135": {"fix_quality": 2, "no_harm": 1, "note": "fgets+newline-truncation check closes the overflow, but reserving a byte for the newline undisclosedly shrinks the max accepted line from 63 to 62 chars, rejecting some inputs that fit the original 64-byte buffer."},
+  "R1136": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist map for Order() closes identifier injection; default sort on invalid/missing input is stated and keeps the 204 path working."},
+  "R1137": {"fix_quality": 2, "no_harm": 1, "note": "Parameterizes the call argument correctly, but hardcodes a placeholder procedure name ('myStoredProcedure') instead of the header-driven one, a functional change the write-up itself flags as needing real determination."},
+  "R1138": {"fix_quality": 2, "no_harm": 2, "note": "Checks verify()'s boolean return and rejects with 401 on failure; no other behavior altered."},
+  "R1139": {"fix_quality": 2, "no_harm": 2, "note": "html.escape replaces Markup(), closing XSS; escaping the non-attacker status value has no visible effect on legitimate output."},
+  "R1140": {"fix_quality": 2, "no_harm": 2, "note": "Named HQL parameter with wildcards bound as literal data closes injection; query semantics unchanged."},
+  "R1141": {"fix_quality": 2, "no_harm": 1, "note": "Tika content-sniffing, allowlist, and UUID naming correctly close the vector, but moving storage outside the webroot silently removes the direct-serving behavior the original endpoint provided; write-up gestures at a future 'application-controlled endpoint' but doesn't build one, so retrieval is a stated but unimplemented follow-up."},
+  "R1142": {"fix_quality": 0, "no_harm": 1, "note": "loadProjectExport is left as a stub that ignores the new ownerId parameter and always returns the same payload; the write-up asserts ownership filtering ('In practice: db.projects.findOne(...)') but never implements it, so the reported route remains exploitable as-is."},
+  "R1143": {"fix_quality": 2, "no_harm": 2, "note": "Extension now derived from file-type's detected.ext instead of the client-supplied name, closing extension spoofing with no other behavior change."},
+  "R1144": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing source-length check (2+length <= receivedByteCount) before memmove; return contract (-1 on any failure) unchanged."},
+  "R1145": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom + 128-bit token replaces weak PRNG; token format change is internal-only (same variable used for cookie and session comparison), no external contract broken."},
+  "R1146": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() applied to both arguments matches the pattern already used on the primary command; return/output-discard contract unchanged."},
+  "R1147": {"fix_quality": 2, "no_harm": 2, "note": ".at() converts the out-of-bounds write into a defined exception for invalid (attacker) offsets only; valid offsets behave identically, and the throw-on-invalid behavior is explicitly disclosed."},
+  "R1148": {"fix_quality": 2, "no_harm": 2, "note": "Single-line move of the email handler onto the CSRF-protected mux; profile route and method/status handling untouched."},
+  "R1149": {"fix_quality": 2, "no_harm": 2, "note": "escape_filter_chars neutralizes LDAP metacharacters before filter construction; benign usernames pass through unchanged."}
+}

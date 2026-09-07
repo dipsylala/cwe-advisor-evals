@@ -1,0 +1,19 @@
+{
+  "R1010": {"fix_quality": 1, "no_harm": 1, "note": "Allowlist regex's \\s includes newline, so a %0A-encoded header value decodes to a literal newline that sh -c treats as a statement separator, bypassing the filter; the 400-on-reject restriction is disclosed."},
+  "R1011": {"fix_quality": 2, "no_harm": 2, "note": "Replaces default-ECB with CBC/GCM plus a random IV/nonce prepended to the ciphertext, an openly-stated format change a key holder can still decrypt, satisfying the stated contract."},
+  "R1012": {"fix_quality": 2, "no_harm": 2, "note": "Parameterizes both uid and street via ctx.search's filterArgs, which the JNDI API documents as RFC-4515-escaped; semantics unchanged."},
+  "R1013": {"fix_quality": 2, "no_harm": 1, "note": "Parameterizes both tenantId and beforeDate closing the injection, but adds no date validation, so a malformed beforeDate still surfaces as an unhandled SqlException rather than the contract's required request-validation failure (only vaguely gestured at, not implemented)."},
+  "R1014": {"fix_quality": 2, "no_harm": 2, "note": "Standard ? placeholder plus variadic arg to sqlx.Select, preserves query semantics."},
+  "R1015": {"fix_quality": 2, "no_harm": 1, "note": "GUID filename plus extension check correctly closes the traversal, but the shown fix stops before the trailing return statement, which still echoes the client-supplied file.FileName instead of the actual stored name - an undisclosed inconsistency."},
+  "R1016": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg on both requestedName and target mirrors the file's existing safe pattern; return/output-array contract unaffected."},
+  "R1017": {"fix_quality": 2, "no_harm": 2, "note": "ldapjs EqualityFilter is the library's documented safe filter-object API and applies RFC-4515 escaping; same attribute/value semantics preserved."},
+  "R1018": {"fix_quality": 2, "no_harm": 2, "note": "Canonical bounds check before write; only out-of-range attacker offsets are skipped, never a valid position, so no legitimate edit is dropped."},
+  "R1019": {"fix_quality": 2, "no_harm": 1, "note": "Restores signature verification correctly, but only catches InvalidSignatureError/DecodeError - jwt.ExpiredSignatureError is a sibling exception, not a subclass of either, so an expired token now raises unhandled, undisclosed 500 instead of a clean 401."},
+  "R1020": {"fix_quality": 2, "no_harm": 2, "note": "Moves the %...% wildcard construction into the bound parameter, preserving LIKE substring semantics exactly per the stated contract."},
+  "R1021": {"fix_quality": 2, "no_harm": 2, "note": "Array form to proc_open avoids the shell entirely and keeps the -- end-of-options marker, closing both shell-metacharacter and flag-injection variants."},
+  "R1022": {"fix_quality": 2, "no_harm": 2, "note": "redis-py .hset() frames field/value as separate RESP arguments and preserves the original class's constructor/method signature so callers are unaffected."},
+  "R1023": {"fix_quality": 2, "no_harm": 2, "note": "OWASP Encoder forHtml() is correct for the HTML-body context and preserves the greeting text/behavior for legitimate names."},
+  "R1024": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist enforces the four approved sort modes per contract, but any other sort value is silently redirected to a default rather than rejected - disclosed as a known gap ('whitelist should be expanded')."},
+  "R1025": {"fix_quality": 2, "no_harm": 2, "note": "Canonical erase-and-reassign idiom preserves order and visits every element exactly once, matching the contract."},
+  "R1026": {"fix_quality": 2, "no_harm": 2, "note": "htmlspecialchars with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5 at both concatenation points closes the XSS with no behavior change for legitimate content."}
+}

@@ -1,0 +1,19 @@
+{
+  "R392": {"fix_quality": 2, "no_harm": 2, "note": "Splits GET (safe confirmation form, self-contained) from POST (CrossOriginProtection-wrapped delete), matching the file's existing pattern; email-link convenience and legitimate delete both still work."},
+  "R393": {"fix_quality": 2, "no_harm": 1, "note": "CRLF check plus alphanumeric-only allowlist blocks the injection, but the allowlist also rejects legitimate report filenames containing spaces/parentheses etc. beyond what's needed to stop CRLF, without flagging that tradeoff."},
+  "R394": {"fix_quality": 2, "no_harm": 1, "note": "StackExchange.Redis StringSet correctly closes RESP injection and preserves key/value semantics, but changes RedisWireWriter's constructor from TcpClient to IConnectionMultiplexer; write-up openly notes the DI/initialization call site (not in the shown files) must be updated too."},
+  "R395": {"fix_quality": 2, "no_harm": 2, "note": "SandboxedEnvironment is Jinja2's supported mechanism for untrusted templates; self-contained swap, preserves render/return contract for legitimate previews."},
+  "R396": {"fix_quality": 2, "no_harm": 2, "note": "WebUtility.HtmlEncode at the sink correctly neutralizes the reflected value; no other observable change."},
+  "R397": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query via placeholder + args is the correct database/sql pattern, identical query semantics to the original."},
+  "R398": {"fix_quality": 2, "no_harm": 1, "note": "escapeshellarg alone would close the vector; the added hostname allowlist is stricter than needed and silently rejects valid IPv6 hosts by returning reachable:false rather than an error."},
+  "R399": {"fix_quality": 2, "no_harm": 1, "note": "GET->POST + [ValidateAntiForgeryToken] is the correct pattern, but the ConfirmDelete view's link (not shown/modified) will break until it's changed to a token-carrying POST form; write-up discloses this as out of scope."},
+  "R400": {"fix_quality": 2, "no_harm": 2, "note": "Regex rejects only control characters, closing the CRLF injection while leaving normal folder-name characters (spaces, letters, quotes) unaffected."},
+  "R401": {"fix_quality": 2, "no_harm": 2, "note": "Classic save-next-before-free fix; preserves order, single free, and continued traversal exactly per the stated contract."},
+  "R402": {"fix_quality": 2, "no_harm": 2, "note": "Standard RFC4515-style LDAP filter escaping applied before the search call; escaping the extra '/' character is harmless and legitimate cn values are unaffected."},
+  "R403": {"fix_quality": 2, "no_harm": 2, "note": "CGI::escapeHTML applied at both interpolation points closes the XSS with no other observable change."},
+  "R404": {"fix_quality": 2, "no_harm": 2, "note": "Absolute-path rejection plus Clean+prefix containment check (with separator) correctly closes traversal; legitimate in-tree file requests are unaffected."},
+  "R405": {"fix_quality": 2, "no_harm": 1, "note": "bcrypt.CompareHashAndPassword with a dummy-hash timing guard is the right mechanism, but it requires existing plaintext-stored passwords to be migrated to bcrypt hashes before any real user can log in again; disclosed in the explanation but not applied within the fix."},
+  "R406": {"fix_quality": 2, "no_harm": 2, "note": "Named parameter via setParameter() closes the HQL injection with identical LIKE-pattern semantics."},
+  "R407": {"fix_quality": 2, "no_harm": 2, "note": "Method-type check inside keyFunc plus jwt.WithValidMethods([\"HS256\"]) is the documented golang-jwt fix for algorithm confusion; legitimate HS256 tokens are unaffected."},
+  "R408": {"fix_quality": 2, "no_harm": 1, "note": "Switching to flask_wtf.FlaskForm is the right mechanism, but it only protects once the template renders {{ form.csrf_token() }}; that template file isn't shown/updated, though the write-up does call it out as required."}
+}

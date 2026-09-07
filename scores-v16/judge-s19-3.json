@@ -1,0 +1,17 @@
+{
+  "R447": {"fix_quality": 2, "no_harm": 2, "note": "GET->confirmation page + separate POST delete endpoint with CSRF token; compiles, method split is clean, and the disclosed behavior change (confirm click required) does not block legitimate deletion."},
+  "R448": {"fix_quality": 2, "no_harm": 2, "note": "Generic 500 body matches stated contract exactly; success/404 paths and logger call untouched."},
+  "R449": {"fix_quality": 2, "no_harm": 1, "note": "PreparedStatement/setString correctly closes the injection, but the finally block still references the old `sqlStatement` variable and the write-up only notes the needed cleanup fix rather than applying it, leaving pstmt unclosed."},
+  "R450": {"fix_quality": 2, "no_harm": 2, "note": "Moves validation to post-write magic-byte check via file-type, renames from detected type, deletes on rejection; success response shape preserved."},
+  "R451": {"fix_quality": 2, "no_harm": 2, "note": "SpaCsrfTokenRequestHandler pairing (real Spring Security class) resolves the raw-vs-BREACH-encoded token mismatch; other filter chain config untouched."},
+  "R452": {"fix_quality": 2, "no_harm": 1, "note": "Parameterization fully eliminates injection, but the primary fix hardcodes an invented procedure name (\"GetUserData\") that discards the original ability to select a procedure via input; disclosed as an assumption, not a silent change."},
+  "R453": {"fix_quality": 2, "no_harm": 2, "note": "Applies the file's own escapeAuthorName() to rawComment before the sink is reached; no other output paths changed."},
+  "R454": {"fix_quality": 2, "no_harm": 2, "note": "Path.resolve+normalize+startsWith correctly rejects traversal and absolute-path override attempts; benign filenames resolve identically to before."},
+  "R455": {"fix_quality": 2, "no_harm": 2, "note": "Switches inline-protocol raw socket to StackExchange.Redis's length-prefixed RESP API, eliminating CRLF injection; constructor/DI signature change is explicitly called out."},
+  "R456": {"fix_quality": 2, "no_harm": 2, "note": "crypto/rand.Text() (real Go 1.24+ API, with a correct pre-1.24 fallback given) replaces math/rand; format change (numeric->alphanumeric token) is stated and doesn't affect any caller since it's an opaque cookie value."},
+  "R457": {"fix_quality": 2, "no_harm": 2, "note": "Adds a role check scoped to the one admin-only handler; other socket handlers and emitted events unchanged."},
+  "R458": {"fix_quality": 0, "no_harm": 2, "note": "Still executes untrusted script via vm.runInNewContext, which Node's own docs state is not a security boundary; a regex blocklist (and one pattern checks capitalized \"Constructor(\" which doesn't even match real escape idioms like `.constructor(`) does not close arbitrary code execution."},
+  "R459": {"fix_quality": 2, "no_harm": 2, "note": "Tika magic-byte detection replaces the trusted Content-Type header, and ImageIO re-encoding strips appended payloads; recompression is disclosed and doesn't block legitimate uploads."},
+  "R460": {"fix_quality": 2, "no_harm": 2, "note": "Standard SqlParameter binding with explicit SqlDbType closes the injection with identical query semantics and result shape."},
+  "R461": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetRelativePath-based check correctly fixes the sibling-directory StartsWith bypass while preserving legitimate same-directory downloads."}
+}

@@ -1,0 +1,20 @@
+{
+  "R374": {"fix_quality": 2, "no_harm": 2, "note": "Filename validation (rejects /, \\, ..) plus realpath check on the parent directory closes the traversal without breaking legitimate saves."},
+  "R375": {"fix_quality": 0, "no_harm": 2, "note": "createFilter(\"cases.deserialize.RestoredSession\") has no trailing ';!*' catch-all; confirmed by compiling/running that ObjectInputStream treats an unmatched class as UNDECIDED->ALLOWED, so an arbitrary gadget class still deserializes unfiltered."},
+  "R376": {"fix_quality": 2, "no_harm": 2, "note": "{{ }} escaping closes the XSS; the case has no actual rich-text rendering so the contract's rich-text clause doesn't apply."},
+  "R377": {"fix_quality": 2, "no_harm": 2, "note": "Narrower JobRequest DTO plus server-set IsAdmin:false removes the untrusted privilege field from the decode path; matches the stated contract."},
+  "R378": {"fix_quality": 2, "no_harm": 2, "note": "Scheme blocklist plus host allowlist closes the open-redirect/dangerous-scheme vector while still permitting relative redirects."},
+  "R379": {"fix_quality": 2, "no_harm": 2, "note": "filepath.Base() strips traversal/absolute-path components from the uploaded filename, the standard fix for this sink."},
+  "R380": {"fix_quality": 0, "no_harm": 0, "note": "`const { parse } = require('expr-eval')` is wrong - expr-eval 2.0.2 exports only Parser/Expression, no `parse` function; verified by installing and running the package, every call throws TypeError so even legitimate expressions like order.total+order.tax fail with 'Invalid formula', undisclosed."},
+  "R381": {"fix_quality": 2, "no_harm": 2, "note": "fgets + truncation-drain loop matches the contract: bounded copy and 0 on success, -1 with drained input on oversize."},
+  "R382": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities() from HTML::Entities is the standard Perl escaping fix and by default covers <>&'\"; normal input unaffected."},
+  "R383": {"fix_quality": 2, "no_harm": 1, "note": "Signature verification correctly enabled with explicit algorithm, but adds options={'require':['exp']} - an openly-stated new requirement not needed to fix CWE-347 that would reject legitimate tokens lacking an exp claim."},
+  "R384": {"fix_quality": 2, "no_harm": 2, "note": "RFC4515 filter-value escaping (*, (, ), \\, NUL) is correct and leaves ordinary input unchanged."},
+  "R385": {"fix_quality": 0, "no_harm": 0, "note": "Fix references message.UserId, but ChatMessage only defines AuthorUserId - does not compile."},
+  "R386": {"fix_quality": 2, "no_harm": 2, "note": "Replacing the string form with a closure eliminates code generation while calling recordReminder identically with the same arguments and timing."},
+  "R387": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg($source)/$target reuses the already-basename-derived variables, consistent with the primary path; return-value and discarded-output contract unchanged."},
+  "R388": {"fix_quality": 2, "no_harm": 2, "note": "Standard PreparedStatement fix for this OWASP Benchmark case; preserves DatabaseHelper.outputUpdateComplete and the error-hiding branch unchanged."},
+  "R389": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with a placeholder correctly closes the injection; cleanup/finally block updated consistently for the new resource."},
+  "R390": {"fix_quality": 2, "no_harm": 1, "note": "Files.list() eliminates the shell entirely, but it also newly writes every filename to the HTTP response and throws on invalid input - output/behavior the original exec-only method never produced; disclosed in the diff but beyond the minimal fix."},
+  "R391": {"fix_quality": 2, "no_harm": 2, "note": "Null-safe default (0) in applyDiscount and an explicit null check in isDiscountApplied exactly match both contract branches."}
+}

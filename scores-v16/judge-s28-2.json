@@ -1,0 +1,16 @@
+{
+  "R604": {"fix_quality": 2, "no_harm": 2, "note": "Swaps raw f-string SQL for Order.objects.filter(customer_email=email); same QuerySet iteration surface, clean parameterized fix."},
+  "R605": {"fix_quality": 2, "no_harm": 0, "note": "Correctly hex-escapes * ( ) \\\\, but also maps space to \\\\00 (a literal NUL byte, not a space) which silently breaks legitimate searches for names containing spaces (e.g. \"John Smith\"); not disclosed as a behavior change."},
+  "R606": {"fix_quality": 2, "no_harm": 2, "note": "secrets.randbelow(max-min+1)+min preserves the original inclusive range; unused random import correctly dropped."},
+  "R607": {"fix_quality": 2, "no_harm": 2, "note": "Generic messages plus server-side logger.exception(); the 500->404 status change for the not-found case is stated plainly and doesn't block legitimate use."},
+  "R608": {"fix_quality": 1, "no_harm": 0, "note": "The 'fixed' ActionResolver drops __construct(), so $registry is never populated; verified with php that isset($this->registry[$category]) then returns false for every action, so all legitimate workflow calls (not just malicious ones) are silently rejected as 'Unknown workflow category' -- not disclosed."},
+  "R609": {"fix_quality": 2, "no_harm": 2, "note": "htmlspecialchars with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5 on the reported sink only; correct context-appropriate encoding, no collateral change."},
+  "R610": {"fix_quality": 2, "no_harm": 2, "note": "Replaces client Content-Type trust with magic-byte sniffing (PNG/JPEG/GIF), rewinds stream before writing full content; response shape unchanged."},
+  "R611": {"fix_quality": 2, "no_harm": 2, "note": "Sprintf concatenation replaced with sqlx placeholder + bound arg; correct parameterized Select call."},
+  "R612": {"fix_quality": 2, "no_harm": 2, "note": "Replaces hand-rolled inline-protocol socket writes with redis-py's parameterized hset(), closing CRLF command injection; library swap stated openly, public method signature/behavior preserved."},
+  "R613": {"fix_quality": 2, "no_harm": 2, "note": "parseClaimsJwt() (accepts alg:none) replaced with parseClaimsJws()+setSigningKey(); added constructor param and 401-on-failure are necessary, disclosed parts of the fix."},
+  "R614": {"fix_quality": 2, "no_harm": 2, "note": "Statement/executeQuery(sql) correctly replaced with PreparedStatement bound via setString; declaration type updated consistently in the shown code."},
+  "R615": {"fix_quality": 0, "no_harm": 0, "note": "sqlStatement is declared 'Statement sqlStatement = null;' earlier in the same method (shown in case file) but the fix calls sqlStatement.setString(...), a PreparedStatement-only method -- write-up never updates the declaration, so this will not compile as given."},
+  "R616": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetFileName() strips traversal sequences and an extension allowlist matches the endpoint's stated purpose (admin-authored .cshtml templates); response echoing the sanitized name instead of raw input is disclosed and doesn't affect legitimate filenames."},
+  "R617": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized '?' query preserves exact-match semantics per the stated contract; search.js left untouched as instructed."}
+}

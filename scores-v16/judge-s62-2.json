@@ -1,0 +1,22 @@
+{
+  "R1197": {"fix_quality": 1, "no_harm": 2, "note": "Unix array-exec correctly avoids the shell, but the Windows array-exec still invokes cmd.exe /c, which re-parses '&','|','^' etc. from the raw command line regardless of argv quoting; unquoted attacker data without spaces is not quoted by ProcessBuilder and remains injectable, so only one of the two branches is actually closed."},
+  "R1198": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(16) base64url is a correct CSPRNG replacement; no other observable change."},
+  "R1199": {"fix_quality": 2, "no_harm": 2, "note": "Re-accessing tasks[activeIndex] after push_back avoids the stale reference and preserves the intended write to the same logical element."},
+  "R1200": {"fix_quality": 2, "no_harm": 2, "note": "html/template auto-escapes both fields; only observable change is added template whitespace, immaterial."},
+  "R1201": {"fix_quality": 2, "no_harm": 2, "note": "ValidAlgorithms pinned to HmacSha256, correct API for the symmetric key in use; no other behavior changed."},
+  "R1202": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected to i < n; matches the stated contract exactly including the n==0 case."},
+  "R1203": {"fix_quality": 2, "no_harm": 2, "note": "th:utext -> th:text is the correct Thymeleaf escaping directive for this sink."},
+  "R1204": {"fix_quality": 1, "no_harm": 2, "note": "No concrete patch is delivered - four alternative approaches are listed and one (copy fd by value) is recommended in prose only, without an actual diff to the file."},
+  "R1205": {"fix_quality": 2, "no_harm": 2, "note": "algorithms: ['RS256'] correctly pins verification and preserves existing catch/401 flow."},
+  "R1206": {"fix_quality": 2, "no_harm": 1, "note": "createCipheriv AES-256-GCM + PBKDF2 is the correct primitive swap, but the response now includes salt/iv/authTag not present before, a disclosed but real API/response-shape change any existing caller would need to handle."},
+  "R1207": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized pool.query with ? placeholder and array closes the injection with no other behavior change."},
+  "R1208": {"fix_quality": 2, "no_harm": 2, "note": "Splits the unsafe GET state-change into a safe GET confirmation page plus a CrossOriginProtection-wrapped POST, matching the sibling routes' pattern; legitimate deletion still completes via the confirmation click."},
+  "R1209": {"fix_quality": 2, "no_harm": 2, "note": "Wraps exportUsersHandler with the existing requireAdmin middleware, identical to sibling routes."},
+  "R1210": {"fix_quality": 2, "no_harm": 2, "note": "Generic 500 body while preserving logger.error, 404 shape, and success path exactly matches the stated contract."},
+  "R1211": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist regex blocks traversal/absolute paths and fails before require(), matching the stated contract."},
+  "R1212": {"fix_quality": 2, "no_harm": 2, "note": "pool.execute with ? placeholder is a valid, safe parameterized-query fix; the write-up's claim that pool.query's placeholder binding is unsafe/client-side-interpolated is inaccurate, but the shipped fix itself is correct and behavior-preserving."},
+  "R1213": {"fix_quality": 2, "no_harm": 2, "note": "escape_filter_chars() is the correct ldap3 API for neutralizing LDAP filter metacharacters."},
+  "R1214": {"fix_quality": 2, "no_harm": 2, "note": "Both offered alternatives (getRandomValues, randomBytes(6).toString('hex')) are valid CSPRNG-based replacements; only a cosmetic change to code length/charset, not depended on elsewhere in the file."},
+  "R1215": {"fix_quality": 1, "no_harm": 2, "note": "Wrapping query.term in markupsafe.escape() closes the reported HTML-injection but the value is still concatenated into the string passed to render_template_string as template source rather than bound as a Jinja variable, so template syntax like {{ }} in the input is still parsed by Jinja - the wrong shape for this sink (this exact render_template_string pitfall is called out in this repo's own cwe/79/python history)."},
+  "R1216": {"fix_quality": 2, "no_harm": 1, "note": "Clean+Rel traversal check correctly blocks real Zip Slip paths, but strings.HasPrefix(relPath, \"..\") also silently rejects legitimate filenames that merely begin with two dots (e.g. \"..foo\") without a separator, since it doesn't anchor the check to a full \"..\" segment - an unstated legitimate-use regression."}
+}
