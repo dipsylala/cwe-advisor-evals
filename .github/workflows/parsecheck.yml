@@ -6,9 +6,9 @@ name: parse-check cases
 
 on:
   push:
-    paths: ['cases/**', 'scripts/parsecheck.py', '.github/workflows/parsecheck.yml']
+    paths: ['cases/**', 'stubs/**', 'scripts/parsecheck.py', 'scripts/compilecheck.py', '.github/workflows/parsecheck.yml']
   pull_request:
-    paths: ['cases/**', 'scripts/parsecheck.py', '.github/workflows/parsecheck.yml']
+    paths: ['cases/**', 'stubs/**', 'scripts/parsecheck.py', 'scripts/compilecheck.py', '.github/workflows/parsecheck.yml']
   workflow_dispatch:
 
 jobs:
