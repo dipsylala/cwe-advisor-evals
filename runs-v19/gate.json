@@ -1,0 +1,2518 @@
+{
+ "B/117/csharp/LoginFailureLogConcat": {
+  "arm": "B",
+  "changed": [
+   "LoginFailureLogConcat.cs"
+  ],
+  "cwe": "117",
+  "files": [
+   "LoginFailureLogConcat.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "LoginFailureLogConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/csharp/PathCombineAbsoluteOverride": {
+  "arm": "B",
+  "changed": [
+   "PathCombineAbsoluteOverride.cs"
+  ],
+  "cwe": "22",
+  "files": [
+   "PathCombineAbsoluteOverride.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "PathCombineAbsoluteOverride",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/csharp/PathCombineUnsanitizedFilename": {
+  "arm": "B",
+  "changed": [
+   "PathCombineUnsanitizedFilename.cs"
+  ],
+  "cwe": "22",
+  "files": [
+   "PathCombineUnsanitizedFilename.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "PathCombineUnsanitizedFilename",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/csharp/StringPrefixContainmentSiblingBypass": {
+  "arm": "B",
+  "changed": [
+   "UploadsController.cs"
+  ],
+  "cwe": "22",
+  "files": [
+   "UploadsController.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "StringPrefixContainmentSiblingBypass",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/go/FilepathJoinUserInput": {
+  "arm": "B",
+  "changed": [
+   "FilepathJoinUserInput.go"
+  ],
+  "cwe": "22",
+  "files": [
+   "FilepathJoinUserInput.go"
+  ],
+  "finding_file_changed": true,
+  "id": "FilepathJoinUserInput",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/go/SiblingDirectoryPrefixBypass": {
+  "arm": "B",
+  "changed": [
+   "uploads_download.go"
+  ],
+  "cwe": "22",
+  "files": [
+   "uploads_download.go"
+  ],
+  "finding_file_changed": true,
+  "id": "SiblingDirectoryPrefixBypass",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/go/SymlinkPlantedUploadEscape": {
+  "arm": "B",
+  "changed": [
+   "uploads.go"
+  ],
+  "cwe": "22",
+  "files": [
+   "uploads.go"
+  ],
+  "finding_file_changed": true,
+  "id": "SymlinkPlantedUploadEscape",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/go/ZipSlipArchiveExtraction": {
+  "arm": "B",
+  "changed": [
+   "ZipSlipArchiveExtraction.go"
+  ],
+  "cwe": "22",
+  "files": [
+   "ZipSlipArchiveExtraction.go"
+  ],
+  "finding_file_changed": true,
+  "id": "ZipSlipArchiveExtraction",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/java/BenchmarkTest00001": {
+  "arm": "B",
+  "changed": [
+   "BenchmarkTest00001.java"
+  ],
+  "cwe": "22",
+  "files": [
+   "BenchmarkTest00001.java"
+  ],
+  "finding_file_changed": true,
+  "id": "BenchmarkTest00001",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/java/BenchmarkTest00002": {
+  "arm": "B",
+  "changed": [
+   "BenchmarkTest00002.java"
+  ],
+  "cwe": "22",
+  "files": [
+   "BenchmarkTest00002.java"
+  ],
+  "finding_file_changed": true,
+  "id": "BenchmarkTest00002",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/java/DoubleUrlDecodeManufacturesTraversal": {
+  "arm": "B",
+  "changed": [
+   "AttachmentDownloadServlet.java"
+  ],
+  "cwe": "22",
+  "files": [
+   "AttachmentDownloadServlet.java"
+  ],
+  "finding_file_changed": true,
+  "id": "DoubleUrlDecodeManufacturesTraversal",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/java/FileConstructorDirectConcatenation": {
+  "arm": "B",
+  "changed": [
+   "DocumentDownloadServlet.java"
+  ],
+  "cwe": "22",
+  "files": [
+   "DocumentDownloadServlet.java"
+  ],
+  "finding_file_changed": true,
+  "id": "FileConstructorDirectConcatenation",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/java/FileGetCanonicalPathSiblingBypass": {
+  "arm": "B",
+  "changed": [
+   "UploadNotesServlet.java"
+  ],
+  "cwe": "22",
+  "files": [
+   "UploadNotesServlet.java"
+  ],
+  "finding_file_changed": true,
+  "id": "FileGetCanonicalPathSiblingBypass",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/java/NormalizeBeforeJoinTraversal": {
+  "arm": "B",
+  "changed": [
+   "ReportFileReader.java"
+  ],
+  "cwe": "22",
+  "files": [
+   "ReportFileReader.java"
+  ],
+  "finding_file_changed": true,
+  "id": "NormalizeBeforeJoinTraversal",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/java/ZipEntryNormalizeExtract": {
+  "arm": "B",
+  "changed": [
+   "ZipExtractor.java"
+  ],
+  "cwe": "22",
+  "files": [
+   "ZipExtractor.java"
+  ],
+  "finding_file_changed": true,
+  "id": "ZipEntryNormalizeExtract",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/javascript/DynamicRequireModuleSpecifier": {
+  "arm": "B",
+  "changed": [
+   "DynamicRequireModuleSpecifier.js"
+  ],
+  "cwe": "22",
+  "files": [
+   "DynamicRequireModuleSpecifier.js"
+  ],
+  "finding_file_changed": true,
+  "id": "DynamicRequireModuleSpecifier",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/javascript/ExpressSendFileNoRootOption": {
+  "arm": "B",
+  "changed": [
+   "ExpressSendFileNoRootOption.js"
+  ],
+  "cwe": "22",
+  "files": [
+   "ExpressSendFileNoRootOption.js"
+  ],
+  "finding_file_changed": true,
+  "id": "ExpressSendFileNoRootOption",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/javascript/PathJoinReadFile": {
+  "arm": "B",
+  "changed": [
+   "PathJoinReadFile.js"
+  ],
+  "cwe": "22",
+  "files": [
+   "PathJoinReadFile.js"
+  ],
+  "finding_file_changed": true,
+  "id": "PathJoinReadFile",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/php/FileGetContentsUserPath": {
+  "arm": "B",
+  "changed": [
+   "FileGetContentsUserPath.php"
+  ],
+  "cwe": "22",
+  "files": [
+   "FileGetContentsUserPath.php"
+  ],
+  "finding_file_changed": true,
+  "id": "FileGetContentsUserPath",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/php/RealpathFalseFallbackDowngrade": {
+  "arm": "B",
+  "changed": [
+   "RealpathFalseFallbackDowngrade.php"
+  ],
+  "cwe": "22",
+  "files": [
+   "RealpathFalseFallbackDowngrade.php"
+  ],
+  "finding_file_changed": true,
+  "id": "RealpathFalseFallbackDowngrade",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/php/StreamWrapperFilterBypassesTraversalCheck": {
+  "arm": "B",
+  "changed": [
+   "StreamWrapperFilterBypassesTraversalCheck.php"
+  ],
+  "cwe": "22",
+  "files": [
+   "StreamWrapperFilterBypassesTraversalCheck.php"
+  ],
+  "finding_file_changed": true,
+  "id": "StreamWrapperFilterBypassesTraversalCheck",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/python/AbsolutePathDiscardsBaseJoin": {
+  "arm": "B",
+  "changed": [
+   "document_download.py"
+  ],
+  "cwe": "22",
+  "files": [
+   "document_download.py"
+  ],
+  "finding_file_changed": true,
+  "id": "AbsolutePathDiscardsBaseJoin",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/python/OsPathJoinOpenFile": {
+  "arm": "B",
+  "changed": [
+   "OsPathJoinOpenFile.py"
+  ],
+  "cwe": "22",
+  "files": [
+   "OsPathJoinOpenFile.py"
+  ],
+  "finding_file_changed": true,
+  "id": "OsPathJoinOpenFile",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/python/ReportDownloadSymlinkEscape": {
+  "arm": "B",
+  "changed": [
+   "report_store.py"
+  ],
+  "cwe": "22",
+  "files": [
+   "report_store.py"
+  ],
+  "finding_file_changed": true,
+  "id": "ReportDownloadSymlinkEscape",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/22/python/TarfileExtractallNoFilter": {
+  "arm": "B",
+  "changed": [
+   "TarfileExtractallNoFilter.py"
+  ],
+  "cwe": "22",
+  "files": [
+   "TarfileExtractallNoFilter.py"
+  ],
+  "finding_file_changed": true,
+  "id": "TarfileExtractallNoFilter",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/326/python/AesEcbModeEncrypt": {
+  "arm": "B",
+  "changed": [
+   "AesEcbModeEncrypt.py"
+  ],
+  "cwe": "326",
+  "files": [
+   "AesEcbModeEncrypt.py"
+  ],
+  "finding_file_changed": true,
+  "id": "AesEcbModeEncrypt",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/347/javascript/JwtDecodeWithoutVerify": {
+  "arm": "B",
+  "changed": [
+   "JwtDecodeWithoutVerify.js"
+  ],
+  "cwe": "347",
+  "files": [
+   "JwtDecodeWithoutVerify.js"
+  ],
+  "finding_file_changed": true,
+  "id": "JwtDecodeWithoutVerify",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/352/csharp/GetRequestStateChange": {
+  "arm": "B",
+  "changed": [
+   "AccountController.cs"
+  ],
+  "cwe": "352",
+  "files": [
+   "AccountController.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "GetRequestStateChange",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "1 case stub(s)",
+  "status": "OK"
+ },
+ "B/352/csharp/JsonBoundMinimalApiMissingValidateRequestAsync": {
+  "arm": "B",
+  "changed": [
+   "Program.cs"
+  ],
+  "cwe": "352",
+  "files": [
+   "Program.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "JsonBoundMinimalApiMissingValidateRequestAsync",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/352/csharp/MinimalApiEmailNoAntiforgery": {
+  "arm": "B",
+  "changed": [
+   "Program.cs",
+   "EmailEndpoints.cs"
+  ],
+  "cwe": "352",
+  "files": [
+   "EmailEndpoints.cs",
+   "Program.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "MinimalApiEmailNoAntiforgery",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/352/csharp/MvcControllerIgnoreAntiforgeryToken": {
+  "arm": "B",
+  "changed": [
+   "AccountController.cs"
+  ],
+  "cwe": "352",
+  "files": [
+   "AccountController.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "MvcControllerIgnoreAntiforgeryToken",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/352/go/GetRequestStateChange": {
+  "arm": "B",
+  "changed": [
+   "account_routes.go"
+  ],
+  "cwe": "352",
+  "files": [
+   "account_routes.go"
+  ],
+  "finding_file_changed": true,
+  "id": "GetRequestStateChange",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/352/go/HandlerRegisteredBeforeCsrfMiddlewareApplied": {
+  "arm": "B",
+  "changed": [
+   "main.go"
+  ],
+  "cwe": "352",
+  "files": [
+   "main.go"
+  ],
+  "finding_file_changed": true,
+  "id": "HandlerRegisteredBeforeCsrfMiddlewareApplied",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/352/go/OriginHeaderOnlyNoTokenValidation": {
+  "arm": "B",
+  "changed": [
+   "account_settings.go"
+  ],
+  "cwe": "352",
+  "files": [
+   "account_settings.go"
+  ],
+  "finding_file_changed": true,
+  "id": "OriginHeaderOnlyNoTokenValidation",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/352/go/SettingsMuxOutsideCsrf": {
+  "arm": "B",
+  "changed": [
+   "settings_routes.go"
+  ],
+  "cwe": "352",
+  "files": [
+   "settings_routes.go"
+  ],
+  "finding_file_changed": true,
+  "id": "SettingsMuxOutsideCsrf",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/352/go/TokenHeaderSubstringMatch": {
+  "arm": "B",
+  "changed": [
+   "csrf.go"
+  ],
+  "cwe": "352",
+  "files": [
+   "csrf.go"
+  ],
+  "finding_file_changed": true,
+  "id": "TokenHeaderSubstringMatch",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/434/java/AvatarSvgInlineServeXss": {
+  "arm": "B",
+  "changed": [
+   "AvatarDownloadController.java"
+  ],
+  "cwe": "434",
+  "files": [
+   "AvatarDownloadController.java"
+  ],
+  "finding_file_changed": true,
+  "id": "AvatarSvgInlineServeXss",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/434/java/ContentTypeAllowlistNoMagicByteCheck": {
+  "arm": "B",
+  "changed": [
+   "ImageUploadController.java"
+  ],
+  "cwe": "434",
+  "files": [
+   "ImageUploadController.java"
+  ],
+  "finding_file_changed": true,
+  "id": "ContentTypeAllowlistNoMagicByteCheck",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/434/java/MultipartUploadNoValidation": {
+  "arm": "B",
+  "changed": [
+   "MultipartUploadNoValidation.java"
+  ],
+  "cwe": "434",
+  "files": [
+   "MultipartUploadNoValidation.java"
+  ],
+  "finding_file_changed": true,
+  "id": "MultipartUploadNoValidation",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/434/java/ProbeContentTypeInsteadOfTika": {
+  "arm": "B",
+  "changed": [
+   "DocumentUploadController.java"
+  ],
+  "cwe": "434",
+  "files": [
+   "DocumentUploadController.java"
+  ],
+  "finding_file_changed": true,
+  "id": "ProbeContentTypeInsteadOfTika",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/434/java/SpringAvatarContentTypeTrust": {
+  "arm": "B",
+  "changed": [
+   "AvatarController.java",
+   "AvatarStorage.java"
+  ],
+  "cwe": "434",
+  "files": [
+   "AvatarController.java",
+   "AvatarStorage.java"
+  ],
+  "finding_file_changed": true,
+  "id": "SpringAvatarContentTypeTrust",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/434/javascript/AvatarInStaticRoot": {
+  "arm": "B",
+  "changed": [
+   "AvatarInStaticRoot.js"
+  ],
+  "cwe": "434",
+  "files": [
+   "AvatarInStaticRoot.js"
+  ],
+  "finding_file_changed": true,
+  "id": "AvatarInStaticRoot",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/434/javascript/ExtensionFromOriginalnameNotDetectedType": {
+  "arm": "B",
+  "changed": [
+   "ExtensionFromOriginalnameNotDetectedType.js"
+  ],
+  "cwe": "434",
+  "files": [
+   "ExtensionFromOriginalnameNotDetectedType.js"
+  ],
+  "finding_file_changed": true,
+  "id": "ExtensionFromOriginalnameNotDetectedType",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/434/javascript/FileFilterDenylistDangerousExtensions": {
+  "arm": "B",
+  "changed": [
+   "FileFilterDenylistDangerousExtensions.js"
+  ],
+  "cwe": "434",
+  "files": [
+   "FileFilterDenylistDangerousExtensions.js"
+  ],
+  "finding_file_changed": true,
+  "id": "FileFilterDenylistDangerousExtensions",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/434/javascript/FileFilterMimetypeOnly": {
+  "arm": "B",
+  "changed": [
+   "FileFilterMimetypeOnly.js"
+  ],
+  "cwe": "434",
+  "files": [
+   "FileFilterMimetypeOnly.js"
+  ],
+  "finding_file_changed": true,
+  "id": "FileFilterMimetypeOnly",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/611/javascript/LibxmljsExternalEntity": {
+  "arm": "B",
+  "changed": [
+   "LibxmljsExternalEntity.js"
+  ],
+  "cwe": "611",
+  "files": [
+   "LibxmljsExternalEntity.js"
+  ],
+  "finding_file_changed": true,
+  "id": "LibxmljsExternalEntity",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/77/csharp/MemcachedKeyInjectionRawSocket": {
+  "arm": "B",
+  "changed": [
+   "MemcachedKeyInjectionRawSocket.cs"
+  ],
+  "cwe": "77",
+  "files": [
+   "MemcachedKeyInjectionRawSocket.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "MemcachedKeyInjectionRawSocket",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/77/csharp/MultiFileRedisCommandRelay": {
+  "arm": "B",
+  "changed": [
+   "RedisWireWriter.cs"
+  ],
+  "cwe": "77",
+  "files": [
+   "RedisWireWriter.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "MultiFileRedisCommandRelay",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/77/csharp/RedisMultiArgRawSocket": {
+  "arm": "B",
+  "changed": [
+   "RedisMultiArgRawSocket.cs"
+  ],
+  "cwe": "77",
+  "files": [
+   "RedisMultiArgRawSocket.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "RedisMultiArgRawSocket",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/77/csharp/RedisSetRawSocket": {
+  "arm": "B",
+  "changed": [
+   "RedisSetRawSocket.cs"
+  ],
+  "cwe": "77",
+  "files": [
+   "RedisSetRawSocket.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "RedisSetRawSocket",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/77/java/FtpRawSocketFilenameInjection": {
+  "arm": "B",
+  "changed": [
+   "FtpRawSocketFilenameInjection.java"
+  ],
+  "cwe": "77",
+  "files": [
+   "FtpRawSocketFilenameInjection.java"
+  ],
+  "finding_file_changed": true,
+  "id": "FtpRawSocketFilenameInjection",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/77/java/ImapRawSocketFolderInjection": {
+  "arm": "B",
+  "changed": [
+   "ImapRawSocketFolderInjection.java"
+  ],
+  "cwe": "77",
+  "files": [
+   "ImapRawSocketFolderInjection.java"
+  ],
+  "finding_file_changed": true,
+  "id": "ImapRawSocketFolderInjection",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/77/java/MultiFileSmtpCommandRelay": {
+  "arm": "B",
+  "changed": [
+   "SmtpRelayClient.java"
+  ],
+  "cwe": "77",
+  "files": [
+   "SmtpRelayClient.java"
+  ],
+  "finding_file_changed": true,
+  "id": "MultiFileSmtpCommandRelay",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/77/java/SmtpRawSocketRcptInjection": {
+  "arm": "B",
+  "changed": [
+   "SmtpRawSocketRcptInjection.java"
+  ],
+  "cwe": "77",
+  "files": [
+   "SmtpRawSocketRcptInjection.java"
+  ],
+  "finding_file_changed": true,
+  "id": "SmtpRawSocketRcptInjection",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/csharp/BatchScriptReentry": {
+  "arm": "B",
+  "changed": [
+   "BatchScriptReentry.cs"
+  ],
+  "cwe": "78",
+  "files": [
+   "BatchScriptReentry.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "BatchScriptReentry",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/csharp/PingHostCommandInjection": {
+  "arm": "B",
+  "changed": [
+   "PingHostCommandInjection.cs"
+  ],
+  "cwe": "78",
+  "files": [
+   "PingHostCommandInjection.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "PingHostCommandInjection",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/csharp/PowerShellCommandConcat": {
+  "arm": "B",
+  "changed": [
+   "PowerShellCommandConcat.cs"
+  ],
+  "cwe": "78",
+  "files": [
+   "PowerShellCommandConcat.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "PowerShellCommandConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/go/ArchiveListShellCommandInjection": {
+  "arm": "B",
+  "changed": [
+   "archive_runner.go"
+  ],
+  "cwe": "78",
+  "files": [
+   "archive_runner.go"
+  ],
+  "finding_file_changed": true,
+  "id": "ArchiveListShellCommandInjection",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/go/CmdExeWindowsBatch": {
+  "arm": "B",
+  "changed": [
+   "diagnostics.go"
+  ],
+  "cwe": "78",
+  "files": [
+   "diagnostics.go"
+  ],
+  "finding_file_changed": true,
+  "id": "CmdExeWindowsBatch",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/go/ImageResizeShellEnvStripped": {
+  "arm": "B",
+  "changed": [
+   "resize.go"
+  ],
+  "cwe": "78",
+  "files": [
+   "resize.go"
+  ],
+  "finding_file_changed": true,
+  "id": "ImageResizeShellEnvStripped",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/go/TaintedExecutableName": {
+  "arm": "B",
+  "changed": [
+   "diagnostics.go"
+  ],
+  "cwe": "78",
+  "files": [
+   "diagnostics.go"
+  ],
+  "finding_file_changed": true,
+  "id": "TaintedExecutableName",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/go/TracerouteShellExec": {
+  "arm": "B",
+  "changed": [
+   "TracerouteShellExec.go"
+  ],
+  "cwe": "78",
+  "files": [
+   "TracerouteShellExec.go"
+  ],
+  "finding_file_changed": true,
+  "id": "TracerouteShellExec",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/java/BenchmarkTest00006": {
+  "arm": "B",
+  "changed": [
+   "BenchmarkTest00006.java"
+  ],
+  "cwe": "78",
+  "files": [
+   "BenchmarkTest00006.java"
+  ],
+  "finding_file_changed": true,
+  "id": "BenchmarkTest00006",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/java/BenchmarkTest00007": {
+  "arm": "B",
+  "changed": [
+   "BenchmarkTest00007.java"
+  ],
+  "cwe": "78",
+  "files": [
+   "BenchmarkTest00007.java"
+  ],
+  "finding_file_changed": true,
+  "id": "BenchmarkTest00007",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/java/Case04": {
+  "arm": "B",
+  "changed": [
+   "Case04B.java"
+  ],
+  "cwe": "78",
+  "files": [
+   "Case04B.java"
+  ],
+  "finding_file_changed": true,
+  "id": "Case04",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/java/Case05": {
+  "arm": "B",
+  "changed": [
+   "Case05D.java"
+  ],
+  "cwe": "78",
+  "files": [
+   "Case05D.java"
+  ],
+  "finding_file_changed": true,
+  "id": "Case05",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/java/Case06": {
+  "arm": "B",
+  "changed": [
+   "Case06E.java"
+  ],
+  "cwe": "78",
+  "files": [
+   "Case06E.java"
+  ],
+  "finding_file_changed": true,
+  "id": "Case06",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/java/Case15": {
+  "arm": "B",
+  "changed": [
+   "Case15B.java"
+  ],
+  "cwe": "78",
+  "files": [
+   "Case15B.java"
+  ],
+  "finding_file_changed": true,
+  "id": "Case15",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/java/ProcessBuilderBatchReentry": {
+  "arm": "B",
+  "changed": [
+   "ReportExportService.java"
+  ],
+  "cwe": "78",
+  "files": [
+   "ReportExportService.java"
+  ],
+  "finding_file_changed": true,
+  "id": "ProcessBuilderBatchReentry",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/java/ProcessBuilderCmdWindows": {
+  "arm": "B",
+  "changed": [
+   "DiagnosticController.java"
+  ],
+  "cwe": "78",
+  "files": [
+   "DiagnosticController.java"
+  ],
+  "finding_file_changed": true,
+  "id": "ProcessBuilderCmdWindows",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/java/RuntimeExecSingleStringTokenize": {
+  "arm": "B",
+  "changed": [
+   "PingDiagnosticServlet.java"
+  ],
+  "cwe": "78",
+  "files": [
+   "PingDiagnosticServlet.java"
+  ],
+  "finding_file_changed": true,
+  "id": "RuntimeExecSingleStringTokenize",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/javascript/ExecSyncTemplateLiteral": {
+  "arm": "B",
+  "changed": [
+   "ExecSyncTemplateLiteral.js"
+  ],
+  "cwe": "78",
+  "files": [
+   "ExecSyncTemplateLiteral.js"
+  ],
+  "finding_file_changed": true,
+  "id": "ExecSyncTemplateLiteral",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/javascript/ExecWindowsBatchTarget": {
+  "arm": "B",
+  "changed": [
+   "ExecWindowsBatchTarget.js"
+  ],
+  "cwe": "78",
+  "files": [
+   "ExecWindowsBatchTarget.js"
+  ],
+  "finding_file_changed": true,
+  "id": "ExecWindowsBatchTarget",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/javascript/WhoisLookupChildProcess": {
+  "arm": "B",
+  "changed": [
+   "WhoisLookupChildProcess.js"
+  ],
+  "cwe": "78",
+  "files": [
+   "WhoisLookupChildProcess.js"
+  ],
+  "finding_file_changed": true,
+  "id": "WhoisLookupChildProcess",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/php/LegacyConvertFallback": {
+  "arm": "B",
+  "changed": [
+   "LegacyConvertFallback.php"
+  ],
+  "cwe": "78",
+  "files": [
+   "LegacyConvertFallback.php"
+  ],
+  "finding_file_changed": true,
+  "id": "LegacyConvertFallback",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/php/ProcOpenShellString": {
+  "arm": "B",
+  "changed": [
+   "ProcOpenShellString.php"
+  ],
+  "cwe": "78",
+  "files": [
+   "ProcOpenShellString.php"
+  ],
+  "finding_file_changed": true,
+  "id": "ProcOpenShellString",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/php/ShellExecConcat": {
+  "arm": "B",
+  "changed": [
+   "ShellExecConcat.php"
+  ],
+  "cwe": "78",
+  "files": [
+   "ShellExecConcat.php"
+  ],
+  "finding_file_changed": true,
+  "id": "ShellExecConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/php/SystemFunctionConcat": {
+  "arm": "B",
+  "changed": [
+   "SystemFunctionConcat.php"
+  ],
+  "cwe": "78",
+  "files": [
+   "SystemFunctionConcat.php"
+  ],
+  "finding_file_changed": true,
+  "id": "SystemFunctionConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/python/ConvertFileSubprocessShell": {
+  "arm": "B",
+  "changed": [
+   "ConvertFileSubprocessShell.py"
+  ],
+  "cwe": "78",
+  "files": [
+   "ConvertFileSubprocessShell.py"
+  ],
+  "finding_file_changed": true,
+  "id": "ConvertFileSubprocessShell",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/python/OsSystemStringFormat": {
+  "arm": "B",
+  "changed": [
+   "OsSystemStringFormat.py"
+  ],
+  "cwe": "78",
+  "files": [
+   "OsSystemStringFormat.py"
+  ],
+  "finding_file_changed": true,
+  "id": "OsSystemStringFormat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/python/PopenShellBatchWindows": {
+  "arm": "B",
+  "changed": [
+   "PopenShellBatchWindows.py"
+  ],
+  "cwe": "78",
+  "files": [
+   "PopenShellBatchWindows.py"
+  ],
+  "finding_file_changed": true,
+  "id": "PopenShellBatchWindows",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/78/python/TarArchiveFilenameOptionInjection": {
+  "arm": "B",
+  "changed": [
+   "backup.py"
+  ],
+  "cwe": "78",
+  "files": [
+   "backup.py"
+  ],
+  "finding_file_changed": true,
+  "id": "TarArchiveFilenameOptionInjection",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/787/c/ArrayIndexUnvalidatedWrite": {
+  "arm": "B",
+  "changed": [
+   "score_update.c"
+  ],
+  "cwe": "787",
+  "files": [
+   "score_update.c"
+  ],
+  "finding_file_changed": true,
+  "id": "ArrayIndexUnvalidatedWrite",
+  "kind": "",
+  "kind_detail": "",
+  "language": "c",
+  "new": [],
+  "note": "msvc /Zs",
+  "status": "OK"
+ },
+ "B/787/c/FrameOffsetLengthWriter": {
+  "arm": "B",
+  "changed": [
+   "buffer_writer.c"
+  ],
+  "cwe": "787",
+  "files": [
+   "buffer_writer.c"
+  ],
+  "finding_file_changed": true,
+  "id": "FrameOffsetLengthWriter",
+  "kind": "",
+  "kind_detail": "",
+  "language": "c",
+  "new": [],
+  "note": "msvc /Zs",
+  "status": "OK"
+ },
+ "B/787/c/PacketFieldStaleCapacityPropagation": {
+  "arm": "B",
+  "changed": [
+   "field_writer.c",
+   "packet_buffer.c"
+  ],
+  "cwe": "787",
+  "files": [
+   "field_writer.c",
+   "packet_buffer.c"
+  ],
+  "finding_file_changed": true,
+  "id": "PacketFieldStaleCapacityPropagation",
+  "kind": "",
+  "kind_detail": "",
+  "language": "c",
+  "new": [],
+  "note": "msvc /Zs",
+  "status": "OK"
+ },
+ "B/787/c/ProductBatchAllocationOverflow": {
+  "arm": "B",
+  "changed": [
+   "ProductBatchAllocationOverflow.c"
+  ],
+  "cwe": "787",
+  "files": [
+   "ProductBatchAllocationOverflow.c"
+  ],
+  "finding_file_changed": true,
+  "id": "ProductBatchAllocationOverflow",
+  "kind": "",
+  "kind_detail": "",
+  "language": "c",
+  "new": [],
+  "note": "msvc /Zs",
+  "status": "OK"
+ },
+ "B/787/c/RecentEventsOffByOneCopy": {
+  "arm": "B",
+  "changed": [
+   "RecentEventsOffByOneCopy.c"
+  ],
+  "cwe": "787",
+  "files": [
+   "RecentEventsOffByOneCopy.c"
+  ],
+  "finding_file_changed": true,
+  "id": "RecentEventsOffByOneCopy",
+  "kind": "",
+  "kind_detail": "",
+  "language": "c",
+  "new": [],
+  "note": "msvc /Zs",
+  "status": "OK"
+ },
+ "B/787/c/SprintfFixedBufferOverflow": {
+  "arm": "B",
+  "changed": [
+   "SprintfFixedBufferOverflow.c"
+  ],
+  "cwe": "787",
+  "files": [
+   "SprintfFixedBufferOverflow.c"
+  ],
+  "finding_file_changed": true,
+  "id": "SprintfFixedBufferOverflow",
+  "kind": "",
+  "kind_detail": "",
+  "language": "c",
+  "new": [],
+  "note": "msvc /Zs",
+  "status": "OK"
+ },
+ "B/787/c/StrcatUnboundedAppend": {
+  "arm": "B",
+  "changed": [
+   "StrcatUnboundedAppend.c"
+  ],
+  "cwe": "787",
+  "files": [
+   "StrcatUnboundedAppend.c"
+  ],
+  "finding_file_changed": true,
+  "id": "StrcatUnboundedAppend",
+  "kind": "",
+  "kind_detail": "",
+  "language": "c",
+  "new": [],
+  "note": "msvc /Zs",
+  "status": "OK"
+ },
+ "B/862/csharp/AspNetInvoiceExportBareAuthorize": {
+  "arm": "B",
+  "changed": [
+   "InvoiceExportController.cs",
+   "InvoiceOwnershipHandler.cs"
+  ],
+  "cwe": "862",
+  "files": [
+   "InvoiceExportController.cs",
+   "InvoiceOwnershipHandler.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "AspNetInvoiceExportBareAuthorize",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [
+   "InvoiceOwnershipHandler.cs"
+  ],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/csharp/BlazorAuthorizeViewHandlerUnchecked": {
+  "arm": "B",
+  "changed": [
+   "AdminAccountPanel.razor"
+  ],
+  "cwe": "862",
+  "files": [
+   "AdminAccountPanel.razor"
+  ],
+  "finding_file_changed": true,
+  "id": "BlazorAuthorizeViewHandlerUnchecked",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "no .cs files",
+  "status": "UNCHECKED"
+ },
+ "B/862/csharp/MinimalApiMissingAuthorizeMetadata": {
+  "arm": "B",
+  "changed": [
+   "Program.cs"
+  ],
+  "cwe": "862",
+  "files": [
+   "Program.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "MinimalApiMissingAuthorizeMetadata",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/csharp/SignalRHubMethodMissingCheck": {
+  "arm": "B",
+  "changed": [
+   "ChatHub.cs"
+  ],
+  "cwe": "862",
+  "files": [
+   "ChatHub.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "SignalRHubMethodMissingCheck",
+  "kind": "unresolved-member",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "CS1061: 'ChatMessage' does not contain a definition for 'UserId' and no accessible extension method 'UserId' accepting a first argument of type 'ChatMessage' could be found (are you missing a using directive or an assemb",
+  "status": "FAIL"
+ },
+ "B/862/go/GrpcMethodNoInterceptorCheck": {
+  "arm": "B",
+  "changed": [
+   "GrpcMethodNoInterceptorCheck.go"
+  ],
+  "cwe": "862",
+  "files": [
+   "GrpcMethodNoInterceptorCheck.go"
+  ],
+  "finding_file_changed": true,
+  "id": "GrpcMethodNoInterceptorCheck",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/go/HandlerMissingRoleCheck": {
+  "arm": "B",
+  "changed": [
+   "handler.go"
+  ],
+  "cwe": "862",
+  "files": [
+   "handler.go"
+  ],
+  "finding_file_changed": true,
+  "id": "HandlerMissingRoleCheck",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/go/RouteRegisteredWithoutMiddlewareWrapper": {
+  "arm": "B",
+  "changed": [
+   "admin.go"
+  ],
+  "cwe": "862",
+  "files": [
+   "admin.go"
+  ],
+  "finding_file_changed": true,
+  "id": "RouteRegisteredWithoutMiddlewareWrapper",
+  "kind": "",
+  "kind_detail": "",
+  "language": "go",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/java/AdminRoleOnlyNoOwnershipCheck": {
+  "arm": "B",
+  "changed": [
+   "OrderService.java",
+   "OrderSecurity.java"
+  ],
+  "cwe": "862",
+  "files": [
+   "OrderSecurity.java",
+   "OrderService.java"
+  ],
+  "finding_file_changed": true,
+  "id": "AdminRoleOnlyNoOwnershipCheck",
+  "kind": "unresolved-member",
+  "kind_detail": "",
+  "language": "java",
+  "new": [
+   "OrderSecurity.java"
+  ],
+  "note": "OrderSecurity.java:17: error: cannot find symbol (symbol:   method getOwnerId())",
+  "status": "FAIL"
+ },
+ "B/862/java/InvoiceListVsDetailScoping": {
+  "arm": "B",
+  "changed": [
+   "InvoiceController.java"
+  ],
+  "cwe": "862",
+  "files": [
+   "InvoiceController.java"
+  ],
+  "finding_file_changed": true,
+  "id": "InvoiceListVsDetailScoping",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/java/MethodSecurityNotEnabledGlobally": {
+  "arm": "B",
+  "changed": [
+   "SecurityConfig.java",
+   "UserAccountSecurity.java",
+   "UserAccountService.java"
+  ],
+  "cwe": "862",
+  "files": [
+   "SecurityConfig.java",
+   "UserAccountSecurity.java",
+   "UserAccountService.java"
+  ],
+  "finding_file_changed": true,
+  "id": "MethodSecurityNotEnabledGlobally",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [
+   "UserAccountSecurity.java"
+  ],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/java/SelfInvocationBypassesProxyAdvice": {
+  "arm": "B",
+  "changed": [
+   "InvoiceService.java"
+  ],
+  "cwe": "862",
+  "files": [
+   "InvoiceService.java"
+  ],
+  "finding_file_changed": true,
+  "id": "SelfInvocationBypassesProxyAdvice",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "2 case stub(s)",
+  "status": "OK"
+ },
+ "B/862/java/SpringDocumentDeleteMissingOwner": {
+  "arm": "B",
+  "changed": [
+   "DocumentService.java",
+   "DocumentSecurityService.java",
+   "DocumentRepository.java"
+  ],
+  "cwe": "862",
+  "files": [
+   "DocumentRepository.java",
+   "DocumentSecurityService.java",
+   "DocumentService.java"
+  ],
+  "finding_file_changed": false,
+  "id": "SpringDocumentDeleteMissingOwner",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [
+   "DocumentSecurityService.java"
+  ],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/javascript/ExpressProjectExportMissingOwner": {
+  "arm": "B",
+  "changed": [
+   "projectRoutes.js",
+   "projectStore.js"
+  ],
+  "cwe": "862",
+  "files": [
+   "projectRoutes.js",
+   "projectStore.js"
+  ],
+  "finding_file_changed": true,
+  "id": "ExpressProjectExportMissingOwner",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/javascript/MongooseFilterNotScalarInjection": {
+  "arm": "B",
+  "changed": [
+   "orderRoutes.js"
+  ],
+  "cwe": "862",
+  "files": [
+   "orderRoutes.js"
+  ],
+  "finding_file_changed": true,
+  "id": "MongooseFilterNotScalarInjection",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/javascript/RouteMissingRoleMiddlewareNewEndpoint": {
+  "arm": "B",
+  "changed": [
+   "adminRoutes.js"
+  ],
+  "cwe": "862",
+  "files": [
+   "adminRoutes.js"
+  ],
+  "finding_file_changed": true,
+  "id": "RouteMissingRoleMiddlewareNewEndpoint",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/javascript/SocketIoEventHandlerMissingPerEventCheck": {
+  "arm": "B",
+  "changed": [
+   "chatServer.js"
+  ],
+  "cwe": "862",
+  "files": [
+   "chatServer.js"
+  ],
+  "finding_file_changed": true,
+  "id": "SocketIoEventHandlerMissingPerEventCheck",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/php/GateAllowsResultIgnored": {
+  "arm": "B",
+  "changed": [
+   "OrderController.php"
+  ],
+  "cwe": "862",
+  "files": [
+   "OrderController.php"
+  ],
+  "finding_file_changed": true,
+  "id": "GateAllowsResultIgnored",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/php/LaravelOrderRefundAuthOnly": {
+  "arm": "B",
+  "changed": [
+   "routes_api.php",
+   "app/Policies/OrderPolicy.php"
+  ],
+  "cwe": "862",
+  "files": [
+   "app/Policies/OrderPolicy.php",
+   "routes_api.php"
+  ],
+  "finding_file_changed": true,
+  "id": "LaravelOrderRefundAuthOnly",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [
+   "app/Policies/OrderPolicy.php"
+  ],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/php/OrderIndexAdminBranchSwap": {
+  "arm": "B",
+  "changed": [
+   "OrderController.php"
+  ],
+  "cwe": "862",
+  "files": [
+   "OrderController.php"
+  ],
+  "finding_file_changed": true,
+  "id": "OrderIndexAdminBranchSwap",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/php/PolicyCheckOnUpdateOnlyNotDelete": {
+  "arm": "B",
+  "changed": [
+   "OrderController.php"
+  ],
+  "cwe": "862",
+  "files": [
+   "OrderController.php"
+  ],
+  "finding_file_changed": true,
+  "id": "PolicyCheckOnUpdateOnlyNotDelete",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/php/RouteMissingCanMiddlewareNewEndpoint": {
+  "arm": "B",
+  "changed": [
+   "routes_orders.php"
+  ],
+  "cwe": "862",
+  "files": [
+   "routes_orders.php"
+  ],
+  "finding_file_changed": true,
+  "id": "RouteMissingCanMiddlewareNewEndpoint",
+  "kind": "",
+  "kind_detail": "",
+  "language": "php",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/python/DefaultPermissionClassesUnsetAllowAny": {
+  "arm": "B",
+  "changed": [
+   "views.py"
+  ],
+  "cwe": "862",
+  "files": [
+   "views.py"
+  ],
+  "finding_file_changed": true,
+  "id": "DefaultPermissionClassesUnsetAllowAny",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/python/DrfCustomRetrieveBypass": {
+  "arm": "B",
+  "changed": [
+   "views.py"
+  ],
+  "cwe": "862",
+  "files": [
+   "views.py"
+  ],
+  "finding_file_changed": true,
+  "id": "DrfCustomRetrieveBypass",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/python/PerformCreateMissingOwnershipEnforcement": {
+  "arm": "B",
+  "changed": [
+   "views.py"
+  ],
+  "cwe": "862",
+  "files": [
+   "views.py"
+  ],
+  "finding_file_changed": true,
+  "id": "PerformCreateMissingOwnershipEnforcement",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/862/python/StaffQuerysetWidenButObjectPermissionOwnerOnly": {
+  "arm": "B",
+  "changed": [
+   "views.py"
+  ],
+  "cwe": "862",
+  "files": [
+   "views.py"
+  ],
+  "finding_file_changed": true,
+  "id": "StaffQuerysetWidenButObjectPermissionOwnerOnly",
+  "kind": "",
+  "kind_detail": "",
+  "language": "python",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/DapperCustomerSortDatapath": {
+  "arm": "B",
+  "changed": [
+   "CustomerRepository.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "CustomerRepository.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "DapperCustomerSortDatapath",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/EfCoreArchiveExecuteSqlRaw": {
+  "arm": "B",
+  "changed": [
+   "OrderMaintenanceRepository.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "OrderMaintenanceRepository.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "EfCoreArchiveExecuteSqlRaw",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/EfCoreProductSearchFromSqlRaw": {
+  "arm": "B",
+  "changed": [
+   "ProductSearchRepository.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "ProductSearchRepository.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "EfCoreProductSearchFromSqlRaw",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/LegacyReportAdapterFill": {
+  "arm": "B",
+  "changed": [
+   "LegacyReportRepository.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "LegacyReportRepository.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "LegacyReportAdapterFill",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/OdbcCommandConcat": {
+  "arm": "B",
+  "changed": [
+   "OdbcCommandConcat.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "OdbcCommandConcat.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "OdbcCommandConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/RawSqlCommandConcat": {
+  "arm": "B",
+  "changed": [
+   "RawSqlCommandConcat.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "RawSqlCommandConcat.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "RawSqlCommandConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/SqlCommandExecuteNonQueryDelete": {
+  "arm": "B",
+  "changed": [
+   "CleanupRepository.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "CleanupRepository.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "SqlCommandExecuteNonQueryDelete",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/SqlCommandExecuteScalarMetric": {
+  "arm": "B",
+  "changed": [
+   "AuditMetricRepository.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "AuditMetricRepository.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "SqlCommandExecuteScalarMetric",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/StoredProcExecStringConcat": {
+  "arm": "B",
+  "changed": [
+   "CustomerOrdersRepository.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "CustomerOrdersRepository.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "StoredProcExecStringConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/csharp/StringFormatCommandText": {
+  "arm": "B",
+  "changed": [
+   "WidgetAdminController.cs"
+  ],
+  "cwe": "89",
+  "files": [
+   "WidgetAdminController.cs"
+  ],
+  "finding_file_changed": true,
+  "id": "StringFormatCommandText",
+  "kind": "",
+  "kind_detail": "",
+  "language": "csharp",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/javascript/HandBuiltInListNodePg": {
+  "arm": "B",
+  "changed": [
+   "orders.js"
+  ],
+  "cwe": "89",
+  "files": [
+   "orders.js"
+  ],
+  "finding_file_changed": true,
+  "id": "HandBuiltInListNodePg",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/javascript/Mysql2QueryConcat": {
+  "arm": "B",
+  "changed": [
+   "Mysql2QueryConcat.js"
+  ],
+  "cwe": "89",
+  "files": [
+   "Mysql2QueryConcat.js"
+  ],
+  "finding_file_changed": true,
+  "id": "Mysql2QueryConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/javascript/OrdersDynamicSortIdentifier": {
+  "arm": "B",
+  "changed": [
+   "orderRepository.js"
+  ],
+  "cwe": "89",
+  "files": [
+   "orderRepository.js"
+  ],
+  "finding_file_changed": true,
+  "id": "OrdersDynamicSortIdentifier",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/javascript/PrismaLedgerRawUnsafeDatapath": {
+  "arm": "B",
+  "changed": [
+   "ledgerRepository.js"
+  ],
+  "cwe": "89",
+  "files": [
+   "ledgerRepository.js"
+  ],
+  "finding_file_changed": true,
+  "id": "PrismaLedgerRawUnsafeDatapath",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/javascript/SequelizeRawQueryConcat": {
+  "arm": "B",
+  "changed": [
+   "SequelizeRawQueryConcat.js"
+  ],
+  "cwe": "89",
+  "files": [
+   "SequelizeRawQueryConcat.js"
+  ],
+  "finding_file_changed": true,
+  "id": "SequelizeRawQueryConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/89/javascript/TemplateLiteralQueryConcat": {
+  "arm": "B",
+  "changed": [
+   "TemplateLiteralQueryConcat.js"
+  ],
+  "cwe": "89",
+  "files": [
+   "TemplateLiteralQueryConcat.js"
+  ],
+  "finding_file_changed": true,
+  "id": "TemplateLiteralQueryConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/94/java/GroovyShellEvaluate": {
+  "arm": "B",
+  "changed": [
+   "PricingFormulaEvaluator.java"
+  ],
+  "cwe": "94",
+  "files": [
+   "PricingFormulaEvaluator.java"
+  ],
+  "finding_file_changed": true,
+  "id": "GroovyShellEvaluate",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "1 case stub(s)",
+  "status": "OK"
+ },
+ "B/94/java/JexlEngineUnsandboxedEval": {
+  "arm": "B",
+  "changed": [
+   "ReportFilterService.java"
+  ],
+  "cwe": "94",
+  "files": [
+   "ReportFilterService.java"
+  ],
+  "finding_file_changed": true,
+  "id": "JexlEngineUnsandboxedEval",
+  "kind": "",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/94/java/ScriptEngineJavaScriptEval": {
+  "arm": "B",
+  "changed": [
+   "CustomValidationRuleService.java"
+  ],
+  "cwe": "94",
+  "files": [
+   "CustomValidationRuleService.java"
+  ],
+  "finding_file_changed": true,
+  "id": "ScriptEngineJavaScriptEval",
+  "kind": "signature",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "CustomValidationRuleService.java:29: error: incompatible types: Class<Number> cannot be converted to String",
+  "status": "FAIL"
+ },
+ "B/94/java/SpelStandardEvaluationContext": {
+  "arm": "B",
+  "changed": [
+   "RulePreviewService.java"
+  ],
+  "cwe": "94",
+  "files": [
+   "RulePreviewService.java"
+  ],
+  "finding_file_changed": true,
+  "id": "SpelStandardEvaluationContext",
+  "kind": "unresolved-member",
+  "kind_detail": "",
+  "language": "java",
+  "new": [],
+  "note": "RulePreviewService.java:13: error: cannot find symbol (symbol:   method setRootObject(OrderContext))",
+  "status": "FAIL"
+ },
+ "B/94/javascript/EvalDirectStringConcat": {
+  "arm": "B",
+  "changed": [
+   "calculatorController.js"
+  ],
+  "cwe": "94",
+  "files": [
+   "calculatorController.js"
+  ],
+  "finding_file_changed": true,
+  "id": "EvalDirectStringConcat",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/94/javascript/FormulaPreviewFunctionConstructor": {
+  "arm": "B",
+  "changed": [
+   "formulaEngine.js"
+  ],
+  "cwe": "94",
+  "files": [
+   "formulaEngine.js"
+  ],
+  "finding_file_changed": true,
+  "id": "FormulaPreviewFunctionConstructor",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/94/javascript/SetTimeoutStringArg": {
+  "arm": "B",
+  "changed": [
+   "SetTimeoutStringArg.js"
+  ],
+  "cwe": "94",
+  "files": [
+   "SetTimeoutStringArg.js"
+  ],
+  "finding_file_changed": true,
+  "id": "SetTimeoutStringArg",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "",
+  "status": "OK"
+ },
+ "B/94/javascript/VmRunInNewContextEval": {
+  "arm": "B",
+  "changed": [
+   "automationRunner.js"
+  ],
+  "cwe": "94",
+  "files": [
+   "automationRunner.js"
+  ],
+  "finding_file_changed": true,
+  "id": "VmRunInNewContextEval",
+  "kind": "",
+  "kind_detail": "",
+  "language": "javascript",
+  "new": [],
+  "note": "'isolated-vm' present but cannot load here: Cannot find module './out/isolated_vm'",
+  "status": "UNCHECKED"
+ }
+}

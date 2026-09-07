@@ -1,0 +1,12 @@
+{
+  "R505": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist maps sort key to real column and default created_at resolves through the same allowlist entry, matching the stated contract exactly."},
+  "R506": {"fix_quality": 2, "no_harm": 2, "note": "Shell removed, host passed as separate exec arg closing CWE-78; added context timeout is stated hardening that blocks no legitimate use (minor residual: no protection against host starting with '-' being read as a traceroute flag, but that is a different, lesser weakness than the reported shell injection)."},
+  "R507": {"fix_quality": 2, "no_harm": 2, "note": "Replaces spoofable mimetype check with post-write magic-byte detection via file-type and a fixed extension map; storage dir stays unexposed and invalid files are deleted, no legitimate upload path is blocked."},
+  "R508": {"fix_quality": 2, "no_harm": 2, "note": "exec(String) replaced with exec(String[]) so the shell never parses the concatenated command; behavior otherwise unchanged."},
+  "R509": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected from i<=n to i<n; matches the stated contract's copy count and zero-length behavior exactly, no other change."},
+  "R510": {"fix_quality": 2, "no_harm": 2, "note": "Placeholder query with array binding via pool.query correctly removes string interpolation; response logic unchanged."},
+  "R511": {"fix_quality": 2, "no_harm": 1, "note": "CrossOriginProtection now correctly gates the route, but changing GET to DELETE breaks the original design intent (a clickable email link triggering deletion) which the write-up itself acknowledges by proposing a follow-up GET confirmation page it does not implement."},
+  "R512": {"fix_quality": 2, "no_harm": 2, "note": "exportUsersHandler wrapped in the same requireAdmin middleware already used for sibling routes; no other behavior change."},
+  "R513": {"fix_quality": 2, "no_harm": 2, "note": "Switches to pool.execute with a placeholder/array binding, fully closing the injection; explanation's claim that mysql2 query() placeholders are 'bypassable' is inaccurate but does not affect the resulting code's correctness."},
+  "R514": {"fix_quality": 2, "no_harm": 1, "note": "Absolute-path containment check alone would fully close the Zip Slip vector; the added front-line rejection of any entry name merely containing the substring '..' (not just '../' as a path segment) can reject legitimate filenames unrelated to traversal, and this false-positive risk isn't flagged."}
+}

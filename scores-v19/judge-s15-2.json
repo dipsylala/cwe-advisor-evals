@@ -1,0 +1,17 @@
+{
+  "R321": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized SqlCommand closes the injection cleanly; preserves the DataTable shape and region filtering per the contract."},
+  "R322": {"fix_quality": 2, "no_harm": 2, "note": "Adds an admin-role check at the entry point, matching the existing User.Role field and the endpoint's admin-only intent; no legitimate caller is affected."},
+  "R323": {"fix_quality": 0, "no_harm": 2, "note": "Ownership check is tautological - projectStore sets ownerId to the requesting userId itself, so `project.ownerId !== userId` can never be true and the authorization gap is unfixed; observable behavior is otherwise unchanged from the (already-stubbed) original."},
+  "R324": {"fix_quality": 2, "no_harm": 2, "note": "Argument list with shell=False removes the shell entirely; same libreoffice invocation and outputs preserved."},
+  "R325": {"fix_quality": 2, "no_harm": 1, "note": "Ping class correctly eliminates the shell sink, but silently changes the response shape and count (raw multi-packet ping stdout -> one custom-formatted line) without stating this as a behavior change."},
+  "R326": {"fix_quality": 2, "no_harm": 2, "note": "Adding @PreAuthorize to the caller closes the self-invocation proxy bypass; consistent with the ADMIN-only requirement already enforced on deleteInvoice, so it isn't a novel restriction."},
+  "R327": {"fix_quality": 2, "no_harm": 2, "note": "Sequelize bind parameters correctly parameterize the date range using documented named-bind syntax; query semantics unchanged."},
+  "R328": {"fix_quality": 2, "no_harm": 2, "note": "Callback closure removes the code-string sink entirely; recordReminder still called with the same values after delayMs."},
+  "R329": {"fix_quality": 2, "no_harm": 2, "note": "Canonical-path containment check (getCanonicalPath + startsWith) blocks traversal while leaving normal downloads unaffected."},
+  "R330": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte detection via Tika plus a fixed MIME-to-extension map and UUID filenames closes content-type spoofing and incidental path traversal; matches the stated contract exactly."},
+  "R331": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath()+startsWith containment correctly blocks traversal and symlink escapes; the absolute-path quirk of Path.resolve() is still caught by the final containment check."},
+  "R332": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected from <= n to < n, exactly matching the stated copy/return contract."},
+  "R333": {"fix_quality": 2, "no_harm": 2, "note": "Removes the unsafe realpath-fallback, validates the filename as a single path component, and verifies canonical-parent containment, matching the file's own documented no-subdirectories intent."},
+  "R334": {"fix_quality": 2, "no_harm": 2, "note": "exec.Command with a plain argument list removes the shell entirely, satisfying the stated contract that shell metacharacters become inert literal data; resize behavior preserved."},
+  "R335": {"fix_quality": 1, "no_harm": 2, "note": "Manual leading-'/' and '..'-substring denylist blocks the simple traversal case but not symlink-based escapes; the stated Python 3.11 runtime (3.11.4+) has the built-in extractall(filter='data') that is the correct-shape fix for this exact CVE class."}
+}

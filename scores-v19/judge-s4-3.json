@@ -1,0 +1,14 @@
+{
+  "R160": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized SqlCommand with @Owner placeholder closes the injection cleanly; no other observable change."},
+  "R161": {"fix_quality": 2, "no_harm": 2, "note": "strlcat/strlcpy check bounds before writing into the fixed 128-byte buffer, preserving prior semantics for valid inputs."},
+  "R162": {"fix_quality": 2, "no_harm": 2, "note": "Direct ProcessBuilder exec of ping removes shell reparsing; digit-only count validation matches the natural format and doesn't block legitimate use (minor unaddressed residual: host starting with '-' could still be read as a ping flag, a lesser flag-injection gap not the reported shell-injection vector)."},
+  "R163": {"fix_quality": 2, "no_harm": 2, "note": "File(baseDir, param) plus canonical-path containment check closes traversal while preserving normal in-directory file access."},
+  "R164": {"fix_quality": 2, "no_harm": 1, "note": "fsockopen fully removes the shell sink, but the write-up openly swaps ICMP ping semantics for TCP port-reachability checks and adds a hostname allowlist regex, both real behavior changes beyond the minimal fix."},
+  "R165": {"fix_quality": 2, "no_harm": 2, "note": "calloc(count, sizeof) performs the overflow check and matches the stated contract (exact-count copy, NULL without leak on failure) precisely."},
+  "R166": {"fix_quality": 2, "no_harm": 1, "note": "Switching to java.nio.file removes the shell sink entirely, but the added rejection of absolute paths is an extra restriction not needed to close CWE-78 and narrows what paths callers can list, disclosed but unrequired."},
+  "R167": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILs (HttpHeaders.X_CONTENT_TYPE_OPTIONS does not exist in Spring), so the endpoint does not compile at all, silently breaking the 'still retrievable' contract for PNG/JPEG avatars."},
+  "R168": {"fix_quality": 2, "no_harm": 2, "note": "Adds Gate::authorize('delete', $order) matching the sibling show/update pattern and the existing OrderPolicy::delete; no other behavior change."},
+  "R169": {"fix_quality": 2, "no_harm": 2, "note": "Adds caller authentication and an ownership check before the delete, exactly closing the missing-authorization gap with no unrelated change."},
+  "R170": {"fix_quality": 2, "no_harm": 1, "note": "Canonical-path containment check closes traversal, but the write-up also drops URLDecoder.decode() on the cookie value, silently changing behavior for legitimate percent-encoded filenames even though the removal is explained (and unnecessary, since containment alone would have sufficed)."},
+  "R171": {"fix_quality": 2, "no_harm": 2, "note": "Corrects the inverted admin check exactly as the stated contract requires, with no other change."}
+}

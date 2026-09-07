@@ -1,0 +1,17 @@
+{
+  "R321": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized SqlCommand replaces string concatenation, preserves DataTable shape and filtering; clean fix."},
+  "R322": {"fix_quality": 2, "no_harm": 2, "note": "Adds admin-role check matching the handler's own doc comment (admin-only endpoint); no other behaviour change for legitimate admin callers."},
+  "R323": {"fix_quality": 0, "no_harm": 1, "note": "The ownership check is a no-op: loadProjectExport sets ownerId := userId itself, so `project.ownerId !== userId` can never be true and any authenticated user can still fetch any project; vulnerability is not actually closed."},
+  "R324": {"fix_quality": 2, "no_harm": 2, "note": "shell=True string replaced with shell=False argument list; closes shell injection with no other observable change."},
+  "R325": {"fix_quality": 2, "no_harm": 1, "note": "Switching to System.Net.NetworkInformation.Ping correctly removes the shell, but the write-up silently changes behaviour: only one ICMP echo is sent instead of the original's four, and the reply text fabricates a fixed TTL=64/bytes=32 rather than reflecting the real reply, undisclosed as a tradeoff."},
+  "R326": {"fix_quality": 2, "no_harm": 2, "note": "Moving @PreAuthorize(hasRole('ADMIN')) onto processMonthEndCleanup() closes the self-invocation bypass via the proxy and is consistent with deleteInvoice's existing admin-only requirement; write-up states the scope clearly."},
+  "R327": {"fix_quality": 2, "no_harm": 2, "note": "Concatenated SQL replaced with Sequelize bind parameters ($startDate/$endDate); driver-level parameterization, no other behaviour change."},
+  "R328": {"fix_quality": 2, "no_harm": 2, "note": "setTimeout string eval replaced with a closure callback; eliminates code generation with identical scheduled behaviour."},
+  "R329": {"fix_quality": 2, "no_harm": 2, "note": "Canonical-path containment check with separator-safe prefix comparison correctly blocks traversal while preserving download of legitimate files."},
+  "R330": {"fix_quality": 2, "no_harm": 2, "note": "Apache Tika magic-byte detection plus UUID-based server-generated filenames closes both the content-type spoof and path traversal, matching the stated contract."},
+  "R331": {"fix_quality": 2, "no_harm": 2, "note": "Path.toRealPath()/startsWith containment check is a correct, component-safe traversal fix that preserves legitimate downloads and 404 semantics."},
+  "R332": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected from i<=n to i<n; matches the stated contract exactly with no other change."},
+  "R333": {"fix_quality": 2, "no_harm": 2, "note": "Removes the realpath()?:fallback, validates the filename as a single path component (matching the documented no-subdirectory contract), and canonicalizes the parent directory before writing; closes the vector without over-restricting legitimate single-component filenames."},
+  "R334": {"fix_quality": 2, "no_harm": 2, "note": "exec.Command with a discrete argument list removes the shell entirely, satisfying the stated contract with no other observable change."},
+  "R335": {"fix_quality": 1, "no_harm": 1, "note": "Manual check for a leading '/' or '..' substring in member names is a partial, reimplemented defense that misses symlink-based tar-slip escapes that Python's built-in extractall(filter='data') (available since 3.11.4, the declared runtime) handles; the substring check can also silently reject legitimate filenames merely containing '..', undisclosed as a tradeoff."}
+}

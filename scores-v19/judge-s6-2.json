@@ -1,0 +1,16 @@
+{
+  "R188": {"fix_quality": 0, "no_harm": 1, "note": "Build FAILs (missing StoreMode/Enyim.Caching.Memcached using); also silently changes the constructor from Socket to IMemcachedClient, breaking any existing caller without saying so."},
+  "R189": {"fix_quality": 1, "no_harm": 1, "note": "Denylist of literal patterns (java., importClass, load() is the wrong shape for code injection and is trivially bypassed by splitting the forbidden substring across string literals; also risks rejecting legitimate rule text that happens to contain those substrings."},
+  "R190": {"fix_quality": 2, "no_harm": 2, "note": "Correctly scopes the list query to the authenticated user via the repository's existing findByOwnerUsername, matching the stated contract exactly."},
+  "R191": {"fix_quality": 0, "no_harm": 1, "note": "Build FAILs: DocumentService/DocumentController reference a Document type and getOwner()/findById() that are never defined in the fix's files."},
+  "R192": {"fix_quality": 2, "no_harm": 2, "note": "Wraps exportUsersHandler with the existing requireAdmin middleware, mirroring the sibling routes; no other observable change."},
+  "R193": {"fix_quality": 2, "no_harm": 2, "note": "Parameterizes the LIKE query via OdbcCommand.Parameters; wildcard concatenation stays in app code as data, output unchanged."},
+  "R194": {"fix_quality": 2, "no_harm": 2, "note": "Canonicalizes with Path.resolve() and checks containment via relative_to(); legitimate filenames behave identically to before."},
+  "R195": {"fix_quality": 2, "no_harm": 1, "note": "Removes the shell entirely (good), but silently narrows accepted geometry to strict NxN and switches to sharp's cover-crop fit, changing accepted input and output vs ImageMagick's default aspect-preserving resize, without flagging this as a behavior change."},
+  "R196": {"fix_quality": 2, "no_harm": 2, "note": "GetFullPath + GetRelativePath containment check blocks traversal for legitimate same-root paths; minor unstated caveat that GetRelativePath can return an unmodified absolute path across Windows drive roots, but base path style implies single-root deployment."},
+  "R197": {"fix_quality": 2, "no_harm": 2, "note": "Adds an explicit server-side (Blazor Server, direct service injection) role check in the handler mirroring the AuthorizeView role, preserving normal admin flow."},
+  "R198": {"fix_quality": 2, "no_harm": 2, "note": "Uses res.sendFile's built-in root option, the idiomatic fix for this sink; legitimate filenames behave the same."},
+  "R199": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the ad hoc inline command with standard RESP array encoding, closing CRLF injection with no change to the SET semantics or response."},
+  "R200": {"fix_quality": 2, "no_harm": 2, "note": "Switches to pool.execute with a ? placeholder and bound userId; output unchanged (explanation overstates that only execute() is safe, but code itself is correct)."},
+  "R201": {"fix_quality": 2, "no_harm": 2, "note": "basename() enforcement matches the stated no-subdirectories design and keeps realpath containment for existing files; closes the traversal without narrowing intended usage."}
+}

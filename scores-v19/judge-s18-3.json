@@ -1,0 +1,17 @@
+{
+  "R366": {"fix_quality": 2, "no_harm": 1, "note": "StackExchange.Redis StringSet closes CRLF injection via RESP encoding, but adds an unrequested userId allowlist regex that could reject legitimate userIds the original accepted."},
+  "R367": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath() canonicalization plus Path.startsWith containment check matches the stated contract; no behavior change for valid nested entries."},
+  "R368": {"fix_quality": 2, "no_harm": 1, "note": "execFile with an argument array correctly avoids shell parsing, but the added reportName regex allowlist is an unrequired extra restriction that could reject legitimate report names."},
+  "R369": {"fix_quality": 2, "no_harm": 2, "note": "realpath() plus separator-aware prefix check is the correct canonicalization pattern; no side effects on legitimate files."},
+  "R370": {"fix_quality": 2, "no_harm": 2, "note": "Rejecting CR/LF in filename is required by the FTP text protocol itself (no safe parameterized API exists for a raw socket sink), so the restriction matches the protocol's own constraints."},
+  "R371": {"fix_quality": 2, "no_harm": 2, "note": "expr-eval Parser replaces eval() with a safe arithmetic-only evaluator, preserving the calculator's intended functionality."},
+  "R372": {"fix_quality": 0, "no_harm": 2, "note": "Build FAILs: the fix redeclares 'record OrderContext' in RulePreviewService.java, duplicating the one already in RulePreviewController.java in the same package; the SimpleEvaluationContext.forReadOnlyDataBinding() logic itself correctly matches the stated contract (property access only, no methods/types/constructors) if the duplicate declaration is removed."},
+  "R373": {"fix_quality": 2, "no_harm": 2, "note": "Rejecting spaces, null bytes, and control characters in cacheKey mirrors memcached's own key syntax requirements, so the restriction isn't extraneous."},
+  "R374": {"fix_quality": 2, "no_harm": 2, "note": "ProcessBuilder with a separate argument array is the correct API and preserves output/error handling; leading-'-' flag injection into ping is a narrow, pre-existing gap not introduced by this fix."},
+  "R375": {"fix_quality": 2, "no_harm": 2, "note": "Redirect-only handler on the plaintext listener matches the code's own documented intent and removes the unprotected route without altering legitimate HTTPS behavior."},
+  "R376": {"fix_quality": 2, "no_harm": 2, "note": "JEXL3 expression engine preserves arithmetic/ternary formula semantics; the disclosed catch-all fallback to basePrice on evaluation failure is a stated, non-blocking behavior change."},
+  "R377": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized stored-procedure call matches the stated contract exactly, treating customerId strictly as data."},
+  "R378": {"fix_quality": 2, "no_harm": 1, "note": "Tika magic-byte detection plus ImageIO re-encoding correctly closes the content-spoofing vector, but the added 5 MB size cap is a new restriction not present in the original and not required to close this CWE-434 finding."},
+  "R379": {"fix_quality": 2, "no_harm": 2, "note": "Forcing owner=self.request.user on save() closes the missing-authorization gap on create without otherwise changing behavior."},
+  "R380": {"fix_quality": 1, "no_harm": 1, "note": "Relies solely on a regex allowlist rather than switching to ProcessStartInfo.ArgumentList (the idiomatic safe API for this sink), and the allowlist itself is a new restriction that could reject legitimate report names."}
+}

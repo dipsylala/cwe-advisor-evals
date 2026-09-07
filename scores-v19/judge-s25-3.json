@@ -1,0 +1,15 @@
+{
+  "R465": {"fix_quality": 2, "no_harm": 1, "note": "Containment+canonicalization closes the traversal, but the fix also drops the original URLDecoder.decode() step on the cookie value, silently changing what encoded input is accepted (stated in the write-up but not required by the fix)."},
+  "R466": {"fix_quality": 2, "no_harm": 2, "note": "Clean fix: plaintext listener now serves the same CSRF-wrapped handler as the TLS listener, no other observable change."},
+  "R467": {"fix_quality": 2, "no_harm": 2, "note": "Column/direction allowlist matches the stated contract's 'intended sort keys' restriction; parameterized accountId binding untouched."},
+  "R468": {"fix_quality": 2, "no_harm": 2, "note": "Minimal, correct move of the email route to protectedMux; profile route and handler's own 405 check untouched, matching the stated contract."},
+  "R469": {"fix_quality": 2, "no_harm": 2, "note": "Argument-array proc_open removes shell interpretation and preserves the combined stdout/stderr output shape."},
+  "R470": {"fix_quality": 2, "no_harm": 2, "note": "Removes the stale [IgnoreAntiforgeryToken] override so the app's own global CSRF filter applies again; no other change."},
+  "R471": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized stored-procedure call matches the stated contract exactly, same call target and return type."},
+  "R472": {"fix_quality": 2, "no_harm": 2, "note": "execFile with an argument array removes shell interpretation without changing behavior for legitimate domain values."},
+  "R473": {"fix_quality": 2, "no_harm": 2, "note": "Array-based exec plus a hostname/IPv6 character allowlist matches the input shape a ping-target host parameter is expected to have."},
+  "R474": {"fix_quality": 2, "no_harm": 1, "note": "JexlSandbox deny-by-default plus disabled object construction is the correct mitigation, but the added regex allowlist on the raw expression text also blocks legitimate operators (e.g. '+', ',', '[]') beyond simple comparisons, while the write-up claims functionality is fully preserved."},
+  "R475": {"fix_quality": 2, "no_harm": 2, "note": "Reuses the app's existing can:update,order convention already applied to the sibling cancel route; no unrelated change."},
+  "R476": {"fix_quality": 2, "no_harm": 1, "note": "Fully eliminates process spawning, but replaces PowerShell Test-Connection's tabular object output with a hand-rolled classic-ping-style text format and incorrectly claims the response shape is preserved."},
+  "R477": {"fix_quality": 2, "no_harm": 1, "note": "Rejecting CR/LF closes the inline-protocol injection, but rejects legitimate multi-line annotation text instead of using RESP's binary-safe framing, and this trade-off isn't flagged as a limitation."}
+}

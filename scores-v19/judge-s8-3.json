@@ -1,0 +1,17 @@
+{
+  "R217": {"fix_quality": 2, "no_harm": 2, "note": "Adds .RequireAuthorization() to the metadata-less Minimal API delete route, matching the plain [Authorize] used on the sibling MVC controller."},
+  "R218": {"fix_quality": 2, "no_harm": 2, "note": "jwt.decode() replaced with jwt.verify(token, JWT_SECRET); role-check flow preserved, the new secret requirement is inherent to verification, not extraneous."},
+  "R219": {"fix_quality": 2, "no_harm": 2, "note": "path.resolve + path.relative('..') containment check blocks traversal without restricting legitimate filenames within the reports directory."},
+  "R220": {"fix_quality": 2, "no_harm": 1, "note": "Shell execution eliminated entirely (good), but the fix also silently narrows behavior by rejecting absolute-path input that the original os.exec-based listing accepted; this is stated in the explanation but is an added restriction beyond what closing the injection required."},
+  "R221": {"fix_quality": 2, "no_harm": 2, "note": "Gate::allows -> Gate::authorize is the canonical Laravel fix; authorized callers see unchanged behavior."},
+  "R222": {"fix_quality": 2, "no_harm": 2, "note": "Correct parameterized IN-clause with positional placeholders; matches the stated contract exactly for any array of ids."},
+  "R223": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized DELETE with typed SqlDbType parameters closes the injection and preserves tenant scoping and row-count return; a malformed 'before' date will surface as an unhandled conversion exception rather than a clean validation response, a minor gap against the contract's wording but it does not broaden the predicate."},
+  "R224": {"fix_quality": 2, "no_harm": 2, "note": "Rejects path separators/stream-wrapper colons and canonicalizes with realpath before a containment check, appropriate for a flat reports directory; chdir() removal is a stated, harmless cleanup."},
+  "R225": {"fix_quality": 1, "no_harm": 0, "note": "Adds a TokenStore/ValidateToken mechanism but nothing in the delivered code (or acknowledged as missing) ever calls StoreToken/GenerateToken to issue a token to a legitimate client, so every legitimate POST now fails ValidateToken and the endpoint is permanently non-functional; this consequence is not disclosed."},
+  "R226": {"fix_quality": 2, "no_harm": 2, "note": "AllowAny -> IsAdminUser matches the unscoped ApiKey.objects.all() queryset (no per-owner filtering exists elsewhere), consistent with an admin-only resource."},
+  "R227": {"fix_quality": 2, "no_harm": 2, "note": "subtle.ConstantTimeCompare enforces exact equality, matching the stated contract precisely."},
+  "R228": {"fix_quality": 2, "no_harm": 2, "note": "IsAbs rejection plus Clean+HasPrefix containment closes traversal without restricting legitimate relative filenames."},
+  "R229": {"fix_quality": 2, "no_harm": 2, "note": "Moves UpdateEmail registration onto the CSRF-protected mux exactly as the stated contract requires, leaving Profile and the 405 behavior untouched."},
+  "R230": {"fix_quality": 2, "no_harm": 2, "note": "@EnableMethodSecurity activates the pre-existing @PreAuthorize checks; minimal, correct, no other behavior change."},
+  "R231": {"fix_quality": 1, "no_harm": 2, "note": "EvalSymlinks only rejects targets that resolve outside uploadsDir; os.ReadFile(full) still follows a symlink whose target lies inside uploadsDir, so a requestedName that merely names a symlink is read rather than rejected as the stated contract requires."}
+}

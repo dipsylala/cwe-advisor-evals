@@ -1,0 +1,16 @@
+{
+  "R260": {"fix_quality": 2, "no_harm": 2, "note": "Canonicalizes with GetFullPath and rejects escapes via GetRelativePath before reading; legitimate relative paths under the root still succeed."},
+  "R261": {"fix_quality": 2, "no_harm": 2, "note": "Scopes the list query to the authenticated user via findByOwnerUsername, matching the stated contract exactly."},
+  "R262": {"fix_quality": 2, "no_harm": 2, "note": "Encodes control/line-separator characters and switches to a message-template log call; normal usernames pass through unchanged."},
+  "R263": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing per-event admin role check inside the handler; non-admins are silently denied, admins unaffected."},
+  "R264": {"fix_quality": 2, "no_harm": 2, "note": "Rejects CRLF in email/subject before building the hand-rolled SMTP commands, closing the injection without altering normal sends."},
+  "R265": {"fix_quality": 2, "no_harm": 2, "note": "Parameterizes the query with AddWithValue; apostrophe-bearing actor values are treated as literal data per the stated contract."},
+  "R266": {"fix_quality": 2, "no_harm": 2, "note": "Replaces attacker-controlled originalname with a UUID name derived from the sniffed MIME type; JSON url shape and 400 path preserved per contract."},
+  "R267": {"fix_quality": 0, "no_harm": 2, "note": "Empirically confirmed (execFile('cmd.exe',['/c',...]) reproduced in a scratch Node script) that a reportName containing an embedded quote plus '&' still executes injected commands, because cmd.exe re-parses the whole line itself; the argument array does not close this sink."},
+  "R268": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing app.UseAntiforgery() middleware after AddAntiforgery() was already registered, matching the minimal-API POST default and the stated contract."},
+  "R269": {"fix_quality": 2, "no_harm": 2, "note": "Adds a magic-byte check confirming PNG/JPEG signatures against the declared content type before copying; legitimate images still pass."},
+  "R270": {"fix_quality": 2, "no_harm": 2, "note": "Swaps StandardEvaluationContext for SimpleEvaluationContext.forReadOnlyDataBinding(), the standard SpEL sandboxing pattern that blocks method/type/constructor/bean access while leaving arithmetic and property reads intact per the contract."},
+  "R271": {"fix_quality": 2, "no_harm": 1, "note": "Tika content-sniffing plus UUID filenames correctly close the upload vector, but re-encoding through ImageIO.read/write can reject legitimate images ImageIO cannot decode (e.g. CMYK JPEGs) without the write-up disclosing that narrower format support."},
+  "R272": {"fix_quality": 2, "no_harm": 2, "note": "Removes the stray [IgnoreAntiforgeryToken], reverting the action to the already-registered app-wide AutoValidateAntiforgeryTokenAttribute filter with no other change."},
+  "R273": {"fix_quality": 2, "no_harm": 2, "note": "Verified via an analogous lxml test (same underlying libxml2 XML_PARSE_NOENT/NONET flags: noent=false alone left the entity unsubstituted and blocked file disclosure even with network entities allowed) that noent:false is the operative fix and closes the exfiltration vector; nonet:true is added defense-in-depth."}
+}

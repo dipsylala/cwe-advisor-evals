@@ -1,0 +1,16 @@
+{
+  "R491": {"fix_quality": 2, "no_harm": 2, "note": "Content-sniffed allowlist (Tika), random filename, storage outside webroot, size cap; rejections are inherent to the CWE-434 fix and stated."},
+  "R492": {"fix_quality": 0, "no_harm": 2, "note": "verifyProjectOwnership() unconditionally returns a match regardless of projectId/userId, so any user can still export any project despite the added parameter; not-found branch is now dead code."},
+  "R493": {"fix_quality": 2, "no_harm": 2, "note": "Stored extension now sourced from file-type's detected.ext instead of client filename; response shape unchanged."},
+  "R494": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() applied to both args, matching the existing primary-command pattern; return/discard contract preserved."},
+  "R495": {"fix_quality": 2, "no_harm": 2, "note": "Minimal correct fix: moves UpdateEmail registration onto protectedMux; contract (profile route, 202, 405) unaffected."},
+  "R496": {"fix_quality": 2, "no_harm": 2, "note": "Propagates requestedCapacity into write_field's bounds check exactly per the stated contract; no other change."},
+  "R497": {"fix_quality": 1, "no_harm": 2, "note": "Linux branch is properly fixed (ProcessBuilder array + --), but the Windows branch still calls cmd.exe /c with data as a separate ProcessBuilder argument; verified with a live JDK test that a no-whitespace payload (e.g. 'test&whoami>marker.txt') still gets executed by cmd.exe, so the vector is only partially closed."},
+  "R498": {"fix_quality": 2, "no_harm": 0, "note": "Forces Content-Disposition: attachment for every avatar including PNG/JPEG, not just SVG, which silently breaks inline avatar display the contract requires to stay 'served back unchanged'; write-up only discusses the SVG rationale and never flags this PNG/JPEG side effect."},
+  "R499": {"fix_quality": 2, "no_harm": 2, "note": "Replaces proc_open/grep with native file()+strpos(), eliminating the shell entirely while preserving literal-match semantics and return shape."},
+  "R500": {"fix_quality": 2, "no_harm": 2, "note": "Invokes ping.exe directly (no shell) with ArgumentList; shell metacharacter injection is fully closed and functionality preserved."},
+  "R501": {"fix_quality": 2, "no_harm": 2, "note": "Invokes ping.exe directly with separate arguments (avoids the cmd.exe /c re-parsing issue that affects R497), plus a leading-dash guard on host for argument-injection defense-in-depth; count-format validation is disclosed and reasonable for a numeric field."},
+  "R502": {"fix_quality": 0, "no_harm": 2, "note": "Removes the existing (imperfect) Origin check and replaces it only with a comment saying the caller must wrap the mux with net/http.CrossOriginProtection; that wrapping is never invoked anywhere in the given call chain, so the delivered code has no CSRF defense at all."},
+  "R503": {"fix_quality": 2, "no_harm": 2, "note": "Replaces eval() with mathjs.evaluate() inside a try/catch returning 400 on parse errors; response shape and calculator functionality preserved."},
+  "R504": {"fix_quality": 2, "no_harm": 2, "note": "snprintf with the standard truncation/error check, rejecting (not corrupting) an over-length line; matches expected CWE-787 remediation."}
+}

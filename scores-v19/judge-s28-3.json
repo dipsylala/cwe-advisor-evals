@@ -1,0 +1,12 @@
+{
+  "R505": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist maps sort keys (incl. default created_at) to safe columns; injection closed, legitimate sorts and bound params preserved."},
+  "R506": {"fix_quality": 2, "no_harm": 2, "note": "Shell removed, host passed as separate exec argument; CombinedOutput/timeout behavior preserved, only stated addition is a context timeout."},
+  "R507": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte detection via file-type after write, safe UUID+detected-extension naming; legitimate png/jpg uploads still succeed (adds an undeclared file-type dependency, minor)."},
+  "R508": {"fix_quality": 2, "no_harm": 2, "note": "exec(String) replaced with exec(String[]); same dir/ls semantics preserved, shell metacharacters no longer parsed."},
+  "R509": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected from i<=n to i<n exactly per stated contract; no other change."},
+  "R510": {"fix_quality": 2, "no_harm": 2, "note": "Concatenation replaced with ? placeholder and pool.query(sql,[trackingCode],cb); behavior otherwise identical."},
+  "R511": {"fix_quality": 2, "no_harm": 1, "note": "Correctly moves delete route under CrossOriginProtection, but switching GET->DELETE breaks the email-link direct-click flow the original code's comment says was intentional; write-up discloses this as a follow-up rather than implementing it."},
+  "R512": {"fix_quality": 2, "no_harm": 2, "note": "Wraps exportUsersHandler with the same requireAdmin middleware used on sibling routes; no other behavior change."},
+  "R513": {"fix_quality": 2, "no_harm": 2, "note": "Switches to pool.execute with ? placeholder, closing injection with unchanged response shape (explanation's claim that pool.query() escaping is 'bypassable' is inaccurate but doesn't affect the fix's correctness)."},
+  "R514": {"fix_quality": 2, "no_harm": 1, "note": "Absolute-path containment check correctly closes zip-slip, but the added literal '..'-substring rejection can reject legitimate entry names containing two dots outside any path-traversal context, and this collateral rejection isn't flagged in the write-up."}
+}

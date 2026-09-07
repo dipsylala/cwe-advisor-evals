@@ -1,0 +1,15 @@
+{
+  "R478": {"fix_quality": 2, "no_harm": 0, "note": "Content-based validation and random naming close the vector, but STORAGE_DIR (private_uploads) is never created; verified with multer that a missing destination dir makes every upload 500 with ENOENT, silently breaking all legitimate uploads."},
+  "R479": {"fix_quality": 2, "no_harm": 1, "note": "archive/tar replacement cleanly closes the shell injection, but ctx is now an unused parameter so request-context cancellation from the stated contract is silently dropped."},
+  "R480": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath() plus startsWith containment check correctly closes the symlink/traversal gap while preserving the read contract."},
+  "R481": {"fix_quality": 2, "no_harm": 2, "note": "StackExchange.Redis HashSet uses proper RESP encoding, closing the CRLF command-injection vector; same key/fields preserved, constructor change is disclosed and necessary."},
+  "R482": {"fix_quality": 2, "no_harm": 2, "note": "Tika content detection, allowlist, random filename, directory creation, and re-encoding are all disclosed and directly address the unrestricted-upload weakness without silently blocking legitimate use."},
+  "R483": {"fix_quality": 2, "no_harm": 2, "note": "Adds the same can:update,order middleware already used by sibling mutating routes, matching established codebase convention for authorizing order actions."},
+  "R484": {"fix_quality": 2, "no_harm": 0, "note": "Removing the shell call stops command injection, but writing the fully attacker-controlled header value unescaped into a text/html response introduces reflected XSS (CWE-79)."},
+  "R485": {"fix_quality": 2, "no_harm": 2, "note": "Reject-then-canonicalize-then-contain approach closes the traversal vector while preserving the original read/encode/response behavior."},
+  "R486": {"fix_quality": 2, "no_harm": 2, "note": "Verified with Node that xml2js/sax-js rejects entity references rather than resolving them, and that legitimate parsing still extracts orderId identically."},
+  "R487": {"fix_quality": 2, "no_harm": 2, "note": "Verified by compiling and running against a real .bat file: ArgumentList blocks the '&' injection that the Arguments string allowed, while a legitimate reportName still passes through unchanged."},
+  "R488": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist/lookup-map for the plugin name matches the CWE-22 guidance quoted in the write-up for this exact require() sink pattern."},
+  "R489": {"fix_quality": 2, "no_harm": 1, "note": "Single-path-component validation correctly fixes the traversal (and matches the file's own 'no subdirectories' contract), but the added fopen(...,'x') exclusive-create mode now rejects re-saving an existing note filename, a disclosed but unflagged regression from the original overwrite-capable file_put_contents."},
+  "R490": {"fix_quality": 2, "no_harm": 2, "note": "CBC with a fresh random IV per encryption, correctly prepended for later recovery, is the necessary and disclosed format change to replace ECB."}
+}

@@ -1,0 +1,15 @@
+{
+  "R452": {"fix_quality": 2, "no_harm": 2, "note": "Removes the manufactured double-decode, canonicalizes with toRealPath() and a path-component containment check; added .. / null-byte pre-checks are harmless belt-and-suspenders."},
+  "R453": {"fix_quality": 1, "no_harm": 1, "note": "Still builds a shell string via sh -c (wrong shape for this sink); the added [a-zA-Z0-9 ]* allowlist is disclosed but is a new restriction not called for by any stated contract and could reject legitimate values."},
+  "R454": {"fix_quality": 2, "no_harm": 2, "note": "Parameterizes both TenantId and BeforeDate, matching the stated contract's scoping/return-count requirements; no explicit date-format validation is added, but the predicate can no longer be broadened."},
+  "R455": {"fix_quality": 2, "no_harm": 2, "note": "Applies escapeshellarg() to both fallback args and switches to the already-basename()'d $source, a disclosed correction that aligns the fallback with the primary path and does not narrow accepted input."},
+  "R456": {"fix_quality": 2, "no_harm": 2, "note": "Array-form proc_open bypasses the shell entirely; no new restriction on $term."},
+  "R457": {"fix_quality": 2, "no_harm": 2, "note": "filepath.Rel + \"..\" prefix check correctly closes the sibling-directory bypass without narrowing legitimate paths."},
+  "R458": {"fix_quality": 2, "no_harm": 2, "note": "Removes the second decode and relies on toRealPath()+startsWith for containment; equivalent protection to R452 with no added restriction beyond what's needed."},
+  "R459": {"fix_quality": 2, "no_harm": 2, "note": "Column allowlist (Id/Name/Status/created_at) matches exactly what the stated contract requires (supported sort keys only, default preserved), so the restriction is contract-sanctioned."},
+  "R460": {"fix_quality": 2, "no_harm": 1, "note": "subprocess.run with an argument list and shell=False fully closes the vector on its own; the added hostname regex is an undisclosed-as-required, un-contracted restriction that could reject valid hosts (e.g. underscored or zone-id IPv6 forms)."},
+  "R461": {"fix_quality": 2, "no_harm": 2, "note": "pathlib resolve()+relative_to() correctly enforces containment; the added is_file() check only replaces an unhandled exception with a clean 404, no narrowing of legitimate access."},
+  "R462": {"fix_quality": 0, "no_harm": 1, "note": "Build FAILs (Class<Number> vs String type error) so fix_quality is 0 regardless of design; separately, swapping the entire rule language from JavaScript to JEXL is a disclosed but substantial break for any existing tenant-authored rule."},
+  "R463": {"fix_quality": 2, "no_harm": 2, "note": "Column/direction allowlists match exactly the sort keys and default the stated contract requires, so the restriction is contract-sanctioned."},
+  "R464": {"fix_quality": 2, "no_harm": 2, "note": "Adds the path separator to the prefix check, correctly rejecting the sibling directory while preserving all legitimate paths under uploadsDir."}
+}

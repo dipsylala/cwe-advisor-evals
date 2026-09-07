@@ -1,0 +1,16 @@
+{
+  "R260": {"fix_quality": 2, "no_harm": 2, "note": "GetFullPath + GetRelativePath containment check correctly rejects rooted/traversal paths while passing normal relative filenames."},
+  "R261": {"fix_quality": 2, "no_harm": 2, "note": "Scopes list to caller via existing findByOwnerUsername, matching the stated contract exactly."},
+  "R262": {"fix_quality": 2, "no_harm": 2, "note": "Escapes CR/LF and Unicode separators before logging and switches to a message template; auth logic untouched."},
+  "R263": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing per-event admin role check inside the handler, the correct place given io.use() runs once per connection."},
+  "R264": {"fix_quality": 2, "no_harm": 2, "note": "Rejects CR/LF in the SMTP envelope fields at the sink; only rejects values that were never valid anyway, so legitimate addresses/subjects pass unchanged."},
+  "R265": {"fix_quality": 2, "no_harm": 2, "note": "Standard SqlParameter parameterization; matches the stated contract literally (apostrophes counted as literal names)."},
+  "R266": {"fix_quality": 2, "no_harm": 2, "note": "Drops originalname entirely for a UUID name plus MIME-derived extension; success/400 response shapes match the stated contract."},
+  "R267": {"fix_quality": 0, "no_harm": 1, "note": "Verified by testing (Node child_process on Windows): execFile('cmd.exe', ['/c', scriptPath, reportName]) is still exploitable - a reportName containing a quote followed by '&' survives cmd.exe's quote-stripping and executes as a separate command (reproduced: payload wrote an injected file), so the CWE-78 vector is not actually closed despite the confident write-up."},
+  "R268": {"fix_quality": 2, "no_harm": 2, "note": "Adds app.UseAntiforgery() in the documented order after AuthN/AuthZ and before endpoint mapping; matches the contract that only valid-token callers still succeed."},
+  "R269": {"fix_quality": 2, "no_harm": 2, "note": "Adds a real magic-byte check for PNG/JPEG ahead of the copy; success path for legitimate files is unchanged."},
+  "R270": {"fix_quality": 2, "no_harm": 2, "note": "SimpleEvaluationContext.forReadOnlyDataBinding() is the idiomatic Spring fix, exactly matching the stated contract (arithmetic/property access allowed, methods/types/beans blocked)."},
+  "R271": {"fix_quality": 2, "no_harm": 1, "note": "Content-sniffing plus UUID naming correctly closes the upload vector, but the added ImageIO re-encode step can reject legitimate images ImageIO can't decode (e.g. CMYK JPEGs) and silently strips EXIF/color-profile data beyond what the fix needed, without disclosing that limitation."},
+  "R272": {"fix_quality": 2, "no_harm": 2, "note": "Minimal, correct removal of the attribute that had opted the endpoint out of the app-wide antiforgery filter."},
+  "R273": {"fix_quality": 2, "no_harm": 2, "note": "Passes noent:false/nonet:true to parseXml, the documented libxmljs configuration for this sink; build unchecked (native bindings unavailable) so judged by reading against known library options, no restriction on legitimate order XML."}
+}

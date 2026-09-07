@@ -1,0 +1,16 @@
+{
+  "R438": {"fix_quality": 2, "no_harm": 2, "note": "Numbered $n placeholders with ids passed as pg query params fully close the injection while preserving identical selection semantics."},
+  "R439": {"fix_quality": 2, "no_harm": 2, "note": "proc_open() array form bypasses the shell entirely while keeping -F, --, term and logPath as the same literal arguments, so grep behavior is unchanged."},
+  "R440": {"fix_quality": 2, "no_harm": 2, "note": "In-handler admin role check correctly gates the broadcast; no other behavior changed."},
+  "R441": {"fix_quality": 2, "no_harm": 1, "note": "Sandboxed JEXL evaluator is an appropriate remediation shape, but the write-up silently swallows all evaluation exceptions (returns basePrice where the original let errors propagate) and does not disclose that existing DB-stored Groovy-syntax formulas may not parse under JEXL and would need migration."},
+  "R442": {"fix_quality": 2, "no_harm": 2, "note": "Auth interceptor plus owner_id-scoped DELETE correctly closes the missing-authorization gap; assumptions about the schema/metadata are stated openly."},
+  "R443": {"fix_quality": 2, "no_harm": 2, "note": "Clean swap to a parameterized SqlCommand with AddWithValue; behavior otherwise unchanged."},
+  "R444": {"fix_quality": 2, "no_harm": 2, "note": "snprintf with an explicit truncation check rejects oversized input instead of overflowing or silently truncating, and the write-up states this plainly."},
+  "R445": {"fix_quality": 2, "no_harm": 2, "note": "Removing the tainted argsEnv (no legitimate feature relied on injecting the header into the child process environment) eliminates the vector cleanly."},
+  "R446": {"fix_quality": 2, "no_harm": 2, "note": "Path.resolve()+is_relative_to() containment check correctly blocks absolute-path and traversal input while preserving normal downloads."},
+  "R447": {"fix_quality": 2, "no_harm": 2, "note": "resolve(strict=True) plus is_relative_to() follows symlinks and matches the stated contract: nested reports stay downloadable, missing/escaping paths fail closed, controller's leaf-name logic is untouched."},
+  "R448": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILs: fix references message.UserId, a property that does not exist on ChatMessage (the real field is AuthorUserId), so the whole file fails to compile."},
+  "R449": {"fix_quality": 2, "no_harm": 2, "note": "realpathSync.native containment check on both base and target correctly blocks traversal/symlink escape while preserving normal reads."},
+  "R450": {"fix_quality": 2, "no_harm": 2, "note": "Same realpath-based containment fix as R449 plus an openly-stated null-byte guard that rejects no legitimate filename."},
+  "R451": {"fix_quality": 2, "no_harm": 2, "note": "Adds an in-handler AuthenticationStateProvider role check, the documented Blazor mitigation for AuthorizeView-only protection; admin path behavior is unchanged."}
+}

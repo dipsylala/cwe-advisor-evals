@@ -1,0 +1,14 @@
+{
+  "R160": {"fix_quality": 2, "no_harm": 2, "note": "Clean parameterized query via SqlCommand.Parameters; behavior otherwise unchanged."},
+  "R161": {"fix_quality": 2, "no_harm": 2, "note": "strlcat/strlcpy bound the writes and reject only inputs that would have overflowed; normal filenames unaffected."},
+  "R162": {"fix_quality": 1, "no_harm": 2, "note": "Closes shell metacharacter injection (no cmd.exe) and validates count, but host is never validated, so a leading '-' (e.g. \"-t\") still reaches ping.exe as a flag - the argument-injection gap an args array alone doesn't close."},
+  "R163": {"fix_quality": 2, "no_harm": 2, "note": "Canonical-path containment check (File(baseDir,param) + getCanonicalPath + startsWith) is the standard correct fix and preserves normal same-directory file access."},
+  "R164": {"fix_quality": 2, "no_harm": 1, "note": "shell_exec fully eliminated via fsockopen (no residual injection), but the write-up openly swaps ICMP ping for TCP port probes, replacing the response body/format entirely."},
+  "R165": {"fix_quality": 2, "no_harm": 2, "note": "calloc's built-in overflow check matches the stated contract exactly: valid counts still get exact rows, overflow/failure returns NULL without leaking batch."},
+  "R166": {"fix_quality": 2, "no_harm": 1, "note": "Runtime.exec removed in favor of NIO directory listing, but the fix also silently adds new rejection of absolute paths and any \"..\" beyond what closing CWE-78 requires, and the replacement loop body does nothing with entries."},
+  "R167": {"fix_quality": 0, "no_harm": 0, "note": "Does not compile - HttpHeaders.X_CONTENT_TYPE_OPTIONS is not a real Spring constant - so as shipped it silently breaks serving of every avatar, including PNG/JPEG, violating the stated contract."},
+  "R168": {"fix_quality": 2, "no_harm": 2, "note": "Mirrors the sibling show()/update() Gate::authorize('delete', $order) pattern exactly."},
+  "R169": {"fix_quality": 2, "no_harm": 2, "note": "Adds authentication plus an ownership check before the delete; implements the only authorization model the code data supports (no admin field/table exists to also honor the comment's 'or administer')."},
+  "R170": {"fix_quality": 2, "no_harm": 1, "note": "Canonicalization/containment check is sound, but the write-up openly adds a new rejection of any '/' or '\\' in the filename, blocking legitimate subdirectory paths the original code did not forbid."},
+  "R171": {"fix_quality": 2, "no_harm": 2, "note": "Corrects the inverted admin check exactly per the stated contract: admins get all orders, others get only their own."}
+}

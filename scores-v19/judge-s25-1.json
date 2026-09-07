@@ -1,0 +1,15 @@
+{
+  "R465": {"fix_quality": 2, "no_harm": 1, "note": "Containment/single-component check correctly stops the traversal, but the write-up also drops the original URLDecoder.decode() call, changing what the cookie value maps to beyond what the fix required."},
+  "R466": {"fix_quality": 2, "no_harm": 2, "note": "Minimal, correct fix - both listeners now serve protectedHandler as the code's own comments intended."},
+  "R467": {"fix_quality": 2, "no_harm": 2, "note": "Column/direction whitelists exactly match the selected columns and the contract's required sort keys; accountId parameterization untouched."},
+  "R468": {"fix_quality": 2, "no_harm": 2, "note": "Minimal swap of the email route from apiMux to protectedMux, matching the stated contract exactly."},
+  "R469": {"fix_quality": 2, "no_harm": 2, "note": "proc_open with an argument array fully removes shell parsing of host; unaddressed leading-'-' flag injection is a secondary, non-reported concern."},
+  "R470": {"fix_quality": 2, "no_harm": 2, "note": "Removes the stale IgnoreAntiforgeryToken bypass, restoring the app's global CSRF filter with no other change."},
+  "R471": {"fix_quality": 2, "no_harm": 2, "note": "Correct parameterized stored-procedure call, matches the stated contract exactly."},
+  "R472": {"fix_quality": 2, "no_harm": 2, "note": "execFile with an argument array closes the shell injection; unaddressed leading-'-' flag injection on domain is a secondary, non-reported concern."},
+  "R473": {"fix_quality": 2, "no_harm": 1, "note": "Array-form exec() closes the shell injection, but the added hostname allowlist regex is an extra restriction (rejects e.g. IPv6 zone-IDs, IDN hosts) not required to close the vector."},
+  "R474": {"fix_quality": 2, "no_harm": 1, "note": "JexlSandbox deny-by-default plus disabled object construction correctly closes the code injection, but the added character-allowlist regex blocks legitimate filter syntax (arithmetic operators, comma args) beyond what the sandbox fix required."},
+  "R475": {"fix_quality": 2, "no_harm": 2, "note": "Reuses the existing can:update,order policy exactly as sibling routes do, matching the code's own stated intent for the new endpoint."},
+  "R476": {"fix_quality": 2, "no_harm": 2, "note": "Eliminates the process-spawn sink entirely via native .NET Ping; the rewrite is fully disclosed and preserves the output shape and functional contract."},
+  "R477": {"fix_quality": 2, "no_harm": 1, "note": "Rejecting CR/LF closes the inline-protocol command injection but also forecloses legitimate multi-line note text; a length-prefixed RESP encoding would close the vector without that restriction."}
+}

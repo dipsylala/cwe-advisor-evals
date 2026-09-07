@@ -1,0 +1,16 @@
+{
+  "R438": {"fix_quality": 2, "no_harm": 2, "note": "Correct pg parameterized IN clause ($1,$2,...) with ids passed as values; preserves contract exactly."},
+  "R439": {"fix_quality": 2, "no_harm": 2, "note": "proc_open array form bypasses shell entirely, keeps -F/-- and log path as separate args; no other behavior change."},
+  "R440": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing per-event admin role check, silent-deny disclosed and consistent with existing handler convention."},
+  "R441": {"fix_quality": 2, "no_harm": 1, "note": "Replaces GroovyShell with a sandboxed JEXL engine (closes injection), but swapping expression languages can silently break existing stored formulas using Groovy syntax beyond arithmetic/ternary, and the catch-all swallows failures into basePrice with no disclosure of this migration risk."},
+  "R442": {"fix_quality": 2, "no_harm": 2, "note": "Adds auth interceptor plus ownership-scoped DELETE; assumption about trusted upstream metadata is stated openly."},
+  "R443": {"fix_quality": 2, "no_harm": 2, "note": "Standard SqlParameter parameterization replacing string.Format; no other behavior change."},
+  "R444": {"fix_quality": 2, "no_harm": 1, "note": "snprintf correctly closes the overflow, but treats any truncation as a hard failure (drops the audit entry, returns -1) rather than logging a truncated line, for inputs the code itself says have no length cap; this is stated in the explanation but changes legitimate logging behavior."},
+  "R445": {"fix_quality": 2, "no_harm": 2, "note": "Nulling argsEnv removes the tainted, non-legitimate env injection vector and falls back to documented default (inherit parent env)."},
+  "R446": {"fix_quality": 2, "no_harm": 2, "note": "Path.resolve()+is_relative_to() correctly blocks absolute-path and traversal escapes; no change to legitimate downloads."},
+  "R447": {"fix_quality": 2, "no_harm": 2, "note": "resolve(strict=True) follows symlinks and is_relative_to() fixes the prefix-match bug; matches stated contract (nested dirs work, escapes/missing fail closed, download_name unchanged)."},
+  "R448": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILs (CS1061): references message.UserId, but the actual property is AuthorUserId, so the fix does not compile and silently breaks the endpoint for everyone."},
+  "R449": {"fix_quality": 2, "no_harm": 2, "note": "realpathSync.native() canonicalization plus path.relative() containment check correctly closes traversal without altering legitimate access."},
+  "R450": {"fix_quality": 2, "no_harm": 2, "note": "Same solid containment fix as R449 plus a disclosed, harmless null-byte rejection."},
+  "R451": {"fix_quality": 2, "no_harm": 2, "note": "Adds the required server-side role check inside the event handler itself, correctly addressing that AuthorizeView only gates rendering, not invocation."}
+}

@@ -1,0 +1,17 @@
+{
+  "R321": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized SqlCommand replaces string concatenation; same query shape and return type preserved."},
+  "R322": {"fix_quality": 2, "no_harm": 2, "note": "Adds admin role check matching the handler's already-documented admin-only intent; no legitimate caller affected."},
+  "R323": {"fix_quality": 0, "no_harm": 1, "note": "Ownership check is vacuous - the store hardcodes ownerId to the requesting userId so the check always passes for any user/project, leaving the vector open; also openly swaps 404 for 403 on failure, contradicting the stated contract that unauthorized/unknown IDs must not reveal existence."},
+  "R324": {"fix_quality": 2, "no_harm": 2, "note": "Converts to shell=False argument list matching original command tokens exactly."},
+  "R325": {"fix_quality": 2, "no_harm": 1, "note": "Correctly eliminates the shell via .NET Ping, but silently changes behavior: sends 1 echo instead of the original -n 4, and fabricates bytes=32/TTL=64 in output rather than reporting real values, undisclosed."},
+  "R326": {"fix_quality": 2, "no_harm": 2, "note": "Adds @PreAuthorize to the externally-callable wrapper, closing the self-invocation bypass with the same ADMIN requirement already enforced on deleteInvoice."},
+  "R327": {"fix_quality": 2, "no_harm": 2, "note": "Switches to Sequelize bind parameters with correct named-bind syntax; query semantics unchanged."},
+  "R328": {"fix_quality": 2, "no_harm": 2, "note": "Replaces string-based setTimeout with a closure callback, eliminating code generation while preserving the delayed call."},
+  "R329": {"fix_quality": 2, "no_harm": 2, "note": "Canonical-path containment check via getCanonicalPath()/startsWith, correct pattern, preserves existing 404/headers behavior."},
+  "R330": {"fix_quality": 2, "no_harm": 2, "note": "Replaces header trust with Tika magic-byte detection and a UUID filename derived from a fixed MIME map; matches stated contract."},
+  "R331": {"fix_quality": 2, "no_harm": 2, "note": "NIO toRealPath()/startsWith containment check, correctly folds existence check into the same resolution; equivalent to R329's approach."},
+  "R332": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected from <= to <, matches the stated copy-exactly-n contract including the zero cases."},
+  "R333": {"fix_quality": 2, "no_harm": 2, "note": "Validates filename as a single path component and canonicalizes the parent directory before writing; matches the file's own documented no-subdirectories intent."},
+  "R334": {"fix_quality": 2, "no_harm": 2, "note": "Replaces sh -c string with exec.Command argument list matching original convert invocation; matches stated contract."},
+  "R335": {"fix_quality": 1, "no_harm": 2, "note": "Hand-rolled check on member.name (absolute path or '..' substring) misses symlink/hardlink targets escaping the workspace; Python's tarfile extraction filters (filter=tarfile.data_filter, available on the stated 3.11 runtime) are the documented fix for this CVE-2007-4559 class and were not used."}
+}

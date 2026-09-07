@@ -236,7 +236,13 @@ they cost no tokens. The gate reads `case.json` (it is a script, not an arm or a
 the finding's file name. Use `--lang` to run the languages as separate background processes:
 on 744 synthetic write-ups (every fixture echoed unchanged, then every finding's file given a
 line that parses in no language) PHP took 6.5 minutes, Java, C# and Python 2-3 each, Go, C and
-C++ about 1.3, JavaScript and Perl seconds - 18 minutes in sequence, 7 in parallel. That
+C++ about 1.3, JavaScript and Perl seconds - 18 minutes in sequence, 7 in parallel. Do not
+run all seven at once on a machine with less than about 32 GB free: run 19's first pass did,
+javac, dotnet, node and php each hit an allocation failure, and twelve write-ups came back
+`FAIL` with notes reading "insufficient memory", "OutOfMemoryException", "cannot allocate
+memory" or "VirtualAlloc failed" - every one `OK` when re-run serially. A note that reads as an
+allocation failure is the gate's verdict on the machine, not on the fix; re-run it before
+counting it. That
 self-test gated every echo as `OK` (or `UNCHECKED` for the nine fixtures Step 0 cannot check)
 and every broken file as `FAIL`, except where the break landed in a file no checker compiles
 (a Razor view, a Thymeleaf template, a Blade view: reported `UNCHECKED` with the file named) or
@@ -421,7 +427,11 @@ across the family and say so in the run that measures it; do not patch one entry
 changed the entries: the guided arm stopped adding allowlists and its `no_harm` on those cases
 did not move, because behaviour changes made while replacing the sink with a library took the
 vacated place. The Build line was obeyed 19 of 19 and the judges cost the same per write-up as
-without it - the bundle read is the floor, not the compile turns. See RESULTS-v18.md.) A write-up that carries complete
+without it - the bundle read is the floor, not the compile turns. See RESULTS-v18.md. Run 19
+then edited the entries against every guided loss in the two runs' judge notes - the ping lines
+that prescribed a TCP probe, the `..` tests beside containment, seven C#/JDK namespaces, a dozen
+API shapes - and the guided arm came level with the control on `no_harm` on the 138 touched
+cases, 1.64 to 1.78 against 1.79, with build failures 10 to 4. See RESULTS-v19.md.) A write-up that carries complete
 files is not much longer than a snippet one (the run-17 CWE-89 pilot's 84 write-ups packed
 into six 80KB segments, a median of 16 per segment against run 16's 18), because the old
 before/after snippets were most of the file anyway; the segment cap is unchanged.

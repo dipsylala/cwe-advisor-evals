@@ -1,0 +1,12 @@
+{
+  "R505": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist maps sort param to safe canonical columns; default created_at path still works; matches the stated contract that only supported sort options succeed."},
+  "R506": {"fix_quality": 2, "no_harm": 2, "note": "exec.CommandContext with host as a discrete arg removes the shell; the added 30s timeout is disclosed and reasonable for a 15-hop bounded traceroute."},
+  "R507": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte detection via file-type against the same allowlist, random filename with detected-type extension; legitimate PNG/JPEG uploads still succeed."},
+  "R508": {"fix_quality": 2, "no_harm": 2, "note": "exec(String[]) puts data in its own array element, the standard fix for this sink; behavior (dir/ls listing) is otherwise unchanged."},
+  "R509": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected to i < n, exactly matching the stated contract including the n==0 case."},
+  "R510": {"fix_quality": 2, "no_harm": 2, "note": "Placeholder + array param via pool.query(); no other observable change."},
+  "R511": {"fix_quality": 2, "no_harm": 1, "note": "CrossOriginProtection correctly closes CSRF, but changing the route to DELETE breaks the pre-existing GET email-link deletion flow the original code explicitly implemented; only a code comment gestures at a replacement that isn't built, so the loss of that legitimate path is disclosed but not remedied."},
+  "R512": {"fix_quality": 2, "no_harm": 2, "note": "requireAdmin wrapper applied to the export route matching the sibling ban/unban routes; no other behavior change."},
+  "R513": {"fix_quality": 2, "no_harm": 2, "note": "pool.execute() with a ? placeholder is a valid parameterized fix; the write-up's claim that plain pool.query() placeholders are 'bypassable' is technically inaccurate but doesn't affect the code's correctness."},
+  "R514": {"fix_quality": 2, "no_harm": 1, "note": "Absolute-path containment check alone fully closes Zip Slip; the added blanket rejection of any filename containing a literal '..' substring (not just traversal segments) can reject legitimate archive entry names, an overbroad restriction disclosed in the write-up but not required by the fix."}
+}

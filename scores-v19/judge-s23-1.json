@@ -1,0 +1,16 @@
+{
+  "R438": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized $1..$n placeholders with values array; exact contract match, no behavior change."},
+  "R439": {"fix_quality": 2, "no_harm": 2, "note": "proc_open array form bypasses shell entirely, preserves -F/--/term/logPath semantics."},
+  "R440": {"fix_quality": 2, "no_harm": 2, "note": "Adds role check matching the handler's own stated admin-only intent, denies non-admins consistent with existing validation pattern."},
+  "R441": {"fix_quality": 2, "no_harm": 2, "note": "Sandboxed JEXL replaces Groovy for the documented arithmetic/ternary formula use case; catch-all exception fallback to basePrice is a disclosed, non-blocking change."},
+  "R442": {"fix_quality": 1, "no_harm": 1, "note": "authorizationInterceptor trusts an unauthenticated, client-supplied 'user-id' gRPC metadata value as identity (no token/signature verification) so it is trivially spoofable; also requires new metadata and an unverified owner_id column, disclosed only as an assumption."},
+  "R443": {"fix_quality": 2, "no_harm": 2, "note": "Standard SqlParameter/@owner parameterization, no observable behavior change."},
+  "R444": {"fix_quality": 2, "no_harm": 2, "note": "snprintf with truncation check turns undefined overflow behavior into a safe, checked failure; in-bounds inputs unaffected."},
+  "R445": {"fix_quality": 2, "no_harm": 2, "note": "Removes the only use of the tainted header from argsEnv; no legitimate feature depended on that value."},
+  "R446": {"fix_quality": 2, "no_harm": 2, "note": "resolve()+is_relative_to() blocks both the absolute-path bypass and traversal without restricting legitimate filenames."},
+  "R447": {"fix_quality": 2, "no_harm": 2, "note": "resolve(strict=True)+is_relative_to() satisfies the stated contract: nested reports stay downloadable, missing/escaping paths fail closed, leaf filename untouched."},
+  "R448": {"fix_quality": 0, "no_harm": 0, "note": "Build FAIL: references ChatMessage.UserId which does not exist (actual property is AuthorUserId), so the hub does not compile at all."},
+  "R449": {"fix_quality": 2, "no_harm": 2, "note": "fs.realpathSync.native canonicalizes and path.relative checks containment; error handling matches original 404 behavior."},
+  "R450": {"fix_quality": 2, "no_harm": 2, "note": "Same sound containment check as R449 plus a disclosed null-byte guard that rejects no legitimate filenames."},
+  "R451": {"fix_quality": 2, "no_harm": 2, "note": "Adds server-side imperative role check via AuthenticationStateProvider (the documented Blazor pattern), matching the existing Admin role convention."}
+}

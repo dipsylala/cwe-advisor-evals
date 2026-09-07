@@ -1,0 +1,17 @@
+{
+  "R217": {"fix_quality": 2, "no_harm": 2, "note": "Adds .RequireAuthorization() to the Minimal API delete route; closes the finding with no other observable change."},
+  "R218": {"fix_quality": 2, "no_harm": 2, "note": "Replaces jwt.decode with jwt.verify against JWT_SECRET, with disclosed error handling and secret-presence check; no unrelated behavior change."},
+  "R219": {"fix_quality": 2, "no_harm": 2, "note": "path.resolve + path.relative containment check correctly blocks escape while allowing legitimate filenames in REPORTS_DIR."},
+  "R220": {"fix_quality": 2, "no_harm": 1, "note": "Eliminates the shell entirely (closes CWE-78), but also adds a new rejection of '..' and absolute paths that the original directory-listing feature did not have and that isn't required to close command injection; disclosed but still an added restriction that can reject previously-accepted input, per rubric that caps this at 1."},
+  "R221": {"fix_quality": 2, "no_harm": 2, "note": "Gate::allows -> Gate::authorize is the idiomatic Laravel fix; enforces the check, no other behavior change."},
+  "R222": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized IN-clause with matching placeholders and ids passed as bind params; matches the stated contract exactly."},
+  "R223": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized DELETE with SqlDbType.NVarChar/DateTime; verified empirically (via reflection on SqlParameter.Validate/CoercedValue in Microsoft.Data.SqlClient) that a valid date string is correctly coerced to DateTime, so legitimate calls still succeed and the predicate can't be widened."},
+  "R224": {"fix_quality": 2, "no_harm": 2, "note": "Drops chdir, rejects separators/colons, resolves with realpath and checks containment before fopen; closes the stream-wrapper bypass without changing behavior for legitimate flat filenames."},
+  "R225": {"fix_quality": 1, "no_harm": 0, "note": "Adds a TokenStore/ValidateToken mechanism but the case's only file never initializes AccountService.tokenStore nor exposes any route that calls StoreToken/GenerateToken, so every legitimate request either nil-panics or always fails ValidateToken; this silent breakage of all legitimate use is not disclosed."},
+  "R226": {"fix_quality": 2, "no_harm": 2, "note": "Adds permission_classes = [IsAdminUser], the exact intended fix for a missing-authorization finding on an admin-only API-key viewset."},
+  "R227": {"fix_quality": 2, "no_harm": 2, "note": "subtle.ConstantTimeCompare enforces exact-length, exact-value equality, matching the stated contract precisely."},
+  "R228": {"fix_quality": 2, "no_harm": 2, "note": "filepath.Clean + IsAbs rejection + prefix containment check correctly closes traversal without restricting legitimate relative filenames."},
+  "R229": {"fix_quality": 2, "no_harm": 2, "note": "Minimal one-line fix moving the email route to the CSRF-protected mux; matches the stated contract (202 on valid POST, 405 on non-POST)."},
+  "R230": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing @EnableMethodSecurity so the already-present @PreAuthorize checks are enforced; no other change."},
+  "R231": {"fix_quality": 1, "no_harm": 2, "note": "EvalSymlinks + prefix check only rejects symlinks that resolve outside uploadsDir; the stated contract also requires rejecting any requestedName that is itself a symlink (even one resolving inside the directory), which this fix does not check for (no Lstat on requestedName)."}
+}

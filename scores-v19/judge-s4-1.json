@@ -1,0 +1,14 @@
+{
+  "R160": {"fix_quality": 2, "no_harm": 2, "note": "Clean parameterized query via SqlCommand.Parameters.Add; no observable behaviour change for legitimate owner values."},
+  "R161": {"fix_quality": 2, "no_harm": 2, "note": "strlcat/strlcpy bound every write with explicit capacity and reject truncation before use; explanation slightly overstates that the check precedes writing, but the write is bounded either way so no overflow occurs."},
+  "R162": {"fix_quality": 2, "no_harm": 2, "note": "ProcessBuilder argument array plus numeric-only count validation fully closes the reported shell injection; host is still passed unvalidated so a leading '-' could be read as a ping flag (a distinct, lesser option-injection gap the write-up did not address for host)."},
+  "R163": {"fix_quality": 2, "no_harm": 2, "note": "File(baseDir, param) plus canonical-path containment check is the standard safe pattern; URL decoding is preserved so behaviour for legitimate filenames is unchanged."},
+  "R164": {"fix_quality": 2, "no_harm": 1, "note": "fsockopen fully eliminates the shell sink, but the write-up (disclosed) swaps ICMP ping semantics for TCP port probing on 3 fixed ports and adds a new hostname-format allowlist, both of which change what legitimate callers get back or can submit."},
+  "R165": {"fix_quality": 2, "no_harm": 2, "note": "calloc(count, sizeof) gives the standard overflow-checked allocation and matches the stated contract exactly (same rows/count on success, NULL without leaking batch on failure)."},
+  "R166": {"fix_quality": 2, "no_harm": 1, "note": "Replacing Runtime.exec with java.nio.file removes the shell sink entirely, but the write-up discloses new rejection of absolute paths and '..' that the original ls/dir-based listing did not restrict."},
+  "R167": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILS (HttpHeaders.X_CONTENT_TYPE_OPTIONS does not exist), so the endpoint does not compile at all - the contractually-required unchanged PNG/JPEG serving is not delivered, and this is not disclosed."},
+  "R168": {"fix_quality": 2, "no_harm": 2, "note": "Gate::authorize('delete', $order) mirrors the existing show()/update() pattern exactly; no other behaviour change."},
+  "R169": {"fix_quality": 2, "no_harm": 2, "note": "Adds authentication plus an ownership check before the delete, matching the CWE-862 remediation pattern with no unintended restriction beyond the missing check itself."},
+  "R170": {"fix_quality": 2, "no_harm": 1, "note": "Canonicalization plus containment check (with parent-path handling for not-yet-existing files) is solid, but the write-up discloses removing URLDecoder.decode(), which changes handling of legitimately percent-encoded cookie values."},
+  "R171": {"fix_quality": 2, "no_harm": 2, "note": "Minimal, correct fix of the inverted boolean; matches the stated contract exactly with no side effects."}
+}

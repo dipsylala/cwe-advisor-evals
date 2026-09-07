@@ -1,0 +1,17 @@
+{
+  "R394": {"fix_quality": 0, "no_harm": 0, "note": "Build FAIL: invalid char literal `case '':` in EscapeLogValue is a syntax error (CS1003), so the fix does not compile."},
+  "R395": {"fix_quality": 2, "no_harm": 2, "note": "Shell removed, ping/nslookup invoked with target as separate arg; sequential ping-then-nslookup and combined output preserved."},
+  "R396": {"fix_quality": 2, "no_harm": 1, "note": "Injection closed via exec.CommandContext with separate args, but adds an undisclosed-as-restrictive hostname allowlist (alnum/./-  only) that could reject legitimate hostnames the original accepted."},
+  "R397": {"fix_quality": 2, "no_harm": 2, "note": "subtle.ConstantTimeCompare gives exact, constant-time equality matching the stated contract."},
+  "R398": {"fix_quality": 2, "no_harm": 2, "note": "Path.Join + GetFullPath + GetRelativePath containment check correctly blocks traversal/rooted-path replacement while passing normal filenames through unchanged."},
+  "R399": {"fix_quality": 2, "no_harm": 2, "note": "self.get_object() restores queryset filtering and object permission check per DRF convention, matching the stated contract exactly."},
+  "R400": {"fix_quality": 2, "no_harm": 1, "note": "spawnSync with arg array closes the injection, but result.error only fires on spawn failure, not on a non-zero convert exit code, so a legitimate conversion failure now silently returns a 200 success response (undisclosed)."},
+  "R401": {"fix_quality": 2, "no_harm": 2, "note": "exec.CommandContext(tar, -tf, archiveName) removes the shell; archiveName is consumed as -f's value so no flag-injection gap; handler/status/context behavior unchanged."},
+  "R402": {"fix_quality": 2, "no_harm": 2, "note": "Passing null uses the parent environment instead of attacker-controlled env content; the removed feature had no legitimate use and the change is disclosed."},
+  "R403": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized StoredProcedure call with AddWithValue matches the stated contract; customerId always treated as a literal value."},
+  "R404": {"fix_quality": 0, "no_harm": 0, "note": "Build FAIL: mypy rejects AESGCM.generate_key(bit_length=256) keyword argument, so the fix does not type-check."},
+  "R405": {"fix_quality": 2, "no_harm": 2, "note": "FromSqlInterpolated parameterizes tenantId and the LIKE pattern correctly; tenant filter and empty-term behavior preserved per contract."},
+  "R406": {"fix_quality": 2, "no_harm": 2, "note": "Shell removed, ping.exe invoked directly via ArgumentList; output capture and response shape unchanged."},
+  "R407": {"fix_quality": 2, "no_harm": 1, "note": "Jakarta Mail replaces raw command building (a valid direction), but it changes selectFolder's signature from Socket to Properties and drops the pre-established connection/session context - a real, disclosed breaking change for any caller."},
+  "R408": {"fix_quality": 2, "no_harm": 1, "note": "Path.startsWith containment correctly blocks the symlink sibling-directory bypass, but toRealPath() requires the target to exist, so a request for a genuinely missing note now throws IOException (likely a 500) instead of the intended 404 - not disclosed."}
+}

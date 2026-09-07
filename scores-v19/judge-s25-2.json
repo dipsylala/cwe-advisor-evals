@@ -1,0 +1,15 @@
+{
+  "R465": {"fix_quality": 2, "no_harm": 1, "note": "Canonicalized base dir + single-component check + startsWith containment closes traversal, but the fix also removes the cookie's URLDecoder.decode() call (stated, not silent), changing handling of any legitimately percent-encoded filename."},
+  "R466": {"fix_quality": 2, "no_harm": 2, "note": "Correctly serves the CSRF-wrapped protectedHandler on both listeners, mirroring the already-protected TLS listener; no other observable change."},
+  "R467": {"fix_quality": 2, "no_harm": 2, "note": "Column/direction allowlist matches the stated contract's required sort keys and default order; parameterized accountId filter unchanged."},
+  "R468": {"fix_quality": 2, "no_harm": 2, "note": "Minimal, exact fix moving UpdateEmail registration to protectedMux as the contract requires; profile route and handler untouched."},
+  "R469": {"fix_quality": 2, "no_harm": 2, "note": "proc_open with an argument array removes the shell entirely, closing the injection; separate stdout/stderr pipes are concatenated to approximate the original combined output."},
+  "R470": {"fix_quality": 2, "no_harm": 2, "note": "Minimal removal of the stale [IgnoreAntiforgeryToken] attribute restores the app-wide antiforgery filter with no other change."},
+  "R471": {"fix_quality": 2, "no_harm": 2, "note": "Switches to CommandType.StoredProcedure with a bound @CustomerId parameter, matching the stated contract exactly."},
+  "R472": {"fix_quality": 2, "no_harm": 2, "note": "execFile with an argument array removes the shell, closing the injection with no other behavior change."},
+  "R473": {"fix_quality": 2, "no_harm": 1, "note": "Array-form exec alone already closes the shell-injection vector; the added hostname allowlist regex is an unrequired extra restriction that could reject a legitimate value (e.g. an IPv6 zone-ID suffix)."},
+  "R474": {"fix_quality": 2, "no_harm": 1, "note": "JexlSandbox deny-by-default plus disabled object construction correctly closes the code-injection vector, but the added expression character-allowlist also blocks legitimate arithmetic operators (+, *, /) while the write-up claims full functional preservation."},
+  "R475": {"fix_quality": 2, "no_harm": 2, "note": "Adds the same can:update,order authorization check used by the sibling update/cancel routes, directly matching the missing-authorization finding."},
+  "R476": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the PowerShell process entirely with native System.Net.NetworkInformation.Ping, eliminating the shell sink outright; the added DNS pre-check only rejects names that could not have pinged successfully anyway."},
+  "R477": {"fix_quality": 2, "no_harm": 1, "note": "Rejecting CR/LF in key/value is a sound mitigation for the inline-protocol injection, but it throws (stated in the write-up) on any legitimate multi-line annotation text rather than adopting proper RESP frame encoding, which the class's own comment flags as the bypassed alternative."}
+}

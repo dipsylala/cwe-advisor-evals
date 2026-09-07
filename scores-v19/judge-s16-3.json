@@ -1,0 +1,16 @@
+{
+  "R336": {"fix_quality": 2, "no_harm": 1, "note": "Containment check via toRealPath+startsWith correctly closes traversal, but the fix also silently drops the URLDecoder.decode() call on the cookie value, changing how encoded cookie values are handled beyond the reported vector even though it is disclosed."},
+  "R337": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query with ? placeholder via pool.execute correctly closes the injection with no other observable behavior change."},
+  "R338": {"fix_quality": 2, "no_harm": 2, "note": "Scopes listInvoices() to the authenticated user via the existing findByOwnerUsername repository method, matching the stated contract exactly."},
+  "R339": {"fix_quality": 2, "no_harm": 2, "note": "Eliminates the shell-invoking exec entirely and writes the same param value directly, preserving prior output behavior with no new observable difference."},
+  "R340": {"fix_quality": 2, "no_harm": 2, "note": "filepath.IsLocal plus absolute-path canonicalization and prefix containment check fully closes zip-slip without restricting legitimate in-archive relative paths."},
+  "R341": {"fix_quality": 2, "no_harm": 2, "note": "Adds requireRole('admin') matching sibling routes exactly, restoring intended authorization with no other change."},
+  "R342": {"fix_quality": 1, "no_harm": 2, "note": "Switches to array-based Runtime.exec() which closes shell metacharacter injection, but data is still passed as a bare argument so a leading '-' can still be read as an ls/cmd.exe option/flag (the recurring option-injection gap); no new observable harm otherwise."},
+  "R343": {"fix_quality": 2, "no_harm": 2, "note": "Gate::authorize() enforces the decision (throws/403) instead of the ignored Gate::allows() boolean; authorized callers proceed exactly as before."},
+  "R344": {"fix_quality": 2, "no_harm": 2, "note": "Adds a '--' end-of-options marker before the filenames so every entry, including ones starting with '-', is archived as a literal filename, matching the stated contract precisely."},
+  "R345": {"fix_quality": 2, "no_harm": 2, "note": "Allowlists the tool to the small fixed set the handler's own comment says it supports, closing arbitrary-executable injection without rejecting any intended use."},
+  "R346": {"fix_quality": 2, "no_harm": 2, "note": "Appends a trailing separator to the canonicalized base dir before the startsWith check, correctly closing the sibling-directory bypass while still allowing legitimate files under the base dir."},
+  "R347": {"fix_quality": 2, "no_harm": 2, "note": "Precomputes available space and uses strncat with a pre-write length check, eliminating the out-of-bounds write; rejecting oversized filenames is required by the fixed-size buffer and is stated openly."},
+  "R348": {"fix_quality": 2, "no_harm": 2, "note": "Allowlists ORDER BY column/direction (identifiers can't be parameterized) matching the SELECT list and stated contract; accountId stays parameterized and default sort is preserved."},
+  "R349": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILs (CS0246: IAntiforgery not found, missing using directive), so the fix does not compile and silently breaks the endpoint for every caller, legitimate or not."}
+}

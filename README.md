@@ -20,12 +20,16 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Run 17 is the current measurement: on 372 cases across 27 CWEs and nine languages, with every
-fix compile-gated, guidance lifts `fix_quality` on Haiku 4.5 from 1.80 to 1.91 (ahead on 64
-cases, behind on 22) and leaves `no_harm` (whether a fix silently breaks or changes something the
-sink's caller depended on) level, 1.76 against 1.74. See **Runs** below and
-[RESULTS-v17.md](RESULTS-v17.md). Earlier runs were removed at the run-17 boundary; **Known
-gaps** below says what remains unverified rather than just measured.
+Run 17 is the baseline measurement: on 372 cases across 27 CWEs and nine languages, with every
+fix compile-gated, guidance lifted `fix_quality` on Haiku 4.5 from 1.80 to 1.91 (ahead on 64
+cases, behind on 22) and left `no_harm` (whether a fix silently breaks or changes something the
+sink's caller depended on) level, 1.76 against 1.74. Runs 18 and 19 then re-sampled the guided
+arm on the 179 cases whose entries were edited against the judge notes; taking each case's latest
+guided text, guidance now stands at 1.92 / 1.82 against the same 1.80 / 1.76 control, with 288
+clean write-ups against 256 and 7 build failures against 16. See **Runs** below,
+[RESULTS-v17.md](RESULTS-v17.md) and [RESULTS-v19.md](RESULTS-v19.md). Earlier runs were removed
+at the run-17 boundary; **Known gaps** below says what remains unverified rather than just
+measured.
 
 ## Corpus
 
@@ -185,8 +189,12 @@ are a worked example, not a fixed name.
   half of them the disclosed-narrowing gray zone the rubric pin was added for.
 - **The rubric and the entries disagree on allowlists.** The pin scores an added allowlist as
   narrowing unless the contract calls for it; the CWE-77, 78 and 90 entries prescribe allowlists
-  beside the API fix. Ten of the guided arm's unanimous `no_harm` misses in run 17 are that shape.
-  Open - see HARNESS.md Step 5.
+  beside the API fix. Ten of the guided arm's unanimous `no_harm` misses in run 17 were that
+  shape. Runs 18 and 19 changed the entries (allowlists conditional, `..` tests scoped, `--`
+  before a leading-`-` rejection) and the guided arm's unanimous narrowing verdicts fell from
+  twelve to four on the touched cases. Two sibling tensions remain open: the CWE-434 image
+  re-encode step the entries prescribe is scored as a behaviour change, and a stated constructor
+  signature change (CWE-77) scores 1 however plainly it is stated. See HARNESS.md Step 5.
 - **A judge's self-reported "reproduced" is not independently verified.** A fresh panel once
   unanimously reversed a correct technical read while citing its own reproduction; direct
   reproduction showed the original panel right. Treat a judge's reproduction claim as provisional
@@ -205,7 +213,7 @@ are a worked example, not a fixed name.
 
 ## Runs
 
-Run 17 is the current baseline and the frozen unguided control for later runs; run 18 is the first targeted run on top of it. Runs 1-16 - the
+Run 17 is the current baseline and the frozen unguided control for later runs; runs 18 and 19 are targeted runs on top of it. Runs 1-16 - the
 records, scores and results files - were removed at the run-17 format boundary, because the
 current corpus, judging and write-up format no longer share a scale with them; they remain in this
 repository's git history before that commit, and HARNESS.md keeps the lessons they taught.
@@ -214,3 +222,4 @@ repository's git history before that commit, and HARNESS.md keeps the lessons th
 |---|---|---|---|---|---|
 | 17 | Same 372 cases; a format boundary - write-ups carry the complete changed files - with fresh unguided (A) and guided (B) Haiku 4.5 samples, no B-pre, and `scripts/fixgate.py` building every fix against its fixture | 744 (372 x 2 sets) | Does the guided fix build, and what does a compile gate find that sixteen judged runs did not? | Gate: 16 of 372 unguided and 18 of 372 guided fixes do not compile (one checker false positive excluded) - the same 4-5% either way, in different shapes: A invents helper methods and leaves Go variables unused, B mis-imports or mis-packages the library the entry names. Four B failures traced to two entries naming a class without its package (`JexlSandbox`, `Encode`), both fixed - the first entry defects found by a compiler rather than a judge. The first pass also showed the superset manifests must carry the libraries the knowledge base recommends: 13 A and 20 B failures were missing packages, not slips, until added. Judged: A 1.80/1.76, B 1.91/1.74, clean 256 -> 263; B ahead on fix_quality for 64 cases and behind on 22; no_harm level, with B's unanimous losses in allowlists the CWE-77/78/90 entries prescribe and the rubric pin scores as narrowing, and in whole-file rewrites that changed something beside the sink. The gate dominates the judges' own compiling (11 unanimous 2.00s were compile errors; no gate-OK write-up drew a compile claim that held), so from run 18 the judges receive the gate line and stop compiling | [RESULTS-v17.md](RESULTS-v17.md) |
 | 18 | Targeted: 115 cases whose entries changed after run 17 - every CWE-22/77/78/90 case (allowlists no longer a default step) and the Java cases of the entries that gained package names; run 17's A and B text for the same cases re-judged beside a fresh guided sample, judges given the gate's Build line and told not to compile | 345 (115 x 3 sets) | Do the package names remove the build failures, and does dropping the default allowlist recover the guided arm's no_harm? | Package set (37 Java cases): guided 1.53/1.60 -> 1.84/1.81, build failures 8 -> 3, missing imports 5 -> 0. Doctrine set (78): the guided arm stopped adding allowlists (anchored regexes 9 -> 0, unanimous narrowing verdicts 12 -> 2) and no_harm stayed flat (1.66 -> 1.68) because silent behaviour changes from shell-elimination rewrites took the vacated place; CWE-90 recovered (1.70 -> 1.90), CWE-78 did not (1.54). Judges obeyed the Build line 19 of 19 and cost the same per write-up | [RESULTS-v18.md](RESULTS-v18.md) |
+| 19 | Targeted: 138 cases whose entries changed in a sweep driven by every guided-arm loss in the run-17 and run-18 judge notes (thirty entry files: the CWE-78 ping lines that prescribed a TCP probe, `..` tests beside containment across CWE-22, `--` before a leading-`-` rejection, seven C#/JDK namespaces, a dozen verified API shapes); run 17's A and the latest guided text re-judged beside a fresh guided sample | 414 (138 x 3 sets) | Does editing the entry that produced each loss move the guided arm's no_harm? | Overall on the 138: guided 1.77/1.64 -> 1.86/1.78 against the control's 1.79/1.79, clean 83 -> 95 (control 93), build failures 10 -> 4. Ping cases stopped swapping ICMP for TCP (no_harm 1.33 -> 2.00); CWE-78 recovered past the control (1.50 -> 1.86); the namespace set went 0.29/0.57 -> 1.90/1.76 with six build failures to none; CWE-22 changed shape but not score; CWE-862 regressed to the control on two invented-member build failures; CWE-94 did not move. Two more entry defects found by the notes (Commons Net `FTPClient` frames nothing; `SimpleEvaluationContext` has no `setRootObject`), both fixed unmeasured. Composite over all 372 cases with the latest guided text: 1.92/1.82 against 1.80/1.76 | [RESULTS-v19.md](RESULTS-v19.md) |
