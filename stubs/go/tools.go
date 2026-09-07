@@ -10,5 +10,6 @@ import (
 	_ "google.golang.org/grpc"
 	_ "google.golang.org/grpc/codes"
 	_ "google.golang.org/grpc/status"
+	_ "golang.org/x/crypto/bcrypt"
 	_ "gorm.io/gorm"
 )

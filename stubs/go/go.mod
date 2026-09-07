@@ -13,6 +13,8 @@ require (
 	gorm.io/gorm v1.25.12
 )
 
+require golang.org/x/crypto v0.26.0
+
 require (
 	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect

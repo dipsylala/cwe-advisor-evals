@@ -256,6 +256,22 @@ A `NO_FILES` or `BAD_FORMAT` write-up is not re-run: it is what the arm produced
 prompt, and re-sampling only the non-compliant ones would select on the outcome. Report the
 count and let the judges score the text as they find it.
 
+**Triage the first pass before believing it.** The superset manifests under `stubs/` were built
+from the fixtures' surface, and a fix brings in libraries no fixture uses - the guided arm
+especially, because it follows the entries' recommendations (run 17's first pass: Tika, the OWASP
+encoder and HTML sanitizer, commons-text, jakarta.mail, bcrypt, csurf, mathjs, StackExchange.Redis,
+Flask-WTF, joblib, RestrictedPython, and more). A `FAIL` whose note is "package does not exist" or
+"module not found" is an environment gap, not a slip, and it lands on the arm that took the
+advice. Add every such library to the language's superset when it is a real published package
+under the name the write-up used, re-resolve, and re-gate; a name that resolves nowhere stays a
+`FAIL`, because that is the slip the gate exists to catch (`using EnyimMemcached;` for a package
+whose namespace is `Enyim.Caching`; `use CGI::Util qw(html_escape)` for a module that exports no
+such name - `stubs/perl/lib/CGI/Util.pm` carries the real export list so Exporter rejects it).
+Native npm packages (`bcrypt`, `sharp`, `isolated-vm`) install without their binding and report
+`UNCHECKED`. Read the remaining `FAIL` notes one by one: a checker's stub can be wrong too
+(mypy rejected `AESGCM.generate_key(bit_length=256)` under cryptography 43.0.3's type stubs; the
+call runs), and such a row is counted as passing with the reason recorded in `RESULTS*.md`.
+
 ## Step 4 - blind the outputs
 
 ```sh
@@ -390,8 +406,9 @@ The compile gate's result (Step 3) is withheld from the judges in run 17. They c
 own, as in run 16, and the agreement between the gate's `FAIL` set and the judges' "would not
 compile" notes is the measurement that decides whether a later run hands the gate line to the
 judges in the blinded header and drops their compile turns. A write-up that carries complete
-files is longer than a snippet one, so expect roughly twice the segments per pool; the segment
-cap is unchanged.
+files is not much longer than a snippet one (the run-17 CWE-89 pilot's 84 write-ups packed
+into six 80KB segments, a median of 16 per segment against run 16's 18), because the old
+before/after snippets were most of the file anyway; the segment cap is unchanged.
 
 ## Step 6 - analyse
 

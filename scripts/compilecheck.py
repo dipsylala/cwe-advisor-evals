@@ -109,8 +109,14 @@ class JavaChecker:
                           + self.shared + extra + files)
         if rc == 0:
             return 'OK', f'{len(extra)} case stub(s)' if extra else ''
-        errs = [l.strip() for l in out.splitlines() if ' error: ' in l]
-        return 'FAIL', (errs[0] if errs else out.strip())[:220]
+        lines = out.splitlines()
+        errs = [i for i, l in enumerate(lines) if ' error: ' in l]
+        if not errs:
+            return 'FAIL', out.strip()[:220]
+        # javac puts the name behind "cannot find symbol" on the following "symbol:" line.
+        first = lines[errs[0]].strip()
+        sym = next((l.strip() for l in lines[errs[0] + 1:errs[0] + 5] if l.strip().startswith('symbol:')), '')
+        return 'FAIL', (first + (' (' + sym + ')' if sym else ''))[:220]
 
 
 # ---------------------------------------------------------------- csharp

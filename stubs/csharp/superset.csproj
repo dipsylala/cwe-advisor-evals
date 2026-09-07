@@ -28,6 +28,9 @@
     <PackageReference Include="System.Data.Odbc" Version="8.0.1" />
     <PackageReference Include="System.DirectoryServices" Version="8.0.0" />
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="9.0.0" />
+    <!-- Libraries a fix brings in that no fixture uses (run 17): the entries recommend them. -->
+    <PackageReference Include="StackExchange.Redis" Version="2.8.16" />
+    <PackageReference Include="EnyimMemcachedCore" Version="3.2.4" />
   </ItemGroup>
   <ItemGroup>
     <!-- CASE_COMPILE_ITEMS -->
