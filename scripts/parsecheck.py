@@ -94,10 +94,15 @@ def check_js(files, case_dir):
 
 
 def check_py(files, case_dir):
-    for f in files:
-        rc, out = run([sys.executable, '-m', 'py_compile', f])
-        if rc != 0:
-            return 'FAIL', first_line(out, re.compile('Error'))
+    # py_compile writes bytecode into __pycache__ next to the source unless told otherwise, which
+    # would leave 50-odd untracked directories inside the fixtures; compile into a temp file.
+    with tempfile.TemporaryDirectory() as td:
+        for f in files:
+            rc, out = run([sys.executable, '-c',
+                           'import py_compile, sys; py_compile.compile(sys.argv[1], cfile=sys.argv[2], doraise=True)',
+                           f, os.path.join(td, 'out.pyc')])
+            if rc != 0:
+                return 'FAIL', first_line(out, re.compile('Error'))
     return 'OK', ''
 
 
