@@ -215,8 +215,11 @@ def check_c(files, case_dir, cpp=False):
     cc = shutil.which('clang++' if cpp else 'clang') or shutil.which('g++' if cpp else 'gcc')
     srcs = [f for f in files if not f.endswith(('.h', '.hpp'))] or files
     if cc:
+        # Same language levels as the MSVC branch (/std:c17, /std:c++20): std::span fixtures
+        # need C++20, and the compiler's default is gnu++17. gnu_compat.h declares gets() for C.
+        std = ['-std=c++20'] if cpp else ['-include', os.path.join(EVALS, 'stubs', 'c', 'gnu_compat.h')]
         for f in srcs:
-            rc, out = run([cc, '-fsyntax-only', '-w', f], cwd=case_dir)
+            rc, out = run([cc, '-fsyntax-only', '-w'] + std + [f], cwd=case_dir)
             if rc != 0:
                 return 'FAIL', first_line(out, re.compile('error'))
         return 'OK', ''

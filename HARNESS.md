@@ -106,9 +106,12 @@ ASP.NET Web Forms pages, a JSP, a Blazor component, a React component in JSX) or
 binding will not build here (`libxmljs`). JavaScript parses through V8 as a script or a module
 (`stubs/javascript/parse-check.js`), not `node --check`, which on Node 22+ returns 0 for any file
 it classifies as ESM whatever the syntax - a gap the compile-gate self-test found. Seven fixtures needed compile-only edits to get there, recorded under **What a
-run is**. C and C++ use `gcc`/`clang -fsyntax-only` where present and otherwise MSVC's `cl /Zs`
-through the Visual Studio developer script, with `stubs/c/msvc_compat.h` force-included for the
-POSIX spellings MSVC lacks (`ssize_t`); both are the compiler's full semantic pass. PHP is PHPStan
+run is**. C and C++ use `gcc`/`clang -fsyntax-only` where present (C++ at `-std=c++20` for the
+`std::span` fixtures; C with `stubs/c/gnu_compat.h` force-included, because glibc stops
+declaring `gets()` at C11 and clang 16+ rejects the call the CWE-121 fixture exists to make)
+and otherwise MSVC's `cl /Zs` through the Visual Studio developer script, with
+`stubs/c/msvc_compat.h` force-included for the POSIX spellings MSVC lacks (`ssize_t`); both are
+the compiler's full semantic pass. PHP is PHPStan
 at level 2 (unknown classes, functions, methods, properties) with Larastan for the Laravel facades
 and Eloquent models, booted through Orchestra Testbench from a composer superset in `stubs/php`;
 one fixture carries a per-case ignore (`phpstan-ignore.txt`) because the error PHPStan reports,
