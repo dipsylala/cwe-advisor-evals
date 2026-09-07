@@ -40,5 +40,16 @@
     <dependency><groupId>jakarta.mail</groupId><artifactId>jakarta.mail-api</artifactId><version>2.1.3</version></dependency>
     <!-- javax.mail namespace: the 1.6 line cwe/77/java names as a fixed release (1.6.8). -->
     <dependency><groupId>com.sun.mail</groupId><artifactId>jakarta.mail</artifactId><version>1.6.8</version></dependency>
+    <!-- Classes the Java entries for corpus CWEs name that no fixture uses (found by the
+         package sweep after run 17): spring-ldap (cwe/90), Jackson and XStream (cwe/502),
+         spring-security-oauth2-jose (cwe/287), Spring Boot's error handling and logback
+         (cwe/209), spring-test (cwe/862). javax-era lines to match Spring 5.3 / Security 5.8. -->
+    <dependency><groupId>org.springframework.ldap</groupId><artifactId>spring-ldap-core</artifactId><version>2.4.4</version></dependency>
+    <dependency><groupId>com.fasterxml.jackson.core</groupId><artifactId>jackson-databind</artifactId><version>2.17.2</version></dependency>
+    <dependency><groupId>com.thoughtworks.xstream</groupId><artifactId>xstream</artifactId><version>1.4.21</version></dependency>
+    <dependency><groupId>org.springframework.security</groupId><artifactId>spring-security-oauth2-jose</artifactId><version>${spring.security.version}</version></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-autoconfigure</artifactId><version>2.7.18</version></dependency>
+    <dependency><groupId>ch.qos.logback</groupId><artifactId>logback-classic</artifactId><version>1.2.13</version></dependency>
+    <dependency><groupId>org.springframework</groupId><artifactId>spring-test</artifactId><version>${spring.version}</version></dependency>
   </dependencies>
 </project>

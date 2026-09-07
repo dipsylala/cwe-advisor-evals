@@ -83,6 +83,21 @@ template) or a native npm package that installs without its binding (`bcrypt`, `
 
 ### What the failures are
 
+By kind (`scripts/gatekinds.py`, added after the run and applied to `gate.json`):
+
+| Kind | A | B |
+| --- | --- | --- |
+| missing-import (a real class, not imported) | 3 | 10 |
+| unresolved-name (nothing defines it) | 1 | 3 |
+| unresolved-member (a method or export the type lacks) | 5 | 2 |
+| signature (real API, wrong arguments or types) | 2 | 3 |
+| syntax | 0 | 1 |
+| unused import or variable (Go) | 4 | 0 |
+| runtime (an invalid regex the checker rejects) | 1 | 0 |
+
+Half of the guided arm's failures are a missing import of a class that exists; the unguided
+arm's are spread across invented members and Go's unused declarations.
+
 Every remaining `FAIL` note was read. One is the checker, not the fix:
 `B/326/python/AesEcbModeEncrypt` calls `AESGCM.generate_key(bit_length=256)`, which mypy rejects
 under cryptography 43.0.3's type stubs and which runs (reproduced). Counting that as a pass, the

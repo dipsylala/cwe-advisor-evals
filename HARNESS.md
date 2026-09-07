@@ -225,7 +225,12 @@ Perl). Each write-up gets one of `OK`, `FAIL` (with the first error), `UNCHECKED
 fixtures Step 0 cannot check, or a toolchain missing here), `NO_FILES` (no File block - the
 format was not followed, so nothing can be applied) or `BAD_FORMAT` (a path outside the case
 directory, an unterminated fence); the JSON also records which files differ from the fixture and
-whether the finding's file is among them. Run it before any judging and report the per-arm pass
+whether the finding's file is among them. Each `FAIL` also carries a `kind`
+(`scripts/gatekinds.py`): `missing-import` (a real class the fix did not import - Java and C#
+names are looked up in the JDK image, the superset classpath and the .NET reference assemblies),
+`unresolved-name`, `unresolved-member`, `signature`, `syntax`, `unused`, `missing-package` or
+`runtime`. Report the kinds beside the counts; a missing import and an invented API score the
+same 0 but are not the same finding. Run it before any judging and report the per-arm pass
 rates in `RESULTS*.md`: they are the mechanical reading of the run-13 to run-16 slip bucket, and
 they cost no tokens. The gate reads `case.json` (it is a script, not an arm or a judge) only for
 the finding's file name. Use `--lang` to run the languages as separate background processes:

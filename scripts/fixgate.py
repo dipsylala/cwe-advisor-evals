@@ -42,6 +42,7 @@ import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import compilecheck  # noqa: E402
+import gatekinds  # noqa: E402
 import parsecheck  # noqa: E402
 
 EVALS = compilecheck.EVALS
@@ -204,6 +205,7 @@ class Gate:
         if problems:
             note = ('; '.join(problems) + ('; ' + note if note else ''))[:220]
         rec.update(status=status, note=note)
+        rec['kind'], rec['kind_detail'] = gatekinds.classify(lang, status, note)
         return rec
 
 
