@@ -200,6 +200,14 @@ the superset manifests actually require.
 | Perl | `perl` | Perl 5 with `perl -c`; no type checker exists | none (`stubs/perl/lib` is a compile-only `CGI.pm`) | unchecked |
 | C, C++ | `gcc`/`g++` or `clang`/`clang++`, else MSVC | a compiler with `-std=c++20`; MSVC is found through `vswhere` and `VsDevCmd.bat` | none | unchecked |
 
+On Windows, disable the Microsoft Store app execution aliases for `python.exe` and
+`python3.exe` (Settings > Apps > Advanced app settings > App execution aliases). The harness
+scripts never call Python by name, but arm and judge agents do - run 19's arms ran `python3 -m
+py_compile` and the like to test their fixes - and the alias answers with a Store prompt and
+exit code 0, so the agent's check passes silently and a Store window opens on the desk. With the
+aliases off, `python3` is simply absent and the agent falls back to whatever `python` is real
+(here the `uv`-managed interpreter); `uv python install --default` makes both names resolve to it.
+
 Two operational notes. The Java, C#, JavaScript and PHP resolvers run on the first invocation
 and cache into `stubs/<language>/` (gitignored), so the first `compilecheck.py` on a machine takes
 minutes and needs network access. And do not run all seven `fixgate.py --lang` processes at
