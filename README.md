@@ -206,8 +206,8 @@ special.
   reproduction claim as provisional, especially before it would change an entry.
 - **No fix is compiled or executed by the harness itself.** The fixtures now parse and type-check
   (`scripts/parsecheck.py` and `scripts/compilecheck.py`, in CI and the pre-commit hook: every
-  Java, C#, JavaScript, Go and Python case resolves against one superset manifest per language
-  plus compile-only stubs under `stubs/`), so the fixtures are known good. The fixes are not: a
+  Java, C#, JavaScript, Go, Python, PHP, C and C++ case resolves against one superset manifest per
+  language plus compile-only stubs under `stubs/`), so the fixtures are known good. The fixes are not: a
   write-up carries snippets, not files, so nothing applies a fix to its fixture and builds it. A
   fix is scored on whether it reads as correct, not on whether it actually builds or passes a test; the judge-side
   gap above is this same problem one level up, where even the *scoring* wasn't independently

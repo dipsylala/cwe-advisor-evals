@@ -1,0 +1,21 @@
+# Base PHPStan configuration for type-checking the PHP fixtures (scripts/compilecheck.py).
+# Larastan supplies Laravel's facades and Eloquent typing. Level 2 is the "does it resolve"
+# level: unknown classes, functions, methods and properties, plus obvious call-shape errors,
+# without the strict-typing noise of the higher levels. The checker generates a per-case config
+# that includes this one and adds the case directory and its stub mirror as scanDirectories.
+includes:
+  - vendor/larastan/larastan/extension.neon
+parameters:
+  level: 2
+  tmpDir: .phpstan-cache
+  scanDirectories:
+    - shared
+  bootstrapFiles:
+    - polyfill.php
+  stubFiles:
+    - auth-user.stub
+  reportUnmatchedIgnoredErrors: false
+  treatPhpDocTypesAsCertain: false
+  ignoreErrors:
+    # A fixture is a slice of an app; a class it declares but never instantiates is not a defect.
+    - '#Class .* is unused#'

@@ -1,0 +1,3 @@
+# Error identifiers PHPStan may report on this fixture that are the vulnerability itself, not a
+# defect: the /e modifier is the CWE-94 sink the case exists to test.
+regexp.pattern

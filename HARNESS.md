@@ -94,13 +94,17 @@ restored once, a `package.json` installed once, a `go.mod`, a `requirements.txt`
 environment. Classes and modules a fixture references but does not ship (a repository, an entity,
 a config module, Juliet's `testcasesupport`, the Benchmark helpers) are compile-only stand-ins
 under `stubs/<language>/`. Every case resolves: Java 85, C# 51, JavaScript 47, Go 43, Python 52,
-C 22, C++ 19; the rest are unchecked because they cannot exist outside their host (two ASP.NET
-Web Forms pages, a JSP, a Blazor component) or because a native binding will not build here
-(`libxmljs`). Seven fixtures needed compile-only edits to get there, recorded under **What a run
-is**. C and C++ use `gcc`/`clang -fsyntax-only` where present and otherwise MSVC's `cl /Zs` through
-the Visual Studio developer script, with `stubs/c/msvc_compat.h` force-included for the POSIX
-spellings MSVC lacks (`ssize_t`); both are the compiler's full semantic pass. PHP and Perl have
-the parse check only.
+PHP 44, C 22, C++ 19; the rest are unchecked because they cannot exist outside their host (two
+ASP.NET Web Forms pages, a JSP, a Blazor component) or because a native binding will not build
+here (`libxmljs`). Seven fixtures needed compile-only edits to get there, recorded under **What a
+run is**. C and C++ use `gcc`/`clang -fsyntax-only` where present and otherwise MSVC's `cl /Zs`
+through the Visual Studio developer script, with `stubs/c/msvc_compat.h` force-included for the
+POSIX spellings MSVC lacks (`ssize_t`); both are the compiler's full semantic pass. PHP is PHPStan
+at level 2 (unknown classes, functions, methods, properties) with Larastan for the Laravel facades
+and Eloquent models, booted through Orchestra Testbench from a composer superset in `stubs/php`;
+one fixture carries a per-case ignore (`phpstan-ignore.txt`) because the error PHPStan reports,
+the `/e` regex modifier, is the CWE-94 sink the case exists to test. Perl has the parse check
+only.
 
 What the type check catches is the run-13 to run-16 slip bucket applied to the fixtures - an
 invented method, a missing `using`, a package that does not exist - and it is the floor for

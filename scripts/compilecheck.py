@@ -271,6 +271,83 @@ class PythonChecker:
         return 'OK', ''
 
 
+# ---------------------------------------------------------------- php
+PHP_STUBS = os.path.join(STUBS, 'php')
+PHP_ERR = re.compile(r'^(?:[A-Za-z]:|/).*:\d+:')
+
+
+def php_cmd():
+    """php plus the extension flags composer and PHPStan need when no php.ini is loaded, which
+    is how the winget PHP ships on this machine. Harmless where an ini already loads them."""
+    php = shutil.which('php')
+    if not php:
+        return None
+    rc, out = run([php, '-m'])
+    loaded = {l.strip().lower() for l in out.splitlines()}
+    cmd = [php, '-d', 'memory_limit=1G']
+    missing = [e for e in ('openssl', 'mbstring', 'curl', 'fileinfo', 'zip') if e not in loaded]
+    if missing:
+        ext_dir = os.path.join(os.path.dirname(php), 'ext')
+        if os.path.isdir(ext_dir):
+            cmd += ['-d', f'extension_dir={ext_dir}']
+            for e in missing:
+                cmd += ['-d', f'extension={e}']
+    return cmd
+
+
+class PhpChecker:
+    lang = 'php'
+
+    def __init__(self):
+        self.php = php_cmd()
+        self.ok = bool(self.php)
+        self.note = 'php not on PATH' if not self.ok else ''
+        if not self.ok:
+            return
+        phar = os.path.join(PHP_STUBS, 'composer.phar')
+        if not os.path.isdir(os.path.join(PHP_STUBS, 'vendor')):
+            if not os.path.exists(phar):
+                rc, out = run(['curl', '-sSL', 'https://getcomposer.org/composer-stable.phar', '-o', phar])
+                if rc != 0:
+                    self.ok, self.note = False, 'no vendor/ and composer could not be downloaded'
+                    return
+            rc, out = run(self.php + [phar, 'install', '--no-interaction', '--no-progress'], cwd=PHP_STUBS)
+            if rc != 0:
+                raise SystemExit('composer install in stubs/php failed:\n' + out[-2000:])
+        self.phpstan = os.path.join(PHP_STUBS, 'vendor', 'bin', 'phpstan')
+
+    def check(self, case_dir, key):
+        files = sources(case_dir, '.php')
+        if not files:
+            return 'UNCHECKED', 'no .php files'
+        stub_dir = case_stub_dir('php', key)
+        ignore_file = os.path.join(stub_dir, 'phpstan-ignore.txt')
+        ignores = []
+        if os.path.exists(ignore_file):
+            ignores = [l.strip() for l in io.open(ignore_file, encoding='utf-8') if l.strip() and not l.startswith('#')]
+        scan = [stub_dir] if os.path.isdir(stub_dir) else []
+        neon = 'includes:\n  - phpstan.neon\nparameters:\n'
+        if scan:
+            neon += '  scanDirectories:\n' + ''.join(f'    - {d.replace(os.sep, "/")}\n' for d in scan)
+        if ignores:
+            neon += '  ignoreErrors:\n' + ''.join(f'    - identifier: {i}\n' for i in ignores)
+        cfg = os.path.join(PHP_STUBS, f'.case-{os.getpid()}.neon')
+        io.open(cfg, 'w', encoding='utf-8').write(neon)
+        try:
+            # Testbench boots Laravel relative to the working directory, so run from stubs/php.
+            rc, out = run(self.php + [self.phpstan, 'analyse', '-c', cfg, '--no-progress', '--error-format=raw',
+                                      '--memory-limit=1G'] + files, cwd=PHP_STUBS)
+        finally:
+            os.unlink(cfg)
+        out = re.sub(r'\x1b\[[0-9;]*m', '', out)
+        errs = [l.strip() for l in out.splitlines() if PHP_ERR.match(l.strip())]
+        if rc == 0 and not errs:
+            return 'OK', ''
+        if errs:
+            return 'FAIL', re.sub(r'^.*?cases[\\/]', '', errs[0])[:220]
+        return 'FAIL', out.strip().splitlines()[0][:220] if out.strip() else f'phpstan exit {rc}'
+
+
 # ---------------------------------------------------------------- c / c++
 # A C or C++ fixture is self-contained (no third-party headers across the corpus), so its type
 # check is the compiler's own semantic pass: gcc/clang -fsyntax-only, or MSVC cl /Zs through the
@@ -301,7 +378,7 @@ class CppChecker(CChecker):
     cpp = True
 
 
-CHECKERS = {c.lang: c for c in (JavaChecker, CSharpChecker, JsChecker, GoChecker, PythonChecker, CChecker, CppChecker)}
+CHECKERS = {c.lang: c for c in (JavaChecker, CSharpChecker, JsChecker, GoChecker, PythonChecker, PhpChecker, CChecker, CppChecker)}
 
 
 def main():

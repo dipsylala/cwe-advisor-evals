@@ -1,0 +1,26 @@
+{
+  "name": "cwe-advisor/evals-php-superset",
+  "description": "Superset dependency set for type-checking every PHP fixture with PHPStan (scripts/compilecheck.py). One install resolves the whole corpus. Static analysis only, nothing here is executed, so packages with advisories are allowed: the versions the fixtures target are the point.",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.2",
+    "laravel/framework": "^11.0",
+    "firebase/php-jwt": "^6.10"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^2.1",
+    "larastan/larastan": "^3.0",
+    "orchestra/testbench": "^9.0"
+  },
+  "config": {
+    "allow-plugins": false,
+    "platform-check": false,
+    "policy": {
+      "advisories": {
+        "block": false
+      }
+    }
+  },
+  "minimum-stability": "stable"
+}

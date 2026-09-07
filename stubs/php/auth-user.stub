@@ -1,0 +1,16 @@
+<?php
+// PHPStan stub (phpstan.neon stubFiles): analysis-time additions to the framework's base user
+// class. The fixtures call application-defined helpers on the authenticated user, which in a
+// real app live on App\Models\User; the booted Testbench app types $request->user() as this
+// base class, so the helpers are declared here as magic methods. Analysis only.
+
+namespace Illuminate\Foundation\Auth;
+
+/**
+ * @method bool isAdmin()
+ * @method bool hasRole(string $role)
+ * @method bool can(string $ability, mixed $arguments = [])
+ */
+class User
+{
+}
