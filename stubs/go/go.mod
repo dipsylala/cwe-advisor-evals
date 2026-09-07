@@ -1,6 +1,6 @@
 module evalcases
 
-go 1.23
+go 1.25
 
 // Superset module set for type-checking every Go fixture (scripts/compilecheck.py). Case files are
 // copied into a package directory under this module and vetted against these requirements.
