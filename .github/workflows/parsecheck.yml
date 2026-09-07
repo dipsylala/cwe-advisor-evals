@@ -35,10 +35,11 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
+      - uses: astral-sh/setup-uv@v3
       - name: toolchains
         run: |
-          php --version | head -1; node --version; go version; javac -version; dotnet --version; gcc --version | head -1; perl -v | sed -n 2p
+          php --version | head -1; node --version; go version; javac -version; mvn -v | head -1; dotnet --version; uv --version; gcc --version | head -1; perl -v | sed -n 2p
       - name: parse check
         run: python scripts/parsecheck.py
-      - name: type check (java)
+      - name: type check (java, csharp, javascript, go, python)
         run: python scripts/compilecheck.py

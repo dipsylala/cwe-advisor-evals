@@ -20,7 +20,7 @@ public class ReportsController : ControllerBase
         var reportPath = Path.Combine(_reportsRoot, file);
 
         // SAST FINDING: CWE-22 (Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')) reported here. Sink is the next statement.
-        var reportText = File.ReadAllText(reportPath);
+        var reportText = System.IO.File.ReadAllText(reportPath);
 
         return Content(reportText, "text/plain");
     }

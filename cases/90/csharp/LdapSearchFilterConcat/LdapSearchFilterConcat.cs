@@ -24,8 +24,8 @@ public class DirectoryLookupController : ControllerBase
 
         return Ok(new
         {
-            result.Properties["displayName"],
-            result.Properties["mail"]
+            displayName = result.Properties["displayName"],
+            mail = result.Properties["mail"]
         });
     }
 }

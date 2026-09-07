@@ -1,3 +1,4 @@
+using DocumentPortal;
 using DocumentPortal.Services;
 
 var builder = WebApplication.CreateBuilder(args);

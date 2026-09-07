@@ -204,10 +204,12 @@ special.
   reproduction confirmed the original panel and the entry were right - see HARNESS.md's **Things
   that have gone wrong before** and [RESULTS-v6.md](RESULTS-v6.md)'s addendum. Treat a judge's
   reproduction claim as provisional, especially before it would change an entry.
-- **Nothing in the corpus is compiled or executed by the harness itself.** The fixtures now parse
-  (`scripts/parsecheck.py`, run in CI and by the pre-commit hook), but that is a syntax floor: they
-  carry no dependency manifests, so no fixture and no fix is type-checked against the libraries it
-  names. A fix is scored on whether it reads as correct, not on whether it actually builds or passes a test; the judge-side
+- **No fix is compiled or executed by the harness itself.** The fixtures now parse and type-check
+  (`scripts/parsecheck.py` and `scripts/compilecheck.py`, in CI and the pre-commit hook: every
+  Java, C#, JavaScript, Go and Python case resolves against one superset manifest per language
+  plus compile-only stubs under `stubs/`), so the fixtures are known good. The fixes are not: a
+  write-up carries snippets, not files, so nothing applies a fix to its fixture and builds it. A
+  fix is scored on whether it reads as correct, not on whether it actually builds or passes a test; the judge-side
   gap above is this same problem one level up, where even the *scoring* wasn't independently
   verified until this session checked one case by hand.
   Run 15 made the cost concrete: 24 of 372 cases in every set - unguided, guided before and after a

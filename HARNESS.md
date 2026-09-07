@@ -41,10 +41,17 @@ identical judging for the cost of judge agents only. Re-sample A when the corpus
 small fixed subset when a fresh estimate of the sample floor is needed. The reuse key for a frozen
 sample is everything that produced it: the corpus commit and fixture contents, the arm model, the
 arm prompt, and the execution settings - not the corpus version alone. Any of those changing means
-a fresh A. One recorded exception: after run 16, `79/java/ThymeleafUtextUnescaped` lost the
-`public` modifier on its controller class so that `javac` accepts the file (a public class must
-sit in a file of its own name); the sink, the call chain and the finding are unchanged, and the
-frozen samples for that case were produced against the `public` version.
+a fresh A. Recorded exceptions, all compile-only edits made after run 16 when the type check
+(Step 0) first ran, none touching a sink, a call chain or a finding: `79/java/ThymeleafUtextUnescaped`
+lost the `public` modifier on its controller class (a public class must sit in a file of its own
+name); `22/csharp/PathCombineAbsoluteOverride` and `22/csharp/PathCombineUnsanitizedFilename`
+qualify `File.ReadAllText` as `System.IO.File` (inside a `ControllerBase`, bare `File` binds to
+the `File(...)` action-result method and does not compile); `94/csharp/CSharpCompilationRuntimeCompile`
+gained `using Microsoft.CodeAnalysis.Emit` for `EmitResult`; `90/csharp/LdapSearchFilterConcat`'s
+anonymous response type names its two indexer members (`displayName`, `mail`), which C# requires;
+`352/csharp/MvcControllerIgnoreAntiforgeryToken` and `862/csharp/MinimalApiMissingAuthorizeMetadata`
+gained the `using` for the namespace their sibling file declares. The frozen samples for those
+seven cases were produced against the pre-edit files.
 
 **A runner or judge that has already read the knowledge base cannot credibly produce arm A.** Run
 each arm and each judge as a separate agent with its own context.
@@ -73,19 +80,28 @@ framework (`.jsp`, `.razor`, `.cshtml`) are reported as unchecked. The same swee
 push to `cases/` in the evals repo's CI, and `git config core.hooksPath .githooks` in `evals/`
 runs it on the cases in each commit.
 
-For Java the type check exists too:
+The type check sits on top of it:
 
 ```sh
 python evals/scripts/compilecheck.py
 ```
 
-The third-party surface across all 86 Java cases is about twenty artifacts, so one superset
-classpath (`stubs/java/pom.xml`, resolved once with Maven and cached) resolves every case without
-per-case manifests; classes a fixture references but does not ship are compile-only stand-ins
-under `stubs/java/` (Juliet's `testcasesupport`, the Benchmark helpers, and a handful of
-per-case repositories and entities). 84 of 85 compile with full resolution; the one that does not
-is a public class in a file of another name. The same shape - one superset manifest per language
-plus stubs - is how C#, JavaScript, Go and Python get their type checks.
+The third-party surface of each language across the whole corpus is a short list - about twenty
+Maven artifacts for 86 Java cases, thirteen NuGet packages for 54 C# cases, twenty npm packages,
+five Go modules, twenty PyPI packages - so one superset manifest per language under `stubs/`
+resolves every case without per-case manifests: a pom resolved once into a classpath, a `.csproj`
+restored once, a `package.json` installed once, a `go.mod`, a `requirements.txt` in an isolated uv
+environment. Classes and modules a fixture references but does not ship (a repository, an entity,
+a config module, Juliet's `testcasesupport`, the Benchmark helpers) are compile-only stand-ins
+under `stubs/<language>/`. Every case resolves: Java 85, C# 51, JavaScript 47, Go 43, Python 52;
+the rest are unchecked because they cannot exist outside their host (two ASP.NET Web Forms
+pages, a JSP, a Blazor component) or because a native binding will not build here (`libxmljs`).
+Seven fixtures needed compile-only edits to get there, recorded under **What a run is**. C and
+C++ have a parse check only.
+
+What the type check catches is the run-13 to run-16 slip bucket applied to the fixtures - an
+invented method, a missing `using`, a package that does not exist - and it is the floor for
+applying the same check to a fix, which needs the write-up to carry complete files.
 
 ## Step 1 - choose the cases
 

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ContosoApp.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
