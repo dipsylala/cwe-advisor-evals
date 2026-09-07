@@ -179,6 +179,33 @@ label, so nothing needs editing to add an arm or start a new run. Pick the next 
 suffix (`runs-v18`, `scores-v18`, `arm-map-v18.json`, `RESULTS-v18.md`); HARNESS.md's `v4` examples
 are a worked example, not a fixed name.
 
+### Prerequisites
+
+The arms and judges need only an agent runtime. The fixture checks (`scripts/parsecheck.py`,
+`scripts/compilecheck.py`) and the compile gate (`scripts/fixgate.py`) need the toolchains
+below on `PATH`. Every checker finds its tool with `shutil.which` and, when the tool is missing,
+reports that language `UNCHECKED` with a note rather than failing, so a partial toolchain gives a
+partial gate - read the notes before trusting a count. CI (`.github/workflows/parsecheck.yml`)
+carries all of them; the versions there are the reference, the floors are what the corpus and
+the superset manifests actually require.
+
+| Language | Tools | Floor | Resolver the checker runs once | Without it |
+| --- | --- | --- | --- | --- |
+| Java | `javac`, `mvn` | JDK 17 (`javac --release 17`; CI uses 21) | `mvn dependency:build-classpath` on `stubs/java/pom.xml`, cached beside it | `javac` missing: unchecked; `mvn` missing with no cached classpath: unchecked |
+| C# | `dotnet` | .NET 8 SDK (`net8.0` target; a newer SDK builds it) | `dotnet restore` of `stubs/csharp/superset.csproj` | unchecked |
+| JavaScript | `node`, `npm` | Node 22 (the V8 parse of ESM and `require()` of ESM packages; CI uses 22) | `npm install` in `stubs/javascript` | `node` missing: unchecked; `npm` missing with no `node_modules`: unchecked |
+| Go | `go`, `gofmt` | Go 1.25 (`stubs/go/go.mod`; `net/http.CrossOriginProtection` in the fixtures) | none (`go vet` resolves `go.mod`) | unchecked |
+| Python | `uv` | any host Python; `uv` fetches CPython 3.13 and mypy from `stubs/python/requirements.txt` | `uv run --with-requirements` per invocation | unchecked (parse check still runs under the host interpreter) |
+| PHP | `php`, `curl` | PHP 8.2 (`stubs/php/composer.json`; CI uses 8.3) with `openssl`, `mbstring`, `curl`, `fileinfo`, `zip` loadable | Composer downloaded to `stubs/php/composer.phar` and `composer install` (PHPStan, Larastan, Testbench) | `php` missing: unchecked; download blocked with no `vendor/`: unchecked |
+| Perl | `perl` | Perl 5 with `perl -c`; no type checker exists | none (`stubs/perl/lib` is a compile-only `CGI.pm`) | unchecked |
+| C, C++ | `gcc`/`g++` or `clang`/`clang++`, else MSVC | a compiler with `-std=c++20`; MSVC is found through `vswhere` and `VsDevCmd.bat` | none | unchecked |
+
+Two operational notes. The Java, C#, JavaScript and PHP resolvers run on the first invocation
+and cache into `stubs/<language>/` (gitignored), so the first `compilecheck.py` on a machine takes
+minutes and needs network access. And do not run all seven `fixgate.py --lang` processes at
+once on a machine with less than about 32 GB free: javac, dotnet, node and php each hit an
+allocation failure in run 19 and returned `FAIL` rows that passed serially (HARNESS.md Step 3).
+
 ### Known gaps
 
 - **`no_harm` is scored against the stated contract where a case has one.** `scripts/blind.py`
