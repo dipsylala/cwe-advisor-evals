@@ -41,7 +41,10 @@ identical judging for the cost of judge agents only. Re-sample A when the corpus
 small fixed subset when a fresh estimate of the sample floor is needed. The reuse key for a frozen
 sample is everything that produced it: the corpus commit and fixture contents, the arm model, the
 arm prompt, and the execution settings - not the corpus version alone. Any of those changing means
-a fresh A.
+a fresh A. One recorded exception: after run 16, `79/java/ThymeleafUtextUnescaped` lost the
+`public` modifier on its controller class so that `javac` accepts the file (a public class must
+sit in a file of its own name); the sink, the call chain and the finding are unchanged, and the
+frozen samples for that case were produced against the `public` version.
 
 **A runner or judge that has already read the knowledge base cannot credibly produce arm A.** Run
 each arm and each judge as a separate agent with its own context.

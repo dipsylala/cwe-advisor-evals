@@ -9,7 +9,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 @RestController
-public class SupportTicketPreviewController {
+class SupportTicketPreviewController {
 
     private final TemplateEngine templateEngine;
 
