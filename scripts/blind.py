@@ -24,6 +24,9 @@ Two things this does that matter:
   'Contract to preserve:' so every judge scores no_harm against the same stated contract instead
   of inventing one (run 11: 63 of 91 arm-B no_harm misses were judge splits). trap and origin are
   never copied - they name the intended wrong fix and would tell a judge what to look for.
+- With --gate (from run 18), the compile gate's verdict is written as a 'Build:' line so the
+  judges take it as settled instead of compiling themselves (run 17: the gate found eleven
+  non-compiling fixes the panel had passed, and the panel found none the gate had missed).
 
 Writes <out>/<rid>.md and <out>/arm-map.json next to it. (Older invocations of this script wrote
 the map to <out>/../arm-map.json - fine for a throwaway --out like /tmp/blind-v4, but a repo-local
@@ -59,12 +62,31 @@ def load_cases():
     return cases
 
 
+def build_line(g):
+    """The compile gate's verdict for the judge's header. Same form for every arm; the note is the
+    compiler's own first error and names nothing about which arm produced the write-up."""
+    status = g['status']
+    if status == 'OK':
+        return "OK - the write-up's files applied to the case compile and type-check"
+    if status == 'FAIL':
+        return f"FAIL - {g['note']}"
+    if status == 'UNCHECKED':
+        return f"unchecked - {g['note']}"
+    return 'not run - the write-up carries no complete file to build'
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('run_dirs', nargs='+')
     ap.add_argument('--out', required=True)
     ap.add_argument('--prefix', default='R')
+    ap.add_argument('--gate', action='append', default=[],
+                    help='gate.json from fixgate.py (repeatable); adds a "Build:" line to every header')
     args = ap.parse_args()
+
+    gate = {}
+    for g in args.gate:
+        gate.update(json.loads(io.open(g, encoding='utf-8').read()))
 
     cases = load_cases()
     items = []
@@ -104,6 +126,11 @@ def main():
                   f"Reported sink: `{f['sink_code']}`\n")
         if c.get('must_preserve'):
             header += f"Contract to preserve: {c['must_preserve']}\n"
+        if args.gate:
+            g = gate.get(f'{arm}/{cwe}/{lang}/{cid}')
+            if g is None:
+                raise SystemExit(f'no gate record for {arm}/{cwe}/{lang}/{cid} - run fixgate.py over every arm first')
+            header += f'Build: {build_line(g)}\n'
         io.open(os.path.join(args.out, rid + '.md'), 'w', encoding='utf-8', newline='').write(
             header + f"\n---\n\n{body}\n")
 

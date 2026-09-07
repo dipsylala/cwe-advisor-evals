@@ -267,8 +267,11 @@ call runs), and such a row is counted as passing with the reason recorded in `RE
 ## Step 4 - blind the outputs
 
 ```sh
-python evals/scripts/blind.py evals/runs-v4/A evals/runs-v4/B --out /tmp/blind-v4
+python evals/scripts/blind.py evals/runs-v4/A evals/runs-v4/B --gate evals/runs-v4/gate.json --out /tmp/blind-v4
 ```
+
+`--gate` (from run 18) writes the compile gate's verdict into each header as a `Build:` line, so
+run the gate over every arm in the pool first; a frozen arm's gate record is reused with its text.
 
 Writes the pool to `--out` and `arm-map.json` beside it. It strips any `Behaviour changes` section,
 prints a leak check, and reports the per-arm counts. Confirm every file carries the same section
@@ -303,6 +306,11 @@ how well it was fixed.
 Where a write-up's header carries a "Contract to preserve:" line, that is the sink's stated
 contract - score no_harm against it, not against your own reading of what the original preserved.
 Where there is no such line, derive the contract from the case files as usual.
+
+The "Build:" line in each header is the result of applying the write-up's files to the case and
+running the language's compiler or type checker. Take it as settled: FAIL means the fix does not
+build, which the rubric scores 0 on fix_quality; OK means it builds; "unchecked" or "not run"
+means you judge the code by reading. Do not compile or run anything yourself.
 
 Score each:
 
