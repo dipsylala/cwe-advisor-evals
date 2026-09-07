@@ -10,7 +10,7 @@ it is what run 4 used when this file was first written. A new run picks the next
 check `evals/` for the highest existing `runs-v*`/`RESULTS-v*.md` and increment it - and substitutes
 it everywhere below; `scripts/blind.py` and `scripts/analyse.py` take directory paths as arguments
 and don't care what they're named. See README.md's **Known gaps** for what remains unscored, and
-**Past runs** for what the highest-numbered run so far actually used.
+**Runs** for the current baseline.
 
 ## What a run is
 
@@ -30,28 +30,16 @@ own output directory - the scripts take arm directories as arguments and use the
 the label.
 
 **From run 15 the control is a frozen sample, not a fresh one.** Arm A never reads `cwe/`, so an
-entry or SKILL.md edit cannot move it; re-running it only re-samples the model (run 11 -> 13 moved
-it -0.03 / -0.05 on 372 cases with nothing changed, and -0.10 / -0.23 on a 14-case subset). Keep one
-arm-A sample per corpus version - `runs-v15/A` is run 13's outputs with the 14 cases in the slots
-re-edited after it taken from run 14 - and copy it into every later run's pool so the same judge
-panel scores it beside the fresh B set. Panels drift too, so carry A's text forward, never its
-scores: A's movement between runs is then the panel's, and B's movement beyond it is the change
-under test. Copying the previous B set's text in as well (`B-pre`) measures the edit directly under
-identical judging for the cost of judge agents only. Re-sample A when the corpus changes, or on a
-small fixed subset when a fresh estimate of the sample floor is needed. The reuse key for a frozen
-sample is everything that produced it: the corpus commit and fixture contents, the arm model, the
-arm prompt, and the execution settings - not the corpus version alone. Any of those changing means
-a fresh A. Recorded exceptions, all compile-only edits made after run 16 when the type check
-(Step 0) first ran, none touching a sink, a call chain or a finding: `79/java/ThymeleafUtextUnescaped`
-lost the `public` modifier on its controller class (a public class must sit in a file of its own
-name); `22/csharp/PathCombineAbsoluteOverride` and `22/csharp/PathCombineUnsanitizedFilename`
-qualify `File.ReadAllText` as `System.IO.File` (inside a `ControllerBase`, bare `File` binds to
-the `File(...)` action-result method and does not compile); `94/csharp/CSharpCompilationRuntimeCompile`
-gained `using Microsoft.CodeAnalysis.Emit` for `EmitResult`; `90/csharp/LdapSearchFilterConcat`'s
-anonymous response type names its two indexer members (`displayName`, `mail`), which C# requires;
-`352/csharp/MvcControllerIgnoreAntiforgeryToken` and `862/csharp/MinimalApiMissingAuthorizeMetadata`
-gained the `using` for the namespace their sibling file declares. The frozen samples for those
-seven cases were produced against the pre-edit files.
+entry or SKILL.md edit cannot move it; re-running it only re-samples the model. Keep one arm-A
+sample per corpus version and copy it into every later run's pool so the same judge panel scores
+it beside the fresh B set. Panels drift too, so carry A's text forward, never its scores: A's
+movement between runs is then the panel's, and B's movement beyond it is the change under test.
+Copying the previous B set's text in as well (`B-pre`) measures the edit directly under identical
+judging for the cost of judge agents only. The current frozen sample is `runs-v17/A`. Re-sample A
+when the corpus changes, or on a small fixed subset when a fresh estimate of the sample floor is
+needed. The reuse key for a frozen sample is everything that produced it: the corpus commit and
+fixture contents, the arm model, the arm prompt, and the execution settings - not the corpus
+version alone. Any of those changing means a fresh A.
 
 **Run 17 is a format boundary.** From run 17 a write-up's `## Fix` carries the complete changed
 files rather than before/after snippets (Step 2), so the compile gate (Step 3) can build every
@@ -105,8 +93,7 @@ PHP 44, C 22, C++ 19; the rest are unchecked because they cannot exist outside t
 ASP.NET Web Forms pages, a JSP, a Blazor component, a React component in JSX) or because a native
 binding will not build here (`libxmljs`). JavaScript parses through V8 as a script or a module
 (`stubs/javascript/parse-check.js`), not `node --check`, which on Node 22+ returns 0 for any file
-it classifies as ESM whatever the syntax - a gap the compile-gate self-test found. Seven fixtures needed compile-only edits to get there, recorded under **What a
-run is**. C and C++ use `gcc`/`clang -fsyntax-only` where present (C++ at `-std=c++20` for the
+it classifies as ESM whatever the syntax - a gap the compile-gate self-test found. Seven fixtures needed compile-only edits to get there; `git log cases/` records them. C and C++ use `gcc`/`clang -fsyntax-only` where present (C++ at `-std=c++20` for the
 `std::span` fixtures; C with `stubs/c/gnu_compat.h` force-included, because glibc stops
 declaring `gets()` at C11 and clang 16+ rejects the call the CWE-121 fixture exists to make)
 and otherwise MSVC's `cl /Zs` through the Visual Studio developer script, with

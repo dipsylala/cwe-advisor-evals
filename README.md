@@ -20,15 +20,12 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Seventeen runs so far - see **Past runs** below for the run-by-run detail, headline, and results file
-for each. In short: `fix_quality` saturates on Sonnet 5 across every corpus size and composition
-tested so far; on Haiku 4.5 it has shown a real gap, a near-tie, a smaller reopened gap, and now a
-comparable gap holding at nearly double the corpus size, across four re-runs as the corpus grew and
-specific guidance defects got found and fixed - model and corpus are both live confounds, not
-settled variables. `no_harm` (whether a fix silently breaks or changes something the sink's caller
-depended on) has consistently shown guidance's small edge on Sonnet 5, and on Haiku 4.5 no edge
-until judges were shown the stated contract (run 13), after which the arms are level.
-See **Known gaps** below for what remains unverified rather than just measured.
+Run 17 is the current measurement: on 372 cases across 27 CWEs and nine languages, with every
+fix compile-gated, guidance lifts `fix_quality` on Haiku 4.5 from 1.80 to 1.91 (ahead on 64
+cases, behind on 22) and leaves `no_harm` (whether a fix silently breaks or changes something the
+sink's caller depended on) level, 1.76 against 1.74. See **Runs** below and
+[RESULTS-v17.md](RESULTS-v17.md). Earlier runs were removed at the run-17 boundary; **Known
+gaps** below says what remains unverified rather than just measured.
 
 ## Corpus
 
@@ -64,7 +61,7 @@ mechanically stripped before use). A case written here would be shaped toward th
 unconsciously matching the vulnerability to the form the entry already describes - which manufactures
 whatever result was wanted. That is why these two are weighted as the stronger ground truth.
 
-**`authored-from-docs-pitfall`** cases exist because runs 1-3 measured the first two sources to
+**`authored-from-docs-pitfall`** cases exist because the first runs measured the first two sources to
 saturation - chain depth never discriminated, every recorded harm was sink-local. These drop the
 chain and instead vary how much contract the sink has and how wrong a plausible fix is. Each is built
 from a `Common Pitfalls` bullet in the `docs/` corpus (actor/critic reviewed across two model
@@ -79,8 +76,8 @@ checkable rather than implied by the code:
 - **`origin`** - the `docs/` pitfall the case is built from.
 
 Their labels are an authoring claim, not an external ground truth, which is weaker than the other
-two sources. Treat a judge disagreeing with `kind` on one of these as a finding about the case. See
-**Past runs** (runs 4 and 6) for what these traps did and did not catch.
+two sources. Treat a judge disagreeing with `kind` on one of these as a finding about the case.
+Run 17's by-source table in [RESULTS-v17.md](RESULTS-v17.md) shows what they catch now.
 
 **`authored-top15-fix-complexity`** cases cover the 2025 CWE Top 15 entries with remediation-quality
 pressure rather than detection labels. The scanner finding is part of the prompt and is treated as
@@ -130,7 +127,7 @@ padding an already-hammered CWE.
   1/language, need 2 more per slot), 94, 125, 287, 352, 416, 434 (same), 787, 862.
 - **Multi-file depth.** Every `authored` case above is single-file (`depth: 1`) - the only multi-file
   cases in the corpus were `juliet`'s, and only in Java. 11 new cases (one per language slot across
-  CWE-79 and CWE-77, `depth` 2-5) test whether tracing across files - which runs 1-3 found saturated
+  CWE-79 and CWE-77, `depth` 2-5) test whether tracing across files - which the first runs found saturated
   on Sonnet 5 up to 5 files, only ever on Juliet's Java cases - holds on other languages and other
   models. Each threads untrusted input through genuine intermediate logic (a value object, a
   service layer, a partial allowlist that checks one half of a value but not the other) rather than
@@ -151,7 +148,7 @@ Create `cases/{CWE}/{language}/{case-id}/` with the source files and a `case.jso
 | `source` | Where the case came from, for judging independence from the guidance |
 | `kind` | `true_positive` or `false_positive` |
 | `depth` | Files in the call chain from source to sink |
-| `group` | `reviewed` or `unreviewed`, for the review-effort split (the CWEs the top-15 review covered - see run 1's design in [RESULTS.md](RESULTS.md) - are `reviewed`; everything else is `unreviewed`) |
+| `group` | `reviewed` or `unreviewed`, for the review-effort split (the CWEs the top-15 review covered are `reviewed`; everything else is `unreviewed` - a split designed for the first run, whose records are in git history) |
 | `files` | Source files, in call order |
 | `finding` | What the scanner reports and the arm is told to fix: `cwe`, `name`, `file`, `sink_line`, `sink_code`, `summary` |
 | `trap`, `must_preserve`, `origin` | `authored-from-docs-pitfall` and `authored-top15-fix-complexity` only. A plain `authored` case omits all three |
@@ -174,92 +171,45 @@ blinded (`scripts/blind.py`) and scored by at least three independent judges who
 arm produced what, and finally aggregated (`scripts/analyse.py`) into comparison tables.
 
 Both scripts are generic - they take arm directories as arguments and use the directory name as the
-label, so nothing needs editing to add an arm or start a new run. **Pick the next unused version
-suffix for a new run** (the existing ones are `runs`/`runs-v2`/`runs-v3`/`runs-v4`/`runs-v5`/`runs-v6`
-and their matching `arm-map*.json`/`scores*.json`/`RESULTS*.md`); HARNESS.md's own examples are
-written against `runs-v4` specifically because that is what run 4 used, not because that name is
-special.
+label, so nothing needs editing to add an arm or start a new run. Pick the next unused version
+suffix (`runs-v18`, `scores-v18`, `arm-map-v18.json`, `RESULTS-v18.md`); HARNESS.md's `v4` examples
+are a worked example, not a fixed name.
 
 ### Known gaps
 
-- **`no_harm` sees `must_preserve` from run 12 on, not retroactively.** Through run 11 the judge
-  prompt withheld all of `case.json`, including the contract `must_preserve` states, so judges
-  applied their own reading of what the original preserved and disagreed with each other over it
-  (9 of 20 runs in run 4; 63 of the 91 arm-B `no_harm` misses in run 11 were judge splits rather
-  than unanimous defects). `scripts/blind.py` now copies `must_preserve` into the blinded header as
-  `Contract to preserve:` - never `trap` or `origin`, which would reveal the intended wrong fix -
-  and the judge prompt in HARNESS.md scores against it. Runs 1-11's `no_harm` numbers were scored
-  without it and are not directly comparable to a later run's. This is separate from the disclosure
-  gap below, which was fixed earlier.
-- **`no_harm`'s disclosed-vs-silent gap is fixed going forward, not retroactively.** Runs 4 and 6
-  both found the old rubric scored a disclosed limitation the same as a silent one - run 4 saw
-  declared scope creep cost a point, run 6 saw a model that honestly declined to guess an
-  unverifiable value score far worse than one that guessed and got lucky. HARNESS.md's `no_harm`
-  wording now scores a disclosed, endpoint-breaking limitation as a 1 rather than a 0. Runs 1-6's
-  `no_harm` numbers were scored under the old wording and are not directly comparable to a future
-  run's without accounting for that.
-- **A judge's self-reported "reproduced" is not independently verified.** Validating the disclosure
-  fix on run 6's pool, a fresh judge panel unanimously reversed the original panel's (correct) read
-  of `DeprecatedEntityLoaderGuard`'s core technical claim while citing its own reproduction. Direct
-  reproduction confirmed the original panel and the entry were right - see HARNESS.md's **Things
-  that have gone wrong before** and [RESULTS-v6.md](RESULTS-v6.md)'s addendum. Treat a judge's
-  reproduction claim as provisional, especially before it would change an entry.
-- **No fix is compiled or executed by the harness itself.** The fixtures now parse and type-check
-  (`scripts/parsecheck.py` and `scripts/compilecheck.py`, in CI and the pre-commit hook: every
-  Java, C#, JavaScript, Go, Python, PHP, C and C++ case resolves against one superset manifest per
-  language plus compile-only stubs under `stubs/`), so the fixtures are known good. Through run
-  16 the fixes were not: a write-up carried snippets, not files, so nothing could apply a fix to
-  its fixture and build it. From run 17 the write-up carries complete files and
-  `scripts/fixgate.py` builds every fix against its fixture (HARNESS.md Step 3; no run has
-  reported it yet). Nothing executes a fix. A fix is scored on whether it reads as correct and,
-  from run 17, whether it builds - not on whether it passes a test; the judge-side
-  gap above is this same problem one level up, where even the *scoring* wasn't independently
-  verified until this session checked one case by hand.
-  Run 15 made the cost concrete: 24 of 372 cases in every set - unguided, guided before and after a
-  SKILL.md self-check asking the model to source every name it introduces - carry a judge note
-  naming an identifier that does not exist or code that does not compile. An instruction did not
-  move that number, and run 16 showed that telling the model to run the compiler does not either
-  (18% of agents ran one; 24 -> 25 cases). From run 16 the *judges* compile - bundled judging
-  with the restricted `cwe-judge` agent verifies claims with `php -l`, `dotnet build`, `javac`
-  against real jars - so the scorer now catches what it used to pass; the arm still does not.
-  Run 17 added the gate the model does not operate: write-ups carry complete files and
-  `scripts/fixgate.py` builds each one against its fixture. It finds 16 of 372 unguided and 18
-  of 372 guided fixes that do not compile, names the missing import or invented method in each,
-  and found two entries naming a class without its package - at no token cost. What it still
-  cannot see is a fix that builds and does the wrong thing; that remains the judges'.
-- **Only one alternate model has been tried, and its data points on the full corpus still disagree
-  with each other before and after the guidance fixes.** Runs 1-6 all had every arm and judge
-  inherit whatever model was running the orchestrating session (Sonnet 5 for runs 5 and 6,
-  undocumented for 1-4). Run 7 re-ran run 5's exact 79-case corpus with arms on Haiku 4.5 and judges
-  pinned to Sonnet 5, and found a real `fix_quality` gap Sonnet 5 never showed on the same cases.
-  Run 8 repeated the identical Haiku-vs-Sonnet pairing after the corpus grew to 203 cases and found
-  the gap collapsed to a near-tie; run 10 repeated it again after fixing three guidance defects run
-  8 found, and the gap partially reopened (+0.05, well short of run 7's +0.13); run 11 repeated it
-  again after the corpus nearly doubled to 372 cases and found a comparable gap (+0.07) - see runs 7,
-  8, 10, and 11's rows below. Model choice, corpus size/composition, and specific entry defects are
-  all now demonstrated confounds; a third model (mid-tier, or a different vendor) is still the
-  obvious next test, and it should be run against a fixed, unchanging corpus and guidance snapshot if
-  the goal is to isolate the model variable cleanly. Run 9 (Sonnet 5 on the full corpus) at least
-  confirms Sonnet's own saturation is stable across both corpus size and the guidance fixes.
+- **`no_harm` is scored against the stated contract where a case has one.** `scripts/blind.py`
+  copies `must_preserve` into the blinded header as `Contract to preserve:` - never `trap` or
+  `origin`, which would reveal the intended wrong fix. The 274 cases without a contract are scored
+  against the judges' own reading of what the original preserved, and that is where judges split
+  most: 51 of 372 unguided and 64 of 372 guided write-ups in run 17 had a `no_harm` split, about
+  half of them the disclosed-narrowing gray zone the rubric pin was added for.
+- **The rubric and the entries disagree on allowlists.** The pin scores an added allowlist as
+  narrowing unless the contract calls for it; the CWE-77, 78 and 90 entries prescribe allowlists
+  beside the API fix. Ten of the guided arm's unanimous `no_harm` misses in run 17 are that shape.
+  Open - see HARNESS.md Step 5.
+- **A judge's self-reported "reproduced" is not independently verified.** A fresh panel once
+  unanimously reversed a correct technical read while citing its own reproduction; direct
+  reproduction showed the original panel right. Treat a judge's reproduction claim as provisional
+  before it changes an entry - see HARNESS.md's **Things that have gone wrong before**.
+- **Fixes are built, not executed.** Fixtures parse and type-check (`scripts/parsecheck.py`,
+  `scripts/compilecheck.py`, in CI and the pre-commit hook) and `scripts/fixgate.py` builds every
+  fix against its fixture, which catches the invented-name and missing-import bucket at no token
+  cost (16 of 372 unguided and 18 of 372 guided in run 17). Nothing runs a fix: one that builds
+  and does the wrong thing, or closes the sink and breaks the contract, is still the judges' to
+  see. Nine fixtures are unchecked (Web Forms, JSP, Blazor, JSX, a native binding), and the gate
+  reflects one dependency environment per language.
+- **One model.** The current corpus and format have been measured on Haiku 4.5 only. Sonnet 5
+  saturated `fix_quality` on earlier corpora (records in git history before the run-17 boundary),
+  so it cannot show a guidance effect on that axis; its `no_harm` under the current judging is
+  unmeasured. A Sonnet run needs its own frozen unguided sample.
 
-## Past runs
+## Runs
+
+Run 17 is the current baseline and the frozen unguided control for later runs. Runs 1-16 - the
+records, scores and results files - were removed at the run-17 format boundary, because the
+current corpus, judging and write-up format no longer share a scale with them; they remain in this
+repository's git history before that commit, and HARNESS.md keeps the lessons they taught.
 
 | Run | Corpus | Runs | Question | Headline | Results |
 |---|---|---|---|---|---|
-| 1 | 16 OWASP Benchmark cases (Java) | 48 (16 x 3 arms) | Does the knowledge base beat the bare model? | Every run scored max on vulnerability-removed - the corpus was too easy to discriminate any arm. The only signal: guidance made one CWE-78 fix worse by over-deleting a feature | [RESULTS.md](RESULTS.md) |
-| 2 | +17 Juliet cases (Java, chain depth 2-5, plus false positives) | 34 (17 x 2 arms) | Does multi-file taint tracing need the skill? | No - both arms traced five-file chains and declined every false positive perfectly. `no_harm` was the only criterion with variance, and it cut both ways: helped on CWE-90/601, hurt on CWE-78 | [RESULTS-v2.md](RESULTS-v2.md) |
-| 3 | Same 17 Juliet cases, re-judged, plus a fresh B2 | 51 (17 x 3 sets) | Did the sink-contract fix (SKILL.md Step 4/5) address run 2's harm? | Yes - `no_harm` on true positives rose from 1.25 (A) / 1.67 (B, before) to 1.92 (B2, after); CWE-601's URI-fragment preservation is a clean, unconfounded before/after | [RESULTS-v3.md](RESULTS-v3.md) |
-| 4 | +10 `authored-from-docs-pitfall` cases | 20 (10 x 2 arms) | Do the deliberately-planted "plausible but wrong" fixes actually catch anything? | Mostly no (19/20 at ceiling on `fix_quality`) - but the one that did (CWE-117) confirmed a repeatable defect shape: guidance that leads with an infrastructure/config change over the sink-level fix | [RESULTS-v4.md](RESULTS-v4.md) |
-| 5 | 79 `authored` cases (breadth + depth campaigns, 14 CWEs x 7 languages) | 158 (79 x 2 arms) | Does the knowledge base still help on the ordinary, undramatic, single-file case at this scale? | `fix_quality` saturated again (156/158 at ceiling); `no_harm` favoured the guided arm on a low-disagreement measurement (1.97 A vs 2.00 B); found one new, reproducible entry gap - `cwe/434/go` doesn't warn that a renamed upload needs the read path updated too, and both arms independently shipped that break | [RESULTS-v5.md](RESULTS-v5.md) |
-| 6 | Last 3 `authored-from-docs-pitfall` cases | 6 (3 x 2 arms) | Do the last three planted traps catch anything run 4 didn't already find? | No (12/13 across runs 4 and 6 at ceiling on `fix_quality`), but two unplanned findings: guidance gave the technically correct exploitability read on a contested PHP/libxml question two judges reproduced, and the `no_harm` disclosure gap cuts against honest incompleteness even harder than it cuts against declared scope creep | [RESULTS-v6.md](RESULTS-v6.md) |
-| 7 | Run 5's identical 79 cases, arms on Haiku 4.5 instead of Sonnet 5 (judges stayed on Sonnet 5) | 158 (79 x 2 arms) | Does run 5's `fix_quality` saturation hold on a smaller model? | No - real gap (1.84 A / 1.97 B), concentrated in CWE-90 (+0.89) and CWE-117 (+0.75). Mechanism verified directly, not from judge notes: the ungoverned arm called `ldap3`/`ldapjs` functions that do not exist (confirmed against the real packages); the guided arm, reading the entry's named APIs, did not | [RESULTS-v7.md](RESULTS-v7.md) |
-| 8 | Full 203-case corpus (grown from run 7's 79), same Haiku-4.5-vs-Sonnet-5 pairing | 406 (203 x 2 arms) | Does run 7's Haiku `fix_quality` gap hold once the corpus nearly triples and adds deliberate wrong-fix traps? | No - collapses to a near-tie (1.86 A / 1.86 B); `no_harm` now slightly favours *no* guidance (1.86 A / 1.80 B). Traced three guidance defects the harder corpus exposed and both arms' actual generated code (or Microsoft's own docs) confirmed directly: `cwe/90/java` omitted that `DirContext.search()`'s `filterArgs` overload requires a `SearchControls` argument (guided arm's fix didn't compile in 3/4 CWE-90 multi-file cases); `cwe/117/javascript` named Unicode code points without their JS escape syntax (guided arm pasted raw control characters into a regex literal, a `SyntaxError`); `cwe/352/csharp` didn't note that `app.UseAntiforgery()` never validates a JSON-bound minimal API endpoint, which both arms independently missed on the same case. All three fixed | [RESULTS-v8.md](RESULTS-v8.md) |
-| 9 | Full 203-case corpus, Sonnet 5 for both arms (first Sonnet pass at this scale) | 406 (203 x 2 arms) | Does run 5's Sonnet-5 saturation hold on the full, harder corpus, after run 8's fixes? | Yes - `fix_quality` saturates again (1.98 A / 1.98 B), `no_harm` keeps its small guided edge (1.88 A / 1.91 B), replicating run 5's pattern at more than twice the scale | [RESULTS-v9.md](RESULTS-v9.md) |
-| 10 | Run 8's identical 203-case corpus, Haiku 4.5 for both arms (direct before/after on run 8's three fixes) | 406 (203 x 2 arms) | Did run 8's three guidance fixes actually work? | Mostly - a small `fix_quality` gap reopens (1.85 A / 1.90 B). Verified case-by-case, not just in aggregate: all three previously-broken CWE-90 Java cases now score a clean 2.00/2.00 for the guided arm (up from 0.67), and the CWE-352/csharp case rose to 2.00/1.67 while the unguided arm - unaffected by the fix - stayed poor on the same case. The CWE-117/javascript fix only partially held: Haiku pasted a raw Unicode character into fresh code again, independent of the (now-correct) guidance text - a model execution slip, not a remaining documentation gap | [RESULTS-v10.md](RESULTS-v10.md) |
-| 11 | Full 372-case corpus (grown from run 10's 203 via ongoing breadth/depth campaigns), Haiku 4.5 for both arms | 744 (372 x 2 arms) | Does the Haiku `fix_quality` gap hold at nearly double the corpus size? | Yes, comparably - +0.07 (1.82 A / 1.89 B), between run 10's +0.05 and run 7's original +0.13; `no_harm` stays flat/slightly negative for the guided arm (1.81 A / 1.79 B), same as runs 8 and 10. CWE-94 and CWE-90 show guidance's clearest wins, concentrated in cases needing an architectural fix (sandbox/remove a dynamic-execution engine) rather than a local patch. New finding: a reproducible, cross-language (java/php/go) `no_harm` pattern where guided CWE-502 fixes swap wire format (gob/PHP-serialize -> JSON) without fully disclosing the breaking change - flagged for follow-up, not yet fixed | [RESULTS-v11.md](RESULTS-v11.md) |
-| 12 | The 47 cases in the 15 `(cwe, language)` slots whose entries run 11's findings led to editing; run 11's own outputs for them (pre) re-judged alongside fresh post-edit Haiku 4.5 runs, all four sets in one blind pool; first run with `must_preserve` in the judge header | 188 (47 x 4 sets) | Did the eight guidance edits close the cases they were written for? | Mostly - 9 of 13 targeted cases went to a clean 2.00/2.00 for the guided arm, with judge notes naming the mechanism each edit added (`setObjectInputFilter` per stream, `allowed_classes`, the fastify hook, the length-first bounds check); guided arm 1.76/1.40 -> 1.93/1.65 on the subset. The unguided control moved -0.08/-0.24 with nothing changed, so aggregate movement of +-0.2 on 47 cases is resampling noise and only the case-level trace counts. Two residuals are model tendency, not guidance: Haiku quoted the new Thymeleaf sanitizer bullet and still shipped `th:text`, and turned the CSRF confirmation page into a JSON message on a JSON API. One edit overshot (`CartLegacySerializedMigration` swung from silent JSON data loss to ignoring migrated rows) - sharpened after the run, untested | [RESULTS-v12.md](RESULTS-v12.md) |
-| 13 | Run 11's identical 372-case corpus, Haiku 4.5 for both arms, after the twelve entry edits from runs 11-12; first full-corpus run judged with `must_preserve` in the header | 744 (372 x 2 arms) | Do the run-11/12 edits hold corpus-wide, and what does the contract header do at scale? | The gap widens slightly to +0.09 fix (1.79 A / 1.88 B) and `no_harm` turns level (1.76 A / 1.77 B, from -0.02). The movement is where the edits were: on the 47 edited-slot cases the guided arm went 1.76/1.57 -> 1.90/1.82 (clean 24 -> 32/47) while the unguided arm stayed flat on fix and fell on no_harm; on the 325 untouched cases both arms drifted down together by the same amount, which is panel and sample noise, not guidance. 11 of the 13 run-11 targets are now clean or near it, including the Thymeleaf sanitizer case that run 12 called model tendency - it followed the guidance this time, which says stochastic rather than refused. The contract header cut the unguided arm's `no_harm` on contract-bearing cases from 1.83 to 1.56 while the guided arm held at 1.72: once judges score the stated contract, guidance's `no_harm` edge on the hardest cases appears for the first time on Haiku | [RESULTS-v13.md](RESULTS-v13.md) |
-| 14 | The 14 cases in the four slots edited after run 13 (`90/javascript`, `79/python`, `94/python`, `416/c`); run 13's outputs re-judged as pre alongside fresh post-edit Haiku 4.5 runs, one blind pool | 56 (14 x 4 sets) | Do the four run-13 fixes close the cases they were written for? | Yes - three of four targets to a unanimous 2.00/2.00 (`LdapFilterFromQuery` from 0.00/0.00 while the control stayed at 0.00/0.00; the Flask `escape` import and the generation-counter placement likewise), the fourth to 2.00/1.67 on a contract detail outside the entry. Guided arm on the 14: 1.52/1.43 -> 1.98/1.88, clean 7 -> 10; control drifted down again with nothing changed. One new gap noted for `cwe/79/python`: escaping a value that is then compiled by `render_template_string()` does not close SSTI | [RESULTS-v14.md](RESULTS-v14.md) |
-| 15 | Same 372 cases; the run 13 + 14 composite copied in as a frozen unguided control (A) and frozen guided baseline (B-pre), plus a fresh guided Haiku 4.5 sample (B-post) after SKILL.md Step 5 gained an identifier existence self-check; one blind pool, one panel | 1116 (372 x 3 sets) | Does a self-check instruction reduce the invented-name / non-compiling slips that runs 13-14 traced most guided losses to? And what does re-judging frozen text show about the panel? | No effect: B-pre 1.89/1.76 -> B-post 1.89/1.73, clean 262 -> 259, and the target metric is unchanged - 24 cases with a name-slip judge note in A, in B-pre, and in B-post. The run-13 slips closed (`Case08`, `EventBusDanglingObserver`, `LoginFailureLogConcat` all to 2.00/2.00) and the same number of the same shape opened elsewhere (a second `SecurityConfig` class, `getOwner()` on an entity without it, raw U+2028 in a regex literal). 20 of 372 write-ups mention checking a name in either guided set: the instruction was read, not executed. Panel drift isolated for the first time: identical A and B-pre text re-judged moved -0.04/-0.03 and -0.01/-0.02, and the arm gap survives it | [RESULTS-v15.md](RESULTS-v15.md) |
-| 16 | Same 372 cases; frozen A and run 15's guided output as B-pre, plus a fresh guided Haiku 4.5 sample (B-post) after SKILL.md Step 5 was rewritten to run the compiler on a scratch copy of the fix; first run judged from prepared bundles by the restricted `cwe-judge` agent | 1116 (372 x 3 sets) | Does telling the model to run a compiler reduce the invented-name / non-compiling slips? And what does the new judging protocol do to the frozen sets? | No effect: B-pre 1.87/1.67 -> B-post 1.84/1.66, clean 245 -> 241, name-slip cases 24 -> 25. 68 of 372 agents ran any checker, and the two inspected ran it on the wrong artefact (a scratch file never linted; the original case file instead of the fix). The panel change is the larger result: identical frozen text scored 0.05-0.06 lower on no_harm and 14-23 fewer clean, because judges now compile (`php -l`, `dotnet build`, `go doc`, `javac` against real jars) and find errors the reading panel passed - every compile claim quoted was reproduced independently. Per scored write-up the panel costs about 37% of the old protocol. The arm gap survives the protocol change; the absolute level does not | [RESULTS-v16.md](RESULTS-v16.md) |
 | 17 | Same 372 cases; a format boundary - write-ups carry the complete changed files - with fresh unguided (A) and guided (B) Haiku 4.5 samples, no B-pre, and `scripts/fixgate.py` building every fix against its fixture | 744 (372 x 2 sets) | Does the guided fix build, and what does a compile gate find that sixteen judged runs did not? | Gate: 16 of 372 unguided and 18 of 372 guided fixes do not compile (one checker false positive excluded) - the same 4-5% either way, in different shapes: A invents helper methods and leaves Go variables unused, B mis-imports or mis-packages the library the entry names. Four B failures traced to two entries naming a class without its package (`JexlSandbox`, `Encode`), both fixed - the first entry defects found by a compiler rather than a judge. The first pass also showed the superset manifests must carry the libraries the knowledge base recommends: 13 A and 20 B failures were missing packages, not slips, until added. Judged: A 1.80/1.76, B 1.91/1.74, clean 256 -> 263; B ahead on fix_quality for 64 cases and behind on 22; no_harm level, with B's unanimous losses in allowlists the CWE-77/78/90 entries prescribe and the rubric pin scores as narrowing, and in whole-file rewrites that changed something beside the sink. The gate dominates the judges' own compiling (11 unanimous 2.00s were compile errors; no gate-OK write-up drew a compile claim that held), so from run 18 the judges receive the gate line and stop compiling | [RESULTS-v17.md](RESULTS-v17.md) |
