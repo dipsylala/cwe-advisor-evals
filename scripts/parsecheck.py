@@ -164,15 +164,59 @@ def check_cs(files, case_dir):
     return 'FAIL', first_line(out, re.compile('error'))
 
 
+_VSDEVCMD = None
+
+
+def vsdevcmd():
+    """Path to Visual Studio's developer command script, or '' if MSVC's C++ toolset is absent.
+    On a machine without gcc/clang this is how cl.exe and the Windows SDK reach the PATH."""
+    global _VSDEVCMD
+    if _VSDEVCMD is None:
+        _VSDEVCMD = ''
+        vswhere = os.path.join(os.environ.get('ProgramFiles(x86)', r'C:\Program Files (x86)'),
+                               'Microsoft Visual Studio', 'Installer', 'vswhere.exe')
+        if os.path.exists(vswhere):
+            rc, out = run([vswhere, '-latest', '-products', '*', '-requires',
+                           'Microsoft.VisualStudio.Component.VC.Tools.x86.x64', '-find', r'Common7\Tools\VsDevCmd.bat'])
+            if rc == 0 and out.strip():
+                _VSDEVCMD = out.strip().splitlines()[0]
+    return _VSDEVCMD
+
+
+def msvc_syntax_check(files, cpp, cwd):
+    """cl /Zs: parse plus full semantic analysis, no code generation. Returns (rc, output).
+    Goes through a generated batch file: the developer script has to run in the same cmd as cl,
+    and cmd's quoting of a one-line `call ... && cl ...` handed over by subprocess is unreliable."""
+    compat = os.path.join(EVALS, 'stubs', 'c', 'msvc_compat.h')
+    flags = (f'/nologo /Zs /W0 /EHsc /FI"{compat}" /I"{os.path.dirname(compat)}" '
+             + ('/TP /std:c++20' if cpp else '/TC /std:c17'))
+    quoted = ' '.join(f'"{os.path.abspath(f)}"' for f in files)
+    with tempfile.NamedTemporaryFile('w', suffix='.bat', delete=False, encoding='ascii', newline='\r\n') as bat:
+        bat.write('@echo off\n')
+        bat.write(f'call "{vsdevcmd()}" -arch=x64 -no_logo >nul 2>&1\n')
+        bat.write(f'cl {flags} {quoted}\n')
+        bat.write('exit /b %ERRORLEVEL%\n')
+    try:
+        return run(['cmd', '/c', bat.name], cwd=cwd, timeout=300)
+    finally:
+        os.unlink(bat.name)
+
+
 def check_c(files, case_dir, cpp=False):
     cc = shutil.which('clang++' if cpp else 'clang') or shutil.which('g++' if cpp else 'gcc')
-    if not cc:
-        return 'UNCHECKED', 'no C/C++ compiler on PATH'
-    for f in files:
-        rc, out = run([cc, '-fsyntax-only', '-w', f], cwd=case_dir)
+    srcs = [f for f in files if not f.endswith(('.h', '.hpp'))] or files
+    if cc:
+        for f in srcs:
+            rc, out = run([cc, '-fsyntax-only', '-w', f], cwd=case_dir)
+            if rc != 0:
+                return 'FAIL', first_line(out, re.compile('error'))
+        return 'OK', ''
+    if vsdevcmd():
+        rc, out = msvc_syntax_check(srcs, cpp, case_dir)
         if rc != 0:
-            return 'FAIL', first_line(out, re.compile('error'))
-    return 'OK', ''
+            return 'FAIL', first_line(out, re.compile(r'error C\d{4}'))
+        return 'OK', 'msvc /Zs'
+    return 'UNCHECKED', 'no C/C++ compiler on PATH'
 
 
 CHECKERS = {

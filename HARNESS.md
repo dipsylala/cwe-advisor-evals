@@ -93,11 +93,14 @@ resolves every case without per-case manifests: a pom resolved once into a class
 restored once, a `package.json` installed once, a `go.mod`, a `requirements.txt` in an isolated uv
 environment. Classes and modules a fixture references but does not ship (a repository, an entity,
 a config module, Juliet's `testcasesupport`, the Benchmark helpers) are compile-only stand-ins
-under `stubs/<language>/`. Every case resolves: Java 85, C# 51, JavaScript 47, Go 43, Python 52;
-the rest are unchecked because they cannot exist outside their host (two ASP.NET Web Forms
-pages, a JSP, a Blazor component) or because a native binding will not build here (`libxmljs`).
-Seven fixtures needed compile-only edits to get there, recorded under **What a run is**. C and
-C++ have a parse check only.
+under `stubs/<language>/`. Every case resolves: Java 85, C# 51, JavaScript 47, Go 43, Python 52,
+C 22, C++ 19; the rest are unchecked because they cannot exist outside their host (two ASP.NET
+Web Forms pages, a JSP, a Blazor component) or because a native binding will not build here
+(`libxmljs`). Seven fixtures needed compile-only edits to get there, recorded under **What a run
+is**. C and C++ use `gcc`/`clang -fsyntax-only` where present and otherwise MSVC's `cl /Zs` through
+the Visual Studio developer script, with `stubs/c/msvc_compat.h` force-included for the POSIX
+spellings MSVC lacks (`ssize_t`); both are the compiler's full semantic pass. PHP and Perl have
+the parse check only.
 
 What the type check catches is the run-13 to run-16 slip bucket applied to the fixtures - an
 invented method, a missing `using`, a package that does not exist - and it is the floor for

@@ -271,7 +271,37 @@ class PythonChecker:
         return 'OK', ''
 
 
-CHECKERS = {c.lang: c for c in (JavaChecker, CSharpChecker, JsChecker, GoChecker, PythonChecker)}
+# ---------------------------------------------------------------- c / c++
+# A C or C++ fixture is self-contained (no third-party headers across the corpus), so its type
+# check is the compiler's own semantic pass: gcc/clang -fsyntax-only, or MSVC cl /Zs through the
+# developer command script where that is the toolchain present. Shared with parsecheck.py.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import parsecheck  # noqa: E402
+
+
+class CChecker:
+    lang = 'c'
+    cpp = False
+
+    def __init__(self):
+        has_gnu = bool(shutil.which('clang++' if self.cpp else 'clang') or shutil.which('g++' if self.cpp else 'gcc'))
+        self.ok = has_gnu or bool(parsecheck.vsdevcmd())
+        self.note = 'no C/C++ compiler on PATH and no MSVC C++ toolset' if not self.ok else ''
+
+    def check(self, case_dir, key):
+        files = sources(case_dir, '.cpp' if self.cpp else '.c') + sources(case_dir, '.cc' if self.cpp else '.h')
+        files = [f for f in files if f.endswith(('.c', '.cpp', '.cc'))] or files
+        if not files:
+            return 'UNCHECKED', 'no source files'
+        return parsecheck.check_c(files, case_dir, cpp=self.cpp)
+
+
+class CppChecker(CChecker):
+    lang = 'cpp'
+    cpp = True
+
+
+CHECKERS = {c.lang: c for c in (JavaChecker, CSharpChecker, JsChecker, GoChecker, PythonChecker, CChecker, CppChecker)}
 
 
 def main():
