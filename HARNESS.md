@@ -103,8 +103,10 @@ POSIX spellings MSVC lacks (`ssize_t`); both are the compiler's full semantic pa
 at level 2 (unknown classes, functions, methods, properties) with Larastan for the Laravel facades
 and Eloquent models, booted through Orchestra Testbench from a composer superset in `stubs/php`;
 one fixture carries a per-case ignore (`phpstan-ignore.txt`) because the error PHPStan reports,
-the `/e` regex modifier, is the CWE-94 sink the case exists to test. Perl has the parse check
-only.
+the `/e` regex modifier, is the CWE-94 sink the case exists to test. Perl has no static type
+checker; its four fixtures compile fully under `perl -c` with a compile-only `CGI.pm` in
+`stubs/perl/lib` (without it `perl -c` stops at `use CGI;` and the rest of the file goes unread),
+and `use strict` catches undeclared variables at that stage. That is the ceiling for Perl.
 
 What the type check catches is the run-13 to run-16 slip bucket applied to the fixtures - an
 invented method, a missing `using`, a package that does not exist - and it is the floor for

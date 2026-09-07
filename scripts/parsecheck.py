@@ -10,8 +10,9 @@ Per language:
     javascript  node --check
     python      py_compile under this interpreter
     go          gofmt -e (parse only)
-    perl        perl -c; "Can't locate X.pm" is a missing module and passes, because perl -c stops at
-                the first BEGIN failure and any syntax error before it is still reported
+    perl        perl -c with stubs/perl/lib on @INC (a compile-only CGI.pm) and the case directory
+                for its own .pm files, so the whole file compiles rather than stopping at the
+                first module perl -c cannot load
     java        javac on the case directory with no classpath; an error is a syntax failure unless
                 it is a resolution error ("package X does not exist", "cannot find symbol", and the
                 "does not override a method from a supertype" that an unresolved superclass causes)
@@ -115,17 +116,17 @@ def check_go(files, case_dir):
 
 
 def check_perl(files, case_dir):
-    unresolved = 0
+    # perl -c stops at the first `use` it cannot load, so a missing module would leave the rest of
+    # the file unchecked. Modules the fixtures use but do not ship are compile-only stand-ins under
+    # stubs/perl/lib; case-local .pm files resolve from the case directory. There is no static
+    # type checker for Perl, so this compile phase (with `use strict` catching undeclared
+    # variables) is the ceiling.
+    stub_lib = os.path.join(EVALS, 'stubs', 'perl', 'lib')
     for f in files:
-        rc, out = run(['perl', '-c', f], cwd=case_dir)
+        rc, out = run(['perl', '-I', stub_lib, '-I', case_dir, '-c', f], cwd=case_dir)
         if rc != 0:
-            if re.search(r'syntax error|Unmatched|Missing right curly|Bareword found where', out):
-                return 'FAIL', first_line(out, re.compile('syntax error|Unmatched|Missing|Bareword'))
-            if "Can't locate" in out:
-                unresolved += 1
-                continue
-            return 'FAIL', first_line(out)
-    return 'OK', f'{unresolved} file(s) stop at a missing module (no CPAN)' if unresolved else ''
+            return 'FAIL', first_line(out, re.compile("syntax error|Unmatched|Missing|Bareword|Can't locate|Global symbol"))
+    return 'OK', ''
 
 
 def check_java(files, case_dir):
