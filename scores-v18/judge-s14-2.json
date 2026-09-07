@@ -1,0 +1,14 @@
+{
+  "R284": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist maps to the two functions actually defined in the file; matches legitimate commands exactly, no restriction on legitimate use."},
+  "R285": {"fix_quality": 2, "no_harm": 2, "note": "Replaces format(param,obj) with escapeHtml4-then-write; stated change, still echoes Referer text, no restriction on legitimate use."},
+  "R286": {"fix_quality": 2, "no_harm": 0, "note": "Allowlist fully closes the injection vector, but maps to handleStatus/handleHelp/handleInfo, none of which are defined anywhere in the case (only file in the call chain); every dispatch now fatals on an undefined function call, silently breaking all legitimate use."},
+  "R287": {"fix_quality": 2, "no_harm": 2, "note": "Scopes listInvoices via existing findByOwnerUsername(authentication.getName()), matches the stated contract exactly."},
+  "R288": {"fix_quality": 2, "no_harm": 2, "note": "Adds proper PasswordEncoder.matches check plus dummy-hash timing mitigation; new PasswordEncoder constructor dependency is plainly shown in the fix, not hidden."},
+  "R289": {"fix_quality": 2, "no_harm": 2, "note": "Removes the incidental shell-out entirely and echoes the input directly, matching the file's sole purpose; change is stated plainly."},
+  "R290": {"fix_quality": 2, "no_harm": 2, "note": "filepath.IsLocal correctly rejects absolute/.. entries before path construction; legitimate relative entries unaffected (explanation overstates symlink coverage, but that's a documentation nuance, not a functional defect)."},
+  "R291": {"fix_quality": 2, "no_harm": 2, "note": "Replaces Math.random() with SecureRandom-backed 128-bit token, base64-url encoded; cookie value format changes but remains a valid opaque token, disclosed."},
+  "R292": {"fix_quality": 1, "no_harm": 2, "note": "Switching to exec(String[]) closes injection on the /bin/ls branch, but the Windows branch still invokes cmd.exe /c, which re-parses its own command line and honors shell metacharacters (&, |, etc.) regardless of Java's argv separation, so injection remains live there."},
+  "R293": {"fix_quality": 2, "no_harm": 2, "note": "Replaces format(...) sink with OWASP Encode.forHtml() before writing; standard, appropriate encoder for this sink, no restriction on legitimate use."},
+  "R294": {"fix_quality": 2, "no_harm": 2, "note": "Adds the POSIX `--` end-of-options marker before filenames, matching the stated contract precisely: all normal filenames still archived, leading-dash names treated as literal operands."},
+  "R295": {"fix_quality": 2, "no_harm": 2, "note": "Allowlists the executable to ping/traceroute/nslookup/dig, matching the handler's documented scope of a handful of diagnostic tools; no legitimate tool excluded."}
+}

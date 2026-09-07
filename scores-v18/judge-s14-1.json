@@ -1,0 +1,14 @@
+{
+  "R284": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist maps to the only two functions actually defined in the file, preserving zero-arg dispatch semantics; clean."},
+  "R285": {"fix_quality": 2, "no_harm": 2, "note": "Replaces format()-as-sink with escapeHtml4()+write(), standard output encoding, no legitimate-use regression."},
+  "R286": {"fix_quality": 2, "no_harm": 0, "note": "Whitelist correctly restricts call_user_func_array, but maps to handleStatus/handleHelp/handleInfo which are never defined anywhere in the case, so every whitelisted command now fatals with an undefined-function error; not disclosed."},
+  "R287": {"fix_quality": 2, "no_harm": 2, "note": "Mirrors the sibling getInvoice() ownership-scoping pattern exactly per stated contract, using the already-existing findByOwnerUsername()."},
+  "R288": {"fix_quality": 2, "no_harm": 2, "note": "Adds PasswordEncoder.matches() verification plus a disclosed timing-attack mitigation; the added dependency is the fix itself, not an incidental restriction."},
+  "R289": {"fix_quality": 2, "no_harm": 0, "note": "Eliminates the shell exec (valid CWE-78 strategy) but writes raw untrusted param directly into the text/html response with no encoding, introducing reflected XSS not mentioned in the write-up."},
+  "R290": {"fix_quality": 2, "no_harm": 2, "note": "filepath.IsLocal() is the idiomatic Go 1.20+ Zip Slip guard; rejects only escaping/absolute entries, legitimate relative entries unaffected."},
+  "R291": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom-backed 128-bit token is internally consistent (same code sets and reads it), no external format contract broken."},
+  "R292": {"fix_quality": 2, "no_harm": 2, "note": "Standard exec(String[]) fix for the reported string-concatenation sink; treating data as one literal argument is the intended, disclosed effect of the fix."},
+  "R293": {"fix_quality": 2, "no_harm": 2, "note": "OWASP Encoder forHtml() + println() cleanly replaces the format()-as-sink pattern; correct and unrestrictive."},
+  "R294": {"fix_quality": 2, "no_harm": 2, "note": "Adds the '--' separator exactly as the stated contract requires; filenames not starting with '-' are archived unchanged."},
+  "R295": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist of ping/traceroute/nslookup/dig matches the handler's own doc comment describing 'a handful of diagnostic utilities'; no legitimate tool excluded."}
+}

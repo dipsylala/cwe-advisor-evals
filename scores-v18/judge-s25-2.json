@@ -1,0 +1,14 @@
+{
+  "R421": {"fix_quality": 2, "no_harm": 2, "note": "Filename validated as a single path component (no separators, no '.'/'..'), matching the documented 'no subdirectories' contract; traversal is closed and containment check retained."},
+  "R422": {"fix_quality": 2, "no_harm": 2, "note": "Checks verify() return value and rejects with 401 on failure; only invalid signatures are now rejected, no restriction on legitimate valid tokens."},
+  "R423": {"fix_quality": 0, "no_harm": 1, "note": "Build FAILS (javax.imageio.BufferedImage does not exist); also silently discards the client filename entirely and imposes a MIME allowlist, a stated but real restriction on previously-accepted file types."},
+  "R424": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom-based 128-bit token replaces java.util.Random; token format changes but is only ever compared internally, no external contract broken."},
+  "R425": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() applied to both fallback args, matching the primary path's pattern; substituting $source for $requestedName restores consistency with the already-basenamed source path rather than adding a new restriction, and is disclosed."},
+  "R426": {"fix_quality": 2, "no_harm": 2, "note": "escape_filter_chars() from ldap3.utils.conv correctly neutralizes LDAP metacharacters without rejecting any input."},
+  "R427": {"fix_quality": 2, "no_harm": 1, "note": "ProcessBuilder array form closes the shell injection, but adds an undisclosed-as-contract restriction rejecting any data starting with '-', which could reject a legitimate directory name/argument the original accepted."},
+  "R428": {"fix_quality": 2, "no_harm": 2, "note": "Switches to JNDI parameterized filterArgs search, correctly separating filter structure from data; added default SearchControls() is a reasonable, disclosed necessity of the safe overload."},
+  "R429": {"fix_quality": 2, "no_harm": 2, "note": "OWASP Java HTML Sanitizer (FORMATTING+BLOCKS) applied before template render; sanitized output for the sample content is unchanged, matching the contract of preserving plain text and allowlisted rich-text tags."},
+  "R430": {"fix_quality": 2, "no_harm": 2, "note": "Fully parameterizes both filter placeholders ({0} uid, {1} street) via filterArgs, correcting the original's partial/mixed use of concatenation and templating without altering search semantics."},
+  "R431": {"fix_quality": 2, "no_harm": 2, "note": "Filename allowlist regex matches AvatarStorage's actual UUID+extension output; Content-Disposition/nosniff headers are disclosed hardening that does not affect embedded <img> rendering or byte content, consistent with the contract."},
+  "R432": {"fix_quality": 2, "no_harm": 2, "note": "Array-form proc_open() bypasses the shell entirely, closing the injection with no added restriction on the search term and unchanged error handling/output shape."}
+}

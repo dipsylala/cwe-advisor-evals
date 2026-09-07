@@ -1,0 +1,62 @@
+{
+  "R334": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Eliminates shell exec via Files.newDirectoryStream, but adds an undisclosed-as-tradeoff blunt string check (rejects any occurrence of \"..\" or a leading slash) that can reject benign filenames (e.g. containing literal \"..\" substring) and forecloses absolute-path use the original (insecurely) allowed, with no stated contract calling for that restriction."
+  },
+  "R335": {
+    "fix_quality": 1,
+    "no_harm": 0,
+    "note": "Case's own Javadoc states the SPA must read the CSRF cookie via JavaScript (the documented, framework-recommended withHttpOnlyFalse pattern for SPA clients); flipping to the default HttpOnly=true cookie breaks that architecture entirely, and the write-up incorrectly claims the fix 'preserves the SPA's ability to perform CSRF token exchange' while no replacement endpoint/header is actually implemented in the code."
+  },
+  "R336": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Canonicalizes both base and requested path via toRealPath() and checks containment with startsWith, closing traversal without a character allowlist that could reject legitimate relative filenames."
+  },
+  "R337": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Correctly moves the mutation off GET to a CSRF-protected POST (the standard fix), but this necessarily breaks the documented 'simple link, no JS form needed' convenience GET behavior for existing callers; the write-up states this openly."
+  },
+  "R338": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Removes shell invocation via argument-array exec.Command (closes CWE-78), but also adds a strict character allowlist for the target host that was not present before and could reject legitimate hostnames (e.g. containing underscores), an added restriction beyond what the sink required."
+  },
+  "R339": {
+    "fix_quality": 0,
+    "no_harm": 0,
+    "note": "Build FAILS (parseSignedClaims is not present on jjwt 0.11.5's parser API, per the case's own pinned dependency comment), so the endpoint would not compile or run at all; the write-up does not flag this incompatibility."
+  },
+  "R340": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Removes shell invocation via argument-array exec.Command (closes CWE-78), but adds a hostname/IP allowlist regex that was not previously required and could reject some legitimate hostnames, an added restriction beyond the sink's minimal fix."
+  },
+  "R341": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Canonicalizes via Path.GetFullPath and verifies containment with Path.GetRelativePath, closing traversal without an overly-broad character allowlist; legitimate relative filenames within the base dir are unaffected."
+  },
+  "R342": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "spawnSync with an argument array closes the shell injection correctly, but the write-up claims the added error handling 'returns a 500 error if generation fails' when it only checks result.error (spawn-launch failures) and not a non-zero exit status, so a failed convert (e.g. bad image/geometry) silently reports success -- a dropped-error-handling regression not accurately disclosed."
+  },
+  "R343": {
+    "fix_quality": 1,
+    "no_harm": 2,
+    "note": "Removing sh -c stops shell-metacharacter injection and preserves the stated contract (text/plain, 400/500 codes, ctx cancellation) exactly, but archiveName still reaches tar unvalidated and a leading '--' can be parsed as a GNU tar option (e.g. --checkpoint-action=exec=...), leaving a known argument-injection route to command execution open."
+  },
+  "R344": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "HTML-entity-encodes both user-controlled fields with Apache Commons Lang3's escapeHtml4 at the point of output, closing the XSS sink without altering legitimate content rendering."
+  },
+  "R345": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Removes the attacker-controlled header value from the exec's environment-variable array entirely; that value had no other legitimate use in the code, so no functionality is lost."
+  }
+}

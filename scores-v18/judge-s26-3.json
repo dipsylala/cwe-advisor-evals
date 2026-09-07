@@ -1,0 +1,14 @@
+{
+  "R433": {"fix_quality": 2, "no_harm": 1, "note": "Correct parameterized DirContext.search(name, filter, filterArgs, cons) closes the injection, but the unmatched-result branch now silently prints the literal \"{0}\" template instead of the actual query text - an unstated display change."},
+  "R434": {"fix_quality": 2, "no_harm": 2, "note": "Removes the CSRF exemption exactly as the stated contract requires; nothing else changes."},
+  "R435": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom + base64url token generation is the right API; token format necessarily changes but nothing else in the flow does."},
+  "R436": {"fix_quality": 2, "no_harm": 2, "note": "ArgumentList to ping.exe with no shell closes the vector cleanly; output/behaviour otherwise preserved."},
+  "R437": {"fix_quality": 2, "no_harm": 1, "note": "InetAddress-based reachability check eliminates command execution per the repo's own CWE-78 guidance, but adds a new count-range restriction (clamps to 1-10, silently defaults invalid/out-of-range values to 1) not present in the original."},
+  "R438": {"fix_quality": 2, "no_harm": 2, "note": "Encode.forHtml() on both fields at the sink, output-escaping only, no other behaviour change."},
+  "R439": {"fix_quality": 2, "no_harm": 2, "note": "Generic error message replaces exception detail; status code and success path unchanged."},
+  "R440": {"fix_quality": 2, "no_harm": 2, "note": "Narrows CSRF exemption to /api/webhooks/** matching the existing authorization rule and code comments; nothing else changes."},
+  "R441": {"fix_quality": 2, "no_harm": 1, "note": "exec.CommandContext with argument array closes shell injection and correctly also blocks leading-\"-\" flag injection, but the added hostname character allowlist (alnum/dot/hyphen only) is a new restriction beyond that, not required by any stated contract, that could reject valid hostnames the original accepted."},
+  "R442": {"fix_quality": 1, "no_harm": 2, "note": "Verified with a real JDK test: the Unix branch (array exec to /bin/ls) is fixed, but the Windows branch still shells out via cmd.exe /c, and a double-quote breakout in `data` (e.g. `foo\" & echo INJECTED & \"`) still achieves command injection - the vector is not actually closed on Windows."},
+  "R443": {"fix_quality": 2, "no_harm": 2, "note": "th:utext to th:text restores Thymeleaf's default HTML escaping, the correct API for this sink."},
+  "R444": {"fix_quality": 2, "no_harm": 1, "note": "ldap3's own escape_filter_chars() is the correct, sufficient fix; the added allowlist regex is an extra, unrequired restriction that could reject valid usernames."}
+}

@@ -1,0 +1,14 @@
+{
+  "R220": {"fix_quality": 2, "no_harm": 2, "note": "IsPathRooted pre-check plus GetFullPath/GetRelativePath containment check correctly blocks the Path.Combine absolute-override bypass and traversal while leaving in-root access unchanged."},
+  "R221": {"fix_quality": 2, "no_harm": 2, "note": "Adds Authentication param and swaps findAll() for the existing findByOwnerUsername(), matching the stated contract exactly with no other behavior change."},
+  "R222": {"fix_quality": 2, "no_harm": 2, "note": "Rejects only CR/LF in the reply-to/recipient/subject fields at the SMTP sink, closing header/command injection without restricting legitimate single-line values."},
+  "R223": {"fix_quality": 2, "no_harm": 1, "note": "execFile plus the CRLF-safe allowlist closes injection, but the new ^[a-zA-Z0-9_-]+$ regex on reportName is a restriction absent from the original (which only checked non-empty) and could reject legitimate report names with spaces/punctuation; disclosed in the write-up so scores 1 not 0."},
+  "R224": {"fix_quality": 2, "no_harm": 2, "note": "Reads and checks real magic bytes against the declared content type before storing; genuine PNG/JPEG uploads are unaffected."},
+  "R225": {"fix_quality": 2, "no_harm": 2, "note": "SimpleEvaluationContext.forReadOnlyDataBinding() blocks method/type/constructor access while still permitting property access and arithmetic operators, matching the stated contract precisely."},
+  "R226": {"fix_quality": 2, "no_harm": 2, "note": "Apache Tika content sniffing replaces trusted header, and UUID-based storage naming matches the contract's 'server-generated name' requirement; unsupported types rejected before storage."},
+  "R227": {"fix_quality": 2, "no_harm": 2, "note": "OWASP Encoder Encode.forHtml() at the sink HTML-encodes output without altering legitimate rendering; new library dependency is disclosed for SCA follow-up."},
+  "R228": {"fix_quality": 2, "no_harm": 2, "note": "Uses JNDI's parameterized filterArgs search overload, the correct RFC4515-escaping mechanism for this sink; explicit new SearchControls() preserves the same default behavior as the original null-cons call."},
+  "R229": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILs: SpaCsrfTokenRequestHandler is not an actual Spring Security built-in (Spring's own SPA docs present it as sample code a developer must implement), so the import doesn't resolve and the whole app fails to compile."},
+  "R230": {"fix_quality": 2, "no_harm": 2, "note": "Eliminates the shell entirely via Files.newDirectoryStream; the added directory-exists/is-directory checks are appropriate to the listing semantics rather than an arbitrary new restriction."},
+  "R231": {"fix_quality": 2, "no_harm": 2, "note": "Per-stream ObjectInputFilter allowlist (OrderEvent + java.base + java.util, deny rest) preserves native serialization format per the stated contract while blocking gadget classes."}
+}

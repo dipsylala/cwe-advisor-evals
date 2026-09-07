@@ -1,0 +1,17 @@
+{
+  "R101": {"fix_quality": 2, "no_harm": 2, "note": "Correct JNDI parameterized search(filterArgs) API escapes per RFC4515; explicit new SearchControls() matches JNDI's documented default-on-null behavior, so no observable change."},
+  "R102": {"fix_quality": 2, "no_harm": 2, "note": "path.basename() correctly confines require() to the flat ./plugins/ directory the comment describes, without rejecting any legitimate flat plugin name."},
+  "R103": {"fix_quality": 2, "no_harm": 2, "note": "RFC4515-correct hex-escaping of *()\\ and NUL closes the injection while leaving normal usernames unchanged."},
+  "R104": {"fix_quality": 2, "no_harm": 1, "note": "Closes injection via archive/tar with no shell; ctx parameter is now unused, silently dropping the request-cancellation behavior the stated contract explicitly requires be preserved."},
+  "R105": {"fix_quality": 2, "no_harm": 1, "note": "Eliminates process execution as intended, but wholesale replaces the response body with a custom-formatted ping report instead of the original PowerShell Test-Connection output - a disclosed but substantial change to observable output."},
+  "R106": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom correctly replaces the seedable PRNG; unused seed-parsing line is leftover but behaves identically to the original in that respect."},
+  "R107": {"fix_quality": 2, "no_harm": 2, "note": "Canonical @Lazy self-injection routes the call through the AOP proxy so the pre-existing (not newly added) @PreAuthorize check is finally enforced, the standard fix for this exact bypass pattern."},
+  "R108": {"fix_quality": 2, "no_harm": 2, "note": "Express's documented root option on sendFile correctly bounds the path and behaves identically for legitimate filenames."},
+  "R109": {"fix_quality": 2, "no_harm": 2, "note": "execFile('whois', [domain]) with a real native binary avoids shell reparsing; residual leading-dash flag-injection risk is unchanged from the original (concatenated the same way), not newly introduced."},
+  "R110": {"fix_quality": 2, "no_harm": 2, "note": "@EnableMethodSecurity correctly activates the pre-existing @PreAuthorize checks; no scope beyond what was already declared."},
+  "R111": {"fix_quality": 2, "no_harm": 2, "note": "Narrowing supports() to ApiKeyAuthenticationToken matches exactly the provider's stated design intent in the file's own header comment."},
+  "R112": {"fix_quality": 0, "no_harm": 2, "note": "Verified by reproducing the exact PowerShell invocation: -ArgumentList after -Command does not populate $args and the injected payload (e.g. '; Write-Output INJECTED') still executes - the vector is not closed."},
+  "R113": {"fix_quality": 0, "no_harm": 2, "note": "Verified by reproducing the exact execFile('cmd.exe',['/c',scriptPath,reportName]) call: a quote-breakout payload still executes arbitrary commands (confirmed whoami ran) because cmd.exe re-parses its own command line for .bat targets regardless of Node's argument array."},
+  "R114": {"fix_quality": 2, "no_harm": 2, "note": "Replaces GroovyShell with a deny-by-default JexlSandbox and newInstance(false), the standard sandboxing approach for commons-jexl; documented arithmetic-only formulas still evaluate, exception fallback to basePrice preserved."},
+  "R115": {"fix_quality": 2, "no_harm": 1, "note": "Fully removes process execution via java.nio.file, but adds a new rejection of absolute paths and '..' that the original unrestricted exec-based listing did not have, disclosed but not called for by any stated contract."}
+}

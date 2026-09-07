@@ -1,0 +1,14 @@
+{
+  "R246": {"fix_quality": 2, "no_harm": 2, "note": "parseClaimsJwt -> parseClaimsJws with a signing key correctly enforces signature verification; the new required secretKey constructor param is disclosed and inherent to the fix."},
+  "R247": {"fix_quality": 2, "no_harm": 2, "note": "@PreAuthorize with an ownership-checking security bean gates delete before it runs; owner path still returns 204, non-owner/non-existent both denied uniformly per contract."},
+  "R248": {"fix_quality": 2, "no_harm": 2, "note": "os.Lstat + IsRegular() correctly rejects symlinks/non-regular files while regular in-directory files still pass, matching the stated contract exactly."},
+  "R249": {"fix_quality": 2, "no_harm": 2, "note": "realpath() canonicalization plus separator-aware prefix check correctly resolves symlinks/traversal and preserves legitimate report reads."},
+  "R250": {"fix_quality": 2, "no_harm": 2, "note": "shell=True string replaced with shell=False argument list; input_path is always prefixed by a fixed dir so leading-dash flag injection isn't reachable."},
+  "R251": {"fix_quality": 1, "no_harm": 2, "note": "escaping only covers backslash/quote, not raw CR/LF; Redis's inline reader finds the first bare \\n before quote parsing, so an injected CRLF still breaks the line (protocol error/connection reset) rather than being safely embedded as the write-up claims - wrong shape for this sink, should escape \\r/\\n or use a real client library."},
+  "R252": {"fix_quality": 2, "no_harm": 2, "note": "Random(seed) replaced with unseeded SecureRandom; endpoint still requires the (now-unused) seed param, preserving the external contract."},
+  "R253": {"fix_quality": 2, "no_harm": 2, "note": "Math.random() replaced with SecureRandom-derived 128-bit hex token; format change from decimal digits to hex is internal/self-consistent and doesn't affect legitimate use."},
+  "R254": {"fix_quality": 2, "no_harm": 2, "note": "os.system() replaced with subprocess.run(list) redirecting stdout/stderr to the same log file, faithfully reproducing original redirection behavior."},
+  "R255": {"fix_quality": 0, "no_harm": 0, "note": "Build FAIL (missing AccessDeniedException import); code also calls order.getUserId(), a method that doesn't exist on the real Order class (only getCustomerUsername()), so the fix is non-functional and presented as working without disclosure."},
+  "R256": {"fix_quality": 2, "no_harm": 1, "note": "ArgumentList alone doesn't stop cmd.exe's own metacharacter re-interpretation for a .bat target, so the added regex allowlist is doing real work here, but restricting reportName to [a-zA-Z0-9_-] could reject legitimate report names (spaces, dots) with no stated contract requiring that restriction."},
+  "R257": {"fix_quality": 2, "no_harm": 2, "note": "Standard zip-slip fix: absolute base dir plus separator-aware containment check before every file/dir creation; legitimate in-tree entries unaffected."}
+}

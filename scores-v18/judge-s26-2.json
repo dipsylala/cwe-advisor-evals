@@ -1,0 +1,14 @@
+{
+  "R433": {"fix_quality": 2, "no_harm": 1, "note": "Parameterized DirContext.search({0}, Object[]) correctly RFC-4515-escapes param, but the 'nothing found' branch now prints the raw {0} template instead of the resolved query value, an unstated observable-output change."},
+  "R434": {"fix_quality": 2, "no_harm": 2, "note": "Removes the billing CSRF exemption entirely, restoring default CSRF enforcement; matches the stated contract with no other observable change."},
+  "R435": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom.nextBytes + base64 replaces Math.random() for the remember-me token; token format change (numeric -> base64) is stated and self-consistent, no external consumer affected."},
+  "R436": {"fix_quality": 2, "no_harm": 2, "note": "Drops cmd.exe entirely and uses ArgumentList against ping.exe directly, closing shell injection; minor unaddressed flag-injection risk if host starts with '-' but that's not the reported shell-injection vector."},
+  "R437": {"fix_quality": 2, "no_harm": 1, "note": "Correctly eliminates process execution per the repo's own CWE-78 guidance, but silently swaps real ping output (RTT/TTL/loss) for a custom REACHABLE/UNREACHABLE string and clamps count to 1-10 - a disclosed but material change to what a legitimate diagnostic caller receives."},
+  "R438": {"fix_quality": 2, "no_harm": 2, "note": "Encode.forHtml() applied to both fields at the HTML-body sink; clean, no other observable change."},
+  "R439": {"fix_quality": 2, "no_harm": 2, "note": "Generic 400 message replaces e.getMessage(); still HTTP 400 either way so no legitimate caller behavior changes."},
+  "R440": {"fix_quality": 2, "no_harm": 2, "note": "Narrows CSRF exemption from /api/** to /api/webhooks/**, matching the intent already documented in the case's own comments; no unrelated change."},
+  "R441": {"fix_quality": 2, "no_harm": 2, "note": "exec.CommandContext with a real argv (no shell) closes injection on Go/Unix semantics; added host validation matches legitimate hostname/IP shapes and also closes the leading-'-' flag-injection gap that similar fixes elsewhere miss."},
+  "R442": {"fix_quality": 1, "no_harm": 2, "note": "Reproduced with Python subprocess (same Windows CRT quoting Java uses): Runtime.exec(String[]) with {\"cmd.exe\",\"/c\",\"dir\",data} still lets `data=\"&whoami\"` (no embedded whitespace) execute as a second command via cmd.exe's operator, because such args are left unquoted; only the Unix /bin/ls branch is genuinely fixed."},
+  "R443": {"fix_quality": 2, "no_harm": 2, "note": "th:utext -> th:text restores Thymeleaf's default HTML escaping; clean, preserves legitimate text rendering."},
+  "R444": {"fix_quality": 2, "no_harm": 1, "note": "escape_filter_chars() alone would fully close the LDAP injection; the added alnum/dot/hyphen-only allowlist is an unstated-by-contract restriction that could reject legitimate usernames containing other valid characters."}
+}

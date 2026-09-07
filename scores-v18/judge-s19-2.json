@@ -1,0 +1,16 @@
+{
+  "R346": {"fix_quality": 2, "no_harm": 2, "note": "JNDI parameterized search now escapes both uid and street via Object[] filter args, same query shape as original."},
+  "R347": {"fix_quality": 2, "no_harm": 1, "note": "Eliminates the shell via .NET Ping, but silently changes the response semantics (single echo vs original's 4-ping stdout, custom text vs raw ping output) without stating the tradeoff."},
+  "R348": {"fix_quality": 2, "no_harm": 0, "note": "Switches to JavaMail Store/Folder API (closes CRLF injection) but never calls store.connect() before getFolder/open(), so every legitimate call throws IllegalStateException at runtime, and the method's second parameter silently changes type from Socket to Session; neither is disclosed."},
+  "R349": {"fix_quality": 2, "no_harm": 2, "note": "Separator-terminated prefix compare is the standard, correct fix for the sibling-directory bypass; preserves legitimate paths."},
+  "R350": {"fix_quality": 2, "no_harm": 2, "note": "Swaps raw inline-protocol socket writer for StackExchange.Redis's typed IDatabase.StringSet; SendSetCommand's caller-facing signature and behavior are unchanged."},
+  "R351": {"fix_quality": 2, "no_harm": 2, "note": "ldap3 escape_filter_chars is the standard RFC 4515 escaping fix; preserves the original query contract."},
+  "R352": {"fix_quality": 2, "no_harm": 2, "note": "Normalizes destination once and resolves/normalizes each entry before the containment check, matching the stated contract exactly."},
+  "R353": {"fix_quality": 2, "no_harm": 1, "note": "fsockopen removes the shell, but reachability semantics change from ICMP to TCP:80 and an added hostname allowlist regex could reject previously-accepted values; both disclosed but still cap at 1."},
+  "R354": {"fix_quality": 2, "no_harm": 2, "note": "Per-member resolve+is_relative_to containment check correctly rejects traversal and absolute-path members (verified pathlib's absolute-join behavior still yields a path that fails the check) while extracting legitimate nested members."},
+  "R355": {"fix_quality": 2, "no_harm": 1, "note": "sharp removes the shell entirely, but the new strict NxN-digit geometry validation narrows what convert's -resize previously accepted (e.g. percentages, single-dimension), disclosed but still a restriction that could reject legitimate input."},
+  "R356": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILs: RulePreviewService.java redeclares OrderContext, duplicating the record already in RulePreviewController.java in the same package; not disclosed."},
+  "R357": {"fix_quality": 2, "no_harm": 2, "note": "Array-form Runtime.exec closes the vector; empirically verified on this Windows/JDK26 host that cmd.exe /c dir with the payload as a separate array element does not split on & even without surrounding spaces, so the Windows branch is also protected."},
+  "R358": {"fix_quality": 2, "no_harm": 2, "note": "parseClaimsJws with a server-side HMAC key correctly requires and validates the signature; fail-closed exception handling is stated."},
+  "R359": {"fix_quality": 2, "no_harm": 2, "note": "os.path.realpath resolves symlinks before the containment check, closing the stated symlink-escape vector; REPORT_ROOT itself is only abspath'd (not realpath'd), a minor asymmetry that doesn't affect the literal-path scenario given."}
+}

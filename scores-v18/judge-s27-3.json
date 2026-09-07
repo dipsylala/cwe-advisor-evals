@@ -1,0 +1,1 @@
+{"R445": {"fix_quality": 2, "no_harm": 1, "note": "Zip Slip closed correctly via Join+Abs prefix containment (sufficient alone), but the added first-layer strings.Contains(name, \"..\") denylist rejects any legitimate filename that merely contains a literal \"..\" substring (e.g. \"report..final.pdf\"), an extra restriction beyond what the sink's contract requires."}}

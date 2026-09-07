@@ -1,0 +1,14 @@
+{
+  "R421": {"fix_quality": 2, "no_harm": 2, "note": "Single-component filename validation matches the docstring's 'no subdirectories' contract and closes the realpath-false-fallback traversal cleanly."},
+  "R422": {"fix_quality": 2, "no_harm": 2, "note": "Return value of verify() is now checked and unauthorized on failure; no other behavior change."},
+  "R423": {"fix_quality": 0, "no_harm": 0, "note": "Uses javax.imageio.BufferedImage, which does not exist (BufferedImage is in java.awt.image), matching the reported Build: FAIL; endpoint would not compile/run and this isn't disclosed."},
+  "R424": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom-based 128-bit token replaces java.util.Random; storage/validation flow unchanged."},
+  "R425": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() applied to both args as in the primary path; switching from raw $requestedName to the already-basename'd $source is disclosed and doesn't violate the stated return/output contract."},
+  "R426": {"fix_quality": 2, "no_harm": 2, "note": "escape_filter_chars() correctly neutralizes LDAP metacharacters without altering query logic or return shape."},
+  "R427": {"fix_quality": 2, "no_harm": 1, "note": "ProcessBuilder array form correctly closes shell injection, but the added leading-'-' rejection is a new restriction not required by any stated contract and could reject a legitimate operand; disclosed but still a restriction."},
+  "R428": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized DirContext.search with filterArgs correctly replaces concatenation; new SearchControls() is behaviorally equivalent to the prior null argument."},
+  "R429": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist HTML sanitization before th:utext matches the stated contract of preserving plain text and allowlisted rich-text tags only."},
+  "R430": {"fix_quality": 2, "no_harm": 2, "note": "Fully parameterizes both filter clauses with correctly ordered filterArgs, closing the injection with no other behavior change."},
+  "R431": {"fix_quality": 2, "no_harm": 0, "note": "Content-Disposition: attachment is applied unconditionally to all avatars, not just SVG, which forces download instead of inline rendering for legitimate PNG/JPEG avatars - contradicts the 'served back unchanged' contract and isn't disclosed as affecting non-SVG types."},
+  "R432": {"fix_quality": 2, "no_harm": 2, "note": "proc_open array form with absolute grep path and -- marker correctly avoids shell parsing; return/error shape unchanged."}
+}

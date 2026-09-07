@@ -1,0 +1,14 @@
+{
+  "R360": {"fix_quality": 2, "no_harm": 2, "note": "supports() correctly narrowed to ApiKeyAuthenticationToken, matching the type authenticate() casts to; no other behaviour change."},
+  "R361": {"fix_quality": 2, "no_harm": 2, "note": "escapeLdapFilter() covers the RFC 4515 metacharacters (and a couple extra, harmless to over-escape) before concatenation into the filter; structure and output otherwise unchanged."},
+  "R362": {"fix_quality": 2, "no_harm": 1, "note": "extension allowlist is the intrinsic CWE-434 fix, but the write-up also adds a 10MB size cap and replaces the caller's original filename with a random UUID in the returned path - both disclosed but observable behaviour changes beyond closing the reported weakness."},
+  "R363": {"fix_quality": 2, "no_harm": 2, "note": "Path.toRealPath()+Path.startsWith(Path) correctly closes the sibling-prefix bypass; only side effect is a nonexistent note now returning 403 instead of 404, disclosed and doesn't block any legitimate access."},
+  "R364": {"fix_quality": 2, "no_harm": 2, "note": "blocks stream-wrapper scheme, absolute paths/drive letters, then enforces realpath() containment before fopen(); preserves original 400/404/500 semantics."},
+  "R365": {"fix_quality": 2, "no_harm": 2, "note": "GetFullPath+GetRelativePath containment check correctly catches the rooted-argument override even though the vulnerable Path.Combine call is kept; response shape unchanged."},
+  "R366": {"fix_quality": 1, "no_harm": 0, "note": "contract requires intentionally-supported rich-text tags to survive via allowlist sanitization plus th:utext, but the fix switches to th:text, blanket-escaping all HTML (including any allowed tags) rather than sanitizing - the loss of supported rich text is not disclosed."},
+  "R367": {"fix_quality": 2, "no_harm": 1, "note": "Commons Net FTPClient + a strict [a-zA-Z0-9._-]+ allowlist closes the CRLF injection, but the allowlist (disclosed as defense-in-depth) would reject any previously-accepted filename containing a space or other non-alnum character."},
+  "R368": {"fix_quality": 2, "no_harm": 2, "note": "allowlist maps exactly the two admin commands that existed in the original code to their handler functions; no legitimate command is lost."},
+  "R369": {"fix_quality": 2, "no_harm": 2, "note": "drops cmd.exe /c string concatenation for a literal ping.exe argument array; host/count still flow through unrestricted as intended, output handling unchanged."},
+  "R370": {"fix_quality": 2, "no_harm": 2, "note": "allowlist maps the tool query param to a fixed set of absolute executable paths consistent with the handler's documented 'handful of diagnostic utilities' scope; args/flags unchanged."},
+  "R371": {"fix_quality": 2, "no_harm": 2, "note": "replaces proc_open/grep -F with native file()+strpos() literal substring search, removing the shell entirely while preserving match/error return shape."}
+}

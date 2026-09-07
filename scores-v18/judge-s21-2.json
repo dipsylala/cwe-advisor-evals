@@ -1,0 +1,15 @@
+{
+  "R372": {"fix_quality": 0, "no_harm": 2, "note": "Build FAILs: commons-jexl3/JexlSandbox dependency was never added, so the fix as written does not compile; the swallow-all-exceptions fallback is stated and doesn't block legitimate use."},
+  "R373": {"fix_quality": 2, "no_harm": 2, "note": "Encode.forHtml() plus a fixed \"%s\" format string closes both the XSS and the incidental format-string risk without altering behaviour for benign referer values."},
+  "R374": {"fix_quality": 2, "no_harm": 2, "note": "argsEnv set to null removes the only tainted-data channel into exec(); disclosed, and no legitimate use relied on passing the header value as a malformed env entry."},
+  "R375": {"fix_quality": 2, "no_harm": 2, "note": "Canonicalize-then-contain via Path.resolve(strict=True) + is_relative_to() correctly replaces the vulnerable join/isfile check with no added restriction beyond containment."},
+  "R376": {"fix_quality": 2, "no_harm": 2, "note": "Meets the stated contract: resolve(strict=True)+is_relative_to() keeps nested paths downloadable, fails closed on missing/escaping paths, and leaves the controller's download_name untouched."},
+  "R377": {"fix_quality": 2, "no_harm": 1, "note": "Containment check via path.relative() is sufficient on its own; the added unconditional rejection of any fileName containing '..' as a substring could reject legitimate filenames (e.g. \"report..v2.pdf\") that aren't traversal attempts."},
+  "R378": {"fix_quality": 2, "no_harm": 2, "note": "fs.realpathSync.native() canonicalization plus path.relative() containment closes the vector with no extraneous filename restriction."},
+  "R379": {"fix_quality": 2, "no_harm": 2, "note": "Removes the double-decode that manufactures the traversal (the actual root cause), and the single-path-component check matches the file's own documented flat-storage layout."},
+  "R380": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist [a-zA-Z0-9 ]* fully closes the shell-metacharacter injection but is disclosed to reject any legitimate header value containing ordinary punctuation that the original code accepted."},
+  "R381": {"fix_quality": 2, "no_harm": 2, "note": "AES/GCM with a random IV prepended to the ciphertext satisfies the stated contract: still a Base64 string decryptable by the key holder, and the 400-on-missing-ssn path is untouched."},
+  "R382": {"fix_quality": 2, "no_harm": 2, "note": "Extends the file's own existing JNDI parameterized-filter pattern to the uid clause; placeholder indices and the filters array line up correctly."},
+  "R383": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() on the already basename'd $source/$target closes the injection while preserving the stated contract (return value and discarded output arrays unchanged)."},
+  "R384": {"fix_quality": 2, "no_harm": 1, "note": "ldapjs EqualityFilter alone closes the injection; the added allowlist regex [a-zA-Z0-9._-]+ is a redundant restriction disclosed as defence-in-depth but could reject legitimate usernames outside that set."}
+}

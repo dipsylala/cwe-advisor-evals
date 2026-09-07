@@ -1,0 +1,14 @@
+{
+  "R360": {"fix_quality": 2, "no_harm": 2, "note": "supports() correctly narrowed to ApiKeyAuthenticationToken; no other observable change."},
+  "R361": {"fix_quality": 2, "no_harm": 2, "note": "RFC 4515-style escaping closes the injection; extra escaping of '/' is harmless over-escaping (round-trips to the same literal)."},
+  "R362": {"fix_quality": 2, "no_harm": 2, "note": "extension allowlist and UUID renaming are the direct fix for unrestricted-type upload; renamed/returned filename change is stated openly and does not block legitimate uploads."},
+  "R363": {"fix_quality": 2, "no_harm": 2, "note": "Path.startsWith(Path) with toRealPath() fixes the sibling-prefix bypass; 404->403 for nonexistent files is a stated, non-blocking status-code change."},
+  "R364": {"fix_quality": 2, "no_harm": 2, "note": "blocks stream wrappers/absolute paths and enforces realpath containment; scoped to closing the reported bypass, no unrelated restriction."},
+  "R365": {"fix_quality": 2, "no_harm": 2, "note": "GetFullPath + GetRelativePath containment check correctly rejects the absolute-path override; no other observable change."},
+  "R366": {"fix_quality": 2, "no_harm": 0, "note": "th:text closes the XSS but silently drops all rich-text rendering, contradicting the stated contract's requirement to preserve allowlist-sanitized rich text tags; write-up does not disclose this loss."},
+  "R367": {"fix_quality": 2, "no_harm": 1, "note": "FTPClient replaces raw socket construction (closes the vector via the character allowlist regardless of library internals), but the added `[a-zA-Z0-9._-]+` filename allowlist is stricter than needed to stop CRLF injection and could reject legitimate filenames (spaces, parens, etc.), even though stated."},
+  "R368": {"fix_quality": 2, "no_harm": 2, "note": "allowlist dispatch to the two functions that already existed is the direct fix for arbitrary function-name dispatch; no legitimate use lost."},
+  "R369": {"fix_quality": 2, "no_harm": 2, "note": "drops cmd.exe /c shell string for a direct argument-array ProcessBuilder call; host/count remain unrestricted as before, only shell interpretation is removed."},
+  "R370": {"fix_quality": 2, "no_harm": 2, "note": "allowlist mapping tool name to canonical absolute path is the direct fix for arbitrary-executable injection; target argument left unrestricted since exec.Command bypasses the shell."},
+  "R371": {"fix_quality": 2, "no_harm": 2, "note": "replaces proc_open/grep with native file()+strpos() literal search, preserving matches/error semantics while eliminating the shell entirely."}
+}

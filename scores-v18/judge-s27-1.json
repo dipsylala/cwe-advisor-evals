@@ -1,0 +1,1 @@
+{"R445": {"fix_quality": 2, "no_harm": 1, "note": "Output-side abs-path prefix check correctly closes zip slip, but the added input-side strings.Contains(name, \"..\") rejects any filename containing that substring anywhere (e.g. \"notes..old.txt\"), not just traversal segments - a disclosed but broader-than-needed restriction on legitimate entries."}}

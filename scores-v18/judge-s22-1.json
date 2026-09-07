@@ -1,0 +1,15 @@
+{
+  "R385": {"fix_quality": 2, "no_harm": 2, "note": "Array-form proc_open bypasses shell parsing entirely, with -- terminator; correct API for this sink."},
+  "R386": {"fix_quality": 2, "no_harm": 2, "note": "Replaces hand-rolled inline protocol with redis-py hset(), proper RESP framing; equivalent write behaviour."},
+  "R387": {"fix_quality": 2, "no_harm": 2, "note": "OWASP Encoder forHtml() is the right context-appropriate encoding for JSP body output, no input restriction added."},
+  "R388": {"fix_quality": 2, "no_harm": 2, "note": "RFC4515 escaping of *()\\  and NUL is correct LDAP filter neutralization, preserves literal input."},
+  "R389": {"fix_quality": 2, "no_harm": 1, "note": "filepath.Rel + HasPrefix(rel, \"..\") lacks a separator boundary check, so a legitimate filename literally starting with \"..\" (e.g. \"..hidden\") directly under uploadsDir would be wrongly rejected; not disclosed."},
+  "R390": {"fix_quality": 2, "no_harm": 2, "note": "Removes the extraneous second decode (the actual bug) and adds toRealPath()+startsWith containment check; matches original intent, no legitimate use blocked."},
+  "R391": {"fix_quality": 2, "no_harm": 2, "note": "subprocess.run with argument array plus hostname allowlist and leading-hyphen rejection closes both shell injection and the flag-injection gap; stated and non-restrictive for valid hosts/IPs."},
+  "R392": {"fix_quality": 2, "no_harm": 2, "note": "AES/GCM with random 12-byte IV prepended to ciphertext, satisfies stated contract (Base64, decryptable by key holder, 400 on missing ssn)."},
+  "R393": {"fix_quality": 2, "no_harm": 2, "note": "resolve()+relative_to() containment check is correct; pathlib's absolute-path join gotcha doesn't bypass it since relative_to() still rejects the escaped result."},
+  "R394": {"fix_quality": 2, "no_harm": 1, "note": "Deny-by-default JEXL sandbox with no instantiation and a dot/bracket-excluding allowlist correctly closes code injection, but swapping the rule language from JavaScript to JEXL breaks any previously stored non-trivial tenant rules; write-up claims 'preserves intended behavior' rather than flagging this as a required migration."},
+  "R395": {"fix_quality": 0, "no_harm": 0, "note": "Build FAIL - getHeader().getAlgorithm() returns JWSAlgorithm, not String, so the comparison doesn't compile; the endpoint would not work at all, undisclosed."},
+  "R396": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the attacker-controlled format() call with println(Encode.forHtml(param)), correct HTML encoding for the sink; dropping the unused obj array is stated and benign since format() semantics weren't a legitimate feature here."},
+  "R397": {"fix_quality": 2, "no_harm": 2, "note": "full == uploadsDir || HasPrefix(full, uploadsDir+separator) is the canonical separator-aware containment check, blocks the sibling directory without over-rejecting legitimate filenames."}
+}

@@ -1,0 +1,16 @@
+{
+  "R232": {"fix_quality": 2, "no_harm": 1, "note": "Closes the cmd.exe/.bat metacharacter vector, but the added regex allowlist (alnum/dot/underscore/hyphen only) rejects report names the original code accepted (e.g. spaces), with no stated contract requiring that restriction."},
+  "R233": {"fix_quality": 2, "no_harm": 1, "note": "send_from_directory correctly closes traversal via safe_join, but silently changes response behaviour vs. the original (Content-Type now guessed from extension instead of the fixed application/pdf, plus new ETag/Last-Modified/Cache-Control headers) beyond the brief, non-specific disclosure in the write-up."},
+  "R234": {"fix_quality": 2, "no_harm": 2, "note": "EvalSymlinks plus a re-applied boundary check matches the stated contract exactly: regular files inside uploadsDir still read, symlinks/escapes rejected."},
+  "R235": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the leaked exception message with a generic string; same status code and control flow, no legitimate input newly rejected."},
+  "R236": {"fix_quality": 2, "no_harm": 2, "note": "Checks verify()'s return value and rejects on failure before trusting claims; valid-signature path is unchanged."},
+  "R237": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetRelativePath containment check fixes the sibling-directory bypass and the disclosed Combine->Join change closes a related absolute-path override without restricting legitimate files."},
+  "R238": {"fix_quality": 2, "no_harm": 2, "note": "Switches to Tika content-byte detection as prescribed for this exact gap; added extension-on-store and temp-file cleanup are disclosed improvements that don't change accepted inputs."},
+  "R239": {"fix_quality": 2, "no_harm": 2, "note": "Path.resolve()+is_relative_to gives component-aware containment; success-path response format (200/pdf) is preserved, missing-file case turns an unhandled crash into an explicit 404."},
+  "R240": {"fix_quality": 2, "no_harm": 2, "note": "Adding the separator to the prefix check closes the sibling-directory bypass at the reported line without narrowing legitimate access."},
+  "R241": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist maps macro names to exactly the renderer's four existing public methods, closing arbitrary dispatch without dropping any real macro."},
+  "R242": {"fix_quality": 2, "no_harm": 2, "note": "Scoped findByIdAndCustomerUsername query adds the missing resource-ownership check; owners can still update their own orders, non-owners now correctly rejected."},
+  "R243": {"fix_quality": 2, "no_harm": 2, "note": "Escapes the RFC 4515 LDAP filter metacharacters (plus a harmless extra escape for '/'); literal values pass through unchanged, no legitimate input rejected."},
+  "R244": {"fix_quality": 2, "no_harm": 2, "note": "Adds a per-category method allowlist restricted to the one method the shown handler actually exposes, closing arbitrary method dispatch without blocking legitimate use."},
+  "R245": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the hand-rolled inline-protocol socket write with redis-py's parameterized hset(), closing CRLF command injection and correctly transmitting values the naive protocol previously mishandled."}
+}

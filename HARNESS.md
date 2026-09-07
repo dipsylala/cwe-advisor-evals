@@ -417,7 +417,11 @@ Run 17 also found the rubric and the knowledge base pulling against each other o
 the disclosed-narrowing pin scores an added allowlist as 1 unless the contract asks for it, and
 the CWE-77, 78 and 90 entries prescribe allowlists beside the API fix. Ten of the guided arm's
 unanimous `no_harm` misses are that shape. Whichever side is changed, change it deliberately
-across the family and say so in the run that measures it; do not patch one entry. A write-up that carries complete
+across the family and say so in the run that measures it; do not patch one entry. (Run 18
+changed the entries: the guided arm stopped adding allowlists and its `no_harm` on those cases
+did not move, because behaviour changes made while replacing the sink with a library took the
+vacated place. The Build line was obeyed 19 of 19 and the judges cost the same per write-up as
+without it - the bundle read is the floor, not the compile turns. See RESULTS-v18.md.) A write-up that carries complete
 files is not much longer than a snippet one (the run-17 CWE-89 pilot's 84 write-ups packed
 into six 80KB segments, a median of 16 per segment against run 16's 18), because the old
 before/after snippets were most of the file anyway; the segment cap is unchanged.

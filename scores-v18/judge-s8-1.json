@@ -1,0 +1,17 @@
+{
+  "R205": {"fix_quality": 2, "no_harm": 2, "note": "Jakarta Mail InternetAddress(strict)+MimeMessage/Transport closes CRLF injection; message body is hardcoded ('Ticket acknowledgement') instead of using subjectLine as body, but this is visible in the shown fix code, not silent."},
+  "R206": {"fix_quality": 2, "no_harm": 1, "note": "Removes the command sink entirely (fsockopen), but silently swaps ping/ICMP reachability semantics for a TCP:80 connect check, a real functional change for hosts pingable but not serving port 80."},
+  "R207": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist regex closes LDAP metacharacter injection but adds an unstated 3-64 char/charset restriction on usernames not present in the original or any stated contract."},
+  "R208": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILs (JexlSandbox symbol not found), so the class does not compile and silently breaks the service entirely."},
+  "R209": {"fix_quality": 2, "no_harm": 2, "note": "Adds @PreAuthorize to the externally-reachable processMonthEndCleanup, correctly closing the self-invocation proxy bypass; the added authorization check is exactly what the CWE-862 finding requires."},
+  "R210": {"fix_quality": 2, "no_harm": 2, "note": "basename+realpath containment check matches the file's own stated contract (flat filenames under /var/www/reports); no legitimate use lost."},
+  "R211": {"fix_quality": 2, "no_harm": 2, "note": "String-based ObjectInputFilter pattern (com.example.report.* plus java.lang.*/java.util.*, deny-all) fixes the prefix-bypass while still allowing the report classes and needed container types per the stated contract."},
+  "R212": {"fix_quality": 2, "no_harm": 2, "note": "Replaces leaked exception message with a generic 'Invalid order ID' 400 response; no legitimate behavior lost."},
+  "R213": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILs (JexlSandbox symbol not found), so the class does not compile and silently breaks the service entirely."},
+  "R214": {"fix_quality": 2, "no_harm": 1, "note": "redis-py .set() closes RESP/CRLF injection, but the fix silently adds an r.get() call and changes the return value from the raw SET protocol acknowledgment to the actual bio string, undisclosed in the write-up."},
+  "R215": {"fix_quality": 2, "no_harm": 2, "note": "Path.resolve(strict=True)+is_relative_to correctly follows symlinks and blocks escape while preserving nested-directory access and fail-closed behavior per the stated contract."},
+  "R216": {"fix_quality": 2, "no_harm": 2, "note": "filepath.Rel + '..' prefix check correctly blocks traversal while still allowing any legitimate path under docsRoot."},
+  "R217": {"fix_quality": 2, "no_harm": 2, "note": "Apache Tika content-sniffing correctly replaces extension-only probeContentType; allowed MIME set unchanged so legitimate uploads still pass."},
+  "R218": {"fix_quality": 2, "no_harm": 2, "note": "Encode.forHtml() on the reflected Referer value closes the XSS; dropping the unused format-args parameter is stated and has no legitimate use since the value was only ever echoed."},
+  "R219": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom with no attacker-controlled seed closes the weak-PRNG finding; removing the seed parameter has no legitimate use case for a session token generator."}
+}

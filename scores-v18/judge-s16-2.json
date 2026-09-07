@@ -1,0 +1,16 @@
+{
+  "R307": {"fix_quality": 2, "no_harm": 1, "note": "CR/LF rejection alone fully closes the RCPT TO injection; the added full email-format regex is an extra, unrequired restriction that could reject unusual but legitimate email addresses (quoted locals, IP-literal domains)."},
+  "R308": {"fix_quality": 2, "no_harm": 2, "note": "Removes the CSRF exemption entirely, restoring default CSRF protection while leaving authentication intact; matches the stated contract exactly."},
+  "R309": {"fix_quality": 2, "no_harm": 2, "note": "Narrows the exemption from /api/** to the documented /api/webhooks/** only, restoring CSRF protection on other authenticated endpoints without broadening anything."},
+  "R310": {"fix_quality": 2, "no_harm": 1, "note": "subprocess.run with an argument list and shell=False already fully closes the injection; the added hostname-charset allowlist is an unnecessary extra restriction that could reject legitimate hosts."},
+  "R311": {"fix_quality": 2, "no_harm": 1, "note": "Replacing raw IMAP command text with Jakarta Mail closes the CRLF injection, but the write-up openly changes the method signature (Socket to Properties) and discards the pre-established connection/authentication state instead of reusing it."},
+  "R312": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() neutralizes shell metacharacters by quoting without rejecting any legitimate host value; clean, idiomatic PHP fix."},
+  "R313": {"fix_quality": 2, "no_harm": 2, "note": "Manual RFC 4515 character escaping is correctly implemented and preserves all legitimate usernames as literal search data."},
+  "R314": {"fix_quality": 2, "no_harm": 2, "note": "Uses ldapjs's own EqualityFilter, which escapes per RFC 4515 internally; idiomatic parameterized-filter approach, no restriction on legitimate input."},
+  "R315": {"fix_quality": 2, "no_harm": 2, "note": "Replaces raw RESP text concatenation with StackExchange.Redis's typed StringSet(); the constructor's dependency type change is the expected consequence of the correct client library and does not restrict any legitimate statusMessage."},
+  "R316": {"fix_quality": 1, "no_harm": 0, "note": "The single-path-component check rejects every entry containing a '/', silently breaking the stated contract that valid nested archive entries must still extract; the write-up never discloses this."},
+  "R317": {"fix_quality": 2, "no_harm": 1, "note": "execFile with an argument array plus a strict alnum/underscore/hyphen allowlist closes the injection (the allowlist is load-bearing here since cmd.exe is invoked directly as the target process), but it also rejects previously-accepted report names containing spaces or punctuation."},
+  "R318": {"fix_quality": 2, "no_harm": 2, "note": "realpath() canonicalization plus containment check is the standard PHP path-traversal fix and preserves retrieval of any legitimate file already under the reports directory."},
+  "R319": {"fix_quality": 2, "no_harm": 2, "note": "Replaces java.util.Random with SecureRandom and a 128-bit token; cookie comparison logic is unchanged and no legitimate use is restricted."},
+  "R320": {"fix_quality": 2, "no_harm": 2, "note": "Standard RFC 4515 character escaping applied before filter construction; preserves legitimate search values, closes the injection cleanly."}
+}

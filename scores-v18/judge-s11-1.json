@@ -1,0 +1,14 @@
+{
+  "R246": {"fix_quality": 2, "no_harm": 2, "note": "parseClaimsJwt replaced with parseClaimsJws plus a signing key; signature now enforced, no other observable behaviour change."},
+  "R247": {"fix_quality": 2, "no_harm": 2, "note": "PreAuthorize + ownership bean gates delete before repository call; missing and non-owned docs both fall through to the same denial, matching the no-extra-leak contract; owner path still returns 204."},
+  "R248": {"fix_quality": 2, "no_harm": 2, "note": "os.Lstat + IsRegular rejects symlinks before read, exactly matching the stated contract; regular in-directory files still served."},
+  "R249": {"fix_quality": 2, "no_harm": 2, "note": "realpath + separator-aware prefix check is the standard PHP containment idiom; canonical path used for the actual read; legitimate files unaffected."},
+  "R250": {"fix_quality": 2, "no_harm": 2, "note": "shell=True string replaced with argv list and shell=False; check=True and downstream behaviour preserved."},
+  "R251": {"fix_quality": 1, "no_harm": 2, "note": "escapes quotes/backslashes but leaves raw CR/LF bytes untouched; Redis's inline-command reader frames a command by scanning for a raw newline before quote-aware arg parsing runs, so this is the wrong-shaped defense for this sink even though embedded CR/LF likely still fails via quote-imbalance rather than being cleanly rejected - correct fix is to reject values containing \\r/\\n or move to a RESP-based client (e.g. redis-py); legitimate values pass through unchanged."},
+  "R252": {"fix_quality": 2, "no_harm": 2, "note": "Random(seed) replaced with SecureRandom, seed correctly discarded; leaves the now-dead seed-parsing line (harmless, not a behaviour change)."},
+  "R253": {"fix_quality": 2, "no_harm": 2, "note": "Math.random() replaced with SecureRandom.nextBytes producing a 128-bit hex token; format change is internal/self-consistent (same value set and compared), no external contract broken."},
+  "R254": {"fix_quality": 2, "no_harm": 2, "note": "os.system replaced with subprocess.run argv list; stdout/stderr redirection to the same log file correctly reproduces the original '> log 2>&1' behaviour."},
+  "R255": {"fix_quality": 0, "no_harm": 0, "note": "Build FAIL - AccessDeniedException is referenced without an import, so the fix does not compile, breaking the whole class silently."},
+  "R256": {"fix_quality": 2, "no_harm": 1, "note": "ArgumentList plus a strict allowlist regex closes the cmd.exe/batch-reentry vector, but the allowlist (alnum/underscore/hyphen only) rejects report names containing '.', spaces, etc. that the original code accepted and no contract restricts to this set."},
+  "R257": {"fix_quality": 2, "no_harm": 2, "note": "Adds standard Zip Slip containment check (Join+Clean+prefix test) before every directory/file write; well-formed archives extract unchanged."}
+}

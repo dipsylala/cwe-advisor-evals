@@ -1,0 +1,16 @@
+{
+  "R307": {"fix_quality": 2, "no_harm": 2, "note": "CRLF rejection plus email-format check before RCPT command build; both tied directly to the sink, no other behavior change."},
+  "R308": {"fix_quality": 2, "no_harm": 2, "note": "Removes the CSRF exemption entirely, restoring Spring Security's default CSRF protection on /api/billing/**; matches the stated contract exactly."},
+  "R309": {"fix_quality": 2, "no_harm": 2, "note": "Narrows the CSRF exemption from /api/** to /api/webhooks/** matching the code's own documented intent; authorization config updated to match."},
+  "R310": {"fix_quality": 2, "no_harm": 2, "note": "subprocess.run with argument array (shell=False) plus host-format allowlist and timeout; closes shell injection, validation matches the host/IP shape expected by ping."},
+  "R311": {"fix_quality": 2, "no_harm": 2, "note": "CRLF rejection plus swap to Jakarta Mail Session/Store/Folder API; method now takes Properties instead of a raw Socket, disclosed explicitly, but does not change HTTP-observable behavior."},
+  "R312": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() on the concatenated shell string correctly neutralizes metacharacters while preserving the host value passed to ping."},
+  "R313": {"fix_quality": 2, "no_harm": 2, "note": "Manual escaping of the five RFC 4515 special characters before filter concatenation; correct minimal fix, no other change."},
+  "R314": {"fix_quality": 2, "no_harm": 2, "note": "Replaces string concatenation with ldapjs's EqualityFilter object, an idiomatic parameterized-filter API that auto-escapes; no other change."},
+  "R315": {"fix_quality": 2, "no_harm": 2, "note": "Swaps raw-socket inline protocol for StackExchange.Redis StringSet, whose RESP framing structurally prevents CRLF command injection; constructor now takes IConnectionMultiplexer instead of Socket, disclosed, no HTTP-level behavior change."},
+  "R316": {"fix_quality": 2, "no_harm": 0, "note": "Single-path-component check rejects every entry containing a path separator, silently breaking the stated contract requirement that valid nested archive entries still extract; presented only as a security feature, the conflict with the contract is never flagged."},
+  "R317": {"fix_quality": 2, "no_harm": 2, "note": "execFile with an argument array plus a report-name character allowlist; matches the expected simple-identifier shape of a report template name, closes shell injection cleanly."},
+  "R318": {"fix_quality": 2, "no_harm": 2, "note": "realpath() canonicalization plus prefix containment check with separator guard; correctly closes traversal while preserving legitimate in-directory access."},
+  "R319": {"fix_quality": 2, "no_harm": 2, "note": "Replaces java.util.Random with SecureRandom and derives a 128-bit token; the resulting token format differs from the original but that is the necessary, disclosed consequence of the fix."},
+  "R320": {"fix_quality": 2, "no_harm": 2, "note": "Manual escaping of the five RFC 4515 special characters before filter concatenation; correct minimal fix matching JNDI's lack of a built-in escaper."}
+}

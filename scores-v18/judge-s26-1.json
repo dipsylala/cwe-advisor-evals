@@ -1,0 +1,14 @@
+{
+  "R433": {"fix_quality": 2, "no_harm": 1, "note": "Correct parameterized DirContext.search({0}, args) closes the injection, but the 'nothing found' branch still prints the raw `filter` variable which is now the unfilled '{0}' template instead of the submitted value, a silent message-content change from the original."},
+  "R434": {"fix_quality": 2, "no_harm": 2, "note": "Removing the ignoringRequestMatchers line restores default CSRF protection for /api/billing/**; no other observable change, matches the stated contract."},
+  "R435": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom.nextBytes with base64 encoding is the appropriate replacement for Math.random() for the remember-me token; cookie value format changes but nothing depends on its shape, so legitimate use is unaffected."},
+  "R436": {"fix_quality": 2, "no_harm": 2, "note": "Eliminates cmd.exe/shell entirely via ArgumentList to ping.exe, appropriate for this sink; no restriction added beyond the fix."},
+  "R437": {"fix_quality": 2, "no_harm": 1, "note": "Eliminating command execution in favor of InetAddress.isReachable() closes the injection, but it silently changes the response body from actual ping output/RTT stats to a REACHABLE/UNREACHABLE status string and reinterprets 'count' as retry attempts rather than packet count."},
+  "R438": {"fix_quality": 2, "no_harm": 2, "note": "OWASP Encoder Encode.forHtml() applied at both interpolation points closes the XSS with no other observable change."},
+  "R439": {"fix_quality": 2, "no_harm": 2, "note": "Generic client-facing message replaces e.getMessage(); HTTP 400 contract preserved, no legitimate input is newly rejected."},
+  "R440": {"fix_quality": 2, "no_harm": 2, "note": "Narrows CSRF exemption from /api/** to /api/webhooks/**, exactly matching the documented intent and existing authorization split; no other change."},
+  "R441": {"fix_quality": 2, "no_harm": 1, "note": "exec.CommandContext with a separate argument list correctly removes the shell, but adds a new hostname character allowlist (alnum/dot/hyphen only) not called for by any stated contract, which could reject valid hostnames (e.g. underscores) the original accepted."},
+  "R442": {"fix_quality": 2, "no_harm": 2, "note": "Switches Runtime.exec(String) to exec(String[]) matching the existing cmd construction, closing shell metacharacter injection with no added restriction."},
+  "R443": {"fix_quality": 2, "no_harm": 2, "note": "th:utext to th:text enables Thymeleaf's default HTML escaping; no other observable change."},
+  "R444": {"fix_quality": 2, "no_harm": 1, "note": "escape_filter_chars() alone is the appropriate fix, but the write-up also adds a regex allowlist ([a-zA-Z0-9._-]+) on username not required by any stated contract, which could reject legitimate uid values the original accepted."}
+}

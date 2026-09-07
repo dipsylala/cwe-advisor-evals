@@ -1,0 +1,13 @@
+{
+  "R296": {"fix_quality": 2, "no_harm": 2, "note": "Canonicalizes BASE_DIR and adds trailing separator before startsWith, closing the sibling-directory bypass with no other observable change."},
+  "R297": {"fix_quality": 2, "no_harm": 2, "note": "Correct JNDI parameterized search(name, filterExpr, filterArgs, cons) overload; RFC-compliant escaping, no other behavior change."},
+  "R298": {"fix_quality": 2, "no_harm": 2, "note": "execFile with argument array is the appropriate replacement for shell exec; same observable output for legitimate domains."},
+  "R299": {"fix_quality": 1, "no_harm": 2, "note": "Case's SecurityConfig comment states the root cause is missing @EnableMethodSecurity; write-up bolts manual auth checks onto only deleteUserAccount, leaving the identically-annotated suspendUserAccount still fully unprotected and the config gap unfixed - wrong shape for this sink."},
+  "R300": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom + 128-bit base64 token is the correct replacement for Math.random(); string type/usage in cookie and session preserved so no downstream behavior changes."},
+  "R301": {"fix_quality": 0, "no_harm": 0, "note": "Build FAILs (CS0103: StoreMode undefined, missing using Enyim.Caching.Memcached) - undisclosed, code does not compile at all."},
+  "R302": {"fix_quality": 2, "no_harm": 2, "note": "Extension allowlist + magic-byte signature check + UUID-based server-generated filename matches the stated contract exactly; valid PNG/JPEG still upload and are retrievable by returned name."},
+  "R303": {"fix_quality": 2, "no_harm": 1, "note": "toRealPath()+startsWith correctly closes symlink-based Zip Slip, but the added single-filename-component check rejects any nested entry path (e.g. subdir/file), directly contradicting the stated contract that valid nested entries must still extract; disclosed in the explanation so capped at 1, not 0."},
+  "R304": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the format-string sink with println(Encode.forHtml(param)), correctly encoding output; change is stated and does not restrict legitimate referer values, just displays them safely."},
+  "R305": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath() on both base and resolved target plus startsWith containment check matches the stated contract precisely, including handling absolute-path resolve() edge case via the later containment check."},
+  "R306": {"fix_quality": 2, "no_harm": 2, "note": "Per-category method allowlist mirrors the existing category allowlist pattern; legitimate 'send' and default 'handle' methods still work, arbitrary method invocation blocked."}
+}

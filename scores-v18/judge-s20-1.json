@@ -1,0 +1,14 @@
+{
+  "R360": {"fix_quality": 2, "no_harm": 2, "note": "Narrows supports() to ApiKeyAuthenticationToken, matching what authenticate() actually casts to; no other change."},
+  "R361": {"fix_quality": 2, "no_harm": 2, "note": "RFC 4515-correct escaping of *()\\ and NUL before concatenation; escaping '/' too is harmless (round-trips to itself)."},
+  "R362": {"fix_quality": 2, "no_harm": 1, "note": "Extension allowlist is the required CWE-434 fix, but the added 10MB size cap is an unrequested restriction not implied by the finding and could silently reject legitimate large uploads that succeeded before."},
+  "R363": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath()+Path.startsWith() correctly fixes the sibling-bypass; only side effect is missing files now returning 403 instead of 404, stated in the write-up and doesn't block legitimate existing-file access."},
+  "R364": {"fix_quality": 2, "no_harm": 2, "note": "realpath()-based containment check with separator-aware prefix comparison closes the wrapper/sibling bypass without restricting legitimate relative filenames."},
+  "R365": {"fix_quality": 2, "no_harm": 2, "note": "GetRelativePath containment check correctly blocks the absolute-path override while leaving legitimate relative filenames unaffected."},
+  "R366": {"fix_quality": 1, "no_harm": 1, "note": "Contract requires rich-text tags be preserved via allowlist sanitization; th:text instead escapes everything, dropping all rich-text rendering rather than sanitizing it as the contract calls for."},
+  "R367": {"fix_quality": 2, "no_harm": 1, "note": "SAFE_FILENAME regex restricts filenames to alnum/dot/dash/underscore, beyond what neutralizing CRLF requires, and could reject legitimate filenames with other characters (e.g. spaces); also asserts FTPClient itself escapes CRLF internally, which is not established, though the allowlist independently closes the vector."},
+  "R368": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist maps exactly the two functions that existed to be dispatched; no legitimate functionality lost since no other command was ever valid."},
+  "R369": {"fix_quality": 2, "no_harm": 2, "note": "Drops cmd.exe /c shell entirely and passes host/count as separate ProcessBuilder arguments, closing shell metacharacter injection with no added restriction."},
+  "R370": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist of absolute tool paths matches the endpoint's stated 'handful of diagnostic utilities' contract; target argument still passed through unmodified."},
+  "R371": {"fix_quality": 2, "no_harm": 2, "note": "Replaces shell grep with native file()+strpos(), eliminating the shell entirely while preserving the literal-match semantics and return shape."}
+}

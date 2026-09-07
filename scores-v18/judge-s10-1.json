@@ -1,0 +1,16 @@
+{
+  "R232": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist regex on reportName before ProcessBuilder closes cmd.exe metacharacter injection; matches the identifier-style names implied by the docstring."},
+  "R233": {"fix_quality": 2, "no_harm": 2, "note": "send_from_directory uses werkzeug safe_join internally, correctly closing traversal; minor unstated Content-Type/404-vs-500 shift is not blocking to legitimate use."},
+  "R234": {"fix_quality": 1, "no_harm": 2, "note": "EvalSymlinks + boundary recheck closes the escaping-symlink case but the stated contract requires rejecting any requestedName that names a symlink at all, including one resolving inside uploadsDir, which this still permits."},
+  "R235": {"fix_quality": 2, "no_harm": 2, "note": "Replaces leaked exception message with a fixed generic string; status code and control flow otherwise unchanged."},
+  "R236": {"fix_quality": 2, "no_harm": 2, "note": "Checks verify() return value and throws on failure before trusting claims; closes the vector cleanly."},
+  "R237": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetRelativePath gives component-aware containment, closing the sibling-directory bypass; Path.Join swap for the separate absolute-path-override risk is extra hardening, stated and non-blocking."},
+  "R238": {"fix_quality": 2, "no_harm": 2, "note": "Tika content-based detection replaces the unreliable extension-based probeContentType; derived extension/filename change is disclosed and doesn't block legitimate uploads."},
+  "R239": {"fix_quality": 2, "no_harm": 2, "note": "Path.resolve()+is_relative_to gives component-aware containment; preserves original hardcoded Content-Type, adds sensible 403/404 handling without new restrictions on legitimate filenames."},
+  "R240": {"fix_quality": 2, "no_harm": 2, "note": "Adding the directory-separator (or exact-match) check to the prefix comparison directly closes the reported sibling-directory bypass with no other behavior change."},
+  "R241": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist maps macro name to method, matching exactly the four public methods on ReportRenderer; unknown macros rejected and logged."},
+  "R242": {"fix_quality": 2, "no_harm": 2, "note": "findByIdAndCustomerUsername enforces resource-level ownership, the correct primary fix for CWE-862; unified not-found/not-owned response avoids enumeration."},
+  "R243": {"fix_quality": 2, "no_harm": 2, "note": "Escapes LDAP filter metacharacters (*, (, ), \\, NUL, /) per RFC 4515-style hex escaping before building the filter; legitimate CN values pass through unchanged."},
+  "R244": {"fix_quality": 2, "no_harm": 2, "note": "Adds a per-category method allowlist restricted to exactly the handler's intended methods (email->send), closing arbitrary method dispatch."},
+  "R245": {"fix_quality": 2, "no_harm": 2, "note": "Swaps hand-rolled inline-protocol socket writes for redis-py's hset(), which frames each argument via RESP so embedded CRLF cannot split commands."}
+}

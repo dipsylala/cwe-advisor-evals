@@ -1,0 +1,13 @@
+{
+  "R273": {"fix_quality": 2, "no_harm": 2, "note": "Tika magic-byte detection plus ImageIO re-encode and UUID filename correctly closes CWE-434 while satisfying the stated contract."},
+  "R274": {"fix_quality": 2, "no_harm": 2, "note": "Single-path-component check plus toRealPath containment closes traversal; the servlet's own separator-joined path implies flat filenames so the restriction matches intended use."},
+  "R275": {"fix_quality": 2, "no_harm": 2, "note": "Switches to JNDI parameterized search(base, filter, filterArgs, sc) with {0} placeholder, the canonical fix; output and control flow unchanged."},
+  "R276": {"fix_quality": 2, "no_harm": 1, "note": "Traversal fix (single-component check, drops the broken realpath fallback) is sound, but switching file_put_contents to fopen(...,'x') makes re-saving a note with an existing filename fail with a 500 instead of overwriting as before -- an added restriction not called for by the doc comment's 'new file' wording, disclosed but not contract-required."},
+  "R277": {"fix_quality": 2, "no_harm": 2, "note": "redis-py hset(mapping=...) replaces the hand-built RESP command, closing injection with matching field semantics."},
+  "R278": {"fix_quality": 2, "no_harm": 2, "note": "Adds passwordEncoder.matches() check before issuing the authenticated token, the correct primary defence for CWE-287; behavior otherwise unchanged."},
+  "R279": {"fix_quality": 2, "no_harm": 2, "note": "exec.Command(\"convert\", inputPath, ...) with discrete args removes the shell entirely, satisfying the stated contract."},
+  "R280": {"fix_quality": 1, "no_harm": 2, "note": "Manual member.name check for '/' and '..' misses the classic tar symlink/hardlink escape (a member can point outside workspace_dir via a symlink target not caught by the name check); Python 3.11's extractall(filter='data') would close this fully and wasn't used."},
+  "R281": {"fix_quality": 2, "no_harm": 2, "note": "redis-py set(key, bio) replaces the hand-built inline command, closing injection with matching key/value semantics."},
+  "R282": {"fix_quality": 2, "no_harm": 2, "note": "Per-stream ObjectInputFilter allowlisting OrderEvent plus java.base packages is the appropriate CWE-502 fix that preserves the native-serialization wire format the external producer still ships, matching the stated contract's exception behavior."},
+  "R283": {"fix_quality": 2, "no_harm": 2, "note": "Mirrors the standard single-component-plus-toRealPath-containment pattern for this OWASP Benchmark case; preserves the original sink's read/output/exception behavior."}
+}
