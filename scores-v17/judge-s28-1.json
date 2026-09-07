@@ -1,0 +1,19 @@
+{
+  "R530": {"fix_quality": 2, "no_harm": 2, "note": "ProcessBuilder with arg array plus hostname allowlist and leading-dash rejection closes both command and argument injection; restriction matches valid hostname/IPv4/IPv6 formats, not extraneous."},
+  "R531": {"fix_quality": 2, "no_harm": 2, "note": "adds @csrf_protect matching the already-working sibling route exactly, no other behavior change."},
+  "R532": {"fix_quality": 2, "no_harm": 2, "note": "std::array::at() bounds-checks and throws std::out_of_range for an invalid slot, satisfying the contract's 'rejected or reported' requirement; Badge shape unchanged."},
+  "R533": {"fix_quality": 2, "no_harm": 2, "note": "allowlist of 4 diagnostic tools plus exec.Command array closes executable-name injection; matches the handler's own stated intended tool set."},
+  "R534": {"fix_quality": 0, "no_harm": 2, "note": "Verified by reproducing with real dompurify+jsdom: DOMPurify.sanitize(bioHtml,{ALLOWED_TAGS:[]}) does not escape literal quote characters, so bioHtml='foo\" onmouseover=\"alert(1)' still breaks out of the title attribute identically before and after the 'fix' - the attribute-context vector is not closed. No new harm introduced beyond the unfixed weakness."},
+  "R535": {"fix_quality": 2, "no_harm": 2, "note": "overflow-safe offset/length bound matches the stated contract exactly."},
+  "R536": {"fix_quality": 2, "no_harm": 2, "note": "new URL() scheme allowlist restricted to http/https/mailto per contract; verified with Node that URL parsing strips embedded tab/newline before exposing protocol, so the javascript: control-char bypass is still caught."},
+  "R537": {"fix_quality": 0, "no_harm": 0, "note": "missing 'using System.Data;' leaves SqlDbType unresolved - confirmed CS0103 compile error building the exact snippet with the .NET 10 SDK; the endpoint would not build."},
+  "R538": {"fix_quality": 2, "no_harm": 2, "note": "narrows supports() to the concrete token type, matching Spring Security's provider-selection contract; no other change."},
+  "R539": {"fix_quality": 2, "no_harm": 2, "note": "normalizes base dir with a trailing separator before startsWith, closing the sibling-directory bypass without affecting legitimate subpaths."},
+  "R540": {"fix_quality": 2, "no_harm": 2, "note": "pre-check plus strncat bound the write correctly; oversized-filename rejection is disclosed and is required by the fix, not incidental."},
+  "R541": {"fix_quality": 2, "no_harm": 2, "note": "column/direction allowlist matches the SELECT'ed columns and the contract's 'intended sort keys'; accountId stays parameterized."},
+  "R542": {"fix_quality": 2, "no_harm": 2, "note": "swaps mux for the already-built protectedHandler on the plaintext listener; the only behavior change is the fix itself."},
+  "R543": {"fix_quality": 2, "no_harm": 1, "note": "correctly splits GET-confirm/POST-delete since Spring's CsrfFilter only inspects unsafe methods, but this removes the prior single-request GET deletion for any existing caller of that link; the functional change is disclosed openly in the explanation."},
+  "R544": {"fix_quality": 2, "no_harm": 2, "note": "adds a NULL check before strcmp, exactly matching the contract's disable-by-default behavior for an unset variable."},
+  "R545": {"fix_quality": 2, "no_harm": 2, "note": "parameterized stored-procedure call verified to compile (dotnet build, 0 errors, unlike R537's version); matches the contract exactly."},
+  "R546": {"fix_quality": 2, "no_harm": 2, "note": "bounds check before the array write prevents the OOB write; silent reject on an invalid index matches the implied no-write-on-invalid contract."}
+}

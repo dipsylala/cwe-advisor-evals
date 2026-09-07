@@ -1,0 +1,19 @@
+{
+  "R294": {"fix_quality": 2, "no_harm": 2, "note": "WebUtility.HtmlEncode applied at the output sink correctly closes the XSS vector with no other observable change."},
+  "R295": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() on the concatenated host argument correctly neutralizes shell metacharacters without altering legitimate hostname handling."},
+  "R296": {"fix_quality": 1, "no_harm": 2, "note": "Escapes only backslash and double-quote for the IMAP quoted-string form; does not strip or escape embedded CR/LF, so an attacker can still inject a line break to terminate the command early and smuggle additional IMAP commands over the raw socket."},
+  "R297": {"fix_quality": 2, "no_harm": 1, "note": "EqualityFilter correctly replaces string-concatenated filter (proper API for this sink), but the added regex allowlist (^[a-zA-Z0-9._-]+$) rejects usernames with other legitimate characters that were previously accepted and is not called for by any stated contract."},
+  "R298": {"fix_quality": 2, "no_harm": 2, "note": "Saves node->next before free; matches the stated contract exactly with no other behavior change."},
+  "R299": {"fix_quality": 2, "no_harm": 2, "note": "Replaces file read with a fixed rate dictionary and rejects unknown keys, matching the stated contract precisely; Eval() itself is unchanged, consistent with the contract's scope."},
+  "R300": {"fix_quality": 2, "no_harm": 2, "note": "Escapes RFC 4515 special chars (* ( ) \\\\ NUL) in the filter value; preserves legitimate values by escaping rather than rejecting."},
+  "R301": {"fix_quality": 2, "no_harm": 2, "note": "Removes the template.HTML() override so html/template's default context-aware autoescaping applies; minimal, correct fix with no other change."},
+  "R302": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities() applied to the interpolated subject correctly closes the XSS vector; no other observable change."},
+  "R303": {"fix_quality": 2, "no_harm": 2, "note": "Path.resolve()/is_relative_to() containment check correctly rejects absolute-path and traversal escapes while leaving legitimate files under BASE_DIR unaffected."},
+  "R304": {"fix_quality": 2, "no_harm": 2, "note": "Named parameter (:searchPattern via setParameter) correctly replaces concatenation; LIKE wildcard behavior preserved."},
+  "R305": {"fix_quality": 2, "no_harm": 2, "note": "Gate::authorize() enforces the previously-discarded authorization decision; the resulting 403 for unauthorized callers is the fix itself, not an extraneous restriction."},
+  "R306": {"fix_quality": 2, "no_harm": 2, "note": "FlaskForm's built-in CSRF token/validation works standalone (via SECRET_KEY) without requiring the app-wide CSRFProtect extension; correctly closes the CSRF gap for this view."},
+  "R307": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized SqlCommand with @Owner correctly replaces string concatenation; behavior otherwise unchanged."},
+  "R308": {"fix_quality": 2, "no_harm": 1, "note": "Magic-byte MIME allowlist correctly closes CWE-434 for this sink, but the response still returns 'filename': safe_name while the file is actually stored under a different generated UUID name, silently breaking any later retrieval keyed on the returned filename."},
+  "R309": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist mapping of command verbs to fixed handler names eliminates untrusted-input-controlled dynamic dispatch, the required shape of fix for this CWE-77 sink."},
+  "R310": {"fix_quality": 2, "no_harm": 2, "note": "jwt.verify() with secret correctly replaces unverified decode(); expiry/signature checks are inherent to the correct replacement API, not extraneous restriction."}
+}

@@ -1,0 +1,18 @@
+{
+  "R351": {"fix_quality": 2, "no_harm": 2, "note": "html.EscapeString applied to both ticketID and customerNote; extra escaping of ticketID is stated and harmless."},
+  "R352": {"fix_quality": 2, "no_harm": 2, "note": "Callback now copies fd by value at enqueue time instead of a Connection pointer, removing the stale-pointer dereference cleanly."},
+  "R353": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist map keyed by permitted column names, defaults to created_at, matches the stated contract; direction (ASC/DESC) sorting is not supported but the contract only requires column-name sort choices."},
+  "R354": {"fix_quality": 2, "no_harm": 1, "note": "Query was already parameterized (setString) so injection was already closed; the added character/length regex is a new, disclosed restriction that could reject legitimate names (e.g. apostrophes, non-ASCII characters) the original safely accepted."},
+  "R355": {"fix_quality": 2, "no_harm": 2, "note": "Both TenantId and BeforeDate parameterized via SqlParameters; row-count return and tenant scoping preserved per contract."},
+  "R356": {"fix_quality": 2, "no_harm": 2, "note": "Adds can:update,order to the purge route, matching the authorization pattern already used on sibling update/cancel routes."},
+  "R357": {"fix_quality": 2, "no_harm": 1, "note": "redis-py client closes the CRLF injection correctly, but adds disclosed length/type validation that could reject a legitimate long bio, and silently changes the function's return value from the raw SET protocol ack to a subsequent GET result - an undisclosed behavior change."},
+  "R358": {"fix_quality": 2, "no_harm": 2, "note": "Replaces mt_rand with random_bytes(32); clean CSPRNG swap with no other behavior change."},
+  "R359": {"fix_quality": 2, "no_harm": 2, "note": "Tika magic-byte detection replaces header trust, UUID filename satisfies the contract's server-generated-name requirement, and image re-encoding to strip payloads/metadata is disclosed as intentional."},
+  "R360": {"fix_quality": 2, "no_harm": 2, "note": "Double-layer allowlist restricts the table identifier to server-owned literal values while accountId/status stay bound placeholders, matching the contract."},
+  "R361": {"fix_quality": 2, "no_harm": 2, "note": "Switches to IMemcachedClient.Store(), properly framing key/value and preserving the original no-expiration Set behavior as stated."},
+  "R362": {"fix_quality": 2, "no_harm": 2, "note": "Removes the unneeded OS command invocation entirely and writes the parameter directly, a disclosed and appropriate fix for a feature that only ever echoed input."},
+  "R363": {"fix_quality": 2, "no_harm": 2, "note": "html/template with context-aware escaping for both ID and Note fields; extra escaping of ticketID is disclosed and harmless."},
+  "R364": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check throws std::length_error for oversized input, satisfying the contract's 'rejected or truncated consistently' requirement."},
+  "R365": {"fix_quality": 2, "no_harm": 2, "note": "NULL check added before strcmp, returns disabled/default on unset env var exactly as the contract requires."},
+  "R366": {"fix_quality": 2, "no_harm": 2, "note": "Removes HS256 from the allowed algorithms array, closing the RS256/HS256 key-confusion vector with no loss of legitimate RS256 functionality."}
+}

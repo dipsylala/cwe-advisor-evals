@@ -1,0 +1,16 @@
+{
+  "R705": {"fix_quality": 2, "no_harm": 2, "note": "Adds an ObjectInputFilter allowlist (OrderEvent + java.base) before readObject(), preserving native serialization and the RuntimeException-on-reject contract."},
+  "R706": {"fix_quality": 2, "no_harm": 2, "note": "Switches AES/ECB to AES/GCM with a random IV prepended to the ciphertext before Base64; the format change is required for GCM and is disclosed openly."},
+  "R707": {"fix_quality": 2, "no_harm": 2, "note": "ReadAtLeastAsync guarantees a full 8-byte read or an EndOfStreamException before signature validation; the response's bytesRead field is hardcoded to header.Length, which equals the actual value on every success path."},
+  "R708": {"fix_quality": 2, "no_harm": 2, "note": "Uses the existing JNDI parameterized-filter placeholder mechanism for uid, mirroring the pattern already used for street; no other change."},
+  "R709": {"fix_quality": 2, "no_harm": 2, "note": "Standard sqlx parameterized query with ? placeholder replacing fmt.Sprintf concatenation."},
+  "R710": {"fix_quality": 2, "no_harm": 2, "note": "Narrows the CSRF ignore pattern from /api/** to /api/webhooks/**, matching the documented intent; no other change."},
+  "R711": {"fix_quality": 0, "no_harm": 2, "note": "loadProjectExport only checks that userId is truthy (always true once requireAuth has run) and never compares it to project ownership, so any authenticated user can still fetch any project's export - the comment claims a WHERE owner_id check that the code does not implement."},
+  "R712": {"fix_quality": 2, "no_harm": 1, "note": "Sandboxed JEXL evaluator closes the code-injection vector, but the new blanket try/catch silently swallows all evaluation errors and returns basePrice, whereas the original let formula errors propagate as an exception - a disclosed but real behavior change beyond the security fix."},
+  "R713": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check before write; out-of-range edits are skipped rather than applied, a reasonable and openly stated handling of malformed peer input."},
+  "R714": {"fix_quality": 2, "no_harm": 2, "note": "Removes verify_signature:False and verifies HS256 signature against the configured secret; matches original control flow otherwise."},
+  "R715": {"fix_quality": 2, "no_harm": 2, "note": "Array-form proc_open with a -- terminator avoids shell parsing and option injection while producing the same grep invocation as before."},
+  "R716": {"fix_quality": 2, "no_harm": 2, "note": "Replaces orderByRaw with an allowlisted column/direction orderBy(), matching the stated contract for approved sort modes."},
+  "R717": {"fix_quality": 2, "no_harm": 1, "note": "Regex allowlist ^[a-zA-Z0-9._-]{3,64}$ closes LDAP metacharacter injection but is stricter than security requires and could reject legitimate sAMAccountName values containing other characters (spaces, apostrophes, etc.) that are not LDAP-unsafe."},
+  "R718": {"fix_quality": 1, "no_harm": 2, "note": "strlcat/strlcpy correctly bound both writes and preserve the original success-path behavior, but these are BSD functions absent from glibc before 2.38, so the fix risks failing to link on many common Linux targets without an included shim."}
+}

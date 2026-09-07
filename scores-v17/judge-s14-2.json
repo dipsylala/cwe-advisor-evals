@@ -1,0 +1,16 @@
+{
+  "R311": {"fix_quality": 2, "no_harm": 1, "note": "Adds an unconditional 'fileName.includes(\"..\")' reject on top of the path.relative containment check, which alone already closes the vector; the extra check can reject legitimate filenames that merely contain '..' without traversing."},
+  "R312": {"fix_quality": 2, "no_harm": 2, "note": "Clean path.resolve + path.relative containment check; no other observable change beyond closing the vector."},
+  "R313": {"fix_quality": 2, "no_harm": 2, "note": "Standard PDO-style '?' parameterized query via sqlite3, return values and control flow unchanged."},
+  "R314": {"fix_quality": 2, "no_harm": 1, "note": "repr(username) wraps every logged username in quotes and backslash-escapes it, changing the log line's format for benign input too, beyond what's needed to neutralize CRLF injection (change is disclosed)."},
+  "R315": {"fix_quality": 2, "no_harm": 2, "note": "Adds secure:true only; httpOnly, maxAge, and cookie name unchanged."},
+  "R316": {"fix_quality": 2, "no_harm": 0, "note": "GenerateToken()/StoreToken() are defined but never invoked anywhere in the flow, so no client can ever obtain a valid CSRF token and every legitimate POST is now rejected as forbidden; not disclosed as a required follow-up."},
+  "R317": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities() applied to both interpolated values before the print sink; rest of output and control flow unchanged."},
+  "R318": {"fix_quality": 2, "no_harm": 1, "note": "Discards the admin-chosen filename in favor of a random GUID+.cshtml name on every successful upload (stated), breaking any workflow that references or overwrites a template by a known name; the added magic-byte 'binary' check is also ineffective (EXE 'MZ' and most binary signatures pass as printable ASCII/high-bit text) though this doesn't reopen the reported vector."},
+  "R319": {"fix_quality": 2, "no_harm": 2, "note": "Simple unsigned bounds check before the write; in-range behavior unchanged."},
+  "R320": {"fix_quality": 2, "no_harm": 0, "note": "authInterceptor only reads ctx.Value(\"user_id\") but nothing anywhere extracts/sets a user ID from request metadata (no token/JWT parsing), so every RPC call including legitimate authenticated ones is now permanently rejected as Unauthenticated; not disclosed."},
+  "R321": {"fix_quality": 2, "no_harm": 2, "note": "Moves the value into an HTML data attribute (HtmlEncode covers the double-quote), read back via getAttribute(); trackSearch still receives the same value for legitimate input."},
+  "R322": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check against calibrationTable.size(); in-range behavior unchanged, out-of-range returns unmodified reading."},
+  "R323": {"fix_quality": 2, "no_harm": 2, "note": "prepare()/execute([$sku]) parameterized query; return/error handling shape preserved."},
+  "R324": {"fix_quality": 2, "no_harm": 2, "note": "filepath.Abs + Clean + HasPrefix containment check on every entry; nested legitimate paths within extractDir are unaffected."}
+}

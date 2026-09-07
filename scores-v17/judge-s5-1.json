@@ -1,0 +1,18 @@
+{
+  "R178": {"fix_quality": 0, "no_harm": 1, "note": "Text-based syntax-tree denylist is trivially bypassed (e.g. `using S = System;` then `S.IO.File.ReadAllText` evades both the using-namespace and member-access string checks and likely still resolves against the referenced trusted assemblies); also blocks the common benign call `GetType()` on any object, undisclosed break of ordinary rule code."},
+  "R179": {"fix_quality": 2, "no_harm": 2, "note": "Adds `--` end-of-options marker before filenames exactly per contract; no other observable change."},
+  "R180": {"fix_quality": 2, "no_harm": 1, "note": "Correct magic-byte allowlist approach, but response schema silently changes ('path' field replaced by 'message'+'id'/basename) and `file-type` cannot detect plain-text signatures (documented library limitation), so legitimate text/plain uploads in the allowlist likely always fail 415 - not disclosed."},
+  "R181": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(16) replaces Math.random(); no other behavior change."},
+  "R182": {"fix_quality": 2, "no_harm": 0, "note": "Removing mark_safe() closes XSS but also causes Django to escape the entire returned string including the intended `<div class='announcement'>` wrapper tags, so the banner no longer renders as HTML for any user; write-up incorrectly implies only the user text gets escaped. Not disclosed."},
+  "R183": {"fix_quality": 2, "no_harm": 2, "note": "Adds `if (!connection) return;` guard matching contract exactly."},
+  "R184": {"fix_quality": 2, "no_harm": 2, "note": "Statement replaced with PreparedStatement + bound parameter, textbook fix, no other change."},
+  "R185": {"fix_quality": 0, "no_harm": 2, "note": "sanitizeFilter() only neutralizes MongoDB operator objects; since `...sanitizedExtra` is spread last, a plain scalar override like extraCriteria={ownerId:'other-user'} (no $ operator) still overwrites the trusted ownerId/_id anchors, leaving missing-authorization fully exploitable."},
+  "R186": {"fix_quality": 2, "no_harm": 2, "note": "Layered rejection of scheme/absolute-path/null-byte/'..' plus realpath containment check for both existing and non-existent files; chdir() removed cleanly, legitimate access preserved."},
+  "R187": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check against segment.size() replaces untrusted claimedCapacity; signature change removing the capacity param is exactly what the contract calls for."},
+  "R188": {"fix_quality": 2, "no_harm": 2, "note": "unique_ptr->shared_ptr with lambda capturing shared_ptr by value satisfies the contract's 'own/share the Session' branch, stated plainly."},
+  "R189": {"fix_quality": 2, "no_harm": 2, "note": "Null-safe ternary (short-circuits before unboxing) and null-check in isDiscountApplied match contract exactly."},
+  "R190": {"fix_quality": 2, "no_harm": 2, "note": "Adds algorithm-type assertion inside keyfunc plus jwt.WithValidMethods([]string{\"RS256\"}), correct v5 API usage, no side effects for legitimate RS256 tokens."},
+  "R191": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom self-seeded replaces attacker-controlled seed; removal of the seed param is disclosed and was never a legitimate requirement."},
+  "R192": {"fix_quality": 2, "no_harm": 2, "note": "Flips secure flag from false to true, only change, matches sink exactly."},
+  "R193": {"fix_quality": 2, "no_harm": 1, "note": "Primary fix (no shell, exec.Command with argument arrays to ping/nslookup, preserving && short-circuit semantics) fully closes injection; the added target regex allowlist is redundant extra hardening that could reject legitimate hostnames using characters outside `[a-zA-Z0-9.:%-]` (e.g. underscores), undisclosed."}
+}

@@ -402,10 +402,22 @@ which prints the done-set of valid `s<idx>-<j>` keys for a relaunch. The rubric,
 judges per write-up, and the one-pool blinding are unchanged; only what the judge is handed and
 what it can reach changed.
 
-The compile gate's result (Step 3) is withheld from the judges in run 17. They compile on their
-own, as in run 16, and the agreement between the gate's `FAIL` set and the judges' "would not
-compile" notes is the measurement that decides whether a later run hands the gate line to the
-judges in the blinded header and drops their compile turns. A write-up that carries complete
+The compile gate's result (Step 3) was withheld from the judges in run 17 so the two could be
+compared. They agreed on direction (a gate `FAIL` cost 0.8 on both criteria) and the gate won
+every disagreement: eleven write-ups the panel passed unanimously at 2.00 do not build (ten real,
+one checker false positive), and no gate-`OK` write-up drew a compile claim from two judges that
+held. The judges' own compiling catches a subset of what the gate catches and nothing more.
+**From run 18, `blind.py` writes the gate line into the blinded header** (`Build: OK`,
+`Build: FAIL - <first error>`, `Build: unchecked`, identical in form for every arm), and the judge
+prompt adds: "The `Build:` line is the result of applying the write-up's files to the case and
+running the language's compiler or type checker; take it as settled and do not compile anything
+yourself." Measure the saving against run 17's 16k subagent tokens per scored write-up.
+
+Run 17 also found the rubric and the knowledge base pulling against each other on one shape:
+the disclosed-narrowing pin scores an added allowlist as 1 unless the contract asks for it, and
+the CWE-77, 78 and 90 entries prescribe allowlists beside the API fix. Ten of the guided arm's
+unanimous `no_harm` misses are that shape. Whichever side is changed, change it deliberately
+across the family and say so in the run that measures it; do not patch one entry. A write-up that carries complete
 files is not much longer than a snippet one (the run-17 CWE-89 pilot's 84 write-ups packed
 into six 80KB segments, a median of 16 per segment against run 16's 18), because the old
 before/after snippets were most of the file anyway; the segment cap is unchanged.

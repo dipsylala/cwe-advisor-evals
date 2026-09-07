@@ -1,0 +1,16 @@
+{
+  "R561": {"fix_quality": 2, "no_harm": 2, "note": "Adds UPLOAD_ERR_OK check before existing MIME validation, correctly closing the unchecked-upload-error vector without altering behavior for successful uploads."},
+  "R562": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check payloadLength against frameBuffer.size() before memcpy, correct and sufficient; legitimate calls (length <= size) are unaffected."},
+  "R563": {"fix_quality": 2, "no_harm": 2, "note": "Reassigns it = tasks.erase(it) and only increments otherwise; canonical fix, preserves order and evaluates every element per the stated contract."},
+  "R564": {"fix_quality": 2, "no_harm": 2, "note": "Same correct UPLOAD_ERR_OK check as R561; no side effects on legitimate uploads."},
+  "R565": {"fix_quality": 2, "no_harm": 2, "note": "Logs detailed error server-side via log.Printf and returns a fixed generic message to the client, the intended fix for CWE-209; no other observable change."},
+  "R566": {"fix_quality": 2, "no_harm": 2, "note": "Adds server-side IsInRole(\"Admin\") check in the event handler itself (AuthorizeView only gates rendering); correct pattern, legitimate admins still succeed."},
+  "R567": {"fix_quality": 2, "no_harm": 1, "note": "execFile with an argument array alone fully closes the shell-injection vector; the added [a-zA-Z0-9_-]+ allowlist is an extra restriction not required by the fix and could reject legitimate report names (e.g. containing spaces) not shown to be out of scope."},
+  "R568": {"fix_quality": 2, "no_harm": 2, "note": "Escapes the five RFC 4515 LDAP special characters before filter concatenation; correct, standard defense, no effect on non-special input."},
+  "R569": {"fix_quality": 2, "no_harm": 2, "note": "Uses the parameterized DirContext.search(name, filter, filterArgs, cons) API with {0} placeholder, JNDI's own RFC-4515-safe substitution; preferred API for this sink, no behavior change for legitimate values."},
+  "R570": {"fix_quality": 2, "no_harm": 2, "note": "Rejects filenames containing CR/LF before building the FTP command, correctly closing the CRLF command-injection vector; legitimate filenames (no CR/LF) are unaffected."},
+  "R571": {"fix_quality": 2, "no_harm": 2, "note": "Applies htmlspecialchars with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5 and explicit UTF-8 at the echo sink for both message and ticketId; correct context-aware encoding, no behavior change for non-special content."},
+  "R572": {"fix_quality": 2, "no_harm": 2, "note": "Switches from an absolute pointer saved pre-realloc to an offset recomputed against the post-realloc list->data pointer; correctly eliminates the stale-pointer use while preserving last_write_ptr semantics."},
+  "R573": {"fix_quality": 2, "no_harm": 2, "note": "Replaces random.choice with secrets.choice and drops the ineffective reseed; token length/alphabet and RESET_TOKENS mapping-before-response are preserved per the stated contract (leaves an unused `os` import, harmless)."},
+  "R574": {"fix_quality": 2, "no_harm": 2, "note": "Allowlists sortColumn and direction against the exact columns/keys the stated contract calls for, keeping accountId parameterized; matches the contract so the added restriction is not a defect."}
+}

@@ -1,0 +1,17 @@
+{
+  "R266": {"fix_quality": 2, "no_harm": 1, "note": "Eliminates cmd.exe/ping entirely via InetAddress, closing CWE-78 correctly, but InetAddress.isReachable() typically lacks ICMP privileges and falls back to TCP port 7 which is almost never open, so the replacement diagnostic will commonly report UNREACHABLE for genuinely reachable hosts, unlike the original ping - not disclosed."},
+  "R267": {"fix_quality": 2, "no_harm": 2, "note": "Removes template.HTML cast, letting html/template auto-escape; correct idiomatic fix with no other behavior change."},
+  "R268": {"fix_quality": 2, "no_harm": 2, "note": "pathlib resolve()+relative_to() containment check is the standard fix and does not reject legitimate in-directory filenames."},
+  "R269": {"fix_quality": 2, "no_harm": 2, "note": "Adds session_regenerate_id(false) after password verification, the standard session-fixation fix; no other observable change (explanation's claim about timestamp-based hijack detection is dubious but doesn't affect the code)."},
+  "R270": {"fix_quality": 2, "no_harm": 2, "note": "Narrow jobPayload struct plus explicit IsAdmin=false matches the stated contract exactly; gob ignores unmatched fields so Command/Priority still decode correctly."},
+  "R271": {"fix_quality": 2, "no_harm": 2, "note": "Adds PasswordEncoder.matches() check plus dummy-hash timing mitigation; only rejects incorrect credentials, which is the intended fix, no legitimate-caller regression."},
+  "R272": {"fix_quality": 2, "no_harm": 1, "note": "snprintf with truncation check correctly bounds the write, but the fixed 64-byte cap means any legitimate username+message combo over ~60 bytes (realistic given both are described as unbounded) is silently discarded rather than logged, not just truncated; disclosed in the write-up."},
+  "R273": {"fix_quality": 2, "no_harm": 2, "note": "GetFullPath + GetRelativePath containment check is a standard, correct pattern that does not restrict legitimate in-directory files."},
+  "R274": {"fix_quality": 2, "no_harm": 2, "note": "Minimal negation fix exactly restores the intended admin/non-admin branch per the stated contract."},
+  "R275": {"fix_quality": 2, "no_harm": 2, "note": "Adds a role check inside the event handler itself (not just AuthorizeView), matching Microsoft's recommended pattern; admins are unaffected."},
+  "R276": {"fix_quality": 2, "no_harm": 1, "note": "Correctly flips setSecure(false) to true, but the untouched response text still hardcodes \"...secure flag set to: false\", which was coincidentally accurate before and is now false/misleading after the fix; not disclosed."},
+  "R277": {"fix_quality": 2, "no_harm": 1, "note": "Switching @GetMapping to @PostMapping is the correct CSRF fix, but it breaks any existing GET-based caller (e.g. a plain link); the write-up discloses the required frontend change to a POST form."},
+  "R278": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query with ? placeholder is the correct fix; unused fmt import removed, no other behavior change."},
+  "R279": {"fix_quality": 2, "no_harm": 2, "note": "RESP array/length-prefixed encoding is the correct protocol-level fix for CRLF command injection; no restriction on legitimate status messages."},
+  "R280": {"fix_quality": 2, "no_harm": 2, "note": "Adds path-separator-aware containment check (exact match or prefix+separator), correctly closing the sibling-directory bypass without new restrictions on legitimate files."}
+}

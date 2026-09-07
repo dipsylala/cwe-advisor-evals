@@ -1,0 +1,16 @@
+{
+  "R561": {"fix_quality": 2, "no_harm": 2, "note": "Adds UPLOAD_ERR_OK check before MIME validation and move; correct, no side effects."},
+  "R562": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check payloadLength against frameBuffer.size() before memcpy; correct, valid calls unaffected."},
+  "R563": {"fix_quality": 2, "no_harm": 2, "note": "Reassigns erase() return value and conditional increment; satisfies stated contract exactly."},
+  "R564": {"fix_quality": 2, "no_harm": 2, "note": "Same correct UPLOAD_ERR_OK check as R561, no side effects."},
+  "R565": {"fix_quality": 2, "no_harm": 2, "note": "Logs detailed error server-side, returns fixed generic message to client; matches Go guidance, no other behavior change."},
+  "R566": {"fix_quality": 2, "no_harm": 2, "note": "Adds server-side IsInRole(\"Admin\") check in the event handler itself, correctly complementing AuthorizeView; matches only the already-intended admin gate."},
+  "R567": {"fix_quality": 2, "no_harm": 1, "note": "Vector is closed by the stated alphanumeric/underscore/hyphen allowlist on reportName, but that allowlist is an added restriction not called for by any stated contract and could reject legitimate report names (e.g. with spaces); separately, invoking cmd.exe /c explicitly re-shells the call, so the execFile change alone is not actually shell-safe and the regex is doing the real work."},
+  "R568": {"fix_quality": 2, "no_harm": 2, "note": "Manual RFC4515 escaping of the five LDAP filter metacharacters at the concatenation site; only special chars are altered, legitimate values pass through unchanged."},
+  "R569": {"fix_quality": 2, "no_harm": 1, "note": "Correct parameterized DirContext.search(filter, filterArgs) usage, but the undisclosed side effect is that the 'nothing found' message now shows the unsubstituted {0} template instead of the actual query value shown previously."},
+  "R570": {"fix_quality": 2, "no_harm": 2, "note": "Rejects filenames containing CR/LF (the injection mechanism itself) before building the FTP command; narrow restriction targeting only the attack characters."},
+  "R571": {"fix_quality": 2, "no_harm": 2, "note": "Context-aware htmlspecialchars() with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5/UTF-8 applied at the actual echo sink; no functional change for legitimate input."},
+  "R572": {"fix_quality": 2, "no_harm": 2, "note": "Switches last_write_ptr tracking to an offset recomputed after realloc; identical externally observable behavior, UAF eliminated."},
+  "R573": {"fix_quality": 2, "no_harm": 2, "note": "secrets.choice() CSPRNG replacement for random.choice(); token format, length, and response contract all preserved."},
+  "R574": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist for sortColumn/direction is exactly what the stated contract requires (block raw SQL fragments while keeping intended sort keys and default DESC sort)."}
+}

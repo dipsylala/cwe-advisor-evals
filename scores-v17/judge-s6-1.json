@@ -1,0 +1,16 @@
+{
+  "R194": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist maps tool names to absolute paths, matching the handler's own docstring scope of 'a handful of' diagnostic utilities; clean fix with no other observable change."},
+  "R195": {"fix_quality": 2, "no_harm": 1, "note": "execFile+cmd.exe alone does not close the injection (verified: cmd.exe re-parses '/c' args, '&' still executes injected commands); the actual protection is the new alnum-only regex, which silently rejects report names with spaces/punctuation the original accepted, mischaracterized in the write-up as mere 'defense-in-depth'."},
+  "R196": {"fix_quality": 2, "no_harm": 1, "note": "Correctly fixes traversal/extension/webroot issues via random filename, private dir, and a controlled route, but switches serving to res.download() which adds Content-Disposition: attachment not present with the original express.static serving, an undisclosed output change that can break inline avatar rendering."},
+  "R197": {"fix_quality": 2, "no_harm": 2, "note": "FromSqlInterpolated correctly parameterizes tenantId and the LIKE pattern; empty-term and return-type behavior unchanged from original."},
+  "R198": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom.nextBytes replaces Math.random() cleanly; rememberMeKey remains a String used identically downstream, no other behavior change."},
+  "R199": {"fix_quality": 2, "no_harm": 2, "note": "Forwards error to the existing centralized handler via next(error), preserving success/404/500 shapes and still logging server-side."},
+  "R200": {"fix_quality": 2, "no_harm": 2, "note": "supports() correctly narrowed to ApiKeyAuthenticationToken; no other behavior touched."},
+  "R201": {"fix_quality": 2, "no_harm": 2, "note": "Capacity argument corrected to requestedCapacity, matching the stated contract exactly; no other change."},
+  "R202": {"fix_quality": 0, "no_harm": 0, "note": "Import 'org.apache.commons.jexl3.JexlSandbox' is wrong (actual class is org.apache.commons.jexl3.introspection.JexlSandbox in every published 3.x jar checked: 3.3/3.4.0/3.5.0/3.6.2) -- confirmed by compiling against the real jars; code does not compile."},
+  "R203": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the evaluated string with a closure callback to setTimeout; response shape and behavior unchanged."},
+  "R204": {"fix_quality": 2, "no_harm": 2, "note": "Swaps the branches back so admins get all orders and non-admins get only their own, exactly matching the stated contract."},
+  "R205": {"fix_quality": 2, "no_harm": 2, "note": "Standard, complete XXE hardening (disallow-doctype-decl, external entities/DTD off, ACCESS_EXTERNAL_* empty); no other behavior change."},
+  "R206": {"fix_quality": 2, "no_harm": 0, "note": "isolated-vm correctly isolates the sandbox, but 'emit' is set as a raw IsolatedVm.Reference, not a callable inside the isolate; confirmed by installing and running isolated-vm that a script calling emit(orderId, action) as documented throws 'emit is not a function', silently breaking every legitimate automation script."},
+  "R207": {"fix_quality": 2, "no_harm": 2, "note": "Adds IsAdminUser to a viewset that previously had no permission_classes (AllowAny), consistent with the model's 'internal API keys' description; no other change."}
+}

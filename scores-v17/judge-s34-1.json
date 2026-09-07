@@ -1,0 +1,18 @@
+{
+  "R619": {"fix_quality": 2, "no_harm": 2, "note": "Replaces raw socket/RESP hand-building with redis-py hset(); preserves cache_key/field/value and connection params."},
+  "R620": {"fix_quality": 2, "no_harm": 1, "note": "spawnSync array closes shell injection, but result.error only reflects spawn failure not convert's non-zero exit, so a failed conversion now silently returns 200 success (undisclosed behavior change)."},
+  "R621": {"fix_quality": 0, "no_harm": 2, "note": "Only whitelists the caller-supplied content_type string; never inspects file_bytes, so an attacker can still spoof 'image/jpeg' over dangerous bytes -- contract explicitly requires real-type detection or rejection based on actual bytes, which this omits entirely."},
+  "R622": {"fix_quality": 2, "no_harm": 2, "note": "Drops sh -c and calls tar directly with archiveName as -f's sole required value (no room for separate flag injection); contract (400/500/text-plain/context) fully preserved."},
+  "R623": {"fix_quality": 2, "no_harm": 2, "note": "Adds server-side ownership check, uniform 404 for missing/not-owned, matches contract precisely."},
+  "R624": {"fix_quality": 2, "no_harm": 2, "note": "escapeHtml4 applied at both interpolation points; output structure otherwise unchanged."},
+  "R625": {"fix_quality": 2, "no_harm": 2, "note": "random_bytes(32)/bin2hex gives correct high-entropy token; dropping the attacker-influenced client_nonce prefix is disclosed and serves no legitimate purpose."},
+  "R626": {"fix_quality": 2, "no_harm": 1, "note": "csurf token defense is the right class of fix, but now requires clients to fetch a token first (new required step) and the default csurf error path returns a non-JSON error, diverging from the contract's '403 JSON' requirement; the new client obligation is disclosed but not the JSON-format regression."},
+  "R627": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized stored-procedure call preserves the call contract; customerId always treated as a literal value."},
+  "R628": {"fix_quality": 2, "no_harm": 0, "note": "Upload side correctly content-sniffs and randomizes the filename, but avatar_lookup.go's ReadAvatarBytes(originalFilename) is never updated to the new naming scheme, silently breaking retrieval for every future upload -- the exact failure mode the stated contract calls out, and it isn't mentioned in the write-up."},
+  "R629": {"fix_quality": 2, "no_harm": 2, "note": "Argument-array subprocess plus basename check and directory-joined paths also close the flag-injection gap (path always prefixed by a fixed dir); behavior preserved for ordinary filenames."},
+  "R630": {"fix_quality": 2, "no_harm": 2, "note": ".at() converts the out-of-bounds write into a bounds-checked exception, the standard fix for an untrusted index into std::string."},
+  "R631": {"fix_quality": 2, "no_harm": 2, "note": "Null-safe defaults (treat null as 0 discount / not applied) match the stated contract exactly, including the never-negative clamp."},
+  "R632": {"fix_quality": 2, "no_harm": 2, "note": "markupsafe.escape() applied at each concatenation point; output otherwise unchanged."},
+  "R633": {"fix_quality": 2, "no_harm": 2, "note": "Normalizes destination once and reuses it for both resolve() and startsWith(), closing the canonicalization mismatch cleanly."},
+  "R634": {"fix_quality": 0, "no_harm": 1, "note": "Regex denylist over source text is trivially bypassed (e.g. alias `x = eval` so 'eval(' never appears, build '__import__' via string concatenation so the dunder pattern never appears), so the arbitrary-code-execution vector is not actually closed; separately, blocking type/isinstance/lambda outright would reject legitimate transform scripts, disclosed but unrequired by any stated contract."}
+}

@@ -1,0 +1,16 @@
+{
+  "R750": {"fix_quality": 2, "no_harm": 2, "note": "Array-form exec() closes the injection on its own; the hostname/IPv6 allowlist regex is reasonable defense-in-depth that doesn't block legitimate hosts."},
+  "R751": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(16).toString('base64url') correctly replaces Math.random for the same token role, no other behaviour change."},
+  "R752": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom-derived byte token correctly replaces the weak float-derived key; format change is internal/self-consistent (generated and compared by the same code), no external contract affected."},
+  "R753": {"fix_quality": 0, "no_harm": 0, "note": "Imports org.owasp.html.Encode, but that class does not exist in the OWASP HTML Sanitizer package - Encode.forHtml lives in org.owasp.encoder.Encode - so the file as written does not compile and the servlet breaks entirely, silently."},
+  "R754": {"fix_quality": 2, "no_harm": 2, "note": "Converts the vulnerable state-changing GET into a confirmation page plus CSRF-protected POST, the standard/necessary remediation for this exact finding, openly documented in code and explanation."},
+  "R755": {"fix_quality": 2, "no_harm": 1, "note": "Fully closes the code-injection vector, but replaces the endpoint's stated core feature (arbitrary analyst-authored Python transform scripts) with 3 hardcoded string ops, breaking legitimate scripts other than uppercase/lowercase/trim - disclosed, but still a real restriction on stated legitimate use."},
+  "R756": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query preserves the exact-match contract; search.js correctly left untouched as required."},
+  "R757": {"fix_quality": 1, "no_harm": 1, "note": "Rejects any key/value containing CRLF instead of using proper RESP length-prefixed framing (which the class explicitly bypasses); a legitimate multi-line 'note text' now throws instead of being safely transmitted."},
+  "R758": {"fix_quality": 2, "no_harm": 2, "note": "weak_ptr + lock() matches the stated contract exactly (live observers only, subscription order preserved, safe skip on expiry); subscribe() signature change is required and self-contained within the two shown files."},
+  "R759": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte allowlist plus random server-side filename correctly closes the dangerous-upload vector; response never exposed the original filename, so no observable change for legitimate callers."},
+  "R760": {"fix_quality": 2, "no_harm": 2, "note": "Move-captures the unique_ptr into the lambda so the callback owns the Session, exactly the option the stated contract permits; still enqueues exactly one callback."},
+  "R761": {"fix_quality": 2, "no_harm": 2, "note": "HttpUtility.HtmlEncode is the correct, minimal fix for this Response.Write sink."},
+  "R762": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte sniffing plus allowlist correctly replaces trust in the client-supplied Content-Type; extension/filename derived safely, same allowed image types as before."},
+  "R763": {"fix_quality": 2, "no_harm": 2, "note": "JsonSerializer.Serialize for the JS-string context correctly closes the XSS and matches the stated contract (Title stays Razor-encoded, refreshSeconds stays numeric, label still exposed)."}
+}

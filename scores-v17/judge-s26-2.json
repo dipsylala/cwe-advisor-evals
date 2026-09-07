@@ -1,0 +1,21 @@
+{
+  "R492": {"fix_quality": 0, "no_harm": 1, "note": "loadProjectExport sets project.ownerId = userId (the caller's own id) then checks ownerId !== userId, which is always false, so the 'ownership check' can never reject any user/project pair; the CWE-862 vector is not closed. Also silently adds an ownerId field to the JSON response and swaps 404 for 403 without flagging it as a behavior change."},
+  "R493": {"fix_quality": 2, "no_harm": 2, "note": "Correctly flips the Secure flag to true; nothing else changed."},
+  "R494": {"fix_quality": 2, "no_harm": 2, "note": "Correct shape for this sink: allowlist for the unparameterizable field identifier plus bound values for tenant_id/term, matching the stated contract."},
+  "R495": {"fix_quality": 2, "no_harm": 2, "note": "Correct RFC 4515 escaping of *, (, ), \\, NUL before concatenation; no other behavior change."},
+  "R496": {"fix_quality": 2, "no_harm": 2, "note": "Standard parameterized JdbcTemplate query with orderNumber bound via placeholder."},
+  "R497": {"fix_quality": 2, "no_harm": 2, "note": "operator[] replaced with bounds-checked .at(); invalid index silently dropped, which is the only option for a void function and is stated."},
+  "R498": {"fix_quality": 2, "no_harm": 2, "note": "math/rand replaced with crypto/rand + base64-encoded 32-byte token; cookie flags unchanged."},
+  "R499": {"fix_quality": 2, "no_harm": 2, "note": "vector<string_view> changed to vector<string> so the cache owns its data; no other behavior change, matches contract."},
+  "R500": {"fix_quality": 2, "no_harm": 2, "note": "secrets.randbelow(max-min+1)+min reproduces the same inclusive range as random.randint."},
+  "R501": {"fix_quality": 2, "no_harm": 2, "note": "Canonical-path prefix check correctly rejects both relative traversal and absolute-path override of the File(parent,child) constructor; legitimate in-directory files still served."},
+  "R502": {"fix_quality": 2, "no_harm": 2, "note": "operator[] replaced with .at(), throwing on invalid slot as the contract requires; Badge shape unchanged."},
+  "R503": {"fix_quality": 0, "no_harm": 2, "note": "Verified with a live run: %s-style logging produces byte-identical output to the f-string version when username contains embedded newlines, so CRLF/log-forging is not neutralized; CWE-117 vector remains open."},
+  "R504": {"fix_quality": 2, "no_harm": 2, "note": "node-serialize's unserialize() (which can execute embedded IIFEs) replaced with JSON.parse in a try/catch; legitimate plain-object cookies produced by serialize.serialize() remain valid JSON and still parse."},
+  "R505": {"fix_quality": 2, "no_harm": 2, "note": "Adds passwordEncoder.matches() check against the stored hash before issuing the token; required new PasswordEncoder dependency is disclosed."},
+  "R506": {"fix_quality": 2, "no_harm": 2, "note": "HtmlEncoder.Default.Encode applied to both query values before HTML concatenation; correct context, no other change."},
+  "R507": {"fix_quality": 2, "no_harm": 2, "note": "Shell exec eliminated entirely in favor of Files.list(); neither original nor fixed code writes output to the HTTP response, so observable behavior is preserved."},
+  "R508": {"fix_quality": 2, "no_harm": 2, "note": "sh -c string replaced with exec.Command(\"convert\", inputPath, ...) argument array, meeting the stated contract of resizing valid images while treating paths as literal args."},
+  "R509": {"fix_quality": 2, "no_harm": 2, "note": "HttpUtility.JavaScriptStringEncode is the context-correct API for a JS string literal (escapes quotes/backslash/newlines), unlike HTML encoding which would be wrong here."},
+  "R510": {"fix_quality": 1, "no_harm": 2, "note": "Manual check only inspects member.name for '..'/leading '/', missing symlink-based traversal (a symlink member plus a second member written through it) that the standard extractall(filter='data') mitigation (available on this Python 3.11 runtime) covers; workable but not the idiomatic/complete shape for this sink."}
+}

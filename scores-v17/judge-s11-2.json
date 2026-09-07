@@ -1,0 +1,17 @@
+{
+  "R266": {"fix_quality": 2, "no_harm": 1, "note": "Eliminates cmd.exe injection via InetAddress, matching CWE-78 guidance, but adds an undisclosed-as-restriction count cap (1-10) and silently replaces real ping output with a boolean reachable/unreachable message."},
+  "R267": {"fix_quality": 2, "no_harm": 2, "note": "Canonical Go fix: string field lets html/template auto-escape; closes XSS with no other observable change."},
+  "R268": {"fix_quality": 2, "no_harm": 2, "note": "resolve()+relative_to() correctly blocks absolute-path and .. escapes while still serving any legitimate file under BASE_DIR."},
+  "R269": {"fix_quality": 2, "no_harm": 2, "note": "Adds session_regenerate_id(false) right after password verification; correctly closes fixation, preserves existing auth logic."},
+  "R270": {"fix_quality": 2, "no_harm": 2, "note": "Narrow jobPayload struct decodes only Command/Priority, IsAdmin set false by server code, matching the stated contract exactly."},
+  "R271": {"fix_quality": 2, "no_harm": 2, "note": "Adds real password comparison via PasswordEncoder.matches() plus timing-safe dummy-hash path; the extra PasswordEncoder dependency is intrinsic to the fix, not an incidental restriction."},
+  "R272": {"fix_quality": 2, "no_harm": 1, "note": "snprintf with truncation check correctly stops the overflow, but on overflow the whole audit-log entry is silently discarded rather than truncated-and-logged; disclosed in the write-up but likely to trigger often given the 64-byte buffer."},
+  "R273": {"fix_quality": 2, "no_harm": 2, "note": "GetFullPath + GetRelativePath containment check correctly blocks traversal/absolute paths while allowing in-directory files."},
+  "R274": {"fix_quality": 2, "no_harm": 2, "note": "Simple negation fix matches the stated contract exactly: admins get all, others get only their own orders."},
+  "R275": {"fix_quality": 2, "no_harm": 2, "note": "Adds explicit server-side Admin role check in the event handler before deletion, independent of AuthorizeView rendering; no other behavior change."},
+  "R276": {"fix_quality": 2, "no_harm": 1, "note": "Correctly flips setSecure to true, but leaves the response text hardcoded as 'secure flag set to: false', now misleading and not mentioned in the write-up."},
+  "R277": {"fix_quality": 2, "no_harm": 1, "note": "Converts the state-changing endpoint from GET to POST, the standard CSRF fix, but this breaks any existing direct-link/GET-based caller; the write-up discloses the required frontend change as a follow-up rather than it being caught silently."},
+  "R278": {"fix_quality": 2, "no_harm": 2, "note": "Replaces fmt.Sprintf concatenation with a bound placeholder passed to sqlx.Select; closes SQLi with no behavior change for legitimate categories."},
+  "R279": {"fix_quality": 2, "no_harm": 2, "note": "Switches to length-prefixed RESP array encoding, the correct protocol-level fix for Redis command injection; no legitimate functionality lost, UTF-8 encoding is a minor unstated improvement over ASCII."},
+  "R280": {"fix_quality": 2, "no_harm": 2, "note": "Adds filepath.Separator to the prefix check, correctly rejecting sibling directories like uploads-backup while still allowing files under uploadsDir."}
+}

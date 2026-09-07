@@ -1,0 +1,15 @@
+{
+  "R449": {"fix_quality": 2, "no_harm": 2, "note": "Adds a per-category method allowlist checked before dynamic dispatch, closing the reflection vector without altering the accepted email.send path."},
+  "R450": {"fix_quality": 2, "no_harm": 2, "note": "can:refund,order middleware + OrderPolicy ownership check runs before the controller, matches the stated contract exactly with no side effects on the success response."},
+  "R451": {"fix_quality": 2, "no_harm": 2, "note": "Extension allowlist plus GUID-based rename and canonical-path check fully close the traversal/dangerous-type upload; the renamed response is disclosed and does not reject legitimate .cshtml uploads."},
+  "R452": {"fix_quality": 2, "no_harm": 2, "note": "Adds secure:true only; no other observable change."},
+  "R453": {"fix_quality": 2, "no_harm": 2, "note": "html.escape() on the label correctly neutralizes the injection point that Markup() was suppressing; no behavior change for benign labels."},
+  "R454": {"fix_quality": 2, "no_harm": 2, "note": "ValidAlgorithms pinned to HmacSha256 matches the SymmetricSecurityKey in use; closes algorithm-confusion cleanly."},
+  "R455": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check field_index >= MAX_FIELDS before the array read, preserves existing -1 error contract."},
+  "R456": {"fix_quality": 2, "no_harm": 2, "note": "subtle.ConstantTimeCompare enforces exact equality plus timing safety, matching the stated contract precisely."},
+  "R457": {"fix_quality": 1, "no_harm": 2, "note": "Only checks uri.getScheme()!=null; a protocol-relative payload like //evil.com/path has no scheme and passes the check, so the open redirect is not fully closed."},
+  "R458": {"fix_quality": 2, "no_harm": 1, "note": "archive/tar replacement eliminates the shell entirely (appropriate for this sink), but ctx is now unused so request-context cancellation, which the contract requires preserved, silently no longer works and this is not mentioned in the write-up."},
+  "R459": {"fix_quality": 2, "no_harm": 2, "note": "weak_ptr/shared_ptr with lock()-and-erase is the idiomatic fix for a dangling-observer UAF and preserves subscription order and live-observer delivery."},
+  "R460": {"fix_quality": 1, "no_harm": 2, "note": "Escaping only handles backslash/quote; a raw CR/LF inside the quoted value is left unescaped and relies on Redis's inline-parser rejecting the resulting unbalanced quote (connection error) rather than an intentional, explicit CRLF defense - fragile shape for this sink versus using the maintained redis-py client."},
+  "R461": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom() replaces the user-seedable Random; seed parameter is explicitly discarded as stated, no other behavior change."}
+}

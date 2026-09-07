@@ -1,0 +1,27 @@
+{
+  "R840": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Adds Authentication param and swaps findAll() for existing findByOwnerUsername(authentication.getName()), exactly matching the stated contract; compiles, no other observable change."
+  },
+  "R841": {
+    "fix_quality": 0,
+    "no_harm": 0,
+    "note": "No code diff is shown at all - the Fix section is prose-only (python-magic detection, allowlist, uuid4 key), so it cannot be verified to close the vector or compile, and it also describes silently discarding the caller-supplied key without showing how retrieval by that key still works."
+  },
+  "R842": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Replaces Math.random() with crypto.randomBytes(8).toString('hex'), the correct CSPRNG API for Node; format/length change (8-char base36 to 16-char hex) is self-contained (server generates and consumes its own code) and disclosed, blocking no legitimate use."
+  },
+  "R843": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Moves query.term out of the template source into a Jinja2 context variable rendered via {{ query_term }}, relying on Flask's default autoescape (on when render_template_string has no filename); closes both XSS and the latent SSTI from the original whole-string-as-template render, no other behavior change."
+  },
+  "R844": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Absolute-path containment check after filepath.Join correctly and sufficiently closes the traversal; the added pre-check rejecting any entry.Name merely containing a '..' substring (not just as a path segment) is an extra restriction beyond what's needed and could reject a legitimate filename like 'notes..txt' - stated openly, so 1 not 0."
+  }
+}

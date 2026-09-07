@@ -1,0 +1,18 @@
+{
+  "R178": {"fix_quality": 1, "no_harm": 1, "note": "Denylist-style AST check on namespace/method-name substrings is bypassable (e.g. reflection via Type.GetMethod + delegate call, avoiding literal 'Invoke'/'GetType' call text) and its naive Contains() matching also silently rejects legitimate rule code whose method names merely contain banned substrings."},
+  "R179": {"fix_quality": 2, "no_harm": 2, "note": "-- end-of-options marker makes leading-dash filenames literal operands, matching the stated contract exactly; no other change."},
+  "R180": {"fix_quality": 2, "no_harm": 1, "note": "Magic-byte detection + allowlist + random filename is the right shape, but the write-up never discloses that the JSON response field changes from path (full disk path) to id (basename), a silent API contract change for callers."},
+  "R181": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(16) replaces Math.random(); no other observable change."},
+  "R182": {"fix_quality": 1, "no_harm": 0, "note": "Removing mark_safe() blanket-escapes the whole banner_markup string, including the trusted <div class='announcement'> wrapper itself, so every legitimate announcement now renders as visible raw tag text instead of a styled div - a regression on all legitimate calls, not disclosed; correct fix would escape only announcement_text before wrapping."},
+  "R183": {"fix_quality": 2, "no_harm": 2, "note": "Null check on lock() result with early return matches the stated contract (skip silently on expired connection)."},
+  "R184": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with bound parameter; behavior otherwise unchanged."},
+  "R185": {"fix_quality": 2, "no_harm": 2, "note": "mongoose.sanitizeFilter() is the framework's own recommended defense for operator-injection into a filter object; legitimate scalar extra criteria still work."},
+  "R186": {"fix_quality": 2, "no_harm": 2, "note": "realpath() canonicalization plus stream-wrapper/absolute-path/null-byte rejection closes the traversal; legitimate in-directory files still resolve and serve correctly."},
+  "R187": {"fix_quality": 2, "no_harm": 2, "note": "Drops the untrusted claimedCapacity parameter and bounds against segment.size(), exactly matching the stated contract."},
+  "R188": {"fix_quality": 2, "no_harm": 2, "note": "unique_ptr to shared_ptr with by-value capture is one of the two options the stated contract explicitly sanctions, and the signature change is stated openly."},
+  "R189": {"fix_quality": 2, "no_harm": 2, "note": "Null-safe handling in both applyDiscount and isDiscountApplied matches the stated contract precisely."},
+  "R190": {"fix_quality": 2, "no_harm": 2, "note": "Algorithm type-check in keyfunc plus WithValidMethods closes the RS256/HS256 confusion; no other behavior change."},
+  "R191": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom replaces attacker-seeded Random; dropping the now-unused seed param only makes the endpoint more permissive, not less."},
+  "R192": {"fix_quality": 2, "no_harm": 2, "note": "secure flag flipped to true on the auth cookie; no other change."},
+  "R193": {"fix_quality": 2, "no_harm": 2, "note": "Shell eliminated (direct ping/nslookup exec.Command with arg arrays) plus hostname/IP allowlist regex; write-up correctly preserves the original's ping-then-nslookup-on-success and combined-output/error semantics."}
+}

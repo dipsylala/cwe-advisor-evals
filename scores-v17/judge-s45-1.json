@@ -1,0 +1,16 @@
+{
+  "R780": {"fix_quality": 2, "no_harm": 2, "note": "secrets.choice() replaces random.choice() cleanly; same alphabet, length, and mapping/response flow preserved."},
+  "R781": {"fix_quality": 2, "no_harm": 1, "note": "correct content-sniffed allowlist + safe filename pattern, but adds a MIME allowlist (jpg/png/gif/pdf only) and 10MB cap not present before, openly stated, that rejects previously-accepted file types/sizes."},
+  "R782": {"fix_quality": 2, "no_harm": 2, "note": "c:out with default escapeXml=true closes the XSS with no behavior change for legitimate names."},
+  "R783": {"fix_quality": 2, "no_harm": 1, "note": "SHA256 allowlist is an appropriate control for arbitrary assembly loading, but ships with an empty allowlist so every upload is rejected until an operator populates it - stated openly as a required follow-up."},
+  "R784": {"fix_quality": 2, "no_harm": 2, "note": "crypto/rand.Reader with byte-to-alphabet modulo mapping preserves the 32-char key/alphabet/apiKeys/400-path contract; added 500 path only triggers on an effectively-never-failing read."},
+  "R785": {"fix_quality": 2, "no_harm": 1, "note": "correct allowlist-based open-redirect defense, but the domain allowlist (localhost/127.0.0.1/trusted-partner.com) is a new restriction on what the original code allowed to redirect to, stated openly."},
+  "R786": {"fix_quality": 1, "no_harm": 2, "note": "closes the reported ECB pattern-leakage but CBC still lacks integrity/authentication; the already-imported cryptography library supports AES-GCM (AEAD), the modern preferred mode, with similar effort; IV-prepend format change is necessary and disclosed."},
+  "R787": {"fix_quality": 2, "no_harm": 2, "note": "mysqli prepared statement with bound string parameter is the correct API; return shape and error paths unchanged."},
+  "R788": {"fix_quality": 2, "no_harm": 2, "note": "fixed call template with setString(1, param) is the standard parameterized CallableStatement pattern, matching the canonical safe form for this benchmark family."},
+  "R789": {"fix_quality": 2, "no_harm": 2, "note": "checks verify()'s boolean return and rejects with 401 on failure; valid-signature path unchanged, exactly the missing check."},
+  "R790": {"fix_quality": 2, "no_harm": 2, "note": "length-first bounds check avoids unsigned wraparound and exactly matches the stated contract for valid/invalid windows."},
+  "R791": {"fix_quality": 2, "no_harm": 2, "note": "fixed \"%s\" format string plus Encode.forHtml() closes both the XSS and the underlying format-string injection while leaving benign output unchanged."},
+  "R792": {"fix_quality": 1, "no_harm": 1, "note": "keeps the vulnerable string-concatenated call and gates it with an allowlist of invented procedure names (benchmark_proc/test_procedure/data_retrieval) instead of parameterizing the value as the sibling fix for this same file does with testprocedure(?), risking silently rejecting the actual legitimate call."},
+  "R793": {"fix_quality": 2, "no_harm": 2, "note": "adds the missing check that receivedByteCount covers header+payload before memmove, closing the OOB read without altering behavior for complete/valid messages."}
+}

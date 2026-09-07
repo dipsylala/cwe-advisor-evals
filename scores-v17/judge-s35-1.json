@@ -1,0 +1,15 @@
+{
+  "R635": {"fix_quality": 2, "no_harm": 2, "note": "sendRedirect gated on host==null, scheme denylist, and required leading '/'; correctly closes the open-redirect vector and matches the cited Java guidance."},
+  "R636": {"fix_quality": 2, "no_harm": 2, "note": "server-generated random filename plus magic-byte content sniffing (http.DetectContentType) fully removes filename-based traversal; the changed response filename is disclosed and doesn't stop legitimate uploads from succeeding."},
+  "R637": {"fix_quality": 2, "no_harm": 2, "note": "textbook sprintf->snprintf(sizeof) fix; disclosed truncation on oversize input doesn't stop the log write from succeeding."},
+  "R638": {"fix_quality": 2, "no_harm": 2, "note": "host==null + case-insensitive scheme denylist correctly closes the external-redirect vector reported at this sink."},
+  "R639": {"fix_quality": 2, "no_harm": 2, "note": "clean parameterized DB::select with placeholder binding, no other behavior change."},
+  "R640": {"fix_quality": 2, "no_harm": 2, "note": "vector<string_view> -> vector<string> gives names_ ownership, resolving the dangling reference; matches stated contract and leaves bounds-checking out of scope as instructed."},
+  "R641": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath() + startsWith(baseDir) containment check correctly closes traversal; nonexistent/outside paths both still map to an error response as before."},
+  "R642": {"fix_quality": 2, "no_harm": 2, "note": "switches to DirContext.search's parameterized filterArgs overload, which JNDI escapes per RFC 4515; SearchControls() default matches the prior null-controls default, so no behavior change beyond the fix."},
+  "R643": {"fix_quality": 2, "no_harm": 2, "note": "Math.random() replaced with SecureRandom-backed 128-bit token, used identically as the remember-me cookie/session value elsewhere in the file."},
+  "R644": {"fix_quality": 1, "no_harm": 0, "note": "check_password() is the wrong API for this sink's actual data: verified against a live Django 6.1 runtime that check_password() falls back to fake_runtime and returns False whenever the stored value isn't a recognized hasher-encoded string (as this legacy plaintext column is by the docstring's own description), so every legitimate legacy user would be silently locked out of login; the write-up's claim that it 'works regardless of whether the stored password is plaintext' is verified false."},
+  "R645": {"fix_quality": 2, "no_harm": 2, "note": "crypto/rand.Read into a 32-byte key mapped through the same alphabet closes the weak-PRNG finding; still 32 chars, still recorded in apiKeys before writing, 400 path untouched, matching the stated contract."},
+  "R646": {"fix_quality": 2, "no_harm": 2, "note": "jwt.decode() replaced with jwt.verify(token, secret); string secret defaults jsonwebtoken to HMAC algorithms, avoiding alg-confusion, and error handling/response shape otherwise unchanged."},
+  "R647": {"fix_quality": 2, "no_harm": 2, "note": "Statement/string-concat query replaced with PreparedStatement + setString bind; no other behavior change."}
+}

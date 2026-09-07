@@ -1,0 +1,15 @@
+{
+  "R678": {"fix_quality": 2, "no_harm": 1, "note": "th:text closes XSS fully but blanket-escapes everything rather than allowlist-sanitizing, so intentionally supported rich-text tags no longer render as HTML (goes beyond the stated contract); disclosed openly in the explanation."},
+  "R679": {"fix_quality": 2, "no_harm": 2, "note": "Wraps exportUsersHandler with requireAdmin exactly as other admin routes; only other change is a stated comment update."},
+  "R680": {"fix_quality": 2, "no_harm": 2, "note": "Adds bcrypt.compare before accepting the user; rejection path is the intended fix itself, not an extraneous restriction."},
+  "R681": {"fix_quality": 2, "no_harm": 1, "note": "Correct GET-to-POST + ValidateAntiForgeryToken fix, but write-up openly notes the confirm-delete view/form is not actually updated to POST with the token, so the endpoint would stop working for legitimate use until that follow-up lands."},
+  "R682": {"fix_quality": 2, "no_harm": 2, "note": "Argument-array ProcessBuilder closes the reported shell-metacharacter injection; residual leading-'-' flag-injection risk (a distinct CWE-88 concern) predates the fix and isn't newly introduced."},
+  "R683": {"fix_quality": 2, "no_harm": 2, "note": "Standard $1..$n parameterized IN-clause with ids passed as query params; matches the stated contract for any array of ids."},
+  "R684": {"fix_quality": 2, "no_harm": 2, "note": "Re-indexes tasks[activeIndex] after push_back instead of using the stale reference; only the invalidated access is changed."},
+  "R685": {"fix_quality": 2, "no_harm": 2, "note": "XmlResolver = null before LoadXml is the standard OWASP-recommended XXE mitigation for XmlDocument; no behavior change for documents without external entities."},
+  "R686": {"fix_quality": 2, "no_harm": 2, "note": "Filter template converted to two placeholders ({0}/{1}) with filterArgs, preserving original filter semantics while letting JNDI escape values per RFC 4515."},
+  "R687": {"fix_quality": 2, "no_harm": 2, "note": "Replaces fmt.Sprintf string building with a ? placeholder and QueryRow(query, username); standard database/sql parameterization."},
+  "R688": {"fix_quality": 2, "no_harm": 2, "note": "Captures bytesSent() into a local before unique_ptr.reset() destroys the object; same value, no other side effects."},
+  "R689": {"fix_quality": 2, "no_harm": 2, "note": "Rejects '..'/absolute paths and verifies canonical containment within the base dir before opening; matches OWASP Benchmark path-traversal fix pattern with no behavior change for legitimate filenames."},
+  "R690": {"fix_quality": 2, "no_harm": 2, "note": "unserialize($payload, ['allowed_classes' => false]) is the canonical format-preserving PHP fix for object injection; empty/invalid cookie and legitimate items/coupon shape both preserved as required."}
+}

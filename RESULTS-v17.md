@@ -1,7 +1,7 @@
 # Run 17 - complete-file write-ups and the compile gate
 
-**Status: arms and gate complete; judging not yet run.** This file records the arm-level result
-the gate gives on its own. The judged tables will be appended when the pool is scored.
+Arms, gate and judging complete. The first half of this file is the gate on its own; the judged
+tables and the gate-versus-judge comparison follow under **Judged**.
 
 ## What changed
 
@@ -123,6 +123,89 @@ The gate does not see everything a judge sees: a fix that compiles and does noth
 compiles and breaks the contract, or a fix in a template. It sees the slip bucket exactly, and it
 sees it in twenty minutes of machine time.
 
+## Judged
+
+Three `cwe-judge` agents (Sonnet 5, `claude-sonnet-5`) per bundle segment, 50 segments of the
+744-item pool, rubric with the disclosed-narrowing pin (HARNESS.md Step 5). The gate result was
+withheld from the judges. 150 of 150 score files valid on the first launch; 11.9M subagent
+tokens, 59 minutes, about 16k tokens per scored write-up.
+
+| Set | n | fix_quality | no_harm | clean (2.00/2.00) | fq splits | nh splits |
+| --- | --- | --- | --- | --- | --- | --- |
+| A (no guidance) | 372 | 1.80 | 1.76 | 256 | 42 | 51 |
+| B (skill) | 372 | 1.91 | 1.74 | 263 | 27 | 64 |
+
+Paired by case: `fix_quality` B above A on 64 cases, A above B on 22, tied on 286. `no_harm`
+A above B on 73, B above A on 59, tied on 240. These numbers sit on the run-17 scale (fresh
+samples, complete-file format, compiling panel with the pin) and are not comparable to runs
+11-16 by value; the arm gap is the comparison.
+
+By language (fq / nh, clean):
+
+| Language | A | B |
+| --- | --- | --- |
+| c | 1.92 / 1.79, 18 of 22 | 1.97 / 1.91, 18 |
+| cpp | 1.88 / 1.84, 16 of 19 | 2.00 / 1.91, 18 |
+| csharp | 1.73 / 1.68, 34 of 54 | 1.93 / 1.72, 35 |
+| go | 1.79 / 1.67, 28 of 43 | 1.93 / 1.78, 34 |
+| java | 1.78 / 1.80, 56 of 86 | 1.83 / 1.63, 54 |
+| javascript | 1.79 / 1.86, 35 of 48 | 1.89 / 1.69, 31 |
+| perl | 1.50 / 1.50, 3 of 4 | 2.00 / 2.00, 4 |
+| php | 1.92 / 1.80, 35 of 44 | 1.98 / 1.84, 34 |
+| python | 1.79 / 1.72, 31 of 52 | 1.92 / 1.74, 35 |
+
+By source: guidance's `fix_quality` edge is largest where the cases are hardest -
+`authored-top15-fix-complexity` 1.73 to 1.91 and `authored-from-docs-pitfall` 1.67 to 1.92 -
+and absent on `owasp-benchmark` (1.98 both). By CWE the widest gap is CWE-94 (1.38 to 1.83 on
+22 cases); CWE-287 moves 1.70 to 1.94.
+
+### Where the guided arm loses `no_harm`
+
+B's `no_harm` is level with A overall and behind it in Java (1.63 against 1.80) and JavaScript
+(1.69 against 1.86). Reading every write-up where all three judges scored below 2 (A 43, B 51):
+
+- **Narrowing the entries prescribe.** Ten unanimous B misses are an allowlist regex added on
+  top of the API fix, scored 1 under the pin because no stated contract calls for it -
+  `^[a-zA-Z0-9._-]+$` on an LDAP username beside `escape_filter_chars()`, on a report name beside
+  `execFile()`, on a filename beside `FTPClient.retrieveFile()`. The arm did what it was told:
+  `cwe/90/INDEX.md` says "apply strict allowlist validation for filter components",
+  `cwe/90/csharp` gives that exact regex, `cwe/78/INDEX.md` adds allowlists "as a secondary
+  defence layer". The rubric and the knowledge base disagree here, and the run cannot settle
+  which is right: the pin treats an allowlist that could reject a legitimate value as harm unless
+  the contract asks for it, the entries treat it as defence in depth. That is a doctrine decision
+  for the entries (CWE-77, 78, 90 families), not something to fix in one file.
+- **Silent behaviour change while rewriting the whole file.** Fourteen unanimous B misses and
+  nine A misses are a rewrite that changed something beside the sink: a `ping` diagnostic
+  replaced by a TCP-connect probe, a return value dropped, a request context no longer honoured,
+  and one `main()` rewritten without its `/login` handler (`B/117/go`, `no_harm` 0.00). The
+  complete-file format makes this easier to do and easier to see; whether it made it more common
+  than the snippet format cannot be measured across the boundary.
+- The rest are the usual gray zone (disclosed changes the judges weighed differently, 27 B and
+  23 A), and B's `no_harm` splits (64 against 51) say the pin did not remove the zone.
+
+### The gate against the judges
+
+| Gate status | n | mean fq | mean nh | all three judges gave fq 2 | at least one judge asserts a compile or name error |
+| --- | --- | --- | --- | --- | --- |
+| OK | 686 | 1.90 | 1.80 | 609 | 8 |
+| FAIL | 35 | 1.10 | 0.94 | 11 | 21 |
+| UNCHECKED | 19 | 1.91 | 1.70 | 15 | 0 |
+| NO_FILES | 4 | 1.25 | 1.33 | 2 | 0 |
+
+The gate and the panel agree on the direction - a gate `FAIL` costs 0.8 on both criteria - and
+disagree on eleven write-ups the panel passed unanimously at 2.00: ten real compile errors
+(`DatabaseHelper.getConnection()`, `SqlDbType` without `using System.Data`, `using
+EnyimMemcached`, `IAntiforgery` without its `using`, `std::out_of_range` without `<stdexcept>`,
+an unused Go import, a `[]byte` handed to `image.DecodeConfig`, a PHP regex with an unescaped
+`/`, `JexlSandbox` from the wrong package, `ReadAtLeastAsync` with the token in the `bool` slot)
+and the one checker false positive. The other way round, no gate-`OK` write-up drew a compile
+claim from two judges that held up (the two matches are a regex artefact on "rejects undefined
+names"). So the judges' own compiling, which run 16 introduced and which is most of their Bash
+turns, catches a subset of what the gate catches and nothing the gate misses. From run 18 the
+blinded header carries the gate line (`Build: OK` / `Build: FAIL - <first error>` /
+`Build: unchecked`), the judge prompt tells the panel to take it as settled and not compile, and
+the saving is measured against this run's 16k tokens per write-up.
+
 ## What this establishes
 
 - The format works on Haiku: 740 of 744 write-ups carry complete files, and the gate reads them
@@ -137,17 +220,26 @@ sees it in twenty minutes of machine time.
   libraries were added), and the manifests now carry them.
 - Two entry defects (`JexlSandbox` and `Encode` packages) were found by the compiler and fixed;
   neither had surfaced in sixteen judged runs.
+- Judged, guidance lifts `fix_quality` by 0.11 on 372 cases (B ahead on 64 cases, behind on 22)
+  and leaves `no_harm` level, with the guided arm's losses concentrated in allowlists the entries
+  prescribe and the rubric penalises, and in whole-file rewrites that change something beside the
+  sink.
+- The gate strictly dominates the judges' own compiling on the slip bucket; the judges can stop.
 
 ## Limitations
 
-- No judging yet: `fix_quality` and `no_harm` for run 17 are not measured. The gate is one axis.
 - The gate reflects one environment per language. A fix that needs a dependency upgrade fails
   here whether or not the write-up says so; the two cases of that shape are listed above.
 - Ten arm-A and nine arm-B write-ups are unchecked (framework-hosted files and native bindings).
 - One sample per arm on one model, and the session limit interrupted the launch; the 12 top-up
   agents ran under the identical prompt.
+- The narrowing-versus-defence-in-depth question is a finding about the rubric and the entries
+  together; this run measured it and did not resolve it.
+- The "asserts a compile or name error" column is a regular expression over judge notes and
+  undercounts phrasing it does not know.
 
 ## Cost
 
 Arms: 756 Haiku agents, 31.1M subagent tokens (about 41k per write-up), 51 minutes of wall clock
-across three launches. Gate: about 20 minutes of machine time per pass, no tokens.
+across three launches. Gate: about 20 minutes of machine time per pass, no tokens. Judges: 150
+Sonnet agents, 11.9M subagent tokens (about 16k per scored write-up), 59 minutes.

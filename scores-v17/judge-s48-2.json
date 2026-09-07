@@ -1,0 +1,18 @@
+{
+  "R824": {"fix_quality": 2, "no_harm": 2, "note": "Rejects negative offset before conversion, then checks offset<=packet_len and length<=packet_len-offset with no overflow; matches contract exactly."},
+  "R825": {"fix_quality": 2, "no_harm": 2, "note": "Narrows ignoringRequestMatchers from /api/** to /api/webhooks/**, matching the documented intent; only that pattern changed."},
+  "R826": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist limited to the visibly-used columns (Id/Name/Status/created_at) preserves the default sort and keeps AccountId/Query parameterized; contract explicitly calls for rejecting raw fragments."},
+  "R827": {"fix_quality": 1, "no_harm": 2, "note": "getSessionIdentifier bound to req.session.userId rather than the actual session identifier (csrf-csrf's own docs and examples use req.session.id/sessionID); blocks the described cross-user reuse but is the wrong value for the library's session-fixation-style binding."},
+  "R828": {"fix_quality": 2, "no_harm": 2, "note": "getSessionIdentifier bound to req.sessionID, matching csrf-csrf's documented per-session binding pattern; no other change."},
+  "R829": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized ? placeholders with matching argument order (displayName, userID); output/format unchanged."},
+  "R830": {"fix_quality": 2, "no_harm": 2, "note": "Single-owner rewrite (callee never frees, caller always frees) closes the UAF cleanly with no leak or double-free on either path."},
+  "R831": {"fix_quality": 2, "no_harm": 2, "note": "AES-GCM replaces DES/CBC-zero-IV; nonce-prefixed output is a disclosed, necessary consequence of AEAD. Write-up's 'AES-256' label overclaims since the actual key size is whatever length the client supplies, but this doesn't change fix correctness."},
+  "R832": {"fix_quality": 2, "no_harm": 2, "note": "calloc(count, sizeof) performs the overflow check the manual multiplication lacked; zero-init has no observable effect since every element is subsequently overwritten."},
+  "R833": {"fix_quality": 2, "no_harm": 2, "note": "exec(String[]) removes shell string parsing, the standard accepted fix for this sink; the Windows cmd.exe /c branch still invokes a shell so array quoting alone is a weaker defense there, but this matches the textbook remediation for this exact case shape."},
+  "R834": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected from i<=n to i<n; matches contract exactly for both the n>0 and n==0 cases."},
+  "R835": {"fix_quality": 2, "no_harm": 2, "note": "Reference counting correctly defers the free until both the release path and the queued callback have dropped their reference; no leak or double-free."},
+  "R836": {"fix_quality": 2, "no_harm": 2, "note": "Standard parameterized query with ? placeholder and array binding; no other observable change."},
+  "R837": {"fix_quality": 2, "no_harm": 2, "note": "500 body genericized while logger.error(error) is preserved and success/404 paths are untouched, matching the stated contract precisely."},
+  "R838": {"fix_quality": 2, "no_harm": 2, "note": "Character-class allowlist blocks traversal/absolute-path chars before require() executes; default 'summary' still matches the pattern."},
+  "R839": {"fix_quality": 2, "no_harm": 2, "note": "Adds SpaCsrfTokenRequestHandler, the documented Spring Security fix for the cookie/BREACH-encoding mismatch with SPA clients; change is isolated to the CSRF handler."}
+}

@@ -1,0 +1,18 @@
+{
+  "R824": {"fix_quality": 2, "no_harm": 2, "note": "Rejects negative offset before unsigned conversion and reorders the bounds check to avoid overflow/underflow, matching the stated contract exactly."},
+  "R825": {"fix_quality": 2, "no_harm": 2, "note": "Narrows the CSRF exemption pattern from /api/** to /api/webhooks/** to match the documented intent already present in comments; no other behavior change."},
+  "R826": {"fix_quality": 2, "no_harm": 2, "note": "Adds an allowlist for the ORDER BY column (required since identifiers can't be parameterized) while AccountId/Query stay bound parameters; default created_at sort is in the allowlist."},
+  "R827": {"fix_quality": 2, "no_harm": 2, "note": "Binds tokens via req.session.userId, which closes the reported cross-session reuse; a valid but less canonical identifier than the session ID itself."},
+  "R828": {"fix_quality": 2, "no_harm": 2, "note": "Binds tokens via req.sessionID, the canonical per-session identifier the csrf-csrf library's getSessionIdentifier option is documented for."},
+  "R829": {"fix_quality": 2, "no_harm": 2, "note": "Replaces Sprintf string building with a parameterized ? placeholder query passed to Exec, preserving all existing error handling and response formatting."},
+  "R830": {"fix_quality": 2, "no_harm": 2, "note": "Moves free() entirely into the caller and removes it from the callee's error path, restoring single ownership with no double-free or leak on either return path."},
+  "R831": {"fix_quality": 2, "no_harm": 2, "note": "Replaces DES/CBC/zero-IV with AES-GCM and a random nonce; the ciphertext format change (nonce prefix, auth tag) is an unavoidable, disclosed consequence of fixing the weak-algorithm finding, and no decrypting consumer exists in this single-file case."},
+  "R832": {"fix_quality": 2, "no_harm": 2, "note": "calloc(count, sizeof(ProductRow)) performs overflow-checked multiplication and returns NULL on overflow, matching the contract's return-NULL-without-leak requirement for oversized counts."},
+  "R833": {"fix_quality": 2, "no_harm": 2, "note": "Switches exec(String) to exec(String[]) removing the concatenated command string; functionally equivalent for legitimate single-token data values."},
+  "R834": {"fix_quality": 2, "no_harm": 2, "note": "Corrects the loop bound from i<=n to i<n, an exact minimal fix matching the stated contract."},
+  "R835": {"fix_quality": 2, "no_harm": 2, "note": "Adds reference counting on Connection so the callback's stale pointer stays valid until process_work_queue finishes with it; traced execution shows no double-free or leak."},
+  "R836": {"fix_quality": 2, "no_harm": 2, "note": "Parameterizes the query with a ? placeholder and array argument via mysql2, the standard fix; handler logic unchanged."},
+  "R837": {"fix_quality": 2, "no_harm": 2, "note": "Matches the stated contract exactly: generic 500 body, logger.error still called, success and 404 paths untouched."},
+  "R838": {"fix_quality": 2, "no_harm": 2, "note": "Regex allowlist blocks traversal sequences and null bytes and rejects before require() executes, matching the stated contract."},
+  "R839": {"fix_quality": 0, "no_harm": 0, "note": "Verified against real spring-security-web and spring-security-config 6.5.8 jars: no SpaCsrfTokenRequestHandler class exists in org.springframework.security.web.csrf (it's a doc-sample class developers must define themselves) and CsrfConfigurer has no .requestHandler(...) method (only csrfTokenRequestHandler(CsrfTokenRequestHandler)); the fix will not compile and leaves the CSRF mismatch unresolved."}
+}

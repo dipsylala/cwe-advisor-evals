@@ -1,0 +1,19 @@
+{
+  "R401": {"fix_quality": 2, "no_harm": 1, "note": "secure_filename() plus extension allowlist correctly closes traversal/upload risk, but dropping the content-type check for an extension-only check (and rejecting filenames with no dot) can reject a file the original content-type check accepted; disclosed in the write-up so 1 not 0."},
+  "R402": {"fix_quality": 2, "no_harm": 2, "note": "Gate::authorize() is the idiomatic Laravel enforcement API and throws 403 on denial with no other observable change."},
+  "R403": {"fix_quality": 2, "no_harm": 2, "note": "Host-based default-deny plus javascript:/data: scheme rejection correctly closes the open redirect; no unstated side effects."},
+  "R404": {"fix_quality": 2, "no_harm": 2, "note": "Escapes control/line-separator characters before logging, closing log forging; only affects the log line, not the response."},
+  "R405": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist of exact permitted ORDER BY expressions matches the stated contract; account_id/range logic untouched."},
+  "R406": {"fix_quality": 2, "no_harm": 2, "note": "Moves the route to the CSRF-protected mux exactly as the contract requires; profile route and handler logic unchanged."},
+  "R407": {"fix_quality": 2, "no_harm": 2, "note": "createCipheriv/AES-256-GCM with salted PBKDF2 correctly replaces the weak legacy API; extra salt/iv/authTag fields are additive and needed for decryption, and are disclosed."},
+  "R408": {"fix_quality": 2, "no_harm": 2, "note": "crypto/rand with 256 bits of entropy correctly replaces math/rand; sessionID format change is disclosed and the field is opaque."},
+  "R409": {"fix_quality": 2, "no_harm": 2, "note": "html/template is the exact drop-in fix for text/template XSS; no other observable change."},
+  "R410": {"fix_quality": 1, "no_harm": 0, "note": "Contract requires oversized input be rejected (-1), not truncated; scanf(\"%15s\", code) prevents the overflow but silently accepts and truncates an oversized token as success, contradicting the stated contract, and the write-up does not flag this."},
+  "R411": {"fix_quality": 2, "no_harm": 2, "note": "Same correct host/scheme default-deny pattern as R403; relative paths still redirect normally."},
+  "R412": {"fix_quality": 2, "no_harm": 2, "note": "IsAdminUser is a defensible default for an internal service-to-service API-key resource; write-up openly flags the self-service alternative if that access pattern is actually needed."},
+  "R413": {"fix_quality": 1, "no_harm": 0, "note": "Contract requires out-of-range windows be rejected consistently and forbids silently checksumming a truncated range unless reported to the caller; the fix clamps length and returns a checksum with no indication of truncation, directly contradicting the contract, and the explanation does not disclose this."},
+  "R414": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing role check before the sensitive operation; returns 403 for non-admins, no other change."},
+  "R415": {"fix_quality": 2, "no_harm": 2, "note": "Standard erase-remove-idiom fix (reassign it = erase(it)); matches the contract's order-preserving, no-skip removal exactly."},
+  "R416": {"fix_quality": 2, "no_harm": 2, "note": "enable_shared_from_this plus capturing the shared_ptr is the standard idiom to keep the object alive for the queued callback; change to heap allocation is disclosed and required for the fix."},
+  "R417": {"fix_quality": 2, "no_harm": 2, "note": "Explicit offset/length bounds check before subspan() rejects malformed headers with an exception rather than silently truncating; valid inputs behave identically."}
+}

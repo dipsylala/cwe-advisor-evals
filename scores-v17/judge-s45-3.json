@@ -1,0 +1,16 @@
+{
+  "R780": {"fix_quality": 2, "no_harm": 2, "note": "secrets.choice() replaces random.choice(), removes seeding, preserves the exact token/JSON contract."},
+  "R781": {"fix_quality": 0, "no_harm": 0, "note": "reencodeImage() references javax.imageio.BufferedImage, which does not exist (real class is java.awt.image.BufferedImage) - confirmed with javac, fails to compile for every accepted image type."},
+  "R782": {"fix_quality": 2, "no_harm": 2, "note": "JSTL c:out with default escapeXml=true correctly HTML-encodes displayName; behavior otherwise unchanged."},
+  "R783": {"fix_quality": 2, "no_harm": 1, "note": "SHA256 allowlist correctly gates Assembly.Load, but TrustedPluginHashes ships empty so every legitimate plugin upload is rejected until manually populated - disclosed openly as a required follow-up."},
+  "R784": {"fix_quality": 2, "no_harm": 2, "note": "crypto/rand.Reader with byte-modulo mapping onto the same alphabet matches the stated contract (32-char key, apiKeys recorded, 400 path unchanged); added 500 path on rand failure is a reasonable new addition."},
+  "R785": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist plus protocol-relative/opaque-URI rejection closes the open redirect; relative paths (the case's actual data \"foo\") still pass through."},
+  "R786": {"fix_quality": 2, "no_harm": 2, "note": "CBC with random IV closes the ECB pattern-leakage weakness; IV is prepended to the output and this is stated plainly as necessary for decryption, no other consumer shown to break."},
+  "R787": {"fix_quality": 0, "no_harm": 0, "note": "Calls mysqli_bind_param() and mysqli_execute(), which do not exist in the mysqli extension (correct names are mysqli_stmt_bind_param()/mysqli_stmt_execute()) - fatal undefined-function error on every request, not disclosed."},
+  "R788": {"fix_quality": 2, "no_harm": 1, "note": "Correct ? placeholder + setString parameterization, but silently redefines the header value from selecting/building the whole call to being a bound value for a hardcoded \"testprocedure\" - a functional change not called out as such."},
+  "R789": {"fix_quality": 2, "no_harm": 2, "note": "Checks the boolean return of signedJWT.verify() and rejects with 401 before using claims; standard correct fix."},
+  "R790": {"fix_quality": 2, "no_harm": 2, "note": "length-then-offset check order avoids unsigned underflow and correctly bounds the read; matches the stated contract's reject-consistently requirement."},
+  "R791": {"fix_quality": 2, "no_harm": 2, "note": "Fixes the format-string sink to a literal \"%s\" and HTML-encodes the referer value via OWASP Encode.forHtml(); legitimate referer text still renders (encoded)."},
+  "R792": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist-gated identifier concatenation is a valid pattern for this sink shape, but restricts calls to three fabricated procedure names not established anywhere in the case, likely rejecting legitimate values."},
+  "R793": {"fix_quality": 2, "no_harm": 2, "note": "receivedByteCount < 2 + length check correctly bounds the memmove read against actually-received data; no other behavior change."}
+}

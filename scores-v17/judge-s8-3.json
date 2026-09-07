@@ -1,0 +1,17 @@
+{
+  "R222": {"fix_quality": 1, "no_harm": 2, "note": "Regex only filters character shape (identifier/dots); it still lets attacker choose any syntactically-valid installed module name, so arbitrary import_module() target selection - the actual CWE-94 vector - remains open."},
+  "R223": {"fix_quality": 2, "no_harm": 2, "note": "full_clean() correctly triggers the model's magic-byte validator before save; legitimate uploads unaffected."},
+  "R224": {"fix_quality": 2, "no_harm": 2, "note": "Standard SqlCommand parameterization; query logic and result set unchanged."},
+  "R225": {"fix_quality": 2, "no_harm": 2, "note": "Removes LIBXML_NOENT (stops entity substitution) and adds LIBXML_NONET; well-formed submissions parse identically."},
+  "R226": {"fix_quality": 2, "no_harm": 2, "note": "Standard signing-method check in keyFunc; only rejects tokens using a method other than the one this system actually issues."},
+  "R227": {"fix_quality": 2, "no_harm": 2, "note": "Correct overflow-safe bounds check before allocation; legitimate (non-overflowing) inputs unaffected."},
+  "R228": {"fix_quality": 1, "no_harm": 1, "note": "getCallerID() trusts raw, unverified gRPC metadata as identity (no interceptor/token validation), so an attacker can simply set user-id to the target owner's ID and bypass the new check; also silently requires a metadata field no prior caller needed to send."},
+  "R229": {"fix_quality": 2, "no_harm": 2, "note": "Pins algorithms to RS256, matching the system's actual RSA-signed tokens; legitimate tokens still verify."},
+  "R230": {"fix_quality": 2, "no_harm": 2, "note": "Named-parameter HQL preserves identical query semantics including LIKE wildcards."},
+  "R231": {"fix_quality": 2, "no_harm": 1, "note": "Correctly switches to the redis-py client (RESP protocol, no injection), but silently changes the function's return value from the raw socket response bytes to a hardcoded \"OK\" string - not mentioned in the write-up."},
+  "R232": {"fix_quality": 2, "no_harm": 2, "note": "Matches the stated contract exactly: title still Razor-encoded, label and refreshSeconds still exposed to JS, refreshSeconds stays numeric; data-attribute + getAttribute() round-trips the original string safely."},
+  "R233": {"fix_quality": 2, "no_harm": 1, "note": "Correct constant-time bcrypt comparison plus enumeration-timing mitigation, but silently switches password storage format without addressing migration of any pre-existing plaintext-stored passwords (the map is explicitly described as standing in for a live DB table)."},
+  "R234": {"fix_quality": 2, "no_harm": 1, "note": "Fully closes the code-injection vector by removing dynamic compilation, but this eliminates the endpoint's original ad-hoc \"paste and run\" capability in favor of a CI/CD-gated workflow - a real loss of legitimate use, though openly stated as the required replacement."},
+  "R235": {"fix_quality": 2, "no_harm": 2, "note": "Removes the staff-widening branch; matches IsTicketOwner's actual (owner-only) semantics, no modeled assignment access is broken."},
+  "R236": {"fix_quality": 2, "no_harm": 2, "note": "Positional ODBC parameter with wildcard folded into the bound value; identical LIKE search behavior preserved."}
+}

@@ -1,0 +1,15 @@
+{
+  "R281": {"fix_quality": 2, "no_harm": 2, "note": "basename() rejection matches the docstring's no-subdirectory contract; realpath containment check retained for existing files, unresolved path only used for genuinely new same-directory files."},
+  "R282": {"fix_quality": 2, "no_harm": 2, "note": "AES/GCM with fresh random IV correctly replaces ECB; IV-prepended wire format is disclosed and still lets the key holder decrypt, satisfying the stated contract."},
+  "R283": {"fix_quality": 0, "no_harm": 2, "note": "Filter pattern has no trailing '!*' reject-all, so classes outside the allowlist return UNDECIDED which the JDK treats as allowed by default -- verified against a real JDK (26) that an unlisted class (HashMap) still deserializes successfully through an identically-shaped filter, so arbitrary classes remain instantiable; legitimate sessions still restore fine so no_harm is unaffected."},
+  "R284": {"fix_quality": 2, "no_harm": 1, "note": "{{ }} fully closes the XSS vector, but the contract calls for rich formatting to survive via sanitization while only scripts/handlers/URLs are stripped; this fix instead escapes everything, discarding formatting entirely -- a behavior change the write-up does openly disclose."},
+  "R285": {"fix_quality": 2, "no_harm": 2, "note": "filepath.Base() closes the traversal cleanly, keeps the existing content-type gate and response shape unchanged."},
+  "R286": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte sniffing plus a server-side allowlist and generated filename fully closes content-type/extension spoofing; 201/error shapes and name-returned==name-stored contract are preserved, O_EXCL addition is inconsequential given the random name."},
+  "R287": {"fix_quality": 2, "no_harm": 2, "note": "RFC4515-correct escaping of *()\\ and NUL closes the LDAP filter injection without altering behavior for ordinary names."},
+  "R288": {"fix_quality": 2, "no_harm": 2, "note": "Adds the ownership check that is exactly the missing-authorization finding itself; no unrelated behavior change."},
+  "R289": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() on both fallback arguments closes the injection and preserves the return-value/output-discard contract."},
+  "R290": {"fix_quality": 2, "no_harm": 2, "note": "Standard PreparedStatement conversion matching OWASP Benchmark's own expected-fix shape for this test family; no unintended behavior change."},
+  "R291": {"fix_quality": 2, "no_harm": 2, "note": "Clean PreparedStatement conversion with parameter binding; no other observable change."},
+  "R292": {"fix_quality": 2, "no_harm": 2, "note": "resolve()+is_relative_to() per-member containment check verified (via pathlib) to correctly reject both absolute-path and ../ traversal members while passing legitimate in-tree members through."},
+  "R293": {"fix_quality": 2, "no_harm": 1, "note": "BinaryFormatter has no safe in-place fix so System.Text.Json is the correct replacement API, but it changes the wire format from binary to JSON, breaking any legitimate binary producer -- disclosed as a required producer migration but not delivered in this diff."}
+}

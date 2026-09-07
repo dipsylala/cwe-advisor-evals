@@ -1,0 +1,19 @@
+{
+  "R384": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist validation of field matches the stated contract; term/tenant_id remain bound, ILIKE clause unchanged."},
+  "R385": {"fix_quality": 2, "no_harm": 2, "note": "resolve_entities=False is the correct primary defense for lxml XXE; no other observable change."},
+  "R386": {"fix_quality": 2, "no_harm": 1, "note": "Checking verify()'s boolean return correctly closes the reported flaw, but the added literal-\"RS256\" algorithm pin rejects RS384/RS512/PS* tokens that RSASSAVerifier legitimately accepted before the bug, an added restriction beyond what the finding required."},
+  "R387": {"fix_quality": 2, "no_harm": 1, "note": "Eliminating Process.Start closes the injection, but the write-up swaps the whole PowerShell Test-Connection mechanism for a custom Ping-based implementation with a different response format/behavior rather than a minimal argument-list fix; disclosed but a larger-than-needed behavior change."},
+  "R388": {"fix_quality": 2, "no_harm": 2, "note": "Uses file-type's detected.ext instead of client extension; response shape and validation flow unchanged."},
+  "R389": {"fix_quality": 2, "no_harm": 2, "note": "CRLF rejection at the SMTP protocol sink closes the injection with no legitimate-value impact."},
+  "R390": {"fix_quality": 2, "no_harm": 2, "note": "Standard ADO.NET parameterized query; matches stated contract exactly."},
+  "R391": {"fix_quality": 2, "no_harm": 2, "note": "UUID filename plus MIME-derived extension closes traversal/extension spoofing; response/error shapes match stated contract."},
+  "R392": {"fix_quality": 0, "no_harm": 2, "note": "Verified by running the fix on .NET 10 (AddAntiforgery+UseAntiforgery, MapPost with JSON-bound record, no endpoint metadata): a POST with no antiforgery token still returns 202 Accepted -- the middleware only enforces validation on endpoints carrying antiforgery metadata, which this fix never attaches, so the CSRF vector remains fully open."},
+  "R393": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte check against declared content type correctly closes the spoofed-MIME upload vector; preserves existing safe filename/directory logic."},
+  "R394": {"fix_quality": 2, "no_harm": 2, "note": "Adds Secure:true to the cookie exactly as the sink requires; no other change."},
+  "R395": {"fix_quality": 2, "no_harm": 2, "note": "Verified against real spring-expression 6.2.15: SimpleEvaluationContext.forReadOnlyDataBinding() still resolves record properties (total+tax=45) while T()/method/constructor access throws SpelEvaluationException, matching the stated contract exactly."},
+  "R396": {"fix_quality": 2, "no_harm": 2, "note": "Simple reordering of the session write to after login_user(); no other behavior change."},
+  "R397": {"fix_quality": 2, "no_harm": 2, "note": "allowed_classes restricted to the one DTO class (no magic methods) closes gadget-chain risk while preserving the existing instanceof round-trip."},
+  "R398": {"fix_quality": 2, "no_harm": 2, "note": "PDO placeholder with wildcards folded into the bound parameter preserves LIKE '%...%' semantics exactly as the contract requires."},
+  "R399": {"fix_quality": 2, "no_harm": 2, "note": "RandomNumberGenerator.Fill replaces the attacker-seedable Random; dropping the seed is correct and openly explained since no legitimate use needs a client-supplied token seed."},
+  "R400": {"fix_quality": 2, "no_harm": 2, "note": "noent:false plus nonet:true matches the standard libxmljs XXE-prevention pattern; no other observable change."}
+}

@@ -1,0 +1,15 @@
+{
+  "R449": {"fix_quality": 2, "no_harm": 2, "note": "Adds per-category method whitelist so dynamic dispatch can only reach the documented email.send action; unrelated behaviour unchanged."},
+  "R450": {"fix_quality": 2, "no_harm": 2, "note": "Standard Laravel can: middleware + ownership Policy runs before the controller; matches the stated contract (same success shape, 403 for others, refund() not called first)."},
+  "R451": {"fix_quality": 2, "no_harm": 1, "note": "Traversal and extension are correctly closed, but the fix silently replaces the admin's chosen filename with a random GUID (disclosed in the write-up) rather than sanitizing/preserving it, discarding the original naming intent."},
+  "R452": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing secure:true flag only; no other observable change."},
+  "R453": {"fix_quality": 2, "no_harm": 2, "note": "Replaces Markup() with html.escape() for the interpolated label; correctly neutralizes the injection with no other behaviour change."},
+  "R454": {"fix_quality": 2, "no_harm": 2, "note": "Pins ValidAlgorithms to HmacSha256 matching the symmetric key in use, closing the algorithm-confusion gap without altering other validation."},
+  "R455": {"fix_quality": 2, "no_harm": 2, "note": "Adds a straightforward bounds check before the array read; valid indices 0-15 behave exactly as before."},
+  "R456": {"fix_quality": 2, "no_harm": 2, "note": "subtle.ConstantTimeCompare enforces exact-length, exact-content match and correctly returns false on any mismatch, matching the stated contract."},
+  "R457": {"fix_quality": 1, "no_harm": 2, "note": "Only rejects URIs with a non-null scheme; misses the classic scheme-relative bypass (e.g. //evil.com/path), which java.net.URI parses with a null scheme and host set, so the check does not close open redirect fully."},
+  "R458": {"fix_quality": 2, "no_harm": 1, "note": "Replacing shell exec with archive/tar correctly eliminates command injection, but the new ListArchive never uses the ctx parameter, silently dropping the request-context cancellation the stated contract requires."},
+  "R459": {"fix_quality": 2, "no_harm": 2, "note": "weak_ptr/shared_ptr with lock() is the standard idiom for this UAF; all call sites in the case are updated consistently and publish() still calls onEvent on live subscribers in order."},
+  "R460": {"fix_quality": 2, "no_harm": 2, "note": "Quoting plus backslash/quote escaping does not literally escape raw CR/LF as the docstring claims, but since a user-supplied quote can never appear unescaped, any embedded newline still produces an unbalanced-quote line that Redis rejects, blocking the demonstrated command-splicing attack."},
+  "R461": {"fix_quality": 2, "no_harm": 2, "note": "Swaps in SecureRandom and discards the attacker-controlled seed; no other behaviour change."}
+}

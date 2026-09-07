@@ -1,0 +1,16 @@
+{
+  "R237": {"fix_quality": 2, "no_harm": 1, "note": "ValidateRequestAsync is the correct API for a JSON-bound minimal API sink, but it makes every legitimate call now require an antiforgery token with no stated contract confirming callers already send one and no token-issuing endpoint shown."},
+  "R238": {"fix_quality": 2, "no_harm": 2, "note": "HtmlEncoder.Default.Encode applied at the sink; no other observable change."},
+  "R239": {"fix_quality": 2, "no_harm": 2, "note": "WebUtility.HtmlEncode applied to both concatenated values before output; clean fix."},
+  "R240": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing admin-role check; the file's own comment states the endpoint is 'intended for administrators only', so the restriction matches the stated contract."},
+  "R241": {"fix_quality": 2, "no_harm": 2, "note": "Flips setSecure(false) to true, exactly the reported flag; only other change is the disclosed response-message text update."},
+  "R242": {"fix_quality": 2, "no_harm": 2, "note": "realpath() containment check matches the file's own docstring intent of confining reads to reportsDir, and is actually less restrictive than the old '..' denylist for benign filenames."},
+  "R243": {"fix_quality": 2, "no_harm": 2, "note": "Sequelize named replacements parameterize the query values with no other behavior change."},
+  "R244": {"fix_quality": 2, "no_harm": 2, "note": "html/template gives context-aware escaping at the sink; output structure preserved."},
+  "R245": {"fix_quality": 2, "no_harm": 2, "note": "SandboxedEnvironment matches the stated contract restricting template data access; normal template constructs still render."},
+  "R246": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist covers exactly the Invoice struct's sortable columns, matching the stated contract that intended sort modes keep working."},
+  "R247": {"fix_quality": 2, "no_harm": 2, "note": "lockoutOnFailure: true is the correct flag flip; only affects behavior after repeated failed attempts, not any single legitimate correct-credential request."},
+  "R248": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check matches the array's own declared MAX_FIELDS size; no legitimate index is excluded."},
+  "R249": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist is the right mechanism, but it narrows accepted extensions/MIME types far below the original comment's stated 'assume safe unless denylisted' intent and also randomizes stored filenames beyond the finding's scope; disclosed but unverified against real legitimate attachment types."},
+  "R250": {"fix_quality": 2, "no_harm": 2, "note": "CGI::escapeHTML applied to both interpolated values; clean fix."}
+}

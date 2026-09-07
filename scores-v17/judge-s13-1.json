@@ -1,0 +1,19 @@
+{
+  "R294": {"fix_quality": 2, "no_harm": 2, "note": "WebUtility.HtmlEncode applied at the sink to banner.Message; correct API, no other behaviour change."},
+  "R295": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() wraps $host before concatenation into the ping command; standard fix, legitimate hostnames unaffected."},
+  "R296": {"fix_quality": 1, "no_harm": 2, "note": "Escapes only backslash/quote and wraps in quotes; leaves raw CR/LF unfiltered, so an attacker can still inject a line break and smuggle a second IMAP command through the same socket write."},
+  "R297": {"fix_quality": 2, "no_harm": 1, "note": "EqualityFilter object correctly closes the injection, but the added regex allowlist (`^[a-zA-Z0-9._-]+$`) is a new restriction not required to close the vector and could reject legitimate uids (spaces, apostrophes, unicode); stated but still caps at 1 per rubric."},
+  "R298": {"fix_quality": 2, "no_harm": 2, "note": "Saves node->next before free(); matches contract exactly, no other behaviour change."},
+  "R299": {"fix_quality": 2, "no_harm": 2, "note": "LookupRate replaced with an allowlisted RateConfiguration dictionary matching the stated contract; Eval() surface itself is not independently exploitable here since no dangerous types/functions are otherwise registered."},
+  "R300": {"fix_quality": 2, "no_harm": 2, "note": "RFC4515-style escaping of *()\\ and NUL applied before filter construction; standard correct fix, no other change."},
+  "R301": {"fix_quality": 2, "no_harm": 2, "note": "Removes template.HTML() wrapper and changes field to string so html/template's context-aware auto-escaping applies; this is exactly the required fix, not an extra restriction."},
+  "R302": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities() applied to $subject at the interpolation point; correct, no other change."},
+  "R303": {"fix_quality": 2, "no_harm": 2, "note": "Resolves both paths and checks is_relative_to() before serving; correctly scoped containment check, rejects only genuinely out-of-bound paths."},
+  "R304": {"fix_quality": 2, "no_harm": 2, "note": "Named parameter :searchPattern via setParameter(); standard HQL parameterization, wildcard stays in the bound value."},
+  "R305": {"fix_quality": 2, "no_harm": 2, "note": "Gate::allows() replaced with Gate::authorize(), which throws/403s on denial instead of discarding the result; enforces the exact same policy that was already being computed."},
+  "R306": {"fix_quality": 2, "no_harm": 1, "note": "FlaskForm/validate_on_submit() correctly gives CSRF protection, but the write-up itself notes the template must add {{ form.csrf_token }} for a legitimate POST to pass validation, and that template file isn't part of the fix - a stated required follow-up, not a completed fix."},
+  "R307": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query with @Owner via AddWithValue; standard fix, no other behaviour change."},
+  "R308": {"fix_quality": 2, "no_harm": 1, "note": "Magic-byte MIME allowlist plus UUID storage name correctly closes the dangerous-upload vector, but the JSON response still returns the original secure_filename() as \"filename\" while the file is actually stored under a different UUID name - disclosed in the explanation but a real mismatch that could break any legitimate retrieval-by-returned-name flow."},
+  "R309": {"fix_quality": 1, "no_harm": 0, "note": "Allowlist dispatch correctly prevents arbitrary function invocation, but the handlers it dispatches to (handleHelp, handleStatus, handleReset) are never defined anywhere in the file, so every command - including the three 'legitimate' ones - now fails with a PHP fatal error (call to undefined function); not disclosed."},
+  "R310": {"fix_quality": 2, "no_harm": 2, "note": "jwt.decode() replaced with jwt.verify(token, secret) plus error handling and a missing-secret guard; standard correct fix."}
+}

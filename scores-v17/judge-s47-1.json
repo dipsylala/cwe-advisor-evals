@@ -1,0 +1,72 @@
+{
+  "R810": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Correctly wires @fastify/csrf-protection (registration, /csrf-token generateCsrf endpoint, preValidation hook on the mutating route); standard token-based CSRF defense, no other observable change."
+  },
+  "R811": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Clean PreparedStatement with setString bind; query semantics and output unchanged."
+  },
+  "R812": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Attachment disposition + nosniff correctly stop inline SVG script execution, but Content-Disposition: attachment is applied unconditionally to PNG/JPEG too, changing direct-fetch/navigation behavior for those legitimate avatars versus the contract's 'served back unchanged'; the change is stated in the write-up, not silent."
+  },
+  "R813": {
+    "fix_quality": 0,
+    "no_harm": 0,
+    "note": "Verified by compiling: `fileHeader` from `r.FormFile` is never used after being replaced by extensionMap[detectedType], so `go build` fails with 'declared and not used: fileHeader' -- the fix does not compile/ship."
+  },
+  "R814": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Minimal, exact removal of the ignoringRequestMatchers exemption; default Spring Security CSRF now applies, matching the stated contract with no unrelated change."
+  },
+  "R815": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Drops cmd.exe entirely, runs ping.exe directly via ArgumentList; UseShellExecute already false so no shell interprets the host value; ping semantics preserved."
+  },
+  "R816": {
+    "fix_quality": 0,
+    "no_harm": 1,
+    "note": "Deletes the (weak) Origin check and replaces it with only a comment instructing a caller elsewhere to wrap the mux in net/http.CrossOriginProtection; as delivered, this file performs zero CSRF check on the sink, so the vector is not actually closed within the fix. The removal itself is disclosed, not silent."
+  },
+  "R817": {
+    "fix_quality": 0,
+    "no_harm": 0,
+    "note": "Verified against CGI::Util 4.72 source: it exports only rearrange/rearrange_header/make_attributes/unescape/escape/expires/ebcdic2ascii/ascii2ebcdic (simple_escape exists but isn't exported); there is no html_escape. `use CGI::Util qw(html_escape)` fails at compile time with 'not exported by the CGI::Util module' (reproduced the Exporter failure), so the script never runs at all."
+  },
+  "R818": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Removes the SignatureValidator bypass; Authority is set so AddJwtBearer's default OIDC-discovery-driven validation (incl. signature) applies; no other behavior change."
+  },
+  "R819": {
+    "fix_quality": 0,
+    "no_harm": 2,
+    "note": "Widens the %s width to 255 to match nameBuf's write-side size, but the source `line` is only a 64-byte, non-NUL-guaranteed buffer; per the file's own comment the destination size is not the limiting factor, and 255 still far exceeds line's real bound, so sscanf can still read past line's allocation when no delimiter exists within it -- the reported OOB read is not actually closed (only the unreported nameBuf write-overflow is)."
+  },
+  "R820": {
+    "fix_quality": 1,
+    "no_harm": 2,
+    "note": "Verified with java.net.URI: a scheme-relative payload like '//evil.com/path' has isAbsolute()==false (host still resolves to evil.com), so it skips the whole scheme/host check block and reaches sendRedirect unmodified -- a known open-redirect bypass of isAbsolute()-gated filters."
+  },
+  "R821": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Removes the token-controlled jku resolver, fetches from a hardcoded trusted JWKS URL instead; ValidateToken behavior (throws on failure, returns ClaimsPrincipal on success) unchanged, matching the stated contract."
+  },
+  "R822": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Path.startsWith(Path) correctly fixes the sibling-directory string-prefix bypass, but toRealPath() on a non-existent candidate throws before the isFile() check, so a request for a legitimate but missing note now returns 403 instead of 404 -- a behavior change beyond the fix, disclosed in the write-up."
+  },
+  "R823": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Replaces eval() with mathjs's purpose-built, non-code-executing expression evaluator, matching the calculator's intended scope; input validation and error handling preserved."
+  }
+}

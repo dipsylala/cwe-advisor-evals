@@ -1,0 +1,18 @@
+{
+  "R794": {"fix_quality": 2, "no_harm": 1, "note": "Switching raw socket SMTP to Jakarta Mail closes the CRLF injection, but the body content silently changes from the original subject text to a hardcoded 'Ticket acknowledgement' string and adds a mandatory STARTTLS requirement, neither disclosed as a behavior change."},
+  "R795": {"fix_quality": 2, "no_harm": 2, "note": "Extracting deleteInvoice into a separate @Service bean makes the pre-existing @PreAuthorize actually apply through the proxy; restores intended enforcement without altering legitimate call semantics."},
+  "R796": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities() correctly neutralizes the text-context XSS; other fields left unescaped are justified as non-attacker-controlled."},
+  "R797": {"fix_quality": 2, "no_harm": 2, "note": "Removes the attacker-controlled Entity map and the unused noteLabel extraction entirely; noteLabel was not used elsewhere so nothing legitimate breaks."},
+  "R798": {"fix_quality": 2, "no_harm": 2, "note": "Replaces string-eval assert() with a direct boolean comparison, eliminating code injection while preserving identical pass/fail logic."},
+  "R799": {"fix_quality": 2, "no_harm": 2, "note": "escapeJava() plus SLF4J parameterized logging neutralizes CRLF log forging on the failure branch while preserving ERROR+exception+401 and the INFO/200 success path per the stated contract."},
+  "R800": {"fix_quality": 2, "no_harm": 2, "note": "Drops shell invocation for a direct exec.Command argument array, matching the stated contract exactly."},
+  "R801": {"fix_quality": 2, "no_harm": 1, "note": "Eliminates the exec sink, but adds an undisclosed-as-risk restriction: toRealPath()+isDirectory() now rejects non-directory or non-existent paths that the original ls/dir invocation would have accepted, and introduces a new thrown-exception failure mode."},
+  "R802": {"fix_quality": 2, "no_harm": 2, "note": "html.escape() before mark_safe() correctly neutralizes injected markup while preserving the intended div wrapper."},
+  "R803": {"fix_quality": 2, "no_harm": 2, "note": "Adds the '--' operand separator exactly as the stated contract requires, passing dash-prefixed filenames through literally rather than rejecting them."},
+  "R804": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with bound parameter closes the injection and preserves identical query semantics and resource-cleanup structure."},
+  "R805": {"fix_quality": 2, "no_harm": 2, "note": "escape_filter_chars() is the correct ldap3 API for neutralizing LDAP filter metacharacters without altering legitimate lookups."},
+  "R806": {"fix_quality": 2, "no_harm": 2, "note": "Correct unsigned-safe bounds check before subspan(); valid inputs behave identically, invalid inputs now throw instead of undefined behavior, which is the intended fix and is disclosed."},
+  "R807": {"fix_quality": 2, "no_harm": 2, "note": "Swapping text/template for html/template is the idiomatic, minimal fix with no other observable change."},
+  "R808": {"fix_quality": 2, "no_harm": 2, "note": "html.escape() applied to all rendered dynamic values closes the XSS without altering legitimate output."},
+  "R809": {"fix_quality": 2, "no_harm": 2, "note": "Uses Django raw() with %s placeholder and params list, the correct parameterized form, preserving query results for legitimate input."}
+}

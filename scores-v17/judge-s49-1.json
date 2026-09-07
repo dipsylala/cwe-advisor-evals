@@ -1,0 +1,7 @@
+{
+  "R840": {"fix_quality": 2, "no_harm": 2, "note": "Adds Authentication param and swaps findAll() for existing findByOwnerUsername(), matching the sibling pattern and the stated contract exactly; no other observable change."},
+  "R841": {"fix_quality": 0, "no_harm": 1, "note": "Fix section is prose only - no code diff or full file is shown, so the described vector closure cannot be verified as applied; explanation also discloses that the client-supplied key is silently replaced with a server-generated uuid-based key, an unrequested restriction beyond the stated contract that could break retrieval by the original key."},
+  "R842": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(8).toString('hex') is an appropriate CSPRNG replacement for Math.random(); output format/length changes (hex vs base36) but the code is stated plainly and nothing downstream depends on the prior format."},
+  "R843": {"fix_quality": 2, "no_harm": 2, "note": "Correctly moves query.term into a Jinja2 context variable via {{ query_term }} so Flask's autoescaping neutralizes it, instead of string-concatenating into the template; no other behavior changes."},
+  "R844": {"fix_quality": 2, "no_harm": 2, "note": "Rejects leading-slash/'..' entries and independently verifies the resolved absolute destination stays within extractDir before os.Create, a standard two-layer Zip Slip defense that does not restrict legitimate nested-path entries."}
+}

@@ -1,0 +1,19 @@
+{
+  "R294": {"fix_quality": 2, "no_harm": 2, "note": "WebUtility.HtmlEncode applied at the sink; no other observable change."},
+  "R295": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg on $host neutralizes shell metacharacters; legitimate hostnames unaffected."},
+  "R296": {"fix_quality": 1, "no_harm": 2, "note": "Quoting only escapes backslash and double-quote; CR/LF are not escaped or rejected, so a mailbox name containing \\r\\n can still terminate the command line early and inject a second raw IMAP command over the socket - wrong mechanism for this sink (should use IMAP literal syntax or reject control chars)."},
+  "R297": {"fix_quality": 2, "no_harm": 1, "note": "EqualityFilter closes the injection vector, but the added regex allowlist (^[a-zA-Z0-9._-]+$) is a new restriction beyond what escaping requires and could reject legitimate uid values (e.g. spaces, apostrophes, unicode) that the original code accepted."},
+  "R298": {"fix_quality": 2, "no_harm": 2, "note": "Saves next pointer before free; matches stated contract exactly (order preserved, single free, traversal continues)."},
+  "R299": {"fix_quality": 2, "no_harm": 2, "note": "LookupRate replaced with a fixed dictionary lookup and rejection of unknown keys, matching the stated contract; no other behavior change."},
+  "R300": {"fix_quality": 2, "no_harm": 2, "note": "RFC 4515 backslash-hex escaping of *()\\ and NUL applied before filter construction; correct mechanism for this sink."},
+  "R301": {"fix_quality": 2, "no_harm": 2, "note": "Removes template.HTML() cast and field type, restoring html/template's automatic contextual escaping; no other change."},
+  "R302": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities() applied at the sink; standard HTML::Entities usage, no side effects."},
+  "R303": {"fix_quality": 2, "no_harm": 2, "note": "resolve() + is_relative_to() correctly rejects absolute-path/traversal escapes while legitimate files under BASE_DIR still resolve."},
+  "R304": {"fix_quality": 2, "no_harm": 2, "note": "Named parameter via setParameter() replaces string concatenation; standard Hibernate parameterization."},
+  "R305": {"fix_quality": 2, "no_harm": 2, "note": "Gate::authorize() enforces the decision (throws/403) instead of discarding it; only blocks unauthorized callers."},
+  "R306": {"fix_quality": 2, "no_harm": 1, "note": "FlaskForm/validate_on_submit() is the correct CSRF mechanism, but the write-up itself notes the template must add {{ form.csrf_token }} - without that (template not part of this fix), every legitimate submission will fail CSRF validation; stated openly as a required follow-up rather than done silently."},
+  "R307": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query via @Owner/AddWithValue; standard fix, no behavior change for legitimate input."},
+  "R308": {"fix_quality": 2, "no_harm": 1, "note": "Magic-byte allowlist plus UUID-based storage name closes the vector, but the JSON response still returns the sanitized original filename while the file is actually persisted under a different UUID+detected-extension name - a silent mismatch between the reported and actual stored filename, not called out in the write-up."},
+  "R309": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist dispatch closes the arbitrary-function-call vector, but it maps commands to invented 'handleHelp'/'handleStatus'/'handleReset' names that are not defined anywhere in the file (confirmed by running the fixed code locally: calling the /help command throws an uncaught TypeError, 'function handleHelp not found'), silently breaking every legitimate command rather than preserving the original verb-as-function-name dispatch."},
+  "R310": {"fix_quality": 2, "no_harm": 2, "note": "jwt.verify() with secret and try/catch replaces jwt.decode(); enforces signature check without other behavior change."}
+}

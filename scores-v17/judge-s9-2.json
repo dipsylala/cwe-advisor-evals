@@ -1,0 +1,16 @@
+{
+  "R237": {"fix_quality": 2, "no_harm": 0, "note": "ValidateRequestAsync is the right call for a JSON-bound minimal API, but the fix never adds a way for a legitimate client to obtain the antiforgery token (no GetAndStoreTokens endpoint), and AddAntiforgery() is never configured with a HeaderName, so by default ValidateRequestAsync only checks form fields, not a header - a JSON POST can never supply a token and every caller, legitimate or not, is silently rejected."},
+  "R238": {"fix_quality": 2, "no_harm": 2, "note": "HtmlEncoder.Default.Encode applied to the only untrusted field at the sink; no other observable change."},
+  "R239": {"fix_quality": 2, "no_harm": 2, "note": "WebUtility.HtmlEncode on both untrusted params before concatenation; clean, no other behavior change."},
+  "R240": {"fix_quality": 2, "no_harm": 2, "note": "Adds the admin-role check the handler's own doc comment says is required; no other behavior change."},
+  "R241": {"fix_quality": 2, "no_harm": 2, "note": "setSecure(false) -> true is the exact expected fix; response message updated consistently, nothing else changed."},
+  "R242": {"fix_quality": 2, "no_harm": 2, "note": "Canonicalize-then-verify-containment via realpath() correctly replaces the denylist and closes the wrapper-bypass vector while preserving relative-file semantics and existing 400/404/500 responses."},
+  "R243": {"fix_quality": 2, "no_harm": 2, "note": "Named replacements via Sequelize's replacements option correctly parameterize both values; no other change."},
+  "R244": {"fix_quality": 2, "no_harm": 2, "note": "html/template with the same markup structure auto-escapes both fields; output identical for benign input, no other change."},
+  "R245": {"fix_quality": 2, "no_harm": 2, "note": "SandboxedEnvironment is the documented Jinja2 mitigation for untrusted template source and blocks the dunder-chain RCE; render_preview signature and context unchanged, matching the stated contract."},
+  "R246": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist for column/direction is the correct approach since identifiers can't be parameterized in Order(); matches the contract's explicit call for 'intended sort modes still work' while blocking arbitrary SQL text."},
+  "R247": {"fix_quality": 2, "no_harm": 2, "note": "lockoutOnFailure: true is exactly the prescribed fix; write-up openly notes IdentityOptions.Lockout config is required elsewhere and out of scope for this file."},
+  "R248": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check field_index >= MAX_FIELDS before the array read; consistent with existing -1 error-return pattern, no other change."},
+  "R249": {"fix_quality": 2, "no_harm": 1, "note": "Correctly moves from denylist to allowlist, but the 8-extension/MIME allowlist is stricter than the original's broad accept-by-default policy and could reject previously-accepted legitimate file types, and it also silently swaps the returned path from one derived from the original filename to a randomly generated name - both disclosed but not required by any stated contract."},
+  "R250": {"fix_quality": 2, "no_harm": 2, "note": "CGI::escapeHTML applied to both untrusted fields before concatenation into the HTML body; no other observable change."}
+}

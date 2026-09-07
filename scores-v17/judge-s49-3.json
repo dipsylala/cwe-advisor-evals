@@ -1,0 +1,7 @@
+{
+  "R840": {"fix_quality": 2, "no_harm": 2, "note": "Adds Authentication param and swaps findAll() for existing findByOwnerUsername(), matching the stated contract exactly; mirrors getInvoice()'s established pattern."},
+  "R841": {"fix_quality": 0, "no_harm": 1, "note": "Write-up gives no code at all (no diff, no code block) so the vector is never actually closed; Explanation also mentions replacing the caller-supplied key with a server-generated uuid filename, an unrequested behavior change beyond the stated content-type contract, though disclosed in prose."},
+  "R842": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(8).toString('hex') is an appropriate CSPRNG replacement; output length changes from 8 to 16 chars but this is stated and nothing else depends on the length."},
+  "R843": {"fix_quality": 2, "no_harm": 2, "note": "Moves query.term out of the template string into a {{ query_term }} context variable, closing both the SSTI and XSS vector via Jinja2 autoescaping, with no other behavior change."},
+  "R844": {"fix_quality": 2, "no_harm": 1, "note": "Absolute-path prefix check alone fully closes the traversal vector, but the added strings.Contains(name, \"..\") pre-check rejects any filename merely containing \"..\" as a substring (not just traversal sequences), an over-broad restriction beyond what closing the vector requires, though stated in the code comment/explanation."}
+}

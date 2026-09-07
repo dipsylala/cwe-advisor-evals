@@ -1,0 +1,21 @@
+{
+  "R492": {"fix_quality": 0, "no_harm": 2, "note": "loadProjectExport sets ownerId: userId right before comparing it to userId, so the ownership check is tautological and never rejects — the authorization vector remains fully open."},
+  "R493": {"fix_quality": 2, "no_harm": 2, "note": "clean one-parameter flip of the secure flag false->true; nothing else changed."},
+  "R494": {"fix_quality": 2, "no_harm": 2, "note": "field allowlist plus bound tenant_id/term params matches the contract; ValueError on a disallowed field is the contract-required rejection and is disclosed."},
+  "R495": {"fix_quality": 2, "no_harm": 2, "note": "RFC4515 hex-escaping of *, (, ), \\, NUL closes the injection; no other observable change."},
+  "R496": {"fix_quality": 2, "no_harm": 2, "note": "standard JdbcTemplate ? placeholder with bound orderNumber; clean."},
+  "R497": {"fix_quality": 2, "no_harm": 2, "note": ".at() with try/catch cleanly rejects out-of-range channelIndex and silently drops the update, matching the void sink's shape."},
+  "R498": {"fix_quality": 2, "no_harm": 2, "note": "crypto/rand + base64 token closes the entropy gap; the numeric-to-base64 sessionID format change is disclosed and nothing in the file parses it back."},
+  "R499": {"fix_quality": 2, "no_harm": 2, "note": "vector<string_view> -> vector<string> is the correct owning fix; leaves firstLetter()'s unrelated index-bounds behavior untouched per the contract."},
+  "R500": {"fix_quality": 2, "no_harm": 2, "note": "secrets.randbelow with correct min/max offset; clean substitution for random.randint."},
+  "R501": {"fix_quality": 2, "no_harm": 2, "note": "File(base, name) plus canonical-path prefix check is the standard traversal fix; preserves the existing 404/download response behavior."},
+  "R502": {"fix_quality": 2, "no_harm": 2, "note": ".at() throws on an invalid slot, satisfying the contract's 'rejected or reported, not silently writing another slot'; Badge's fields are unchanged when it does return."},
+  "R503": {"fix_quality": 2, "no_harm": 2, "note": "standard %s-parameterized logger.warning call; clean."},
+  "R504": {"fix_quality": 2, "no_harm": 2, "note": "JSON.parse replaces node-serialize.unserialize, removing the code-execution path; node-serialize's own serialize() output for plain profile data is valid JSON, so legitimate cookies still parse."},
+  "R505": {"fix_quality": 2, "no_harm": 2, "note": "adds passwordEncoder.matches() before minting the token, closing the missing credential check; the new constructor dependency and required PasswordEncoder bean are stated."},
+  "R506": {"fix_quality": 2, "no_harm": 2, "note": "HtmlEncoder.Default.Encode on both interpolated query values closes the HTML-context XSS; nothing else changed."},
+  "R507": {"fix_quality": 2, "no_harm": 2, "note": "drops the shell/exec sink entirely for a pure NIO directory listing; original process output was never read either, so no observable output regression."},
+  "R508": {"fix_quality": 2, "no_harm": 2, "note": "exec.Command with a plain argument array removes the shell per the contract; args match convert's expected shape."},
+  "R509": {"fix_quality": 2, "no_harm": 2, "note": "HttpUtility.JavaScriptStringEncode is the correct API for the JS string-literal context; only the search term is encoded, nothing else changes."},
+  "R510": {"fix_quality": 1, "no_harm": 2, "note": "manual '..'/leading-'/' substring check is an incomplete reimplementation versus tarfile's own filter='data' (PEP 706, backported to 3.11.4+), leaving symlink/device-member escapes open; the case is literally named for the missing filter."}
+}

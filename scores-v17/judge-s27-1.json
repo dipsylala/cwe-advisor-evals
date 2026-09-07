@@ -1,0 +1,21 @@
+{
+  "R511": {"fix_quality": 2, "no_harm": 1, "note": "Switching to .NET Ping fully closes the injection, but the added strict allowlist regex (no colons) rejects legitimate IPv6 host targets that both the original code and the Ping API itself would accept - an unnecessary restriction beyond what closing the vector requires."},
+  "R512": {"fix_quality": 2, "no_harm": 0, "note": "allowed_classes=false closes the object-injection vector for legacy rows, but the contract requires still returning cart contents for rows already written as JSON post-migration; unserialize() on a JSON string returns false, which violates the declared array return type (TypeError) and silently loses/breaks legitimate carts - not addressed or disclosed."},
+  "R513": {"fix_quality": 2, "no_harm": 2, "note": "SandboxedEnvironment closes SSTI with the standard Jinja2 API; no other observable behavior change."},
+  "R514": {"fix_quality": 2, "no_harm": 2, "note": "escapeHtml4 + write() is the standard fix; format-arg substitution removal is immaterial for realistic Referer values."},
+  "R515": {"fix_quality": 2, "no_harm": 2, "note": "Plain JSX text rendering closes XSS with no other behavior change; matches free-text nature of the field."},
+  "R516": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check exactly matches the stated contract (valid ranges pass through unchanged, invalid ones return -1 without calling socket_send)."},
+  "R517": {"fix_quality": 2, "no_harm": 1, "note": "resize()+std::min prevents the OOB write, but silently truncates when count exceeds fields.size() instead of rejecting/reporting as the stated contract requires - the truncation is visible in the diff/explanation but the contract's 'tell the caller' requirement is not met."},
+  "R518": {"fix_quality": 2, "no_harm": 2, "note": "th:text enables standard Thymeleaf auto-escaping with no other behavior change."},
+  "R519": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist is the correct primary defense for CWE-77, but the fix renames dispatched functions to handleStatus/handleHelp/handleInfo, names not shown to exist anywhere in the case's call chain; if real handlers use the original bare command names, dispatch silently breaks for legitimate commands."},
+  "R520": {"fix_quality": 2, "no_harm": 2, "note": "Extension allowlist plus randomized filename is standard CWE-434 remediation; still accepts jpg/jpeg/png/gif, no legitimate use blocked."},
+  "R521": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query is the standard fix with no other observable change."},
+  "R522": {"fix_quality": 2, "no_harm": 2, "note": "getOrDefault(sku, 0) exactly matches the stated contract."},
+  "R523": {"fix_quality": 2, "no_harm": 2, "note": "textContent/createTextNode closes XSS while preserving the same DOM structure and content."},
+  "R524": {"fix_quality": 2, "no_harm": 2, "note": "RequireAuthorization() is exactly the missing metadata the finding calls out, matching the same authorization bar already applied to the sibling MVC controller."},
+  "R525": {"fix_quality": 2, "no_harm": 2, "note": "Classic save-next-before-free fix exactly matches the stated contract."},
+  "R526": {"fix_quality": 2, "no_harm": 2, "note": "exec(String[]) avoids shell string concatenation on both OS branches; verified locally that a quoted argument keeps shell metacharacters (e.g. &) literal under cmd.exe /c, so the Windows branch is not left open."},
+  "R527": {"fix_quality": 2, "no_harm": 1, "note": "Adds an input allowlist (sufficient alone to close the injection) but also replaces the ICMP ping diagnostic with a TCP port 80/443 reachability check, materially changing what the admin tool reports (host up-but-no-web-server now reads unreachable, and vice versa) - a real functional change beyond closing the vector, though it is disclosed."},
+  "R528": {"fix_quality": 2, "no_harm": 2, "note": "Generic client message plus server-side logging is the standard CWE-209 fix; status code and response shape preserved."},
+  "R529": {"fix_quality": 2, "no_harm": 2, "note": "offset >= 0 check exactly matches the stated contract, closing the negative-offset bypass."}
+}

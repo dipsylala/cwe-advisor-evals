@@ -1,0 +1,18 @@
+{
+  "R794": {"fix_quality": 2, "no_harm": 1, "note": "Closes CRLF injection via InternetAddress strict parsing and Jakarta Mail, but silently changes the sent message: body becomes hardcoded \"Ticket acknowledgement\" instead of the original subjectLine content, and adds a forced STARTTLS requirement not present in the original plaintext relay, both undisclosed as behavior changes."},
+  "R795": {"fix_quality": 2, "no_harm": 2, "note": "Correctly fixes the self-invocation bypass by moving the @PreAuthorize method into a separate collaborator bean invoked through the Spring proxy; the added enforcement is exactly what the missing-authorization finding requires."},
+  "R796": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities() correctly neutralizes the injected subject text in a text-node context; no other observable change."},
+  "R797": {"fix_quality": 2, "no_harm": 2, "note": "Removes the dead/unsafe decoder.Entity assignment entirely; the entity map was never referenced by the Order struct so removal changes nothing observable."},
+  "R798": {"fix_quality": 2, "no_harm": 2, "note": "Replaces string-eval assert() with a plain boolean, eliminating code injection while preserving identical pass/fail semantics for the premium check."},
+  "R799": {"fix_quality": 2, "no_harm": 2, "note": "SLF4J's (String,Object,Object) overload treats a trailing Throwable as the exception argument, so ERROR level + attached exception + 401 are preserved as required; escapeJava() neutralizes CRLF, the stated DEL(0x7f) gap is minor and disclosed."},
+  "R800": {"fix_quality": 2, "no_harm": 2, "note": "Eliminates the sh -c shell invocation with a direct exec.Command argument array, closing the reported shell-metacharacter vector per the stated contract; residual ImageMagick option/delegate injection (e.g. a leading '-' or pipe-prefixed path) is not addressed but is outside the stated contract."},
+  "R801": {"fix_quality": 2, "no_harm": 2, "note": "Replaces Runtime.exec with Files.newDirectoryStream, preserving the same directory-listing scope as the original (no new restriction on which paths can be listed)."},
+  "R802": {"fix_quality": 2, "no_harm": 2, "note": "html.escape() before mark_safe() correctly neutralizes the injected announcement text; no other observable change."},
+  "R803": {"fix_quality": 2, "no_harm": 2, "note": "Adds the POSIX '--' operand separator exactly as the stated contract requires, passing dash-led filenames through literally instead of as tar options."},
+  "R804": {"fix_quality": 2, "no_harm": 2, "note": "Standard PreparedStatement parameterization; query semantics unchanged."},
+  "R805": {"fix_quality": 2, "no_harm": 2, "note": "escape_filter_chars() correctly neutralizes LDAP filter metacharacters in the username; no other change."},
+  "R806": {"fix_quality": 2, "no_harm": 2, "note": "Adds correct underflow-safe bounds checks before subspan() and throws on violation; the previous behavior was undefined, so replacing it with a defined exception is the required fix, not an extra restriction."},
+  "R807": {"fix_quality": 2, "no_harm": 2, "note": "Swapping text/template for html/template is the idiomatic Go fix; API-compatible, auto-escapes without further changes."},
+  "R808": {"fix_quality": 2, "no_harm": 2, "note": "html.escape() applied to all three interpolated values; no other observable change."},
+  "R809": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized raw() query with %s placeholder and params=[email]; same query semantics as the original f-string."}
+}

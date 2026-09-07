@@ -1,0 +1,16 @@
+{
+  "R311": {"fix_quality": 2, "no_harm": 1, "note": "Redundant fileName.includes('..') pre-check rejects any filename with two consecutive dots anywhere (e.g. 'notes..v2.txt'), an undisclosed extra restriction beyond the (already sufficient and correct) path.relative containment check."},
+  "R312": {"fix_quality": 2, "no_harm": 2, "note": "Clean resolve+relative containment check with no extra restrictions; preserves legitimate access."},
+  "R313": {"fix_quality": 2, "no_harm": 2, "note": "Standard sqlite3 parameterized query with ? placeholder, behavior otherwise unchanged."},
+  "R314": {"fix_quality": 2, "no_harm": 2, "note": "%s-style logging plus repr() escapes CR/LF and control chars so injected newlines cannot forge log lines; the added quoting/escaping in the log text is the disclosed, inherent effect of the fix itself."},
+  "R315": {"fix_quality": 2, "no_harm": 2, "note": "Adds secure:true only; all other cookie options and response flow unchanged."},
+  "R316": {"fix_quality": 1, "no_harm": 0, "note": "CSRF token validation is added but nothing in the shown code ever issues/stores a token for a legitimate caller (StoreToken is defined but never called, tokenStore may even be nil) - every real request is silently rejected, not disclosed as a dependency on an unshown token-issuance flow."},
+  "R317": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities() correctly neutralizes HTML-context XSS; encoded values render identically for benign input, no other behavior change."},
+  "R318": {"fix_quality": 2, "no_harm": 2, "note": "GUID-based server filename fully removes path traversal; content-sniffing check targets the 'dangerous type' portion of the finding and is unlikely to reject genuine text-based .cshtml templates; the changed 'stored' filename returned to the caller is disclosed and still usable."},
+  "R319": {"fix_quality": 2, "no_harm": 2, "note": "Simple bounds check against MAX_PLAYERS before the write; no other behavior change."},
+  "R320": {"fix_quality": 1, "no_harm": 0, "note": "authInterceptor checks ctx.Value(\"user_id\") but no code anywhere extracts credentials and sets that context key, so every RPC (legitimate or not) is rejected with Unauthenticated - the fix as delivered is non-functional for legitimate callers and this isn't disclosed."},
+  "R321": {"fix_quality": 2, "no_harm": 2, "note": "Moves untrusted value out of the JS string context into an HTML-encoded data attribute; trackSearch still receives the equivalent original value via getAttribute, no functional change."},
+  "R322": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check against calibrationTable.size() before the read; falls back to unmodified rawReading, no other change."},
+  "R323": {"fix_quality": 2, "no_harm": 2, "note": "Standard PDO prepared statement with ? placeholder replacing string concatenation."},
+  "R324": {"fix_quality": 2, "no_harm": 2, "note": "Abs+Join+Clean plus separator-aware prefix containment check is the correct Zip Slip fix; only malicious entries abort extraction, legitimate archives unaffected."}
+}

@@ -1,0 +1,18 @@
+{
+  "R132": {"fix_quality": 2, "no_harm": 2, "note": "Flips lockoutOnFailure to true, the correct API parameter; no other behaviour changed."},
+  "R133": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() applied to already-basename-sanitized $source/$target, matching the primary command's pattern; return/discard contract preserved exactly."},
+  "R134": {"fix_quality": 1, "no_harm": 0, "note": "Verified by running powershell.exe with the same -Command/-ArgumentList tail: trailing tokens are not delivered into $args, so $args[0] is empty and Test-Connection never receives the real target - injection appears blocked but every legitimate call silently breaks, undisclosed."},
+  "R135": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath() canonicalization plus startsWith containment check is the standard fix and matches the stated contract exactly."},
+  "R136": {"fix_quality": 2, "no_harm": 2, "note": "random_bytes()/bin2hex replaces uniqid(); dropping the attacker-supplied prefix is openly stated and is itself part of closing the weakness."},
+  "R137": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized OdbcCommand with ? placeholder and bound VarChar value; LIKE wildcard semantics preserved unchanged."},
+  "R138": {"fix_quality": 2, "no_harm": 2, "note": "html.EscapeString applied to both interpolated fields; verified via go run that the local var named 'html' shadowing the package still compiles and escapes correctly."},
+  "R139": {"fix_quality": 2, "no_harm": 2, "note": "Generic message replaces e.getMessage(); status code and control flow otherwise unchanged."},
+  "R140": {"fix_quality": 2, "no_harm": 2, "note": "escape-html applied consistently to all interpolated values; standard maintained package, no other behaviour change."},
+  "R141": {"fix_quality": 2, "no_harm": 2, "note": "Adds the same @csrf_protect decorator already used on the sibling route, matching the established pattern exactly."},
+  "R142": {"fix_quality": 2, "no_harm": 2, "note": "RandomNumberGenerator.Create() replaces seeded Random; unused seed param openly left in signature for compatibility, response shape unchanged."},
+  "R143": {"fix_quality": 2, "no_harm": 2, "note": "Ownership check added before refund() call; matches contract - 403 for non-owner, unchanged refund/response for owner."},
+  "R144": {"fix_quality": 2, "no_harm": 2, "note": "Character allowlist plus IP parse is the standard defense for a shell-chained cmd.exe batch line; covers normal hostnames/IPs without blocking legitimate diagnostic use."},
+  "R145": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist of known plugin module names matches the loader's documented catalog of installed plugins; 404 for anything else."},
+  "R146": {"fix_quality": 2, "no_harm": 2, "note": "jwt.verify() with explicit HS256 algorithm allowlist replaces unsigned decode(); standard, correct remediation."},
+  "R147": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with bound parameter replaces string-concatenated query; behaviour otherwise unchanged."}
+}

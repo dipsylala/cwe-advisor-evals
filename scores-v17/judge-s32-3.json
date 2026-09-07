@@ -1,0 +1,18 @@
+{
+  "R591": {"fix_quality": 2, "no_harm": 1, "note": "Regex allowlist blocks batch metacharacters, but restricts reportName to alnum/dash/underscore, a new restriction not required by any stated contract and not scoped to what the original accepted."},
+  "R592": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized SLF4J logging closes injection with no other observable change; matches stated contract exactly."},
+  "R593": {"fix_quality": 2, "no_harm": 1, "note": "Extension allowlist plus GUID rename closes the vector, but the allowlist rejects file types the original accepted and the stated contract does not call for that restriction."},
+  "R594": {"fix_quality": 1, "no_harm": 0, "note": "Adds csrf-csrf double-submit middleware but no route to issue/generate the token is provided, so legitimate authenticated transfers would have no valid token and always fail; this break is not disclosed."},
+  "R595": {"fix_quality": 2, "no_harm": 1, "note": "Magic-byte signature check plus GUID rename is a robust technique, but the 4-signature allowlist rejects legitimate file types not covered by the stated contract."},
+  "R596": {"fix_quality": 2, "no_harm": 2, "note": "Removes csrf_exempt only, restoring default Django CSRF middleware exactly as the stated contract requires; nothing else changes."},
+  "R597": {"fix_quality": 2, "no_harm": 2, "note": "random_bytes/bin2hex replaces the weak, user-seeded mt_rand token; only necessary format change, rest of flow untouched."},
+  "R598": {"fix_quality": 2, "no_harm": 2, "note": "ValidAlgorithms pinned to HmacSha256 matches the symmetric key actually configured; closes algorithm-confusion without affecting legitimate HS256 tokens."},
+  "R599": {"fix_quality": 2, "no_harm": 1, "note": "toRealPath()+startsWith correctly closes Zip Slip, but the added single-filename-only check rejects every nested entry, directly violating the stated contract that valid nested entries still extract (disclosed, not silent)."},
+  "R600": {"fix_quality": 2, "no_harm": 2, "note": "Removes the erroneous double decode and replaces the weak substring check with a separator-safe canonical-path containment check; no other behavior change."},
+  "R601": {"fix_quality": 2, "no_harm": 2, "note": "Array-form exec() with -- for ls avoids shell/flag injection while preserving the same command and data; standard fix for this sink."},
+  "R602": {"fix_quality": 2, "no_harm": 2, "note": "Placeholder-based QueryRow parameterization closes the injection; scan/error-handling logic unchanged."},
+  "R603": {"fix_quality": 2, "no_harm": 2, "note": "Logs the detailed error server-side and returns a generic message to the client, exactly the required remediation for CWE-209; no other change."},
+  "R604": {"fix_quality": 2, "no_harm": 2, "note": "Adds .RequireAuthorization() matching the sibling MVC controller's [Authorize] pattern; the case's own comments confirm this endpoint was meant to require authentication."},
+  "R605": {"fix_quality": 2, "no_harm": 1, "note": "Swapping to Jakarta Mail's Store/Folder API closes CRLF injection but changes the method's signature (Socket param dropped for Session) and discards the caller's already-open socket, a compatibility break not called out for callers."},
+  "R606": {"fix_quality": 1, "no_harm": 0, "note": "Setting HttpOnly=true blocks the JS cookie read that the file's own comments say the SPA depends on for CSRF token echo; write-up claims an alternate delivery path preserves SPA function but no such endpoint/header is implemented."}
+}

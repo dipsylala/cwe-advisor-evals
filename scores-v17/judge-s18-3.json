@@ -1,0 +1,19 @@
+{
+  "R367": {"fix_quality": 2, "no_harm": 2, "note": "basename() rejection plus realpath containment check with separator-safe prefix comparison closes traversal while preserving normal single-filename requests."},
+  "R368": {"fix_quality": 2, "no_harm": 2, "note": "runtime format sniff (JSON vs legacy) with unserialize(..., ['allowed_classes'=>false]) preserves both old and new rows per the stated contract and blocks object injection."},
+  "R369": {"fix_quality": 2, "no_harm": 2, "note": "parameterized DirContext.search with filterArgs is the correct JNDI fix; passing new SearchControls() is JNDI's own documented default for a null cons, so scope is unchanged."},
+  "R370": {"fix_quality": 2, "no_harm": 2, "note": "OWASP Java HTML Sanitizer (FORMATTING+BLOCKS) applied before the value reaches th:utext matches the stated allowlist-sanitization contract; title path unchanged."},
+  "R371": {"fix_quality": 2, "no_harm": 2, "note": "adds the missing bytesRead<header.Length check, rejecting only files too short to carry a real magic number; normal PNG/PDF uploads unaffected."},
+  "R372": {"fix_quality": 2, "no_harm": 2, "note": "acorn AST allowlist permits literals/order.-member/arith/logical exprs (satisfies the arithmetic-preview contract) and rejects calls, nested member escapes, and bare identifiers like process/require."},
+  "R373": {"fix_quality": 2, "no_harm": 2, "note": "allowlist maps exactly the four ReportRenderer methods actually used as macros, so no legitimate macro is dropped while dispatch to arbitrary methods is closed."},
+  "R374": {"fix_quality": 2, "no_harm": 2, "note": "parseClaimsJws() with an injected signing key correctly requires and validates a signature; failure path fails closed (clears context) without a fallback secret."},
+  "R375": {"fix_quality": 0, "no_harm": 0, "note": "joblib has no loads() function (confirmed via pip install/inspection: dir(joblib) contains dump/load, not dumps/loads) -- code raises AttributeError on every request, breaking get_prediction entirely and not actually closing the deserialization vector."},
+  "R376": {"fix_quality": 2, "no_harm": 2, "note": "standard division-based overflow guard (sizeof > SIZE_MAX/count) plus a null-input guard correctly prevents undersized allocation without changing behavior for valid counts."},
+  "R377": {"fix_quality": 2, "no_harm": 2, "note": "realpath() canonicalization plus separator-safe prefix containment check closes traversal for the same case as R367, using a single-layer realpath approach that still blocks escapes."},
+  "R378": {"fix_quality": 2, "no_harm": 1, "note": "correctly re-enables signature verification with explicit HS256 algorithms, but silently adds a hardcoded fallback secret (os.environ.get(..., \"default-secret-key\")) that reintroduces forgeable tokens if JWT_SECRET is unset, undisclosed as a risk."},
+  "R379": {"fix_quality": 2, "no_harm": 2, "note": "filepath.Rel + HasPrefix('..') after Join is the idiomatic Go containment check; legitimate in-root paths pass through unchanged."},
+  "R380": {"fix_quality": 2, "no_harm": 2, "note": "correctly identifies the finding as a false positive -- query is already a static PreparedStatement with setString binding -- and makes no change."},
+  "R381": {"fix_quality": 2, "no_harm": 2, "note": "replaces extension-based probeContentType with Tika content-sniffing detect(), the correct primary defense for this sink; allowed types unaffected."},
+  "R382": {"fix_quality": 2, "no_harm": 2, "note": "replaces Markup(label) (which disabled escaping) with html.escape(label), a standard context-appropriate output-encoding fix with no other behavior change."},
+  "R383": {"fix_quality": 2, "no_harm": 2, "note": "converts string-concatenated query to PDO prepare/execute with a bound parameter; preserves prior error handling and return contract."}
+}

@@ -1,0 +1,18 @@
+{
+  "R575": {"fix_quality": 2, "no_harm": 2, "note": "Escapes rawComment at the correct point using the existing entity-mapping pattern; no other observable change."},
+  "R576": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetRelativePath + rooted-path check correctly closes the sibling-prefix bypass and the Path.Combine absolute-path discard; legitimate paths under base dir still succeed."},
+  "R577": {"fix_quality": 2, "no_harm": 2, "note": "Moves term into Jinja2 context var instead of string concatenation, relying on real autoescaping default; no other behavior change."},
+  "R578": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist switch replaces $$cmd() dispatch; both legitimate commands preserved, returns same string type for unknown input."},
+  "R579": {"fix_quality": 2, "no_harm": 2, "note": "Rejects keys with protocol metacharacters (space/null/control) per memcached key spec; this validation is the fix itself, not an unrelated restriction."},
+  "R580": {"fix_quality": 2, "no_harm": 2, "note": "Adds can:update,order middleware matching sibling routes' established pattern; the authorization check is the fix itself."},
+  "R581": {"fix_quality": 2, "no_harm": 2, "note": "session_regenerate_id(true) added post-auth, standard fixation fix, no other behavior change."},
+  "R582": {"fix_quality": 2, "no_harm": 2, "note": "Plaintext listener now only redirects to HTTPS, matching the code's own stated original intent; disclosed and closes the CSRF-exposed path."},
+  "R583": {"fix_quality": 2, "no_harm": 2, "note": "createCipheriv + PBKDF2 + random salt/iv, standard fix; salt:iv:ciphertext format change is necessary for correct decryption and disclosed, no consumer shown in scope to break."},
+  "R584": {"fix_quality": 2, "no_harm": 2, "note": "Removes the attacker-controlled entity map assignment entirely, which is itself the vulnerability; no legitimate design depended on user data defining XML entities."},
+  "R585": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(16).toString('hex') replaces Math.random(); format change to 32-char hex is disclosed and doesn't reject any legitimate use."},
+  "R586": {"fix_quality": 2, "no_harm": 2, "note": "fgets + truncation-peek + drain correctly implements the stated contract: fits-in-line copies through, too-long-for-line rejects with no leftover bytes queued."},
+  "R587": {"fix_quality": 2, "no_harm": 2, "note": "Adds UseAntiforgery() middleware and explicit ValidateRequestAsync() call; preserves 202 Accepted and QueueAsync() call for authorized requests with valid tokens, matching the stated contract."},
+  "R588": {"fix_quality": 2, "no_harm": 1, "note": "Swaps GroovyShell for JEXL3, an appropriate restricted-expression-language fix, but silently changes the formula DSL - any already-stored admin formula using Groovy-specific syntax beyond basic math/ternary would now fail (falling back to basePrice) without this being flagged as a migration risk."},
+  "R589": {"fix_quality": 2, "no_harm": 2, "note": "Captures bytesSent() before reset() eliminates the UAF; returns the same value a correct call would have produced, no other change."},
+  "R590": {"fix_quality": 2, "no_harm": 2, "note": "Statement->PreparedStatement with setString bind parameter, standard fix, no other observable change."}
+}

@@ -1,0 +1,17 @@
+{
+  "R719": {"fix_quality": 2, "no_harm": 2, "note": "Correct SQLAlchemy text() named-parameter binding; behavior otherwise unchanged."},
+  "R720": {"fix_quality": 2, "no_harm": 2, "note": "Correct PreparedStatement with setString; identical observable behavior."},
+  "R721": {"fix_quality": 2, "no_harm": 2, "note": "RFC 4515-style escaping of LDAP filter metacharacters; legitimate lookups unaffected."},
+  "R722": {"fix_quality": 2, "no_harm": 0, "note": "filepath.Rel/HasPrefix(rel, \"..\") check also silently rejects legitimate filenames that merely start with \"..\" (e.g. \"..data.txt\") even though they resolve inside uploadsDir and were accepted by the original check; not disclosed."},
+  "R723": {"fix_quality": 2, "no_harm": 2, "note": "Math.multiplyExact with ArithmeticException->400 matches the stated contract exactly."},
+  "R724": {"fix_quality": 2, "no_harm": 2, "note": "Verified by compiling against EF Core 8/9 (Relational package): Database.ExecuteSqlAsync(FormattableString) exists and auto-parameterizes all three interpolated values, matching the contract."},
+  "R725": {"fix_quality": 2, "no_harm": 2, "note": "Simple i<n loop bound fix matches the stated copy/return contract exactly."},
+  "R726": {"fix_quality": 1, "no_harm": 0, "note": "Verified by running RestrictedPython 8.5: setting restricted_globals['__builtins__'] = safe_globals (instead of using safe_globals itself as the globals dict) raises NameError on ordinary calls like len(), so virtually every legitimate snippet fails; write-up wrongly claims functionality is preserved."},
+  "R727": {"fix_quality": 2, "no_harm": 2, "note": "Pointer recomputed from list->data/length after realloc and memcpy; correct and behavior-preserving."},
+  "R728": {"fix_quality": 0, "no_harm": 2, "note": "Confirmed against the installed @fastify/csrf-protection package docs: registering the plugin alone enforces nothing - fastify.csrfProtection must be added as onRequest/preHandler per route or via fastify.addHook globally, which this fix never does, so the POST route remains unprotected."},
+  "R729": {"fix_quality": 2, "no_harm": 2, "note": "Correct Django raw() with %s placeholder and params list; behavior unchanged."},
+  "R730": {"fix_quality": 2, "no_harm": 2, "note": "std::min-based truncation with length matching bytes written exactly matches the stated contract."},
+  "R731": {"fix_quality": 2, "no_harm": 2, "note": "Adds secure=True (the actual fix) plus a stated, non-blocking samesite='Lax' hardening addition."},
+  "R732": {"fix_quality": 2, "no_harm": 2, "note": "Column allowlist for ORDER BY is the correct approach since column names can't be parameterized; allowed set matches the columns actually selected plus the default, consistent with the contract."},
+  "R733": {"fix_quality": 2, "no_harm": 1, "note": "Files.list() correctly avoids the shell entirely, but the added character allowlist/absolute-path/\"..\" checks are an extra restriction not required to close the vector and could reject legitimate filenames; the write-up does disclose this restriction openly."}
+}

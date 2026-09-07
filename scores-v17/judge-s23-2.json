@@ -1,0 +1,15 @@
+{
+  "R449": {"fix_quality": 2, "no_harm": 2, "note": "Adds a per-category method whitelist checked before dispatch; only the real handler method (send) is allowed, closing the dynamic-dispatch vector without breaking any working codepath."},
+  "R450": {"fix_quality": 2, "no_harm": 2, "note": "can:refund,order route middleware plus an ownership-checking OrderPolicy is the correct Laravel authorization pattern and matches the stated contract exactly."},
+  "R451": {"fix_quality": 2, "no_harm": 1, "note": "GUID-renaming plus canonical-path validation closes the traversal vector, but it silently (well, disclosed in the write-up) discards the client-chosen filename entirely, so a legitimate admin can no longer name or later reference an uploaded template by its intended name -- a stated restriction the original code did not have."},
+  "R452": {"fix_quality": 2, "no_harm": 2, "note": "Minimal, correct addition of secure: true; no other observable change."},
+  "R453": {"fix_quality": 2, "no_harm": 2, "note": "Replaces Markup() with html.escape() at the point the untrusted label is embedded; correct output encoding, no other behavior change."},
+  "R454": {"fix_quality": 2, "no_harm": 2, "note": "ValidAlgorithms pinned to HmacSha256 matches the SymmetricSecurityKey already in use, closing algorithm confusion without narrowing legitimate token acceptance."},
+  "R455": {"fix_quality": 2, "no_harm": 2, "note": "Straightforward bounds check before the array access; preserves existing error-return convention."},
+  "R456": {"fix_quality": 2, "no_harm": 2, "note": "subtle.ConstantTimeCompare plus the retained empty-string guard exactly reproduces the stated contract (exact match only, false otherwise)."},
+  "R457": {"fix_quality": 1, "no_harm": 2, "note": "Only rejects URIs with a non-null scheme; verified against OpenJDK 26 that new URI(\"//evil.com/path\") has scheme=null but host=evil.com, so protocol-relative redirects (//evil.com/...) bypass this check entirely -- vector only partially closed."},
+  "R458": {"fix_quality": 2, "no_harm": 1, "note": "archive/tar swap correctly eliminates the shell sink entirely, but the ctx parameter is now unused, silently dropping the contract's required request-context cancellation for long-running reads -- not mentioned in the write-up."},
+  "R459": {"fix_quality": 2, "no_harm": 2, "note": "shared_ptr/weak_ptr with lock()-before-invoke is the standard fix for this dangling-observer pattern; order and live-observer-only invocation are preserved as required."},
+  "R460": {"fix_quality": 0, "no_harm": 2, "note": "_escape_inline_arg only escapes backslash and double-quote characters, never the literal CR/LF bytes; Redis's inline-command framing splits on the first raw newline in the byte stream before any quote parsing runs, so the exact CRLF injection the write-up's own worked example describes still succeeds against the 'fixed' code."},
+  "R461": {"fix_quality": 2, "no_harm": 2, "note": "Correct SecureRandom replacement with the predictable seed discarded; seedParam/seed become unused dead code, a minor cleanliness nit but no behavior change."}
+}

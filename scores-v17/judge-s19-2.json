@@ -1,0 +1,19 @@
+{
+  "R384": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist rejects non-approved field identifiers via ValueError; default 'name' and term binding preserved."},
+  "R385": {"fix_quality": 2, "no_harm": 2, "note": "resolve_entities=False is the standard lxml XXE fix; no other behavior changed."},
+  "R386": {"fix_quality": 0, "no_harm": 0, "note": "`String algorithm = signedJWT.getHeader().getAlgorithm();` does not compile (JWSAlgorithm cannot convert to String) - verified by compiling against real nimbus-jose-jwt 9.37.3 jar; even if fixed, would break every legitimate RS256 request since object-vs-String .equals() never matches."},
+  "R387": {"fix_quality": 2, "no_harm": 2, "note": "Eliminates process execution entirely via Ping; output text format differs from PowerShell's but this is stated openly and the connectivity-check purpose is preserved."},
+  "R388": {"fix_quality": 2, "no_harm": 2, "note": "Extension now sourced from file-type's detected.ext instead of client filename; matches allowed MIME types already validated."},
+  "R389": {"fix_quality": 2, "no_harm": 2, "note": "Rejects (not strips) CR/LF at the SMTP sink, avoiding the strip-produces-valid-syntax pitfall; doesn't add any restriction beyond blocking the injection chars."},
+  "R390": {"fix_quality": 2, "no_harm": 2, "note": "Standard parameterized SqlCommand fix; matches stated contract exactly."},
+  "R391": {"fix_quality": 2, "no_harm": 2, "note": "UUID filename + MIME-derived extension closes traversal; success/error JSON shapes match the stated contract."},
+  "R392": {"fix_quality": 0, "no_harm": 2, "note": "No-op: app.UseAntiforgery() only validates endpoints carrying antiforgery metadata (auto-added for [FromForm] binding); EmailChangeRequest binds from JSON body so no metadata is attached. Verified by building a .NET 10 minimal-API repro with the identical pattern and POSTing without any token - returned 202 Accepted. Nothing else changed, so no new harm, but the CSRF vector is unaddressed."},
+  "R393": {"fix_quality": 2, "no_harm": 2, "note": "Correct PNG/JPEG magic-byte signatures checked against declared content type; legitimate images unaffected."},
+  "R394": {"fix_quality": 2, "no_harm": 2, "note": "Adds Secure:true to the cookie, the standard fix for this exact CWE; nothing else changed."},
+  "R395": {"fix_quality": 2, "no_harm": 2, "note": "SimpleEvaluationContext.forReadOnlyDataBinding() (no .withInstanceMethods()) blocks method invocation, T(), new, and bean refs while still supporting arithmetic and property reads on the root object - matches the stated contract exactly."},
+  "R396": {"fix_quality": 2, "no_harm": 2, "note": "Reorders the session write to after login_user(), the exact issue the case is built around; final session state and redirect are unchanged for a successful login."},
+  "R397": {"fix_quality": 2, "no_harm": 2, "note": "unserialize(..., ['allowed_classes' => ['ShoppingCart']]) is the standard PHP CWE-502 fix and still reconstructs legitimate carts (only scalar/array properties)."},
+  "R398": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized LIKE placeholder with wildcards folded into the bound value; substring-match semantics preserved per contract."},
+  "R399": {"fix_quality": 2, "no_harm": 2, "note": "RandomNumberGenerator.Fill() replaces the attacker-seedable Random; seed param left unused (harmless) but no longer influences the token, which is the fix itself."},
+  "R400": {"fix_quality": 2, "no_harm": 2, "note": "nonet:true blocks the network-based external DTD/entity fetch (libxmljs's real default-on XXE/SSRF vector); noent:false matches libxmljs's safe default for entity substitution. Could not install libxmljs locally (native module, no VS build tools) to run it directly, so this rests on documented libxml2/libxmljs option semantics rather than execution."}
+}

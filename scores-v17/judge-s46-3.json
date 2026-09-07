@@ -1,0 +1,18 @@
+{
+  "R794": {"fix_quality": 0, "no_harm": 0, "note": "Catches AddressException without importing jakarta.mail.internet.AddressException (only InternetAddress/MimeMessage imported from that subpackage; the jakarta.mail.* wildcard does not cover it) - fails to compile; also swaps the raw-socket relay for JavaMail's Transport with mail.smtp.starttls.required=true, an unstated risk of breaking delivery if the internal gateway lacks STARTTLS."},
+  "R795": {"fix_quality": 2, "no_harm": 2, "note": "Correctly fixes the Spring AOP self-invocation bypass by moving the @PreAuthorize'd delete into a separate proxied bean; enforcement now matches the pre-existing annotation's intent, nothing else changes."},
+  "R796": {"fix_quality": 2, "no_harm": 2, "note": "Standard HTML::Entities encode_entities() fix on the untrusted field only; no other observable change."},
+  "R797": {"fix_quality": 2, "no_harm": 2, "note": "Removes the attacker-influenced decoder.Entity population and the now-dead query-param read entirely; clean closure."},
+  "R798": {"fix_quality": 2, "no_harm": 2, "note": "Replaces string-eval assert() with a direct boolean comparison logically equivalent to the original string comparison; no other behavior change."},
+  "R799": {"fix_quality": 2, "no_harm": 2, "note": "SLF4J parameterized logging plus escapeJava() neutralizes CRLF while still attaching the exception via the trailing Throwable arg, matching the stated contract."},
+  "R800": {"fix_quality": 1, "no_harm": 2, "note": "Argument array closes shell-metacharacter injection but leaves ImageMagick convert open to a leading '-' in inputPath/outputPath being read as an option/coder rather than a literal path; no '--' separator or dash guard added."},
+  "R801": {"fix_quality": 2, "no_harm": 2, "note": "Replaces Runtime.exec with Files.newDirectoryStream; the added path/dir validation is required for the new API and doesn't reject legitimate directory paths."},
+  "R802": {"fix_quality": 2, "no_harm": 2, "note": "Escapes user text before building the markup, then mark_safe()s only the assembled string - canonical fix, no other change."},
+  "R803": {"fix_quality": 2, "no_harm": 2, "note": "Adds the POSIX '--' end-of-options marker as allowed by the stated contract, preserving literal dash-prefixed filenames."},
+  "R804": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with bound parameter; structurally identical to original otherwise, including cleanup logic."},
+  "R805": {"fix_quality": 2, "no_harm": 2, "note": "ldap3's escape_filter_chars() is the correct mitigation for LDAP filter injection; behavior otherwise unchanged."},
+  "R806": {"fix_quality": 2, "no_harm": 2, "note": "Correct unsigned-safe bounds check before subspan(); throwing on invalid header values is inherent to fixing the OOB read, not an extraneous restriction."},
+  "R807": {"fix_quality": 2, "no_harm": 2, "note": "Swaps text/template for html/template, the minimal correct Go fix; identical template and struct otherwise."},
+  "R808": {"fix_quality": 2, "no_harm": 2, "note": "html.escape() wraps every dynamic value before concatenation; no other change."},
+  "R809": {"fix_quality": 2, "no_harm": 2, "note": "Django raw() with %s placeholder and params=[email]; standard parameterized fix, output shape unchanged."}
+}

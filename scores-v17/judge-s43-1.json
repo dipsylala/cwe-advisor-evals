@@ -1,0 +1,16 @@
+{
+  "R750": {"fix_quality": 2, "no_harm": 2, "note": "Switches to array-form exec (no shell tokenization) and adds a hostname/IPv6 allowlist regex that covers real hostnames, so no legitimate host is rejected."},
+  "R751": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(16) replaces Math.random(); no other behaviour changed."},
+  "R752": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom-derived 128-bit token replaces Random().nextFloat(); cookie/session comparison logic unaffected."},
+  "R753": {"fix_quality": 0, "no_harm": 0, "note": "Imports org.owasp.html.Encode, but that class does not exist in the OWASP HTML Sanitizer package (org.owasp.html has PolicyFactory/Sanitizers, not Encode); the real forHtml() static method lives in org.owasp.encoder.Encode - this will not compile."},
+  "R754": {"fix_quality": 2, "no_harm": 2, "note": "GET now renders a CSRF-token confirmation form instead of deleting directly, POST does the deletion under doubleCsrfProtection; this behaviour change is the required fix for a state-changing GET and is stated plainly."},
+  "R755": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist dispatch table correctly closes the code-injection vector, but it eliminates the endpoint's entire prior capability (arbitrary transformation scripts) - a real restriction on legitimate use, openly stated but not merely incidental hardening."},
+  "R756": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query with ? placeholder; matches the stated contract exactly, no other behaviour change."},
+  "R757": {"fix_quality": 2, "no_harm": 1, "note": "Rejecting CR/LF fully closes the Redis inline-protocol injection, but it also throws an uncaught ArgumentException (500) for any legitimate multi-line annotation text, which the original endpoint accepted; not disclosed as a functional trade-off in the write-up beyond the mechanics."},
+  "R758": {"fix_quality": 2, "no_harm": 2, "note": "weak_ptr storage + lock()-at-use-site matches the stated contract (live observers called in order, expired ones skipped); both files updated consistently."},
+  "R759": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte MIME detection plus allowlist and random server-side filename is the standard fix; restricting to image types is what CWE-434 remediation requires, not extraneous."},
+  "R760": {"fix_quality": 0, "no_harm": 0, "note": "Lambda move-captures a std::unique_ptr and is passed to std::function<void()>, which requires the target to be CopyConstructible - a lambda with a move-only capture is not copyable, so this fails to compile (classic move-only-lambda-into-std::function error); should have captured a shared_ptr instead."},
+  "R761": {"fix_quality": 2, "no_harm": 2, "note": "HttpUtility.HtmlEncode() applied to the untrusted value before output; no other change."},
+  "R762": {"fix_quality": 2, "no_harm": 2, "note": "Adds magic-byte format detection and derives extension from detected format instead of client Content-Type; legitimate PNG/JPEG/GIF uploads still pass."},
+  "R763": {"fix_quality": 2, "no_harm": 2, "note": "JSON-serializes Model.Label and drops the surrounding literal quotes in the template so the JSON's own quoting is used; Title encoding and RefreshSeconds numeric type are both preserved per the stated contract."}
+}

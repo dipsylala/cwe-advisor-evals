@@ -1,0 +1,16 @@
+{
+  "R462": {"fix_quality": 2, "no_harm": 2, "note": "Math.random() replaced with SecureRandom-backed 128-bit hex token; only the opaque cookie value's format changes, nothing else observable."},
+  "R463": {"fix_quality": 2, "no_harm": 2, "note": "os.system replaced with subprocess.run using an argument list and equivalent stdout/stderr redirection; behavior preserved (unused os import left behind, harmless)."},
+  "R464": {"fix_quality": 2, "no_harm": 2, "note": "self.get_object() restores DRF queryset scoping and object-permission check, matching the stated contract exactly."},
+  "R465": {"fix_quality": 0, "no_harm": 0, "note": "Fix calls order.getUserId(), but the Order entity in this case only has getCustomerUsername() - no such method exists, so the code does not compile."},
+  "R466": {"fix_quality": 2, "no_harm": 2, "note": "Straightforward parameterized query with ? placeholder, preserves exact-match search semantics per contract."},
+  "R467": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized mysql2 query with ? placeholder and [userId] array closes the injection with no behavior change."},
+  "R468": {"fix_quality": 2, "no_harm": 2, "note": "SqlCommand with @Region parameter and AddWithValue closes injection; DataTable name and columns preserved per contract."},
+  "R469": {"fix_quality": 2, "no_harm": 2, "note": "Standard, thorough XXE hardening (disallow-doctype-decl, external entities/DTD off, XInclude off); feature calls correctly wrapped in try/catch, no behavior change for legitimate XML."},
+  "R470": {"fix_quality": 2, "no_harm": 2, "note": "Saved file extension now derived from a fixed MIME-to-extension map instead of attacker-controlled originalname, closing the dangerous-extension vector without affecting legitimate PNG/JPEG uploads."},
+  "R471": {"fix_quality": 2, "no_harm": 1, "note": "snprintf correctly closes the overflow, but the contract requires oversized names be rejected or reported, not silently truncated into a different value - the write-up discloses the truncation but the contract violation stands (disclosure caps this at 1, not 2)."},
+  "R472": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check before array access, returns unmodified reading on out-of-range index consistent with the function's existing error-handling pattern."},
+  "R473": {"fix_quality": 2, "no_harm": 2, "note": "preg_replace_callback with call_user_func replaces the /e code-eval; allowlist of formatter names is the only sound fix for a user-controlled callable and matches the documented example formatters."},
+  "R474": {"fix_quality": 2, "no_harm": 2, "note": "Exact-match Set allowlist replaces the bypassable startsWith() prefix check per the contract; write-up explicitly flags the class list as a starting point to be tailored to the real application classes."},
+  "R475": {"fix_quality": 2, "no_harm": 2, "note": "Adds requireRole('admin') to match the pattern on every sibling admin route, closing the missing-authorization gap with no other behavior change."}
+}

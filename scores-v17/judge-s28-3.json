@@ -1,0 +1,19 @@
+{
+  "R530": {"fix_quality": 2, "no_harm": 2, "note": "ProcessBuilder with array args plus hostname allowlist/leading-dash rejection closes both the tokenization injection and the CWE-88 argument-injection gap; restriction covers ordinary hostnames/IPv6 addresses and is disclosed."},
+  "R531": {"fix_quality": 2, "no_harm": 2, "note": "Adds @csrf_protect matching the sibling endpoint's already-correct pattern; no other change."},
+  "R532": {"fix_quality": 2, "no_harm": 2, "note": "at() throws on out-of-range slot, matching the stated contract's 'rejected or reported'; valid slots behave identically to []."},
+  "R533": {"fix_quality": 2, "no_harm": 2, "note": "Allowlisting the executable name is the only sound fix for a tainted-program-name sink; matches the doc comment's 'handful of diagnostic utilities' scope."},
+  "R534": {"fix_quality": 0, "no_harm": 1, "note": "Verified via DOMPurify+jsdom in a scratch dir: DOMPurify.sanitize(bio, {ALLOWED_TAGS: []}) does not encode double quotes, so a bio containing a quote still breaks out of the title attribute (e.g. produces a live onmouseover=) -- the exact vector the contract requires closed is still exploitable; fix only strips tags, doesn't fix attribute encoding."},
+  "R535": {"fix_quality": 2, "no_harm": 2, "note": "Overflow-safe length>buffer_len-offset check with offset guard first matches the stated contract exactly."},
+  "R536": {"fix_quality": 2, "no_harm": 2, "note": "new URL() scheme allowlist (http/https/mailto) with fallback dangerous-prefix check for relative URLs; tab/newline stripping by the URL parser is handled correctly (confirmed by reasoning through WHATWG URL parsing), falls back to '#' without breaking legitimate links."},
+  "R537": {"fix_quality": 2, "no_harm": 2, "note": "Standard parameterized SqlCommand replacing string.Format; preserves rowsDeleted/NotFound behavior exactly."},
+  "R538": {"fix_quality": 2, "no_harm": 2, "note": "Narrows supports() to the provider's own token type, the standard Spring Security fix; other providers unaffected."},
+  "R539": {"fix_quality": 2, "no_harm": 2, "note": "Canonicalizes and separator-terminates the base dir before startsWith, closing the sibling-directory bypass without affecting legitimate files under BASE_DIR."},
+  "R540": {"fix_quality": 2, "no_harm": 2, "note": "Pre-checks available space and uses strncat as a second guard; rejecting oversized filenames is structurally required by the fixed-size buffer and is disclosed."},
+  "R541": {"fix_quality": 2, "no_harm": 2, "note": "Column/direction allowlists preserve parameterized accountId filter and default sort exactly per the stated contract; added try/catch in the controller is disclosed and necessary since findOrders now throws."},
+  "R542": {"fix_quality": 2, "no_harm": 2, "note": "Swaps mux for protectedHandler on the plaintext listener so both listeners share the same CSRF-wrapped handler; no other change."},
+  "R543": {"fix_quality": 2, "no_harm": 2, "note": "Splits GET (confirmation view) from POST (actual deletion, CSRF-checked), matching the standard fix for a state change reachable via a safe method; the fixed file's own comments describe exactly this two-step pattern, and the change is disclosed."},
+  "R544": {"fix_quality": 2, "no_harm": 2, "note": "NULL check short-circuits strcmp; matches the stated contract's disabled-by-default behavior for unset env var."},
+  "R545": {"fix_quality": 2, "no_harm": 2, "note": "CommandType.StoredProcedure with a bound @CustomerId parameter matches the stated contract exactly."},
+  "R546": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check on playerIndex before the array write rejects out-of-range indices while leaving valid indices unaffected."}
+}

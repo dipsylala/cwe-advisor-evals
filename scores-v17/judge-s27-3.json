@@ -1,0 +1,21 @@
+{
+  "R511": {"fix_quality": 2, "no_harm": 1, "note": "Native Ping class removes the shell entirely, but sends a single ping (not -n 4) and returns a wholly different single-line message format than the original raw ping stdout; write-up claims format is 'preserved' when it isn't."},
+  "R512": {"fix_quality": 2, "no_harm": 0, "note": "allowed_classes=false correctly blocks object injection for legacy rows, but the stated contract requires post-migration rows stored as JSON to still return their contents - unserialize() on a JSON string returns false, silently breaking those carts, and this is never addressed or disclosed."},
+  "R513": {"fix_quality": 2, "no_harm": 2, "note": "SandboxedEnvironment is the standard mitigation; autoescape and render signature unchanged."},
+  "R514": {"fix_quality": 2, "no_harm": 2, "note": "escapeHtml4 correctly neutralizes the reflected Referer value; dropping the unused format-args array only affects contrived format-specifier inputs, not normal use."},
+  "R515": {"fix_quality": 2, "no_harm": 2, "note": "JSX text interpolation auto-escapes; description is documented free text so no formatting capability is lost."},
+  "R516": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing offset+length bound exactly as the contract specifies, matches valid/invalid behavior required."},
+  "R517": {"fix_quality": 2, "no_harm": 0, "note": "resize() correctly fixes the OOB write, but the contract requires rejecting or reporting oversized counts rather than truncating - the fix silently clamps via std::min() with no error signal to the caller, contradicting the contract despite being described in prose."},
+  "R518": {"fix_quality": 2, "no_harm": 2, "note": "th:text enables Thymeleaf's default escaping; no other behavior changed."},
+  "R519": {"fix_quality": 2, "no_harm": 0, "note": "Allowlist-based dispatch correctly prevents arbitrary function invocation, but handleStatus/handleHelp/handleInfo are never defined anywhere in the file, so every legitimate command now fatals at runtime - undisclosed breakage."},
+  "R520": {"fix_quality": 2, "no_harm": 2, "note": "Extension allowlist plus random filename is standard CWE-434 mitigation; legitimate jpg/png/gif uploads still succeed."},
+  "R521": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query correctly separates data from SQL structure; return shape unchanged."},
+  "R522": {"fix_quality": 2, "no_harm": 2, "note": "getOrDefault(sku, 0) matches the stated contract exactly."},
+  "R523": {"fix_quality": 2, "no_harm": 2, "note": "textContent/createTextNode preserves the span structure while escaping user content; matches original markup shape."},
+  "R524": {"fix_quality": 2, "no_harm": 2, "note": "RequireAuthorization() is the correct minimal-API mechanism; blocking unauthenticated callers is the intended fix, not incidental harm."},
+  "R525": {"fix_quality": 2, "no_harm": 2, "note": "Saves next pointer before free(), matches contract's traversal/no-double-free requirement."},
+  "R526": {"fix_quality": 2, "no_harm": 2, "note": "exec(String[]) removes shell interpretation entirely, the canonical OWASP Benchmark remediation for this sink."},
+  "R527": {"fix_quality": 2, "no_harm": 1, "note": "Eliminates the shell sink entirely, but replaces ICMP ping semantics with a TCP connect probe on ports 80/443 - a host reachable by ping but not listening on those ports now reports unreachable; disclosed as a mechanism swap but not as a behavioral difference."},
+  "R528": {"fix_quality": 2, "no_harm": 2, "note": "Generic error message plus server-side logging is the standard CWE-209 fix; status code and response shape unchanged."},
+  "R529": {"fix_quality": 2, "no_harm": 2, "note": "offset >= 0 check closes the negative-offset bypass exactly as the contract requires."}
+}

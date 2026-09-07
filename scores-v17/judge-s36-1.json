@@ -1,0 +1,17 @@
+{
+  "R648": {"fix_quality": 2, "no_harm": 2, "note": "strings.NewReplacer strips \\n/\\r before logging; response path still uses raw username, closing CRLF log injection cleanly."},
+  "R649": {"fix_quality": 2, "no_harm": 2, "note": "Correctly reorders session write to after login_user(); no other observable change."},
+  "R650": {"fix_quality": 2, "no_harm": 2, "note": "Array-form Runtime.exec(String[]) avoids single-string command tokenizing/shell parsing; same command shape preserved for legitimate input."},
+  "R651": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte MIME sniffing + allowlist + generated filename is the standard fix; allowlist matches the docstring's stated supported types (PDF/DOCX/DOC/TXT)."},
+  "R652": {"fix_quality": 2, "no_harm": 2, "note": "os.path.realpath resolves symlinks before the prefix check per the stated contract; controller and returned download_name untouched."},
+  "R653": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query via pool.execute() with ? placeholder closes the injection; response shape and error handling unchanged."},
+  "R654": {"fix_quality": 2, "no_harm": 1, "note": "redis-py hset() correctly closes CRLF command injection, but silently drops the function's original return value (raw socket response bytes) without disclosing the change."},
+  "R655": {"fix_quality": 2, "no_harm": 2, "note": "Standard ? placeholder parameterized Exec(); unchanged response/error handling."},
+  "R656": {"fix_quality": 2, "no_harm": 2, "note": "Jakarta Mail Transport.send() with strict InternetAddress validation replaces hand-built SMTP commands; rejecting CRLF-bearing/malformed addresses is inherent to closing this sink, not an unrelated restriction."},
+  "R657": {"fix_quality": 2, "no_harm": 2, "note": "lock()+null-check matches the stated contract: live connections still get the message once, expired ones are skipped without extending lifetime."},
+  "R658": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist mapping for Order() matches the contract's explicit requirement to disallow arbitrary SQL text there; Where-clause parameterization and 204 response untouched."},
+  "R659": {"fix_quality": 1, "no_harm": 2, "note": "Denylist/keyword-blocklist over live CSharpScript.EvaluateAsync() omits 'Environment' entirely (System is imported so no 'System.' prefix is required), so Environment.Exit/GetEnvironmentVariable bypasses every filter -- the contract explicitly requires environment access to be blocked."},
+  "R660": {"fix_quality": 2, "no_harm": 2, "note": "htmlspecialchars(ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5) on the reported sink plus disclosed defense-in-depth on other reflected outputs; purely encoding, no functional change."},
+  "R661": {"fix_quality": 2, "no_harm": 2, "note": "RFC 4515-style escaping of LDAP metacharacters neutralizes injection while preserving legitimate filter matching."},
+  "R662": {"fix_quality": 0, "no_harm": 0, "note": "ExecuteSqlRawAsync(sql, object[]) requires {0}/{1}/{2}-style positional placeholders, not @named ones -- confirmed by running against EF Core 10.0.11/Sqlite: it throws InvalidOperationException 'Must add values for the following parameters: @accountId, @status, @beforeUtc' on every call, breaking the archive endpoint for legitimate use as well as blocking the injection."}
+}

@@ -1,0 +1,16 @@
+{
+  "R237": {"fix_quality": 2, "no_harm": 2, "note": "Injects IAntiforgery and calls ValidateRequestAsync before the sink, the correct pattern for a JSON-bound minimal API that UseAntiforgery() does not auto-validate."},
+  "R238": {"fix_quality": 2, "no_harm": 2, "note": "HtmlEncoder.Default.Encode() applied only to the untrusted Message field at the sink, matching the interpolation context exactly."},
+  "R239": {"fix_quality": 2, "no_harm": 2, "note": "WebUtility.HtmlEncode() applied to both untrusted query params before concatenation, correct minimal fix."},
+  "R240": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing admin-role check the handler's own doc comment says is intended, matching the endpoint's stated contract."},
+  "R241": {"fix_quality": 2, "no_harm": 2, "note": "setSecure(false) to setSecure(true) is the exact minimal fix; the accompanying response-text update is disclosed and simply keeps the message accurate to the corrected flag."},
+  "R242": {"fix_quality": 2, "no_harm": 2, "note": "Canonicalizes with realpath() and checks containment with a separator-aware prefix comparison against the reports dir, correctly closing the stream-wrapper/denylist bypass while still permitting any real file inside the directory (including subdirectories)."},
+  "R243": {"fix_quality": 2, "no_harm": 2, "note": "Replaces string concatenation with Sequelize named replacements, the standard parameterization API for this sink."},
+  "R244": {"fix_quality": 2, "no_harm": 2, "note": "Replaces fmt.Sprintf with html/template using the same markup structure, idiomatic Go context-aware escaping."},
+  "R245": {"fix_quality": 2, "no_harm": 2, "note": "Swaps Environment for jinja2.sandbox.SandboxedEnvironment, the vendor-documented mechanism for restricting a user-supplied template's own syntax/introspection while leaving the render_preview signature, context, and response shape from the contract untouched."},
+  "R246": {"fix_quality": 2, "no_harm": 2, "note": "Allowlists column and direction tokens matching the struct's own fields before building the ORDER BY fragment; matches the contract's requirement that intended sort modes keep working while blocking arbitrary SQL text."},
+  "R247": {"fix_quality": 2, "no_harm": 2, "note": "lockoutOnFailure: false to true is the documented ASP.NET Core Identity fix; does not affect a legitimate user who authenticates correctly."},
+  "R248": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing field_index >= MAX_FIELDS bounds check immediately before the array read, standard fix, no effect on valid indices."},
+  "R249": {"fix_quality": 2, "no_harm": 1, "note": "Correct allowlist shape for the fileFilter sink, but the original denylist (blocking only exe/php/sh/bat) implicitly permitted a much broader set of attachment types than the new 8-extension allowlist, so legitimate uploads the original code accepted (zip, csv, pptx, mp4, etc.) would now be silently rejected; disclosed in the write-up but not called for by any stated contract."},
+  "R250": {"fix_quality": 2, "no_harm": 2, "note": "CGI::escapeHTML() applied to both untrusted fields before concatenation into the HTML string, correct and minimal."}
+}

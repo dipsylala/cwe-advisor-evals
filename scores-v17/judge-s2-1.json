@@ -1,0 +1,18 @@
+{
+  "R132": {"fix_quality": 2, "no_harm": 2, "note": "lockoutOnFailure flipped false->true, the standard fix; only observable effect is the intended lockout defense itself."},
+  "R133": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg() applied to already-basename'd source/target; swaps raw $requestedName for $source, disclosed, and equivalent for legitimate filenames."},
+  "R134": {"fix_quality": 0, "no_harm": 0, "note": "verified with a live powershell.exe: -ArgumentList after -Command is not a real binding mechanism, so $args[0] stays null (every legitimate call fails ParameterArgumentValidationError) and the escaped value is still concatenated into the -Command script text, so injected `; Remove-Item ...` still executes -- both breaks legitimate use and leaves the injection open."},
+  "R135": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath() canonicalization plus startsWith containment check on base and target; clean, matches contract."},
+  "R136": {"fix_quality": 2, "no_harm": 2, "note": "random_bytes(16)/bin2hex replaces uniqid(); removal of the unused $prefix/client_nonce is disclosed and blocks no legitimate caller."},
+  "R137": {"fix_quality": 2, "no_harm": 1, "note": "parameterized query correctly closes the injection, but adds an undisclosed OdbcType.VarChar(255) length cap the original never had, which could silently truncate/reject long search terms."},
+  "R138": {"fix_quality": 2, "no_harm": 2, "note": "html.EscapeString applied to both fields at the actual render sink; verified the local variable `html` shadowing the `html` package in the same statement still compiles and evaluates correctly."},
+  "R139": {"fix_quality": 2, "no_harm": 2, "note": "generic client-facing message replaces e.getMessage(); response shape and status code unchanged."},
+  "R140": {"fix_quality": 2, "no_harm": 2, "note": "escape-html applied to all interpolated values at the sink; no other observable change."},
+  "R141": {"fix_quality": 2, "no_harm": 2, "note": "adds @csrf_protect matching the sibling route's existing pattern -- the mandated defense itself, not an extraneous restriction."},
+  "R142": {"fix_quality": 2, "no_harm": 2, "note": "RandomNumberGenerator.Create() replaces the seeded Random; unused seed param retained and disclosed, output format (Base64, 16 bytes) preserved."},
+  "R143": {"fix_quality": 2, "no_harm": 2, "note": "ownership check runs before refund(), returns 403 on mismatch via abort(), preserves the authorized-path response shape per the stated contract."},
+  "R144": {"fix_quality": 2, "no_harm": 2, "note": "hostname/IP allowlist matches the legitimate input domain for a ping/nslookup target sink; preserves the cmd /C ping && nslookup structure."},
+  "R145": {"fix_quality": 2, "no_harm": 1, "note": "hardcoded two-item ALLOWED_PLUGINS closes the injection, but the docstring's 'e.g. csv_export, pdf_export' implies other legitimate installed plugins may exist that this disclosed allowlist would now silently reject."},
+  "R146": {"fix_quality": 2, "no_harm": 2, "note": "jwt.verify() with pinned HS256 algorithm and try/catch replaces jwt.decode(); the JWT_SECRET requirement is inherent to a working signature check, not an extraneous restriction."},
+  "R147": {"fix_quality": 2, "no_harm": 2, "note": "standard PreparedStatement with setString(); resource cleanup and error handling structure preserved."}
+}

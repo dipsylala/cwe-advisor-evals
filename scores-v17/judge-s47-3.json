@@ -1,0 +1,16 @@
+{
+  "R810": {"fix_quality": 2, "no_harm": 2, "note": "Registers @fastify/csrf-protection and wires the documented preValidation hook plus an authenticated token-issuance endpoint; no other observable behavior change."},
+  "R811": {"fix_quality": 2, "no_harm": 2, "note": "Textbook PreparedStatement with bound parameter; nothing else altered."},
+  "R812": {"fix_quality": 2, "no_harm": 1, "note": "Content-Disposition: attachment is applied unconditionally to PNG/JPEG as well as SVG, forcing forced-download behavior for the non-SVG avatars the contract says must be served back unchanged, and this scope-widening isn't called out as SVG-only."},
+  "R813": {"fix_quality": 2, "no_harm": 2, "note": "Extension now derived from the validated detected content type via a safe map; no other behavior change."},
+  "R814": {"fix_quality": 2, "no_harm": 2, "note": "Removes only the ignoringRequestMatchers exemption, restoring default CSRF protection for billing exactly as the contract requires."},
+  "R815": {"fix_quality": 2, "no_harm": 2, "note": "Shell removed entirely via ArgumentList to ping.exe directly, closing the reported command-injection vector (a leading '-' in host could still be read as a Windows ping flag, a lesser, separate flag-injection gap not addressed)."},
+  "R816": {"fix_quality": 1, "no_harm": 2, "note": "The Origin check is deleted and replaced only by comments instructing a caller to wrap the mux with http.CrossOriginProtection elsewhere; the code in this file, as delivered, applies no CSRF protection at all."},
+  "R817": {"fix_quality": 0, "no_harm": 0, "note": "CGI::Util has no html_escape export (the real function is CGI::escapeHTML); `use CGI::Util qw(html_escape)` fails to compile, fatally breaking the page for every request, which the write-up does not disclose."},
+  "R818": {"fix_quality": 2, "no_harm": 2, "note": "Removes the bypassing SignatureValidator delegate, restoring the default validator against the existing TokenValidationParameters; nothing else changed."},
+  "R819": {"fix_quality": 2, "no_harm": 2, "note": "Adds %255s width matching nameBuf's 256-byte size, closing the OOB read while accommodating the full legitimate buffer capacity."},
+  "R820": {"fix_quality": 1, "no_harm": 2, "note": "Verified with a live java.net.URI test: a protocol-relative value like '//evil.com/path' has isAbsolute()==false, so it skips the host-allowlist branch entirely and reaches sendRedirect(data) unchecked -- a real open-redirect bypass of the fix."},
+  "R821": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the attacker-controlled jku key resolver with keys fetched from a hardcoded trusted JWKS URL; ValidateToken still returns/throws as before."},
+  "R822": {"fix_quality": 2, "no_harm": 2, "note": "Path.startsWith with toRealPath() gives component-aware containment instead of string prefix; a nonexistent note now yields 403 instead of 404 (disclosed), but existing legitimate notes are served unchanged."},
+  "R823": {"fix_quality": 2, "no_harm": 2, "note": "eval() replaced with mathjs.evaluate(), the standard purpose-built expression parser for exactly this calculator use case; behavior for legitimate math expressions preserved."}
+}

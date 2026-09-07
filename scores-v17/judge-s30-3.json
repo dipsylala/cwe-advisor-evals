@@ -1,0 +1,16 @@
+{
+  "R561": {"fix_quality": 2, "no_harm": 2, "note": "Adds UPLOAD_ERR_OK check before finfo/move, exactly the required fix; only rejects genuinely failed uploads."},
+  "R562": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check payloadLength against frameBuffer.size() before memcpy; only rejects malformed/oversized frames, matches header comment's implied contract."},
+  "R563": {"fix_quality": 2, "no_harm": 2, "note": "Uses erase() return value and conditional increment; removes all completed tasks, preserves order, skips none, matches stated contract."},
+  "R564": {"fix_quality": 2, "no_harm": 2, "note": "Same correct UPLOAD_ERR_OK check as R561, same case; closes vector without side effects."},
+  "R565": {"fix_quality": 2, "no_harm": 2, "note": "Logs detailed error server-side via log.Printf, returns fixed generic message to client; matches Go guidance, no unstated side effects."},
+  "R566": {"fix_quality": 2, "no_harm": 2, "note": "Adds server-side user.IsInRole(\"Admin\") check in the event handler itself, the correct fix for AuthorizeView-only gating; restriction matches the component's own declared Admin-only intent."},
+  "R567": {"fix_quality": 2, "no_harm": 1, "note": "execFile + cmd.exe /c closes shell injection but relies on a new regex allowlist ([a-zA-Z0-9_-]+) for reportName not required by any stated contract, which could reject legitimate report names (spaces, dots, etc.)."},
+  "R568": {"fix_quality": 2, "no_harm": 2, "note": "Adds RFC4515 char escaping before filter concatenation; escapes rather than rejects, preserves search semantics for benign input."},
+  "R569": {"fix_quality": 2, "no_harm": 2, "note": "Uses JNDI parameterized DirContext.search(name, filter, filterArgs, cons) with {0} placeholder, the idiomatic API for this sink; no functional restriction added."},
+  "R570": {"fix_quality": 2, "no_harm": 2, "note": "Rejects filenames containing CR/LF (the injection vector) rather than stripping; null/empty check is a minor addition but targets inputs that were never meaningful, not a restriction on legitimate filenames."},
+  "R571": {"fix_quality": 2, "no_harm": 2, "note": "htmlspecialchars with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5 applied at both output points in the sink; encodes rather than rejects, preserves display of legitimate content."},
+  "R572": {"fix_quality": 2, "no_harm": 2, "note": "Switches to offset-based tracking (record_offset) recomputed against the post-realloc list->data, eliminating the stale pointer while writing the same status byte at the same logical position and updating last_write_ptr as before."},
+  "R573": {"fix_quality": 2, "no_harm": 2, "note": "Replaces random.choice with secrets.choice, drops the ineffective reseed; token still 32-char alphanumeric and mapping still recorded before responding, matching the stated contract exactly."},
+  "R574": {"fix_quality": 2, "no_harm": 2, "note": "Allowlists sort column/direction before interpolation, keeps accountId parameterized; the restriction is explicitly called for by the stated contract (intended sort keys only, no raw SQL fragments)."}
+}
