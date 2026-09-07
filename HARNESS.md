@@ -54,6 +54,22 @@ this; all of them ran under whatever model powered the session at the time (Sonn
 vs. the same model without" - none of it has been repeated on a second model, so a benefit or defect
 found here has not been shown to generalise across models.
 
+## Step 0 - check the fixtures parse
+
+```sh
+python evals/scripts/parsecheck.py
+```
+
+Every case fixture must parse with the language's own tool (`php -l`, `node --check`, `py_compile`,
+`gofmt -e`, `perl -c`, `javac` and `dotnet build` with resolution errors filtered out; C and C++
+need a compiler, which CI has and the authoring machine does not). A fixture that does not parse as
+shipped cannot be judged by building a fix against it, and any compile gate on arm output needs
+this as its floor. The fixtures carry no dependency manifests, so this is a parse check, not a
+type check: an invented method or package in a fixture would pass it. Templates hosted by a
+framework (`.jsp`, `.razor`, `.cshtml`) are reported as unchecked. The same sweep runs on every
+push to `cases/` in the evals repo's CI, and `git config core.hooksPath .githooks` in `evals/`
+runs it on the cases in each commit.
+
 ## Step 1 - choose the cases
 
 Cases live in `cases/{CWE}/{language}/{case-id}/`, each with a `case.json`. Select by whatever the

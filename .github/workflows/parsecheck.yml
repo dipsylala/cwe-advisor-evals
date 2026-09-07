@@ -1,0 +1,42 @@
+name: parse-check cases
+
+# Tier-1 syntax check of every case fixture (scripts/parsecheck.py). A fixture that does not parse
+# as shipped cannot be judged by compiling a fix against it. Ubuntu carries gcc, so C and C++ are
+# checked here even though the authoring machine has no compiler for them.
+
+on:
+  push:
+    paths: ['cases/**', 'scripts/parsecheck.py', '.github/workflows/parsecheck.yml']
+  pull_request:
+    paths: ['cases/**', 'scripts/parsecheck.py', '.github/workflows/parsecheck.yml']
+  workflow_dispatch:
+
+jobs:
+  parsecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - name: toolchains
+        run: |
+          php --version | head -1; node --version; go version; javac -version; dotnet --version; gcc --version | head -1; perl -v | sed -n 2p
+      - name: parse check
+        run: python scripts/parsecheck.py

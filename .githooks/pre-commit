@@ -1,0 +1,12 @@
+#!/bin/sh
+# Tier-1 parse check of every case touched by this commit - see scripts/parsecheck.py.
+# Enabled once per clone via: git config core.hooksPath .githooks
+# The full sweep over all cases runs in CI (.github/workflows/parsecheck.yml).
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR -- cases)
+if [ -z "$staged" ]; then
+  exit 0
+fi
+# shellcheck disable=SC2086
+python scripts/parsecheck.py --paths $staged
+exit $?
