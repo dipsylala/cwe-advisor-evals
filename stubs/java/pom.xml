@@ -51,5 +51,7 @@
     <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-autoconfigure</artifactId><version>2.7.18</version></dependency>
     <dependency><groupId>ch.qos.logback</groupId><artifactId>logback-classic</artifactId><version>1.2.13</version></dependency>
     <dependency><groupId>org.springframework</groupId><artifactId>spring-test</artifactId><version>${spring.version}</version></dependency>
+    <!-- Apache Commons Net: cwe/77/java's FTP client replacement (run 18 first pass). -->
+    <dependency><groupId>commons-net</groupId><artifactId>commons-net</artifactId><version>3.11.1</version></dependency>
   </dependencies>
 </project>
