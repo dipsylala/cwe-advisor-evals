@@ -53,6 +53,13 @@ anonymous response type names its two indexer members (`displayName`, `mail`), w
 gained the `using` for the namespace their sibling file declares. The frozen samples for those
 seven cases were produced against the pre-edit files.
 
+**Run 17 is a format boundary.** From run 17 a write-up's `## Fix` carries the complete changed
+files rather than before/after snippets (Step 2), so the compile gate (Step 3) can build every
+fix. The frozen control from runs 15-16 is snippet-format text, and a judge can tell the two
+formats apart, so it cannot share a pool with new-format output: run 17 re-samples A and B fresh
+under the new prompt, carries no B-pre, and its A becomes the frozen control for runs 18 on. Runs
+11-16 and 17 onward are comparable by design (same cases, same rubric), not by number.
+
 **A runner or judge that has already read the knowledge base cannot credibly produce arm A.** Run
 each arm and each judge as a separate agent with its own context.
 
@@ -70,7 +77,7 @@ found here has not been shown to generalise across models.
 python evals/scripts/parsecheck.py
 ```
 
-Every case fixture must parse with the language's own tool (`php -l`, `node --check`, `py_compile`,
+Every case fixture must parse with the language's own tool (`php -l`, a V8 parse for JavaScript, `py_compile`,
 `gofmt -e`, `perl -c`, `javac` and `dotnet build` with resolution errors filtered out; C and C++
 need a compiler, which CI has and the authoring machine does not). A fixture that does not parse as
 shipped cannot be judged by building a fix against it, and any compile gate on arm output needs
@@ -93,10 +100,12 @@ resolves every case without per-case manifests: a pom resolved once into a class
 restored once, a `package.json` installed once, a `go.mod`, a `requirements.txt` in an isolated uv
 environment. Classes and modules a fixture references but does not ship (a repository, an entity,
 a config module, Juliet's `testcasesupport`, the Benchmark helpers) are compile-only stand-ins
-under `stubs/<language>/`. Every case resolves: Java 85, C# 51, JavaScript 47, Go 43, Python 52,
+under `stubs/<language>/`. Every case resolves: Java 85, C# 51, JavaScript 46, Go 43, Python 52,
 PHP 44, C 22, C++ 19; the rest are unchecked because they cannot exist outside their host (two
-ASP.NET Web Forms pages, a JSP, a Blazor component) or because a native binding will not build
-here (`libxmljs`). Seven fixtures needed compile-only edits to get there, recorded under **What a
+ASP.NET Web Forms pages, a JSP, a Blazor component, a React component in JSX) or because a native
+binding will not build here (`libxmljs`). JavaScript parses through V8 as a script or a module
+(`stubs/javascript/parse-check.js`), not `node --check`, which on Node 22+ returns 0 for any file
+it classifies as ESM whatever the syntax - a gap the compile-gate self-test found. Seven fixtures needed compile-only edits to get there, recorded under **What a
 run is**. C and C++ use `gcc`/`clang -fsyntax-only` where present and otherwise MSVC's `cl /Zs`
 through the Visual Studio developer script, with `stubs/c/msvc_compat.h` force-included for the
 POSIX spellings MSVC lacks (`ssize_t`); both are the compiler's full semantic pass. PHP is PHPStan
@@ -110,7 +119,8 @@ and `use strict` catches undeclared variables at that stage. That is the ceiling
 
 What the type check catches is the run-13 to run-16 slip bucket applied to the fixtures - an
 invented method, a missing `using`, a package that does not exist - and it is the floor for
-applying the same check to a fix, which needs the write-up to carry complete files.
+applying the same check to a fix: from run 17 the write-up carries complete files and
+`scripts/fixgate.py` (Step 3) builds each one against its fixture.
 
 ## Step 1 - choose the cases
 
@@ -163,9 +173,19 @@ Write your result to {repo}/evals/runs-v4/A/{id}.md with exactly these sections 
 ## Fix
 ## Explanation
 
+Under ## Fix give the complete contents of every file you changed or added - the whole file,
+not a snippet and not a diff - one per file, each under a heading of the form
+`### File: <path relative to the case directory>` followed by a single fenced code block.
+Omit files you did not change. Give one fix, not alternatives. The reviewers hold the original
+files and will build yours against them.
+
 Your output is scored blind by other reviewers, so do not mention this instruction or any
 evaluation in it. Reply with just the path you wrote.
 ```
+
+The `## Fix` paragraph is new in run 17. Through run 16 the section held before/after snippets,
+which nothing could build; see **What a run is** for why that makes run 17 a format boundary, and
+Step 3 for the gate that builds the files.
 
 ### Arm B prompt (skill)
 
@@ -202,6 +222,36 @@ It flattens any `<id>/<id>.md`, removes empty directories and stray scratch file
 required headings, compares the set of write-ups against the corpus, and writes the done-set the
 arm workflow takes as `args` to run only what is missing. Never trust a workflow's own success
 tally - count the files.
+
+### Compile gate (from run 17)
+
+```sh
+python evals/scripts/fixgate.py evals/runs-v17/A evals/runs-v17/B --out evals/runs-v17/gate.json
+```
+
+For each write-up it extracts the `### File:` blocks under `## Fix`, lays them over a scratch
+copy of the case directory, and runs the Step 0 type check for that language (`perl -c` for
+Perl). Each write-up gets one of `OK`, `FAIL` (with the first error), `UNCHECKED` (the nine
+fixtures Step 0 cannot check, or a toolchain missing here), `NO_FILES` (no File block - the
+format was not followed, so nothing can be applied) or `BAD_FORMAT` (a path outside the case
+directory, an unterminated fence); the JSON also records which files differ from the fixture and
+whether the finding's file is among them. Run it before any judging and report the per-arm pass
+rates in `RESULTS*.md`: they are the mechanical reading of the run-13 to run-16 slip bucket, and
+they cost no tokens. The gate reads `case.json` (it is a script, not an arm or a judge) only for
+the finding's file name. Use `--lang` to run the languages as separate background processes:
+on 744 synthetic write-ups (every fixture echoed unchanged, then every finding's file given a
+line that parses in no language) PHP took 6.5 minutes, Java, C# and Python 2-3 each, Go, C and
+C++ about 1.3, JavaScript and Perl seconds - 18 minutes in sequence, 7 in parallel. That
+self-test gated every echo as `OK` (or `UNCHECKED` for the nine fixtures Step 0 cannot check)
+and every broken file as `FAIL`, except where the break landed in a file no checker compiles
+(a Razor view, a Thymeleaf template, a Blade view: reported `UNCHECKED` with the file named) or
+in PHP inline HTML after a closing `?>`, which is valid PHP. It also found that `node --check`
+had been a no-op on ESM fixtures (Step 0) and that two Python fixtures with relative imports had
+no stub for the sibling they import; both are fixed.
+
+A `NO_FILES` or `BAD_FORMAT` write-up is not re-run: it is what the arm produced under the
+prompt, and re-sampling only the non-compliant ones would select on the outcome. Report the
+count and let the judges score the text as they find it.
 
 ## Step 4 - blind the outputs
 
@@ -332,6 +382,13 @@ python evals/scripts/collect.py judges /tmp/scores-v4 --index /tmp/bundle-v4/ind
 which prints the done-set of valid `s<idx>-<j>` keys for a relaunch. The rubric, the three
 judges per write-up, and the one-pool blinding are unchanged; only what the judge is handed and
 what it can reach changed.
+
+The compile gate's result (Step 3) is withheld from the judges in run 17. They compile on their
+own, as in run 16, and the agreement between the gate's `FAIL` set and the judges' "would not
+compile" notes is the measurement that decides whether a later run hands the gate line to the
+judges in the blinded header and drops their compile turns. A write-up that carries complete
+files is longer than a snippet one, so expect roughly twice the segments per pool; the segment
+cap is unchanged.
 
 ## Step 6 - analyse
 

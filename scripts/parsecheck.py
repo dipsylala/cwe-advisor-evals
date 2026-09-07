@@ -7,7 +7,8 @@ be judged by compiling a fix against it, and a compile gate on arm output needs 
 
 Per language:
     php         php -l
-    javascript  node --check
+    javascript  V8 parse as script then module (stubs/javascript/parse-check.js; `node --check`
+                passes any file Node detects as ESM); JSX reported unchecked
     python      py_compile under this interpreter
     go          gofmt -e (parse only)
     perl        perl -c with stubs/perl/lib on @INC (a compile-only CGI.pm) and the case directory
@@ -87,10 +88,17 @@ def check_php(files, case_dir):
 
 
 def check_js(files, case_dir):
-    for f in files:
-        rc, out = run(['node', '--check', f])
-        if rc != 0:
-            return 'FAIL', first_line(out, re.compile('SyntaxError'))
+    # Not `node --check`: on Node 22+ it returns 0 for any file module detection reads as ESM,
+    # syntax or no syntax. stubs/javascript/parse-check.js parses with V8 as a script, then as a
+    # module, and reports JSX as unchecked.
+    script = os.path.join(EVALS, 'stubs', 'javascript', 'parse-check.js')
+    rc, out = run(['node', '--experimental-vm-modules', '--no-warnings', script] + files)
+    lines = [l for l in out.splitlines() if l.startswith(('FAIL', 'UNCHECKED'))]
+    fails = [l for l in lines if l.startswith('FAIL')]
+    if fails or (rc != 0 and not lines):
+        return 'FAIL', (fails[0].split(': ', 1)[-1] if fails else first_line(out))[:200]
+    if lines:
+        return 'UNCHECKED', lines[0].split(': ', 1)[-1][:200]
     return 'OK', ''
 
 

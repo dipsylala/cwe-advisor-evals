@@ -181,6 +181,11 @@ class JsChecker:
         files = sources(case_dir, '.js')
         if not files:
             return 'UNCHECKED', 'no .js files'
+        # The resolver below is not a parser: a file that does not parse still resolves. Parse
+        # first, as Step 0 does, so a fix with a syntax error fails here and JSX is unchecked.
+        status, note = parsecheck.check_js(files, case_dir)
+        if status != 'OK':
+            return status, note
         rc, out = run(['node', os.path.join(JS_STUBS, 'resolve-check.js')] + files)
         lines = [l for l in out.splitlines() if l.startswith(('FAIL', 'UNCHECKED'))]
         fails = [l for l in lines if l.startswith('FAIL')]
@@ -255,6 +260,12 @@ class PythonChecker:
                 os.makedirs(pkg)
                 for f in files:
                     shutil.copy(f, pkg)
+                # A sibling the fixture imports relatively but does not ship (`from .models
+                # import Order`) is a stub at the top of the case's stub dir; it has to sit
+                # inside the package, where MYPYPATH cannot reach.
+                for f in sources(env['MYPYPATH'], '.py'):
+                    if os.path.dirname(f) == env['MYPYPATH'] and not os.path.exists(os.path.join(pkg, os.path.basename(f))):
+                        shutil.copy(f, pkg)
                 io.open(os.path.join(pkg, '__init__.py'), 'w').close()
                 target = [pkg]
             else:

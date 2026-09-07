@@ -207,9 +207,12 @@ special.
 - **No fix is compiled or executed by the harness itself.** The fixtures now parse and type-check
   (`scripts/parsecheck.py` and `scripts/compilecheck.py`, in CI and the pre-commit hook: every
   Java, C#, JavaScript, Go, Python, PHP, C and C++ case resolves against one superset manifest per
-  language plus compile-only stubs under `stubs/`), so the fixtures are known good. The fixes are not: a
-  write-up carries snippets, not files, so nothing applies a fix to its fixture and builds it. A
-  fix is scored on whether it reads as correct, not on whether it actually builds or passes a test; the judge-side
+  language plus compile-only stubs under `stubs/`), so the fixtures are known good. Through run
+  16 the fixes were not: a write-up carried snippets, not files, so nothing could apply a fix to
+  its fixture and build it. From run 17 the write-up carries complete files and
+  `scripts/fixgate.py` builds every fix against its fixture (HARNESS.md Step 3; no run has
+  reported it yet). Nothing executes a fix. A fix is scored on whether it reads as correct and,
+  from run 17, whether it builds - not on whether it passes a test; the judge-side
   gap above is this same problem one level up, where even the *scoring* wasn't independently
   verified until this session checked one case by hand.
   Run 15 made the cost concrete: 24 of 372 cases in every set - unguided, guided before and after a
