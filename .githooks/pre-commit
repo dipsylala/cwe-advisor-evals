@@ -8,5 +8,7 @@ if [ -z "$staged" ]; then
   exit 0
 fi
 # shellcheck disable=SC2086
-python scripts/parsecheck.py --paths $staged
+python scripts/parsecheck.py --paths $staged || exit 1
+# shellcheck disable=SC2086
+python scripts/compilecheck.py --paths $staged
 exit $?

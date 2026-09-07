@@ -40,3 +40,5 @@ jobs:
           php --version | head -1; node --version; go version; javac -version; dotnet --version; gcc --version | head -1; perl -v | sed -n 2p
       - name: parse check
         run: python scripts/parsecheck.py
+      - name: type check (java)
+        run: python scripts/compilecheck.py

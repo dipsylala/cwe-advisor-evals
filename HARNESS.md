@@ -70,6 +70,20 @@ framework (`.jsp`, `.razor`, `.cshtml`) are reported as unchecked. The same swee
 push to `cases/` in the evals repo's CI, and `git config core.hooksPath .githooks` in `evals/`
 runs it on the cases in each commit.
 
+For Java the type check exists too:
+
+```sh
+python evals/scripts/compilecheck.py
+```
+
+The third-party surface across all 86 Java cases is about twenty artifacts, so one superset
+classpath (`stubs/java/pom.xml`, resolved once with Maven and cached) resolves every case without
+per-case manifests; classes a fixture references but does not ship are compile-only stand-ins
+under `stubs/java/` (Juliet's `testcasesupport`, the Benchmark helpers, and a handful of
+per-case repositories and entities). 84 of 85 compile with full resolution; the one that does not
+is a public class in a file of another name. The same shape - one superset manifest per language
+plus stubs - is how C#, JavaScript, Go and Python get their type checks.
+
 ## Step 1 - choose the cases
 
 Cases live in `cases/{CWE}/{language}/{case-id}/`, each with a `case.json`. Select by whatever the
@@ -222,6 +236,18 @@ plainly in the write-up is a lesser defect than the identical change left for th
 because a reviewer or an automated gate reading the write-up can catch a stated change before the
 fix ships and cannot catch a silent one. Disclosure does not launder a change that stops legitimate
 use into a 2 - it moves a 0 to a 1, not a 0 to a 2.
+
+Two shapes recur often enough to pin. A fix that adds a restriction the original did not have - an
+allowlist, a length or character bound, a newly required parameter, an authorization check on a
+path that was open - and that could reject an input the contract or the original code accepted,
+scores 1 even when the write-up states it, unless the stated contract calls for that restriction.
+Extra hardening against a different weakness - a cookie flag, a header, a stricter default - that
+blocks no legitimate use and is stated scores 2.
+
+(That paragraph was added after run 16, where a sample of the no_harm splits showed about half
+were this gray zone rather than disagreement about facts. Re-judging run 16's worst segment under
+it, 19 write-ups, took no_harm splits from 7 to 3 with the mean unchanged within 0.1; on 19 items
+that is directional, not proof, and run 17's frozen sets carry the real measurement.)
 
 Write one JSON object keyed by run id to {scores-dir}/judge{N}.json:
 {"R101": {"fix_quality": 2, "no_harm": 2, "note": "..."}, ...}
