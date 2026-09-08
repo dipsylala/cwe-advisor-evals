@@ -105,6 +105,19 @@ removed - a return value that becomes `True` instead of the server's bytes, a `g
 replaced by a whole-file read, an unused `ctx` that drops request cancellation. CWE-434 (1.63 to
 1.49) and CWE-94 (three build failures in both arms) are unchanged from run 19's reading.
 
+**Perl, and why a four-case language was worth reading anyway.** Perl `fix_quality` fell 2.00 to
+1.75 here and 2.00 to 1.83 in run 20 - small samples, but the same case in both runs, and six of
+run 21's six judges plus two of run 20's three cited the same mechanism and said they had
+reproduced it. They were right, and it reproduces against real HTML::Entities: the guided arm
+writes `encode_entities($cgi->param('note'))`, `param()` returns every value of a repeated
+parameter in list context, so `?note=<payload>&note=q` becomes
+`encode_entities('<payload>', 'q')` - the second value is taken as the unsafe-character set and
+the payload goes out unescaped. `cwe/79/perl` had named list context and the second argument in
+separate bullets without connecting them, and its Remediation Steps prescribed exactly that call.
+Fixed after the run, so unmeasured: the entry now says to force scalar context before handing a
+value to any encoder. This is the run's clearest case of a judge panel finding a real entry defect
+rather than an arm slip.
+
 One entry-attributable regression, and it is from the run-19 sweep: `cwe/22`'s tightened wording
 produced redundant `..` and `IsAbs` rejections in Go and Java on cases where the containment check
 already covered it. The sweep removed that shape from the entries and the arm reintroduced it from
