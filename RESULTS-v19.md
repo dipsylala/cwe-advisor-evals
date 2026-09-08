@@ -177,7 +177,27 @@ run 17's unguided control:
 Guided is ahead on `fix_quality` for 63 cases and behind on 19; on `no_harm` ahead on 62 and
 behind on 46. The composite mixes three judge panels, but the control's drift across them is
 0.03 or less, and every touched case was re-sampled because its entry changed, not selected for
-its score. The per-language form of this table is in the parent repository's README.
+its score.
+
+By language, unguided control to latest guided text (clean = all three judges gave 2 on both
+axes; "does not build" is the compile gate):
+
+| Language | Cases | fix_quality | no_harm | Clean | Does not build |
+| --- | --- | --- | --- | --- | --- |
+| C | 22 | 1.92 -> 1.98 | 1.79 -> 1.94 | 18 -> 19 | 0 -> 0 |
+| C++ | 19 | 1.88 -> 2.00 | 1.84 -> 1.91 | 16 -> 18 | 1 -> 1 |
+| C# | 54 | 1.73 -> 1.94 | 1.68 -> 1.78 | 34 -> 40 | 2 -> 2 |
+| Go | 43 | 1.79 -> 1.98 | 1.67 -> 1.81 | 28 -> 34 | 6 -> 0 |
+| Java | 86 | 1.78 -> 1.84 | 1.80 -> 1.75 | 56 -> 59 | 4 -> 4 |
+| JavaScript | 48 | 1.79 -> 1.89 | 1.86 -> 1.85 | 35 -> 38 | 0 -> 0 |
+| Perl | 4 | 1.50 -> 2.00 | 1.50 -> 2.00 | 3 -> 4 | 1 -> 0 |
+| PHP | 44 | 1.92 -> 1.95 | 1.80 -> 1.87 | 35 -> 35 | 2 -> 0 |
+| Python | 52 | 1.79 -> 1.92 | 1.72 -> 1.84 | 31 -> 41 | 0 -> 0 |
+| All | 372 | 1.80 -> 1.92 | 1.76 -> 1.82 | 256 -> 288 | 16 -> 7 |
+
+Java is the one language behind on `no_harm`, on the CWE-94 and CWE-434 cases. These figures use
+the runs 17-19 Sonnet judge panel; the current per-language figures, on two arm models and the
+later panel, are in [RESULTS-v21.md](RESULTS-v21.md) and the parent README.
 
 ## Limitations
 
