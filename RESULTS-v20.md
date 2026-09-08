@@ -82,10 +82,11 @@ no longer reads the bzip2 and xz archives `tar -tf` did).
 restriction as 1 unless the contract calls for it, and Fable applies that to shapes the Sonnet
 panels of runs 17-19 let through: a hostname allowlist beside an argv fix, a 30-second timeout,
 a MIME allowlist, a `SameSite=Strict` the original did not set, a `MAX_CONNECTIONS` cap. CWE-78
-sits at 1.25 / 1.38 for the two arms because Sonnet adds a hostname or filename allowlist next
+scores 1.25 on `no_harm` unguided and 1.38 guided because Sonnet adds a hostname or filename allowlist next
 to the fix in either arm - 17 of the unguided arm's 21 misses and 15 of the guided arm's 20 carry
 a narrowing note. The entries stopped prescribing allowlists in run 18; Sonnet adds them on its
-own, and the doctrine change did not reach it. CWE-94 (1.32 / 1.48) and CWE-434 (1.60 / 1.55)
+own, and the doctrine change did not reach it. CWE-94 (`no_harm` 1.32 unguided, 1.48 guided) and
+CWE-434 (1.60 and 1.55)
 have the same shape: sandboxes that reject expressions the original accepted, image re-encodes
 that alter legitimate uploads. Whether those are regressions or the correct price of the fix is
 the open rubric question from run 19, now with a judge that answers it strictly every time.

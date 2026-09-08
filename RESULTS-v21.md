@@ -27,11 +27,11 @@ is the size of ordinary panel drift on frozen text (0.03 in run 19), so the two 
 `blind.py` shuffles arms across segments, so both arms meet both panels in proportion, and the
 guided-versus-unguided delta can be read inside each panel separately. It is the same delta:
 
-| Panel | write-ups | A | B | delta |
-| --- | --- | --- | --- | --- |
-| Fable (26 segments) | 403 | 1.75 / 1.68 | 1.89 / 1.67 | +0.14 / -0.01 |
-| Opus (24 segments) | 341 | 1.73 / 1.65 | 1.86 / 1.72 | +0.13 / +0.07 |
-| Pooled | 744 | 1.74 / 1.67 | 1.88 / 1.69 | +0.14 / +0.02 |
+| Panel | write-ups | A `fix_quality` | B `fix_quality` | delta | A `no_harm` | B `no_harm` | delta |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Fable (26 segments) | 403 | 1.75 | 1.89 | +0.14 | 1.68 | 1.67 | -0.01 |
+| Opus (24 segments) | 341 | 1.73 | 1.86 | +0.13 | 1.65 | 1.72 | +0.07 |
+| Pooled | 744 | 1.74 | 1.88 | +0.14 | 1.67 | 1.69 | +0.02 |
 
 ## Gate
 
@@ -64,10 +64,10 @@ Paired per case: `fix_quality` guided ahead on 57, behind on 23, tied on 292; `n
 
 ## The cross-model result
 
-| Arm model | unguided | guided | fix_quality delta | no_harm delta | build failures |
-| --- | --- | --- | --- | --- | --- |
-| Sonnet 5 (run 20) | 1.92 / 1.70 | 1.94 / 1.76 | +0.02 | +0.06 | 7 -> 3 |
-| Haiku 4.5 (run 21) | 1.74 / 1.67 | 1.88 / 1.69 | +0.14 | +0.02 | 16 -> 10 |
+| Arm model | fix_quality | no_harm | build failures |
+| --- | --- | --- | --- |
+| Sonnet 5 (run 20) | 1.92 -> 1.94 | 1.70 -> 1.76 | 7 -> 3 |
+| Haiku 4.5 (run 21) | 1.74 -> 1.88 | 1.67 -> 1.69 | 16 -> 10 |
 
 **Guidance recovers most of the model gap on fix quality.** Unguided, Haiku trails Sonnet by 0.18
 (1.74 against 1.92). Guided, it trails by 0.06 (1.88 against 1.94). On this corpus and this axis
@@ -93,7 +93,8 @@ else while doing so.
 Largest guided gains for Haiku, by CWE: CWE-117 `fix_quality` 1.00 to 2.00 (the run-19 sweep gave
 the entry the concrete escape output form, and the arm stopped writing a switch that mapped every
 control character back to itself), CWE-502 1.48 to 1.97 with `no_harm` 1.09 to 1.42 (the
-format-preserving doctrine from run 12), CWE-90 1.80 / 1.40 to 2.00 / 1.93, CWE-347 `no_harm`
+format-preserving doctrine from run 12), CWE-90 1.80 to 2.00 on `fix_quality` and 1.40 to 1.93 on
+`no_harm`, CWE-347 `no_harm`
 1.17 to 1.67, CWE-614 1.71 to 2.00, CWE-77 1.79 to 1.98. By language the gains are broad: PHP
 1.77 to 1.98, Python 1.75 to 1.94, Go 1.58 to 1.78, Java 1.73 to 1.87.
 
@@ -113,7 +114,8 @@ its own priors; the entry text is not the lever there.
 
 - One sample per arm. The per-CWE rows with fewer than ten cases are direction only, and Perl
   (four cases) moved 2.00 to 1.75 on a single write-up.
-- Two judge panels, pooled on a measured offset of 0.03 / -0.01. Comparisons against runs 17-19
+- Two judge panels, pooled on a measured offset of +0.03 on `fix_quality` and -0.01 on `no_harm`.
+  Comparisons against runs 17-19
   (Sonnet judges) are still not available at the level of absolute numbers.
 - The gate reflects one dependency environment per language, and one unguided write-up is
   unjudgeable by it for the NU1605 reason above.
