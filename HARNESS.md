@@ -431,7 +431,13 @@ without it - the bundle read is the floor, not the compile turns. See RESULTS-v1
 then edited the entries against every guided loss in the two runs' judge notes - the ping lines
 that prescribed a TCP probe, the `..` tests beside containment, seven C#/JDK namespaces, a dozen
 API shapes - and the guided arm came level with the control on `no_harm` on the 138 touched
-cases, 1.64 to 1.78 against 1.79, with build failures 10 to 4. See RESULTS-v19.md.) A write-up that carries complete
+cases, 1.64 to 1.78 against 1.79, with build failures 10 to 4. See RESULTS-v19.md. Runs 20 and 21
+then took the question to a second arm model and a judge that is not the arm's own: a Sonnet 5
+pair and a Haiku 4.5 pair on the same cases, and the answer is that the rubric tension is the
+model's, not the entries'. Sonnet adds hostname allowlists, timeouts and caps beside the fix with
+or without guidance, so CWE-78 scores 1.25 / 1.38 across both its arms. Three judge models have
+now scored this shape the same way; the entries stopped prescribing it in run 18 and the arms
+supply it from their own priors. See RESULTS-v20.md and RESULTS-v21.md.) A write-up that carries complete
 files is not much longer than a snippet one (the run-17 CWE-89 pilot's 84 write-ups packed
 into six 80KB segments, a median of 16 per segment against run 16's 18), because the old
 before/after snippets were most of the file anyway; the segment cap is unchanged.
@@ -490,6 +496,34 @@ sample size, a confounded cell, a prompt that was not preserved, a criterion at 
   a flat `<cwe>/<lang>/<id>.md`), passing the valid keys to the script as a done-set through `args`,
   and relaunching - the script skips those and runs the rest under the identical prompt. Never
   trust the tally; count the files.
+- **A judge panel must stay homogeneous per segment.** Run 21's Fable capacity ran out with 26 of
+  50 segments scored. Topping up the seven part-scored segments with a different model would have
+  produced three-judge means blended across two models, which no later analysis can unpick. What
+  was done instead: re-judge those segments in full on the new model, keep the partial files from
+  the old one (`scores-v21-fable-partial/`), and read the offset off the write-ups both models
+  scored - 106 of them, +0.03 `fix_quality` and -0.01 `no_harm`, the size of ordinary panel drift.
+  Because `blind.py` shuffles arms across segments, each panel also carries both arms in
+  proportion, so the guided-versus-unguided delta can be checked inside each panel separately
+  before pooling (run 21: +0.14 and +0.13).
+- **Judges quote code, and quoted code breaks their JSON.** Four of run 20 and 21's score files
+  were unparseable on a Windows path or a regex in a note (`c:\WINDOWS`, `/Function\s*\(/`). The
+  repair is mechanical and touches no score - double any backslash that does not begin a valid
+  JSON escape (`scratchpad/repair_judge_json.py`) - but `collect.py judges` must be run before the
+  statistics, or the affected segments silently drop out of the pool.
+- **Rejecting a foreground tool call kills every background workflow, silently.** Run 20's judges
+  and run 21's arms both stopped at the second the user rejected an unrelated Agent call; no
+  notification arrived and the task list showed nothing. The only sign was the newest transcript
+  mtime under `subagents/workflows/<wf>/`. Treat an interrupt like a session limit: count the
+  files on disk, rebuild the done-sets, relaunch. Completed work is never lost, only the agents in
+  flight.
+- **Arm agents leave processes and files behind.** Sonnet arms in run 20 launched `find / -iname
+  '*.jar'` searches for libraries to compile against; when their shells timed out the searches
+  kept walking the whole disk - 33 orphaned `find.exe` processes an hour after the workflow
+  ended, slowing the gate that followed. Others wrote a `go.mod`, a `csrf.go` and a `$TEMP/`
+  directory into the parent repo root, and one wrote `fixed_RulePreviewService.java` into the
+  case directory it was told not to touch. After every arm launch: `tasklist` for stray
+  `find.exe`/`java.exe`, `git status` in both repos, and `git status cases/` in `evals/` before
+  the gate runs.
 - **Agents inherit the launcher's working directory.** The Bash tool's `cd` persists across calls,
   and Workflow agents start in whatever directory it was left in. Run 15's first arm launch went out
   with `evals/` as the working directory, so every repo-root-relative path in the prompt pointed at

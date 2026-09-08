@@ -1,0 +1,15 @@
+{
+  "R214": {"fix_quality": 2, "no_harm": 2, "note": "th:utext swapped to th:text HTML-escapes the request-derived note; plain-text preview contract preserved, nothing else changed."},
+  "R215": {"fix_quality": 2, "no_harm": 2, "note": "Setting XmlResolver=null before LoadXml disables external entity resolution; well-formed XML without external refs parses unchanged."},
+  "R216": {"fix_quality": 2, "no_harm": 2, "note": "Replaces raw-socket inline RESP with StackExchange.Redis HashSet length-prefixed framing, closing CRLF injection; constructor now takes IDatabase (required, stated) and SaveAgentNote signature/semantics unchanged."},
+  "R217": {"fix_quality": 2, "no_harm": 2, "note": "Moves data into filterArgs of the 4-arg search so JNDI escapes per RFC 4515; new SearchControls() keeps the same ONELEVEL default as the prior null, so scope is unchanged."},
+  "R218": {"fix_quality": 2, "no_harm": 2, "note": "Strict in_array allowlist of exactly the four UI macro tokens is the right shape for method-name dispatch and rejects only never-legitimate methods."},
+  "R219": {"fix_quality": 2, "no_harm": 1, "note": "DTO with server-set IsAdmin=false correctly closes the field-control vector, but the gob->JSON swap changes the wire format and breaks existing gob-posting clients; write-up discusses producers but wrongly concludes nothing breaks."},
+  "R220": {"fix_quality": 2, "no_harm": 2, "note": "Content-type allowlist plus decode/re-encode and server-generated random filename close both the dangerous-type upload and the filename path traversal; image uploads still succeed and the changes are stated."},
+  "R221": {"fix_quality": 2, "no_harm": 1, "note": "Recursive-descent parser fully removes eval, but its grammar (only + - * / parens) rejects PHP arithmetic the original eval accepted such as % and **, narrowing the documented contract even though the narrowing is stated."},
+  "R222": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist mapping is the correct shape and closes the sink, but it maps to plugins.csv_export while the original imported top-level csv_export, silently changing the resolved module and risking breakage of legitimate plugins despite the write-up claiming identical behavior."},
+  "R223": {"fix_quality": 2, "no_harm": 2, "note": "Building unsaved and calling full_clean() runs the existing validate_file_content magic-byte check that create() bypassed; DjangoValidationError re-raised as DRF 400, no other field behavior changed."},
+  "R224": {"fix_quality": 2, "no_harm": 2, "note": "Parameterizes owner with @owner and SqlDbType.NVarChar (no size, avoiding truncation); sink and using-scoping unchanged, legitimate queries preserved."},
+  "R225": {"fix_quality": 2, "no_harm": 2, "note": "Dropping LIBXML_NOENT stops entity substitution and closes XXE; LIBXML_NONET is stated defense-in-depth, and title/body extraction for well-formed submissions is preserved per the contract."},
+  "R226": {"fix_quality": 2, "no_harm": 2, "note": "keyFunc pins SigningMethodHMAC and WithValidMethods pins HS256, closing algorithm confusion; legitimate HS256 tokens validate as before and the added fmt import is used."}
+}

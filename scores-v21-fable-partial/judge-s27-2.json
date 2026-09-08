@@ -1,0 +1,20 @@
+{
+  "R520": {"fix_quality": 2, "no_harm": 1, "note": "finfo content check plus server-generated name closes the upload vector, but the image-MIME allowlist rejects formats the original accepted (e.g. SVG/BMP) and the stored filename is no longer the client's; both are stated, so 1 not 0."},
+  "R521": {"fix_quality": 2, "no_harm": 2, "note": "sqlite3 ? placeholder with a parameter tuple; query semantics otherwise unchanged."},
+  "R522": {"fix_quality": 2, "no_harm": 2, "note": "getOrDefault(sku, 0) gives the contract's controlled no-reservation case without changing present-key results."},
+  "R523": {"fix_quality": 2, "no_harm": 2, "note": "createElement/textContent/createTextNode rebuild the same span+separator structure with no HTML parsing of user data."},
+  "R524": {"fix_quality": 2, "no_harm": 2, "note": ".RequireAuthorization() on the MapDelete registration is the Minimal API equivalent of the controller's bare [Authorize]; no policy change."},
+  "R525": {"fix_quality": 2, "no_harm": 2, "note": "next pointer captured before free(); traversal order, single free, and refresh calls preserved."},
+  "R526": {"fix_quality": 1, "no_harm": 2, "note": "Array form closes the Linux branch, but the Windows branch still passes data to cmd.exe /c, which re-parses metacharacters (e.g. x&whoami) so injection persists there; no -- guard against leading-dash flags either."},
+  "R527": {"fix_quality": 2, "no_harm": 2, "note": "proc_open argument array with -- closes shell and flag injection; combined stdout+stderr return and failure message preserved as stated (stream interleaving order differs trivially)."},
+  "R528": {"fix_quality": 2, "no_harm": 2, "note": "Generic client message with exc_info logging server-side; status code and JSON shape unchanged."},
+  "R529": {"fix_quality": 2, "no_harm": 2, "note": "offset >= 0 closes the negative-offset wrap (the write-up's claim that the cast 'would typically make the comparison fail' is wrong - it wraps to length-1 and passes - but the fix is right); contract preserved."},
+  "R530": {"fix_quality": 2, "no_harm": 2, "note": "ProcessBuilder argument list with -- before host closes both the whitespace re-tokenization and flag injection; output capture unchanged."},
+  "R531": {"fix_quality": 2, "no_harm": 2, "note": "@csrf_protect added in the same decorator order as the sibling route; handler and response unchanged."},
+  "R532": {"fix_quality": 2, "no_harm": 2, "note": "std::array::at throws std::out_of_range for slot >= 32, which the contract accepts as rejection; valid slots and Badge shape unchanged, and the throw is stated."},
+  "R533": {"fix_quality": 2, "no_harm": 2, "note": "Executable-name allowlist is what the 'one of a handful of utilities' contract calls for and is stated; the chosen names are a guess (tracert is Windows-only while -c 4 is Linux ping syntax), and target still lacks a -- guard, but that is outside the reported sink."},
+  "R534": {"fix_quality": 0, "no_harm": 2, "note": "DOMPurify.sanitize(..., {ALLOWED_TAGS: []}) returns innerHTML-serialized text, which escapes &, <, > but never double quotes, so bio like x\" onmouseover=\"alert(1) still breaks out of title=\"...\"; the attribute-context vector is not closed (judged from serializer behaviour, dompurify not runnable offline)."},
+  "R535": {"fix_quality": 2, "no_harm": 2, "note": "offset > buffer_len || length > buffer_len - offset is the overflow-safe form and matches the contract exactly."},
+  "R536": {"fix_quality": 1, "no_harm": 0, "note": "Scheme allowlist blocks javascript:/data:, but the fix drops escapeAttribute() on the href and mailto: is an opaque path whose double quotes URL.href leaves unencoded (confirmed in Node in scratch: mailto:a\"onmouseover=\"alert(1) round-trips verbatim), so a mailto value now breaks out of the attribute where the original could not."},
+  "R537": {"fix_quality": 2, "no_harm": 2, "note": "@owner NVarChar parameter replaces string.Format; response shape and messages unchanged."}
+}

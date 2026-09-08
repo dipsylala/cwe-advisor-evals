@@ -1,0 +1,67 @@
+{
+  "R316": {
+    "fix_quality": 0,
+    "no_harm": 1,
+    "note": "Build FAIL (unused accountID in GetCSRFTokenHandler); design is a sound synchronizer token but the client now must fetch and send csrf_token (stated), and AccountService.tokenStore is never initialised anywhere so a struct-literal-constructed service panics on nil receiver field access, which the write-up does not mention."
+  },
+  "R317": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "HTML::Entities encode_entities() on both interpolated values closes the HTML-body injection; rendered output for legitimate names is unchanged."
+  },
+  "R318": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Server-generated GUID filename removes the client name from the path and closes the traversal write, but the admin's chosen template name is discarded (stated, returned in the response) and the added null-byte scan rejects legitimate UTF-16-encoded .cshtml text, a restriction the original did not have."
+  },
+  "R319": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Unsigned index checked against MAX_PLAYERS before the write; out-of-range packets are dropped, which is the only defined behaviour available for a void function that previously had UB there."
+  },
+  "R320": {
+    "fix_quality": 1,
+    "no_harm": 1,
+    "note": "Gate is in the right place with PermissionDenied, but isAdmin trusts a client-supplied 'authorization-role' metadata value any caller can set, so the check is bypassable until wired to a real identity, and the interceptor described as enforcing authorization is a no-op; legitimate admin-console callers must now send the new metadata key (stated)."
+  },
+  "R321": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "JavaScriptEncoder.Default escapes ', <, > and backslash so the value cannot leave the JS string literal (verified in scratch on .NET 10), but Encode(null) throws ArgumentNullException (verified) so a request without ?q= now 500s where the original emitted var lastSearch = ''; not stated."
+  },
+  "R322": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "sensorIndex checked against calibrationTable.size() before subscript; out-of-range requests return the raw reading, matching the existing short-length path."
+  },
+  "R323": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "PDO prepare with ? placeholder and execute([$sku]) closes the injection; null-return paths on prepare/execute failure match the original's false-from-query handling."
+  },
+  "R324": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "filepath.IsLocal on the entry name plus a separator-aware prefix check on the joined absolute path closes Zip Slip; only entries that escape or are absolute are rejected, which is stated."
+  },
+  "R325": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Deletion now lives only in a POST-only view behind CsrfViewMiddleware, which closes the GET-triggered CSRF, but urls.py (in the case) is left unedited so delete_account_confirm has no route and the confirm template is not supplied; the write-up names the two endpoints and the template requirement but never says the route must be added."
+  },
+  "R326": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Parameterised ? placeholder with orderNumber passed as a vararg to queryForObject(String, RowMapper, Object...) closes the injection with no other behaviour change."
+  },
+  "R327": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "res.sendFile(name, { root: reportsDir }) lets send reject '..' segments and absolute paths with 403 while still serving nested legitimate names; nothing else observable changes."
+  },
+  "R328": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "DOMPurify.sanitize() before dangerouslySetInnerHTML strips executable HTML while preserving formatting, and the new dompurify dependency is stated; the CVE-2026-41238 / 3.4.0 floor claim could not be verified here and should be checked against the vendor advisory."
+  }
+}

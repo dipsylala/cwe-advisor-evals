@@ -1,0 +1,19 @@
+{
+  "R181": {"fix_quality": 2, "no_harm": 2, "note": "Replaces Math.random with crypto.randomBytes(16).toString('base64url'); token stays a string, Map/email flow unchanged."},
+  "R182": {"fix_quality": 2, "no_harm": 2, "note": "Escapes user input via django.utils.html.escape before mark_safe; outer div markup preserved, no legit-use impact."},
+  "R183": {"fix_quality": 2, "no_harm": 2, "note": "Adds null test after lock() and throws on expiry; contract allows reporting, Notifier stays observer, live sends unchanged; throw idiom is heavier than a skip but permitted."},
+  "R184": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with setString placeholder closes injection; same query and output shape."},
+  "R185": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist blocks ownerId/_id override so auth is enforced, but it narrows client filtering to status/total/currency (values still copied verbatim, unsanitized), a restriction the original did not have."},
+  "R186": {"fix_quality": 2, "no_harm": 2, "note": "realpath+prefix containment rejects php://filter and ../ escapes; missing trailing separator leaves a narrow sibling-prefix residual but does not break legit reads."},
+  "R187": {"fix_quality": 2, "no_harm": 2, "note": "Checks index against segment.size() (true capacity); claimedCapacity param left vestigial rather than removed as the contract suggested, but harmless."},
+  "R188": {"fix_quality": 2, "no_harm": 2, "note": "Moves unique_ptr into a shared_ptr captured by the lambda so the Session outlives the queued callback; enqueues exactly one callback."},
+  "R189": {"fix_quality": 2, "no_harm": 2, "note": "Null-guards the boxed Long: absent discount treated as 0 (never negative), isDiscountApplied false; matches the stated contract exactly."},
+  "R190": {"fix_quality": 2, "no_harm": 2, "note": "Keyfunc asserts SigningMethodRSA plus WithValidMethods([RS256]); closes algorithm confusion, legit RS256 tokens still verify."},
+  "R191": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom with no seed makes tokens unpredictable; leftover unused seed variable and still-required numeric seed param unchanged from original, no regression."},
+  "R192": {"fix_quality": 2, "no_harm": 2, "note": "Options-array with secure=>true fixes the flag; httponly preserved and SameSite=Strict is stated hardening that blocks no legit use."},
+  "R193": {"fix_quality": 2, "no_harm": 2, "note": "Runs ping and nslookup as separate exec.Command args, no cmd.exe; leading -// guard is the prescribed flag-injection defence and rejects no valid host; minor added output separator."},
+  "R194": {"fix_quality": 2, "no_harm": 2, "note": "Absolute-path allowlist is the necessary fix for a tainted executable name; hardcoded -c 4 args already tied it to ping, so restricting the map does not remove working tools; leading-dash guard appropriate."},
+  "R195": {"fix_quality": 1, "no_harm": 0, "note": "execFile with shell:false closes injection but cannot launch a .bat/.cmd on Windows per Node docs, so the endpoint silently stops running the script while the write-up claims behaviour is identical."},
+  "R196": {"fix_quality": 2, "no_harm": 0, "note": "Random UUID name in a private dir with nosniff serving closes CWE-434, but the success response returns {filename} not the contracted {url}, silently breaking the client contract; SVG still served inline."},
+  "R197": {"fix_quality": 2, "no_harm": 2, "note": "FromSqlInterpolated parameterizes tenantId and the %term% pattern; empty term still yields tenant-scoped LIKE '%%' as before, contract preserved."}
+}

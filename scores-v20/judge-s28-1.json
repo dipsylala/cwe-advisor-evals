@@ -1,0 +1,13 @@
+{
+  "R455": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check against MAX_FIELDS before the index, reusing the existing -1 error path; valid indices resolve exactly as before."},
+  "R456": {"fix_quality": 2, "no_harm": 2, "note": "subtle.ConstantTimeCompare requires exact byte equality (length mismatch returns 0), satisfying the stated contract; empty-header guard retained."},
+  "R457": {"fix_quality": 2, "no_harm": 1, "note": "Relative-rooted-path restriction closes the open redirect, but the target is rebuilt from raw path + query only, so a fragment is silently dropped and absolute same-host URLs are now rejected without the write-up saying so."},
+  "R458": {"fix_quality": 2, "no_harm": 1, "note": "Native archive/tar replaces the shell entirely, but tar -tf also transparently reads bzip2/xz/zstd archives which this fix now fails with a 500; only gzip is handled and the narrowing is not called out."},
+  "R459": {"fix_quality": 2, "no_harm": 2, "note": "unsubscribe() plus an RAII ScopedSubscription destroyed before the observer removes the dangling pointer; publish order and unsubscribed-not-invoked contract preserved."},
+  "R460": {"fix_quality": 2, "no_harm": 2, "note": "Length-prefixed RESP bulk strings make CR/LF/space in the value plain data; same server, same HSET semantics, no dependency added."},
+  "R461": {"fix_quality": 2, "no_harm": 2, "note": "Shared SecureRandom with no request-derived seed; dropping the seed parameter (which previously 500'd when absent) is stated plainly and blocks no legitimate caller."},
+  "R462": {"fix_quality": 2, "no_harm": 2, "note": "Static SecureRandom.nextDouble() is a drop-in for Math.random(); token formatting, cookie and session logic unchanged."},
+  "R463": {"fix_quality": 2, "no_harm": 1, "note": "Argument list plus '--' closes shell and flag injection, but the added hostname/IP allowlist (rejects e.g. trailing-dot FQDNs or underscore hosts) and the 10s timeout that turns an unreachable-host ping into a 504 restrict inputs the original accepted, even though stated."},
+  "R464": {"fix_quality": 2, "no_harm": 2, "note": "self.get_object() routes through the ownership-scoped queryset and check_object_permissions, keeping 404 for both missing and foreign invoices while staff still see all."},
+  "R465": {"fix_quality": 2, "no_harm": 2, "note": "Ownership check against order.getCustomerUsername() from the SecurityContext before mutation, AccessDeniedException -> 403; no signature or controller change."}
+}

@@ -1,0 +1,19 @@
+{
+  "R467": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized query with ? placeholder and [userId]; standard mysql2 fix, nothing else changed."},
+  "R468": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized @Region via SqlCommand; preserves DataTable('Customers'), columns, and region filtering per contract."},
+  "R469": {"fix_quality": 2, "no_harm": 2, "note": "Disables DOCTYPE/external entities/DTD/XInclude before parse; still returns Document, error handling intact."},
+  "R470": {"fix_quality": 2, "no_harm": 1, "note": "Fixed mime-to-ext mapping closes the vector, but the added extension allowlist can reject a legit image whose originalname lacks an allowed extension."},
+  "R471": {"fix_quality": 2, "no_harm": 1, "note": "Bounded strncpy/strncat closes the overflow, but it silently truncates oversized names into a different badge value, which the contract explicitly forbids (wanted reject/report)."},
+  "R472": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check against calibrationTable.size() before operator[]; returns rawReading like the existing error path, no legit index rejected."},
+  "R473": {"fix_quality": 2, "no_harm": 1, "note": "preg_replace_callback closes the /e code injection, but the formatter allowlist silently defaults disallowed (but previously accepted) formatter names to strtoupper."},
+  "R474": {"fix_quality": 2, "no_harm": 1, "note": "Exact-name allowlist closes the prefix bypass, but the two hardcoded class names are guesses that may reject the endpoint's real report classes (write-up admits they are placeholders)."},
+  "R475": {"fix_quality": 2, "no_harm": 2, "note": "Adds requireRole('admin') matching sibling routes; admin-only is the intended contract, no legit caller lost."},
+  "R476": {"fix_quality": 2, "no_harm": 2, "note": "Passes name as a Jinja context variable instead of interpolating into template source, closing SSTI; escape() is redundant but harmless."},
+  "R477": {"fix_quality": 2, "no_harm": 2, "note": "RESP length-prefixed array framing makes newline/metachar injection impossible; same HSET semantics preserved."},
+  "R478": {"fix_quality": 2, "no_harm": 2, "note": "isSafeUrl rejects javascript:/data: to '#' while allowing http/https/mailto and relative URLs; display name still escaped, contract met."},
+  "R479": {"fix_quality": 2, "no_harm": 2, "note": "Replaces eval with expr-eval-fork parser (maintained, CVE noted); math still evaluates, added try-catch 400 handling is stated and harmless."},
+  "R480": {"fix_quality": 2, "no_harm": 1, "note": "Ownership check closes IDOR, but returning Forbid() (403) for another account's invoice vs NotFound() (404) reveals existence, which the contract said not to expose beyond the not-found path."},
+  "R481": {"fix_quality": 1, "no_harm": 0, "note": "Allowlist closes the table injection, but switching to prisma.$queryRaw called with a plain string is wrong API usage (tagged-template-only; strings need $queryRawUnsafe) so the query throws for all legit callers, contrary to the write-up's claim it stays parameterized."},
+  "R482": {"fix_quality": 2, "no_harm": 2, "note": "password_verify replaces the loose == (fixes type-juggling auth bypass); dummy-hash timing protection is stated extra hardening blocking no legit login."},
+  "R483": {"fix_quality": 2, "no_harm": 2, "note": "Passes actual requestedCapacity as destCapacity so write_field bounds-checks against the real allocation; surgical, allocation and rejection behavior preserved."}
+}

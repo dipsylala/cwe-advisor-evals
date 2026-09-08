@@ -1,0 +1,16 @@
+{
+  "R240": {"fix_quality": 2, "no_harm": 2, "note": "Adds admin role check before the suspend sink; endpoint is admin-only by contract so no legitimate caller is blocked."},
+  "R241": {"fix_quality": 2, "no_harm": 2, "note": "setSecure(false)->true closes it; the response message still says 'secure flag set to: false' but that is cosmetic, not a behavior regression."},
+  "R242": {"fix_quality": 2, "no_harm": 1, "note": "realpath containment closes traversal/wrappers, but also rejecting any '/' bars subdirectory report paths the original chdir+relative fopen accepted."},
+  "R243": {"fix_quality": 2, "no_harm": 2, "note": "Named :startDate/:endDate placeholders with replacements; clean parameterization, contract preserved."},
+  "R244": {"fix_quality": 2, "no_harm": 2, "note": "Replaces fmt.Sprintf with html/template contextual escaping; same output structure and error handling."},
+  "R245": {"fix_quality": 2, "no_harm": 2, "note": "SandboxedEnvironment is the correct API for untrusted Jinja templates; autoescape kept, contract preserved (unused Environment import is harmless)."},
+  "R246": {"fix_quality": 2, "no_harm": 2, "note": "ORDER BY identifier cannot be parameterized; allowlist mapped to real schema columns is the correct shape (direction modifiers unsupported, a minor note)."},
+  "R247": {"fix_quality": 2, "no_harm": 1, "note": "lockoutOnFailure:true closes brute-force, but the bcrypt-format decoy '$2a$10$DECOY...' is not valid Identity PBKDF2 base64 and would throw on the unknown-user branch; write-up flags the placeholder as needing startup generation."},
+  "R248": {"fix_quality": 2, "no_harm": 2, "note": "field_index>=MAX_FIELDS bound check before array access closes the OOB read; valid indices unchanged."},
+  "R249": {"fix_quality": 2, "no_harm": 1, "note": "Denylist->allowlist is the right shape, but the arbitrary 6-type list narrows accepted uploads (docx/xlsx/zip etc.) the original permitted, with no stated contract requiring only those."},
+  "R250": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities on both user-supplied fields; badge uses fixed strings, output otherwise unchanged."},
+  "R251": {"fix_quality": 2, "no_harm": 2, "note": "proc_open array form plus '--' closes injection and option-injection; return shape and reachable logic preserved via proc_close exit code."},
+  "R252": {"fix_quality": 2, "no_harm": 2, "note": "Direct !== comparison removes the assert()-string eval; premium callers still get the report, non-premium correctly denied."},
+  "R253": {"fix_quality": 2, "no_harm": 2, "note": "List-form Popen without shell=True; reproduced in scratch dir that an injected quote payload did not create a marker file on Python 3.13, so the vector is closed; return behavior preserved."}
+}

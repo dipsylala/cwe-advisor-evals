@@ -1,0 +1,18 @@
+{
+  "R329": {"fix_quality": 2, "no_harm": 2, "note": "Content-based MIME allowlist via python-magic plus derived extension closes dangerous-type upload; uuid rename changes returned path but is stated and blocks no legitimate upload."},
+  "R330": {"fix_quality": 2, "no_harm": 2, "note": "EvalSymlinks plus resolved-path containment check closes the symlink escape; regular in-dir files still read, error type masked to ErrPermission but no legit break."},
+  "R331": {"fix_quality": 1, "no_harm": 2, "note": "@EnableMethodSecurity is the right API but the config is placed in com.example.config while every other file is com.example.accounts, so it likely falls outside component scan and could remain inert."},
+  "R332": {"fix_quality": 2, "no_harm": 2, "note": "Dropping LIBXML_NOENT returns libxml to safe default and adding LIBXML_NONET is stated defense-in-depth; well-formed title/body still parse."},
+  "R333": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized @Actor with NVarChar closes injection and counts apostrophe actors literally; added System.Data import only."},
+  "R334": {"fix_quality": 2, "no_harm": 2, "note": "getOrDefault(sku,0) removes the null unbox and matches the no-reservation contract exactly."},
+  "R335": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath+resolve+normalize+startsWith containment closes traversal; SecurityException is caught by existing handler, legitimate filenames still open."},
+  "R336": {"fix_quality": 2, "no_harm": 2, "note": "exec.CommandContext with separate args removes the shell; leading-dash rejection is stated flag-injection hardening that no hostname/IP legitimately trips."},
+  "R337": {"fix_quality": 2, "no_harm": 2, "note": "Removing the untrusted envp and switching to exec(args) closes env injection; child now inherits parent env, stated plainly, no legit break."},
+  "R338": {"fix_quality": 2, "no_harm": 2, "note": "DOMPurify.sanitize before bypassSecurityTrustHtml strips scripts while keeping b/em/a; version floor stated."},
+  "R339": {"fix_quality": 2, "no_harm": 2, "note": "Overflow-safe check headerLen>UINT32_MAX-payloadLen throws before allocation; only rejects inputs that could not be served legitimately."},
+  "R340": {"fix_quality": 2, "no_harm": 2, "note": "Keeps string check then EvalSymlinks with re-check on resolved path, closing symlink escape; regular files still read."},
+  "R341": {"fix_quality": 2, "no_harm": 2, "note": "Adds per-event socket.user.role admin check to the broadcast handler; only rejects non-admins on an admin-only action."},
+  "R342": {"fix_quality": 1, "no_harm": 1, "note": "Regex denylist is the wrong shape for vm code injection and is bypassable (e.g. this.constructor.constructor, bracketed globalThis); the case-insensitive /Function\\s*\\(/ also silently rejects legitimate scripts using the function keyword."},
+  "R343": {"fix_quality": 2, "no_harm": 2, "note": "Adds requireRole('admin') matching sibling routes; only rejects non-admins on a sensitive export, admins unaffected."},
+  "R344": {"fix_quality": 2, "no_harm": 2, "note": "json_encode with JSON_HEX flags and removed surrounding quotes safely closes the JS-string-context XSS while still rendering the note."}
+}

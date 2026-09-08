@@ -1,0 +1,77 @@
+{
+  "R667": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "BinaryFormatter replaced by System.Text.Json into a concrete type, which closes the gadget vector, but it swaps the wire format and invents a three-field SessionData: any existing producer of the serialized blob now gets 400, and the cached value's type changes from object to SessionData for whatever reads it - the placeholder fields are flagged, the format break for existing callers is not."
+  },
+  "R668": {
+    "fix_quality": 1,
+    "no_harm": 2,
+    "note": "filepath.Base closes the traversal out of storageDir (filepath.Join cleans but does not confine), but the reported weakness is unrestricted upload of a dangerous type and the fix adds no extension or content-type check at all - the write-up explicitly leaves that as optional follow-up; the read path in avatar_lookup.go still resolves for ordinary filenames, so nothing else changes."
+  },
+  "R669": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "fgets with sizeof(line) closes the overflow, but it silently truncates an over-long line: with out_capacity > 63 the call now returns 0 with a partial command instead of the contract's -1, and the unread remainder stays queued in stdin to be read as the next line - the write-up mentions only the newline difference."
+  },
+  "R670": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Removes @csrf_exempt and its import, restoring CsrfViewMiddleware checking; the 405, 401 and queued JSON paths and BillingMailer.queue_change are byte-for-byte unchanged."
+  },
+  "R671": {
+    "fix_quality": 1,
+    "no_harm": 2,
+    "note": "ArgumentList is the right general shape but does not close this sink: CreateProcess runs a .bat through cmd.exe, and .NET only quotes an argument containing whitespace or a quote, so a payload with no space such as report&whoami is emitted bare and cmd re-parses the & - the write-up asserts the opposite; argument semantics for legitimate names are otherwise preserved."
+  },
+  "R672": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Decoding into a narrow DTO keeps the gob wire format (gob matches struct fields by name, so existing Account payloads still decode) and closes IsAdmin injection, but it also hard-codes Balance to 0, so an import that legitimately carried a balance now silently stores zero while still returning 200 - stated in the write-up, but wider than the weakness required."
+  },
+  "R673": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "FlaskForm plus validate_on_submit is the idiomatic per-form CSRF fix and validation/redirect/render paths are otherwise identical; the new flask-wtf dependency and the required template csrf_token render are both stated as explicit assumptions, and the request import is left unused."
+  },
+  "R674": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Logs the clientId parameter instead of dereferencing the freed req, which removes the use-after-free without touching the ownership contract; the message, return code and success-path frees are unchanged."
+  },
+  "R675": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Adds secure=True to the existing set_cookie call and changes nothing else; httponly, cookie name and value and the response body are untouched."
+  },
+  "R676": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Replacing File.ReadAllText with a constructor-injected rate dictionary closes the arbitrary file read and rejects unknown keys as the contract requires, but the added ^[\\s0-9a-zA-Z_.,()+\\-*/%\"']+$ rule regex is a new restriction that rejects legitimate discount rules using <, >, =, ?: or &&, and it does not actually constrain Eval (member access via . and () is still permitted)."
+  },
+  "R677": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Magic-byte detection with file-type after the write, with unlink on mismatch and the extension taken from the detected type rather than originalname, is the right shape for this sink; genuine PNG/JPEG uploads still return 201 with a URL, the rejection path keeps the 400, and the new file-type dependency is named in the write-up."
+  },
+  "R678": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "th:text closes the XSS, but the contract asks that intentionally supported rich-text tags survive allowlist sanitization; the service's own body is <p>Draft body</p>, which now renders as literal escaped markup - the write-up mentions sanitizing as an alternative rather than shipping it."
+  },
+  "R679": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Wraps exportUsersHandler in the file's existing requireAdmin, matching the ban/unban registrations; the rest of admin.go is reproduced unchanged, so admin callers keep the same CSV response."
+  },
+  "R680": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "bcrypt.compare against the stored hash before done(null, user) is the correct gate and the false/err branches keep passport's callback shape; it assumes the model field is user.password without saying so, and the distinct 'Invalid password' message is marginally more enumerable than the original single branch."
+  },
+  "R681": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "HttpPost plus ValidateAntiForgeryToken is the right fix for a state-changing GET, but it also drops the confirmed parameter and the RedirectToAction(ConfirmDelete) branch, so a token-carrying POST now deletes with no server-side confirmation check - stated in the write-up, along with the required view change from link to form."
+  }
+}

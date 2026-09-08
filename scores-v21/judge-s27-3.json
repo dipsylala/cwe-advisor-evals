@@ -1,0 +1,20 @@
+{
+  "R520": {"fix_quality": 2, "no_harm": 2, "note": "finfo_file content-type allowlist plus server-generated random name closes the upload vector; the stored filename now differs from the client's, which the write-up states plainly and which still lets a legitimate upload succeed."},
+  "R521": {"fix_quality": 2, "no_harm": 2, "note": "sqlite3 ? placeholder with a parameter tuple; query shape, returned rows and connection handling unchanged."},
+  "R522": {"fix_quality": 2, "no_harm": 2, "note": "getOrDefault(sku, 0) removes the null unboxing and matches the stated contract for absent SKUs exactly."},
+  "R523": {"fix_quality": 2, "no_harm": 2, "note": "createElement/textContent/createTextNode reproduce the same div>span.chat-author + ': body' structure with no HTML parsing of user data."},
+  "R524": {"fix_quality": 2, "no_harm": 2, "note": "RequireAuthorization() on the MapDelete builder is the per-endpoint metadata this sink needs and matches the controller's bare [Authorize] gate; nothing else changed."},
+  "R525": {"fix_quality": 2, "no_harm": 2, "note": "next pointer captured before free(); order, single free, and continued traversal after an expired node all preserved."},
+  "R526": {"fix_quality": 1, "no_harm": 2, "note": "Linux branch is fixed, but the Windows branch still routes the tainted arg through cmd.exe /c, and Java only quotes args containing space/tab for an .exe, so 'x&whoami' still injects; no -- before data on either branch."},
+  "R527": {"fix_quality": 2, "no_harm": 2, "note": "proc_open with an argument array plus -- closes shell and option injection; stderr is now appended after stdout rather than interleaved via 2>&1, a minor inherent consequence of dropping the shell."},
+  "R528": {"fix_quality": 2, "no_harm": 2, "note": "generic client message with the exception logged server-side via exc_info; status code and success path untouched."},
+  "R529": {"fix_quality": 2, "no_harm": 2, "note": "offset >= 0 closes the wrap-around path ((size_t)-1 + 1 == 0 passed the old check); the explanation's claim that the large cast 'would typically make the comparison fail' is wrong, but the code is right and matches the contract."},
+  "R530": {"fix_quality": 2, "no_harm": 2, "note": "ProcessBuilder argument list with -- before host; stdout capture, waitFor and response contract unchanged."},
+  "R531": {"fix_quality": 2, "no_harm": 2, "note": "@csrf_protect added in the same decorator position as the sibling route the case establishes as correct; signature and response unchanged."},
+  "R532": {"fix_quality": 2, "no_harm": 2, "note": "std::array::at() bounds-checks the write and throws for invalid slots, which the contract sanctions as 'rejected or reported'; Badge shape unchanged."},
+  "R533": {"fix_quality": 2, "no_harm": 2, "note": "map allowlist means only hardcoded names reach exec.Command; the case's own comment scopes the endpoint to 'a handful of' tools, so the restriction is the contract. target still lacks a -- guard against a leading dash."},
+  "R534": {"fix_quality": 1, "no_harm": 2, "note": "wrong shape for an attribute sink: DOMPurify serializes text nodes without escaping the double quote (confirmed with jsdom that innerHTML round-trips a raw \" in text), so a bio containing '\" onmouseover=' still breaks out of title=\"...\"; the attribute needs HTML escaping, not a second sanitize pass."},
+  "R535": {"fix_quality": 2, "no_harm": 2, "note": "length > buffer_len - offset avoids any overflow and matches the contract's accept/reject boundary exactly."},
+  "R536": {"fix_quality": 2, "no_harm": 0, "note": "scheme allowlist closes javascript:/data:, but escapeAttribute was dropped from the href and mailto: is allowed - verified in Node that new URL('mailto:a\" onmouseover=alert(1) x@y.com').href keeps the raw quote and spaces, so the fix introduces an attribute-breakout event-handler injection the original escaping prevented."},
+  "R537": {"fix_quality": 2, "no_harm": 2, "note": "SqlParameter with @owner replaces string.Format; added using System.Data is the only other change and the NotFound/Ok contract is untouched."}
+}

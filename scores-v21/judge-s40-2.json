@@ -1,0 +1,72 @@
+{
+  "R709": {
+    "fix_quality": 0,
+    "no_harm": 1,
+    "note": "Parameterization with a ? placeholder is the right fix, but the write-up leaves \"fmt\" imported and unused so the package does not build (Build: FAIL); nothing else in the handler changes."
+  },
+  "R710": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Narrows the CSRF exemption to /api/webhooks/** exactly as the file's own comment states the intent, leaving authorizeHttpRequests and everything else untouched."
+  },
+  "R711": {
+    "fix_quality": 1,
+    "no_harm": 2,
+    "note": "Threads req.user.id into loadProjectExport but the ownership predicate exists only as a comment - the store still returns the payload for any projectId whenever userId is truthy, which requireAuth guarantees, so an authenticated attacker still exports other users' projects; 401/404/success shapes are unchanged."
+  },
+  "R712": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Swapping GroovyShell for JEXL with new JexlSandbox(false) (deny-by-default) closes arbitrary code execution and keeps arithmetic formulas working, but it changes the stored formula language for admin-authored text outside the diff and now swallows evaluation errors into a silent basePrice fallback where Groovy propagated them - only the latter is stated."
+  },
+  "R713": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "position < record.size() before operator[] is the correct bounds guard; in-range edits still apply and skipping out-of-range ones is stated."
+  },
+  "R714": {
+    "fix_quality": 1,
+    "no_harm": 1,
+    "note": "Enables verification with key + algorithms=[\"HS256\"] and a 401 on InvalidTokenError, but hardcodes SECRET_KEY = \"your-secret-key\", a guessable committed placeholder that leaves forgery practical and will reject every token signed with the real key; the write-up flags it as needing secure config but ships it anyway."
+  },
+  "R715": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "proc_open with the argument array ['grep','-F','--',$term,$logPath] bypasses the shell and the -- also blocks option injection; pipe handling, exit-code logic and JSON output are unchanged (requires PHP 7.4+ for the array form, unstated)."
+  },
+  "R716": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Splits sort into column+direction, allowlists both and uses orderBy(), which the stated contract explicitly calls for; account_id binding and the 31/365-day window are untouched, though an invalid sort now raises an uncaught InvalidArgumentException and multi-column sorts would be rejected."
+  },
+  "R717": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "RFC 4515 escaping of \\ * ( ) and NUL with the backslash replaced first closes the filter injection; null still yields an empty assertion as before and the response shape is unchanged."
+  },
+  "R718": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "space_left = sizeof(path) - strlen(path) - 1 checked before strcat is exact for the 128-byte buffer and the guard precedes the write; short filenames behave identically and only the previously-overflowing case now returns -1."
+  },
+  "R719": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "text() with the :date_filter bind parameter passed to execute() closes the injection; the row mapping, connection scope and handler default of \"1970-01-01\" are unchanged."
+  },
+  "R720": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "PreparedStatement with setString(1, data) is the correct sink replacement and the finally-block close sequence and logging are preserved verbatim."
+  },
+  "R721": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Escapes * ( ) \\ and NUL before building the (cn=...) filter, closing the injection; the extra \\2f for / is redundant but decodes back to / so matching is unaffected, and only an absent parameter changes from \"(cn=null)\" to \"(cn=)\"."
+  },
+  "R722": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Requiring an exact match or the uploadsDir+separator prefix closes the sibling-directory bypass that plain HasPrefix allowed; legitimate files under the tree are still served with the same 403 error path for rejects."
+  }
+}

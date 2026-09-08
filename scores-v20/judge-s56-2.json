@@ -1,0 +1,16 @@
+{
+  "R799": {"fix_quality": 2, "no_harm": 2, "note": "Both sinks encode control chars and line separators as u-escapes while keeping the trailing Throwable and status codes; backslash doubling in logged usernames is stated and blocks no caller."},
+  "R800": {"fix_quality": 2, "no_harm": 1, "note": "Shell removed entirely via native decode/resize, but the rewrite only accepts PNG/JPEG/GIF input and .jpg/.png output and adds a golang.org/x/image dependency, so callers passing other valid image formats that convert handled now fail (stated, but a restriction the contract's 'valid image' did not have)."},
+  "R801": {"fix_quality": 2, "no_harm": 1, "note": "Files.newDirectoryStream removes the command sink, but it now throws (NPE for null data, NoSuchFileException/NotDirectoryException for a missing path or a regular file) where the original ls/dir silently exited non-zero, and this failure-behaviour change is not stated."},
+  "R802": {"fix_quality": 2, "no_harm": 2, "note": "html.escape() applied to the only untrusted value before interpolation; mark_safe and surrounding markup unchanged."},
+  "R803": {"fix_quality": 2, "no_harm": 2, "note": "Literal '--' inserted before the operands so leading-dash entries are archived as filenames, matching the contract; archive_path still bound to f before the separator."},
+  "R804": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with bound parameter; try/catch/finally cleanup and output unchanged."},
+  "R805": {"fix_quality": 2, "no_harm": 2, "note": "ldap3 escape_filter_chars applied to the value only; base, attributes and response shape unchanged."},
+  "R806": {"fix_quality": 2, "no_harm": 2, "note": "Overflow-safe two-step bounds check before subspan, rejecting bad headers with out_of_range instead of undefined behaviour; valid inputs unaffected."},
+  "R807": {"fix_quality": 2, "no_harm": 2, "note": "Import swap to html/template gives contextual escaping for the text-node placeholder with no other change."},
+  "R808": {"fix_quality": 2, "no_harm": 2, "note": "html.escape() on each concatenated value including status (stated); 400 branch and structure unchanged."},
+  "R809": {"fix_quality": 2, "no_harm": 2, "note": "Order.objects.raw(sql, [email]) with %s placeholder; query columns and response shape unchanged."},
+  "R810": {"fix_quality": 2, "no_harm": 2, "note": "@fastify/csrf-protection registered with sessionPlugin, awaited so fastify.csrfProtection exists at route definition, onRequest hook on the POST and a token-issuing GET route; the required token is the fix itself and is stated, though onRequest now runs before the auth preHandler so tokenless unauthenticated requests get 403 rather than 401."},
+  "R811": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with bound parameter at the end of the pass-through chain; cleanup and logging unchanged."},
+  "R812": {"fix_quality": 2, "no_harm": 2, "note": "SVG dropped from the storage allowlist (stated, and the contract preserves only PNG/JPEG) and the download path serves only .png/.jpg as images with nosniff, forcing legacy files to an octet-stream attachment; PNG/JPEG retrieval by storedName is preserved."}
+}

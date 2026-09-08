@@ -1,0 +1,32 @@
+{
+  "R839": {
+    "fix_quality": 0,
+    "no_harm": 1,
+    "note": "Build FAIL: SpaCsrfTokenRequestHandler does not compile (missing abstract-method override), so the handler pairing never takes effect; the design itself mirrors Spring's documented SPA handler and introduces no new weakness, but a non-compiling change leaves the application unbuildable."
+  },
+  "R840": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Replaces findAll() with the existing findByOwnerUsername(authentication.getName()), scoping the query by construction exactly as the sibling detail endpoint does; contract preserved, no other observable change."
+  },
+  "R841": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Byte-level detection plus allowlist and detected ContentType close the vector per the contract, but the Pillow re-encode silently degrades legitimate uploads (JPEG recompressed at default quality, animated GIF/WebP reduced to first frame, EXIF stripped) - the write-up says 're-encode' without stating it is lossy."
+  },
+  "R842": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "crypto.randomBytes(6).toString('base64url') is the right CSPRNG API for a token; 8-char length kept, character-set change to base64url is stated and blocks no legitimate use."
+  },
+  "R843": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Term moved out of the template source into a {{ term }} variable under Flask's default autoescaping for render_template_string, closing both the XSS and the SSTI path; rendered markup is otherwise identical."
+  },
+  "R844": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Cleaned-join containment check (equal to extractDir or under extractDir+separator) placed before MkdirAll and os.Create rejects traversal entries; legitimate nested entries are unaffected and error handling matches the existing pattern."
+  }
+}

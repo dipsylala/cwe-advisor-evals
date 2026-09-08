@@ -1,0 +1,18 @@
+{
+  "R552": {"fix_quality": 2, "no_harm": 2, "note": "HTML-escapes the Referer before writing; dropping format() means percent-specifiers are no longer expanded, but that is stated plainly and breaks no legitimate caller (leftover unused obj array is cosmetic)."},
+  "R553": {"fix_quality": 2, "no_harm": 2, "note": "htmlspecialchars with ENT_QUOTES on both concatenated fields closes the sink and changes nothing else."},
+  "R554": {"fix_quality": 0, "no_harm": 1, "note": "Build FAIL (UnknownIdentifierException lives in DynamicExpresso.Exceptions and is not imported), and the added character allowlist rejects formulas the original accepted - anything with a comma, comparison operator or string literal."},
+  "R555": {"fix_quality": 2, "no_harm": 2, "note": "Argument list with shell=False plus a fullmatch on the alphanumeric format the docstring already documents; verified in a scratch dir that CPython 3.13 does launch a .bat with shell=False and quotes the argument, so the endpoint still works."},
+  "R556": {"fix_quality": 2, "no_harm": 2, "note": "Escapes the POST sink and the two GET echoes with htmlspecialchars; the added null-coalesce on note is stated and rejects nothing."},
+  "R557": {"fix_quality": 2, "no_harm": 1, "note": "CR/LF and '>' rejection closes the RCPT injection, but the added strict email regex rejects addresses the original accepted (user@localhost, quoted local parts, internationalised domains)."},
+  "R558": {"fix_quality": 2, "no_harm": 2, "note": "Binding the algorithm via new Key(publicKey, 'RS256') closes algorithm confusion and the required 6.x upgrade is stated; the dropped HS256 branch could never have verified legitimately since only the RSA public key was ever passed."},
+  "R559": {"fix_quality": 2, "no_harm": 2, "note": "escapeshellarg on host is the right API for this sink and leaves valid hostnames untouched; residual option injection (a host beginning with a dash still reaches ping as a flag) is unaddressed but minor."},
+  "R560": {"fix_quality": 2, "no_harm": 1, "note": "RFC 4515 escaping with backslash handled first is correct, but the silent falsy guard turns a username of \"0\" into the filter (uid=) instead of (uid=0)."},
+  "R561": {"fix_quality": 2, "no_harm": 2, "note": "Adds the UPLOAD_ERR_OK check before finfo and move and nothing else; successful uploads behave exactly as before."},
+  "R562": {"fix_quality": 2, "no_harm": 2, "note": "Comparing payloadLength against frameBuffer.size() before the memcpy closes the over-read using the function's existing false return; valid lengths still copy identically."},
+  "R563": {"fix_quality": 2, "no_harm": 2, "note": "Standard erase-returns-iterator idiom; removes every completed task, preserves order, skips no element."},
+  "R564": {"fix_quality": 2, "no_harm": 2, "note": "UPLOAD_ERR_OK check closes the finding; the extra fileinfo guard and the type-derived extension appended to the stored filename change the on-disk artifact but are stated in detail and block no legitimate upload."},
+  "R565": {"fix_quality": 2, "no_harm": 2, "note": "Generic 500 body with the wrapped detail moved to log.Printf; status code and success path unchanged."},
+  "R566": {"fix_quality": 2, "no_harm": 2, "note": "Server-side IsInRole(\"Admin\") from GetAuthenticationStateAsync inside the handler closes the direct-invocation path; only the unauthorized branch changes behaviour."},
+  "R567": {"fix_quality": 1, "no_harm": 0, "note": "Reproduced in a scratch dir on Node v24: execFile on a .bat without shell throws spawn EINVAL, so no report is generated for any caller, while the write-up asserts the .bat receives the argument as %1 normally."}
+}

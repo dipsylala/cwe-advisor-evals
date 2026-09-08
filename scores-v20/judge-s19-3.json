@@ -1,0 +1,14 @@
+{
+  "R338": {"fix_quality": 2, "no_harm": 2, "note": "DOMPurify.sanitize before bypassSecurityTrustHtml closes the vector while keeping allowed formatting tags; nothing else changes."},
+  "R339": {"fix_quality": 2, "no_harm": 2, "note": "64-bit widening makes totalSize equal the bytes memcpy writes; the added nullptr return only fires where size_t is narrower than 64 bits and is stated in the header comment."},
+  "R340": {"fix_quality": 2, "no_harm": 2, "note": "os.OpenRoot/root.ReadFile enforces containment against the live filesystem including symlink targets; only an absolute requestedName (previously joined under uploadsDir) now errors, a corner case not affecting the stated contract."},
+  "R341": {"fix_quality": 2, "no_harm": 2, "note": "Per-event role check on socket.user.role from the verified JWT, early-return mirrors existing handler style, nothing else touched."},
+  "R342": {"fix_quality": 2, "no_harm": 1, "note": "Removing vm entirely closes the vector, but the request contract changes (req.body.script string -> req.body.rules JSON DSL), so every existing merchant script and client stops working; the write-up states the migration openly."},
+  "R343": {"fix_quality": 2, "no_harm": 2, "note": "Inserts the same requireRole('admin') middleware sibling routes use; 403 for non-admins is the intended behaviour and handler output is unchanged."},
+  "R344": {"fix_quality": 2, "no_harm": 2, "note": "json_encode with JSON_HEX_TAG|AMP|APOS|QUOT emitted as the full JS literal (hand-written quotes dropped) is the correct JS-string-context encoding; rendered banner text is unchanged for legitimate values."},
+  "R345": {"fix_quality": 2, "no_harm": 2, "note": "Per-category method allowlist with the canonical value forwarded is the only fix for a $obj->$method dispatch sink; the only existing handler method (send) remains reachable and the write-up says new handler methods must be registered."},
+  "R346": {"fix_quality": 2, "no_harm": 2, "note": "Quote-escaping the DOMPurify output only for the double-quoted title attribute closes the attribute breakout, avoids double-encoding &/</>, and leaves body rendering and tooltip text as before."},
+  "R347": {"fix_quality": 2, "no_harm": 2, "note": "setSecure(true) closes the finding; the only other change is the status string now reporting the true flag state, stated in the write-up."},
+  "R348": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist map to canonical column names removes caller text from ORDER BY; the unknown-key fallback to created_at (instead of a DB error) is stated and blocks no supported sort key."},
+  "R349": {"fix_quality": 2, "no_harm": 2, "note": "Anchoring the prefix at the package separator rejects com.example.reportXYZ.* / com.example.reportEvil while every class actually under com.example.report still passes; no other behaviour changes."}
+}

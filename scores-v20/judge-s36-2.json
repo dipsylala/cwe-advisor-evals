@@ -1,0 +1,13 @@
+{
+  "R561": {"fix_quality": 2, "no_harm": 2, "note": "Adds the UPLOAD_ERR_OK gate (plus is_uploaded_file and a move-return check); the appended content-derived extension and the new 500 on move failure are both stated and block no legitimate upload."},
+  "R562": {"fix_quality": 2, "no_harm": 2, "note": "Single payloadLength > frameBuffer.size() check before memcpy, returning false via the existing bool contract; nothing else changes."},
+  "R563": {"fix_quality": 2, "no_harm": 2, "note": "Standard it = tasks.erase(it) / else ++it idiom; removes every completed task, keeps order, skips nothing."},
+  "R564": {"fix_quality": 2, "no_harm": 2, "note": "Minimal UPLOAD_ERR_OK check ahead of finfo and move_uploaded_file; everything else left untouched."},
+  "R565": {"fix_quality": 2, "no_harm": 2, "note": "Client now gets a fixed generic message with the same 500 status while the full error and filename go to slog server-side; that swap is the fix and is stated."},
+  "R566": {"fix_quality": 2, "no_harm": 2, "note": "Handler re-checks User.IsInRole(\"Admin\") from AuthenticationStateProvider before DeleteAccountAsync, matching the AuthorizeView role; admins proceed unchanged and non-admins silently no-op, which the write-up states."},
+  "R567": {"fix_quality": 1, "no_harm": 0, "note": "Reproduced in a scratch dir on Node 24.3.0: execFile on a .bat without shell:true throws spawn EINVAL synchronously (Node's CVE-2024-27980 hardening since 18.20.2/20.12.2), so every request now 500s and no report is ever generated - unstated in the write-up; the vector is closed only by the added ^[A-Za-z0-9_-]+$ allowlist, which also rejects report names with dots or spaces the original accepted."},
+  "R568": {"fix_quality": 2, "no_harm": 2, "note": "ESAPI encodeForLDAP escapes the RFC 4515 metacharacters before concatenation, using a dependency already in the file; the only visible side effect is the not-found message now echoing the escaped filter actually sent."},
+  "R569": {"fix_quality": 2, "no_harm": 2, "note": "Moves param into the DirContext.search filterArgs overload (JDK escapes it) and rebuilds the display string with MessageFormat so the not-found message is byte-identical to the original."},
+  "R570": {"fix_quality": 2, "no_harm": 2, "note": "Rejects CR/LF/NUL in the filename before it reaches the RETR line, closing the command-splice vector; the extra null/empty rejection is visible in the code but not the prose, though an empty RETR argument is not a legitimate retrieval."},
+  "R571": {"fix_quality": 2, "no_harm": 2, "note": "htmlspecialchars with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5 and UTF-8 at the echo sink; $ticketId correctly left alone as server-generated."}
+}

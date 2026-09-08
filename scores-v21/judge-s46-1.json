@@ -1,0 +1,19 @@
+{
+  "R796": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities on the subject at the sink closes the injection; other fields left alone and are server-controlled (minor prose slip: default encode_entities does not escape the apostrophe, irrelevant in this text-node context)."},
+  "R797": {"fix_quality": 2, "no_harm": 1, "note": "Dropping decoder.Entity entirely closes the vector, but a partner document that references &noteLabel; (which always resolved before, even to an empty string) now fails with 400; keeping a fixed application-defined map would have preserved it, and the write-up does not state the consequence."},
+  "R798": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the assert() string-eval with a direct boolean comparison; pass/fail outcome and return value are unchanged."},
+  "R799": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized logging plus a control-character escaper closes forging; the Throwable stays as the trailing SLF4J arg, so ERROR-with-exception, INFO-with-username, 401 and 200 all hold."},
+  "R800": {"fix_quality": 2, "no_harm": 2, "note": "exec.Command with an argument vector removes the shell; same binary, same args, same error return (residual leading-dash option injection into convert is outside the stated contract)."},
+  "R801": {"fix_quality": 2, "no_harm": 1, "note": "Files.newDirectoryStream removes the exec sink, but the fix adds a new rejection of null/empty/'..'-containing input that the original accepted (an empty name previously listed the cwd) and swallows IOException where the original propagated."},
+  "R802": {"fix_quality": 2, "no_harm": 2, "note": "html.escape before the format and mark_safe; only the intended escaping of announcement text changes."},
+  "R803": {"fix_quality": 2, "no_harm": 2, "note": "Adds the POSIX -- end-of-options marker after the archive path exactly as the contract prescribes; ordinary filenames archive as before."},
+  "R804": {"fix_quality": 2, "no_harm": 2, "note": "Textbook PreparedStatement conversion with setString; resource-closing finally block and logging untouched."},
+  "R805": {"fix_quality": 1, "no_harm": 1, "note": "escape_filter_chars is the right function but is imported from ldap3.utils.dn; it lives in ldap3.utils.conv, so the module raises ImportError at load and the endpoint stops working (judged by reading - the package was not available to run here)."},
+  "R806": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check ordered to avoid unsigned wrap (length checked before size()-length), returning an empty vector only for headers that were previously undefined behaviour."},
+  "R807": {"fix_quality": 2, "no_harm": 2, "note": "Swaps text/template for html/template; contextual auto-escaping with no other change."},
+  "R808": {"fix_quality": 2, "no_harm": 2, "note": "html.escape applied at each concatenation point; the 400 branch and response shape are unchanged."},
+  "R809": {"fix_quality": 2, "no_harm": 2, "note": "Order.objects.raw with a %s placeholder and a params list; query semantics and JSON response preserved."},
+  "R810": {"fix_quality": 1, "no_harm": 2, "note": "Right plugin and hook, but fastify.register is not awaited (no await/after), so fastify.csrfProtection is still undefined when the route options object is evaluated and the onRequest hook is very likely never attached; nothing else legitimate is broken and the token endpoint is stated."},
+  "R811": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with a bound parameter at the deepest sink; the rest of the chain and the cleanup block are untouched."},
+  "R812": {"fix_quality": 2, "no_harm": 2, "note": "Drops image/svg+xml from extensionFor and stops emitting image/svg+xml on download; PNG/JPEG round-trip is preserved and now carries an exact content type, and the SVG rejection is stated."}
+}

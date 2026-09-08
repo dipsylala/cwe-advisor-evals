@@ -1,0 +1,52 @@
+{
+  "R345": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Per-category method allowlist in resolve() is the right shape for a variable-method dispatch sink; 'email.send' still works, the dead 'handle' default fails the same way it did before, and the new RuntimeException for unknown verbs is stated."
+  },
+  "R346": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Encoding &, \", <, > for the double-quoted title attribute closes the breakout while keeping DOMPurify output in the body, but it re-encodes DOMPurify's already-serialized entities, so a bio like 'Tom & Jerry' now tooltips as 'Tom &amp; Jerry' where the original showed 'Tom & Jerry' - an unstated visible change."
+  },
+  "R347": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "setSecure(false) to setSecure(true) is the whole fix; nothing else changes (the response text still says 'secure flag set to: false', but that string is unchanged from the original)."
+  },
+  "R348": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Sort is used only as a key into a server-side map of column names with account_id/status still bound; the silent fallback of unknown keys to created_at is a restriction the contract calls for and is stated plainly in the write-up (note 'created_at DESC' style direction suffixes are no longer honoured)."
+  },
+  "R349": {
+    "fix_quality": 1,
+    "no_harm": 1,
+    "note": "Exact-match replaces the prefix check, but the added className.startsWith(\"[\") allows every array class of any length (the original rejected all arrays), so a class outside the explicit set is still constructed and an unbounded primitive array allocation is now possible; the two allowlisted report class names are invented rather than flagged as placeholders for the real set, and the write-up's claim that null-class handling was changed is false (original already returned UNDECIDED)."
+  },
+  "R350": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "SecureRandom.nextBytes over 16 bytes replaces Math.random for the remember-me token; the token format change is inherent and stated, the value is stored and compared consistently, and standard Base64 characters are valid cookie-octets (the explanation's 'URL-safe' claim is inaccurate but harmless)."
+  },
+  "R351": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "html.EscapeString on customerNote closes the sink; escaping ticketID as well is stated extra hardening that blocks no legitimate use."
+  },
+  "R352": {
+    "fix_quality": 1,
+    "no_harm": 1,
+    "note": "The slot-table/generation redesign stops the freed pointer being dereferenced in this main(), but connection_allocate() resets generation to 0 on reuse, so a stale queued context matches a re-allocated slot and fires against the wrong live connection - the exact ABA case the write-up claims is prevented; the fix also rewrites the public signatures of enqueue_completion and handle_connection_reset and adds stderr output, well beyond the sink, and connection_allocate() ignores malloc failure."
+  },
+  "R353": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Three static @Select methods selected by a switch remove ${} entirely with tenantId still bound; the IllegalArgumentException for unknown keys is the restriction the contract calls for and is stated (note the selected 'id' column and any direction suffix are not offered as sort keys)."
+  },
+  "R354": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "The supplied files are byte-identical to the case, which already used prepareStatement with ? and setString, so the resulting code has no injection vector and nothing else changes; the write-up misdescribes this unchanged code as a remediation rather than saying no change was needed."
+  }
+}

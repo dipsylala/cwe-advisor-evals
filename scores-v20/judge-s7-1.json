@@ -1,0 +1,62 @@
+{
+  "R190": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Keyfunc method-type check plus WithValidMethods closes the alg-confusion vector, but WithExpirationRequired newly rejects tokens without an exp claim and RS256-only rejects RS384/RS512 tokens the RSA key previously verified; both stated but both restrictions the original accepted."
+  },
+  "R191": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Shared self-seeded SecureRandom replaces the caller-seeded Random; dropping the seed parameter is the fix itself and is stated, token format and header unchanged."
+  },
+  "R192": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "secure=true via the options array closes the finding, but samesite=Strict (not Lax) is an added behaviour change that drops the auth cookie on top-level cross-site navigations, justified only by an assumption about flows not visible in the case."
+  },
+  "R193": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "cmd.exe is removed, ping.exe gets target as its own argv element by absolute path and nslookup becomes net.LookupHost; report text shape changes (Addresses list instead of nslookup output) and a 20s timeout is added, both visible in the write-up and neither blocks a legitimate caller."
+  },
+  "R194": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Map lookup replaces the tainted executable name and -- guards the target, but the allowlist contains only ping while the handler is documented as running a handful of utilities (e.g. mtr -c 4), so other previously accepted tools now fail with a 500 and the write-up does not flag adding them as a follow-up."
+  },
+  "R195": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "The [A-Za-z0-9_-] allowlist does keep every cmd.exe metacharacter out of the value, which is the only viable closure for a .bat target, but it rejects report names with dots or spaces the original accepted (with a misleading 'required' message), and with shell:true execFile joins scriptPath unquoted so the original's quoting is lost and a __dirname containing a space silently breaks the invocation."
+  },
+  "R196": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Client-supplied originalname no longer decides path or extension (UUID plus detected.ext), storage leaves the express.static root and a shape-validated sendFile route keeps the url fetchable; contract preserved, url now UUID-based as stated (note file-type never reports image/svg+xml, so that ALLOWED entry is dead rather than a gap in this fix)."
+  },
+  "R197": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "FromSqlInterpolated binds tenantId and the %term% pattern as DbParameters with identical WHERE/LIKE semantics, empty term still matches tenant-wide as before, signature and return type unchanged."
+  },
+  "R198": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Shared SecureRandom filling 16 bytes replaces Math.random(); the key's format changes from decimal digits to base64url but that is stated, remains a valid cookie value and is used identically downstream."
+  },
+  "R199": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "next(error) routes the failure to the existing error middleware, which still logs and returns a fixed 500 body; the removed duplicate logger call is stated and the 404/success paths are untouched."
+  },
+  "R200": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "supports() now opts in only for ApiKeyAuthenticationToken, which is exactly the AuthenticationProvider contract; authenticate() and its cast are unchanged."
+  },
+  "R201": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Passing requestedCapacity instead of MAX_PACKET_CAPACITY makes write_field's existing check validate against the real malloc size; contract preserved with a one-argument change."
+  }
+}

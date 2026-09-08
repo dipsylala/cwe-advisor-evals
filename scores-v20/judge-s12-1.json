@@ -1,0 +1,62 @@
+{
+  "R249": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Extension allowlist plus random stored name closes the sink, but the allowlist, the declared-MIME match, and the UUID filename reject or alter inputs the original accepted (any non-denylisted extension such as .docx/.zip, browsers sending image/jpg or application/octet-stream, and the returned path no longer contains the original name), and the new 10 MB fileSize limit is added without being mentioned in the write-up."
+  },
+  "R250": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "CGI.pm escapeHTML applied to both tainted parameters at the concatenation point; the fixed literals and status badge are left alone and nothing else changes."
+  },
+  "R251": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "proc_open argument array with -- closes shell and option injection, but the added IP/RFC-1123 hostname check rejects values the original accepted (underscored or trailing-dot names) by reporting them unreachable, and the write-up misstates that the original never surfaced ping output when system() actually streamed it into the response body before the JSON."
+  },
+  "R252": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Replaces the string-form assert() with a direct === comparison and an explicit if/throw gate; the move from a possibly compiled-out assertion to an unconditional throw is stated plainly and only affects non-premium callers the function is documented to deny."
+  },
+  "R253": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Argument list with shell=False plus a report_id pattern that enforces the docstring's stated short-alphanumeric-key contract, which is genuinely required here because CreateProcess re-invokes cmd.exe for .bat targets; the restriction matches the documented format and blocks no legitimate key."
+  },
+  "R254": {
+    "fix_quality": 0,
+    "no_harm": 1,
+    "note": "Does not compile: calls order.getOwnerUsername() but Order exposes getCustomerUsername(); the intended principal-vs-owner check with a not-found-shaped rejection is otherwise sound and stated, but as written the class cannot build."
+  },
+  "R255": {
+    "fix_quality": 0,
+    "no_harm": 1,
+    "note": "Does not compile (jdk.nashorn.api.scripting absent on the build JDK), and even in principle the ClassFilter/--no-java/global-overwrite approach leaves Nashorn's non-enumerable engine/context globals reachable so a rule can obtain an unfiltered engine via engine.getFactory().getScriptEngine() and reach Java.type again; --no-syntax-extensions also rejects rules that previously ran."
+  },
+  "R256": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "execFileSync with an argument array and absolute binary path closes the shell vector, but the new digits-x-digits geometry pattern rejects valid ImageMagick geometries the original accepted (50%, 200x, x200, 200x200!, 200x200>) - a stated restriction the case comment gave only as an example, not a format contract."
+  },
+  "R257": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Swaps findAll() for the existing findByOwnerUsername(authentication.getName()), mirroring the sibling endpoint; callers still get their own invoices and nothing else changes."
+  },
+  "R258": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Moves username into a slog.String attribute; reproduced in a scratch directory with Go 1.25 that the default slog handler quotes the value and escapes newline and ESC into a single line, and the format change to structured key=value output is the stated mechanism of the fix."
+  },
+  "R259": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Per-stream ObjectInputFilter allowlisting RestoredSession and java.lang.String with !* and resource limits, set before readObject(); rejected classes surface as InvalidClassException which the existing catch already maps to IllegalArgumentException, so the stated contract holds."
+  },
+  "R260": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Parameterized SqlCommand with @Region bound as NVarChar fed to SqlDataAdapter(command); Fill still opens/closes the connection itself, the Customers DataTable and column set are unchanged, and valid regions still filter."
+  }
+}

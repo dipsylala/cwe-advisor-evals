@@ -1,0 +1,12 @@
+{
+  "R679": {"fix_quality": 2, "no_harm": 2, "note": "Wraps the export route in the existing requireAdmin exactly as the sibling routes are; only comments otherwise change."},
+  "R680": {"fix_quality": 2, "no_harm": 2, "note": "bcrypt.compare gate before done(null, user) is the right shape; the unified failure message and the missing-hash guard are stated plainly and block no legitimate login."},
+  "R681": {"fix_quality": 2, "no_harm": 1, "note": "GET-to-POST plus [ValidateAntiForgeryToken] is the correct fix, but the existing confirmation-page GET link stops working until the view (outside the diff) is changed, which the write-up states as a required follow-up."},
+  "R682": {"fix_quality": 2, "no_harm": 1, "note": "Direct ping.exe with an argument array closes the shell vector and the leading-dash guard covers flag injection, but the added HOST_PATTERN and 1-10 count cap reject inputs the original accepted (e.g. ::1, underscores in hostnames, count above 10)."},
+  "R683": {"fix_quality": 2, "no_harm": 2, "note": "Generated $n placeholders with ids bound as pg parameters; the stated empty/non-array early return yields [] where the original threw and blocks no legitimate caller."},
+  "R684": {"fix_quality": 2, "no_harm": 2, "note": "Drops the pre-push_back reference and re-indexes tasks[activeIndex] after the reallocating call; semantics otherwise identical."},
+  "R685": {"fix_quality": 2, "no_harm": 2, "note": "Loads through XmlReader with DtdProcessing.Prohibit and null resolvers plus doc.XmlResolver = null; rejecting DOCTYPE is the stated, standard remediation and the DOM for non-DTD input is unchanged."},
+  "R686": {"fix_quality": 2, "no_harm": 2, "note": "Moves param into a {0} filterArgs slot so the JNDI LDAP provider escapes it; only side effect is the not-found diagnostic now echoing the template filter rather than the substituted value, which is inherent to parameterizing."},
+  "R687": {"fix_quality": 2, "no_harm": 2, "note": "QueryRow with a ? placeholder and username as a bound argument; write-up correctly flags that a PostgreSQL driver would need $1 instead."},
+  "R688": {"fix_quality": 2, "no_harm": 2, "note": "Reads bytesSent() before reset() and returns the captured value, which matches the documented contract of reporting the original send's byte count."}
+}

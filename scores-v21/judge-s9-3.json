@@ -1,0 +1,72 @@
+{
+  "R240": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Adds admin-role check returning 403; the endpoint is admin-only so rejecting non-admins is the intended contract, not a regression."
+  },
+  "R241": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "setSecure(true) is the correct CWE-614 fix; leftover println text 'secure flag set to: false' is now cosmetically stale but harmless."
+  },
+  "R242": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "realpath containment plus rejecting separators and dot/dotdot closes traversal and stream-wrapper bypass; the slash rejection is intrinsic to blocking php://filter and the flat reports dir implies no legit subpaths."
+  },
+  "R243": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Named :startDate/:endDate placeholders with replacements is proper Sequelize parameterization; behavior identical for legit inputs."
+  },
+  "R244": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Replaces fmt.Sprintf with html/template context-aware escaping; Content-Type and error return preserved."
+  },
+  "R245": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "SandboxedEnvironment is the correct SSTI fix and preserves the preview contract; leftover unused 'from jinja2 import Environment' import is harmless."
+  },
+  "R246": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Allowlist map is the right shape for ORDER BY, but it accepts only bare column names and errors (->500) on empty or direction-bearing sort values the original passed through."
+  },
+  "R247": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "lockoutOnFailure:true closes the vector, but the added enumeration branch uses an invalid bcrypt-style decoy hash literal that would throw FormatException at runtime for unknown users; disclosed as a placeholder."
+  },
+  "R248": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Bounds check field_index >= MAX_FIELDS before indexing closes the OOB read; valid indices unaffected, returns existing -1 error."
+  },
+  "R249": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Allowlist is the correct CWE-434 approach, but the chosen 6-type set is a product decision that rejects common legitimate attachments (docx, csv, zip) the original accepted; stated."
+  },
+  "R250": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "encode_entities on subject and reply is the correct Perl XSS fix; ticket_id feeds only the badge choice, not reflected markup."
+  },
+  "R251": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "proc_open array form plus end-of-options marker closes shell and option injection; host/reachable JSON contract preserved with matching exit-code semantics."
+  },
+  "R252": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Direct !== 'premium' comparison removes the assert()-string eval entirely; premium passes, non-premium denied, no legit caller broken."
+  },
+  "R253": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "List args without shell=True closes injection - confirmed by scratchpad repro (marker not written, report_id passed as a literal argument); output path and returncode handling unchanged."
+  }
+}

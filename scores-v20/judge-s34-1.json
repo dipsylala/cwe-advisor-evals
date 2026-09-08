@@ -1,0 +1,14 @@
+{
+  "R537": {"fix_quality": 2, "no_harm": 2, "note": "DELETE parameterized via @owner/AddWithValue; connection lifecycle, return value and 404/200 responses unchanged."},
+  "R538": {"fix_quality": 2, "no_harm": 2, "note": "supports() narrowed to ApiKeyAuthenticationToken so ProviderManager only routes the intended token type; nothing else touched."},
+  "R539": {"fix_quality": 2, "no_harm": 1, "note": "Path.startsWith(Path) closes the sibling-prefix bypass, but the candidate is only normalize()d rather than canonicalized as the original getCanonicalPath() did, so a symlink inside /app/uploads pointing outside now passes containment where it previously did not, and toRealPath() on the base turns a missing base dir into an IOException/500 instead of 404 - neither is disclosed."},
+  "R540": {"fix_quality": 2, "no_harm": 2, "note": "snprintf with truncation check bounds the write to path[128]; filenames that fit produce identical output and over-long ones return -1, which the write-up states."},
+  "R541": {"fix_quality": 2, "no_harm": 2, "note": "ORDER BY resolved from server-owned column/direction maps with created_at DESC fallback; accountId stays bound, contract's intended sort keys and default preserved, fallback behaviour stated."},
+  "R542": {"fix_quality": 2, "no_harm": 2, "note": "Plaintext :8080 now serves only a redirect-to-HTTPS handler so no route reaches the mux without CrossOriginProtection; matches the case's documented intent for that listener and the change is stated."},
+  "R543": {"fix_quality": 2, "no_harm": 2, "note": "Deletion moved to @PostMapping under the existing CsrfFilter, GET now renders a token-bearing confirmation form via the auto-registered CsrfToken argument resolver; the GET behaviour change is stated and the settings-page link keeps working."},
+  "R544": {"fix_quality": 2, "no_harm": 2, "note": "Short-circuit NULL check before strcmp; strict still enables, other values and unset both return 0 as the contract requires."},
+  "R545": {"fix_quality": 2, "no_harm": 2, "note": "EXEC now takes @CustomerId bound via Parameters.Add(SqlDbType.NVarChar), same procedure and result set returned; contract preserved."},
+  "R546": {"fix_quality": 2, "no_harm": 2, "note": "Unsigned >= MAX_PLAYERS check before the write drops out-of-range packets and leaves in-range updates identical; drop behaviour stated."},
+  "R547": {"fix_quality": 2, "no_harm": 2, "note": "Deletion moved to POST /account/delete behind protection.Handler with GET reduced to a confirmation form; email link still works, handler logic and status codes unchanged, change stated."},
+  "R548": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with setString(1, param) via statement.getConnection(); outputUpdateComplete still receives the same message string as before so the response is unchanged."}
+}

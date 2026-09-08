@@ -1,0 +1,12 @@
+{
+  "R679": {"fix_quality": 2, "no_harm": 2, "note": "Wraps the export route in the existing requireAdmin the sibling routes use; nothing else changes."},
+  "R680": {"fix_quality": 2, "no_harm": 2, "note": "bcrypt.compare inserted before done(null, user); the generic-message change and the no-hash guard are stated and block no legitimate login, though the user.password field name is an assumption the write-up flags."},
+  "R681": {"fix_quality": 2, "no_harm": 1, "note": "GET->POST plus [ValidateAntiForgeryToken] is the right shape, but the confirmation page's existing GET link (the case's stated caller) now fails until the view is rewritten, which the write-up states only as a required follow-up."},
+  "R682": {"fix_quality": 2, "no_harm": 1, "note": "Dropping cmd.exe for a ping.exe argument array plus a leading-dash guard closes both shell and flag injection, but the new count ceiling of 10 and the host regex reject inputs the original accepted (e.g. -n 20, IPv6 zone ids), and the write-up wrongly calls this non-breaking."},
+  "R683": {"fix_quality": 2, "no_harm": 2, "note": "Generates $n placeholders and binds ids as pg parameters; the stated empty/non-array guard turns a SQL syntax error into an empty result and blocks no legitimate caller."},
+  "R684": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the reference held across push_back with re-indexing by activeIndex; all three writes land on the same element as intended."},
+  "R685": {"fix_quality": 2, "no_harm": 2, "note": "Loads through XmlReader with DtdProcessing.Prohibit and null resolvers on both reader and document; only DOCTYPE-bearing payloads now fail, which is the fix and is stated."},
+  "R686": {"fix_quality": 2, "no_harm": 1, "note": "Moving param into the filterArgs {0} placeholder gets JNDI's RFC 4515 escaping, but the not-found response now echoes the literal '{0}'/'{1}' filter instead of the submitted value, an unstated output change the write-up denies by claiming no other line changes."},
+  "R687": {"fix_quality": 2, "no_harm": 2, "note": "Fixed SQL literal with a ? placeholder and username bound via QueryRow args; the MySQL-vs-$1 placeholder caveat is stated."},
+  "R688": {"fix_quality": 2, "no_harm": 2, "note": "Reads bytesSent() into a local before reset() and returns that, matching the function's documented contract of reporting the original send; nulling rawHandle is harmless."}
+}

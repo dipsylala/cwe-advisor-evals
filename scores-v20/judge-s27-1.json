@@ -1,0 +1,16 @@
+{
+  "R441": {"fix_quality": 2, "no_harm": 2, "note": "Bounded snprintf with capacity passed from the declaring scope; over-length names are rejected (out set to empty) rather than truncated, as the contract asks and the write-up states."},
+  "R442": {"fix_quality": 2, "no_harm": 2, "note": "AESGCM with a fresh 12-byte nonce replaces ECB; the output format change (nonce prepended, no padding) is inherent to the fix and stated plainly."},
+  "R443": {"fix_quality": 2, "no_harm": 2, "note": "Ownership scoped into the delete query with the principal name, 404 on no match per the contract; the repository stub returning false is a placeholder consistent with the original no-op stub."},
+  "R444": {"fix_quality": 2, "no_harm": 2, "note": "ldap3's escape_filter_chars applied to the value before concatenation; no allowlist added, behaviour otherwise unchanged."},
+  "R445": {"fix_quality": 2, "no_harm": 2, "note": "RandomNumberGenerator.Fill with 32 bytes replaces Guid.NewGuid; the token string shape change (base64url instead of GUID) is stated."},
+  "R446": {"fix_quality": 2, "no_harm": 2, "note": "Hand-rolled RFC 4515 escaper covers all five metacharacters with backslash handled first; query structure and API unchanged."},
+  "R447": {"fix_quality": 2, "no_harm": 2, "note": "Checks offset > capacity then length > capacity - offset in overflow-safe order; failure path and void contract preserved."},
+  "R448": {"fix_quality": 2, "no_harm": 2, "note": "Generic error body with the exception moved to logger.exception; status code and success path unchanged."},
+  "R449": {"fix_quality": 2, "no_harm": 2, "note": "Full-action allowlist mapping to fixed (handler, method) pairs removes attacker-chosen method names; the only handler has only send(), so no previously working action is rejected."},
+  "R450": {"fix_quality": 2, "no_harm": 2, "note": "Gate::authorize against an auto-discovered OrderPolicy runs before refund(); denial is the framework AuthorizationException rendered as 404 via denyAsNotFound, stated in the write-up."},
+  "R451": {"fix_quality": 2, "no_harm": 1, "note": "Filename allowlist and relocation out of the Views tree close traversal and Razor execution, but moving uploads to App_Data breaks the existing render-as-Razor-partial path and the regex rejects names the original accepted; both are stated as follow-ups, not silent."},
+  "R452": {"fix_quality": 2, "no_harm": 1, "note": "secure: true is the correct fix, but the added sameSite: 'strict' on an SSO-callback session cookie is a questionable extra: it withholds the cookie on cross-site-initiated navigations (external links, the IdP redirect chain in some browsers), which can make legitimate users appear logged out."},
+  "R453": {"fix_quality": 2, "no_harm": 2, "note": "Markup(label) replaced with markupsafe.escape(label); response shape otherwise unchanged."},
+  "R454": {"fix_quality": 2, "no_harm": 2, "note": "ValidAlgorithms pinned to HmacSha256 consistent with the symmetric key; the assumption that the issuer signs with HS256 (not HS384/512) is stated and is what the finding asks for."}
+}

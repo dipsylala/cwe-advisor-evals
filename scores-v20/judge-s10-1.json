@@ -1,0 +1,13 @@
+{
+  "R227": {"fix_quality": 2, "no_harm": 1, "note": "uint64 widening closes the wrap, but the new 64 MiB cap and nullptr return reject sizes the original accepted with no such bound; stated, so 1 not 0."},
+  "R228": {"fix_quality": 1, "no_harm": 1, "note": "Per-project role check is the right shape, but identity comes from a stub verifyBearerToken that accepts any 'Bearer <id>' string as the user, so a caller can name an owner ID and still delete; the placeholder, the new required token, and the assumed project_members table are all stated as follow-ups."},
+  "R229": {"fix_quality": 2, "no_harm": 2, "note": "Pins algorithms to RS256 on jwt.verify; nothing else changes."},
+  "R230": {"fix_quality": 2, "no_harm": 2, "note": "Named parameter with the wildcard wrapped into the bound value; query semantics, signature, and error propagation unchanged."},
+  "R231": {"fix_quality": 2, "no_harm": 1, "note": "redis-py RESP encoding closes the CRLF injection, but the function silently changes its return from the raw bytes reply to the client's bool, which the write-up does not mention."},
+  "R232": {"fix_quality": 2, "no_harm": 2, "note": "Moves Label into an attribute-encoded data-* and reads it via dataset; title, label, and numeric refreshSeconds all preserved per the stated contract, and the added attribute is stated."},
+  "R233": {"fix_quality": 2, "no_harm": 2, "note": "bcrypt CompareHashAndPassword replaces plaintext equality; the hashed store and dummy-hash timing equalization are both stated and change no legitimate outcome."},
+  "R234": {"fix_quality": 1, "no_harm": 1, "note": "Out-of-process isolation is the right direction, but the child runs as the same OS user with no privilege drop in code so injected code keeps the web process's filesystem and network access; the return type silently changes from the Evaluate result object to JsonElement? and the worker DLL is resolved relative to the temp working directory."},
+  "R235": {"fix_quality": 2, "no_harm": 2, "note": "Removes the is_staff widening so list is owner-scoped, which is exactly what the viewset's stated owner-only contract calls for."},
+  "R236": {"fix_quality": 2, "no_harm": 1, "note": "Positional ? parameter closes the injection, but EscapeLikeWildcards adds backslash escaping without an ESCAPE clause; DB2 for i (the AS/400 target) has no default escape character, so searches containing %, _ or a backslash now match the wrong rows, and user wildcards the original honored are suppressed - hedged but not resolved."},
+  "R237": {"fix_quality": 2, "no_harm": 2, "note": "Injects IAntiforgery and calls ValidateRequestAsync before the sink with a 400 on failure; the new token requirement is inherent to the fix and stated."}
+}

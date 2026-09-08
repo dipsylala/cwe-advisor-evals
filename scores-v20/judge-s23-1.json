@@ -1,0 +1,67 @@
+{
+  "R388": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Stored extension now comes from file-type's detected.ext instead of req.file.originalname, so the extension is bound to the same magic-byte check that gates the MIME allowlist; response shape and status codes unchanged."
+  },
+  "R389": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Rejects CR, LF and NUL in every value written to the wire before the socket opens, which is the correct neutralization for a hand-rolled SMTP client; legitimate addresses and subjects flow unchanged and the rejection is stated plainly."
+  },
+  "R390": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Parameterized query closes the injection and apostrophes are matched literally, but the explicit NVarChar(256) size bound means SqlClient silently truncates an actor value longer than 256 characters before comparison, changing the count returned for such an input that the original compared in full."
+  },
+  "R391": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Server-generated UUID name plus extension mapped from the detected MIME closes both traversal and extension spoofing, but the fix also removes image/svg+xml from the allowlist so SVG avatars the original accepted are now rejected with 400 - stated, but a restriction the contract did not call for."
+  },
+  "R392": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "IAntiforgery.ValidateRequestAsync before QueueAsync closes the CSRF vector for a JSON-bound minimal API endpoint, and the added authorized token-issuing GET is stated and blocks no legitimate use; only quibble is the explanation naming X-XSRF-TOKEN when the unconfigured default header is RequestVerificationToken."
+  },
+  "R393": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Accept/reject and stored extension are now derived from PNG/JPEG magic bytes rather than the client Content-Type header; Files.write with CREATE|TRUNCATE_EXISTING on a UUID name is equivalent to the original REPLACE_EXISTING copy and the in-memory read is stated."
+  },
+  "R394": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Secure: true closes the finding; HttpOnly and SameSite=Lax are stated defence-in-depth flags that block no legitimate use, and name, value and path are untouched."
+  },
+  "R395": {
+    "fix_quality": 0,
+    "no_harm": 1,
+    "note": "Build fails: SimpleEvaluationContext has no setRootObject (the write-up's claim that it is inherited is wrong) - the correct shape is forReadOnlyDataBinding().withRootObject(order).build() or getValue(context, order); the intended context choice would be right, but as submitted nothing compiles."
+  },
+  "R396": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "session.clear() after credential verification and before login_user(), with cart_id captured first and written back afterwards, discards the pre-auth session at the boundary while preserving the guest-cart merge and the 401 path unchanged."
+  },
+  "R397": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "allowed_classes limited to ShoppingCart keeps the existing cookie wire format and turns any other class into __PHP_Incomplete_Class, which the pre-existing instanceof guard already handles by returning an empty cart."
+  },
+  "R398": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Single :term placeholder with the % wildcards concatenated in PHP and bound via bindValue preserves the LIKE '%...%' substring semantics exactly while removing $term from the SQL text."
+  },
+  "R399": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "RandomNumberGenerator.GetBytes(16) replaces the attacker-seeded System.Random; dropping the seed query parameter is stated, breaks no caller that previously succeeded (extra query strings are ignored), and the response shape is unchanged."
+  },
+  "R400": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Resulting flag set (noent/dtdload off, nonet on) is the correct libxmljs lockdown and DOCTYPE-less partner XML parses as before; the explanation overstates nonet (it blocks network fetches, not local file paths, and external parameter entities are already skipped when noent/dtdload/dtdvalid are unset), but the code itself is right."
+  }
+}

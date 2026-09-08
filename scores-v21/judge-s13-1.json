@@ -1,0 +1,19 @@
+{
+  "R299": {"fix_quality": 2, "no_harm": 1, "note": "File read is gone and lookupRate is a keyed lookup, but the keys and rates are invented constants rather than the configured values, so any real config key now throws KeyNotFoundException; stated, but the values are fabricated."},
+  "R300": {"fix_quality": 2, "no_harm": 2, "note": "Hand-rolled RFC 4515 escape covers the full metacharacter set (* ( ) backslash NUL) before concatenation; legitimate values are unchanged."},
+  "R301": {"fix_quality": 2, "no_harm": 2, "note": "Field type changed to string so html/template escapes it in the div context; nothing else changed."},
+  "R302": {"fix_quality": 2, "no_harm": 2, "note": "CGI::escapeHTML at the sink neutralises the subject; priority and ticket_id are correctly left alone as constrained values."},
+  "R303": {"fix_quality": 2, "no_harm": 2, "note": "Resolve both sides then Path.is_relative_to containment, resolved path passed to open(); absolute and .. inputs fail closed with a stated 403."},
+  "R304": {"fix_quality": 2, "no_harm": 2, "note": "Named parameter with the wildcards applied to the bound value; LIKE semantics identical to the original."},
+  "R305": {"fix_quality": 2, "no_harm": 2, "note": "Gate::authorize throws AuthorizationException on denial, replacing the discarded boolean with the framework enforcing API."},
+  "R306": {"fix_quality": 2, "no_harm": 1, "note": "CSRFProtect plus FlaskForm/validate_on_submit closes CSRF, but the write-up claims the token is rendered automatically; the account_settings.html template must emit form.csrf_token or every legitimate POST is rejected, and that follow-up is not stated."},
+  "R307": {"fix_quality": 2, "no_harm": 2, "note": "@Owner parameter via AddWithValue replaces the concatenation; query semantics unchanged for real owner values."},
+  "R308": {"fix_quality": 2, "no_harm": 2, "note": "Extension allowlist matching the documented document-only contract, stated as a product decision, with secure_filename retained; the allowlist is the fix itself for this CWE."},
+  "R309": {"fix_quality": 2, "no_harm": 1, "note": "Allowlist keyed dispatch is the right shape, but the verbs and handler functions (handleStatusCommand etc.) are invented and undefined in the tree, so every allowed command now throws on an invalid callback and any real command not in the list is rejected; stated as an allowlist but not as placeholders to fill in."},
+  "R310": {"fix_quality": 2, "no_harm": 0, "note": "jwt.verify is the right API, but the hardcoded fallback secret 'your-secret-key' introduces CWE-798: with JWT_SECRET unset an attacker signs an admin token with the literal in the source and passes verification."},
+  "R311": {"fix_quality": 2, "no_harm": 2, "note": "realpath both sides then exact path.relative check ('..' or '..'+sep), canonical path passed to readFile; missing files still 404 as before."},
+  "R312": {"fix_quality": 2, "no_harm": 1, "note": "resolve plus path.relative closes traversal, but relativePath.startsWith('..') also rejects any legitimate file inside reports whose name begins with '..', an over-broad check the write-up does not mention."},
+  "R313": {"fix_quality": 2, "no_harm": 2, "note": "sqlite3 ? placeholder with the value bound in a tuple; INTEGER column affinity coerces the bound text so results match the original."},
+  "R314": {"fix_quality": 2, "no_harm": 2, "note": "Parameterised logging with repr() escapes newlines and other control characters; the added quotes around the username are shown in the write-up's own example output."},
+  "R315": {"fix_quality": 2, "no_harm": 2, "note": "secure: true closes the finding; sameSite lax is stated extra hardening that still allows the top-level SSO redirect and blocks no legitimate use."}
+}

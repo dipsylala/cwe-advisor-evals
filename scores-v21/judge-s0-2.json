@@ -1,0 +1,87 @@
+{
+  "R101": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Allowlist plus scalar-only check keeps ownerId unoverridable and blocks operator objects, but the allowlist (status, type, priority) silently drops any other extra criterion the original honoured - including the schema's own total and items fields - so a narrowing the client sends is ignored rather than applied or rejected."
+  },
+  "R102": {
+    "fix_quality": 1,
+    "no_harm": 2,
+    "note": "path.relative(...).startsWith('..') stops ../ traversal on POSIX, but (confirmed with Node in the scratch dir) a different-drive absolute path or UNC path on Windows yields a relative result that does not start with '..' and is required unchecked, despite the write-up's cross-platform claim; legitimate plugin names load as before."
+  },
+  "R103": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "GET replaced with [HttpPost] plus [ValidateAntiForgeryToken], the correct ASP.NET Core shape; the required change to the confirmation view (POST form with the token) is stated plainly as the follow-up."
+  },
+  "R104": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Moves param into the JNDI filterArgs array as {0}, which the LDAP provider escapes as a literal, matching how the street value was already bound; query structure and result handling are unchanged."
+  },
+  "R105": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Single bounded snprintf into message[64] with a truncation check returning -1 meets the contract: inputs that fit still yield AUDIT <username>:<action> and return 0, oversized input is rejected rather than truncated."
+  },
+  "R106": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Correct mysqli prepared statement with bind_param('s') and stmt_get_result; null-on-failure and single-row return semantics preserved."
+  },
+  "R107": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Column-name allowlist in the service is the right fix for a ${} ORDER BY, but any unrecognised sort value - including previously-working forms such as 'total_cents DESC' - is silently mapped to created_at instead of rejected, so a caller gets a differently ordered result with no error; the fallback is stated but changes observable behaviour."
+  },
+  "R108": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Extension now derived from the file-type-detected MIME via a fixed map, so the client name can no longer supply .php; the resulting stored-name change (e.g. .jpeg becomes .jpg) is stated and blocks no legitimate upload."
+  },
+  "R109": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "htmlspecialchars with ENT_QUOTES and UTF-8 on both values at the point of concatenation into element content; markup and output otherwise unchanged."
+  },
+  "R110": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Bounds check against calibrationTable.size() before the subscript write, consistent with the function's existing silent-return style for malformed messages."
+  },
+  "R111": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Replacing hand-built docmd envelope commands with smtp.sendmail() routes both addresses through quoteaddr()/putcmd(), which reject or neutralise embedded CR/LF; empty sender still becomes MAIL FROM:<> and the message body is equivalent, with sendmail's refused-recipient exceptions only affecting the error path."
+  },
+  "R112": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "WHERE id = ANY($1::int[]) with the array passed as a pg parameter is the idiomatic replacement for a hand-built IN list and returns the same rows for any array of valid integer ids."
+  },
+  "R113": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "pathinfo(PATHINFO_EXTENSION) checked against a strict allowlist closes the double-extension bypass, and the hash-based stored name additionally removes the Apache multi-extension risk; the loss of the recognisable original filename is stated plainly and blocks no upload."
+  },
+  "R114": {
+    "fix_quality": 1,
+    "no_harm": 1,
+    "note": "resize(count) makes the packet[i] write in-bounds, but the same statement still reads fields[i] out of bounds whenever count exceeds fields.size(), and the contract's requirement to reject or report such counts is neither implemented nor mentioned."
+  },
+  "R115": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "@PreAuthorize on the proxy-invoked entry point processMonthEndCleanup() is the correct way to close a self-invocation bypass; the ADMIN requirement matches the one deleteInvoice() already declares, so the intended batch-job caller must hold ADMIN as it already would to delete."
+  },
+  "R116": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Arrow-function callback capturing reminderId and message removes string evaluation entirely; recordReminder receives the same values and the response is unchanged."
+  },
+  "R117": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "res.sendFile(requestedFile, { root: reportsDir }) uses Express's own containment, which rejects '..' segments and anchors absolute paths under root; legitimate report names resolve to the same files as before."
+  }
+}

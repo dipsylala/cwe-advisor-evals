@@ -1,0 +1,20 @@
+{
+  "R520": {"fix_quality": 2, "no_harm": 2, "note": "finfo magic-byte allowlist plus server-generated name closes the upload vector; image-only restriction and the renamed stored file fit an avatar handler and are stated plainly."},
+  "R521": {"fix_quality": 2, "no_harm": 2, "note": "sqlite3 ? placeholder with a parameter tuple; query semantics otherwise unchanged."},
+  "R522": {"fix_quality": 2, "no_harm": 2, "note": "getOrDefault(sku, 0) removes the null unbox and matches the stated no-reservation contract."},
+  "R523": {"fix_quality": 2, "no_harm": 2, "note": "createElement/textContent/createTextNode rebuilds the same span-and-separator structure without HTML parsing of user data."},
+  "R524": {"fix_quality": 2, "no_harm": 2, "note": ".RequireAuthorization() on the MapDelete registration is the Minimal API equivalent of the controller's bare [Authorize]; only anonymous callers are newly blocked."},
+  "R525": {"fix_quality": 2, "no_harm": 2, "note": "Captures next before free(), so expired nodes are freed once and traversal continues; refresh order for live nodes unchanged."},
+  "R526": {"fix_quality": 1, "no_harm": 2, "note": "The array form closes the Linux branch, but the Windows branch still runs cmd.exe /c with data appended to the cmd command line, where & | etc. remain live because Java only quotes arguments containing whitespace by default, so that branch is still injectable despite the write-up's claim."},
+  "R527": {"fix_quality": 2, "no_harm": 2, "note": "proc_open argument array with -- closes both shell and flag injection; stdout+stderr still returned combined, PHP 7.4 floor stated."},
+  "R528": {"fix_quality": 2, "no_harm": 2, "note": "Generic 500 body with the exception logged server-side via exc_info; status code and JSON shape unchanged."},
+  "R529": {"fix_quality": 2, "no_harm": 2, "note": "offset >= 0 guard closes the negative-offset wraparound; valid windows and the -1 return path are unchanged (the explanation misdescribes why the cast passed, but the fix is right)."},
+  "R530": {"fix_quality": 2, "no_harm": 2, "note": "ProcessBuilder argument list with -- before host closes shell and flag injection; stdout capture and response handling unchanged."},
+  "R531": {"fix_quality": 2, "no_harm": 2, "note": "@csrf_protect added in the same position as the sibling route, reusing the already-registered CSRFProtectMiddleware; handler untouched."},
+  "R532": {"fix_quality": 2, "no_harm": 2, "note": "std::array::at throws std::out_of_range for invalid slots, which is the contract's 'rejected or reported'; Badge shape and valid-slot behaviour unchanged."},
+  "R533": {"fix_quality": 2, "no_harm": 2, "note": "Allowlist of fixed executable names is the right shape for a tainted program name and the case's 'handful of utilities' contract calls for it; the chosen membership (tracert/nslookup alongside a ping-only -c 4) is a stated product guess, not a new harm."},
+  "R534": {"fix_quality": 0, "no_harm": 2, "note": "DOMPurify with ALLOWED_TAGS: [] returns innerHTML serialization, which does not encode double quotes (verified with jsdom in a scratch dir: text 'x\" onmouseover=\"alert(1)' serializes with the quotes intact), so the title attribute can still be broken out of; the fix needed attribute encoding, not a second sanitize pass."},
+  "R535": {"fix_quality": 2, "no_harm": 2, "note": "offset > buffer_len || length > buffer_len - offset is overflow-safe and rejects exactly the out-of-range windows; in-range calls reach socket_send unchanged."},
+  "R536": {"fix_quality": 1, "no_harm": 0, "note": "The protocol allowlist closes javascript:/data:, but the fix drops escapeAttribute on the href and inserts parsed.href raw; for mailto: the WHATWG parser keeps an opaque path unencoded (verified in Node: new URL('mailto:a\"onmouseover=\"alert(1)').href returns it verbatim), so an allowlisted scheme now yields an attribute breakout the original escaping prevented."},
+  "R537": {"fix_quality": 2, "no_harm": 2, "note": "Static CommandText with an NVarChar @owner parameter; ExecuteNonQuery result and NotFound/Ok responses unchanged."}
+}

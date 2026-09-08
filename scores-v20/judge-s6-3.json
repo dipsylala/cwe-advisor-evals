@@ -1,0 +1,14 @@
+{
+  "R178": {"fix_quality": 2, "no_harm": 1, "note": "Semantic-model allowlist closes the code-injection escape (Type.GetType etc. rejected) and builds; but the 4-namespace allowlist rejects legitimate rules using other BCL namespaces (Text, Regex), a restriction the original did not have though the write-up states it."},
+  "R179": {"fix_quality": 2, "no_harm": 2, "note": "-- end-of-options marker plus leading-dash rejection closes tar option injection; rejecting dash names is explicitly permitted by the stated contract."},
+  "R180": {"fix_quality": 2, "no_harm": 1, "note": "Content-based magic-byte allowlist is the correct CWE-434 fix, but it narrows accepted types to png/jpg/pdf (original accepted any non-blocklisted type), rejecting previously-accepted attachments; disclosed."},
+  "R181": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(16).toString('base64url') replaces Math.random with a CSPRNG; opaque token, no caller affected."},
+  "R182": {"fix_quality": 2, "no_harm": 2, "note": "format_html escapes the interpolated value and drops the redundant mark_safe; legitimate text still renders."},
+  "R183": {"fix_quality": 2, "no_harm": 2, "note": "Adds the missing null guard on the locked shared_ptr; live sends unchanged, expired skipped, weak_ptr observer role preserved."},
+  "R184": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with setString binding closes the injection; same columns, same output, no legitimate change."},
+  "R185": {"fix_quality": 2, "no_harm": 1, "note": "Reordering reserved keys last plus scalar check closes override and operator injection, but the allowlist limits extra to 'status' only, dropping other scalar narrowing fields the original accepted; disclosed."},
+  "R186": {"fix_quality": 2, "no_harm": 2, "note": "basename identity check plus realpath containment closes wrapper/absolute/traversal bypasses; flat report-filename serving preserved, no evidence subdir paths were legitimate."},
+  "R187": {"fix_quality": 2, "no_harm": 2, "note": "Adds index >= segment.size() to the guard, closing the OOB write; no previously-valid write is newly rejected (claimedCapacity check retained but unchanged), contract behavior preserved."},
+  "R188": {"fix_quality": 2, "no_harm": 2, "note": "Moves ownership into a shared_ptr captured by value so the Session outlives the queued callback; single callback still enqueued, matches the own/share option in the contract."},
+  "R189": {"fix_quality": 2, "no_harm": 2, "note": "Null-checks the boxed Long, treating absence as zero discount and false applied-flag; configured-discount behavior and Math.max floor preserved per contract."}
+}

@@ -53,5 +53,9 @@
     <dependency><groupId>org.springframework</groupId><artifactId>spring-test</artifactId><version>${spring.version}</version></dependency>
     <!-- Apache Commons Net: cwe/77/java's FTP client replacement (run 18 first pass). -->
     <dependency><groupId>commons-net</groupId><artifactId>commons-net</artifactId><version>3.11.1</version></dependency>
+    <!-- Run 20 (Sonnet) first pass: fixes written for the jakarta line and for GraalJS; compile-only, beside the javax-era stack above -->
+    <dependency><groupId>jakarta.servlet</groupId><artifactId>jakarta.servlet-api</artifactId><version>6.0.0</version></dependency>
+    <dependency><groupId>org.graalvm.polyglot</groupId><artifactId>polyglot</artifactId><version>24.2.2</version></dependency>
+    <dependency><groupId>net.objecthunter</groupId><artifactId>exp4j</artifactId><version>0.4.8</version></dependency>
   </dependencies>
 </project>

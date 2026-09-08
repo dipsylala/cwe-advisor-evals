@@ -1,0 +1,18 @@
+{
+  "R329": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte allowlist plus random filename with derived extension closes the upload vector; the stated filename change does not reject legitimate images."},
+  "R330": {"fix_quality": 2, "no_harm": 2, "note": "EvalSymlinks with post-resolution containment check closes symlink escape; legitimate regular files inside uploadsDir still read."},
+  "R331": {"fix_quality": 1, "no_harm": 1, "note": "SecurityConfig declared in com.example.config, likely outside the component-scan base (all case classes are com.example.accounts), so @EnableMethodSecurity may never register; and it silently drops the existing SecurityFilterChain bean."},
+  "R332": {"fix_quality": 2, "no_harm": 2, "note": "Removes LIBXML_NOENT (default-safe on libxml 2.9+) and adds LIBXML_NONET; well-formed submissions still parse title/body."},
+  "R333": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized @Actor query; apostrophes counted as literal actor names, count JSON preserved."},
+  "R334": {"fix_quality": 2, "no_harm": 2, "note": "getOrDefault(sku,0) matches the stated no-reservation contract and removes the null unbox."},
+  "R335": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath plus resolve/normalize/startsWith containment closes traversal; legitimate filenames within the base dir still open."},
+  "R336": {"fix_quality": 2, "no_harm": 2, "note": "Argument-array exec (no shell) plus leading-dash rejection for flag injection; no legitimate host starts with '-', output/headers preserved."},
+  "R337": {"fix_quality": 2, "no_harm": 2, "note": "Drops the untrusted envp so the child inherits the parent environment - change is stated and does not break the fixed command."},
+  "R338": {"fix_quality": 2, "no_harm": 2, "note": "DOMPurify.sanitize before bypassSecurityTrustHtml closes script injection while preserving allowed formatting tags."},
+  "R339": {"fix_quality": 2, "no_harm": 2, "note": "Non-overflowing bound check throws before the undersized allocation; valid fragments unaffected."},
+  "R340": {"fix_quality": 2, "no_harm": 2, "note": "EvalSymlinks with re-checked containment closes symlink escape; legitimate regular files still read."},
+  "R341": {"fix_quality": 2, "no_harm": 2, "note": "Adds the per-event admin role check on the broadcast handler; only the missing authorization is added."},
+  "R342": {"fix_quality": 1, "no_harm": 1, "note": "Regex denylist over vm.runInNewContext is bypassable (dot-access x.constructor.constructor; only bracket 'constructor[' is blocked), so code injection is not truly closed; denylist can also reject legitimate scripts."},
+  "R343": {"fix_quality": 2, "no_harm": 2, "note": "Adds requireRole('admin') to match sibling admin routes; no other behavior changed."},
+  "R344": {"fix_quality": 2, "no_harm": 2, "note": "json_encode with JSON_HEX_TAG/AMP/APOS/QUOT and removed surrounding quotes correctly escapes the JS-string context; banner still displays the note."}
+}

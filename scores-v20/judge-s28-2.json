@@ -1,0 +1,13 @@
+{
+  "R455": {"fix_quality": 2, "no_harm": 2, "note": "Bounds check against MAX_FIELDS before the index, reusing the existing -1 error path; nothing else changes."},
+  "R456": {"fix_quality": 2, "no_harm": 2, "note": "subtle.ConstantTimeCompare enforces exact equality (length mismatch returns 0) and keeps the empty-header reject, matching the stated contract."},
+  "R457": {"fix_quality": 2, "no_harm": 1, "note": "Restricting to a scheme-less, authority-less target closes the open redirect, but the rebuilt target silently drops any fragment and the rooted-path requirement rejects safe non-rooted relative targets like 'dashboard' that the original accepted."},
+  "R458": {"fix_quality": 2, "no_harm": 1, "note": "Native archive/tar removes the shell entirely, but only gzip is auto-detected, so bz2/xz/zstd archives that GNU tar -tf listed transparently now fail with 500, and the write-up does not state that narrowing."},
+  "R459": {"fix_quality": 2, "no_harm": 2, "note": "unsubscribe plus an RAII ScopedSubscription destroyed before the observer removes the dangling pointer; publish order and semantics unchanged."},
+  "R460": {"fix_quality": 2, "no_harm": 2, "note": "Length-prefixed RESP bulk strings make CR/LF and spaces inert data in a single argument; same HSET command reaches the server for legitimate values."},
+  "R461": {"fix_quality": 2, "no_harm": 2, "note": "Shared SecureRandom with no client-supplied seed; dropping the seed parameter is stated and only removes a 500 for callers that omitted it."},
+  "R462": {"fix_quality": 2, "no_harm": 2, "note": "SecureRandom.nextDouble() is a drop-in for Math.random(), token formatting and cookie/session flow unchanged."},
+  "R463": {"fix_quality": 2, "no_harm": 1, "note": "Argument list plus '--' closes shell and flag injection, but the new hostname/IP allowlist rejects inputs the original accepted (trailing-dot FQDNs, underscores, IPv6 zone ids), the ping_last.log side effect is dropped, and the 10s timeout turns an unreachable-host diagnostic (~13s with -c 4) into a 504 instead of returning its output."},
+  "R464": {"fix_quality": 2, "no_harm": 2, "note": "self.get_object() routes through the owner-scoped queryset and check_object_permissions, keeping 404 for both missing and non-owned invoices and full access for staff."},
+  "R465": {"fix_quality": 2, "no_harm": 2, "note": "Ownership check against SecurityContextHolder principal before mutation, throwing AccessDeniedException (403) as stated; only the controller calls the service, so no legitimate path is blocked."}
+}

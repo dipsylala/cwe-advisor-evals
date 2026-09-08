@@ -1,0 +1,17 @@
+{
+  "R298": {"fix_quality": 2, "no_harm": 2, "note": "Captures next before free in both branches; traversal order, single free, and refresh_session calls are unchanged."},
+  "R299": {"fix_quality": 2, "no_harm": 2, "note": "Key-to-path allowlist keeps the caller string off File.ReadAllText as the contract requires; the three hardcoded keys/paths are placeholders the write-up shows but does not label as needing real values."},
+  "R300": {"fix_quality": 2, "no_harm": 2, "note": "filterArgs overload lets the JNDI provider escape RFC 2254 metacharacters; passing null SearchControls matches the original."},
+  "R301": {"fix_quality": 2, "no_harm": 2, "note": "Dropping template.HTML restores html/template contextual escaping; nothing else in the handler changes."},
+  "R302": {"fix_quality": 2, "no_harm": 2, "note": "CGI::escapeHTML at the output sink; encoding ticket_id and priority is a stated no-op for their constrained values."},
+  "R303": {"fix_quality": 2, "no_harm": 2, "note": "resolve(strict=True) plus is_relative_to containment, same 404 paths; only unstated dependency is Python 3.9+ for is_relative_to."},
+  "R304": {"fix_quality": 2, "no_harm": 1, "note": "Named-parameter binding closes the injection, but the backslash LIKE escaping is added without an HQL escape clause - HQL has no default escape, so on SQL Server/Oracle a term containing _ or % is sent as a literal backslash sequence and fails to match products it matched before, contrary to the write-up's claim."},
+  "R305": {"fix_quality": 2, "no_harm": 2, "note": "Gate::authorize enforces the same policy check and yields a 403 on denial; no other change."},
+  "R306": {"fix_quality": 2, "no_harm": 1, "note": "validate_csrf blocks forged POSTs before the write, but it raises wtforms ValidationError rather than CSRFError, so the except clause never fires and a missing/invalid token produces a 500 instead of the stated 400; template must also be updated to emit the token (stated)."},
+  "R307": {"fix_quality": 2, "no_harm": 2, "note": "SqlParameter binding replaces concatenation; the stated NVarChar(256) size would only silently truncate an owner value longer than 256 characters."},
+  "R308": {"fix_quality": 2, "no_harm": 1, "note": "Extension allowlist plus libmagic sniff closes the dangerous-type upload, but the sniff rejects legitimate files libmagic labels differently (docx reported as application/zip on older libmagic, .txt content reported as text/csv, text/html, etc.) and adds a native libmagic dependency."},
+  "R309": {"fix_quality": 2, "no_harm": 1, "note": "Verb-to-handler map is the right shape for a callable-string dispatch, but the write-up fabricates three handler functions with invented replies and changes the argument convention from spread positional args to a single array, so any real handler set is silently replaced."},
+  "R310": {"fix_quality": 2, "no_harm": 2, "note": "jwt.verify with a pinned algorithm list and a key from JWT_SECRET; the new startup requirement for that env var is stated plainly and is intrinsic to verifying a signature."},
+  "R311": {"fix_quality": 2, "no_harm": 2, "note": "realpath on both sides plus path.relative containment, reading the checked realTarget; nonexistent paths still return the original 404."},
+  "R312": {"fix_quality": 2, "no_harm": 2, "note": "path.relative containment after join blocks .. escapes and cross-drive absolutes; the new 400 for rejected names is stated, and only a filename literally beginning with '..' is over-rejected."}
+}

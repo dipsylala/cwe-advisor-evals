@@ -1,0 +1,62 @@
+{
+  "R127": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "finfo content detection plus a server-generated name closes the double-extension bypass, but the random rename discards the recognisable original filename the case explicitly preserves for the uploads listing (and canonicalises .jpeg to .jpg); the mechanism is stated but its effect on the listing is not."
+  },
+  "R128": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "strnlen(line, LINE_CAPACITY) precondition plus the %255s width is the correct shape for an unterminated source buffer; the new -1 return for an unterminated line is stated and is the only way to scan safely."
+  },
+  "R129": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Single-component filename check matches the documented no-subdirectories contract and closes traversal, but switching to fopen('xb') refuses an existing note with 409 where the original overwrote it, and reports any other fopen failure (e.g. permissions) as 'already exists'; stated in the write-up."
+  },
+  "R130": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "{{ }} is the right Blade fix given nothing upstream produces HTML for the field; title escaping untouched and the decision not to sanitise is stated plainly."
+  },
+  "R131": {
+    "fix_quality": 1,
+    "no_harm": 2,
+    "note": "Verified with OpenJDK 26 in a scratch dir: new URI(\"///evil.example/x\") has null host and null rawAuthority so isAllowedRedirectTarget returns true, and Tomcat's sendRedirect (and RFC 3986 resolution) emits http:///evil.example/x which browsers load as evil.example - the relative-reference branch needs a leading-'//' rejection; the host allowlist itself is inherent to the fix and stated."
+  },
+  "R132": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "lockoutOnFailure: true restores Identity's native lockout; the added IsLockedOut message is stated and mirrors the framework's own template."
+  },
+  "R133": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "escapeshellarg on both arguments closes the shell-metacharacter vector and preserves the stated return/discard contract; a leading '-' in the raw name could still be read as an option by legacy-convert, a separate gap not the reported vector."
+  },
+  "R134": {
+    "fix_quality": 0,
+    "no_harm": 0,
+    "note": "Verified in a scratch dotnet app via ProcessStartInfo.ArgumentList on both powershell.exe 5.1 and pwsh 7: the argument after '-Command <string>' is appended to the script text, not bound to param(), so a serverName of 'x; New-Item ...' still created the marker file and $ServerName was empty even for a legitimate host - the injection is open and legitimate calls break, contrary to the write-up's claim."
+  },
+  "R135": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "toRealPath on both sides with Path.startsWith closes traversal and symlink escape, but the up-front isAbsolute rejection refuses an absolute path that resolves inside BASE_DIR, which the stated contract says must still be returned; stated but beyond the contract."
+  },
+  "R136": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "bin2hex(random_bytes(16)) is the correct CSPRNG replacement; dropping the client_nonce prefix and the resulting token-shape change are stated plainly."
+  },
+  "R137": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "ODBC positional '?' with the wildcards moved into the bound VarChar value is the right shape; LIKE semantics, result projection and error propagation are unchanged."
+  },
+  "R138": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "html/template with Author and Excerpt in text context is the idiomatic Go fix at the sink; markup, header and return contract are unchanged."
+  }
+}

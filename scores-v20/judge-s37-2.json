@@ -1,0 +1,16 @@
+{
+  "R572": {"fix_quality": 2, "no_harm": 2, "note": "Recomputing last_write_ptr from list->data after the realloc block closes the stale alias; all other logic and the -1 failure path are unchanged."},
+  "R573": {"fix_quality": 2, "no_harm": 1, "note": "secrets.token_urlsafe(32) is the right CSPRNG API, but it yields a 43-character string containing '-' and '_', breaking the stated 32-character alphanumeric contract, and the write-up never states that format change."},
+  "R574": {"fix_quality": 2, "no_harm": 2, "note": "Canonical-value allowlist for column and direction is the correct shape for an identifier position; accountId stays parameterized, defaults preserved, and the fallback-on-unknown behaviour is stated."},
+  "R575": {"fix_quality": 2, "no_harm": 2, "note": "HTML-escapes rawComment at the point it is concatenated into markup, alongside the already-escaped author name; no other behaviour changes."},
+  "R576": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetRelativePath with '..', '..' + separator and rooted-path checks is component-aware and rejects the sibling-directory bypass while accepting every path the original legitimately served."},
+  "R577": {"fix_quality": 2, "no_harm": 2, "note": "Constant template plus term passed as a context variable closes both the XSS and the template-injection path under Flask's default autoescaping for render_template_string."},
+  "R578": {"fix_quality": 2, "no_harm": 2, "note": "Fixed name-to-callable dispatch table replaces the dynamic call; the two intended commands still work and the new 'Unknown command' response is stated."},
+  "R579": {"fix_quality": 2, "no_harm": 2, "note": "Rejecting whitespace/control characters and >250-byte keys enforces exactly the constraints the memcached text protocol imposes, so no key the server would have accepted is refused; the throw-on-bad-key behaviour is stated."},
+  "R580": {"fix_quality": 2, "no_harm": 2, "note": "Adds the same can:update,order gate the sibling mutating routes use; the assumption about reusing the update ability is stated openly."},
+  "R581": {"fix_quality": 2, "no_harm": 2, "note": "session_regenerate_id(true) before the authenticated writes is the correct PHP fix; credential check and return values are untouched."},
+  "R582": {"fix_quality": 2, "no_harm": 1, "note": "Swapping mux for a redirect handler removes the unprotected path, but the redirect target reuses r.Host (which carries :8080 as configured) so plaintext visitors are bounced to https on the wrong port, and /healthz is no longer served on :8080 - neither consequence is stated."},
+  "R583": {"fix_quality": 2, "no_harm": 2, "note": "createCipheriv with a per-request scrypt-derived key and random IV is the right replacement; the added salt/iv response fields are stated plainly and are inherent to any real fix of this sink."},
+  "R584": {"fix_quality": 2, "no_harm": 1, "note": "Dropping the request-derived Entity map closes the vector, but documents that used &noteLabel; now fail with 400 and the new 1 MiB body cap can reject large legitimate orders - both restrictions the original did not have."},
+  "R585": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(16) in base64url replaces Math.random; the longer, mixed-case code format is stated and no contract fixes the code's shape."}
+}

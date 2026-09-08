@@ -1,0 +1,15 @@
+{
+  "R568": {"fix_quality": 2, "no_harm": 1, "note": "Correct JNDI 4-arg parameterized search closes the filter injection, but the not-found branch now echoes the literal template '(&(objectclass=person)(uid={0}))' instead of the searched term - a silent output change not mentioned in the write-up."},
+  "R569": {"fix_quality": 2, "no_harm": 1, "note": "Same correct parameterized search overload; same unstated change to the not-found message, which now prints the '{0}' placeholder rather than the user's search value."},
+  "R570": {"fix_quality": 2, "no_harm": 1, "note": "Rejecting CR/LF closes the FTP command injection, but the fix also adds unrelated null/empty and substring '..' rejections that throw on filenames the original accepted (e.g. 'report..v2.txt')."},
+  "R571": {"fix_quality": 2, "no_harm": 2, "note": "htmlspecialchars with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5 at the sink; the extra encoding of the uniqid-derived ticketId attribute is stated and cannot reject or alter legitimate output."},
+  "R572": {"fix_quality": 2, "no_harm": 2, "note": "Recomputes last_write_ptr from the updated list->data after a successful realloc; nothing else in the function's behaviour or return values changes."},
+  "R573": {"fix_quality": 2, "no_harm": 2, "note": "secrets.choice over the same alphabet keeps the 32-char alphanumeric token, the RESET_TOKENS mapping and the JSON shape; only a now-unused 'import os' remains."},
+  "R574": {"fix_quality": 2, "no_harm": 1, "note": "Allowlisting the identifier and direction closes the injection, but the direction map is case-sensitive so a previously working ?dir=asc now throws, and plain-object lookup means keys like 'constructor'/'__proto__' pass validation and stringify into the ORDER BY clause."},
+  "R575": {"fix_quality": 2, "no_harm": 2, "note": "Applies the file's existing entity escaper to entry.rawComment at the point of HTML assembly; no other output or control flow changes."},
+  "R576": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetRelativePath containment replaces the prefix check and blocks the sibling-directory bypass; legitimate in-base requests and the sink's argument are unchanged."},
+  "R577": {"fix_quality": 2, "no_harm": 2, "note": "Moves the term out of the template source into the render context, closing both the SSTI and the XSS while producing identical markup and keeping the log line."},
+  "R578": {"fix_quality": 2, "no_harm": 2, "note": "Explicit name-to-function map replaces the variable-variable dispatch; the two intended commands still dispatch and unknown input gets a plain message."},
+  "R579": {"fix_quality": 2, "no_harm": 2, "note": "Rejecting keys with whitespace/control characters and over 250 chars closes the space and CRLF injection, and the restriction only excludes values memcached's key syntax already forbids; the new exception path is stated."},
+  "R580": {"fix_quality": 2, "no_harm": 2, "note": "Adds the can:update,order middleware the file's own convention requires for mutating routes; only the now-stale comment claiming just auth:sanctum is wired up is left behind."}
+}

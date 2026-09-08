@@ -20,16 +20,29 @@ default. This harness exists to put numbers against three durable questions:
 3. **Does a specific content or workflow change show up in fix quality?** Tested with before/after
    comparisons on the same entries or the same SKILL.md logic.
 
-Run 17 is the baseline measurement: on 372 cases across 27 CWEs and nine languages, with every
-fix compile-gated, guidance lifted `fix_quality` on Haiku 4.5 from 1.80 to 1.91 (ahead on 64
-cases, behind on 22) and left `no_harm` (whether a fix silently breaks or changes something the
-sink's caller depended on) level, 1.76 against 1.74. Runs 18 and 19 then re-sampled the guided
-arm on the 179 cases whose entries were edited against the judge notes; taking each case's latest
-guided text, guidance now stands at 1.92 / 1.82 against the same 1.80 / 1.76 control, with 288
-clean write-ups against 256 and 7 build failures against 16. See **Runs** below,
-[RESULTS-v17.md](RESULTS-v17.md) and [RESULTS-v19.md](RESULTS-v19.md). Earlier runs were removed
-at the run-17 boundary; **Known gaps** below says what remains unverified rather than just
-measured.
+Runs 20 and 21 are the current measurement, and the cleanest the harness has produced: two fresh
+arm pairs on the same 372 cases, the same prompts and the same rubric, differing only in the arm
+model, so guidance and model strength can be read against each other.
+
+| Arm model | Unguided | Guided | `fix_quality` delta | `no_harm` delta | Build failures |
+|---|---|---|---|---|---|
+| Sonnet 5 (run 20) | 1.92 / 1.70 | 1.94 / 1.76 | +0.02 | +0.06 | 7 -> 3 |
+| Haiku 4.5 (run 21) | 1.74 / 1.67 | 1.88 / 1.69 | +0.14 | +0.02 | 16 -> 10 |
+
+Guidance recovers most of the gap between the two model tiers on `fix_quality`: unguided, Haiku
+trails Sonnet by 0.18; guided, by 0.06. Where the help lands depends on headroom - Sonnet's
+`fix_quality` is saturated so its gain shows up on `no_harm` and on the compile gate, while Haiku
+takes it on `fix_quality` instead. `no_harm` (whether a fix silently breaks or changes something
+the sink's caller depended on) is the axis neither model handles well, guided or not. See
+[RESULTS-v20.md](RESULTS-v20.md) and [RESULTS-v21.md](RESULTS-v21.md).
+
+Run 17 remains the baseline the entries were shaped against: 1.80 to 1.91 on `fix_quality` for
+Haiku with `no_harm` level, then runs 18 and 19 re-sampled the guided arm on the 179 cases whose
+entries were edited against the judge notes, reaching 1.92 / 1.82 against that run's 1.80 / 1.76
+control. Those three runs share a Sonnet judge panel and do not share a scale with runs 20 and 21.
+See **Runs** below, [RESULTS-v17.md](RESULTS-v17.md) and [RESULTS-v19.md](RESULTS-v19.md). Earlier
+runs were removed at the run-17 boundary; **Known gaps** below says what remains unverified rather
+than just measured.
 
 ## Corpus
 
@@ -213,6 +226,9 @@ and cache into `stubs/<language>/` (gitignored), so the first `compilecheck.py` 
 minutes and needs network access. And do not run all seven `fixgate.py --lang` processes at
 once on a machine with less than about 32 GB free: javac, dotnet, node and php each hit an
 allocation failure in run 19 and returned `FAIL` rows that passed serially (HARNESS.md Step 3).
+After an arm run, check for what the agents left behind before gating: orphaned `find.exe` or
+`java.exe` processes from scratch searches whose shell timed out, and files written into the
+repo roots or into `cases/` (HARNESS.md, "Things that have gone wrong before").
 
 ### Known gaps
 
@@ -258,3 +274,5 @@ repository's git history before that commit, and HARNESS.md keeps the lessons th
 | 17 | Same 372 cases; a format boundary - write-ups carry the complete changed files - with fresh unguided (A) and guided (B) Haiku 4.5 samples, no B-pre, and `scripts/fixgate.py` building every fix against its fixture | 744 (372 x 2 sets) | Does the guided fix build, and what does a compile gate find that sixteen judged runs did not? | Gate: 16 of 372 unguided and 18 of 372 guided fixes do not compile (one checker false positive excluded) - the same 4-5% either way, in different shapes: A invents helper methods and leaves Go variables unused, B mis-imports or mis-packages the library the entry names. Four B failures traced to two entries naming a class without its package (`JexlSandbox`, `Encode`), both fixed - the first entry defects found by a compiler rather than a judge. The first pass also showed the superset manifests must carry the libraries the knowledge base recommends: 13 A and 20 B failures were missing packages, not slips, until added. Judged: A 1.80/1.76, B 1.91/1.74, clean 256 -> 263; B ahead on fix_quality for 64 cases and behind on 22; no_harm level, with B's unanimous losses in allowlists the CWE-77/78/90 entries prescribe and the rubric pin scores as narrowing, and in whole-file rewrites that changed something beside the sink. The gate dominates the judges' own compiling (11 unanimous 2.00s were compile errors; no gate-OK write-up drew a compile claim that held), so from run 18 the judges receive the gate line and stop compiling | [RESULTS-v17.md](RESULTS-v17.md) |
 | 18 | Targeted: 115 cases whose entries changed after run 17 - every CWE-22/77/78/90 case (allowlists no longer a default step) and the Java cases of the entries that gained package names; run 17's A and B text for the same cases re-judged beside a fresh guided sample, judges given the gate's Build line and told not to compile | 345 (115 x 3 sets) | Do the package names remove the build failures, and does dropping the default allowlist recover the guided arm's no_harm? | Package set (37 Java cases): guided 1.53/1.60 -> 1.84/1.81, build failures 8 -> 3, missing imports 5 -> 0. Doctrine set (78): the guided arm stopped adding allowlists (anchored regexes 9 -> 0, unanimous narrowing verdicts 12 -> 2) and no_harm stayed flat (1.66 -> 1.68) because silent behaviour changes from shell-elimination rewrites took the vacated place; CWE-90 recovered (1.70 -> 1.90), CWE-78 did not (1.54). Judges obeyed the Build line 19 of 19 and cost the same per write-up | [RESULTS-v18.md](RESULTS-v18.md) |
 | 19 | Targeted: 138 cases whose entries changed in a sweep driven by every guided-arm loss in the run-17 and run-18 judge notes (thirty entry files: the CWE-78 ping lines that prescribed a TCP probe, `..` tests beside containment across CWE-22, `--` before a leading-`-` rejection, seven C#/JDK namespaces, a dozen verified API shapes); run 17's A and the latest guided text re-judged beside a fresh guided sample | 414 (138 x 3 sets) | Does editing the entry that produced each loss move the guided arm's no_harm? | Overall on the 138: guided 1.77/1.64 -> 1.86/1.78 against the control's 1.79/1.79, clean 83 -> 95 (control 93), build failures 10 -> 4. Ping cases stopped swapping ICMP for TCP (no_harm 1.33 -> 2.00); CWE-78 recovered past the control (1.50 -> 1.86); the namespace set went 0.29/0.57 -> 1.90/1.76 with six build failures to none; CWE-22 changed shape but not score; CWE-862 regressed to the control on two invented-member build failures; CWE-94 did not move. Two more entry defects found by the notes (Commons Net `FTPClient` frames nothing; `SimpleEvaluationContext` has no `setRootObject`), both fixed unmeasured. Composite over all 372 cases with the latest guided text: 1.92/1.82 against 1.80/1.76 | [RESULTS-v19.md](RESULTS-v19.md) |
+| 20 | Same 372 cases, fresh Sonnet 5 (`claude-sonnet-5`) unguided and guided arms, judged by three Fable agents per segment instead of Sonnet (a new scale: Sonnet judging Sonnet's own output carried a self-preference risk) | 744 (372 x 2 arms) | Does guidance still help a stronger arm, or only stop hurting it? | `fix_quality` saturated - 1.92 -> 1.94 with 343 of 372 cases tied - so the guidance gain lands on `no_harm` (1.70 -> 1.76, ahead on 80 cases and behind on 48) and on the gate (7 -> 3 build failures, the lowest of any run). Fable applies the narrowing pin strictly and Sonnet adds hostname allowlists, timeouts and caps beside the fix in both arms, so CWE-78 sits at 1.25 / 1.38 either way. Nine write-ups changed no files, declaring the confirmed finding not exploitable - a shape Haiku never produces | [RESULTS-v20.md](RESULTS-v20.md) |
+| 21 | Same 372 cases, fresh Haiku 4.5 pair, same prompts and rubric as run 20 so the two read against each other; judged by Fable on 26 of 50 segments and Opus 5 on the other 24 after the Fable capacity ran out, panels kept homogeneous per segment and the offset measured on 106 doubly-scored write-ups (+0.03 `fix_quality`, -0.01 `no_harm`) | 744 (372 x 2 arms) | Where does the guidance gain go for a weaker arm, and how much of the model gap does it close? | Haiku 1.74 / 1.67 -> 1.88 / 1.69, build failures 16 -> 10. Guidance recovers most of the model gap on `fix_quality`: unguided Haiku trails Sonnet by 0.18, guided by 0.06. The gain goes where the headroom is - `fix_quality` for Haiku, `no_harm` and the gate for Sonnet - and `no_harm` is the axis neither model handles well. Both judge panels report the same delta (+0.14 and +0.13) | [RESULTS-v21.md](RESULTS-v21.md) |

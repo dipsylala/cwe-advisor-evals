@@ -1,0 +1,15 @@
+{
+  "R261": {"fix_quality": 2, "no_harm": 1, "note": "Ownership check before deleteById closes the IDOR, but returning 403 for an existing non-owned document reveals existence, which the stated contract forbids (deny should look like the existing not-found path)."},
+  "R262": {"fix_quality": 2, "no_harm": 2, "note": "Tika.detect(byte[]) sniffs magic bytes instead of the client-chosen extension; dependency addition stated, allowlist and storage path unchanged (readAllBytes loads the upload into memory where Tika.detect(Path) would not, minor)."},
+  "R263": {"fix_quality": 2, "no_harm": 2, "note": "Positional bind parameters via Sequelize's bind option with QueryTypes.SELECT preserved; query shape and result unchanged."},
+  "R264": {"fix_quality": 2, "no_harm": 2, "note": "RESP multibulk encoding makes every argument length-prefixed so CRLF/whitespace cannot split commands; same HSET semantics and reply."},
+  "R265": {"fix_quality": 2, "no_harm": 2, "note": "Caps length against receivedByteCount-2 after the existing <2 check, bounding the memmove read; only previously-invalid messages now return -1."},
+  "R266": {"fix_quality": 2, "no_harm": 1, "note": "Shell removed, argument array plus absolute PING.EXE and leading-dash rejection close both injection gaps, but the added HOST_PATTERN rejects previously accepted hostnames such as ones containing underscores or an IPv6 zone id."},
+  "R267": {"fix_quality": 2, "no_harm": 2, "note": "Dropping the template.HTML cast restores html/template contextual escaping; the resulting text-not-markup rendering is the fix and is stated."},
+  "R268": {"fix_quality": 2, "no_harm": 1, "note": "realpath plus commonpath containment closes traversal, but the added rejection of any '/' or '\\' turns away subdirectory paths under BASE_DIR that the original served and no contract rules out."},
+  "R269": {"fix_quality": 2, "no_harm": 2, "note": "session_regenerate_id() after credential verification and before writing session data closes fixation; return values and flow unchanged."},
+  "R270": {"fix_quality": 2, "no_harm": 2, "note": "Decoding into a jobWire DTO without IsAdmin keeps the gob format (gob ignores unknown stream fields) and IsAdmin is set server-side, matching the contract."},
+  "R271": {"fix_quality": 2, "no_harm": 2, "note": "PasswordEncoder.matches against the stored hash gates token creation; the BadCredentialsException change, dummy-hash timing path and new constructor dependency are all stated."},
+  "R272": {"fix_quality": 2, "no_harm": 2, "note": "snprintf with sizeof(line) closes the overflow; the [TRUNCATED] marker and new return codes (1, -2) are stated and only apply to inputs that previously overflowed."},
+  "R273": {"fix_quality": 2, "no_harm": 1, "note": "GetFullPath containment with trailing-separator prefix check closes traversal, but the GetFileName equality check rejects subdirectory paths the original served and nothing in the case declares bare-filename-only."}
+}

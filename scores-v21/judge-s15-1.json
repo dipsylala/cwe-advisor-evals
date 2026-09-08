@@ -1,0 +1,18 @@
+{
+  "R329": {"fix_quality": 2, "no_harm": 2, "note": "Magic-byte MIME allowlist plus uuid rename closes dangerous-type upload; returned path/filename changes but stated and no legit upload rejected."},
+  "R330": {"fix_quality": 2, "no_harm": 2, "note": "EvalSymlinks with resolved-path containment closes symlink escape; only side effect is returning ErrPermission for nonexistent files, no legit regular-file read broken."},
+  "R331": {"fix_quality": 1, "no_harm": 1, "note": "@EnableMethodSecurity is the right mechanism but the new class is in com.example.config (may not be component-scanned) and overwrites the existing SecurityConfig, silently dropping its authenticated() filterChain."},
+  "R332": {"fix_quality": 2, "no_harm": 2, "note": "Removing LIBXML_NOENT closes XXE; LIBXML_NONET is stated defense-in-depth that breaks no well-formed submission."},
+  "R333": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized @Actor NVarChar query; apostrophes counted literally, contract preserved."},
+  "R334": {"fix_quality": 2, "no_harm": 2, "note": "getOrDefault(sku,0) removes the null unbox and matches the no-reservation contract exactly."},
+  "R335": {"fix_quality": 2, "no_harm": 2, "note": "toRealPath+resolve+normalize+startsWith containment closes traversal; rejects only escaping paths, not legit filenames."},
+  "R336": {"fix_quality": 2, "no_harm": 2, "note": "Arg-array CommandContext removes shell; leading-dash reject covers flag injection and never rejects a real host; timeout is stated hardening."},
+  "R337": {"fix_quality": 2, "no_harm": 2, "note": "Drops untrusted envp and uses exec(args); child inheriting full parent env is stated and no legit behavior of the fixed command breaks."},
+  "R338": {"fix_quality": 2, "no_harm": 2, "note": "DOMPurify.sanitize before bypassSecurityTrustHtml keeps allowed formatting and strips script; CVE version claim unverifiable but immaterial to the fix."},
+  "R339": {"fix_quality": 2, "no_harm": 2, "note": "Non-overflowing headerLen>UINT32_MAX-payloadLen guard with throw prevents the wrap; only rejects malicious oversize sums."},
+  "R340": {"fix_quality": 2, "no_harm": 2, "note": "String check plus EvalSymlinks re-check on resolved path closes symlink escape; returns raw resolve error for missing files, no legit read broken."},
+  "R341": {"fix_quality": 2, "no_harm": 2, "note": "Per-event role check is the required Missing-Authorization fix; admins still broadcast, only unauthorized callers rejected."},
+  "R342": {"fix_quality": 1, "no_harm": 1, "note": "Regex denylist plus Object.freeze on vm.runInNewContext does not close code injection (this.constructor.constructor(...) bypasses it and vm is not a sandbox) and could reject legitimate scripts containing the blocked tokens."},
+  "R343": {"fix_quality": 2, "no_harm": 2, "note": "Adds requireRole('admin') matching every sibling route; closes the authz gap with no other change."},
+  "R344": {"fix_quality": 2, "no_harm": 2, "note": "json_encode with JSON_HEX flags produces a safe JS string literal; banner still renders the note for legit input."}
+}

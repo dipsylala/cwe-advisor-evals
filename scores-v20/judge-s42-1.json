@@ -1,0 +1,13 @@
+{
+  "R632": {"fix_quality": 2, "no_harm": 2, "note": "markupsafe.escape on all three values at the HTML text sink, str()-wrapped so the concatenation and 400 path are unchanged."},
+  "R633": {"fix_quality": 2, "no_harm": 2, "note": "Keeps the lexical guard and adds toRealPath containment on the parent after creating it; directory-entry handling and destination creation are stated and satisfy the contract."},
+  "R634": {"fix_quality": 2, "no_harm": 1, "note": "Removing the interpreter closes the vector, but the request contract is replaced (ScriptBody gone) so every existing script-submitting client breaks; stated openly as a required breaking change."},
+  "R635": {"fix_quality": 1, "no_harm": 2, "note": "Host allowlist is right, but '///evil.com' parses with host=null and isAbsolute=false (verified with java in a scratch dir) so it falls through to sendRedirect; Tomcat scheme-prefixes '//'-leading locations and browsers treat '///host' as scheme-relative, leaving an open-redirect bypass."},
+  "R636": {"fix_quality": 2, "no_harm": 1, "note": "Server-generated name and sniffed type close traversal and header spoofing, but the stored/returned filename is now random, a total-body MaxBytesReader cap replaces the memory-only limit, and sniffing can reject files the header check accepted; stated, but a stated new restriction."},
+  "R637": {"fix_quality": 2, "no_harm": 2, "note": "snprintf(NULL,0) sizing plus a bounded second snprintf removes the fixed buffer without truncation; buffer freed on every path, output identical."},
+  "R638": {"fix_quality": 1, "no_harm": 1, "note": "'///evil.com' yields host=null, path='/evil.com' (verified with java in a scratch dir), passes the single-slash check and is redirected verbatim, a browser-level scheme-relative bypass; also relative targets without a leading '/' (e.g. 'page.jsp') that the original redirected to are now silently sent to '/'."},
+  "R639": {"fix_quality": 2, "no_harm": 2, "note": "Placeholder plus bindings array on DB::select; query semantics and response unchanged."},
+  "R640": {"fix_quality": 2, "no_harm": 2, "note": "Owning std::vector<std::string> removes the dangling view; remember()/firstLetter() contract preserved, unused include dropped."},
+  "R641": {"fix_quality": 2, "no_harm": 2, "note": "Canonical base, resolve+normalize+startsWith, then post-existence toRealPath recheck; legitimate nested names still served, error paths and response unchanged (raw fileName in Content-Disposition is pre-existing)."},
+  "R642": {"fix_quality": 0, "no_harm": 2, "note": "Declares not_exploitable and ships no change, so the unescaped filter concatenation at the confirmed sink is left open; nothing else altered."}
+}

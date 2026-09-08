@@ -1,0 +1,14 @@
+{
+  "R480": {"fix_quality": 2, "no_harm": 1, "note": "Ownership check closes the IDOR, but returning Forbid() (403) after the 404 path reveals that a foreign invoice exists, which the stated contract forbids, and the account_id claim name is asserted without evidence in the case."},
+  "R481": {"fix_quality": 2, "no_harm": 2, "note": "Server-owned table allowlist closes the identifier injection; default ledger_entries still works, bound values untouched, rejection is stated."},
+  "R482": {"fix_quality": 2, "no_harm": 1, "note": "password_verify is the right API, but it fails every login if the column holds plaintext (the original compared plaintext), and the write-up points to a Behaviour changes section that does not exist, so the required hash migration is never stated."},
+  "R483": {"fix_quality": 2, "no_harm": 2, "note": "Passing requestedCapacity instead of the stale constant makes write_field's existing bounds check accurate; nothing else changes."},
+  "R484": {"fix_quality": 0, "no_harm": 1, "note": "Build fails (fmt imported and not used); the intended argv fix is right but the added hostname regex is a new restriction on inputs the original accepted, stated but not called for by any contract."},
+  "R485": {"fix_quality": 2, "no_harm": 1, "note": "setSecure(true) closes the finding, but the response body text was also changed from 'secure flag set to: false' to 'true' while the write-up claims a single-line change and an untouched data flow."},
+  "R486": {"fix_quality": 2, "no_harm": 2, "note": "Pinning algorithms to RS256 closes algorithm confusion and none; legitimate RS256 tokens unaffected."},
+  "R487": {"fix_quality": 2, "no_harm": 2, "note": "IDatabase.StringSet with RESP framing closes the inline-protocol injection; the constructor change from TcpClient to IDatabase is stated and the call chain keeps its signature."},
+  "R488": {"fix_quality": 2, "no_harm": 2, "note": "Content-Disposition: attachment plus nosniff stops the SVG rendering as a document; applying attachment to PNG/JPEG too is stated plainly and does not stop img-tag or download use."},
+  "R489": {"fix_quality": 2, "no_harm": 2, "note": "Replacing new Function with a fixed-grammar arithmetic parser removes code generation; order.total + order.tax still yields a number and calls/member escapes are rejected as the contract requires."},
+  "R490": {"fix_quality": 2, "no_harm": 2, "note": "resolve_entities=False closes entity expansion; no_network and load_dtd only restate lxml defaults, as the write-up says."},
+  "R491": {"fix_quality": 2, "no_harm": 1, "note": "Column/direction allowlist closes the ORDER BY injection, but unknown keys silently coerce to created_at ASC instead of being rejected, so a caller sorting by a real but unlisted column gets a different ordering with no error."}
+}

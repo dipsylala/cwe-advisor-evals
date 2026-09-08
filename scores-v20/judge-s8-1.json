@@ -1,0 +1,62 @@
+{
+  "R202": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Deny-by-default JexlSandbox with an explicit ReportRow allowlist plus newInstance/methodCall features off closes the reflection path at the engine level; the documented comparison/logical filter grammar is untouched and the capability restriction is stated plainly."
+  },
+  "R203": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Replaces the concatenated source string with an arrow-function callback that closes over reminderId and message, removing the code-generation step entirely while calling recordReminder with the same arguments; nothing else observable changes."
+  },
+  "R204": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Inverting the isAdmin() condition is the exact fix; admins get Order::all() and non-admins get only their own rows, matching the stated contract with no other change."
+  },
+  "R205": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "disallow-doctype-decl plus external-entity features off, set on the factory before newDocumentBuilder(), is the standard JAXP hardening; DOCTYPE rejection is stated, surfaces through the existing SAXException catch as the same 400, and the parse output for legitimate order XML is unchanged."
+  },
+  "R206": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "isolated-vm usage (Isolate/createContextSync/setSync copy/ivm.Callback/compileScriptSync/runSync with timeout, dispose in finally) is a correct real isolation boundary, but memoryLimit: 8 is 16x below the 128MB default with the whole order batch copied into that heap, and { copy: true } throws on any non-structured-cloneable order object - either could make legitimate scripts fail, and neither risk is acknowledged."
+  },
+  "R207": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "IsAuthenticated plus an owner-scoped get_queryset() (so get_object() 404s on foreign keys) and perform_create forcing owner=request.user closes the AllowAny/all-rows gap; the owner scoping and forced-owner-on-create are stated plainly and the router registration already carries a basename so dropping the queryset attribute is safe."
+  },
+  "R208": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Canonicalizes both base and candidate and does a component-aware Path.startsWith containment check before opening, rejecting rather than stripping; the SecurityException flows through the existing catch so error handling is unchanged, and the only incidental difference is that the echoed fileName is now the canonical path rather than the raw concatenation."
+  },
+  "R209": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "subprocess.run with an argv list, shell=False and '--' before the host closes both shell-metacharacter and option injection; stdout/stderr redirection into the truncated log file reproduces the '> log 2>&1' semantics exactly, and the absolute /bin/ping path is stated as a Linux-only assumption."
+  },
+  "R210": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Path.GetFullPath on the combined path followed by a GetRelativePath check that rejects '..', '..\\'/'../' prefixes and rooted results catches absolute, UNC, other-drive and sibling-prefix escapes, and the same fullPath variable reaches ReadAllText; the new 400 on rejection is stated and legitimate relative names behave as before."
+  },
+  "R211": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Resolving REPORTS_DIR once and the candidate per request, then is_relative_to() before open(candidate, 'rb'), closes both '..' traversal and the absolute-path override of os.path.join; the added is_file() check only turns a previously-unhandled 500 for a missing file into a 404 and does not affect legitimate downloads."
+  },
+  "R212": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "jwt.decode with the key and an explicit algorithms allowlist restores signature verification and re-enables exp/nbf checks, with InvalidTokenError mapped to the existing 401 shape; the newly required JWT_SECRET env var is stated, though the HS256 choice is an assumption the deployment must confirm against its issuer."
+  },
+  "R213": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Replacing exec() with a fixed-registry dispatch removes the sink entirely, but it also removes the endpoint's actual feature - the request contract changes from 'code' to 'name'/'params', existing clients now get 400, and the registry ships only a NotImplementedError stub - which the write-up states openly as a required follow-up rather than silently."
+  }
+}

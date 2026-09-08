@@ -1,0 +1,12 @@
+{
+  "R679": {"fix_quality": 2, "no_harm": 2, "note": "Wraps the export route in the existing requireAdmin like its siblings; nothing else changes."},
+  "R680": {"fix_quality": 2, "no_harm": 2, "note": "Adds bcrypt.compare before done(null, user); the generic failure message and the missing-hash guard are stated and block no legitimate login."},
+  "R681": {"fix_quality": 2, "no_harm": 1, "note": "GET->POST plus [ValidateAntiForgeryToken] is the right shape, but the confirmation page's existing GET link (the case's stated caller) stops working until the view is rewritten, which the write-up states openly as a required follow-up."},
+  "R682": {"fix_quality": 2, "no_harm": 1, "note": "Direct ping.exe argv plus leading-dash rejection closes both shell and flag injection, but the 1-10 count cap and hostname regex (rejects underscore hosts, bracketed IPv6) reject inputs the original accepted while the write-up claims no breaking change."},
+  "R683": {"fix_quality": 2, "no_harm": 2, "note": "Generated $n placeholders with ids bound as parameters; the stated empty/non-array early return matches the contract and blocks no legitimate caller."},
+  "R684": {"fix_quality": 2, "no_harm": 2, "note": "Drops the pre-push_back reference and re-indexes tasks[activeIndex] after the reallocation point; same writes, same order."},
+  "R685": {"fix_quality": 2, "no_harm": 2, "note": "Loads via XmlReader with DtdProcessing.Prohibit and null resolvers on both reader and document; DOCTYPE rejection is the intended, stated change and non-DTD payloads parse identically."},
+  "R686": {"fix_quality": 2, "no_harm": 2, "note": "Moves param into the JNDI {0} filterArgs slot so it is RFC 4515-escaped; only side effect is the not-found message now echoes the placeholder rather than the input, a direct consequence of removing the concatenation."},
+  "R687": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized QueryRow with the value bound as an argument; the ?-vs-$1 driver dependency is stated and behaviour for legitimate usernames is unchanged."},
+  "R688": {"fix_quality": 2, "no_harm": 2, "note": "Reads bytesSent from the primary Resource before reset() and returns the captured value, which is exactly the contract the comment states; nulling rawHandle is harmless."}
+}

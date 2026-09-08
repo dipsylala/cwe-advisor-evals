@@ -1,0 +1,67 @@
+{
+  "R428": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Escapes rawComment at the point it enters the template with the same entity encoder already used for authorName; helper rename is internal and output for authorName is unchanged."
+  },
+  "R429": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Removes the shell entirely in favour of fopen/fgets/str_contains, which matches grep -F literal substring semantics; the mechanism swap is stated plainly and only the unreadable-log error text differs from grep's stderr."
+  },
+  "R430": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Keeps the cookie format and restricts unserialize to allowed_classes => [ShoppingCart::class], so legitimate carts still restore while foreign classes become __PHP_Incomplete_Class with no magic methods."
+  },
+  "R431": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "password_verify plus rehash is the right API, but the original == only worked because users.password holds plaintext, so every existing account is locked out until a migration the write-up only mentions conditionally as a follow-up."
+  },
+  "R432": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Entity-encodes both req.params.id and req.query.note at interpolation into HTML body text; server-side ticket fields are correctly left alone."
+  },
+  "R433": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "bcrypt.compare against the stored hash with a dummy-hash fallback is the right shape; the unified 'Invalid username or password' message is stated hardening, though the passwordHash field name is assumed from an unseen User model."
+  },
+  "R434": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "IAntiforgery.ValidateRequestAsync in the JSON-bound handler with a configured HeaderName is the documented Minimal API pattern; the added token-issuing GET endpoint and required header are stated plainly and are inherent to the fix."
+  },
+  "R435": {
+    "fix_quality": 1,
+    "no_harm": 2,
+    "note": "encode_entities($cgi->param('note')) calls param() in list context, so a second note= value becomes encode_entities' unsafe-chars argument and the first value is emitted unencoded - reproduced in scratch: encode_entities('<script>alert(1)</script>','z') returns the string unchanged, so a duplicate-parameter request still injects."
+  },
+  "R436": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Compares the resolved path against a separator-terminated normalized base with OrdinalIgnoreCase, closing the sibling-prefix bypass; existing Forbid/NotFound/File responses unchanged."
+  },
+  "R437": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "check_password for hashed rows plus constant-time compare and in-place rehash for legacy plaintext rows is the right shape, but hmac.compare_digest on str raises TypeError for non-ASCII input (reproduced in scratch), so a legacy user with a non-ASCII password now gets an unhandled exception instead of a login, which the write-up does not mention."
+  },
+  "R438": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "serializer.save(owner=self.request.user) is the DRF-documented binding point and overrides any client-supplied owner in validated_data; serializer contract and other actions untouched."
+  },
+  "R439": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "%15s bounds the write to the 16-byte buffer, and the peek/drain/ungetc logic rejects over-long tokens with -1 while leaving the trailing delimiter unread, matching the stated contract."
+  },
+  "R440": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Sniffs the first 512 bytes with http.DetectContentType, reassembles the stream with io.MultiReader, and stores under a server-generated name with a matching extension; the returned name is the stored name and all existing error shapes are preserved, with the filename change stated plainly."
+  }
+}

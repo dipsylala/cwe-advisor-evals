@@ -28,3 +28,4 @@ mypy==1.13.0
 flask-wtf==1.2.2
 joblib==1.4.2
 RestrictedPython==7.4
+simpleeval==1.0.7

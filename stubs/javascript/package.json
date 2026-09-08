@@ -3,6 +3,7 @@
   "private": true,
   "description": "Superset dependency set for resolution-checking every JavaScript fixture (scripts/compilecheck.py). One install resolves the whole corpus; versions are current stable at authoring and pinned so checks are reproducible. Packages no fixture uses but a fix brings in (run 17) are included too, since the entries recommend them; native ones report unchecked because scripts are not run at install.",
   "dependencies": {
+    "@angular/core": "22.1.5",
     "@fastify/cookie": "9.4.0",
     "@fastify/csrf-protection": "6.4.1",
     "@fastify/session": "10.9.0",
@@ -13,6 +14,7 @@
     "csurf": "1.11.0",
     "dompurify": "3.1.7",
     "expr-eval": "2.0.2",
+    "expr-eval-fork": "3.0.3",
     "express": "4.21.1",
     "fast-xml-parser": "4.5.0",
     "fastify": "4.28.1",

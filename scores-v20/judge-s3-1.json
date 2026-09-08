@@ -1,0 +1,16 @@
+{
+  "R139": {"fix_quality": 2, "no_harm": 2, "note": "Generic 400 body replaces e.getMessage() and the exception is logged server-side; the only added output is the stated log line."},
+  "R140": {"fix_quality": 2, "no_harm": 2, "note": "HTML-entity encoding applied to every interpolated value before res.send(); route, status codes and page structure unchanged, extra encoding of store fields is stated."},
+  "R141": {"fix_quality": 2, "no_harm": 2, "note": "@csrf_protect added in the same position as the working sibling route; no change to request/response shape for token-carrying callers."},
+  "R142": {"fix_quality": 2, "no_harm": 2, "note": "RandomNumberGenerator.GetBytes(16) replaces the caller-seeded System.Random; dropping the seed parameter is stated and a surplus query parameter is ignored by MVC binding, so no caller breaks."},
+  "R143": {"fix_quality": 2, "no_harm": 2, "note": "Ownership check throws AuthorizationException (framework 403) before refund(); success path and status shape unchanged per the stated contract."},
+  "R144": {"fix_quality": 2, "no_harm": 1, "note": "Direct exec of ping/nslookup with argument arrays closes the shell path, but the added regex rejects legitimate targets such as ::1 or underscore DNS labels, the error path changes from 500 to a 200 with error text appended, and new section headers appear in the output - none of which the write-up states."},
+  "R145": {"fix_quality": 2, "no_harm": 1, "note": "Fixed name-to-module map is the right shape for import_module, but it silently rewrites csv_export to plugins.csv_export, a path the case never establishes exists, so legitimate top-level plugin modules could fail to import."},
+  "R146": {"fix_quality": 2, "no_harm": 1, "note": "jwt.verify with a pinned algorithm closes the unsigned-token path, but the fix adds an unstated WWW-Authenticate header to every 401 and hard-codes HS256/JWT_SECRET without the case establishing that legitimate tokens are issued that way."},
+  "R147": {"fix_quality": 2, "no_harm": 2, "note": "PreparedStatement with a bound parameter; close handling, logging and output unchanged."},
+  "R148": {"fix_quality": 2, "no_harm": 2, "note": "Removing [IgnoreAntiforgeryToken] restores the global AutoValidateAntiforgeryToken filter; nothing else in the action changed."},
+  "R149": {"fix_quality": 0, "no_harm": 2, "note": "No fix proposed - the write-up rules the finding not exploitable because data is the literal \"foo\", so the string-concatenated executeQuery sink is left as-is; no code changed, so nothing else is affected."},
+  "R150": {"fix_quality": 2, "no_harm": 2, "note": "IsPathRooted plus GetFullPath containment against the canonical root with a trailing separator closes both the rooted-override and .. traversal; the new 400s only replace inputs that already threw."},
+  "R151": {"fix_quality": 2, "no_harm": 2, "note": "Encode.forHtml() on the text-node expression is the correct context encoder; the new OWASP encoder dependency and the manifest follow-up are stated openly."},
+  "R152": {"fix_quality": 2, "no_harm": 2, "note": "jwt.WithValidMethods([\"RS256\"]) rejects algorithm substitution before keyfunc runs; the RS256 success path is unchanged and the assumption is stated."}
+}

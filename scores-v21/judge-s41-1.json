@@ -1,0 +1,18 @@
+{
+  "R723": {"fix_quality": 2, "no_harm": 2, "note": "Math.multiplyExact with ArithmeticException caught into the existing 400 path; response and range behaviour unchanged."},
+  "R724": {"fix_quality": 2, "no_harm": 2, "note": "ExecuteSqlInterpolatedAsync parameterizes all three values via FormattableString; same UPDATE, same affected-row count."},
+  "R725": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected to i < n; copies exactly n events and returns n, zero cases unchanged."},
+  "R726": {"fix_quality": 0, "no_harm": 1, "note": "exec still runs attacker code; empty __builtins__ is trivially escaped (e.g. ().__class__.__base__.__subclasses__() or conn.__class__), so the vector stays open, and stripping builtins breaks ordinary snippets (stated, but claimed to 'maintain functionality')."},
+  "R727": {"fix_quality": 2, "no_harm": 2, "note": "last_write_ptr recomputed from the post-realloc list->data after the memcpy; same record stamped, error path unchanged."},
+  "R728": {"fix_quality": 1, "no_harm": 1, "note": "Right plugin, but fastify.register is deferred so fastify.csrfProtection is undefined when the route options object is built at module load (route-hook validation rejects it); also no reply.generateCsrf() route, so clients have no way to obtain the token."},
+  "R729": {"fix_quality": 2, "no_harm": 2, "note": "ORM .filter(customer_email=email) parameterizes the value; same rows and same serialized fields."},
+  "R730": {"fix_quality": 2, "no_harm": 2, "note": "Copy clamped with std::min and frame.length set to the clamped value, matching the contract's truncate-consistently option; truncation stated."},
+  "R731": {"fix_quality": 2, "no_harm": 2, "note": "secure=True closes CWE-614; the added samesite='Strict' is stated hardening with its inbound-link tradeoff spelled out."},
+  "R732": {"fix_quality": 2, "no_harm": 2, "note": "ORDER BY identifier allowlist is the only available shape here and the contract calls for rejecting raw SQL fragments; the ArgumentException surfaces as a 500 rather than a 400, but is stated."},
+  "R733": {"fix_quality": 2, "no_harm": 1, "note": "Removing exec closes the injection, but the replacement prints filenames to System.out that the original never emitted, swallows IOException/InvalidPathException the original propagated, and leaks the unclosed Files.list stream."},
+  "R734": {"fix_quality": 2, "no_harm": 2, "note": "StackExchange.Redis IDatabase.StringSet sends length-prefixed RESP so CRLF can no longer split commands; the constructor dependency swap from Socket to IDatabase is visible and stated (DI registration must follow)."},
+  "R735": {"fix_quality": 2, "no_harm": 2, "note": "realpath containment check with an os.sep-terminated prefix before open; absolute and ../ inputs get 403, legitimate filenames unaffected."},
+  "R736": {"fix_quality": 0, "no_harm": 1, "note": "Build FAIL - http.SameSiteLax is undefined (constant is http.SameSiteLaxMode); the intended rotation also adds a new 500 path if the old-session Save fails and emits a second Set-Cookie for the same name."},
+  "R737": {"fix_quality": 2, "no_harm": 1, "note": "AesGcm replaces ECB correctly with a per-call random nonce, but the key literal is also doubled to 256 bits - gratuitous, and on top of the unavoidable nonce||ct||tag format change it forces key redistribution for any existing peer; both changes are stated."},
+  "R738": {"fix_quality": 0, "no_harm": 2, "note": "No-op: csrf-csrf's doubleCsrfProtection ignores GET by default (ignoredMethods ['GET','HEAD','OPTIONS']) and ignoredMethods is not overridden, so the GET delete route is still unprotected; nothing else changes."}
+}

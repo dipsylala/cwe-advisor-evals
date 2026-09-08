@@ -1,0 +1,18 @@
+{
+  "R828": {"fix_quality": 2, "no_harm": 0, "note": "getSessionIdentifier binding closes the vector, but the inlined config silently adds a hard-coded fallback secret ('default-secret-change-in-production') and downgrades the cookie's Secure flag from always-on to NODE_ENV-conditional, neither mentioned in the write-up."},
+  "R829": {"fix_quality": 2, "no_harm": 2, "note": "Placeholders with both values passed to Exec; error handling, status codes and response text unchanged."},
+  "R830": {"fix_quality": 2, "no_harm": 2, "note": "Logs the in-scope clientId parameter instead of dereferencing the freed req; identical output and return values."},
+  "R831": {"fix_quality": 2, "no_harm": 1, "note": "AES-256-GCM is the right replacement, but the new exactly-32-byte key check rejects keys the original handler accepted and the ciphertext wire format changes (nonce-prefixed, tagged), so existing callers/data break."},
+  "R832": {"fix_quality": 2, "no_harm": 2, "note": "calloc's internal overflow check returns NULL on the wrapping count and the existing cleanup path frees batch; copied rows and batch->count unchanged for valid counts."},
+  "R833": {"fix_quality": 1, "no_harm": 2, "note": "ProcessBuilder closes the Unix branch, but the Windows branch still routes through cmd.exe /c and Java only quotes args containing space/tab/</>, so a value like 'x&whoami' is still parsed by cmd - injection remains on that path."},
+  "R834": {"fix_quality": 2, "no_harm": 2, "note": "Loop bound corrected to i < n; n, start, return value and the zero-length cases behave exactly as the contract states."},
+  "R835": {"fix_quality": 2, "no_harm": 1, "note": "Purging queued contexts before release closes the UAF, but handle_connection_reset now dereferences *conn before connection_release's NULL guard, so a NULL conn that the original tolerated now crashes."},
+  "R836": {"fix_quality": 2, "no_harm": 2, "note": "mysql2 placeholder with the value passed as a params array; callback, status codes and response bodies unchanged."},
+  "R837": {"fix_quality": 2, "no_harm": 2, "note": "Generic 500 body matching the app error handler; logger.error(error), the 404 shape and the success response are all preserved."},
+  "R838": {"fix_quality": 2, "no_harm": 2, "note": "Character allowlist plus realpath containment blocks traversal and wrappers before require; the default summary plugin and normally-named plugins still load, and rejection is what the contract asks for."},
+  "R839": {"fix_quality": 0, "no_harm": 1, "note": "resolveCsrfTokenValue returns token.getToken() - the server's own expected token - rather than the value the client submitted, so CsrfFilter's constant-time comparison always succeeds and CSRF validation is disabled entirely for every request; the write-up asserts the opposite."},
+  "R840": {"fix_quality": 2, "no_harm": 2, "note": "Scopes the list to findByOwnerUsername(authentication.getName()) using the repository method already present; owners still get their own invoices."},
+  "R841": {"fix_quality": 2, "no_harm": 2, "note": "Content-sniffs with magic.from_buffer and stores the detected type, never the caller's; signature unchanged and the rejection/allowlist is exactly what the contract requires (adds an undeclared python-magic/libmagic dependency)."},
+  "R842": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(6).toString('hex') gives 48 bits from a CSPRNG; only the code's length/charset changes and that is stated, with no consumer constraining the format."},
+  "R843": {"fix_quality": 2, "no_harm": 2, "note": "Term passed as a render_template_string variable so autoescaping applies and it is never compiled as template source, closing both XSS and SSTI; logging and page structure unchanged."}
+}

@@ -1,0 +1,32 @@
+{
+  "R839": {
+    "fix_quality": 0,
+    "no_harm": 1,
+    "note": "Build FAIL: SpaCsrfTokenRequestHandler does not compile against the case's Spring Security, so the fix cannot ship; the design (cookie repository paired with a handler that resolves the raw header value via CsrfTokenRequestAttributeHandler and renders via the XOR handler) is the right shape and changes nothing else, but as delivered the application will not start."
+  },
+  "R840": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Replaces findAll() with the existing findByOwnerUsername(authentication.getName()), mirroring the sibling detail endpoint; own invoices still returned, nothing else changed."
+  },
+  "R841": {
+    "fix_quality": 2,
+    "no_harm": 1,
+    "note": "Byte-level detection with python-magic against an image allowlist plus Pillow verify, and ContentType now comes from the detected type, meeting the contract; but the Pillow re-encode silently alters stored legitimate uploads (metadata stripped, animated GIF collapses to its first frame since save() is called without save_all), which the write-up frames only as stripping malicious payload."
+  },
+  "R842": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "crypto.randomBytes(6).toString('base64url') replaces Math.random(); the code's character set changes (uppercase, '-', '_') but that is stated, is the same 8-character length, and blocks no legitimate use."
+  },
+  "R843": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Template source becomes a fixed constant and the term is passed as a Jinja2 variable, so Flask's default autoescaping for render_template_string applies and the SSTI route is closed too; page structure, signature and logging unchanged."
+  },
+  "R844": {
+    "fix_quality": 2,
+    "no_harm": 2,
+    "note": "Cleaned-join containment check (equal to extractDir or under extractDir + separator) runs before MkdirAll and os.Create, rejecting traversal entries with an error on the same path the original already used for extraction failures; legitimate nested entries are unaffected."
+  }
+}

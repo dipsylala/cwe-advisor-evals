@@ -1,0 +1,16 @@
+{
+  "R682": {"fix_quality": 2, "no_harm": 1, "note": "Drops cmd.exe for a direct ping.exe argument array, closing the shell sink, but adds a new 1-100 numeric bound on count that rejects values the original accepted (stated, and host is still unguarded against a leading '-' option)."},
+  "R683": {"fix_quality": 2, "no_harm": 2, "note": "Generates $1..$n placeholders from array length only and passes ids as pg parameters; empty-array behaviour is unchanged from the original."},
+  "R684": {"fix_quality": 2, "no_harm": 2, "note": "Replaces the stored reference with index access re-acquired after push_back; same field writes and same follow-up task."},
+  "R685": {"fix_quality": 2, "no_harm": 2, "note": "Parses through XmlReader with DtdProcessing.Prohibit and null resolvers; XPath selection and Ok(name) response unchanged."},
+  "R686": {"fix_quality": 2, "no_harm": 2, "note": "Moves param into filterArgs as {0} so JNDI applies RFC 4515 escaping; only the echoed not-found filter text now shows placeholders, an unavoidable consequence of the fix."},
+  "R687": {"fix_quality": 2, "no_harm": 2, "note": "Uses a database/sql placeholder with username bound separately; scan, error path and response format untouched."},
+  "R688": {"fix_quality": 2, "no_harm": 2, "note": "Reads bytesSent() before reset() so the dangling handle is never dereferenced, matching the documented 'bytes the original send transferred' contract."},
+  "R689": {"fix_quality": 2, "no_harm": 2, "note": "Canonical-path containment with a separator-terminated base prefix; the thrown IOException lands in the existing catch, so legitimate in-directory reads and the error page behave as before."},
+  "R690": {"fix_quality": 2, "no_harm": 0, "note": "unserialize() is gone, but swapping the wire format to json_decode() silently empties every already-issued base64(serialize(...)) cart cookie - contract says legitimate cart data must still return items and coupon, and the write-up instead claims full compatibility; unserialize($payload, ['allowed_classes' => false]) would have preserved the format."},
+  "R691": {"fix_quality": 2, "no_harm": 2, "note": "shared_from_this() capture plus make_shared in the caller keeps the Widget alive until the queued task runs; only nit is the stale doc comment above handleRequest still describing a dangling this."},
+  "R692": {"fix_quality": 2, "no_harm": 2, "note": "Parameterized @ownerName via AddWithValue; rowsDeleted handling, NotFound message and Ok payload all unchanged."},
+  "R693": {"fix_quality": 2, "no_harm": 2, "note": "mysql2 execute() with a ? placeholder and [userId]; callback shape and error/response handling preserved (the explanation's client-side/server-side binding wording is muddled but the code is right)."},
+  "R694": {"fix_quality": 2, "no_harm": 2, "note": "encode_entities() from HTML::Entities applied to both tainted values in HTML text context; only other effect is entity-encoding of high-bit chars, which renders identically."},
+  "R695": {"fix_quality": 2, "no_harm": 2, "note": "Switches to the filterArgs overload with (cn={0}); the new SearchControls() replacing null is documented as equivalent to the default and is disclosed in the write-up."}
+}

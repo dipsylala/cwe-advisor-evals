@@ -1,0 +1,8 @@
+{
+  "R839": {"fix_quality": 0, "no_harm": 1, "note": "Build FAIL: SpaCsrfTokenRequestHandler does not compile (missing abstract-method override), so the pairing never takes effect; the intended design is Spring's documented SPA handler and changes nothing else, but as written the application does not build."},
+  "R840": {"fix_quality": 2, "no_harm": 2, "note": "Replaces findAll() with the existing findByOwnerUsername(authentication.getName()), the same injection shape as the sibling getInvoice, so callers still get their own invoices and nothing else changes."},
+  "R841": {"fix_quality": 2, "no_harm": 1, "note": "Byte-sniffed allowlist plus detected Content-Type closes the vector, but the Pillow re-encode silently alters legitimate uploads (lossy JPEG recompression at default quality, animated GIFs flattened to one frame, EXIF/metadata dropped) and the write-up does not state that cost."},
+  "R842": {"fix_quality": 2, "no_harm": 2, "note": "crypto.randomBytes(6).toString('base64url') is the right CSPRNG API; the charset shift to base64url and the Node 15 floor are stated and block no legitimate use."},
+  "R843": {"fix_quality": 2, "no_harm": 2, "note": "Fixed template constant with term passed as a Jinja2 variable, so Flask's default autoescape for from_string templates applies; signature, logging and markup are otherwise unchanged."},
+  "R844": {"fix_quality": 2, "no_harm": 2, "note": "Containment check on the cleaned join against extractDir with a separator-terminated prefix, placed before MkdirAll and Create; legitimate nested entries are unaffected and only escaping entries now error."}
+}

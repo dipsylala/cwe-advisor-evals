@@ -1,0 +1,15 @@
+{
+  "R568": {"fix_quality": 2, "no_harm": 1, "note": "Correct 4-arg DirContext.search with {0}/filterArgs closes the injection, but the not-found branch now echoes the literal template '(uid={0})' instead of the user's term, an unstated output change."},
+  "R569": {"fix_quality": 2, "no_harm": 1, "note": "Same correct parameterized search overload; likewise silently changes the not-found message to print the '{0}' placeholder rather than the searched value."},
+  "R570": {"fix_quality": 2, "no_harm": 1, "note": "Rejecting CR/LF closes the FTP command injection, but the fix also bans any filename containing '..' and empty names - a restriction the original accepted (e.g. 'v1..2.csv') - and throws IllegalArgumentException on a path that previously just ran."},
+  "R571": {"fix_quality": 2, "no_harm": 2, "note": "htmlspecialchars with ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5 at the echo sink; the extra encoding of the uniqid ticketId is stated and cannot alter that value."},
+  "R572": {"fix_quality": 2, "no_harm": 2, "note": "Recomputes last_write_ptr from the updated list->data after a successful realloc; minimal diff, no other behaviour touched."},
+  "R573": {"fix_quality": 2, "no_harm": 2, "note": "secrets.choice over the same alphabet keeps the 32-char alphanumeric token, the RESET_TOKENS mapping and the JSON shape; only nit is the now-unused 'import os'."},
+  "R574": {"fix_quality": 2, "no_harm": 1, "note": "Column/direction allowlist is the right shape for identifiers, but the direction map is uppercase-only, so a previously working '?dir=asc' now throws - a silent narrowing the write-up does not mention."},
+  "R575": {"fix_quality": 2, "no_harm": 2, "note": "Reuses the file's existing entity-escaper on entry.rawComment before it reaches the res.send template; nothing else changed."},
+  "R576": {"fix_quality": 2, "no_harm": 2, "note": "Path.GetRelativePath plus '..'/rooted rejection replaces the prefix check and blocks the sibling-directory bypass; only edge is a literal filename starting with '..', which is not realistic here."},
+  "R577": {"fix_quality": 2, "no_harm": 2, "note": "Constant template with term passed as context - confirmed by running Flask 3.1.3 in a scratch dir that render_template_string autoescapes and does not re-evaluate {{ }} in the value; rendered markup is otherwise identical."},
+  "R578": {"fix_quality": 2, "no_harm": 2, "note": "Explicit name-to-function map replaces $$cmd(), and both documented commands remain dispatchable, so no legitimate console action is lost."},
+  "R579": {"fix_quality": 2, "no_harm": 1, "note": "Rejecting whitespace/control chars closes the memcached key injection, but the added printable-ASCII-only and 250-char bounds plus a new ArgumentException change behaviour for keys the original passed through (e.g. a non-ASCII tenant slug)."},
+  "R580": {"fix_quality": 2, "no_harm": 2, "note": "Adds the same 'can:update,order' middleware the sibling mutating routes use; the file's own header comment states that pairing as the intended contract, so the new check is not an unwarranted restriction."}
+}
