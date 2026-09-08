@@ -445,13 +445,35 @@ before/after snippets were most of the file anyway; the segment cap is unchanged
 ## Step 6 - analyse
 
 ```sh
-python evals/scripts/analyse.py --map /tmp/arm-map.json --scores /tmp/scores-v4 \
-    --out /tmp/results-v4.md
+python evals/scripts/analyse.py 21                                  # one run
+python evals/scripts/analyse.py 20 21 --label "Sonnet 5" --label "Haiku 4.5"   # side by side
+python evals/scripts/analyse.py --map /tmp/arm-map.json --scores /tmp/scores-v4 --out results.md
 ```
 
-Averages across judges - every judge scores every run, so a dict merge would keep one judge and
-discard the rest. Prints how many runs the judges disagreed on, which is the run's own noise
-estimate: an arm difference smaller than the disagreement rate is not a result.
+A run number reads `arm-map-vN.json`, `scores-vN/` and `runs-vN/gate.json` by the repository's own
+naming, so nothing needs paths in the normal case; the `--map`/`--scores` form still works for a
+pool that does not follow it. Averages across judges - every judge scores every write-up, so a dict
+merge would keep one judge and discard the rest. Prints how many write-ups the judges disagreed on,
+which is the run's own noise estimate: an arm difference smaller than the disagreement rate is not
+a result.
+
+**Take the prose claims from the "Derived claims" block, do not read them off the table.** The
+tables have always been right and the sentences about them have not: the parent README twice
+carried a wrong claim written from memory of a table - a per-language cell called sampling noise
+when it was a reproducible entry defect (`cwe/79/perl`, found in runs 20 and 21), and a count of
+declining cells given as three when it was ten. Both are now computed. The block prints the number
+of per-language cells that rise and fall, each decline with its size, and two flags that decide how
+a decline should be written up:
+
+- `CEILING` - the unguided arm already scores 1.95 or better, so the cell can barely rise and a
+  small fall is an artefact of the ceiling, not a regression.
+- `SMALL-N` - fewer than five cases, where the mean is one or two write-ups. Read those write-ups
+  and their judge notes before calling the movement noise; that is exactly the check that turned
+  four Perl cases into a real entry defect.
+
+It also prints the paired per-case counts, the clean and build-failure counts per arm, and the
+exact deltas. Subtracting two rounded table cells is not the delta - run 21's `no_harm` moved
++0.027, which is +0.03, while the rounded cells suggest +0.02.
 
 ## Step 7 - record it
 

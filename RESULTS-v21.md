@@ -31,7 +31,7 @@ guided-versus-unguided delta can be read inside each panel separately. It is the
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Fable (26 segments) | 403 | 1.75 | 1.89 | +0.14 | 1.68 | 1.67 | -0.01 |
 | Opus (24 segments) | 341 | 1.73 | 1.86 | +0.13 | 1.65 | 1.72 | +0.07 |
-| Pooled | 744 | 1.74 | 1.88 | +0.14 | 1.67 | 1.69 | +0.02 |
+| Pooled | 744 | 1.74 | 1.88 | +0.14 | 1.67 | 1.69 | +0.03 |
 
 ## Gate
 
